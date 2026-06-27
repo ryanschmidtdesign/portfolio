@@ -681,7 +681,7 @@
     "inset:0",
     "z-index:999999", // Put it above almost everything except maybe modals
     "pointer-events:none",
-    "opacity:0.06",
+    "opacity:0.2",
     "mix-blend-mode:overlay",
     "background-image:url(\"" + noiseSvg + "\")",
     "background-repeat:repeat",

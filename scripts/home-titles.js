@@ -96,12 +96,14 @@
 
   if (window.marqueeRafId) cancelAnimationFrame(window.marqueeRafId);
 
-  let isHovering = false;
+  let hoveredLinks = new Set();
   let scrollY = 0;
   const pxPerFrame = -0.6;
 
-  container.addEventListener('mouseenter', () => isHovering = true);
-  container.addEventListener('mouseleave', () => isHovering = false);
+  document.querySelectorAll('.home-title').forEach(link => {
+    link.addEventListener('mouseenter', () => hoveredLinks.add(link));
+    link.addEventListener('mouseleave', () => hoveredLinks.delete(link));
+  });
 
   container.addEventListener('wheel', (e) => {
     e.preventDefault();
@@ -109,9 +111,10 @@
   }, { passive: false });
 
   let touchStartY = 0;
+  let isTouching = false;
   container.addEventListener('touchstart', (e) => {
     touchStartY = e.touches[0].clientY;
-    isHovering = true;
+    isTouching = true;
   }, { passive: true });
 
   container.addEventListener('touchmove', (e) => {
@@ -121,10 +124,10 @@
     touchStartY = y;
   }, { passive: false });
 
-  container.addEventListener('touchend', () => isHovering = false);
+  container.addEventListener('touchend', () => isTouching = false);
 
   function tick() {
-    if (!isHovering) {
+    if (hoveredLinks.size === 0 && !isTouching) {
       scrollY += pxPerFrame;
     }
 
