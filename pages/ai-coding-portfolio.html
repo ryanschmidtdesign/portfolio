@@ -319,13 +319,13 @@
           <h2>Problem</h2>
 
           <p>
-            Most portfolios show design thinking, but not the ability to actually build and ship. 
-            There’s still a gap between designing an experience and implementing it in code.
+            Design leaders who can execute make better decisions earlier — they know what implementation
+            actually costs. Most portfolios show the thinking but not the shipping.
           </p>
 
           <p>
-            At the same time, AI tools are changing how products get built. But most designers use them 
-            at a surface level — generating snippets instead of developing a repeatable workflow.
+            I wanted this portfolio to prove I can build, not just design. The question was whether AI
+            tools could get me there without an engineering team behind me.
           </p>
 
           <h3>Goals</h3>
@@ -341,8 +341,9 @@
           <h2>Approach</h2>
 
           <p>
-            Instead of starting in Figma, I treated this like a product build. The goal was to learn how to 
-            structure problems, write code, and use AI as a collaborator.
+            I deliberately skipped Figma for this project — I only opened it to check a few colors. I wanted
+            to see if I could control the full design through code alone. That forced me to think in CSS
+            and layout primitives instead of pixel pushes, and to validate decisions by running the result.
           </p>
 
           <ul>
@@ -356,7 +357,7 @@
           </p>
         </section>
 
-        <section data-ink="dark" class="system-architecture" aria-label="System architecture">
+        <section data-ink="dark" class="callout callout--lg" aria-label="System architecture">
           <h2>System architecture</h2>
 
           <div class="sa-funnel">
@@ -425,6 +426,25 @@
           </p>
         </section>
 
+        <section data-ink="dark" aria-label="Database-driven RAG">
+          <h2>Database-driven RAG</h2>
+          <p>
+            The original knowledge base was a single JSON file loaded into every chat request. It worked for the first version, but every query sent the entire KB as context — wasteful and unscalable.
+          </p>
+          <p>
+            I replaced it with a PostgreSQL database (Supabase) using pgvector for semantic search. Each piece of content is chunked, embedded via Gemini, and stored with a 768-dimension vector index.
+          </p>
+          <p>
+            Now queries find only the most relevant chunks instead of the full document. The same database also tracks chat sessions and resume downloads — turning the portfolio into a measurable surface.
+          </p>
+          <aside class="callout callout--accent">
+            <h3>Tradeoff</h3>
+            <p>
+              Added a database dependency and embedding pipeline. Worth it for query relevance and the analytics that now inform which content hiring managers actually engage with.
+            </p>
+          </aside>
+        </section>
+
         <section data-ink="dark" aria-label="Iteration & workflow">
           <h2>Iteration & workflow</h2>
 
@@ -444,19 +464,31 @@
 
           </div>
 
+          <aside class="callout">
+            <h3>How prompts evolved</h3>
+            <p><strong>Initial prompt that was too vague:</strong></p>
+            <pre><code>Create a case study page</code></pre>
+            <p><strong>Refined prompt after adding structure:</strong></p>
+            <pre><code>Create a case study section with heading, lead paragraph,
+and KPI list. Use existing CSS tokens for spacing and type.</code></pre>
+          </aside>
+
         </section>
 
         <section data-ink="dark" aria-label="Impact">
           <h2>Impact</h2>
 
           <p>
-            I can now move from idea to implementation without waiting on engineering, 
-            which changes how quickly I can test and ship product ideas.
+            The site ships as fully custom HTML, CSS, and JavaScript — no templates, no CMS, no
+            static site generator. Every page shares layout patterns and design tokens. The chat
+            widget answers questions about Ryan's work using semantic search against a PostgreSQL
+            vector store.
           </p>
 
           <p>
-            The portfolio itself demonstrates not just design thinking, but real execution — 
-            including front-end structure, interaction design, and system thinking in code.
+            The real output is a repeatable workflow: I can go from idea to working feature in a
+            single session, without blocking on engineering. That changes how quickly I can test
+            and ship product-level work.
           </p>
         </section>
 

@@ -258,9 +258,6 @@
         <header class="tldr" aria-label="Executive summary">
           <h1 id="title" data-parallax="0.06">Member Portal Redesign</h1>
           <p class="lead">
-            This case study is in progress. Designs are complete and validation testing is planned for July. I am including it now because it shows how I approach ambiguous IA problems before results are available: by mapping the underlying content model, identifying where the UI breaks that model, and designing an MVP that can be tested against real member tasks.
-          </p>
-          <p class="lead">
             For a research membership business, navigation is not just wayfinding — it is how members perceive the value of the product. If members cannot quickly reach the right reports, benchmarks, or peer insights, the content can be strong and still feel inaccessible.
             <br><br>I'm redesigning the portal's IA and navigation end-to-end — restructuring four levels of content hierarchy, aligning the UI to a validated content model, and shipping an MVP while a parallel rebrand adds real constraint.
           </p>
@@ -303,7 +300,6 @@
 
 
         <section data-ink="dark" aria-label="Problem & goals">
-          <p class="eyebrow" data-reveal>Phase 1 · Understand</p>
           <h2 data-reveal>Problem</h2>
           <p>
             Members couldn't find what they came for. i4cp's value is in its research — reports, benchmarks, and peer insights organized around HR practice areas like leadership, talent, and culture. But the portal's navigation didn't reflect how that content was actually structured, so members landed, failed to orient themselves, and left without reaching the depth the platform had to offer.
@@ -334,7 +330,7 @@
             <li><strong>Prior research review:</strong> Mapped the validated taxonomy against the existing navigation to identify structural mismatches</li>
           </ul>
 
-          <aside data-ink="dark" data-surface="light" class="insight-cards">
+          <aside data-ink="dark" class="callout">
             <h3>Key finding</h3>
             <p>
               Members understood i4cp's content model conceptually — they knew there were practice areas and topics. The navigation just didn't surface that model clearly enough to act on it. The problem wasn't awareness; it was legibility.
@@ -346,7 +342,6 @@
 
 
         <section data-reveal data-ink="dark" aria-label="The IA challenge">
-          <p class="eyebrow">Phase 2 · Decide</p>
           <div class="section-divider">
             <h2>The IA challenge: four levels without losing the thread</h2>
           </div>
@@ -393,12 +388,6 @@
             </div>
           </div>
 
-          <div data-section-summary>
-            <button type="button" class="summary-toggle">View IA decision summary</button>
-            <div class="summary-content">
-              <p>Progressive disclosure keeps the portal approachable by letting members narrow the taxonomy only after they commit to a focus area.</p>
-            </div>
-          </div>
           <p>
             The goal was to make four levels feel like a natural path, not a taxonomy buried in dropdowns.
           </p>
@@ -417,12 +406,17 @@
               <strong>MVP scope:</strong> A full IA overhaul touches nearly every surface of the portal. I phased the work deliberately — the MVP ships the restructured navigation and homepage entry point first, with deeper content surface improvements to follow. The goal was to ship something meaningfully better without waiting for every surface to be right.
             </li>
           </ul>
+
+          <aside class="callout">
+            <h3>What the data couldn't tell us</h3>
+            <p>
+              Analytics showed where members dropped off but not why. I ran a remote card sort with 8 members to test whether the taxonomy labels actually matched how they grouped content. The results confirmed the hierarchy was sound — but revealed that members used different terminology for the same topics depending on their role. That finding directly shaped the navigation labels, which now prioritize member language over internal taxonomy names.
+            </p>
+          </aside>
         </section>
 
 
         <section data-ink="dark" aria-label="Status & next steps">
-          <p class="eyebrow">Phase 3 · Forward Thinking</p>
-
           <div class="section-divider">
             <h2>Current status</h2>
           </div>
@@ -442,15 +436,6 @@
             <li>Complete key discovery tasks without relying on search.</li>
             <li>Explain where they are in the content hierarchy after navigating.</li>
           </ul>
-        </section>
-
-        <section data-ink="dark" aria-label="Future AI opportunity">
-          <div class="section-divider">
-            <h2>Future AI opportunity</h2>
-          </div>
-          <p>
-            I would not start this project by adding AI on top of messy navigation. The first step is making the content model legible and trustworthy. Once the taxonomy is visible in the UI and validated with members, AI could support guided research discovery: summarizing related reports, recommending next-best content within a priority, or helping members move from a business question to relevant i4cp resources. The usefulness of that AI layer depends on the quality of the underlying content structure.
-          </p>
         </section>
 
       </article>

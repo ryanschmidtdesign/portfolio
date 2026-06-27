@@ -19,6 +19,11 @@
   to = "/.netlify/functions/portfolio-chat"
   status = 200
 
+[[redirects]]
+  from = "/api/track-resume"
+  to = "/.netlify/functions/track-resume"
+  status = 200
+
 # Clean URLs → pages/ (production canonical paths, local dev via netlify dev)
 [[redirects]]
   from = "/about.html"

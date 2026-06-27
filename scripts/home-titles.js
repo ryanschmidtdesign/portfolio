@@ -11,7 +11,7 @@
       url: "pages/inventory.html"
     },
     {
-      title: "Member<br>Portal",
+      title: "Member Portal",
       summary: "An in-progress IA overhaul aligning a validated content taxonomy with navigation patterns for enterprise HR research discovery.",
       url: "pages/member-portal-overhaul.html"
     },

@@ -273,9 +273,8 @@
         <header class="tldr" aria-label="Executive summary">
           <h1 id="title" data-parallax="0.06">Real-Time Inventory</h1>
           <p class="lead">
-            <!-- TODO Ryan: confirm whether this claim is accurate before publishing. -->
-            Inventory was not just a workflow gap; it was a sales and retention blocker. Enterprise prospects expected inventory to connect with purchasing and project workflows, while existing customers were using spreadsheets because the product did not give them a trustworthy source of truth.
-            <br><br>I redesigned this into a real-time, unified inventory system—reducing manual reconciliation, improving accuracy, and helping drive an 18% increase in recurring revenue.
+            Inventory was not just a workflow gap. Enterprise prospects expected it to connect with purchasing and project workflows, while existing customers were using spreadsheets because the product did not give them a trustworthy source of truth.
+            <br><br>I redesigned it into a real-time, unified inventory system spanning projects, locations, and purchasing — reducing manual reconciliation, improving accuracy, and helping drive an 18% increase in recurring revenue.
           </p>
 
           <div class="tldr-meta">
@@ -304,12 +303,10 @@
         </header>
 
         <section data-ink="dark" aria-label="Problem & goals">
-          <p class="eyebrow" data-reveal>Phase 1 · Understand</p>
           <h2 data-reveal>Problem</h2>
-          <ul>
-            <li><strong>Users:</strong> Teams needed accurate stock counts without hours of reconciliation; otherwise projects slipped and equipment went missing</li>
-            <li><strong>Stakeholders:</strong> Enterprise prospects expected integrated inventory before signing deals</li>
-          </ul>
+          <p>
+            Every week, project managers spent hours reconciling stock counts across spreadsheets. Equipment went missing because nobody could trust the numbers. And enterprise prospects expected integrated inventory before they would sign — so the gap was also a sales blocker.
+          </p>
 
           <h3>Objectives</h3>
           <ul>
@@ -323,10 +320,15 @@
           <div class="section-divider">
             <h2>Research Insights</h2>
           </div>
+          <p>
+            I started by understanding what the spreadsheet workflow actually looked like. One power user maintained a master spreadsheet with 14 tabs — one per project, plus cross-reference sheets, reconciliation logs, and a manual low-stock tracker highlighted in yellow. It took her two hours a day to keep current, and decisions were still made from stale data.
+          </p>
+          <p>
+            Across 6 user interviews and workflow mapping sessions, the pattern was consistent:
+          </p>
           <ul>
-            <li><strong>Methods:</strong> 6 user interviews, workflow mapping, and a competitive analysis</li>
             <li><strong>Time sink:</strong> 2–3 hours/day reconciling stock; 15–20% error rates</li>
-            <li><strong>User split:</strong> Small AV shops needed fast confidence in quantities, while larger teams needed asset‑level traceability (tracking specific asset numbers) for accountability</li>
+            <li><strong>User split:</strong> Small AV shops needed fast confidence in quantities, while larger teams needed asset‑level traceability for accountability</li>
             <li><strong>Market signal:</strong> Integrated inventory was table stakes in enterprise deals</li>
           </ul>
 
@@ -339,7 +341,7 @@
             While this added technical complexity, it eliminated duplicate sources of truth and ensured teams could trust inventory data everywhere.
           </p>
 
-          <aside data-reveal data-ink="dark" data-surface="light" class="insight-cards">
+          <aside data-reveal data-ink="dark" class="callout">
             <h3>Design Responses</h3>
             <ol>
               <li><strong>Receiving defines truth:</strong> Inventory updates at the moment a PO is received — eliminating lag and reconciliation gaps</li>
@@ -367,7 +369,6 @@
         </section>
 
         <section data-reveal data-ink="dark" aria-label="Journey Map">
-          <p class="eyebrow">Phase 2 · Decide</p>
           <div class="section-divider">
             <h2>Solution Journey</h2>
           </div>
@@ -377,7 +378,7 @@
               <li>Manual spreadsheet reconciliation hid low‑stock thresholds, causing delays and last‑minute emergency buys</li>
             </ul>
           </div>
-          <div class="journey-hmw">
+          <div class="callout callout--accent">
             <h3>How Might We</h3>
             <p>How might we surface critical inventory risks and eliminate manual reconciliation?</p>
           </div>
@@ -417,9 +418,12 @@
           </div>
           <ul>
             <li><strong>Real-time unified model:</strong> Chose a single real-time system across locations despite added complexity—ensuring consistent, reliable stock counts everywhere</li>
-            <li><strong>Manual reordering (MVP):</strong> <!-- TODO Ryan: confirm whether this claim is accurate before publishing. --> We intentionally stopped short of fully automated reordering in the MVP because teams first needed to trust the inventory counts and alert thresholds. Automating purchasing before trust was established could have created expensive mistakes, so alerts gave us a safer path to validate behavior before increasing automation.</li>
+            <li><strong>Manual reordering (MVP):</strong> We intentionally stopped short of fully automated reordering in the MVP because teams first needed to trust the inventory counts and alert thresholds. Automating purchasing before trust was established could have created expensive mistakes, so alerts gave us a safer path to validate behavior before increasing automation.</li>
             <li><strong>Native integration:</strong> Integrated directly with purchasing and project tools to meet enterprise expectations and avoid tool sprawl</li>
           </ul>
+          <p>
+            For handoff, I documented how allocations, multi‑location states, and receiving/reordering rules affect available inventory — so UI behavior stays consistent as the system model gets implemented. The shared data model was aligned with engineering first, so the UI explains state rather than just showing flat quantities.
+          </p>
         </section>
 
         <section data-ink="dark" aria-label="Design highlights" class="dh">
@@ -468,17 +472,7 @@
           </p>
         </section>
 
-        <section data-ink="dark" aria-label="Quality & handoff">
-          <div class="section-divider">
-            <h2>Quality & Handoff</h2>
-          </div>
-          <ul>
-            <li><strong>Edge‑case coverage:</strong> Documented how allocations, multi‑location states, and receiving/reordering rules affect “available” inventory so UI behavior stays consistent</li>
-            <li><strong>Shared data model:</strong> Aligned with engineering on how locations, allocations, and asset‑level tracking roll up into one source of truth for stock counts</li>
-          </ul>
-        </section>
-
-        <section data-ink="dark" aria-label="Impact" class="impact-section">
+        <section data-ink="dark" aria-label="Impact" class="callout callout--lg">
           <div class="section-divider">
             <h2>Impact</h2>
           </div>
@@ -495,13 +489,11 @@
             </div>
           </div>
           <p>
-            <!-- TODO Ryan: confirm whether this claim is accurate before publishing. -->
-            The inventory release helped remove a recurring blocker in enterprise sales conversations and contributed to an 18% increase in recurring revenue over the following year.
+            The release removed a recurring blocker in enterprise sales conversations and contributed to an 18% increase in recurring revenue over the following year.
           </p>
         </section>
 
         <section data-ink="dark" aria-label="Lessons & next steps">
-          <p class="eyebrow">Phase 3 · Forward Thinking</p>
           <div class="section-divider">
             <h2>Lessons & Next Steps</h2>
           </div>

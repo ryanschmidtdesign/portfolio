@@ -878,4 +878,17 @@
       toggle.textContent = expanded ? "View summary" : "Hide summary";
     });
   });
+
+  // Resume download tracking
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest('a[href*="ryan-schmidt-resume"][href$=".pdf"]');
+    if (!link) return;
+    fetch("/api/track-resume", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        pageUrl: location.pathname
+      })
+    }).catch(() => {});
+  });
 })();

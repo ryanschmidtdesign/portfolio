@@ -12,6 +12,29 @@ const CSE_API_KEY    = process.env.CSE_API_KEY || "";            // optional
 const CSE_ID         = process.env.CSE_ID || "";                 // optional
 const LOG_WEBHOOK_URL= process.env.LOG_WEBHOOK_URL || "";        // optional
 
+const SUPABASE_URL   = process.env.SUPABASE_URL || "https://ggmkmymtilpkezkpihxt.supabase.co";
+const SUPABASE_KEY   = process.env.SUPABASE_SERVICE_KEY || "";
+
+const SUPABASE_HEADERS = SUPABASE_KEY ? {
+  "apikey": SUPABASE_KEY,
+  "Authorization": `Bearer ${SUPABASE_KEY}`,
+  "Content-Type": "application/json"
+} : null;
+
+async function supabaseFetch(path, options = {}) {
+  if (!SUPABASE_HEADERS) return null;
+  const resp = await fetch(`${SUPABASE_URL}${path}`, {
+    ...options,
+    headers: { ...SUPABASE_HEADERS, ...options.headers }
+  });
+  if (!resp.ok) {
+    const text = await resp.text().catch(() => "");
+    console.warn(`Supabase error ${resp.status} ${path}: ${text.slice(0, 200)}`);
+    return null;
+  }
+  return resp;
+}
+
 // Tight refusal list: only block explicit attempts to drag the chat into
 // politicized debate, NOT mentions of political/religious sectors as hiring
 // contexts. A recruiter at a political-tech or religious nonprofit should
@@ -1933,6 +1956,28 @@ return json(assistantPayload({
       type: "chat", time: Date.now(), user: lastUser, answer,
       usedWeb: !!webSnippets, snippets: webSnippets || []
     });
+
+    // Log to Supabase (fire-and-forget)
+    if (SUPABASE_HEADERS) {
+      supabaseFetch("/rest/v1/chat_messages", {
+        method: "POST",
+        body: JSON.stringify({
+          session_id: null,
+          role: "user",
+          content: String(lastUser || "").slice(0, 4000),
+          metadata: { intent }
+        })
+      }).catch(() => {});
+      supabaseFetch("/rest/v1/chat_messages", {
+        method: "POST",
+        body: JSON.stringify({
+          session_id: null,
+          role: "assistant",
+          content: String(answer || "").slice(0, 4000),
+          metadata: { suggested_pills, hire_intent, context_cases }
+        })
+      }).catch(() => {});
+    }
 
     return json(assistantPayload({
       answer,
