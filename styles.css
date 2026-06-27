@@ -1576,7 +1576,7 @@ code {
 .case-study {
   margin: 0 auto;
   padding: var(--page-margin, 0);
-  padding-inline: var(--page-margin);
+  padding-inline: 10rem;
   color: var(--text-display);
 }
 
