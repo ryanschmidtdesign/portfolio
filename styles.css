@@ -1515,6 +1515,14 @@ code {
   margin-top: 0;
 }
 
+/* Case studies: section dividers have no horizontal lines */
+.case-study .section-divider {
+  border-top: none;
+}
+.case-study .section-divider::before {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .section-divider {
     margin-top: var(--space-6);
@@ -1575,7 +1583,7 @@ code {
 .case-study {
   margin: 0 auto;
   padding: var(--page-margin, 0);
-  padding-inline: var(--page-gutter);
+  padding-inline: clamp(1rem, 3vw, 2.5rem);
   color: var(--text-display);
 }
 
@@ -1587,7 +1595,6 @@ code {
 
 /* Alternating section backgrounds */
 .case-study .section--alt {
-  background: var(--bg-subtle);
   padding-block: var(--space-5);
 }
 
@@ -1873,6 +1880,8 @@ code {
 .case-study .callout,
 .case-study aside {
   margin-block: var(--space-6);
+  max-width: var(--prose);
+  margin-inline: auto;
 }
 
 .callout--accent {
@@ -1891,7 +1900,6 @@ code {
 .case-study .tldr {
   margin: 0 auto var(--space-5);
   padding: 0;
-  max-width: var(--prose);
 }
 
 .case-study .tldr h1 {
@@ -2389,15 +2397,6 @@ code {
   }
 }
 
-.dh {
-  margin: calc(var(--space-8) * 1.1) 0 var(--space-8);
-  background:
-    radial-gradient(900px 420px at 12% 0%, rgba(79, 110, 247, 0.06), transparent 55%),
-    rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-1);
-  border-radius: var(--radius-lg);
-}
 
 
 
