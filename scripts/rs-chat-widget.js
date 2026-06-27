@@ -63,7 +63,7 @@
         color: #f8fafc;
         border: 1px solid var(--surface-dark-border);
         box-shadow: 0 28px 90px rgba(0, 0, 0, 0.24);
-        border-radius: var(--radius-lg);
+        border-radius: 18px;
         visibility: hidden;
         z-index: 2147482999;
         will-change: height;
@@ -228,7 +228,7 @@
         display: flex;
         align-items: center;
         gap: 0;
-        padding: var(--space-3, .75rem);
+        padding: var(--space-3, .75rem) var(--space-3, .75rem) 0;
         background: transparent;
         box-sizing: border-box;
         position: relative;

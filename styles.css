@@ -3950,34 +3950,31 @@ body.page-transitioning {
   height: 56px;
   width: min(420px, calc(100vw - 84px));
   max-width: min(420px, calc(100vw - 84px));
-  border-radius: var(--radius-md);
-  border: 1px solid var(--surface-dark-border);
-  background: var(--surface-dark-solid);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(6, 12, 22, 1);
   font: inherit;
   font-size: var(--fs-sm, 14px);
   color: #f8fafc;
   outline: none;
-  /* Single-line pill behavior */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 54px;          /* 56px height - 2px border = 54px content, vertically centers text */
-  padding: 0 var(--space-8) 0 var(--space-4);
+  padding: 0 3.5rem 0 1.25rem;
   transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24);
   box-sizing: border-box;
   resize: none;
 }
 .ai-mini-input:focus {
-  border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24), 0 0 0 2px rgba(59,130,246,0.12);
+  border-color: rgba(79, 110, 247, 0.5);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24), 0 0 0 2px rgba(79, 110, 247, 0.12);
   background: rgba(6, 12, 22, 1);
   color: #f8fafc;
 }
 .ai-mini-input::placeholder {
   color: rgba(255,255,255,0.45);
   font-weight: var(--weight-regular, 400);
-  line-height: 54px;
 }
 .ai-mini-send {
   position: absolute;
@@ -3986,7 +3983,7 @@ body.page-transitioning {
   width: 40px;
   height: 40px;
   border: none;
-  border-radius: 10px;
+  border-radius: 14px;
   background: var(--accent-hover);
   color: #FFFFFF;
   cursor: pointer;
