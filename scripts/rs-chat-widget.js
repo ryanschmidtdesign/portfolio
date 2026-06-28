@@ -1341,11 +1341,7 @@ if (savedHist.length > 0) {
       // Trust: show which case(s) this answer is based on
       if (Array.isArray(data.context_cases) && data.context_cases.length) {
         renderContextCases(thinking, data.context_cases);
-      }
-
-      // Feature 5: Sources footnote
-      if (Array.isArray(data.sources) && data.sources.length) {
-        renderSources(thinking, data.sources);
+        scrollToBottom(true);
       }
 
       // Phase 2: DOM-Aware Navigation & Highlighting

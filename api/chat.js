@@ -966,6 +966,18 @@ function repairFitAnswer(answer, isFit, kb) {
   return s.trim();
 }
 
+function extractJsonFromText(text) {
+  let s = String(text || "").trim();
+  const codeBlock = s.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (codeBlock) s = codeBlock[1].trim();
+  const braceStart = s.indexOf("{");
+  const braceEnd = s.lastIndexOf("}");
+  if (braceStart !== -1 && braceEnd > braceStart) {
+    s = s.slice(braceStart, braceEnd + 1);
+  }
+  return s;
+}
+
 function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
   const empty = {
     suggested_pills: [],
@@ -995,8 +1007,9 @@ function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
       action_highlight: String(safe.action_highlight || "")
     };
   }
+  const cleaned = extractJsonFromText(text);
   try {
-    const parsed = JSON.parse(text);
+    const parsed = JSON.parse(cleaned);
     return normalizeAssistantPayload(parsed, pickedCases, kb, isFit);
   } catch {
     const m = String(text).match(/"answer"\s*:\s*"((?:\\.|[^"\\])*)"/);
@@ -1454,7 +1467,7 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
 
   const isDetailed = String(answerStyle || "").toLowerCase() === "detailed";
   const model = useFitModel ? XAI_FIT_MODEL : XAI_MODEL;
-  const maxOutputTokens = useFitModel ? 650 : (isDetailed ? 850 : 450);
+  const maxOutputTokens = useFitModel ? 800 : (isDetailed ? 1000 : 600);
   const temperature = useFitModel ? 0.3 : (isDetailed ? 0.3 : 0.25);
 
   const endpoint = "https://api.x.ai/v1/chat/completions";
@@ -1688,7 +1701,7 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
 
   const isDetailed = String(answerStyle || "").toLowerCase() === "detailed";
   const model = useFitModel ? GEMINI_FIT_MODEL : GEMINI_MODEL;
-  const maxOutputTokens = useFitModel ? 650 : (isDetailed ? 850 : 450);
+  const maxOutputTokens = useFitModel ? 800 : (isDetailed ? 1000 : 600);
   const temperature = useFitModel ? 0.3 : (isDetailed ? 0.3 : 0.25);
 
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
