@@ -258,6 +258,44 @@
         background: rgba(6, 12, 22, 1);
       }
       .text::placeholder { color: rgba(255,255,255,0.45); font-weight: var(--weight-regular, 400); line-height: 54px; }
+      .typewriter {
+        position: absolute;
+        left: calc(1.25rem + 1px);
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        white-space: nowrap;
+        overflow: hidden;
+        color: rgba(255,255,255,0.45);
+        font-size: var(--fs-sm, 14px);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 0;
+        max-width: calc(100% - 5rem);
+      }
+      .typewriter-pretext {
+        color: rgba(255,255,255,0.35);
+        flex-shrink: 0;
+      }
+      .typewriter-text {
+        color: rgba(255,255,255,0.45);
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 32ch;
+      }
+      .typewriter-cursor {
+        display: inline-block;
+        color: rgba(255,255,255,0.45);
+        font-weight: 300;
+        animation: typewriter-blink 0.8s step-end infinite;
+        margin-left: 1px;
+        flex-shrink: 0;
+      }
+      @keyframes typewriter-blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
       @keyframes gentleGlow {
         0%, 100% { box-shadow: 0 0 0 0 rgba(79, 110, 247, 0.4); }
         50% { box-shadow: 0 0 15px 2px rgba(79, 110, 247, 0.6); }
@@ -456,7 +494,12 @@
 
         <div class="inp">
           <label for="input" class="visually-hidden">Ask Ryan's portfolio assistant</label>
-          <input type="text" class="text" id="input" placeholder="Paste a job link or ask about Ryan's work..." aria-label="Ask a question about Ryan" aria-describedby="rs-chat-hint" autocomplete="off" />
+          <div class="typewriter" id="typewriter" aria-hidden="true">
+            <span class="typewriter-pretext">Try </span>
+            <span class="typewriter-text" id="typewriterText"></span>
+            <span class="typewriter-cursor" aria-hidden="true">|</span>
+          </div>
+          <input type="text" class="text" id="input" placeholder="" aria-label="Ask a question about Ryan" aria-describedby="rs-chat-hint" autocomplete="off" />
           <button class="send" id="send" type="button" aria-label="Send message">→</button>
         </div>
       </div>
@@ -480,6 +523,69 @@
     console.error('Portfolio Chat: Critical DOM refs missing. Widget will not initialize.');
     return;
   }
+
+  // Typewriter placeholder
+  const typewriterEl = $('#typewriter');
+  const typewriterTextEl = $('#typewriterText');
+  const typewriterPhrases = [
+    'asking about Ryan\'s product strategy...',
+    'pasting a job link for fit...',
+    'asking about the dashboard redesign...',
+    'exploring AI product design work...',
+    'asking about cross-functional leadership...',
+    'checking role fit for Staff Designer...',
+  ];
+  let twIndex = 0;
+  let twChar = 0;
+  let twDeleting = false;
+  let twTimer = null;
+
+  function typewriterLoop() {
+    if (!typewriterEl || !typewriterTextEl) return;
+    if (document.activeElement === inputEl || inputEl.value.length > 0) {
+      typewriterEl.style.display = 'none';
+      clearTimeout(twTimer);
+      return;
+    }
+    typewriterEl.style.display = 'flex';
+    const current = typewriterPhrases[twIndex];
+    if (!twDeleting) {
+      twChar++;
+      typewriterTextEl.textContent = current.substring(0, twChar);
+      if (twChar === current.length) {
+        twTimer = setTimeout(() => { twDeleting = true; typewriterLoop(); }, 2000);
+        return;
+      }
+      twTimer = setTimeout(typewriterLoop, 50 + Math.random() * 40);
+    } else {
+      twChar--;
+      typewriterTextEl.textContent = current.substring(0, twChar);
+      if (twChar === 0) {
+        twDeleting = false;
+        twIndex = (twIndex + 1) % typewriterPhrases.length;
+        twTimer = setTimeout(typewriterLoop, 300);
+        return;
+      }
+      twTimer = setTimeout(typewriterLoop, 25 + Math.random() * 20);
+    }
+  }
+  typewriterLoop();
+
+  inputEl.addEventListener('focus', () => {
+    if (typewriterEl) typewriterEl.style.display = 'none';
+    clearTimeout(twTimer);
+  });
+  inputEl.addEventListener('blur', () => {
+    if (inputEl.value.length === 0) typewriterLoop();
+  });
+  inputEl.addEventListener('input', () => {
+    if (inputEl.value.length > 0) {
+      if (typewriterEl) typewriterEl.style.display = 'none';
+      clearTimeout(twTimer);
+    } else {
+      typewriterLoop();
+    }
+  });
 
   // Small helper: escape HTML when interpolating untrusted strings
   function escapeHtml(value = '') {
