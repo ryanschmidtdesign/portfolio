@@ -1875,7 +1875,8 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
 
   const isDetailed = String(answerStyle || "").toLowerCase() === "detailed";
   const model = useFitModel ? GEMINI_FIT_MODEL : GEMINI_MODEL;
-  const maxOutputTokens = useFitModel ? 800 : (isDetailed ? 1000 : 600);
+  // Tokens must accommodate JSON wrapper (~100 tokens overhead) plus answer text
+  const maxOutputTokens = useFitModel ? 900 : (isDetailed ? 1200 : 800);
   const temperature = useFitModel ? 0.3 : (isDetailed ? 0.3 : 0.25);
 
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
@@ -1906,56 +1907,24 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
     ? parts.map(p => p && p.text).filter(Boolean).join("\n")
     : (candidate?.parts?.[0]?.text || "");
 
-  if (!textRaw || textRaw.trim().startsWith("{") === false) {
-    console.warn(`callGemini: textRaw empty or not JSON: "${String(textRaw).slice(0,200)}" parts_count=${Array.isArray(parts) ? parts.length : "N/A"}`);
-  }
-
   const result = parseGeminiOutput(textRaw, pickedCases, kb, isFit);
 
-  let answerText = result.answer;
-  if (typeof answerText === "string" && answerText.trim().startsWith("{") && answerText.includes('"answer"')) {
-    const extracted = safeExtractAnswer(answerText);
+  // If answer is still wrapped in JSON (Gemini truncated mid-JSON), try extracting directly from textRaw
+  if (typeof result.answer === "string" && result.answer.trim().startsWith("{") && result.answer.includes('"answer"')) {
+    const extracted = safeExtractAnswer(textRaw);
     if (extracted) {
       result.answer = extracted;
     } else {
-      // answer is probably the raw textRaw itself — parse directly
-      const directAttempt = safeExtractAnswer(textRaw);
-      if (directAttempt) {
-        result.answer = directAttempt;
-      }
+      try {
+        const cleaned = extractJsonFromText(textRaw);
+        const parsed = JSON.parse(cleaned);
+        if (parsed && typeof parsed.answer === "string") {
+          result.answer = parsed.answer;
+          if (Array.isArray(parsed.suggested_pills)) result.suggested_pills = parsed.suggested_pills;
+          if (Array.isArray(parsed.context_cases)) result.context_cases = parsed.context_cases;
+        }
+      } catch {}
     }
-  }
-
-  // Safety: if answer still looks like raw JSON, force-extract from textRaw
-  if (typeof result.answer === "string" && result.answer.trim().startsWith("{") && result.answer.includes('"answer"')) {
-    const forced = safeExtractAnswer(textRaw);
-    if (forced) result.answer = forced;
-  }
-
-  // Final fallback: manually parse textRaw into the expected output fields
-  if (typeof result.answer === "string" && result.answer.trim().startsWith("{") && result.answer.includes('"answer"')) {
-    try {
-      const extracted = extractJsonFromText(textRaw);
-      const parsed = JSON.parse(extracted);
-      if (parsed && typeof parsed.answer === "string") {
-        result.answer = parsed.answer;
-        if (Array.isArray(parsed.suggested_pills)) result.suggested_pills = parsed.suggested_pills;
-        if (Array.isArray(parsed.context_cases)) result.context_cases = parsed.context_cases;
-      }
-    } catch {}
-  }
-
-  // Debug: if answer is suspicious, include raw response info
-  if (typeof result.answer === "string" && result.answer.trim().startsWith("{")) {
-    const debugInfo = {
-      len: result.answer.length,
-      textRaw: String(textRaw).slice(0, 400),
-      resultAnswer: String(result.answer).slice(0, 200),
-      hasCandidates: !!data?.candidates?.length,
-      partsCount: Array.isArray(parts) ? parts.length : (parts ? "non-array" : "none"),
-      partsType: parts ? typeof parts : "undefined"
-    };
-    result.answer = `DEBUG ${JSON.stringify(debugInfo)}`;
   }
 
   return result;
@@ -2254,11 +2223,7 @@ export default async function handler(req, res) {
     }
 
     const metricAllowlist = buildMetricAllowlist(kb);
-    let rawAnswer = modelOutput.answer;
-    if (typeof rawAnswer === "string" && rawAnswer.trim().startsWith("{") && rawAnswer.includes('"answer"')) {
-      try { const parsed = JSON.parse(rawAnswer); if (parsed && typeof parsed.answer === "string") rawAnswer = parsed.answer; } catch (e) { console.warn(`double-json unwrap failed: ${e?.message}`); }
-    }
-    const answer = polishAnswerText(validateAnswerMetrics(rawAnswer, metricAllowlist));
+    const answer = polishAnswerText(validateAnswerMetrics(modelOutput.answer, metricAllowlist));
     const suggested_pills = Array.isArray(modelOutput.suggested_pills) && modelOutput.suggested_pills.length
       ? modelOutput.suggested_pills.slice(0, 2)
       : defaultSuggestedPills(intent, lastUser);
