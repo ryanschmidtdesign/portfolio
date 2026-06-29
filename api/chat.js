@@ -1,6 +1,6 @@
 // Vercel serverless function — /api/chat.js
 // Ported from netlify/functions/portfolio-chat.js
-// Uses xAI/Grok API as primary (OpenAI-compatible), Gemini as optional fallback
+// Uses Gemini as the only active model. Grok/xAI code retained for reference only.
 
 // -----------------------------------------------------------------------------
 // Environment and constants
@@ -1244,9 +1244,160 @@ function buildNegativeRulesContext(kb) {
 }
 
 // -----------------------------------------------------------------------------
-// Grok (xAI) request/response handling
+// Local fallback when Gemini is unavailable
 // -----------------------------------------------------------------------------
 
+function buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks = [], contextCases = [] }) {
+  const deterministic = getDeterministicAnswer(intent, kb);
+  if (deterministic) {
+    return assistantPayload({
+      answer: deterministic,
+      suggested_pills: defaultSuggestedPills(intent, lastUser),
+      hire_intent: false,
+      context_cases: contextCases
+    });
+  }
+
+  const t = String(lastUser || "").toLowerCase();
+  const retrievedText = (retrievedChunks || [])
+    .map(c => c.chunk_text)
+    .filter(Boolean)
+    .join("\n\n")
+    .slice(0, 1600);
+
+  if (intent === "role_fit" || detectFitIntent(lastUser)) {
+    return assistantPayload({
+      answer: [
+        "Ryan looks strongest where product design, systems thinking, and hands-on prototyping overlap.",
+        "- His best proof points are in the dashboard, inventory, and AI-coding portfolio work.",
+        "- He is strongest for roles that value complex B2B SaaS, information architecture, design systems, and builder-style product design.",
+        "- Gemini is unavailable right now, so this is a grounded fallback instead of a full role-specific analysis. If you paste the job description again later, the assistant can map his evidence more tightly."
+      ].join("\n"),
+      suggested_pills: [
+        "Which case study best fits this role?",
+        "Show Ryan's strongest proof points."
+      ],
+      hire_intent: false,
+      context_cases: contextCases
+    });
+  }
+
+  if (retrievedText) {
+    return assistantPayload({
+      answer: "Gemini is unavailable right now, but I found relevant portfolio context. The short version: " + retrievedText.slice(0, 500) + (retrievedText.length > 500 ? "..." : ""),
+      suggested_pills: defaultSuggestedPills(intent, lastUser),
+      hire_intent: false,
+      context_cases: contextCases
+    });
+  }
+
+  return assistantPayload({
+    answer: "Gemini is unavailable right now. Try asking about Ryan's case studies, UX Engineer fit, product design process, or strongest proof points.",
+    suggested_pills: defaultSuggestedPills(intent, lastUser),
+    hire_intent: false,
+    context_cases: contextCases
+  });
+}
+
+// -----------------------------------------------------------------------------
+// Supabase vector retrieval (Phase 3)
+// -----------------------------------------------------------------------------
+
+async function generateQueryEmbedding(text = "") {
+  if (!GEMINI_API_KEY || !GEMINI_API_KEY.trim()) return null;
+
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:embedContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+
+  const resp = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "models/gemini-embedding-2",
+      content: { parts: [{ text: String(text || "").slice(0, 2000) }] },
+      outputDimensionality: 768
+    })
+  });
+
+  if (!resp.ok) {
+    const err = await resp.text().catch(() => "");
+    console.warn(`Embedding error: ${resp.status} ${err.slice(0, 200)}`);
+    return null;
+  }
+
+  const data = await resp.json();
+  return data.embedding?.values || null;
+}
+
+async function retrieveKbChunks(userText = "", options = {}) {
+  const {
+    matchCount = 6,
+    similarityThreshold = 0.68
+  } = options;
+
+  if (!SUPABASE_HEADERS) return [];
+  if (!userText || String(userText).trim().length < 3) return [];
+
+  const embedding = await generateQueryEmbedding(userText);
+  if (!embedding || !Array.isArray(embedding)) return [];
+
+  const resp = await supabaseFetch("/rest/v1/rpc/match_kb_chunks", {
+    method: "POST",
+    body: JSON.stringify({
+      query_embedding: embedding,
+      match_count: matchCount,
+      similarity_threshold: similarityThreshold
+    })
+  });
+
+  if (!resp) return [];
+
+  const rows = await resp.json().catch(() => []);
+  if (!Array.isArray(rows)) return [];
+
+  return rows
+    .filter(row => row && row.chunk_text)
+    .map(row => ({
+      chunk_text: String(row.chunk_text || ""),
+      source: String(row.source || ""),
+      metadata: row.metadata || {},
+      similarity: typeof row.similarity === "number" ? row.similarity : null
+    }))
+    .slice(0, matchCount);
+}
+
+function buildRetrievedKbContext(chunks = []) {
+  if (!Array.isArray(chunks) || !chunks.length) return "";
+
+  const formatted = chunks
+    .slice(0, 6)
+    .map((chunk, index) => {
+      const source = chunk.source ? `Source: ${chunk.source}` : "Source: unknown";
+      const score = typeof chunk.similarity === "number"
+        ? `Similarity: ${chunk.similarity.toFixed(3)}`
+        : "";
+      const metadata = chunk.metadata && Object.keys(chunk.metadata).length
+        ? `Metadata: ${JSON.stringify(chunk.metadata).slice(0, 500)}`
+        : "";
+      const text = String(chunk.chunk_text || "").slice(0, 1800);
+
+      return [
+        `## Retrieved chunk ${index + 1}`,
+        source,
+        score,
+        metadata,
+        text
+      ].filter(Boolean).join("\n");
+    })
+    .join("\n\n");
+
+  return `### RETRIEVED KB CONTEXT\nUse these retrieved chunks as high-signal grounding. Do not invent facts beyond this or the structured KB.\n\n${formatted}`;
+}
+
+// -----------------------------------------------------------------------------
+// Grok (xAI) request/response handling — DISABLED
+// -----------------------------------------------------------------------------
+
+/* Grok/xAI code retained for reference only.
 async function callGrok(systemPrompt, messages, webSnippets, kb, answerStyle, options = {}) {
   const { pageUrl = "", sectionContext = null, useFitModel = false, lastUserOverride = "" } = options;
 
@@ -1499,13 +1650,14 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
 
   return parseGeminiOutput(text, pickedCases, kb, isFit);
 }
+*/
 
 // -----------------------------------------------------------------------------
 // Gemini fallback handler
 // -----------------------------------------------------------------------------
 
 async function callGemini(systemPrompt, messages, webSnippets, kb, answerStyle, options = {}) {
-  const { pageUrl = "", sectionContext = null, useFitModel = false, lastUserOverride = "" } = options;
+  const { pageUrl = "", sectionContext = null, useFitModel = false, lastUserOverride = "", retrievedChunks = [] } = options;
   const contents = [];
 
   const lastUserMsg =
@@ -1690,6 +1842,11 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
   if (webSnippets && webSnippets.length) {
     const ctx = webSnippets.map(s => `\u2022 ${s.title}\n  ${s.snippet}\n  ${s.link}`).join("\n\n");
     contents.push({ role:"user", parts:[{ text: `### WEB CONTEXT\n${ctx}\n\nCite lightly by title or domain.` }]});
+  }
+
+  const retrievedCtx = buildRetrievedKbContext(retrievedChunks);
+  if (retrievedCtx) {
+    contents.push({ role: "user", parts: [{ text: retrievedCtx }] });
   }
 
   for (const m of (messages || [])) {
@@ -1879,9 +2036,8 @@ export default async function handler(req, res) {
   }
 
   const useGemini = GEMINI_API_KEY && GEMINI_API_KEY.trim() !== "";
-  const useGrok = !useGemini && XAI_API_KEY && XAI_API_KEY.trim() !== "";
 
-  if (!useGemini && !useGrok) {
+  if (!useGemini) {
     return res.status(500).json(
       assistantPayload({
         answer: "Chat is not configured. Add GEMINI_API_KEY in Vercel \u2192 Project Settings \u2192 Environment Variables."
@@ -1959,6 +2115,13 @@ export default async function handler(req, res) {
       /\bcompany\b/i.test(lastUser);
     const webSnippets = shouldWebSearch ? await maybeSearchCompanyFit(lastUser) : null;
 
+    let retrievedChunks = [];
+    try {
+      retrievedChunks = await retrieveKbChunks(lastUser, { matchCount: 6, similarityThreshold: 0.68 });
+    } catch (e) {
+      console.warn(`Retrieval error: ${e?.message || "unknown"}`);
+    }
+
     const augmentedMessages = Array.isArray(messages) ? [...messages] : [];
     if (pageContext && (pageContext.title || pageContext.description || pageContext.url)) {
       const parts = [
@@ -1989,20 +2152,36 @@ export default async function handler(req, res) {
     }
 
     let modelOutput;
+    let usedFallback = false;
+    const baseOptions = {
+      pageUrl: pageContext?.url || "",
+      sectionContext,
+      useFitModel: isFit,
+      lastUserOverride: lastUser
+    };
+
     if (useGemini) {
-      modelOutput = await callGemini(SYSTEM_PROMPT, augmentedMessages, webSnippets, kb, answerStyle, {
-        pageUrl: pageContext?.url || "",
-        sectionContext,
-        useFitModel: isFit,
-        lastUserOverride: lastUser
-      });
-    } else {
-      modelOutput = await callGrok(SYSTEM_PROMPT, augmentedMessages, webSnippets, kb, answerStyle, {
-        pageUrl: pageContext?.url || "",
-        sectionContext,
-        useFitModel: isFit,
-        lastUserOverride: lastUser
-      });
+      try {
+        modelOutput = await callGemini(SYSTEM_PROMPT, augmentedMessages, webSnippets, kb, answerStyle, {
+          ...baseOptions,
+          retrievedChunks
+        });
+      } catch (geminiErr) {
+        console.warn(`Gemini call failed, using fallback: ${geminiErr?.message || "unknown"}`);
+        usedFallback = true;
+        const fallbackContextCases = (retrievedChunks || [])
+          .filter(c => c.metadata && c.metadata.caseTitle && c.metadata.caseUrl)
+          .map(c => ({ title: c.metadata.caseTitle, url: c.metadata.caseUrl }))
+          .slice(0, 2);
+        modelOutput = buildLocalFallbackAnswer({
+          intent,
+          lastUser,
+          kb,
+          retrievedChunks,
+          contextCases: fallbackContextCases
+        });
+      }
+    // Grok/xAI is disabled — only Gemini is active
     }
 
     const metricAllowlist = buildMetricAllowlist(kb);
@@ -2032,7 +2211,9 @@ export default async function handler(req, res) {
 
     await logIfEnabled({
       type: "chat", time: Date.now(), user: lastUser, answer,
-      usedWeb: !!webSnippets, snippets: webSnippets || []
+      usedWeb: !!webSnippets, snippets: webSnippets || [],
+      usedFallback,
+      retrievalChunks: retrievedChunks.length
     });
 
     if (SUPABASE_HEADERS) {
