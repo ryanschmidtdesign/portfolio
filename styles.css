@@ -1984,11 +1984,14 @@ code {
   grid-template-columns: 2fr 1fr;
   column-gap: var(--space-8);
   align-items: start;
+  width: calc(100% + 80px);
+  margin-inline: -40px;
 }
 
 @media (max-width: 860px) {
   .tldr-meta {
     margin-inline: 0;
+    width: 100%;
     grid-template-columns: 1fr;
     row-gap: var(--space-5);
     padding: var(--space-5);
@@ -2264,6 +2267,7 @@ code {
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-5);
   margin-top: var(--space-6);
+  margin-bottom: var(--space-6);
 }
 
 @media (max-width: 900px) {
@@ -2571,6 +2575,7 @@ code {
   overflow: hidden;
   padding: clamp(1.25rem, 3vw, 2rem);
   margin-top: var(--space-6);
+  margin-bottom: var(--space-6);
   background: var(--surface-elevated);
   border: none;
   border-radius: 0;
