@@ -495,7 +495,7 @@
         <div class="inp">
           <label for="input" class="visually-hidden">Ask Ryan's portfolio assistant</label>
           <div class="typewriter" id="typewriter" aria-hidden="true">
-            <span class="typewriter-pretext">Try </span>
+            <span class="typewriter-pretext">Try&nbsp;</span>
             <span class="typewriter-text" id="typewriterText"></span>
             <span class="typewriter-cursor" aria-hidden="true">|</span>
           </div>
@@ -542,7 +542,7 @@
 
   function typewriterLoop() {
     if (!typewriterEl || !typewriterTextEl) return;
-    if (document.activeElement === inputEl || inputEl.value.length > 0) {
+    if (inputEl.value.length > 0) {
       typewriterEl.style.display = 'none';
       clearTimeout(twTimer);
       return;
@@ -571,18 +571,14 @@
   }
   typewriterLoop();
 
-  inputEl.addEventListener('focus', () => {
-    if (typewriterEl) typewriterEl.style.display = 'none';
-    clearTimeout(twTimer);
-  });
-  inputEl.addEventListener('blur', () => {
-    if (inputEl.value.length === 0) typewriterLoop();
-  });
   inputEl.addEventListener('input', () => {
     if (inputEl.value.length > 0) {
-      if (typewriterEl) typewriterEl.style.display = 'none';
+      typewriterEl.style.display = 'none';
       clearTimeout(twTimer);
     } else {
+      twChar = 0;
+      twDeleting = false;
+      clearTimeout(twTimer);
       typewriterLoop();
     }
   });
