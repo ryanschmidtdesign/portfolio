@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <rect width="1440" height="900" fill="#f1f5f9"/>
+  <text x="720" y="420" font-family="system-ui,sans-serif" font-size="28" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">Homepage Entry</text>
+  <text x="720" y="460" font-family="system-ui,sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">Member Portal</text>
+</svg>
