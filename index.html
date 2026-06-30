@@ -50,11 +50,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.counter.dev" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
   <!-- Fonts (italics + only 400/500/600/700) -->
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
   <link rel="stylesheet" href="./styles.css">
@@ -74,6 +75,7 @@
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link rel="dns-prefetch" href="https://cdn.counter.dev">
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
 <!-- Preload fonts for faster rendering -->
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" as="style">
@@ -368,7 +370,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 2rem;
+      gap: var(--space-6);
       min-width: 0;
     }
 
@@ -427,7 +429,7 @@
     </div>
 
   <!-- Homepage case study titles -->
-  <script src="./scripts/home-titles.js"></script>
+  <script src="./scripts/home-titles.js" defer></script>
 
   <!-- GSAP for smooth slider animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
