@@ -125,6 +125,8 @@
   --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
   --dur-1: 120ms;
   --dur-2: 180ms;
+  --dur-3: 300ms;
+  --dur-4: 450ms;
 
   /* === Cool neutrals === */
   --gray-50:  #f8fafc;
@@ -398,7 +400,16 @@ body:not(.is-home) {
 :where(h1, h2, h3, h4, h5, h6) {
   color: var(--text-heading);
   font-kerning: normal;
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-lg);
 }
+
+h1 { font-size: var(--fs-2xl); line-height: var(--lh-2xl); }
+h2 { font-size: var(--fs-xl); }
+h3 { font-size: var(--fs-lg); }
+h4 { font-size: var(--fs-md); }
+h5 { font-size: var(--fs-body); }
+h6 { font-size: var(--fs-sm); }
 
 strong,
 b {
@@ -521,7 +532,7 @@ body:not(.is-home) .site-main {
 .builder-section .section-title,
 .mentorship-section .section-title,
 .about-section .section-title {
-  color: var(--accent);
+  color: var(--text-heading);
 }
 
 .label {
@@ -737,7 +748,7 @@ code {
   font-weight: var(--weight-regular);
   letter-spacing: var(--tracking-tighter);
   margin: 0 0 var(--space-2) 0;
-  color: var(--accent);
+  color: var(--text-display);
 }
 
 .text-meta {
@@ -912,7 +923,7 @@ code {
 
 /* Accent usage */
 .metric-highlight {
-  color: var(--accent);
+  color: var(--text-display);
   font-weight: var(--weight-semibold);
 }
 
@@ -1925,8 +1936,8 @@ code {
   max-width: var(--prose);
   margin-inline: auto;
   padding: var(--space-5) var(--space-6);
-  background: var(--surface-elevated);
-  border: none;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
 }
@@ -1943,7 +1954,7 @@ code {
 }
 
 .callout--accent {
-  background: var(--surface-elevated-strong);
+  background: var(--surface-elevated);
   box-shadow: var(--shadow-card-strong);
 }
 
@@ -2048,7 +2059,7 @@ code {
   line-height: var(--lh-display);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
-  color: var(--accent);
+  color: var(--text-display);
   margin-bottom: 6px;
 }
 
@@ -2111,7 +2122,7 @@ code {
   line-height: var(--lh-display);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
-  color: var(--accent);
+  color: var(--text-display);
   margin-bottom: 0.3rem;
 }
 
@@ -2187,6 +2198,18 @@ code {
   background: var(--img-matte);
 }
 
+.case-study figure img:not([src]) {
+  background: linear-gradient(110deg, var(--surface-elevated) 30%, var(--surface-1) 50%, var(--surface-elevated) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  min-height: 200px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 .case-study figcaption {
   padding: var(--space-3) var(--space-4);
   color: var(--text-secondary);
@@ -2207,7 +2230,8 @@ code {
   margin-bottom: var(--space-2);
   font-size: var(--fs-sm);
   line-height: var(--lh-md);
-  background: var(--surface-elevated);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
 }
 
@@ -2215,7 +2239,8 @@ code {
 .journey-solutions {
   margin: var(--space-5) 0;
   padding: var(--space-5) var(--space-6);
-  background: var(--surface-elevated);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
   max-width: var(--prose);
 }
@@ -2297,8 +2322,8 @@ code {
 .case-study--ai-coding-portfolio .sa-step {
   flex: initial;
   padding: var(--space-4);
-  background: var(--surface-elevated);
-  border: none;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   display: flex;
@@ -2403,8 +2428,8 @@ code {
 
 .case-study--ai-coding-portfolio .adoption-card {
   padding: var(--space-4) var(--space-6);
-  background: var(--surface-elevated);
-  border: none;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
 }
@@ -2548,7 +2573,7 @@ code {
 
 .splitter-after {
   z-index: 2;
-  transition: clip-path 0.15s ease;
+  transition: clip-path var(--dur-2) ease;
 }
 
 .splitter-handle {
@@ -2659,7 +2684,7 @@ code {
 
 .asd-eyebrow {
   margin: 0 0 var(--space-2);
-  color: var(--accent);
+  color: var(--text-muted);
   font-size: var(--fs-xs);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-caps);
@@ -2749,7 +2774,7 @@ code {
   border: none;
   border-radius: var(--radius-md);
   opacity: 0.65;
-  transition: opacity 0.35s ease, box-shadow 0.35s ease;
+  transition: opacity var(--dur-3) ease, box-shadow var(--dur-3) ease;
 }
 
 .asd-node.is-active {
@@ -2791,7 +2816,7 @@ code {
   height: 0.5rem;
   border-radius: 999px;
   background: var(--text-tertiary);
-  transition: background 0.35s ease, box-shadow 0.35s ease;
+  transition: background var(--dur-3) ease, box-shadow var(--dur-3) ease;
 }
 
 .asd-node.is-active .asd-dot {
@@ -2888,7 +2913,7 @@ code {
   font-size: var(--fs-sm);
   font-weight: var(--weight-medium);
   list-style: none;
-  transition: color 0.3s ease;
+  transition: color var(--dur-3) ease;
 }
 
 .asd-internals li::before {
@@ -2898,7 +2923,7 @@ code {
   border-radius: 999px;
   background: var(--text-tertiary);
   flex-shrink: 0;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: background var(--dur-3) ease, box-shadow var(--dur-3) ease;
 }
 
 .asd-internals li.is-active { color: var(--text); }
@@ -2912,13 +2937,13 @@ code {
   width: 100%;
   max-width: 500px;
   padding: var(--space-4);
-  background: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
-  border: none;
   border-radius: var(--radius-md);
   opacity: 0.65;
   transform: translateY(8px);
-  transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.45s ease;
+  transition: opacity var(--dur-3) ease, transform var(--dur-3) ease, box-shadow var(--dur-3) ease;
 }
 
 .asd-answer-card.is-active {
@@ -2956,7 +2981,7 @@ code {
 .asd-metric {
   padding: var(--space-3);
   background: rgba(255, 255, 255, 0.5);
-  transition: background 0.35s ease, box-shadow 0.35s ease;
+  transition: background var(--dur-3) ease, box-shadow var(--dur-3) ease;
 }
 
 .asd-metric.is-active {
@@ -3225,12 +3250,12 @@ body.is-home .ask-trigger {
   z-index: 9999;
   transform-origin: left;
   will-change: width;
-  transition: width 0.1s ease-out;
+  transition: width var(--dur-1) var(--ease-out);
   pointer-events: none;
 }
 
 body {
-  transition: opacity 0.2s ease-out;
+  transition: opacity var(--dur-2) ease-out;
   opacity: 1;
 }
 
@@ -3482,7 +3507,7 @@ body.page-transitioning {
   padding: var(--space-3) var(--space-4);
   font-weight: var(--weight-semibold);
   cursor: pointer;
-  transition: background .2s ease, color .2s ease, transform .2s ease;
+  transition: background var(--dur-2) ease, color var(--dur-2) ease, transform var(--dur-2) ease;
 }
 
 [data-compare] button[data-compare-button][aria-pressed="true"] {
@@ -3508,63 +3533,11 @@ body.page-transitioning {
   font-size: var(--fs-article-h3);
 }
 
-[data-spotlight] {
-  background: var(--surface-elevated);
-  border: none;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-5);
-  margin-top: var(--space-5);
-  margin-bottom: var(--space-5);
-}
+/* ============================================================================
+   Removed: data-spotlight (no longer wired to HTML)
+   ============================================================================ */
 
-[data-spotlight] .spotlight-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-}
-
-[data-spotlight] .spotlight-item {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 180px;
-  min-width: 0;
-}
-
-[data-spotlight] .spotlight-desc {
-  margin-top: var(--space-2);
-  font-size: var(--fs-sm, 14px);
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-[data-spotlight] [data-spotlight-item] {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
-  background: rgba(255, 255, 255, 0.6);
-  border: none;
-  border-radius: 6px;
-  color: var(--text-secondary);
-  font-weight: var(--weight-semibold);
-  transition: background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
-  cursor: pointer;
-}
-
-[data-spotlight] [data-spotlight-item]:hover,
-[data-spotlight] [data-spotlight-item].is-active {
-  background: var(--accent);
-  color: #fff;
-  transform: translateY(-1px);
-}
-
-[data-spotlight] .spotlight-copy {
-  margin-top: var(--space-4);
-  color: var(--text-secondary);
-}
-
-/* Removed site copy widgets. Copy actions remain only inside the AI chat assistant. */
+/* Removed: site copy widgets. Copy actions remain only inside the AI chat assistant. */
 
 [data-section-summary] {
   margin-top: var(--space-5);
@@ -3593,7 +3566,7 @@ body.page-transitioning {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height .3s ease, opacity .3s ease;
+  transition: max-height var(--dur-3) ease, opacity var(--dur-3) ease;
 }
 
 [data-section-summary].is-open {
@@ -3653,7 +3626,7 @@ body.page-transitioning {
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-caps-wide);
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--text-muted);
   margin-bottom: var(--space-2);
 }
 
@@ -3704,7 +3677,7 @@ body.page-transitioning {
 }
 
 .constellation-node-label.is-project {
-  color: var(--accent);
+  color: var(--text-secondary);
   font-size: var(--fs-sm);
 }
 
@@ -4316,16 +4289,49 @@ body.page-transitioning {
   [data-webgl-hero],
   [data-webgl-models],
   [data-about-overlay],
-  .footer-nav {
+  .footer-nav,
+  #hamburger,
+  .hamburger-menu,
+  .ai-mini-wrapper,
+  .circular-progress-wrapper,
+  .rs-chat-widget,
+  .read-time-badge {
     display: none !important;
   }
 
   body {
     background: white;
     color: black;
+    font-size: 12pt;
+    line-height: 1.6;
   }
 
   .container {
+    max-width: 100%;
+  }
+
+  .site-main {
+    padding: 0 !important;
+  }
+
+  .case-study figure {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .case-study img {
+    max-width: 100%;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  .case-study .tldr h1,
+  .case-study .tldr .lead {
     max-width: 100%;
   }
 }
@@ -4334,7 +4340,7 @@ body.page-transitioning {
   box-shadow: 0 0 0 6px var(--accent-soft);
   background-color: var(--accent-soft);
   border-radius: 4px;
-  transition: box-shadow 0.4s ease, background-color 0.4s ease;
+  transition: box-shadow var(--dur-4) ease, background-color var(--dur-4) ease;
 }
 
 /* ── Portfolio Visual Fixes Overrides ── */

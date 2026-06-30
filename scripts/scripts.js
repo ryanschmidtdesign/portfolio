@@ -240,12 +240,20 @@
 // Section reveal functionality
 // ============================================================================
 (function () {
+  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) return;
+
   const revealSelector = '[data-reveal]';
   const els = document.querySelectorAll(revealSelector);
   if (!('IntersectionObserver' in window)) {
     els.forEach((el) => el.classList.add('is-revealed'));
     return;
   }
+
+  // Stagger reveal timing for visual rhythm
+  els.forEach((el, i) => {
+    el.style.transitionDelay = `${Math.min(i * 30, 180)}ms`;
+  });
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -751,29 +759,6 @@
 // Shared interactive modules
 // ============================================================================
 (function () {
-  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const revealEls = [...document.querySelectorAll("[data-reveal]")];
-  if (revealEls.length) {
-    // Stagger reveal timing for visual rhythm
-    revealEls.forEach((el, i) => {
-      el.style.transitionDelay = `${Math.min(i * 30, 180)}ms`;
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.25 }
-    );
-    revealEls.forEach((el) => observer.observe(el));
-  }
-
   const progressWrappers = [...document.querySelectorAll("[data-progress-story]")];
   if (progressWrappers.length) {
     const wrappers = progressWrappers.map((wrapper) => {
@@ -847,21 +832,6 @@
     });
     updateState(initial);
   });
-
-  [...document.querySelectorAll("[data-spotlight]")].forEach((wrapper) => {
-    const items = [...wrapper.querySelectorAll("[data-spotlight-item]")];
-    if (!items.length) return;
-
-    items.forEach((item) => {
-      item.addEventListener("click", () => {
-        items.forEach((el) => {
-          el.classList.toggle("is-active", el === item);
-          el.setAttribute('aria-selected', el === item ? 'true' : 'false');
-        });
-      });
-    });
-  });
-
 
   [...document.querySelectorAll("[data-section-summary]")].forEach((wrapper) => {
     const toggle = wrapper.querySelector(".summary-toggle");
