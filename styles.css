@@ -165,20 +165,20 @@
   --dot-size: 14px;
   --line-thickness: 2px;
 
-  /* Shadows (slightly bolder than Vercel/Linear/Cursor) */
+  /* Shadows (10% deeper than default) */
 --shadow-1:
-  0 1px 2px rgb(15 23 42 / 0.06),
-  0 2px 4px rgb(15 23 42 / 0.10),
+  0 1px 2px rgb(15 23 42 / 0.07),
+  0 2px 4px rgb(15 23 42 / 0.11),
   0 0 0 1px var(--border);
 
 --shadow-2:
-  0 2px 4px rgb(15 23 42 / 0.06),
-  0 10px 20px rgb(15 23 42 / 0.12),
+  0 2px 4px rgb(15 23 42 / 0.07),
+  0 10px 20px rgb(15 23 42 / 0.13),
   0 0 0 1px var(--border);
 
 --shadow-3:
-  0 4px 8px rgb(15 23 42 / 0.08),
-  0 20px 40px rgb(15 23 42 / 0.16),
+  0 4px 8px rgb(15 23 42 / 0.09),
+  0 20px 40px rgb(15 23 42 / 0.18),
   0 0 0 1px var(--border);
 
   /* === Neutrals (slate) === */
@@ -245,11 +245,11 @@
 
   /* Elevation shadows tuned for light steel-gray bg */
   --shadow-card:
-    0 1px 2px rgba(15, 23, 42, 0.06),
-    0 8px 24px rgba(15, 23, 42, 0.09);
+    0 1px 2px rgba(15, 23, 42, 0.07),
+    0 8px 24px rgba(15, 23, 42, 0.10);
   --shadow-card-strong:
-    0 2px 4px rgba(15, 23, 42, 0.075),
-    0 16px 40px rgba(15, 23, 42, 0.12);
+    0 2px 4px rgba(15, 23, 42, 0.08),
+    0 16px 40px rgba(15, 23, 42, 0.13);
 
   /* Nav ink */
   --ink-on-glass: #0f172a;

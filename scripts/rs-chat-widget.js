@@ -500,7 +500,6 @@
   function buildTypewriter() {
     const wrapper = document.querySelector('.ai-mini-wrapper');
     if (!wrapper) return;
-    wrapper.style.position = 'relative';
     const input = wrapper.querySelector('.ai-mini-input');
     if (!input) return;
     input.style.color = 'transparent';
