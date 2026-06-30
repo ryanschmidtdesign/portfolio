@@ -625,7 +625,8 @@ code {
   border: 1px solid var(--border);
 }
 
-.btn:active {
+.btn:active,
+button:active {
   transform: scale(0.97);
 }
 
@@ -1440,6 +1441,8 @@ code {
 .about-image img {
   display: block;
   width: 100%;
+  height: auto;
+  aspect-ratio: 3/4;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-2);
@@ -4382,7 +4385,7 @@ body.page-transitioning {
 /* ── Sticky Section Navigation Rail ── */
 .section-rail {
   position: fixed;
-  left: max(12px, calc((100vw - var(--prose)) / 2 - 140px));
+  left: 120px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 50;
