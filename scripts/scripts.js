@@ -484,6 +484,8 @@
   document.addEventListener("click", (e) => {
     const link = e.target.closest("a");
     if (!link) return;
+    // Let cmd/ctrl+click pass through to browser default (open in new tab)
+    if (e.metaKey || e.ctrlKey) return;
     const href = link.getAttribute("href");
     if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || link.target === "_blank") return;
 

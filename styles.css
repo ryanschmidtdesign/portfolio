@@ -939,6 +939,7 @@ code {
 --------------------------------------------------------*/
 .leadership-section,
 .about-section {
+  background: var(--gray-200);
   color: var(--text);
 }
 
@@ -1417,8 +1418,6 @@ code {
   width: 100%;
   height: auto;
   aspect-ratio: 3/4;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-2);
 }
 
 @media (max-width: 900px) {
@@ -2026,6 +2025,10 @@ code {
   text-align: center;
 }
 
+.tldr-kpis .tldr-label {
+  text-align: left;
+}
+
 .kpis--hero {
   display: flex;
   justify-content: center;
@@ -2173,7 +2176,6 @@ code {
   height: auto;
   display: block;
   background: var(--img-matte);
-  border-radius: var(--radius-lg);
 }
 
 .case-study figure img:not([src]) {
@@ -2372,7 +2374,7 @@ code {
 /* Inline case study media (replaces carousel) */
 .case-study-media {
   margin-block: var(--space-8);
-  max-width: min(100%, 1200px);
+  max-width: min(100%, 1800px);
   margin-inline: auto;
 }
 
@@ -3445,7 +3447,6 @@ code {
   .case-study figure img {
     max-width: 100%;
     height: auto;
-    border-radius: var(--radius-lg);
   }
 
 
