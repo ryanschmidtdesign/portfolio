@@ -1061,7 +1061,7 @@ code {
   height: var(--line-thickness);
   background: linear-gradient(90deg,
       var(--surface-2) 0%,
-      var(--accent-cool) 50%,
+      var(--accent) 50%,
       var(--surface-2) 100%);
   opacity: var(--line-opacity, 0.6);
   z-index: 0;
@@ -1418,7 +1418,6 @@ code {
   height: auto;
   aspect-ratio: 3/4;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
   box-shadow: var(--shadow-2);
 }
 
