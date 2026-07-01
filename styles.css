@@ -604,7 +604,6 @@ body:not(.is-home) .site-main {
 /* Meta / eyebrow labels */
 .text-meta,
 .metric-kicker,
-.about-kicker,
 .case-study .tldr-label {
   font-size: var(--fs-xs);
   line-height: var(--lh-2xs);
@@ -1351,17 +1350,8 @@ code {
   gap: var(--space-4);
 }
 
-.metric-kicker,
-.about-kicker {
+.metric-kicker {
   letter-spacing: var(--tracking-caps-tight);
-}
-
-.about-kicker {
-  margin: 0;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  /* NEW: align with metric kicker */
-  font-size: var(--type-overline);
 }
 
 .about-section .section-title {
@@ -2205,6 +2195,38 @@ code {
 .case-study figcaption {
   padding: var(--space-3) var(--space-4);
   color: var(--text-secondary);
+}
+
+.before-after-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin: var(--space-6) 0;
+}
+
+.before-after-grid figure {
+  margin: 0;
+}
+
+.before-after-grid figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+  background: var(--img-matte);
+}
+
+.before-after-grid figcaption {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  text-align: center;
+  padding: var(--space-2) 0 0;
+}
+
+@media (max-width: 640px) {
+  .before-after-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 
