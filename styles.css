@@ -2165,20 +2165,7 @@ code {
 
 .case-study figure {
   margin: var(--space-6) 0;
-  overflow: hidden;
-  background: var(--surface-elevated);
-  box-shadow: var(--shadow-card);
-  border-radius: var(--radius-md);
   position: relative;
-}
-
-.case-study figure::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  box-shadow: inset 0 1px 0 rgb(var(--rgb-white) / 0.08);
 }
 
 .case-study figure img,
@@ -2187,6 +2174,7 @@ code {
   height: auto;
   display: block;
   background: var(--img-matte);
+  border-radius: var(--radius-lg);
 }
 
 .case-study figure img:not([src]) {
@@ -2385,7 +2373,7 @@ code {
 /* Inline case study media (replaces carousel) */
 .case-study-media {
   margin-block: var(--space-8);
-  max-width: min(100%, 960px);
+  max-width: min(100%, 1200px);
   margin-inline: auto;
 }
 
@@ -3163,16 +3151,24 @@ code {
   font-size: var(--fs-article-h3);
 }
 
+[data-compare] .compare-panel {
+  position: relative;
+  border-top: 3px solid transparent;
+}
+
 [data-compare] .compare-panel[data-compare-state="spreadsheet"] {
-  background: linear-gradient(135deg, var(--red-soft), var(--surface-elevated) 62%);
+  border-top-color: var(--red);
+  background: var(--red-soft);
 }
 
 [data-compare] .compare-panel[data-compare-state="software"] {
-  background: linear-gradient(135deg, var(--amber-soft), var(--surface-elevated) 62%);
+  border-top-color: var(--amber);
+  background: var(--amber-soft);
 }
 
 [data-compare] .compare-panel[data-compare-state="system"] {
-  background: linear-gradient(135deg, var(--green-soft), var(--surface-elevated) 62%);
+  border-top-color: var(--green);
+  background: var(--green-soft);
 }
 
 /* ============================================================================
@@ -3445,10 +3441,6 @@ code {
   .section-title {
     font-size: clamp(2.5rem, 4vw, 3rem);
     margin-bottom: var(--space-8);
-  }
-
-  .case-study figure {
-    border-radius: var(--radius-lg);
   }
 
   .case-study figure img {
@@ -3821,12 +3813,12 @@ code {
 
   .case-study figure {
     break-inside: avoid;
-    box-shadow: none;
-    border: 1px solid #ddd;
   }
 
-  .case-study img {
+  .case-study figure img,
+  .case-study figure video {
     max-width: 100%;
+    border: 1px solid #ddd;
   }
 
   pre, code {
