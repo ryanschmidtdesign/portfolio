@@ -52,6 +52,12 @@ Personal portfolio site for Ryan Schmidt, Senior Product Designer. Static HTML/C
 - Items 24–25, 27, 30 excluded per user request
 - Breakpoint consolidation skipped (9 separate 768px blocks, merging risks breakage)
 - Three.js liquid slider script deleted (dead code, not loaded by any HTML)
+- About page: swapped heading/kicker — "About" is now the label, "Life Lately" is the h2
+- AI-Coding case study: Cursor Files.png moved to "Start in code" section, Interactive Component.png moved to Implementation highlights; 3 Old screenshots added as before/after evidence grid
+- Member Portal before/after pairs use the existing `image-splitter` component (data-splitter + image-splitter.js), not a new ba-slider — reuse the same component for future pairs
+- `.before-after-grid` class created for multi-image evidence layouts (2-column grid, collapses to single at 640px)
+- Heavy PNGs converted to WebP via Pillow (quality 80) with `<picture>` fallback — Old Home.png: 3.6MB → 77KB, others 70–97% reduction
+- Image width/height attributes updated to match actual source dimensions where files were resized
 
 ## File Structure
 - `index.html` (root) — home page
