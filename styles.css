@@ -2358,6 +2358,15 @@ code {
   color: var(--green);
 }
 
+/* ── Semantic status labels ── */
+.status-label--done {
+  color: var(--green);
+}
+
+.status-label--pending {
+  color: var(--amber);
+}
+
 /* :target highlight for anchor-linked sections */
 .case-study section:target {
   animation: targetFlash 2s var(--ease-out);
@@ -3174,6 +3183,18 @@ code {
 [data-compare] .compare-panel h3 {
   margin-top: 0;
   font-size: var(--fs-article-h3);
+}
+
+[data-compare] .compare-panel[data-compare-state="spreadsheet"] {
+  background: linear-gradient(135deg, var(--red-soft), var(--surface-elevated) 62%);
+}
+
+[data-compare] .compare-panel[data-compare-state="software"] {
+  background: linear-gradient(135deg, var(--amber-soft), var(--surface-elevated) 62%);
+}
+
+[data-compare] .compare-panel[data-compare-state="system"] {
+  background: linear-gradient(135deg, var(--green-soft), var(--surface-elevated) 62%);
 }
 
 /* ============================================================================
