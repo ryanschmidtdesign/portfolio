@@ -207,21 +207,38 @@
       }
 
       .pills {
-        display: flex; flex-wrap: wrap; gap: var(--space-2, .5rem);
-        padding: var(--space-3, .75rem) var(--space-4, 1rem) 0;
-        border-top: none;
-        background: transparent;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2, .5rem);
+        padding: 0 var(--space-4, 1rem) var(--space-2, .5rem);
       }
       .pill {
-        border: 1px solid rgba(255, 255, 255, 0.10);
-        border-radius: var(--radius-pill, 999px);
-        padding: var(--space-2, .5rem) var(--space-3, .75rem);
+        font: inherit;
+        font-size: var(--fs-sm, 13px);
+        color: #f8fafc;
         background: rgba(255, 255, 255, 0.06);
-        color: rgba(255, 255, 255, 0.75);
-        font: inherit; font-size: var(--fs-sm, 14px);
-        cursor: pointer; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 999px;
+        padding: var(--space-2, .5rem) var(--space-3, .75rem);
+        cursor: pointer;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+        transition: opacity 220ms var(--ease-menu), transform 220ms var(--ease-menu),
+          background 160ms ease, border-color 160ms ease;
       }
-      .pill:hover { background: rgba(255, 255, 255, 0.12); color: #f8fafc; }
+      .pills.show .pill {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .pills.show .pill:nth-child(1) { transition-delay: 0ms; }
+      .pills.show .pill:nth-child(2) { transition-delay: 60ms; }
+      .pills.show .pill:nth-child(3) { transition-delay: 120ms; }
+      .pill:hover,
+      .pill:focus-visible {
+        background: rgba(79, 110, 247, 0.18);
+        border-color: var(--accent, #4F6EF7);
+      }
 
       /* Input & Textarea */
       .inp {
@@ -933,29 +950,27 @@ if (savedHist.length > 0) {
   // ─── Page-Aware Smart Pills ──────────────────────────────────────────────
   const PAGE_PILLS = {
     '/dashboard.html': [
-      "What was Ryan's role on the dashboard project?",
       "How did it achieve +71% engagement?",
-      "Why fit at [Company]?"
+      "Why not go AI-first?",
+      "What lessons did you learn?"
     ],
     '/inventory.html': [
-      "Walk me through the spreadsheet-to-live-view decision.",
       "Why ship an MVP first?",
-      "Why fit at [Company]?"
+      "How did you earn stakeholder buy-in?",
+      "What lessons did you learn?"
     ],
     '/ai-coding-portfolio.html': [
-      "How did Ryan build this portfolio with AI?",
       "What tools and workflow did he use?",
-      "Why fit at [Company]?"
+      "Why a database instead of a JSON file?",
+      "What lessons did you learn?"
     ],
     '/about.html': [
       "Tell me about Ryan's mentorship work.",
-      "What makes Ryan a strong design leader?",
-      "Why fit at [Company]?"
+      "What makes Ryan a strong design leader?"
     ],
     '/member-portal-overhaul.html': [
-      "What is the member portal overhaul about?",
-      "When will this case study be published?",
-      "Why fit at [Company]?"
+      "Why progressive disclosure over flat navigation?",
+      "What lessons did you learn?"
     ],
     '/index.html': [
       "Why is Ryan a fit at [Company]?",
@@ -984,6 +999,7 @@ if (savedHist.length > 0) {
     const kbChips = state.kb?.chips?.default;
     const pills = customPills || PAGE_PILLS[path] || kbChips || PAGE_PILLS['/'];
     setPillsFromArray(pills);
+    requestAnimationFrame(() => pillsContainer.classList.add('show'));
   }
 
   // Set pills on load
@@ -1464,7 +1480,11 @@ if (savedHist.length > 0) {
       if (data.suggested_pills && Array.isArray(data.suggested_pills) && data.suggested_pills.length) {
         const pillsContainer = $('#pills');
         if (pillsContainer) {
-          setPillsFromArray(data.suggested_pills);
+          pillsContainer.classList.remove('show');
+          setTimeout(function () {
+            setPillsFromArray(data.suggested_pills);
+            requestAnimationFrame(function () { pillsContainer.classList.add('show'); });
+          }, 180);
         }
       }
 
