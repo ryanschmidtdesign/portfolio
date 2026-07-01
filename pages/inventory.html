@@ -422,6 +422,13 @@
               <p class="step-copy">Designed alerts and thresholds so low stock became visible before it became urgent.</p>
             </div>
           </div>
+
+          <figure class="case-study-media">
+            <video controls muted playsinline loop preload="metadata" width="2880" height="1496">
+              <source src="../Pictures/Inventory/Inventory Modal.mp4" type="video/mp4">
+            </video>
+            <figcaption>Low stock indicators, incoming POs, and bulk actions.</figcaption>
+          </figure>
         </section>
 
         <section id="decisions" aria-label="Decisions and trade-offs" class="section--alt">
@@ -434,6 +441,13 @@
             I worked with PM and engineering to align on a shared model so the UI could explain why an item was available, allocated, incoming, or low-stock instead of showing a flat quantity with no context.
           </p>
 
+          <figure class="case-study-media">
+            <video controls muted playsinline loop preload="metadata" width="2880" height="1496">
+              <source src="../Pictures/Inventory/Inventory Assets.mp4" type="video/mp4">
+            </video>
+            <figcaption>Movement history, allocations, and reorder settings.</figcaption>
+          </figure>
+
           <div class="section-divider">
             <h2>Key decisions & tradeoffs</h2>
           </div>
@@ -442,42 +456,16 @@
             <li><strong>Manual reordering (MVP):</strong> We intentionally stopped short of fully automated reordering in the MVP because teams first needed to trust the inventory counts and alert thresholds. 
               Automating purchasing before trust was established could have created expensive mistakes, so alerts gave us a safer path to validate behavior before increasing automation.</li>
           </ul>
+
+          <figure class="case-study-media">
+            <img src="../Pictures/Inventory/Inventory Settings.png" alt="Inventory settings for alerts, thresholds, and automation rules" loading="lazy" decoding="async" width="1440" height="900">
+            <figcaption>Inventory settings and automation controls.</figcaption>
+          </figure>
+
           <p>
             For handoff, I documented how allocations, multi‑location states, and receiving/reordering rules affect available inventory — so UI behavior stays consistent as the system model gets implemented. 
             The shared data model was aligned with engineering first, so the UI explains state rather than just showing flat quantities.
           </p>
-        </section>
-
-        <section id="design-highlights" aria-label="Design highlights">
-          <div class="section-divider">
-            <h2>Design Highlights</h2>
-          </div>
-
-          <div class="dh-carousel" role="region" aria-roledescription="carousel" aria-label="Design highlights">
-
-            <div class="dh-track" aria-label="Case study screenshots">
-              <figure class="dh-slide">
-                <video autoplay loop muted playsinline width="2880" height="1496">
-                  <source src="../Pictures/Inventory/Inventory Assets.mp4" type="video/mp4">
-                </video>
-                <figcaption>Movement history, allocations, and reorder settings.</figcaption>
-              </figure>
-
-              <figure class="dh-slide">
-                <video autoplay loop muted playsinline width="2880" height="1496">
-                  <source src="../Pictures/Inventory/Inventory Modal.mp4" type="video/mp4">
-                </video>
-                <figcaption>Low stock indicators, incoming POs, and bulk actions.</figcaption>
-              </figure>
-
-              <figure class="dh-slide">
-                <img src="../Pictures/Inventory/Inventory Settings.png" alt="Inventory settings for alerts, thresholds, and automation rules" loading="lazy" decoding="async" width="1440" height="900">
-                <figcaption>Inventory settings and automation controls.</figcaption>
-              </figure>
-            </div>
-
-          </div>
-
         </section>
 
         <section id="validation" aria-label="Validation" class="section--alt">
@@ -562,7 +550,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <!-- Consolidated JavaScript -->
     <script src="../scripts/scripts.js" defer></script>
-    <script src="../scripts/circular-carousel.js" defer></script>
     <script src="../scripts/rs-chat-widget.js" defer></script>
     <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
       <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
