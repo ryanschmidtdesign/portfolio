@@ -713,33 +713,11 @@
           <p>
             These replaced static pages with interactive, structured, and code-driven experiences.
           </p>
-        </section>
 
-        <section id="design-highlights" aria-label="Design highlights">
-          <div class="section-divider">
-            <h2>Design Highlights</h2>
-          </div>
-
-          <div class="dh-carousel" role="region" aria-roledescription="carousel" aria-label="Design highlights">
-
-            <div class="dh-track" aria-label="Case study screenshots">
-              <figure class="dh-slide">
-                <img src="../Pictures/AI Coding Portfolio/Chat Widget.svg" alt="Chat widget integrated into the portfolio homepage" loading="lazy" decoding="async" width="1200" height="800">
-                <figcaption>Chat widget embedded in the portfolio, accessible from any page.</figcaption>
-              </figure>
-
-              <figure class="dh-slide">
-                <img src="../Pictures/AI Coding Portfolio/Knowledge Base.svg" alt="Knowledge base structure powering the chat responses" loading="lazy" decoding="async" width="1200" height="800">
-                <figcaption>Structured knowledge base that drives relevant, contextual answers.</figcaption>
-              </figure>
-
-              <figure class="dh-slide">
-                <img src="../Pictures/AI Coding Portfolio/Analytics Dashboard.svg" alt="Analytics dashboard tracking chat interactions and resume views" loading="lazy" decoding="async" width="1200" height="800">
-                <figcaption>Analytics surface showing what hiring managers actually engage with.</figcaption>
-              </figure>
-            </div>
-
-          </div>
+          <figure class="case-study-media">
+            <img src="../Pictures/AI Coding Portfolio/Chat Widget.svg" alt="Chat widget integrated into the portfolio homepage" loading="lazy" decoding="async" width="1200" height="800">
+            <figcaption>Chat widget embedded in the portfolio, accessible from any page.</figcaption>
+          </figure>
         </section>
 
         <section id="database-rag" aria-label="Database-driven RAG" class="section--alt">
@@ -750,6 +728,12 @@
             The original knowledge base was a single JSON file loaded into every chat request. 
             It worked for the first version, but every query sent the entire KB as context. This was just wasteful and unscalable.
           </p>
+
+          <figure class="case-study-media">
+            <img src="../Pictures/AI Coding Portfolio/Knowledge Base.svg" alt="Knowledge base structure powering the chat responses" loading="lazy" decoding="async" width="1200" height="800">
+            <figcaption>Structured knowledge base that drives relevant, contextual answers.</figcaption>
+          </figure>
+
           <p>
             I replaced it with a PostgreSQL database (Supabase) using pgvector for semantic search. 
             Each piece of content is chunked, embedded via Gemini, and stored with a 768-dimension vector index.
@@ -778,6 +762,11 @@
             widget answers questions about my work using semantic search against a PostgreSQL
             vector store.
           </p>
+
+          <figure class="case-study-media">
+            <img src="../Pictures/AI Coding Portfolio/Analytics Dashboard.svg" alt="Analytics dashboard tracking chat interactions and resume views" loading="lazy" decoding="async" width="1200" height="800">
+            <figcaption>Analytics surface showing what hiring managers actually engage with.</figcaption>
+          </figure>
 
           <p>
             The real output is a repeatable workflow: I can go from idea to working feature in a
@@ -842,7 +831,6 @@
     <!-- Consolidated JavaScript -->
     <script src="../scripts/scripts.js" defer></script>
     <script src="../scripts/rs-chat-widget.js" defer></script>
-    <script src="../scripts/circular-carousel.js" defer></script>
     <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
       <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
