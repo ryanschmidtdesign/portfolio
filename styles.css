@@ -1423,6 +1423,7 @@ code {
   width: 100%;
   height: auto;
   aspect-ratio: 3/4;
+  border-radius: var(--radius-lg);
 }
 
 @media (max-width: 900px) {
@@ -2181,6 +2182,7 @@ code {
   height: auto;
   display: block;
   background: var(--img-matte);
+  border-radius: var(--radius-lg);
 }
 
 .case-study figure img:not([src]) {
@@ -2380,7 +2382,7 @@ code {
 .case-study-media {
   margin-block: var(--space-8);
   width: 100vw;
-  max-width: 1800px;
+  max-width: 1200px;
   margin-left: calc(-50vw + 50%);
 }
 
@@ -3449,6 +3451,7 @@ code {
   .case-study figure img {
     max-width: 100%;
     height: auto;
+    border-radius: var(--radius-lg);
   }
 
 
