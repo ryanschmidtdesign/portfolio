@@ -412,7 +412,17 @@
           </div>
 
           <div class="asd-prompt-bar">
-            <input type="text" class="asd-fake-input" id="asdInput" placeholder="What has Ryan built related to AI product design?" autocomplete="off" aria-label="Type a command">
+            <input
+              type="text"
+              class="asd-fake-input"
+              id="asdInput"
+              placeholder="What has Ryan built related to AI product design?"
+              autocomplete="off"
+              aria-label="Ask the portfolio assistant a question"
+            >
+            <button class="asd-send-btn" id="asdSend" type="button">
+              Run walkthrough
+            </button>
           </div>
 
           <div class="asd-stage">
@@ -509,136 +519,137 @@
               <span>vector search</span>
             </div>
           </div>
+
+          <p class="asd-caption" id="asdCaption" aria-live="polite">
+            <strong>Ready</strong>
+            <span>Type a question or use the default prompt, then run the walkthrough.</span>
+          </p>
         </section>
 
         <script>
-          (function(){
+          (function () {
             const shell = document.querySelector('.asd-shell');
             if (!shell) return;
 
-            const peekBtn   = document.getElementById('asdPeek');
-            const caption   = document.getElementById('asdCaption');
+            const peekBtn = document.getElementById('asdPeek');
+            const caption = document.getElementById('asdCaption');
             const internals = document.getElementById('asdInternals');
-            const inputEl   = document.getElementById('asdInput');
+            const inputEl = document.getElementById('asdInput');
+            const sendBtn = document.getElementById('asdSend');
             const inputNode = shell.querySelector('[data-id="input"] h3');
-            const answerEl  = shell.querySelector('[data-id="answer"] p');
-            const defaultAnswer = answerEl ? answerEl.textContent : '';
-            let timerId     = null;
+            const answerEl = shell.querySelector('[data-id="answer"] p');
+
+            const fallbackAnswer = 'Ryan built an AI-powered portfolio assistant that uses structured project content, retrieval, and Gemini to answer visitor questions about his product design work, systems thinking, and builder experience.';
+
+            function setCaption(label, message) {
+              if (!caption) return;
+              caption.innerHTML = '<strong>' + label + '</strong><span>' + message + '</span>';
+            }
 
             async function fetchAnswer(question) {
               const chatApi = window.RS_CHAT_API || '/api/chat';
+
               try {
                 const res = await fetch(chatApi, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ message: question, url: location.pathname })
                 });
+
+                if (!res.ok) throw new Error('Chat request failed');
+
                 const data = await res.json();
-                return data.answer || 'No answer available.';
+                return data.answer || fallbackAnswer;
               } catch {
-                return 'The API is not responding right now. Please try again later.';
+                return fallbackAnswer;
               }
             }
 
-            // Helper: activate nodes/lines by data-id
             function activate(id) {
-              const els = shell.querySelectorAll(`[data-id="${id}"]`);
-              els.forEach(el => {
-                if (el.classList.contains('asd-flow-line') || el.classList.contains('asd-flow-line-h')) {
-                  el.classList.add('is-active');
-                } else {
-                  el.classList.add('is-active');
-                }
+              shell.querySelectorAll('[data-id="' + id + '"]').forEach(function (el) {
+                el.classList.add('is-active');
               });
             }
 
-            function deactivate(id) {
-              const els = shell.querySelectorAll(`[data-id="${id}"]`);
-              els.forEach(el => el.classList.remove('is-active'));
-            }
-
             function deactivateAll() {
-              shell.querySelectorAll('.is-active').forEach(el => el.classList.remove('is-active'));
+              shell.querySelectorAll('.is-active').forEach(function (el) {
+                el.classList.remove('is-active');
+              });
             }
 
             const steps = [
-              { id: 'input', msg: 'Step 1/5 — Visitor submits a question from the chat widget.', delay: 220 },
-              { id: 'flow-1', msg: 'Step 1/5 — Visitor submits a question from the chat widget.', delay: 40 },
-              { id: 'function', msg: 'Step 2/5 — Netlify function parses intent and routes to RAG pipeline.', delay: 320 },
-              { id: 'substep-1', msg: 'Step 2/5 — Netlify function parses intent and routes to RAG pipeline.', delay: 60 },
-              { id: 'substep-2', msg: 'Step 2/5 — Netlify function parses intent and routes to RAG pipeline.', delay: 120 },
-              { id: 'substep-3', msg: 'Step 2/5 — Netlify function parses intent and routes to RAG pipeline.', delay: 120 },
-              { id: 'substep-4', msg: 'Step 2/5 — Netlify function parses intent and routes to RAG pipeline.', delay: 120 },
-              { id: 'flow-2', msg: 'Step 2/5 — Netlify function parses intent and routes to RAG pipeline.', delay: 50 },
-              { id: 'flow-branch-l', msg: 'Step 3/5 — Vector store searches 1,400+ embedded project chunks.', delay: 40 },
-              { id: 'flow-branch-r', msg: 'Step 3/5 — Vector store searches 1,400+ embedded project chunks.', delay: 40 },
-              { id: 'supabase', msg: 'Step 3/5 — Vector store searches 1,400+ embedded project chunks.', delay: 300 },
-              { id: 'gemini', msg: 'Step 4/5 — Gemini 2.5 Flash generates answer from context + prompt.', delay: 400 },
-              { id: 'flow-3', msg: 'Step 4/5 — Gemini 2.5 Flash generates answer from context + prompt.', delay: 50 },
-              { id: 'metric-1', msg: 'Step 4/5 — Gemini 2.5 Flash generates answer from context + prompt.', delay: 40 },
-              { id: 'metric-2', msg: 'Step 4/5 — Gemini 2.5 Flash generates answer from context + prompt.', delay: 40 },
-              { id: 'metric-3', msg: 'Step 4/5 — Gemini 2.5 Flash generates answer from context + prompt.', delay: 40 },
-              { id: 'flow-branch-l', msg: 'Step 4/5 — Gemini 2.5 Flash generates answer from context + prompt.', delay: 40 },
-              { id: 'flow-branch-r', msg: 'Step 4/5 — Gemini 2.5 Flash generates answer from context + prompt.', delay: 40 },
-              { id: 'answer', msg: 'Step 5/5 — Structured answer delivered back to the visitor.', delay: 380 },
-              { type: 'done', msg: 'Complete — The visitor sees a relevant, structured answer about Ryan\'s AI work. Press <strong>Enter</strong> to run again.', delay: 0 }
+              { id: 'input', label: 'Step 1/5', msg: 'Visitor submits a question from the chat widget.', delay: 160 },
+              { id: 'flow-1', label: 'Step 1/5', msg: 'Question moves into the assistant pipeline.', delay: 120 },
+              { id: 'function', label: 'Step 2/5', msg: 'Netlify function parses intent and routes the request.', delay: 260 },
+              { id: 'substep-1', label: 'Step 2/5', msg: 'Parse question intent.', delay: 80 },
+              { id: 'substep-2', label: 'Step 2/5', msg: 'Check portfolio context.', delay: 100 },
+              { id: 'substep-3', label: 'Step 2/5', msg: 'Route to knowledge retrieval.', delay: 100 },
+              { id: 'substep-4', label: 'Step 2/5', msg: 'Format system prompt.', delay: 100 },
+              { id: 'flow-2', label: 'Step 2/5', msg: 'Request continues to retrieval and generation.', delay: 120 },
+              { id: 'flow-branch-l', label: 'Step 3/5', msg: 'Vector store searches embedded portfolio chunks.', delay: 80 },
+              { id: 'flow-branch-r', label: 'Step 4/5', msg: 'Gemini prepares a context-aware response.', delay: 80 },
+              { id: 'supabase', label: 'Step 3/5', msg: 'Supabase returns relevant project context.', delay: 260 },
+              { id: 'gemini', label: 'Step 4/5', msg: 'Gemini generates an answer from retrieved context.', delay: 320 },
+              { id: 'flow-3', label: 'Step 4/5', msg: 'The generated answer moves back to the UI.', delay: 120 },
+              { id: 'metric-1', label: 'Telemetry', msg: 'Tokens generated.', delay: 60 },
+              { id: 'metric-2', label: 'Telemetry', msg: 'Chunks retrieved.', delay: 60 },
+              { id: 'metric-3', label: 'Telemetry', msg: 'Vector search completed.', delay: 60 },
+              { id: 'answer', label: 'Step 5/5', msg: 'Structured answer delivered back to the visitor.', delay: 260 }
             ];
 
-            function animateSequence(){
+            async function animateSequence() {
+              if (shell.dataset.state === 'running') return;
+
               deactivateAll();
               shell.dataset.state = 'running';
+              if (sendBtn) sendBtn.disabled = true;
 
-              // Use the typed question
               const question = inputEl.value.trim() || 'What has Ryan built related to AI product design?';
               if (inputNode) inputNode.textContent = question;
               if (answerEl) answerEl.textContent = 'Fetching answer...';
+              setCaption('Running', 'Sending the question through the assistant pipeline.');
 
-              // Fetch real answer from the API in parallel
-              fetchAnswer(question).then(function(answer) {
+              fetchAnswer(question).then(function (answer) {
                 if (answerEl) answerEl.textContent = answer;
               });
 
               let totalDelay = 0;
 
-              for (let i = 0; i < steps.length; i++) {
-                const s = steps[i];
-                totalDelay += s.delay;
-                 if (s.type === 'done') {
-                  (function(msg, t){
-                    setTimeout(function(){
-                      caption.innerHTML = msg;
-                      shell.dataset.state = 'complete';
-                    }, t);
-                  })(s.msg, totalDelay);
-                } else {
-                  (function(id, msg, t){
-                    setTimeout(function(){
-                      activate(id);
-                      caption.innerHTML = '<span>' + msg + '</span>';
-                    }, t);
-                  })(s.id, s.msg, totalDelay);
-                }
-              }
-              timerId = setTimeout(function(){
+              steps.forEach(function (step) {
+                totalDelay += step.delay;
+                window.setTimeout(function () {
+                  activate(step.id);
+                  setCaption(step.label, step.msg);
+                }, totalDelay);
+              });
+
+              window.setTimeout(function () {
                 shell.dataset.state = 'complete';
-              }, totalDelay + 200);
+                if (sendBtn) sendBtn.disabled = false;
+                setCaption('Complete', 'The visitor sees a relevant, structured answer. Run it again with a different question.');
+              }, totalDelay + 300);
             }
 
-            // Peek toggle
-            peekBtn.addEventListener('click', function(){
-              const expanded = peekBtn.getAttribute('aria-expanded') === 'true';
-              peekBtn.setAttribute('aria-expanded', !expanded);
-              internals.hidden = expanded;
-              peekBtn.textContent = expanded ? '+ Show function internals' : '− Hide function internals';
-            });
+            if (peekBtn && internals) {
+              peekBtn.addEventListener('click', function () {
+                const expanded = peekBtn.getAttribute('aria-expanded') === 'true';
+                peekBtn.setAttribute('aria-expanded', String(!expanded));
+                internals.hidden = expanded;
+                peekBtn.textContent = expanded ? '+ Show function internals' : '− Hide function internals';
+              });
+            }
 
-            // Init: input active
+            if (sendBtn) {
+              sendBtn.addEventListener('click', animateSequence);
+            }
+
+            if (inputEl) {
+              inputEl.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') animateSequence();
+              });
+            }
+
             activate('input');
-
-            // Enter on input field triggers the run
-            inputEl.addEventListener('keydown', function(e){
-              if (e.key === 'Enter' && shell.dataset.state !== 'running') animateSequence();
-            });
           })();
         </script>
 
