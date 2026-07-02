@@ -1792,6 +1792,11 @@ code {
   text-wrap: balance;
 }
 
+/* Scoped override for the IA challenge heading to avoid awkward balanced wrapping */
+#ia-challenge .section-divider h2 {
+  text-wrap: pretty;
+}
+
 .case-study section h3 {
   font-size: var(--fs-article-h3);
   font-weight: var(--weight-semibold);
@@ -2200,8 +2205,8 @@ code {
 /* Journey cards — 3-column grid for Problems / How Might We / Solutions */
 .case-study--inventory .journey-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
   margin: var(--space-5) 0;
 }
 
@@ -2211,6 +2216,26 @@ code {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
+}
+
+/* Ensure explicit full-width cards span the full grid without changing other card styles */
+.case-study--inventory .journey-card.full-width {
+  grid-column: 1 / -1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure the HMW block marked full-width also spans the grid */
+.case-study--inventory .journey-hmw.full-width {
+  grid-column: 1 / -1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make full-width journey cards span the full container when used */
+.case-study--inventory .journey-card.full-width {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .case-study--inventory .journey-card h3 {
@@ -2242,8 +2267,17 @@ code {
 .case-study--inventory .journey-hmw {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: var(--space-2);
   text-align: center;
+  /* Make the HMW sit visually between full-width cards with equal vertical padding */
+  padding-block: var(--space-4);
+  padding-inline: var(--page-gutter);
+  margin-block: var(--space-4);
+  max-width: var(--prose);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .case-study--inventory .journey-hmw p {
@@ -2253,6 +2287,13 @@ code {
   line-height: var(--lh-md);
   margin: 0;
   max-width: none;
+}
+
+.case-study--inventory .journey-hmw h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs-md);
+  font-weight: var(--weight-semibold);
+  text-align: center;
 }
 
 @media (max-width: 640px) {
@@ -2284,7 +2325,7 @@ code {
 
 /* AI Coding Portfolio: widen System Architecture only */
 .case-study--ai-coding-portfolio #system-architecture {
-  max-width: min(1120px, calc(100vw - (var(--page-gutter) * 2)));
+  max-width: min(900px, calc(100vw - (var(--page-gutter) * 2)));
 }
 
 /* Keep heading and caption aligned to the normal case-study reading column */
@@ -2296,16 +2337,16 @@ code {
 
 .case-study--ai-coding-portfolio .sa-funnel {
   display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
-  gap: clamp(var(--space-4), 2vw, var(--space-6));
-  margin-block: var(--space-6);
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: var(--space-4);
+  margin-block: var(--space-5);
 }
 
 .case-study--ai-coding-portfolio .sa-step {
   position: relative;
-  min-height: 300px;
+  min-height: 192px;
   overflow: hidden;
-  padding: clamp(1.5rem, 2vw, 2rem);
+  padding: var(--space-3);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0.44));
   border: 1px solid var(--border-subtle);
@@ -2318,8 +2359,8 @@ code {
 
 .case-study--ai-coding-portfolio .sa-step-title {
   color: var(--text-display);
-  font-size: clamp(1.45rem, 1.6vw, 1.85rem);
-  line-height: 1.15;
+  font-size: var(--fs-md);
+  line-height: 1.2;
   letter-spacing: var(--tracking-tighter);
   margin: 0;
   overflow-wrap: normal;
@@ -2332,14 +2373,14 @@ code {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--text-body);
-  max-width: 28ch;
+  max-width: 24ch;
 }
 
 .case-study--ai-coding-portfolio .sa-chip {
   align-self: flex-start;
   width: fit-content;
   margin-top: auto;
-  padding: 0.45rem 0.75rem;
+  padding: 0.35rem 0.6rem;
   border-radius: var(--radius-sm);
   background: rgb(79 110 247 / 0.10);
   color: var(--accent-text);
@@ -2365,7 +2406,7 @@ code {
   content: "";
   position: absolute;
   inset: 0 0 auto;
-  height: 3px;
+  height: 2px;
   background: rgb(79 110 247 / 0.32);
 }
 
@@ -2381,7 +2422,7 @@ code {
   background: rgb(5 150 105 / 0.48);
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
   .case-study--ai-coding-portfolio .sa-funnel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3280,12 +3321,26 @@ figure.case-study-media {
   font-size: var(--fs-article-h3);
 }
 
+/* Make the compare panel body read like an emphasized answer */
+[data-compare] .compare-panel p {
+  font-weight: var(--weight-semibold);
+  text-align: left;
+}
+
 [data-compare] .compare-panel[data-tone="bad"]::before {
   background-color: var(--red);
 }
 
 [data-compare] .compare-panel[data-tone="good"]::before {
   background-color: var(--green);
+}
+
+/* Member Portal: IA challenge — align compare panel padding with card content */
+.case-study--member-portal #ia-challenge [data-compare] .compare-panel {
+  padding-left: 0 !important;
+  padding-right: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 /* ============================================================================

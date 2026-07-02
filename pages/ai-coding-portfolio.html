@@ -538,6 +538,9 @@
             const sendBtn = document.getElementById('asdSend');
             const inputNode = shell.querySelector('[data-id="input"] h3');
             const answerEl = shell.querySelector('[data-id="answer"] p');
+            const metric1El = shell.querySelector('[data-id="metric-1"] strong');
+            const metric2El = shell.querySelector('[data-id="metric-2"] strong');
+            const metric3El = shell.querySelector('[data-id="metric-3"] strong');
 
             const fallbackAnswer = 'Ryan built an AI-powered portfolio assistant that uses structured project content, retrieval, and Gemini to answer visitor questions about his product design work, systems thinking, and builder experience.';
 
@@ -549,20 +552,43 @@
             async function fetchAnswer(question) {
               const chatApi = window.RS_CHAT_API || '/api/chat';
 
+              const pageContext = { url: location.pathname };
+              if (document.title) pageContext.title = document.title;
+              const desc = document.querySelector('meta[name="description"]')?.content;
+              if (desc) pageContext.description = desc;
+
+              const payload = {
+                messages: [ { role: 'user', content: question } ],
+                pageContext
+              };
+
               try {
                 const res = await fetch(chatApi, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ message: question, url: location.pathname })
+                  body: JSON.stringify(payload)
                 });
 
                 if (!res.ok) throw new Error('Chat request failed');
 
-                const data = await res.json();
-                return data.answer || fallbackAnswer;
-              } catch {
-                return fallbackAnswer;
+                const data = await res.json().catch(() => ({}));
+                return data.answer || generateFallbackAnswer(question);
+              } catch (e) {
+                return generateFallbackAnswer(question);
               }
+            }
+
+            function generateFallbackAnswer(question) {
+              // Lightweight, relevant canned answer when the API is unreachable.
+              const q = String(question || '').trim();
+              if (!q) return fallbackAnswer;
+              if (/\b(ai|model|gemini|vector|supabase|retriev)/i.test(q)) {
+                return `Ryan has built an AI-powered portfolio assistant that uses retrieval (pgvector/Supabase) and Gemini to answer contextual questions about his work.`;
+              }
+              if (/\bfit|role|resume|hiring|interview/i.test(q)) {
+                return `Ryan focuses on roles that blend design and engineering. He builds prototypes, systems, and AI tooling that demonstrate product judgment and execution.`;
+              }
+              return fallbackAnswer;
             }
 
             function activate(id) {
@@ -609,6 +635,27 @@
               if (answerEl) answerEl.textContent = 'Fetching answer...';
               setCaption('Running', 'Sending the question through the assistant pipeline.');
 
+              // Pre-generate faux telemetry for this run so metrics feel tied to the question.
+              const metrics = (function generateMetrics(q) {
+                const words = (String(q || '').trim().split(/\s+/).filter(Boolean)).length || 6;
+                // tokens: 800-2200, scale slightly with words
+                const base = 800 + Math.round(Math.random() * 1400);
+                const scaled = Math.min(2200, Math.max(800, Math.round(base + (words - 6) * 30)));
+                const chunks = 6 + Math.floor(Math.random() * 13); // 6-18
+                const ms = 14 + Math.floor(Math.random() * 32); // 14-45
+                return { tokens: scaled, chunks, ms };
+              })(question);
+
+              // Format token count like `1.3k` for > 1000
+              function fmtTokens(n) {
+                if (n >= 1000) return (Math.round(n / 100) / 10) + 'k';
+                return String(n);
+              }
+
+              if (metric1El) metric1El.textContent = '—';
+              if (metric2El) metric2El.textContent = '—';
+              if (metric3El) metric3El.textContent = '—';
+
               fetchAnswer(question).then(function (answer) {
                 if (answerEl) answerEl.textContent = answer;
               });
@@ -620,6 +667,19 @@
                 window.setTimeout(function () {
                   activate(step.id);
                   setCaption(step.label, step.msg);
+
+                  // Update telemetry numbers when those steps fire.
+                  if (step.id === 'metric-1') {
+                    if (metric1El) metric1El.textContent = fmtTokens(metrics.tokens);
+                    // small flourish: scale chunks slightly with token size
+                    if (metric2El) metric2El.textContent = String(metrics.chunks + (metrics.tokens > 1600 ? 1 : 0));
+                  }
+                  if (step.id === 'metric-2') {
+                    if (metric2El) metric2El.textContent = String(metrics.chunks + (Math.random() > 0.5 ? 0 : 1));
+                  }
+                  if (step.id === 'metric-3') {
+                    if (metric3El) metric3El.textContent = String(metrics.ms) + 'ms';
+                  }
                 }, totalDelay);
               });
 
