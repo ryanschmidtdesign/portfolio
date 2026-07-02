@@ -2197,43 +2197,69 @@ code {
   box-shadow: none;
 }
 
-.journey-insights,
-.journey-solutions {
+/* Journey cards — 3-column grid for Problems / How Might We / Solutions */
+.case-study--inventory .journey-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
   margin: var(--space-5) 0;
-  padding: var(--space-5) var(--space-6);
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  max-width: var(--prose);
 }
 
-.journey-insights h4,
-.journey-solutions h4 {
-  font-size: var(--type-overline);
+.case-study--inventory .journey-card {
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.case-study--inventory .journey-card h3 {
+  font-size: var(--fs-md);
   font-weight: var(--weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-caps);
-  color: var(--text-secondary);
-  margin-bottom: var(--space-2);
+  margin: 0 0 var(--space-3);
 }
 
-.journey-insights ul,
-.journey-solutions ul {
+.case-study--inventory .journey-insights ul,
+.case-study--inventory .journey-solutions ul {
   list-style: none;
   padding: 0;
-  max-width: var(--prose);
   margin: 0;
 }
 
-.journey-insights li,
-.journey-solutions li {
-  max-width: var(--prose);
-  margin-bottom: var(--space-2);
+.case-study--inventory .journey-insights li,
+.case-study--inventory .journey-solutions li {
   font-size: var(--fs-sm);
   line-height: var(--lh-md);
+  margin-bottom: var(--space-2);
 }
 
+.case-study--inventory .journey-insights li:last-child,
+.case-study--inventory .journey-solutions li:last-child {
+  margin-bottom: 0;
+}
 
+/* How Might We — pull-quote card */
+.case-study--inventory .journey-hmw {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.case-study--inventory .journey-hmw p {
+  font-size: var(--fs-md);
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: var(--lh-md);
+  margin: 0;
+  max-width: none;
+}
+
+@media (max-width: 640px) {
+  .case-study--inventory .journey-cards {
+    grid-template-columns: 1fr;
+  }
+}
 
 .case-study--inventory section ol {
   padding-left: var(--space-6);
@@ -2258,7 +2284,7 @@ code {
 
 .case-study--ai-coding-portfolio .sa-funnel {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-5);
   margin-top: var(--space-6);
   margin-bottom: var(--space-6);
@@ -2304,6 +2330,28 @@ code {
   word-break: normal;
   overflow-wrap: break-word;
   text-wrap: pretty;
+}
+
+/* File + chat 2-up pairing — tall screenshot + landscape screenshot side by side */
+.case-study--ai-coding-portfolio .file-chat-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 160px;
+  align-items: start;
+}
+
+.case-study--ai-coding-portfolio .file-chat-pair img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .case-study--ai-coding-portfolio .file-chat-pair {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: var(--space-5);
+  }
 }
 
 .case-study--ai-coding-portfolio .sa-chip {
@@ -2396,7 +2444,7 @@ figure.case-study-media {
 .splitter-viewport {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 

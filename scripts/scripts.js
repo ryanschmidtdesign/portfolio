@@ -522,7 +522,28 @@
   [...document.querySelectorAll("[data-compare]")].forEach((wrapper) => {
     const buttons = [...wrapper.querySelectorAll("[data-compare-button]")];
     const panels = [...wrapper.querySelectorAll("[data-compare-state]")];
-    if (!buttons.length || !panels.length) return;
+    if (!panels.length) return;
+
+    // Auto-generate buttons from panels when .compare-tabs is empty
+    if (!buttons.length) {
+      const tabs = wrapper.querySelector(".compare-tabs");
+      if (tabs) {
+        panels.forEach((panel) => {
+          const state = panel.dataset.compareState;
+          const heading = panel.querySelector("h3");
+          const label = heading ? heading.textContent.trim() : state.charAt(0).toUpperCase() + state.slice(1);
+          const btn = document.createElement("button");
+          btn.setAttribute("data-compare-button", state);
+          btn.setAttribute("aria-pressed", "false");
+          btn.textContent = label;
+          tabs.appendChild(btn);
+        });
+        // Re-collect buttons now that they exist
+        buttons.push(...tabs.querySelectorAll("[data-compare-button]"));
+      }
+    }
+
+    if (!buttons.length) return;
 
     const initial = wrapper.dataset.compareDefault || buttons[0].dataset.compareButton;
     const stateButtons = buttons;
