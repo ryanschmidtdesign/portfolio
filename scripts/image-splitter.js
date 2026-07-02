@@ -23,10 +23,28 @@
 
     this.update(this.position);
 
-    this.handle.addEventListener('mousedown', function (e) {
-      e.preventDefault();
+    // Allow dragging from the handle AND from the viewport area (better UX on touch)
+    function startDrag(clientX, ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
       self.isDragging = true;
       self.container.classList.add('is-dragging');
+      if (typeof clientX === 'number') self.onPointerMove(clientX);
+    }
+
+    function stopDrag() {
+      if (self.isDragging) {
+        self.isDragging = false;
+        self.container.classList.remove('is-dragging');
+      }
+    }
+
+    this.handle.addEventListener('mousedown', function (e) {
+      startDrag(e.clientX, e);
+    });
+
+    // Allow starting drag by pressing anywhere in the viewport
+    this.viewport.addEventListener('mousedown', function (e) {
+      startDrag(e.clientX, e);
     });
 
     document.addEventListener('mousemove', function (e) {
@@ -34,29 +52,25 @@
       self.onPointerMove(e.clientX);
     });
 
-    document.addEventListener('mouseup', function () {
-      if (self.isDragging) {
-        self.isDragging = false;
-        self.container.classList.remove('is-dragging');
-      }
-    });
+    document.addEventListener('mouseup', stopDrag);
 
+    // Touch events: use non-passive so we can prevent the page from scrolling
     this.handle.addEventListener('touchstart', function (e) {
-      self.isDragging = true;
-      self.container.classList.add('is-dragging');
-    }, { passive: true });
+      startDrag(e.touches[0].clientX, e);
+    }, { passive: false });
+
+    this.viewport.addEventListener('touchstart', function (e) {
+      startDrag(e.touches[0].clientX, e);
+    }, { passive: false });
 
     document.addEventListener('touchmove', function (e) {
       if (!self.isDragging) return;
+      // prevent page scrolling while dragging
+      if (e.cancelable) e.preventDefault();
       self.onPointerMove(e.touches[0].clientX);
-    }, { passive: true });
+    }, { passive: false });
 
-    document.addEventListener('touchend', function () {
-      if (self.isDragging) {
-        self.isDragging = false;
-        self.container.classList.remove('is-dragging');
-      }
-    });
+    document.addEventListener('touchend', stopDrag);
 
     this.handle.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
