@@ -3309,22 +3309,6 @@ figure.case-study-media {
   transition: stroke-dashoffset 0.1s ease-out;
 }
 
-/* Inner Image Parallax */
-.parallax-image-wrapper {
-  overflow: hidden;
-  position: relative;
-  display: block;
-  border-radius: inherit;
-}
-
-.parallax-image-wrapper img {
-  height: auto;
-  width: 100%;
-  object-fit: cover;
-  transform-origin: center;
-  will-change: transform;
-}
-
 /* =========================================================
    VIEWPORT OPTIMIZATION: 1920px, 1440px, and Mobile
    Optimized for Chrome on desktop and mobile devices

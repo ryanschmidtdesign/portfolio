@@ -439,7 +439,7 @@
 
               <button class="asd-peek-btn" id="asdPeek" type="button" aria-expanded="false">
                 + Show function internals
-
+              </button>
               <div class="asd-internals" id="asdInternals" hidden>
                 <ol style="padding:0;margin:0;list-style:none">
                   <li data-id="substep-1">Parse question intent</li>
@@ -840,17 +840,19 @@
     <header>
       <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="hamburgerMenu" aria-expanded="false">
         <span class="hamburger-inner" aria-hidden="true"></span>
+      </button>
       <nav class="hamburger-menu" id="hamburgerMenu" aria-hidden="true" aria-label="Main navigation">
         <a href="../index.html">Home</a>
         <a href="../pages/about.html">About</a>
-          <div class="menu-item-group">
-            <div class="menu-submenu">
-              <a href="../pages/dashboard.html">AI‑Powered Dashboards</a>
-              <a href="../pages/inventory.html">Real-Time Inventory</a>
-              <a href="../pages/member-portal-overhaul.html">i4cp Member Portal</a>
-              <a href="../pages/ai-coding-portfolio.html" aria-current="page">AI-Coding my Portfolio</a>
-            </div>
+        <div class="menu-item-group">
+          <button class="menu-trigger" aria-haspopup="true" aria-expanded="false">Case Studies</button>
+          <div class="menu-submenu">
+            <a href="../pages/dashboard.html">AI‑Powered Dashboards</a>
+            <a href="../pages/inventory.html">Real-Time Inventory</a>
+            <a href="../pages/member-portal-overhaul.html">i4cp Member Portal</a>
+            <a href="../pages/ai-coding-portfolio.html" aria-current="page">AI-Coding my Portfolio</a>
           </div>
+        </div>
         <a href="../assets/ryan-schmidt-resume-june-2026.pdf" target="_blank" rel="noopener">Resume</a>
         <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener">LinkedIn</a>
       </nav>
@@ -863,8 +865,8 @@
     <!-- GSAP for smooth chat widget animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/scripts.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js" defer></script>
+    <script src="../scripts/scripts.js?v=2" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=2" defer></script>
     <footer class="site-footer">
       <p>&copy; 2026 Ryan Schmidt</p>
     </footer>

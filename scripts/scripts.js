@@ -385,45 +385,6 @@
 })();
 
 // ============================================================================
-// Image Parallax (Inner Scroll)
-// ============================================================================
-(function () {
-  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReduced) return;
-
-  const images = document.querySelectorAll(".case-study img:not(.no-parallax)");
-  
-  images.forEach(img => {
-    const wrapper = document.createElement("span");
-    wrapper.className = "parallax-image-wrapper";
-    img.parentNode.insertBefore(wrapper, img);
-    wrapper.appendChild(img);
-    img.style.transform = "translateY(0px)";
-  });
-
-  const parallaxImgs = document.querySelectorAll(".parallax-image-wrapper img");
-  if (!parallaxImgs.length) return;
-
-  function onScroll() {
-    const windowHeight = window.innerHeight;
-    parallaxImgs.forEach(img => {
-      const rect = img.parentElement.getBoundingClientRect();
-      if (rect.top <= windowHeight && rect.bottom >= 0) {
-        const progress = 1 - (rect.bottom / (windowHeight + rect.height));
-        const move = progress * 15; 
-        img.style.transform = `scale(1.15) translateY(-${move}%)`;
-      }
-    });
-  }
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  if (window.lenis) {
-    window.lenis.on('scroll', onScroll);
-  }
-  onScroll();
-})();
-
-// ============================================================================
 // Upgraded Circular Scroll Progress Indicator
 // ============================================================================
 (function () {
