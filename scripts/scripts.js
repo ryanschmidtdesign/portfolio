@@ -255,7 +255,7 @@
 
   // Stagger reveal timing for visual rhythm
   els.forEach((el, i) => {
-    el.style.transitionDelay = `${Math.min(i * 30, 180)}ms`;
+    el.style.transitionDelay = `${Math.min(i * 30, 90)}ms`;
   });
 
   const observer = new IntersectionObserver(
@@ -267,7 +267,7 @@
         }
       });
     },
-    { threshold: 0.3 }
+    { threshold: 0.15 }
   );
 
   const observeElement = (el) => {
@@ -452,126 +452,7 @@
   });
 })();
 
-// ============================================================================
-// Feature 2: Image Lightbox for Case Study Carousels
-// ============================================================================
-(function () {
-  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Build overlay (once, lazily)
-  let overlay = null;
-  let overlayImg = null;
-  let overlayCaption = null;
-
-  function buildOverlay() {
-    if (overlay) return;
-    overlay = document.createElement("div");
-    overlay.id = "rs-lightbox";
-    overlay.setAttribute("role", "dialog");
-    overlay.setAttribute("aria-modal", "true");
-    overlay.setAttribute("aria-label", "Image lightbox");
-    overlay.style.cssText = [
-      "position:fixed", "inset:0", "z-index:99999",
-      "display:flex", "flex-direction:column", "align-items:center", "justify-content:center",
-      "gap:1rem",
-      "background:rgba(0,0,0,.82)",
-      "backdrop-filter:blur(12px)", "-webkit-backdrop-filter:blur(12px)",
-      "opacity:0",
-      "transition:" + (prefersReduced ? "none" : "opacity .22s ease"),
-      "cursor:zoom-out",
-      "padding:2rem",
-    ].join(";");
-
-    overlayImg = document.createElement("img");
-    overlayImg.style.cssText = [
-      "max-width:min(92vw, 1200px)",
-      "max-height:80vh",
-      "object-fit:contain",
-      "border-radius:8px",
-      "box-shadow:0 24px 80px rgba(0,0,0,.7)",
-      "transform:" + (prefersReduced ? "none" : "scale(.92)"),
-      "transition:" + (prefersReduced ? "none" : "transform .22s ease"),
-      "cursor:default",
-    ].join(";");
-
-    overlayCaption = document.createElement("p");
-    overlayCaption.style.cssText = [
-      "max-width:min(92vw, 720px)",
-      "text-align:center",
-      "color:rgba(17,17,17,.65)",
-      "font-size:13px",
-      "line-height:1.5",
-      "margin:0",
-    ].join(";");
-
-    const closeBtn = document.createElement("button");
-    closeBtn.setAttribute("aria-label", "Close lightbox");
-    closeBtn.style.cssText = [
-      "position:fixed", "top:1.25rem", "right:1.25rem",
-      "background:rgba(255,255,255,.1)", "border:1px solid rgba(255,255,255,.18)",
-      "color:#111111", "border-radius:50%", "width:2.25rem", "height:2.25rem",
-      "font-size:1.1rem", "cursor:pointer", "display:flex", "align-items:center", "justify-content:center",
-      "line-height:1",
-    ].join(";");
-    closeBtn.textContent = "×";
-    closeBtn.addEventListener("click", closeLightbox);
-
-    overlay.appendChild(closeBtn);
-    overlay.appendChild(overlayImg);
-    overlay.appendChild(overlayCaption);
-    document.body.appendChild(overlay);
-
-    overlay.addEventListener("click", (e) => { if (e.target === overlay) closeLightbox(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && overlay.classList.contains("lb-open")) closeLightbox(); });
-  }
-
-  function openLightbox(src, alt, caption) {
-    buildOverlay();
-    overlayImg.src = src;
-    overlayImg.alt = alt || "";
-    overlayCaption.textContent = caption || "";
-    overlayCaption.style.display = caption ? "block" : "none";
-    overlay.classList.add("lb-open");
-    // Force reflow then animate in
-    void overlay.offsetWidth;
-    overlay.style.opacity = "1";
-    overlayImg.style.transform = "scale(1)";
-    document.body.style.overflow = "hidden";
-    overlay.focus();
-  }
-
-  function closeLightbox() {
-    if (!overlay) return;
-    overlay.style.opacity = "0";
-    overlayImg.style.transform = prefersReduced ? "scale(1)" : "scale(.92)";
-    setTimeout(() => {
-      overlay.classList.remove("lb-open");
-      document.body.style.overflow = "";
-    }, prefersReduced ? 0 : 220);
-  }
-
-  function attachLightbox() {
-    // Attach to carousel slide images
-    document.querySelectorAll(".case-study-media img, .case-study img:not(.no-lightbox)").forEach((img) => {
-      if (img.dataset.lightboxBound) return;
-      img.dataset.lightboxBound = "1";
-      img.style.cursor = "zoom-in";
-      img.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const fig = img.closest("figure");
-        const caption = fig ? (fig.querySelector("figcaption") || {}).textContent : "";
-        openLightbox(img.src, img.alt, caption);
-      });
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", attachLightbox);
-  } else {
-    attachLightbox();
-  }
-})();
-
+// (Feature 2 removed — Image Lightbox was removed)
 // (Feature 3 removed — Read Time Estimator Badge was removed)
 // (Feature 8 removed — "Ask About This Section" chips no longer used)
 

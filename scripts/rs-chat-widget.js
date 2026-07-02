@@ -869,25 +869,25 @@ if (savedHist.length > 0) {
     '/dashboard.html': [
       "How did you drive 71% more engagement?",
       "Walk me through your UX research process.",
-      "What made this project succeed?"
+      "What lessons did he learn?"
     ],
     '/inventory.html': [
       "Why start with an MVP?",
       "How did you get stakeholder buy-in?",
-      "What was your biggest challenge?"
+      "What lessons did he learn?"
     ],
     '/ai-coding-portfolio.html': [
       "What tools and workflow did you use?",
       "Why a database over a JSON file?",
-      "How does this prove design leadership?"
+      "What lessons did he learn?"
     ],
     '/about.html': [
       "What does your mentorship work look like?",
-      "What makes you a strong design leader?"
+      "What lessons did he learn?"
     ],
     '/member-portal-overhaul.html': [
       "Why progressive disclosure over flat navigation?",
-      "What was your role in this project?"
+      "What lessons did he learn?"
     ],
     '/index.html': [
       "Why is Ryan a fit at [Company]?",

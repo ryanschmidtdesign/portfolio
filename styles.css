@@ -3483,7 +3483,7 @@ figure.case-study-media {
   left: var(--space-5);
   bottom: calc(var(--hamburger-bottom, var(--space-5)) + var(--hamburger-size, 56px) + var(--space-2));
   z-index: 220;
-  width: min(320px, 80vw);
+  width: min(304px, 80vw);
   padding: var(--space-4);
   display: flex;
   flex-direction: column;
