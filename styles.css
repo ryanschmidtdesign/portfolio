@@ -2448,7 +2448,8 @@ code {
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  /* use the smaller spacing token so compare blocks match the smaller gap */
+  gap: var(--space-3);
 }
 
 .case-study--member-portal .ia-challenge-panel__header {
@@ -2468,11 +2469,13 @@ code {
   color: var(--text-secondary);
   font-size: var(--fs-sm);
   line-height: var(--lh-md);
-  max-width: var(--prose-tight);
+  max-width: none;
+  text-wrap: normal;
 }
 
 .case-study--member-portal .ia-challenge-panel [data-compare] {
-  margin-block: 0;
+  /* remove extra margin; the panel uses flex gap for consistent spacing */
+  margin-bottom: 0;
 }
 
 .case-study--member-portal .ia-challenge-panel > p {
@@ -3346,7 +3349,36 @@ figure.case-study-media {
 
 /* Member Portal: IA challenge — align compare panel padding with card content */
 .case-study--member-portal #ia-challenge [data-compare] .compare-panel {
-  padding: 0 12px 0 0;
+  /* No extra padding — keep text aligned with the card content (no indent) */
+  padding: 0 !important;
+}
+
+/* Ensure only the active compare-panel contributes to layout height.
+   Other panels are taken out of flow so they don't increase the container's height. */
+.case-study--member-portal #ia-challenge [data-compare] .compare-panels {
+  position: relative;
+}
+
+.case-study--member-portal #ia-challenge [data-compare] .compare-panel {
+  position: absolute;
+  inset: 0 0 auto 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.case-study--member-portal #ia-challenge [data-compare] .compare-panel.is-active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Remove the large default tab spacing for IA challenge compare blocks so both
+   panels share the same, smaller gap. This prevents an empty .compare-tabs
+   from adding extra vertical space. */
+.case-study--member-portal #ia-challenge [data-compare] .compare-tabs {
+  margin-bottom: var(--space-3) !important;
 }
 
 .case-study--member-portal #ia-challenge [data-compare] .compare-panel h3 {
