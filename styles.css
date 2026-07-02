@@ -626,50 +626,6 @@ code {
 /* Duplicate selection rule removed (kept the global one near top). */
 
 
-/* -------------------------------------------------------
-   Hero
---------------------------------------------------------*/
-.hero-stagger {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.hero-stagger.hero-stagger--in {
-  animation: heroStaggerIn 420ms var(--ease-standard) forwards;
-}
-
-.hero-stagger--1.hero-stagger--in {
-  animation-delay: 60ms;
-}
-
-.hero-stagger--2.hero-stagger--in {
-  animation-delay: 140ms;
-}
-
-.hero-stagger--3.hero-stagger--in {
-  animation-delay: 220ms;
-}
-
-.hero-stagger--4.hero-stagger--in {
-  animation-delay: 300ms;
-}
-
-.hero-stagger--5.hero-stagger--in {
-  animation-delay: 380ms;
-}
-
-@keyframes heroStaggerIn {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes metric-count-in {
   from {
     opacity: 0;
@@ -2619,33 +2575,10 @@ figure.case-study-media {
   box-shadow: var(--shadow-card-strong);
 }
 
-.asd-run-btn,
-.asd-reset-btn,
 .asd-peek-btn {
   border: 0;
   cursor: pointer;
   font: inherit;
-}
-
-.asd-run-btn {
-  padding: var(--space-3) var(--space-4);
-  background: var(--accent-hover);
-  color: var(--text-on-accent);
-  font-weight: var(--weight-semibold);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-}
-
-.asd-run-btn:disabled {
-  cursor: wait;
-  opacity: 0.6;
-}
-
-.asd-reset-btn {
-  padding: var(--space-3) var(--space-4);
-  background: transparent;
-  color: var(--accent);
-  font-weight: var(--weight-semibold);
 }
 
 /* Stage + nodes — all use indigo accent only */

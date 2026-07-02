@@ -516,8 +516,6 @@
             const shell = document.querySelector('.asd-shell');
             if (!shell) return;
 
-            const runBtn    = document.getElementById('asdRun');
-            const resetBtn  = document.getElementById('asdReset');
             const peekBtn   = document.getElementById('asdPeek');
             const caption   = document.getElementById('asdCaption');
             const internals = document.getElementById('asdInternals');
@@ -583,14 +581,12 @@
               { id: 'flow-branch-l', msg: 'Step 4/5 — Gemini 2.5 Flash generates answer from context + prompt.', delay: 40 },
               { id: 'flow-branch-r', msg: 'Step 4/5 — Gemini 2.5 Flash generates answer from context + prompt.', delay: 40 },
               { id: 'answer', msg: 'Step 5/5 — Structured answer delivered back to the visitor.', delay: 380 },
-              { type: 'done', msg: 'Complete — The visitor sees a relevant, structured answer about Ryan\'s AI work. <strong>Press Reset</strong> to run again.', delay: 0 }
+              { type: 'done', msg: 'Complete — The visitor sees a relevant, structured answer about Ryan\'s AI work. Press <strong>Enter</strong> to run again.', delay: 0 }
             ];
 
             function animateSequence(){
               deactivateAll();
               shell.dataset.state = 'running';
-              runBtn.disabled = true;
-              resetBtn.hidden = true;
 
               // Use the typed question
               const question = inputEl.value.trim() || 'What has Ryan built related to AI product design?';
@@ -607,13 +603,11 @@
               for (let i = 0; i < steps.length; i++) {
                 const s = steps[i];
                 totalDelay += s.delay;
-                if (s.type === 'done') {
+                 if (s.type === 'done') {
                   (function(msg, t){
                     setTimeout(function(){
                       caption.innerHTML = msg;
                       shell.dataset.state = 'complete';
-                      runBtn.disabled = false;
-                      resetBtn.hidden = false;
                     }, t);
                   })(s.msg, totalDelay);
                 } else {
@@ -630,17 +624,6 @@
               }, totalDelay + 200);
             }
 
-            function resetSequence(){
-              if (timerId) { clearTimeout(timerId); timerId = null; }
-              deactivateAll();
-              shell.dataset.state = 'idle';
-              runBtn.disabled = false;
-              resetBtn.hidden = true;
-              caption.innerHTML = '<span>Press <strong>Run system</strong> to trace a question through the pipeline.</span>';
-              // re-activate input node as idle state
-              activate('input');
-            }
-
             // Peek toggle
             peekBtn.addEventListener('click', function(){
               const expanded = peekBtn.getAttribute('aria-expanded') === 'true';
@@ -649,23 +632,14 @@
               peekBtn.textContent = expanded ? '+ Show function internals' : '− Hide function internals';
             });
 
-            runBtn.addEventListener('click', animateSequence);
-            resetBtn.addEventListener('click', resetSequence);
-
             // Init: input active
             activate('input');
 
             // Enter on input field triggers the run
             inputEl.addEventListener('keydown', function(e){
-              if (e.key === 'Enter' && !runBtn.disabled) animateSequence();
+              if (e.key === 'Enter' && shell.dataset.state !== 'running') animateSequence();
             });
-
-            // Keyboard: Enter on run/reset
-            runBtn.addEventListener('keydown', function(e){
               if (e.key === 'Enter') animateSequence();
-            });
-            resetBtn.addEventListener('keydown', function(e){
-              if (e.key === 'Enter') resetSequence();
             });
           })();
         </script>

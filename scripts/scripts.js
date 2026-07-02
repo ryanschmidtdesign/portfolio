@@ -240,20 +240,6 @@
 })();
 
 // ============================================================================
-// Hero stagger on load
-// ============================================================================
-(function () {
-  window.addEventListener("DOMContentLoaded", () => {
-    const heroBlocks = document.querySelectorAll(".hero-stagger");
-    heroBlocks.forEach((el) => {
-      // force reflow to ensure animation runs after initial layout
-      void el.offsetWidth;
-      el.classList.add("hero-stagger--in");
-    });
-  });
-})();
-
-// ============================================================================
 // Section reveal functionality
 // ============================================================================
 (function () {
