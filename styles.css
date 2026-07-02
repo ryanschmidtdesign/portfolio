@@ -2405,8 +2405,9 @@ code {
   margin-block: var(--space-8);
   width: 100vw;
   max-width: 960px;
-  margin-left: calc(-50vw + 50%);
+  margin-left: 50%;
   text-align: center;
+  transform: translateX(-50%);
 }
 
 .case-study-media .image-splitter {
