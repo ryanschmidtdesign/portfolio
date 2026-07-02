@@ -204,19 +204,7 @@
   });
 })();
 
-// Back-to-top button visibility
-(function(){
-  const btn = document.querySelector('.back-to-top');
-  if (!btn) return;
-  const onScroll = () => {
-    const show = window.scrollY > 400;
-    btn.classList.toggle('visible', show);
-    if (show) btn.removeAttribute('tabindex');
-    else btn.setAttribute('tabindex', '-1');
-  };
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-})();
+
 
 // ============================================================================
 // Parallax functionality
@@ -423,7 +411,7 @@
       if (rect.top <= windowHeight && rect.bottom >= 0) {
         const progress = 1 - (rect.bottom / (windowHeight + rect.height));
         const move = progress * 15; 
-        img.style.transform = `translateY(-${move}%)`;
+        img.style.transform = `scale(1.15) translateY(-${move}%)`;
       }
     });
   }

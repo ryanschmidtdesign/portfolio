@@ -2403,7 +2403,10 @@ code {
 /* Inline case study media (replaces carousel) */
 figure.case-study-media {
   margin-block: var(--space-8);
-  max-width: 960px;
+  width: 960px;
+  max-width: calc(100vw - (var(--page-gutter) * 2));
+  margin-left: 50%;
+  transform: translateX(-50%);
   text-align: center;
 }
 
@@ -3116,11 +3119,6 @@ figure.case-study-media {
 }
 
 [data-compare] {
-  background: var(--surface-elevated);
-  border: none;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-5);
   margin-top: var(--space-5);
   margin-bottom: var(--space-5);
 }
@@ -3152,24 +3150,34 @@ figure.case-study-media {
   color: var(--text-on-accent);
 }
 
+/* All panels share one grid cell — they swap in the same space, no gap */
 [data-compare] .compare-panels {
   display: grid;
-  gap: var(--space-4);
-  position: relative;
 }
 
-[data-compare] [data-compare-state] {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  top: 0;
+[data-compare] .compare-panel {
+  grid-area: 1 / 1;
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--dur-3) var(--ease-out), visibility var(--dur-3) var(--ease-out);
   pointer-events: none;
+  padding: 12px;
+  padding-left: 24px;
+  position: relative;
+  transition: opacity var(--dur-3) var(--ease-out), visibility var(--dur-3) var(--ease-out);
 }
 
-[data-compare] [data-compare-state].is-active {
+[data-compare] .compare-panel::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  border-radius: 99px;
+  background-color: transparent;
+}
+
+[data-compare] .compare-panel.is-active {
   position: relative;
   opacity: 1;
   visibility: visible;
@@ -3181,24 +3189,12 @@ figure.case-study-media {
   font-size: var(--fs-article-h3);
 }
 
-[data-compare] .compare-panel {
-  position: relative;
-  border-top: 3px solid transparent;
+[data-compare] .compare-panel[data-tone="bad"]::before {
+  background-color: var(--red);
 }
 
-[data-compare] .compare-panel[data-compare-state="spreadsheet"] {
-  border-top-color: var(--red);
-  background: var(--red-soft);
-}
-
-[data-compare] .compare-panel[data-compare-state="software"] {
-  border-top-color: var(--amber);
-  background: var(--amber-soft);
-}
-
-[data-compare] .compare-panel[data-compare-state="system"] {
-  border-top-color: var(--green);
-  background: var(--green-soft);
+[data-compare] .compare-panel[data-tone="good"]::before {
+  background-color: var(--green);
 }
 
 /* ============================================================================
@@ -3322,10 +3318,10 @@ figure.case-study-media {
 }
 
 .parallax-image-wrapper img {
-  height: 120%;
+  height: auto;
   width: 100%;
   object-fit: cover;
-  transform-origin: top;
+  transform-origin: center;
   will-change: transform;
 }
 
@@ -3894,8 +3890,7 @@ figure.case-study-media {
   .hamburger-menu,
   .ai-mini-wrapper,
   .circular-progress-wrapper,
-  .rs-chat-widget,
-  .back-to-top {
+  .rs-chat-widget {
     display: none !important;
   }
 
@@ -3945,8 +3940,7 @@ figure.case-study-media {
     color: #666;
   }
 
-  nav a::after,
-  .back-to-top::after {
+  nav a::after {
     content: none !important;
   }
 
@@ -3991,50 +3985,4 @@ figure.case-study-media {
 
 .case-study--inventory [aria-label="Decisions and trade-offs"] .section-divider:nth-of-type(2) {
   margin-top: 72px;
-}
-
-/* ── Back-to-Top ── */
-.back-to-top {
-  position: fixed;
-  right: 12px;
-  bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
-  z-index: 100;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 50%;
-  background: var(--surface-dark-solid);
-  border: 1px solid var(--surface-dark-border);
-  color: #fff;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(12px);
-  transition: opacity 220ms ease, transform 220ms var(--ease-out), background 180ms ease;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-}
-.back-to-top.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-.back-to-top:hover {
-  background: rgba(10, 10, 10, 0.94);
-  transform: translateY(-2px);
-}
-.back-to-top:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-.back-to-top svg {
-  width: 20px;
-  height: 20px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }

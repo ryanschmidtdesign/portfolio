@@ -54,7 +54,7 @@
       "name": "Ryan Schmidt",
       "jobTitle": "Senior Product Designer",
       "url": "https://ryanschmidt.design/",
-      "image": "https://ryanschmidt.design/Pictures/family-pic.jpg",
+      "image": "https://ryanschmidt.design/assets/images/family-pic.jpg",
       "description": "Senior Product Designer who turns complex B2B SaaS workflows into clear, shippable tools.",
       "sameAs": [
         "https://www.linkedin.com/in/ryanschmidt1989/"
@@ -124,7 +124,7 @@
         "@id": "https://ryanschmidt.design/#person"
       },
       "description": "Case study: Real-time inventory view replacing spreadsheets. +18% recurring revenue and +8% product adoption.",
-      "primaryImageOfPage": "https://ryanschmidt.design/Pictures/family-pic.jpg",
+      "primaryImageOfPage": "https://ryanschmidt.design/assets/images/family-pic.jpg",
       "dateModified": "2026-06-24",
       "inLanguage": "en-US"
     },
@@ -143,7 +143,7 @@
       "datePublished": "2024-12-01",
       "articleSection": "Case Study",
       "inLanguage": "en-US",
-      "image": "https://ryanschmidt.design/Pictures/Inventory/Inventory%20Settings.png",
+      "image": "https://ryanschmidt.design/assets/case-studies/inventory/inventory-settings.png",
       "about": [
         {
           "@type": "Thing",
@@ -253,7 +253,7 @@
   <meta property="og:title" content="Real-Time Inventory — Ryan Schmidt">
   <meta property="og:description" content="Case study: Single real-time inventory view replacing spreadsheets. +18% recurring revenue, +8% product adoption over one year.">
   <meta property="og:url" content="https://ryanschmidt.design/inventory.html">
-  <meta property="og:image" content="https://ryanschmidt.design/Pictures/Inventory/Inventory%20Settings.png">
+  <meta property="og:image" content="https://ryanschmidt.design/assets/case-studies/inventory/inventory-settings.png">
   <meta property="og:image:alt" content="Inventory settings for alerts, thresholds, and automation rules">
   <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -264,7 +264,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Real-Time Inventory - Ryan Schmidt">
 <meta name="twitter:description" content="Case study: Single real-time inventory view replacing spreadsheets. +18% recurring revenue, +8% product adoption over one year.">
-<meta name="twitter:image" content="https://ryanschmidt.design/Pictures/Inventory/Inventory%20Settings.png">
+<meta name="twitter:image" content="https://ryanschmidt.design/assets/case-studies/inventory/inventory-settings.png">
 <meta name="twitter:image:alt" content="Inventory item detail with movement history, allocations, and reorder settings">
 </head>
 
@@ -362,21 +362,18 @@
 
           <div data-compare data-compare-default="spreadsheet">
             <div class="compare-tabs">
-              <button type="button" data-compare-button="spreadsheet" aria-pressed="true">Spreadsheet</button>
-              <button type="button" data-compare-button="software" aria-pressed="false">Other software</button>
-              <button type="button" data-compare-button="system">Real-time system</button>
             </div>
             <div class="compare-panels">
-              <div class="compare-panel" data-compare-state="spreadsheet">
+              <div class="compare-panel" data-compare-state="spreadsheet" data-tone="bad">
                 <h3>Legacy spreadsheet workflow</h3>
                 <p>Some users manually reconciled counts, split data across tabs, and made decisions from stale information.</p>
               </div>
-              <div class="compare-panel" data-compare-state="software">
+              <div class="compare-panel" data-compare-state="software" data-tone="bad">
                 <h3>Money spent on another tool</h3>
                 <p>Most users used another piece of software, like Jetbuilt, to manage inventory. 
                   Multiple tools meant more error-prone workflows and extra costs for users.</p>
               </div>
-              <div class="compare-panel" data-compare-state="system">
+              <div class="compare-panel" data-compare-state="system" data-tone="good">
                 <h3>Unified real-time inventory</h3>
                 <p>A single source of truth surfaced stock risk early, reduced reconciliation, and made decisions faster and more reliable.</p>
               </div>
@@ -424,7 +421,7 @@
 
           <figure class="case-study-media">
             <video autoplay muted playsinline loop preload="auto" width="2880" height="1496">
-              <source src="../Pictures/Inventory/Inventory Modal.mp4" type="video/mp4">
+              <source src="../assets/case-studies/inventory/inventory-modal.mp4" type="video/mp4">
             </video>
             <figcaption>Low stock indicators, incoming POs, and bulk actions.</figcaption>
           </figure>
@@ -442,7 +439,7 @@
 
           <figure class="case-study-media">
             <video autoplay muted playsinline loop preload="auto" width="2880" height="1496">
-              <source src="../Pictures/Inventory/Inventory Assets.mp4" type="video/mp4">
+              <source src="../assets/case-studies/inventory/inventory-assets.mp4" type="video/mp4">
             </video>
             <figcaption>Movement history, allocations, and reorder settings.</figcaption>
           </figure>
@@ -457,7 +454,7 @@
           </ul>
 
           <figure class="case-study-media">
-            <img src="../Pictures/Inventory/Inventory Settings.png" alt="Inventory settings for alerts, thresholds, and automation rules" loading="lazy" decoding="async" width="1440" height="900">
+            <img src="../assets/case-studies/inventory/inventory-controls.png" alt="Inventory settings for alerts, thresholds, and automation rules" width="1440" height="900" class="no-parallax">
             <figcaption>Inventory settings and automation controls.</figcaption>
           </figure>
 
@@ -467,7 +464,7 @@
           </p>
         </section>
 
-        <section id="validation" aria-label="Validation" class="section--alt">
+        <section id="validation" aria-label="Validation">
           <div class="section-divider">
           <h2>Prototyping & Validation</h2>
           </div>
@@ -481,7 +478,7 @@
           </p>
         </section>
 
-        <section id="impact" aria-label="Impact">
+        <section id="impact" aria-label="Impact" class="section--alt">
           <div class="section-divider">
             <h2>Impact</h2>
           </div>
@@ -502,7 +499,7 @@
           </p>
         </section>
 
-        <section id="lessons" aria-label="Lessons & next steps" class="section--alt">
+        <section id="lessons" aria-label="Lessons & next steps">
           <div class="section-divider">
             <h2>Lessons & Next Steps</h2>
           </div>
@@ -523,12 +520,10 @@
     <header>
       <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="hamburgerMenu" aria-expanded="false">
         <span class="hamburger-inner" aria-hidden="true"></span>
-      </button>
       <nav class="hamburger-menu" id="hamburgerMenu" aria-hidden="true" aria-label="Main navigation">
         <a href="../index.html">Home</a>
         <a href="../pages/about.html">About</a>
           <div class="menu-item-group">
-            <button class="menu-trigger" aria-haspopup="true" aria-expanded="false">Case Studies</button>
             <div class="menu-submenu">
               <a href="../pages/dashboard.html">AI‑Powered Dashboards</a>
               <a href="../pages/inventory.html" aria-current="page">Real-Time Inventory</a>
@@ -543,17 +538,13 @@
 
     <div class="ai-mini-wrapper" data-assistant-trigger>
       <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
-      <button id="ai-mini-send" class="ai-mini-send" aria-label="Send">→</button>
     </div>
 
     <!-- GSAP for smooth chat widget animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/scripts.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js" defer></script>
-    <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
-    </button>
+    <script src="../scripts/scripts.js?v=2" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=2" defer></script>
     <footer class="site-footer">
       <p>&copy; 2026 Ryan Schmidt</p>
     </footer>

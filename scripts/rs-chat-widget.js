@@ -855,6 +855,68 @@ if (savedHist.length > 0) {
       });
     }
   }
+  let floatingPillsEl = null;
+  let floatingPillsBound = false;
+  
+  // Chat state
+  const state = { history: [], kb: null, sectionContext: null };
+  let inFlight = false;
+  let streamAborted = false;
+  let currentController = null;
+  let lastInteraction = Date.now();
+
+  const PAGE_PILLS = {
+    '/dashboard.html': [
+      "How did you drive 71% more engagement?",
+      "Walk me through your UX research process.",
+      "What made this project succeed?"
+    ],
+    '/inventory.html': [
+      "Why start with an MVP?",
+      "How did you get stakeholder buy-in?",
+      "What was your biggest challenge?"
+    ],
+    '/ai-coding-portfolio.html': [
+      "What tools and workflow did you use?",
+      "Why a database over a JSON file?",
+      "How does this prove design leadership?"
+    ],
+    '/about.html': [
+      "What does your mentorship work look like?",
+      "What makes you a strong design leader?"
+    ],
+    '/member-portal-overhaul.html': [
+      "Why progressive disclosure over flat navigation?",
+      "What was your role in this project?"
+    ],
+    '/index.html': [
+      "Why is Ryan a fit at [Company]?",
+      "How do you approach AI in product UX?",
+      "Which case study best fits [product]?"
+    ],
+    '/': [
+      "Why is Ryan a fit for this role?",
+      "Show strongest proof points.",
+      "Which case study should I read first?"
+    ]
+  };
+
+  async function ensureKbLoaded() {
+    if (state.kb) return state.kb;
+    try {
+      const r = await fetch('/assets/portfolio-kb.json', { cache: 'force-cache' });
+      if (!r.ok) return null;
+      const j = await r.json();
+      state.kb = j;
+      return j;
+    } catch {
+      return null;
+    }
+  }
+
+  ensureKbLoaded().catch(() => {});
+
+
   function initTypewriter() {
     buildTypewriter();
     typewriterStart();
@@ -908,12 +970,8 @@ if (savedHist.length > 0) {
     }
   });
 
+
   // 5) Chat logic
-  const state = { history: [], kb: null, sectionContext: null };
-  let inFlight = false;
-  let streamAborted = false;
-  let currentController = null;
-  let lastInteraction = Date.now();
   try {
     const saved = sessionStorage.getItem('rs_chat_history');
     if (saved) {
@@ -951,59 +1009,7 @@ if (savedHist.length > 0) {
   }
 
   // Load KB once (optional)
-  async function ensureKbLoaded() {
-    if (state.kb) return state.kb;
-    try {
-      // Cache-friendly: KB changes infrequently and helps first-response speed.
-      const r = await fetch('/assets/portfolio-kb.json', { cache: 'force-cache' });
-      if (!r.ok) return null;
-      const j = await r.json();
-      state.kb = j;
-      return j;
-    } catch {
-      return null;
-    }
-  }
-
-  ensureKbLoaded().catch(() => {});
-
   // ─── Page-Aware Smart Pills ──────────────────────────────────────────────
-  const PAGE_PILLS = {
-    '/dashboard.html': [
-      "How did you drive 71% more engagement?",
-      "Walk me through your UX research process.",
-      "What made this project succeed?"
-    ],
-    '/inventory.html': [
-      "Why start with an MVP?",
-      "How did you get stakeholder buy-in?",
-      "What was your biggest challenge?"
-    ],
-    '/ai-coding-portfolio.html': [
-      "What tools and workflow did you use?",
-      "Why a database over a JSON file?",
-      "How does this prove design leadership?"
-    ],
-    '/about.html': [
-      "What does your mentorship work look like?",
-      "What makes you a strong design leader?"
-    ],
-    '/member-portal-overhaul.html': [
-      "Why progressive disclosure over flat navigation?",
-      "What was your role in this project?"
-    ],
-    '/index.html': [
-      "Why is Ryan a fit at [Company]?",
-      "How do you approach AI in product UX?",
-      "Which case study best fits [product]?"
-    ],
-    '/': [
-      "Why is Ryan a fit for this role?",
-      "Show strongest proof points.",
-      "Which case study should I read first?"
-    ]
-  };
-
   function isCaseStudyPage() {
     return !!document.querySelector('article.case-study, .case-study');
   }
@@ -1034,8 +1040,6 @@ if (savedHist.length > 0) {
   }
 
   // ─── Floating Case-Study Pills (light-DOM) ─────────────────────────────────
-  let floatingPillsEl = null;
-  let floatingPillsBound = false;
 
   function buildFloatingCaseStudyPills() {
     if (!isCaseStudyPage()) return;
