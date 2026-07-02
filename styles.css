@@ -2149,7 +2149,7 @@ code {
 }
 
 .case-study figcaption {
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-3) 0;
   color: var(--text-secondary);
 }
 
@@ -2282,25 +2282,32 @@ code {
   --section-accent-soft: var(--accent-cool-soft);
 }
 
-.case-study--ai-coding-portfolio .sa-funnel {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-5);
-  margin-top: var(--space-6);
-  margin-bottom: var(--space-6);
+/* AI Coding Portfolio: widen System Architecture only */
+.case-study--ai-coding-portfolio #system-architecture {
+  max-width: min(1120px, calc(100vw - (var(--page-gutter) * 2)));
 }
 
-@media (max-width: 900px) {
-  .case-study--ai-coding-portfolio .sa-funnel {
-    grid-template-columns: 1fr;
-    gap: var(--space-4);
-  }
+/* Keep heading and caption aligned to the normal case-study reading column */
+.case-study--ai-coding-portfolio #system-architecture > .section-divider,
+.case-study--ai-coding-portfolio #system-architecture > .caption {
+  max-width: var(--prose);
+  margin-inline: auto;
+}
+
+.case-study--ai-coding-portfolio .sa-funnel {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: clamp(var(--space-4), 2vw, var(--space-6));
+  margin-block: var(--space-6);
 }
 
 .case-study--ai-coding-portfolio .sa-step {
-  flex: initial;
-  padding: var(--space-4);
-  background: transparent;
+  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+  padding: clamp(1.5rem, 2vw, 2rem);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0.44));
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
@@ -2310,26 +2317,116 @@ code {
 }
 
 .case-study--ai-coding-portfolio .sa-step-title {
-  font-size: var(--fs-md);
-  font-weight: var(--weight-semibold);
-  line-height: var(--lh-md);
-  letter-spacing: var(--tracking-snug);
-  color: var(--color-primary);
+  color: var(--text-display);
+  font-size: clamp(1.45rem, 1.6vw, 1.85rem);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-tighter);
   margin: 0;
-  text-wrap: balance;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 .case-study--ai-coding-portfolio .sa-step-body {
   margin: 0;
-  font-size: var(--fs-sm);
-  line-height: var(--lh-md);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   color: var(--text-body);
-  max-width: none;
-  hyphens: none;
-  -webkit-hyphens: none;
-  word-break: normal;
-  overflow-wrap: break-word;
-  text-wrap: pretty;
+  max-width: 28ch;
+}
+
+.case-study--ai-coding-portfolio .sa-chip {
+  align-self: flex-start;
+  width: fit-content;
+  margin-top: auto;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: rgb(79 110 247 / 0.10);
+  color: var(--accent-text);
+  font-size: var(--fs-xs);
+  font-weight: var(--weight-semibold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.case-study--ai-coding-portfolio .sa-chip--start {
+  background: rgb(79 110 247 / 0.12);
+  color: var(--accent-text);
+}
+
+.case-study--ai-coding-portfolio .sa-chip--end {
+  background: rgb(5 150 105 / 0.12);
+  color: var(--green);
+}
+
+/* Progression accent — subtle top bar on each card */
+.case-study--ai-coding-portfolio .sa-step::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: rgb(79 110 247 / 0.32);
+}
+
+.case-study--ai-coding-portfolio .sa-step:nth-child(2)::before {
+  background: rgb(79 110 247 / 0.42);
+}
+
+.case-study--ai-coding-portfolio .sa-step:nth-child(3)::before {
+  background: rgb(79 110 247 / 0.52);
+}
+
+.case-study--ai-coding-portfolio .sa-step:nth-child(4)::before {
+  background: rgb(5 150 105 / 0.48);
+}
+
+@media (max-width: 1050px) {
+  .case-study--ai-coding-portfolio .sa-funnel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .case-study--ai-coding-portfolio .sa-funnel {
+    grid-template-columns: 1fr;
+  }
+
+  .case-study--ai-coding-portfolio .sa-step {
+    min-height: auto;
+  }
+}
+
+/* ── Member Portal IA Challenge ── */
+.case-study--member-portal .ia-challenge-panel {
+  margin-block: var(--space-5);
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.case-study--member-portal .ia-challenge-panel__header {
+  margin-bottom: var(--space-4);
+}
+
+.case-study--member-portal .ia-challenge-panel__header h3 {
+  margin: 0 0 var(--space-1);
+  font-size: var(--fs-base);
+  font-weight: var(--weight-semibold);
+  color: var(--text-display);
+}
+
+.case-study--member-portal .ia-challenge-panel__header > p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  max-width: var(--prose);
+}
+
+.case-study--member-portal .ia-challenge-panel [data-compare] {
+  margin-bottom: 0;
 }
 
 /* File + chat 2-up pairing — tall screenshot + landscape screenshot side by side */
@@ -2352,32 +2449,6 @@ code {
     column-gap: 0;
     row-gap: var(--space-5);
   }
-}
-
-.case-study--ai-coding-portfolio .sa-chip {
-  white-space: nowrap;
-  align-self: flex-start;
-  margin-top: auto;
-  padding: var(--space-1) var(--space-2);
-  border-radius: 0;
-  border: none;
-  font-size: var(--fs-xs);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-caps);
-  color: var(--section-accent);
-  background: color-mix(in srgb, var(--section-accent) 12%, transparent);
-}
-
-.case-study--ai-coding-portfolio .sa-chip--start {
-  background: var(--accent-soft);
-  border-color: var(--accent-strong);
-  color: var(--accent);
-}
-
-.case-study--ai-coding-portfolio .sa-chip--end {
-  background: var(--green-soft);
-  border-color: rgba(5, 150, 105, 0.18);
-  color: var(--green);
 }
 
 /* ── Semantic status labels ── */
@@ -2601,17 +2672,18 @@ figure.case-study-media {
 .asd-prompt-bar {
   display: flex;
   gap: var(--space-2);
-  align-items: center;
+  align-items: stretch;
   margin-bottom: var(--space-5);
 }
 
 .asd-fake-input {
   flex: 1;
   min-width: 0;
-  padding: var(--space-3) var(--space-4);
-  background: rgba(255, 255, 255, 0.6);
+  height: 48px;
+  padding: 0 var(--space-4);
+  background: rgba(255, 255, 255, 0.68);
   color: var(--text);
-  border: none;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   font: inherit;
@@ -2619,8 +2691,65 @@ figure.case-study-media {
 }
 
 .asd-fake-input:focus {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgb(79 110 247 / 0.38);
+  box-shadow: var(--shadow-card), 0 0 0 4px var(--accent-soft);
+}
+
+.asd-send-btn {
+  height: 48px;
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--surface-dark-solid);
+  color: #f8fafc;
+  box-shadow: var(--shadow-card);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    background var(--dur-2) ease,
+    box-shadow var(--dur-2) ease;
+}
+
+.asd-send-btn:hover,
+.asd-send-btn:focus-visible {
+  transform: translateY(-1px);
+  background: #0f172a;
   box-shadow: var(--shadow-card-strong);
+}
+
+.asd-send-btn:disabled {
+  cursor: wait;
+  opacity: 0.65;
+  transform: none;
+}
+
+.asd-caption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: baseline;
+  margin-top: var(--space-4);
+  min-height: 2.5rem;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.asd-caption strong {
+  color: var(--text-display);
+}
+
+@media (max-width: 640px) {
+  .asd-prompt-bar {
+    flex-direction: column;
+  }
+
+  .asd-send-btn {
+    width: 100%;
+  }
 }
 
 .asd-peek-btn {
@@ -2892,26 +3021,7 @@ figure.case-study-media {
   font-size: var(--fs-xs);
 }
 
-.asd-caption {
-  display: flex;
-  gap: var(--space-2);
-  align-items: baseline;
-  margin-top: var(--space-4);
-  color: var(--text-secondary);
-  font-size: var(--fs-sm);
-  min-height: 2.5rem;
-}
-
-.asd-caption strong {
-  color: var(--text);
-}
-
 @media (max-width: 640px) {
-  .asd-prompt-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
   .asd-branch {
     flex-direction: column;
     align-items: center;
