@@ -2442,19 +2442,23 @@ code {
 .case-study--member-portal .ia-challenge-panel {
   margin-block: var(--space-5);
   padding: var(--space-5);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.58);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
 .case-study--member-portal .ia-challenge-panel__header {
-  margin-bottom: var(--space-4);
+  margin-bottom: 0;
 }
 
 .case-study--member-portal .ia-challenge-panel__header h3 {
   margin: 0 0 var(--space-1);
-  font-size: var(--fs-base);
+  font-size: var(--fs-body);
+  line-height: var(--lh-md);
   font-weight: var(--weight-semibold);
   color: var(--text-display);
 }
@@ -2463,11 +2467,16 @@ code {
   margin: 0;
   color: var(--text-secondary);
   font-size: var(--fs-sm);
-  max-width: var(--prose);
+  line-height: var(--lh-md);
+  max-width: var(--prose-tight);
 }
 
 .case-study--member-portal .ia-challenge-panel [data-compare] {
-  margin-bottom: 0;
+  margin-block: 0;
+}
+
+.case-study--member-portal .ia-challenge-panel > p {
+  margin-top: 0;
 }
 
 /* File + chat 2-up pairing — tall screenshot + landscape screenshot side by side */
@@ -3337,10 +3346,18 @@ figure.case-study-media {
 
 /* Member Portal: IA challenge — align compare panel padding with card content */
 .case-study--member-portal #ia-challenge [data-compare] .compare-panel {
-  padding-left: 0 !important;
-  padding-right: 12px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding: 0 12px 0 0;
+}
+
+.case-study--member-portal #ia-challenge [data-compare] .compare-panel h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs-article-h3);
+  line-height: var(--lh-md);
+}
+
+.case-study--member-portal #ia-challenge [data-compare] .compare-panel p {
+  margin: 0;
+  line-height: var(--lh-prose);
 }
 
 /* ============================================================================
