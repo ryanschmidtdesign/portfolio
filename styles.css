@@ -3285,14 +3285,18 @@ figure.case-study-media {
 }
 
 [data-compare] button[data-compare-button] {
-  background: rgba(255, 255, 255, 0.6);
-  border: none;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   color: var(--text-secondary);
   padding: var(--space-3) var(--space-4);
   font-weight: var(--weight-semibold);
   cursor: pointer;
-  transition: background var(--dur-2) ease, color var(--dur-2) ease, transform var(--dur-2) ease;
+  transition: background var(--dur-2) ease, color var(--dur-2) ease, transform var(--dur-2) ease, border-color var(--dur-2) ease;
+}
+
+[data-compare] button[data-compare-button]:hover {
+  border-color: var(--border-strong);
 }
 
 [data-compare] button[data-compare-button]:active {
@@ -3301,6 +3305,7 @@ figure.case-study-media {
 
 [data-compare] button[data-compare-button][aria-pressed="true"] {
   background: var(--accent);
+  border-color: var(--accent);
   color: var(--text-on-accent);
 }
 
