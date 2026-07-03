@@ -2588,17 +2588,21 @@ figure.case-study-media {
   transition: clip-path var(--dur-2) ease;
 }
 
+.image-splitter.is-dragging .splitter-after {
+  transition: none;
+}
+
 .splitter-handle {
   position: absolute;
   top: 0;
   bottom: 0;
+  left: 0;
   z-index: 3;
   width: 3px;
   background: #fff;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   cursor: ew-resize;
-  transform: translateX(-50%);
-  left: 50%;
+  transform: translateX(calc(var(--splitter-pos, 50) * 1% - 50%));
   touch-action: none;
 }
 

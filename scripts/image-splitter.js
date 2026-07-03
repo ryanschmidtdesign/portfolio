@@ -12,6 +12,8 @@
 
     this.isDragging = false;
     this.position = parseFloat(container.getAttribute('data-splitter-initial')) || 50;
+    this.pendingPercent = null;
+    this.rafId = null;
 
     this.init();
   }
@@ -86,14 +88,21 @@
     var x = clientX - rect.left;
     var percent = (x / rect.width) * 100;
     percent = Math.max(0, Math.min(100, percent));
-    this.update(percent);
+
+    this.pendingPercent = percent;
+    if (this.rafId) return;
+
+    var self = this;
+    this.rafId = requestAnimationFrame(function () {
+      self.update(self.pendingPercent);
+      self.rafId = null;
+    });
   };
 
   ImageSplitter.prototype.update = function (percent) {
     this.position = percent;
     this.after.style.clipPath = 'inset(0 0 0 ' + percent + '%)';
-    this.handle.style.left = percent + '%';
-    this.handle.style.transform = 'translateX(-50%)';
+    this.handle.style.setProperty('--splitter-pos', percent);
     this.handle.setAttribute('aria-valuenow', Math.round(percent));
   };
 
