@@ -139,9 +139,9 @@ html {
 
   /* === Cool neutrals === */
   --gray-50: #f8fafc;
-  --gray-100: #f1f5f9;
-  --gray-200: #e2e8f0;
-  --gray-300: #cbd5e1;
+  --gray-100: #F7F9FA;
+  --gray-200: #F1F4F6;
+  --gray-300: #DCE3E8;
   --bg: var(--gray-100);
 
   /* Surface levels (more distinct steps) */
@@ -167,7 +167,7 @@ html {
   --kpi-label-ls: var(--tracking-caps);
   --kpi-label-line-height: var(--lh-2xs);
   --kpi-label-color: var(--text-secondary);
-  --kpi-note-color: var(--text-tertiary);
+  --kpi-note-color: var(--text-secondary);
 
   /* Borders (outline tone) */
   --border-subtle: rgb(var(--rgb-outline) / 0.12);
@@ -202,19 +202,15 @@ html {
     0 0 0 1px var(--border);
 
   /* === Neutrals (slate) === */
-  --slate-600: #475569;
-  --slate-900: #0F172A;
+  --slate-600: #5D6873;
+  --slate-900: #1A2128;
 
   /* Text (APCA intent: keep small text comfortably bright) */
   --text: var(--slate-900);
   --text-display: var(--slate-900);
-  --text-light: #1A1F2E;
-  /* keep for migration */
   --text-heading: var(--text);
-  --text-body: var(--text-light);
+  --text-body: var(--text);
   --text-secondary: var(--slate-600);
-  --text-muted: #5F6B7A;
-  --text-tertiary: #5F6577;
 
   /* Text on colored backgrounds */
   --text-on-accent: #FFFFFF;
@@ -222,7 +218,6 @@ html {
   /* === Brand accent (canonical) — desaturated indigo === */
   --accent: #4F6EF7;
   --accent-hover: #3B5BDB;
-  --accent-bright: #7B93F9;
   --accent-text: #2D4FC4;
   --accent-text-hover: #1F3A8F;
   --accent-soft: rgb(79 110 247 / 0.12);
@@ -237,11 +232,6 @@ html {
   --amber-soft: rgb(217 119 6 / 0.12);
   --red: #DC2626;
   --red-soft: rgb(220 38 38 / 0.10);
-  --blue: #2563EB;
-  --blue-soft: rgb(37 99 235 / 0.12);
-
-  --accent-success: #00C389;
-  --accent-success-soft: rgb(0 195 137 / 0.12);
 
   /* Menu / elevated shadows */
   --shadow-menu: 0 24px 64px rgba(0, 0, 0, 0.24);
@@ -293,7 +283,7 @@ html {
   --rgb-white: 255 255 255;
   --rgb-black: 0 0 0;
   --rgb-blue: 79 110 247;
-  --rgb-outline: 15 23 42;
+  --rgb-outline: 26 33 40;
   --rgb-accent-small: 79 110 247;
   --rgb-cool: 79 110 247;
 
@@ -374,7 +364,7 @@ html.lenis body {
 /* Global Selection Highlight */
 ::selection {
   background-color: var(--accent-soft, rgba(79, 110, 247, 0.2));
-  color: var(--text-display, #0f172a);
+  color: var(--text-display, var(--ink-on-glass));
 }
 
 /* Global Focus State Polish */
@@ -1072,7 +1062,7 @@ code {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   font-weight: var(--weight-regular);
-  color: var(--text-muted);
+  color: var(--text-secondary);
   margin-top: calc(var(--space-6) + var(--dot-size));
   letter-spacing: var(--tracking-loose);
   line-height: var(--lh-2xs);
@@ -1618,7 +1608,7 @@ code {
 .case-study section>.section-divider+p {
   font-size: var(--fs-body);
   line-height: var(--lh-prose-loose);
-  color: var(--text-light);
+  color: var(--text);
   max-width: var(--prose);
 }
 
@@ -1813,7 +1803,7 @@ code {
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-caps-wide);
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 /* Body text inside case study (supporting prose) */
@@ -2628,7 +2618,7 @@ figure.case-study-media {
   background: #fff;
   border-radius: 50%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  color: #0f172a;
+  color: var(--ink-on-glass);
 }
 
 .splitter-handle-icon svg {
@@ -2663,7 +2653,7 @@ figure.case-study-media {
 
   body {
     background: #fff !important;
-    color: #0f172a !important;
+    color: var(--ink-on-glass) !important;
   }
 }
 
@@ -2712,7 +2702,7 @@ figure.case-study-media {
 
 .asd-eyebrow {
   margin: 0 0 var(--space-2);
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: var(--fs-xs);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-caps);
@@ -2766,7 +2756,7 @@ figure.case-study-media {
   border: 0;
   border-radius: var(--radius-md);
   background: var(--surface-dark-solid);
-  color: #f8fafc;
+  color: var(--gray-50);
   box-shadow: var(--shadow-card);
   font: inherit;
   font-size: var(--fs-sm);
@@ -2781,7 +2771,7 @@ figure.case-study-media {
 .asd-send-btn:hover,
 .asd-send-btn:focus-visible {
   transform: translateY(-1px);
-  background: #0f172a;
+  background: var(--ink-on-glass);
   box-shadow: var(--shadow-card-strong);
 }
 
@@ -2870,7 +2860,7 @@ figure.case-study-media {
 }
 
 .asd-kicker {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: var(--fs-xs);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-caps);
@@ -2881,7 +2871,7 @@ figure.case-study-media {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 999px;
-  background: var(--text-tertiary);
+  background: var(--text-secondary);
   transition: background var(--dur-3) ease, box-shadow var(--dur-3) ease;
 }
 
@@ -2999,7 +2989,7 @@ figure.case-study-media {
   width: 0.42rem;
   height: 0.42rem;
   border-radius: 999px;
-  background: var(--text-tertiary);
+  background: var(--text-secondary);
   flex-shrink: 0;
   transition: background var(--dur-3) ease, box-shadow var(--dur-3) ease;
 }
@@ -3038,7 +3028,7 @@ figure.case-study-media {
   gap: var(--space-3);
   align-items: center;
   margin-bottom: var(--space-2);
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: var(--fs-xs);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-caps);
@@ -3781,7 +3771,7 @@ figure.case-study-media {
 
 .hamburger-menu a {
   display: block;
-  color: #f8fafc;
+  color: var(--gray-50);
   text-decoration: none;
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
@@ -3837,7 +3827,7 @@ figure.case-study-media {
   width: 100%;
   background: none;
   border: none;
-  color: #f8fafc;
+  color: var(--gray-50);
   text-decoration: none;
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
@@ -3932,7 +3922,7 @@ figure.case-study-media {
   background: rgba(6, 12, 22, 1);
   font: inherit;
   font-size: var(--fs-sm, 14px);
-  color: #f8fafc;
+  color: var(--gray-50);
   outline: none;
   white-space: nowrap;
   overflow: hidden;
@@ -3948,7 +3938,7 @@ figure.case-study-media {
   border-color: rgba(79, 110, 247, 0.5);
   box-shadow: var(--shadow-menu), 0 0 0 2px rgba(79, 110, 247, 0.12);
   background: rgba(6, 12, 22, 1);
-  color: #f8fafc;
+  color: var(--gray-50);
 }
 
 .ai-mini-input::placeholder {
@@ -4016,7 +4006,7 @@ figure.case-study-media {
   border-radius: var(--radius-pill);
   padding: 0.625rem 1rem;
   background: rgba(6, 12, 22, 0.82);
-  color: #f8fafc;
+  color: var(--gray-50);
   box-shadow: var(--shadow-menu);
   font-family: inherit;
   font-size: var(--fs-sm);
