@@ -138,7 +138,6 @@ html {
   --dur-4: 450ms;
 
   /* === Cool neutrals === */
-  --gray-50: #f8fafc;
   --gray-100: #F7F9FA;
   --gray-200: #F1F4F6;
   --gray-300: #DCE3E8;
@@ -207,9 +206,6 @@ html {
 
   /* Text (APCA intent: keep small text comfortably bright) */
   --text: var(--slate-900);
-  --text-display: var(--slate-900);
-  --text-heading: var(--text);
-  --text-body: var(--text);
   --text-secondary: var(--slate-600);
 
   /* Text on colored backgrounds */
@@ -396,7 +392,7 @@ body {
   font-optical-sizing: auto;
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  color: var(--text-body);
+  color: var(--text);
   font-weight: var(--weight-regular);
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg-gradient-end) 100%);
   -webkit-font-smoothing: antialiased;
@@ -422,7 +418,7 @@ body:not(.is-home) {
 }
 
 :where(h1, h2, h3, h4, h5, h6) {
-  color: var(--text-heading);
+  color: var(--text);
   font-kerning: normal;
   font-weight: var(--weight-semibold);
   line-height: var(--lh-lg);
@@ -476,6 +472,13 @@ a,
 button,
 [role="menuitem"] {
   touch-action: manipulation;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 code,
@@ -577,7 +580,7 @@ body:not(.is-home) .site-main {
 .builder-section .section-title,
 .mentorship-section .section-title,
 .about-section .section-title {
-  color: var(--text-heading);
+  color: var(--text);
 }
 
 .label {
@@ -703,7 +706,7 @@ code {
   font-weight: var(--weight-regular);
   letter-spacing: var(--tracking-tighter);
   margin: 0 0 var(--space-2) 0;
-  color: var(--text-display);
+  color: var(--text);
 }
 
 .text-meta {
@@ -763,7 +766,7 @@ code {
   letter-spacing: var(--tracking-tightest);
   margin-top: var(--space-1);
   margin-bottom: var(--space-3);
-  color: var(--text-display);
+  color: var(--text);
   text-wrap: balance;
 }
 
@@ -772,7 +775,7 @@ code {
   line-height: var(--lh-md);
   font-weight: var(--weight-regular);
   letter-spacing: var(--tracking-snug);
-  color: var(--text-body);
+  color: var(--text);
   margin-bottom: var(--space-5);
   max-width: min(72ch, 100%);
 }
@@ -862,12 +865,12 @@ code {
   font-size: var(--fs-sm);
   line-height: var(--lh-xs);
   font-weight: var(--weight-regular);
-  color: var(--text-heading);
+  color: var(--text);
 }
 
 /* Accent usage */
 .metric-highlight {
-  color: var(--text-display);
+  color: var(--text);
   font-weight: var(--weight-semibold);
 }
 
@@ -922,7 +925,7 @@ code {
   font-size: var(--fs-body);
   line-height: var(--lh-prose);
   letter-spacing: var(--tracking-normal);
-  color: var(--text-body);
+  color: var(--text);
   max-width: var(--prose);
   margin: 0;
   text-wrap: pretty;
@@ -1094,7 +1097,7 @@ code {
 }
 
 .timeline-content p {
-  color: var(--text-body);
+  color: var(--text);
   font-size: var(--fs-sm);
   line-height: var(--lh-xs);
   margin: 0;
@@ -1171,7 +1174,7 @@ code {
   letter-spacing: var(--tracking-normal);
   font-weight: var(--weight-regular);
   margin: 0;
-  color: var(--text-body);
+  color: var(--text);
   max-width: var(--prose);
   text-wrap: pretty;
   hyphens: auto;
@@ -1229,7 +1232,7 @@ code {
   font-size: var(--type-body);
   line-height: var(--lh-prose);
   letter-spacing: var(--tracking-normal);
-  color: var(--text-body);
+  color: var(--text);
   max-width: 48ch;
   text-wrap: pretty;
 }
@@ -1251,7 +1254,7 @@ code {
   line-height: var(--lh-xs);
   letter-spacing: var(--tracking-normal);
   font-weight: var(--weight-semibold);
-  color: var(--text-heading);
+  color: var(--text);
 }
 
 .metric.kpis--large {
@@ -1314,7 +1317,7 @@ code {
 .about-lead {
   font-size: var(--fs-body);
   line-height: var(--lh-prose-loose);
-  color: var(--text-body);
+  color: var(--text);
   margin: 0;
   max-width: var(--prose);
   text-wrap: pretty;
@@ -1343,7 +1346,7 @@ code {
 }
 
 .about-connection p {
-  color: var(--text-body);
+  color: var(--text);
   font-size: var(--fs-sm);
   line-height: var(--lh-body);
   margin: 0;
@@ -1522,7 +1525,7 @@ code {
 .research-column li {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  color: var(--text-body);
+  color: var(--text);
   margin-bottom: var(--space-3);
 }
 
@@ -1532,7 +1535,7 @@ code {
 
 .research-column li strong {
   font-weight: var(--weight-semibold);
-  color: var(--text-display);
+  color: var(--text);
 }
 
 @media (max-width: 768px) {
@@ -1556,7 +1559,7 @@ code {
 .case-study {
   margin: 0 auto;
   padding-top: var(--space-8);
-  color: var(--text-display);
+  color: var(--text);
   background: transparent;
   border: none;
   box-shadow: none;
@@ -1634,7 +1637,7 @@ code {
   padding: var(--space-5) var(--space-6);
   background: var(--surface-elevated-strong);
   box-shadow: var(--shadow-card-strong);
-  color: var(--text-body);
+  color: var(--text);
   max-width: var(--prose);
 }
 
@@ -1690,7 +1693,7 @@ code {
 .case-study th {
   text-align: left;
   font-weight: var(--weight-semibold);
-  color: var(--text-heading);
+  color: var(--text);
 }
 
 .case-study tbody tr:hover {
@@ -1778,7 +1781,7 @@ code {
   line-height: 1.2;
   letter-spacing: var(--tracking-tighter);
   margin: 0 0 var(--case-h2-to-body) 0;
-  color: var(--text-display);
+  color: var(--text);
   text-wrap: balance;
 }
 
@@ -1793,7 +1796,7 @@ code {
   line-height: 1.35;
   letter-spacing: var(--tracking-snug);
   margin: var(--case-h3-top) 0 var(--case-h3-to-body) 0;
-  color: var(--text-display);
+  color: var(--text);
 }
 
 /* Eyebrow/meta labels */
@@ -1814,7 +1817,7 @@ code {
   font-size: var(--fs-body);
   line-height: var(--lh-prose);
   font-weight: var(--weight-regular);
-  color: var(--text-body);
+  color: var(--text);
   max-width: var(--prose);
   text-wrap: pretty;
   hyphens: auto;
@@ -1843,7 +1846,7 @@ code {
   font-weight: var(--weight-regular);
   line-height: var(--lh-prose);
   margin-bottom: 0.85rem;
-  color: var(--text-body);
+  color: var(--text);
   max-width: var(--prose);
   text-wrap: pretty;
 }
@@ -1854,7 +1857,7 @@ code {
 }
 
 .case-study section li>strong:first-child {
-  color: var(--text-display);
+  color: var(--text);
   font-weight: var(--weight-semibold);
 }
 
@@ -1911,7 +1914,7 @@ code {
   line-height: 1.05;
   letter-spacing: -0.035em;
   margin-bottom: var(--space-5);
-  color: var(--text-display);
+  color: var(--text);
   max-width: 22ch;
   text-wrap: balance;
 }
@@ -1920,7 +1923,7 @@ code {
   font-size: var(--fs-article-lead);
   line-height: 1.55;
   font-weight: var(--weight-regular);
-  color: var(--text-body);
+  color: var(--text);
   margin-bottom: var(--space-7);
   max-width: var(--prose);
   text-wrap: pretty;
@@ -1997,7 +2000,7 @@ code {
   line-height: var(--lh-display);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
-  color: var(--text-display);
+  color: var(--text);
   margin-bottom: 6px;
 }
 
@@ -2061,7 +2064,7 @@ code {
   line-height: var(--lh-display);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
-  color: var(--text-display);
+  color: var(--text);
   margin-bottom: 0.3rem;
 }
 
@@ -2105,11 +2108,11 @@ code {
 
 .case-study dl.meta dt {
   font-weight: var(--weight-semibold);
-  color: var(--text-heading);
+  color: var(--text);
 }
 
 .case-study dl.meta dd {
-  color: var(--text-body);
+  color: var(--text);
 }
 
 .case-study figure {
@@ -2348,7 +2351,7 @@ code {
 }
 
 .case-study--ai-coding-portfolio .sa-step-title {
-  color: var(--text-display);
+  color: var(--text);
   font-size: var(--fs-md);
   line-height: 1.2;
   letter-spacing: var(--tracking-tighter);
@@ -2362,7 +2365,7 @@ code {
   margin: 0;
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  color: var(--text-body);
+  color: var(--text);
   max-width: 24ch;
 }
 
@@ -2451,7 +2454,7 @@ code {
   font-size: var(--fs-body);
   line-height: var(--lh-md);
   font-weight: var(--weight-semibold);
-  color: var(--text-display);
+  color: var(--text);
 }
 
 .case-study--member-portal .ia-challenge-panel__header > p {
@@ -2576,6 +2579,8 @@ figure.case-study-media {
   height: 100%;
   display: block;
   object-fit: cover;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .splitter-after {
@@ -2756,7 +2761,7 @@ figure.case-study-media {
   border: 0;
   border-radius: var(--radius-md);
   background: var(--surface-dark-solid);
-  color: var(--gray-50);
+  color: var(--text-on-accent);
   box-shadow: var(--shadow-card);
   font: inherit;
   font-size: var(--fs-sm);
@@ -2793,7 +2798,7 @@ figure.case-study-media {
 }
 
 .asd-caption strong {
-  color: var(--text-display);
+  color: var(--text);
 }
 
 @media (max-width: 640px) {
@@ -3260,7 +3265,7 @@ figure.case-study-media {
 
 [data-progress-story] .step-copy {
   margin-top: var(--space-2);
-  color: var(--text-body);
+  color: var(--text);
 }
 
 [data-compare] {
@@ -3685,7 +3690,7 @@ figure.case-study-media {
   background: var(--surface-dark-solid);
   border: 1px solid var(--surface-dark-border);
   box-shadow: var(--shadow-menu);
-  color: #fff;
+  color: var(--text-on-accent);
   cursor: pointer;
   transition: transform 220ms var(--ease-out), background 180ms ease, box-shadow 180ms ease;
 }
@@ -3771,7 +3776,7 @@ figure.case-study-media {
 
 .hamburger-menu a {
   display: block;
-  color: var(--gray-50);
+  color: var(--text-on-accent);
   text-decoration: none;
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
@@ -3827,7 +3832,7 @@ figure.case-study-media {
   width: 100%;
   background: none;
   border: none;
-  color: var(--gray-50);
+  color: var(--text-on-accent);
   text-decoration: none;
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
@@ -3922,7 +3927,7 @@ figure.case-study-media {
   background: rgba(6, 12, 22, 1);
   font: inherit;
   font-size: var(--fs-sm, 14px);
-  color: var(--gray-50);
+  color: var(--text-on-accent);
   outline: none;
   white-space: nowrap;
   overflow: hidden;
@@ -3938,7 +3943,7 @@ figure.case-study-media {
   border-color: rgba(79, 110, 247, 0.5);
   box-shadow: var(--shadow-menu), 0 0 0 2px rgba(79, 110, 247, 0.12);
   background: rgba(6, 12, 22, 1);
-  color: var(--gray-50);
+  color: var(--text-on-accent);
 }
 
 .ai-mini-input::placeholder {
@@ -4006,7 +4011,7 @@ figure.case-study-media {
   border-radius: var(--radius-pill);
   padding: 0.625rem 1rem;
   background: rgba(6, 12, 22, 0.82);
-  color: var(--gray-50);
+  color: var(--text-on-accent);
   box-shadow: var(--shadow-menu);
   font-family: inherit;
   font-size: var(--fs-sm);
@@ -4117,7 +4122,7 @@ figure.case-study-media {
   a:not([href^="#"])::after {
     content: " (" attr(href) ")";
     font-size: 0.8em;
-    color: #666;
+    color: var(--text-secondary);
   }
 
   nav a::after {
