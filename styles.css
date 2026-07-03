@@ -2559,6 +2559,7 @@ figure.case-study-media {
 .image-splitter {
   margin-top: var(--space-6);
   user-select: none;
+  touch-action: pan-y;
 }
 
 .image-splitter.is-dragging {
@@ -2566,6 +2567,7 @@ figure.case-study-media {
 }
 
 .splitter-viewport {
+  touch-action: pan-y;
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -2602,6 +2604,15 @@ figure.case-study-media {
   cursor: ew-resize;
   transform: translateX(-50%);
   left: 50%;
+  touch-action: none;
+}
+
+.splitter-handle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: -20px;
+  right: -20px;
 }
 
 .splitter-handle-icon {

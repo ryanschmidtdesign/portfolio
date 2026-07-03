@@ -91,15 +91,9 @@
 
   ImageSplitter.prototype.update = function (percent) {
     this.position = percent;
-
-    if (reducedMotion) {
-      this.after.style.clipPath = 'inset(0 0 0 ' + percent + '%)';
-      this.handle.style.transform = 'translateX(-50%)';
-      this.handle.style.left = percent + '%';
-    } else {
-      this.after.style.clipPath = 'inset(0 0 0 ' + percent + '%)';
-      this.handle.style.left = percent + '%';
-    }
+    this.after.style.clipPath = 'inset(0 0 0 ' + percent + '%)';
+    this.handle.style.left = percent + '%';
+    this.handle.style.transform = 'translateX(-50%)';
     this.handle.setAttribute('aria-valuenow', Math.round(percent));
   };
 
