@@ -12,8 +12,6 @@
 
     this.isDragging = false;
     this.position = parseFloat(container.getAttribute('data-splitter-initial')) || 50;
-    this.pendingPercent = null;
-    this.rafId = null;
 
     this.init();
   }
@@ -88,15 +86,7 @@
     var x = clientX - rect.left;
     var percent = (x / rect.width) * 100;
     percent = Math.max(0, Math.min(100, percent));
-
-    this.pendingPercent = percent;
-    if (this.rafId) return;
-
-    var self = this;
-    this.rafId = requestAnimationFrame(function () {
-      self.update(self.pendingPercent);
-      self.rafId = null;
-    });
+    this.update(percent);
   };
 
   ImageSplitter.prototype.update = function (percent) {
