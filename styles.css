@@ -2596,13 +2596,13 @@ figure.case-study-media {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
   z-index: 3;
   width: 3px;
   background: #fff;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   cursor: ew-resize;
-  transform: translateX(calc(var(--splitter-pos, 50) * 1% - 50%));
+  transform: translateX(-50%);
+  left: 50%;
   touch-action: none;
 }
 
@@ -3285,7 +3285,7 @@ figure.case-study-media {
 }
 
 [data-compare] button[data-compare-button] {
-  background: var(--surface-1);
+  background: rgba(255, 255, 255, 0.6);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   color: var(--text-secondary);
