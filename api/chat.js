@@ -2026,10 +2026,12 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
 
         return result;
       }
-      // Non-200 but not necessarily fatal — retry 5xx only
-      if (resp.status >= 500 && attempt < MAX_RETRIES) {
-        const delay = RETRY_DELAY_MS[attempt];
-        console.warn(`Gemini 5xx (attempt ${attempt + 1}), retrying in ${delay}ms`);
+      // Retry 5xx (server errors) and 429 (rate limit) — rate limits use longer backoff
+      if ((resp.status === 429 || resp.status >= 500) && attempt < MAX_RETRIES) {
+        const delay = resp.status === 429
+          ? RETRY_DELAY_MS[attempt] * 3   // 3s, 6s for rate limits
+          : RETRY_DELAY_MS[attempt];       // 1s, 2s for 5xx
+        console.warn(`Gemini ${resp.status} (attempt ${attempt + 1}), retrying in ${delay}ms`);
         await new Promise(r => setTimeout(r, delay));
         continue;
       }
@@ -2403,8 +2405,9 @@ export default async function handler(req, res) {
     };
 
     // In-memory response cache: skip Gemini for identical questions within 1 hour
+    // Fit questions are cached too — company info doesn't change minute-to-minute
     const cached = getCachedResponse(lastUser, intent, isFit);
-    if (cached && !isFit && !shouldWebSearch) {
+    if (cached) {
       modelOutput = cached;
       if (wantsStream) {
         res.writeHead(200, { "Content-Type": "text/event-stream", "Cache-Control": "no-cache", "Connection": "keep-alive" });
@@ -2472,7 +2475,7 @@ export default async function handler(req, res) {
     }
 
     // Store successful Gemini responses in cache for future identical questions
-    if (!usedFallback && !isFit && !shouldWebSearch && modelOutput && !cached) {
+    if (!usedFallback && modelOutput && !cached) {
       setCachedResponse(lastUser, intent, isFit, modelOutput);
     }
 
