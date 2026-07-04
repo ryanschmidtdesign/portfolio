@@ -460,6 +460,30 @@
     {
       "q": "Preferred ways of working?",
       "a": "**Short research loops**, quick prototypes, tight PM and Eng partnership, and systemizing wins with **tokens and components**."
+    },
+    {
+      "q": "What industries has Ryan worked in?",
+      "a": "B2B SaaS, enterprise research, internal tools, and AI products. He's comfortable in fast-moving B2B environments where product complexity demands clear IA and design systems."
+    },
+    {
+      "q": "What's Ryan's design process?",
+      "a": "Brief research loop (6 to 10 interviews), fast prototypes, tight PM+Eng partnership, ship a small surface, systemize the win, repeat. He favors short cycles over big up-front specs."
+    },
+    {
+      "q": "Has Ryan managed or led design teams?",
+      "a": "Ryan has led design strategy and mentored designers (including 5 years as a UX Mentor at Designlab), but hasn't held a formal people-manager title. He's interested in growing into staff-level influence and is open to both IC and leadership-track roles."
+    },
+    {
+      "q": "Does Ryan work remotely?",
+      "a": "Based in Austin, TX. Open to remote, hybrid, or onsite for the right team."
+    },
+    {
+      "q": "How does Ryan handle pressure or tight deadlines?",
+      "a": "Narrow the surface, prototype fast, validate in hours not weeks. The Real-Time Inventory MVP shipped in 12 weeks with 6 user interviews and 3 Figma test rounds. He'd rather ship a focused thing that works than negotiate for more time."
+    },
+    {
+      "q": "What would Ryan bring to a design team beyond his skills?",
+      "a": "A bias toward shipping, a systemizer's instinct, and a track record of making the people around him better — through design mentorship (5 years at Designlab), paired engineering partnership, and leaving things more structured than he found them."
     }
   ],
   "meta_qa": [
@@ -619,7 +643,13 @@
     { "id": "off_topic_design", "examples": ["what makes good ux", "review my portfolio", "design advice"] },
     { "id": "off_topic_unrelated", "examples": ["weather", "code my app", "homework"] },
     { "id": "not_in_kb", "examples": ["asks about a project, employer, or fact not in the KB"] },
-    { "id": "clarification", "examples": ["question lacks the company, product, or role needed to answer well"] }
+    { "id": "clarification", "examples": ["question lacks the company, product, or role needed to answer well"] },
+    { "id": "leadership", "examples": ["has he managed people", "led a team", "leadership experience", "manage designers", "design leadership"] },
+    { "id": "differentiator", "examples": ["what sets him apart", "why hire ryan", "unique about ryan", "stand out", "different from other designers"] },
+    { "id": "compensation", "examples": ["salary expectations", "compensation", "how much does he want", "rate", "pay range"] },
+    { "id": "culture_add", "examples": ["what would he bring to the team", "culture fit", "team contribution", "beyond his skills", "design team culture"] },
+    { "id": "company_fit_specific", "examples": ["why is ryan a fit at", "ryan fit at", "ryan for [company]", "specific company fit"] },
+    { "id": "stakeholder_influence", "examples": ["influence without authority", "executive stakeholder", "convince leadership", "get buy-in", "drive alignment"] }
   ],
   "router": {
     "page_to_case": {
@@ -855,6 +885,36 @@
       "intent": "clarification",
       "prompt": "Why fit at [Company]?",
       "answer": "Happy to make the case, but I'll need a company name or a job description to map Ryan's work to. Drop either one in and I'll get specific."
+    },
+    {
+      "intent": "leadership",
+      "prompt": "Has Ryan led or managed design teams?",
+      "answer": "Ryan has led design strategy at D-Tools and i4cp, but hasn't held a formal people-manager title. He mentored junior designers for 5 years at Designlab, led design system governance across multiple product lines, and works closely with cross-functional teams daily. He's targeting staff-level influence and open to both IC and leadership-track roles. Want to talk specifics? https://www.linkedin.com/in/ryanschmidt1989/"
+    },
+    {
+      "intent": "differentiator",
+      "prompt": "What sets Ryan apart from other product designers?",
+      "answer": "Ryan works at the seam of design and engineering. He prototypes in code, ships real front-end, and uses AI tooling to compress cycles, not skip thinking. Most designers hand off specs; Ryan pairs with engineers on feasibility, writes token specs they actually use, and can build end-to-end features himself. The https://ryanschmidt.design/ai-coding-portfolio.html case is the best example of that in practice."
+    },
+    {
+      "intent": "compensation",
+      "prompt": "What are Ryan's salary expectations?",
+      "answer": "Open to discussing comp at the right stage. Best handled in a conversation rather than a chat reply. https://www.linkedin.com/in/ryanschmidt1989/ is the fastest path to start that discussion."
+    },
+    {
+      "intent": "culture_add",
+      "prompt": "What would Ryan bring to a design team beyond his skills?",
+      "answer": "A bias toward shipping, a systemizer's instinct, and making the people around him better. He's mentored designers for 5 years at Designlab, and his design system governance at D-Tools left the team with patterns that outlasted him. He's the person who volunteers to document the thing everyone keeps forgetting and builds the component nobody asked for but everyone needed."
+    },
+    {
+      "intent": "company_fit_specific",
+      "prompt": "Why is Ryan a fit at a B2B SaaS company like Stripe?",
+      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove **~85% component reuse** on a legacy B2B platform, cut white-labeling requests by **~50%**, and shipped an inventory MVP tied to **+18% recurring revenue**. For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
+    },
+    {
+      "intent": "stakeholder_influence",
+      "prompt": "How does Ryan influence decisions when he doesn't have authority?",
+      "answer": "Ryan brings evidence and stays curious about constraints. On the AI dashboard project, leadership pushed for AI-first. He ran 10 user interviews showing low trust in black-box outputs, then proposed a hybrid model that kept familiar KPIs and layered AI on top. The team bought in, and the result was **+71%** beta engagement. Want the full story on that case?"
     }
   ]
 }
