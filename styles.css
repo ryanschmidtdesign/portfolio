@@ -690,6 +690,12 @@ code {
 
 
 @media (prefers-reduced-motion: reduce) {
+  .loading-dots span {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
 /* Big outcome numbers / key metrics */
 .metric {
   font-variant-numeric: tabular-nums;
