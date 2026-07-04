@@ -309,6 +309,8 @@ async function fetchJobDescriptionFromUrl(urlObj) {
       }
     });
     if (!resp.ok) {
+      const jina = await fetchReadableTextViaJina(urlObj);
+      if (jina) return { url: jina.url, excerpt: jina.excerpt, via: "jina" };
       return { error: `I couldn\u2019t fetch that link (HTTP ${resp.status}). Paste the job description text instead.` };
     }
     const ct = (resp.headers.get("content-type") || "").toLowerCase();
