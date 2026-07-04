@@ -19,8 +19,6 @@ html {
   /* 1200px / 16 */
   --impact-callout-max: 48.75rem;
   /* 780px / 16 */
-  --hero-max: 52rem;
-  /* 640px / 16 */
   --prose: 66ch;
   --prose-tight: 60ch;
 
@@ -294,17 +292,6 @@ html {
   --surface-dark-border: rgb(255 255 255 / 0.10);
 
   /* === Hero overlay gradients === */
-  --hero-overlay-gradient: linear-gradient(to right,
-      rgb(6 12 22 / 0.93) 0%,
-      rgb(6 12 22 / 0.72) 42%,
-      rgb(6 12 22 / 0.30) 62%,
-      transparent 82%);
-
-  --hero-overlay-gradient-mobile: linear-gradient(to right,
-      rgb(6 12 22 / 0.96) 0%,
-      rgb(6 12 22 / 0.88) 50%,
-      rgb(6 12 22 / 0.60) 75%,
-      transparent 90%);
 }
 
 /* -------------------------------------------------------
@@ -596,7 +583,6 @@ body:not(.is-home) .site-main {
 
 /* Meta / eyebrow labels */
 .text-meta,
-.metric-kicker,
 .case-study .tldr-label {
   font-size: var(--fs-xs);
   line-height: var(--lh-2xs);
@@ -650,64 +636,7 @@ code {
   color: var(--text);
 }
 
-.hero-media {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-}
 
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero-overlay {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  align-items: center;
-  padding: clamp(var(--space-7), 8vh, 4.5rem) 0;
-}
-
-/* Homepage-specific: reduce top padding by 25% */
-.is-home .hero-overlay {
-  padding: clamp(2.25rem, 6vh, 3.375rem) 0;
-}
-
-.hero-overlay::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--hero-overlay-gradient);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero-inner {
-  display: block;
-  max-width: var(--hero-max);
-}
-
-.hero-main {
-  position: relative;
-  max-width: var(--hero-max);
-}
-
-.hero-text {
-  text-align: left;
-}
-
-.hero-name {
-  font-size: var(--fs-display-md);
-  line-height: var(--lh-display);
-  font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-tighter);
-  margin: 0 0 var(--space-2) 0;
-  color: var(--text);
-}
 
 .text-meta {
   letter-spacing: var(--tracking-caps);
@@ -759,98 +688,8 @@ code {
   }
 }
 
-.hero-headline-line {
-  font-size: var(--fs-display-lg);
-  line-height: var(--lh-display);
-  font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-tightest);
-  margin-top: var(--space-1);
-  margin-bottom: var(--space-3);
-  color: var(--text);
-  text-wrap: balance;
-}
 
-.hero-description {
-  font-size: var(--fs-md);
-  line-height: var(--lh-md);
-  font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-snug);
-  color: var(--text);
-  margin-bottom: var(--space-5);
-  max-width: min(72ch, 100%);
-}
-
-.hero-cta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  align-items: center;
-  margin-top: var(--space-4);
-  margin-bottom: var(--space-4);
-}
-
-@media (max-width: 480px) {
-  :root {
-    --fs-body: 15px;
-    --fs-sm: 13px;
-    --fs-md: 18px;
-    --fs-lg: 22px;
-  }
-
-  .hero-cta-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--space-3);
-  }
-
-  .section-title {
-    font-size: 1.5rem;
-  }
-
-  .metric {
-    font-size: 20px;
-  }
-}
-
-.hero-cta-project {
-  font-size: var(--fs-sm);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-loose);
-  text-transform: none;
-  text-align: center;
-}
-
-/* Hero metrics container */
-.hero-metrics {
-  display: flex;
-  gap: var(--space-7);
-  margin-top: var(--space-3);
-  padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--surface-dark-border);
-  /* Solid bg — no backdrop-filter over a live WebGL canvas (causes per-frame flicker) */
-  background: linear-gradient(180deg, var(--surface-dark-edge), var(--surface-dark));
-  box-shadow: 0 1px 2px rgb(var(--rgb-outline) / 0.18);
-  max-width: min(640px, 100%);
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-left: 0;
-  margin-right: 0;
-  /* GPU compositing layer — prevents repaint interaction with canvas below */
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-.hero-metric,
-.leadership-metric {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  min-width: 0;
-}
-
-
-
+@media (prefers-reduced-motion: reduce) {
 /* Big outcome numbers / key metrics */
 .metric {
   font-variant-numeric: tabular-nums;
@@ -874,14 +713,7 @@ code {
   font-weight: var(--weight-semibold);
 }
 
-@media (max-width: 768px) {
-  .hero-metrics {
-    flex-direction: column;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-4);
-    max-width: 100%;
-  }
-}
+
 
 /* -------------------------------------------------------
    Leadership & About
@@ -1180,17 +1012,6 @@ code {
   hyphens: auto;
 }
 
-/* About-page metric kicker */
-.metric-kicker {
-  margin: 0;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  /* NEW: make it clearly a label */
-  letter-spacing: var(--tracking-caps-tight);
-  /* NEW: label-y feel */
-  font-size: var(--type-label);
-}
-
 .metric-highlight--xl {
   font-size: var(--fs-xl);
   line-height: var(--lh-xl);
@@ -1299,10 +1120,6 @@ code {
   gap: var(--space-4);
 }
 
-.metric-kicker {
-  letter-spacing: var(--tracking-caps-tight);
-}
-
 .about-section .section-title {
   margin: 0;
 }
@@ -1401,8 +1218,6 @@ code {
   :root {
     --container-max: 90rem;
     /* 1440px */
-    --hero-max: 55rem;
-    /* 880px */
     --fs-body: 17px;
     --fs-md: 21px;
     --fs-lg: 25px;
@@ -1411,10 +1226,6 @@ code {
     --space-9: 6.5rem;
   }
 
-  .hero-metrics {
-    gap: var(--space-6);
-    padding: var(--space-4) var(--space-5);
-  }
 
   .metric {
     font-size: 30px;
@@ -1426,8 +1237,6 @@ code {
   :root {
     --container-max: 100rem;
     /* 1600px */
-    --hero-max: 56rem;
-    /* 896px */
     --fs-body: 18px;
     --fs-md: 23px;
     --fs-lg: 27px;
@@ -1437,11 +1246,6 @@ code {
     --kpi-gap: 4rem;
   }
 
-  .hero-metrics {
-    gap: var(--space-7);
-    padding: var(--space-5) var(--space-7);
-    max-width: 700px;
-  }
 
   .metric {
     font-size: 36px;
@@ -2655,7 +2459,6 @@ figure.case-study-media {
 
 @media print {
 
-  .site-header,
   .site-footer {
     display: none !important;
   }
@@ -3146,54 +2949,7 @@ figure.case-study-media {
   border: 0;
 }
 
-/* ============================================================================
-   Feature 2: Hero Word Morph
-   ============================================================================ */
-.morph-word {
-  position: relative;
-  display: inline-block;
-  perspective: 800px;
-}
 
-.morph-item {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(24px) rotateX(-28deg) scale(0.96);
-  transform-origin: 50% 50% -20px;
-  filter: blur(12px);
-  will-change: transform, opacity, filter;
-  transition:
-    opacity 0.6s var(--ease-out),
-    transform 0.6s var(--ease-out),
-    filter 0.6s var(--ease-out);
-  pointer-events: none;
-}
-
-.morph-item--active {
-  opacity: 1;
-  transform: translateY(0) rotateX(0deg) scale(1);
-  filter: blur(0px);
-  position: relative;
-  /* takes space when active */
-  pointer-events: auto;
-}
-
-.morph-item--exit {
-  opacity: 0;
-  transform: translateY(-24px) rotateX(28deg) scale(1.04);
-  filter: blur(12px);
-  position: absolute;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .morph-item {
-    transition: none;
-  }
-}
 
 /* ============================================================================
    Shared interaction patterns
@@ -3460,10 +3216,7 @@ figure.case-study-media {
   pointer-events: none;
 }
 
-/* Keep the overlay gradient above the canvas */
-.hero-overlay::before {
-  z-index: 0;
-}
+
 
 /* -------------------------------------------------------
    Dashboard case study layout
@@ -3533,26 +3286,6 @@ figure.case-study-media {
     --page-gutter: 1rem;
   }
 
-  .hero-overlay {
-    padding: clamp(1.5rem, 4vh, 2.5rem) 0;
-  }
-
-  .hero-overlay::before {
-    background: var(--hero-overlay-gradient-mobile);
-  }
-
-  .hero-metrics {
-    flex-direction: column;
-    gap: var(--space-4);
-    padding: var(--space-4) var(--space-5);
-    max-width: 100%;
-    align-items: flex-start;
-  }
-
-  .hero-metric {
-    width: 100%;
-  }
-
   .metric {
     font-size: 24px;
   }
@@ -3596,12 +3329,6 @@ figure.case-study-media {
     --page-gutter: 1.5rem;
   }
 
-  .hero-metrics {
-    gap: var(--space-5);
-    padding: var(--space-4) var(--space-5);
-    flex-wrap: wrap;
-  }
-
 }
 
 /* =====================================================
@@ -3610,15 +3337,6 @@ figure.case-study-media {
 @media (min-width: 1400px) and (max-width: 1599px) {
   :root {
     --page-gutter: clamp(1rem, 3.5vw, 1.5rem);
-  }
-
-  .hero-inner {
-    max-width: 740px;
-  }
-
-  .hero-metrics {
-    gap: var(--space-6);
-    padding: var(--space-4) var(--space-5);
   }
 
   .case-study figure img {
@@ -3633,21 +3351,6 @@ figure.case-study-media {
 @media (min-width: 1920px) {
   :root {
     --page-gutter: clamp(2rem, 4vw, 3rem);
-  }
-
-  .hero-inner {
-    max-width: 850px;
-  }
-
-  .hero-metrics {
-    gap: var(--space-7);
-    padding: var(--space-5) var(--space-7);
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .hero-metric {
-    flex: 0 1 auto;
   }
 
   .metric {
@@ -3839,6 +3542,7 @@ figure.case-study-media {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-height: 44px;
   background: none;
   border: none;
   color: var(--text-on-accent);
@@ -4062,6 +3766,7 @@ figure.case-study-media {
 
   .ai-mini-suggestion-pill {
     max-width: min(360px, calc(100vw - 24px));
+    min-height: 44px;
     font-size: 13px;
     padding: 0.55rem 0.8rem;
   }
@@ -4076,7 +3781,6 @@ figure.case-study-media {
    ===================================================== */
 @media print {
 
-  .hero-media,
   [data-webgl-hero],
   [data-webgl-models],
   [data-about-overlay],
