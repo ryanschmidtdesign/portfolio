@@ -1066,6 +1066,7 @@ function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
     const parsed = JSON.parse(cleaned);
     return normalizeAssistantPayload(parsed, pickedCases, kb, isFit);
   } catch {
+    // Try to extract a complete "answer" field (even from truncated JSON)
     const m = String(text).match(/"answer"\s*:\s*"((?:\\.|[^"\\])*)"/);
     if (m) {
       try {
@@ -1073,6 +1074,15 @@ function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
         const repairedAnswer = repairFitAnswer(answer, isFit, kb);
         return { answer: sanitize(String(repairedAnswer)), ...empty };
       } catch {}
+    }
+    // Try to extract answer from truncated JSON (no closing quote)
+    const truncMatch = String(text).match(/"answer"\s*:\s*"((?:\\.|[^"\\])*)$/);
+    if (truncMatch) {
+      const answer = truncMatch[1];
+      if (answer && answer.length > 3) {
+        const repairedAnswer = repairFitAnswer(answer, isFit, kb);
+        return { answer: sanitize(String(repairedAnswer)), ...empty };
+      }
     }
     return {
       answer: "I had trouble formatting that cleanly. Try asking about Ryan's case studies, UX Engineer fit, or strongest proof points.",
@@ -1929,8 +1939,8 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
 
   const isDetailed = String(answerStyle || "").toLowerCase() === "detailed";
   const model = useFitModel ? GEMINI_FIT_MODEL : GEMINI_MODEL;
-  // Tokens must accommodate JSON wrapper (~100 tokens overhead) plus answer text
-  const maxOutputTokens = useFitModel ? 1500 : (isDetailed ? 2000 : 1200);
+  // Tokens must accommodate thinking tokens (~500-900) + JSON wrapper + answer text
+  const maxOutputTokens = useFitModel ? 2000 : (isDetailed ? 2500 : 1800);
   const temperature = useFitModel ? 0.3 : (isDetailed ? 0.3 : 0.25);
 
   const endpointBase = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}`;
