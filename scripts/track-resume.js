@@ -1,4 +1,4 @@
-// netlify/functions/track-resume.js
+// scripts/track-resume.js
 // Logs resume PDF downloads to Supabase.
 
 const SUPABASE_URL   = "https://ggmkmymtilpkezkpihxt.supabase.co";
