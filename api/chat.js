@@ -11,8 +11,8 @@ const XAI_MODEL = process.env.XAI_MODEL || "grok-3-mini";
 const XAI_FIT_MODEL = process.env.XAI_FIT_MODEL || "grok-3";
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
-const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
-const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-2.5-flash";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash";
+const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-3.5-flash";
 const CSE_API_KEY = process.env.CSE_API_KEY || "";
 const CSE_ID = process.env.CSE_ID || "";
 const LOG_WEBHOOK_URL = process.env.LOG_WEBHOOK_URL || "";
