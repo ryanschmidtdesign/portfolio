@@ -1550,10 +1550,13 @@ if (savedHist.length > 0) {
       };
       if (state.sectionContext) payload.sectionContext = state.sectionContext;
 
-      const timeoutTimer = setTimeout(() => currentController.abort(), 30000);
+      const timeoutTimer = setTimeout(() => currentController.abort(), 60000);
       const res = await fetch(chatApi, {
         method:'POST',
-        headers:{ 'Content-Type':'application/json' },
+        headers:{
+          'Content-Type':'application/json',
+          'Accept': 'text/event-stream'
+        },
         body: JSON.stringify(payload),
         signal: currentController.signal
       });
@@ -1561,9 +1564,64 @@ if (savedHist.length > 0) {
       clearTimeout(timeoutTimer);
       state.sectionContext = null;
 
-      const data = await res.json().catch(() => ({}));
+      // Determine if the server responded with SSE streaming
+      const contentType = (res.headers.get('content-type') || '').toLowerCase();
 
-      if (!res.ok) {
+      let data;
+
+      if (contentType.includes('text/event-stream')) {
+        // ---- SSE streaming path ----
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = '';
+        let accumulatedText = '';
+
+        // Helper to parse SSE events from the buffer
+        function processSseBuffer() {
+          const parts = buf.split('\n\n');
+          buf = parts.pop() || '';
+          for (const part of parts) {
+            for (const line of part.split('\n')) {
+              if (!line.startsWith('data: ')) continue;
+              try {
+                const parsed = JSON.parse(line.slice(6).trim());
+                if (parsed.type === 'chunk') {
+                  accumulatedText += parsed.text || '';
+                } else if (parsed.type === 'done') {
+                  data = parsed.data || {};
+                  // Ensure data.answer uses the polished version from the server
+                  if (!data.answer && accumulatedText) {
+                    data.answer = accumulatedText;
+                  }
+                }
+              } catch {}
+            }
+          }
+        }
+
+        // Extend timeout for streaming (60s total, not 30)
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buf += decoder.decode(value, { stream: true });
+            processSseBuffer();
+          }
+          // Flush remaining buffer
+          processSseBuffer();
+        } finally {
+          reader.releaseLock();
+        }
+
+        if (!data && accumulatedText) {
+          data = { answer: accumulatedText };
+        }
+      } else {
+        // ---- Non-streaming (JSON) fallback ----
+        data = await res.json().catch(() => ({}));
+      }
+
+      if (!res.ok && !data) {
         renderErrorMessage(thinking, `I'm having trouble reaching the assistant right now (${res.status}). Try again in a moment, or ask something narrower like "Why is Ryan a fit for this role?"`, text);
         return;
       }
@@ -1572,7 +1630,7 @@ if (savedHist.length > 0) {
   ? String(data.answer)
   : "I didn't get enough to answer that well. Try role fit, a case study, research approach, IA, or design systems.";
 
-      if (data.suggested_pills && Array.isArray(data.suggested_pills) && data.suggested_pills.length) {
+      if (data && data.suggested_pills && Array.isArray(data.suggested_pills) && data.suggested_pills.length) {
         const pillsContainer = $('#pills');
         if (pillsContainer) {
           pillsContainer.classList.remove('show');
@@ -1600,18 +1658,18 @@ if (savedHist.length > 0) {
       }
 
       // Feature 1: Hire Intent card
-      if (data.hire_intent === true) {
+      if (data && data.hire_intent === true) {
         renderHireCard(thinking);
       }
 
       // Trust: show which case(s) this answer is based on
-      if (Array.isArray(data.context_cases) && data.context_cases.length) {
+      if (data && Array.isArray(data.context_cases) && data.context_cases.length) {
         renderContextCases(thinking, data.context_cases);
         scrollToBottom(true);
       }
 
       // Phase 2: DOM-Aware Navigation & Highlighting
-      if (data.action_scroll_to) {
+      if (data && data.action_scroll_to) {
         try {
           const target = document.querySelector(data.action_scroll_to);
           if (target) {
@@ -1626,7 +1684,7 @@ if (savedHist.length > 0) {
         } catch(e) {}
       }
 
-      if (data.action_highlight) {
+      if (data && data.action_highlight) {
         try {
           let target = null;
           try {

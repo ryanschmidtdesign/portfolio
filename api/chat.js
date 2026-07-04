@@ -1674,7 +1674,7 @@ function safeExtractAnswer(raw) {
 // -----------------------------------------------------------------------------
 
 async function callGemini(systemPrompt, messages, webSnippets, kb, answerStyle, options = {}) {
-  const { pageUrl = "", sectionContext = null, useFitModel = false, lastUserOverride = "", retrievedChunks = [] } = options;
+  const { pageUrl = "", sectionContext = null, useFitModel = false, lastUserOverride = "", retrievedChunks = [], streamChunk = null } = options;
   const contents = [];
 
   const lastUserMsg =
@@ -1876,10 +1876,13 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
   const isDetailed = String(answerStyle || "").toLowerCase() === "detailed";
   const model = useFitModel ? GEMINI_FIT_MODEL : GEMINI_MODEL;
   // Tokens must accommodate JSON wrapper (~100 tokens overhead) plus answer text
-  const maxOutputTokens = useFitModel ? 900 : (isDetailed ? 1200 : 800);
+  const maxOutputTokens = useFitModel ? 1500 : (isDetailed ? 2000 : 1200);
   const temperature = useFitModel ? 0.3 : (isDetailed ? 0.3 : 0.25);
 
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+  const endpointBase = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}`;
+  const endpoint = streamChunk
+    ? `${endpointBase}:streamGenerateContent?alt=sse&key=${encodeURIComponent(GEMINI_API_KEY)}`
+    : `${endpointBase}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
 
   const body = {
     systemInstruction: {
@@ -1896,39 +1899,149 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
     }
   };
 
-  const resp = await fetch(endpoint, {
-    method: "POST", headers: { "Content-Type":"application/json" }, body: JSON.stringify(body)
-  });
-  if (!resp.ok) throw new Error(`Gemini error: ${resp.status} ${await resp.text()}`);
-
-  const data = await resp.json();
-  const candidate = data?.candidates?.[0]?.content;
-  const parts = candidate?.parts;
-  const textRaw = Array.isArray(parts)
-    ? parts.map(p => p && p.text).filter(Boolean).join("\n")
-    : (candidate?.parts?.[0]?.text || "");
-
-  const result = parseGeminiOutput(textRaw, pickedCases, kb, isFit);
-
-  // If answer is still wrapped in JSON (Gemini truncated mid-JSON), try extracting directly from textRaw
-  if (typeof result.answer === "string" && result.answer.trim().startsWith("{") && result.answer.includes('"answer"')) {
-    const extracted = safeExtractAnswer(textRaw);
-    if (extracted) {
-      result.answer = extracted;
-    } else {
-      try {
-        const cleaned = extractJsonFromText(textRaw);
-        const parsed = JSON.parse(cleaned);
-        if (parsed && typeof parsed.answer === "string") {
-          result.answer = parsed.answer;
-          if (Array.isArray(parsed.suggested_pills)) result.suggested_pills = parsed.suggested_pills;
-          if (Array.isArray(parsed.context_cases)) result.context_cases = parsed.context_cases;
+  // Retry loop for transient failures (network blips, 5xx)
+  const MAX_RETRIES = 2;
+  const RETRY_DELAY_MS = [1000, 2000];
+  let lastErr = null;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const resp = await fetch(endpoint, {
+        method: "POST", headers: { "Content-Type":"application/json" }, body: JSON.stringify(body)
+      });
+      if (resp.ok) {
+        // Streaming path — read SSE events, emit answer text deltas via streamChunk
+        if (streamChunk) {
+          const fullText = await readGeminiStream(resp, streamChunk);
+          const result = parseGeminiOutput(fullText, pickedCases, kb, isFit);
+          if (typeof result.answer === "string" && result.answer.trim().startsWith("{") && result.answer.includes('"answer"')) {
+            const extracted = safeExtractAnswer(fullText);
+            if (extracted) {
+              result.answer = extracted;
+            } else {
+              try {
+                const cleaned = extractJsonFromText(fullText);
+                const parsed = JSON.parse(cleaned);
+                if (parsed && typeof parsed.answer === "string") {
+                  result.answer = parsed.answer;
+                  if (Array.isArray(parsed.suggested_pills)) result.suggested_pills = parsed.suggested_pills;
+                  if (Array.isArray(parsed.context_cases)) result.context_cases = parsed.context_cases;
+                }
+              } catch {}
+            }
+          }
+          return result;
         }
-      } catch {}
+
+        // Non-streaming path — single response
+        const data = await resp.json();
+        const candidate = data?.candidates?.[0]?.content;
+        const parts = candidate?.parts;
+        const textRaw = Array.isArray(parts)
+          ? parts.map(p => p && p.text).filter(Boolean).join("\n")
+          : (candidate?.parts?.[0]?.text || "");
+
+        const result = parseGeminiOutput(textRaw, pickedCases, kb, isFit);
+
+        // If answer is still wrapped in JSON (Gemini truncated mid-JSON), try extracting directly from textRaw
+        if (typeof result.answer === "string" && result.answer.trim().startsWith("{") && result.answer.includes('"answer"')) {
+          const extracted = safeExtractAnswer(textRaw);
+          if (extracted) {
+            result.answer = extracted;
+          } else {
+            try {
+              const cleaned = extractJsonFromText(textRaw);
+              const parsed = JSON.parse(cleaned);
+              if (parsed && typeof parsed.answer === "string") {
+                result.answer = parsed.answer;
+                if (Array.isArray(parsed.suggested_pills)) result.suggested_pills = parsed.suggested_pills;
+                if (Array.isArray(parsed.context_cases)) result.context_cases = parsed.context_cases;
+              }
+            } catch {}
+          }
+        }
+
+        return result;
+      }
+      // Non-200 but not necessarily fatal — retry 5xx only
+      if (resp.status >= 500 && attempt < MAX_RETRIES) {
+        const delay = RETRY_DELAY_MS[attempt];
+        console.warn(`Gemini 5xx (attempt ${attempt + 1}), retrying in ${delay}ms`);
+        await new Promise(r => setTimeout(r, delay));
+        continue;
+      }
+      throw new Error(`Gemini error: ${resp.status} ${await resp.text()}`);
+    } catch (err) {
+      lastErr = err;
+      // Network errors are retryable
+      const isNetwork = err.type === "system" || err.code === "ECONNRESET" || err.code === "ETIMEDOUT" || err.message?.includes("fetch");
+      if (isNetwork && attempt < MAX_RETRIES) {
+        const delay = RETRY_DELAY_MS[attempt];
+        console.warn(`Gemini network error (attempt ${attempt + 1}), retrying in ${delay}ms: ${err.message}`);
+        await new Promise(r => setTimeout(r, delay));
+        continue;
+      }
+      // Non-retryable: throw immediately
+      throw err;
     }
   }
+  // Should only reach here if all retries exhausted
+  throw lastErr || new Error("Gemini call failed after retries");
+}
 
-  return result;
+/**
+ * Read a Gemini `streamGenerateContent` SSE response.
+ * Calls streamChunk(textDelta) for each incremental text fragment,
+ * then returns the full accumulated text for final JSON parsing.
+ */
+async function readGeminiStream(resp, streamChunk) {
+  const reader = resp.body.getReader();
+  const decoder = new TextDecoder();
+  let buf = "";
+  let fullText = "";
+  let prevLen = 0;
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buf += decoder.decode(value, { stream: true });
+
+      // SSE format: data: {...}\n\n — split on double newline
+      const parts = buf.split("\n\n");
+      // Keep the last (potentially incomplete) chunk in buf
+      buf = parts.pop() || "";
+
+      for (const part of parts) {
+        // Each part is "data: {json}\n..." — extract the JSON line
+        for (const line of part.split("\n")) {
+          if (!line.startsWith("data: ")) continue;
+          const jsonStr = line.slice(6).trim();
+          if (!jsonStr || jsonStr === "[DONE]") continue;
+          try {
+            const parsed = JSON.parse(jsonStr);
+            const text =
+              parsed?.candidates?.[0]?.content?.parts
+                ?.map(p => p.text || "")
+                .filter(Boolean)
+                .join("\n") || "";
+            if (text.length > prevLen) {
+              const delta = text.slice(prevLen);
+              if (delta) streamChunk(delta);
+              prevLen = text.length;
+              fullText = text;
+            }
+          } catch {
+            // Partial JSON chunk — skip, next frame will fill it
+          }
+        }
+      }
+    }
+  } finally {
+    reader.releaseLock();
+  }
+
+  return fullText;
 }
 
 // -----------------------------------------------------------------------------
@@ -2076,7 +2189,15 @@ export default async function handler(req, res) {
 
   const useGemini = GEMINI_API_KEY && GEMINI_API_KEY.trim() !== "";
 
+  // Client signals streaming readiness by sending Accept: text/event-stream
+  const wantsStream = (req.headers?.accept || "").includes("text/event-stream");
+
   if (!useGemini) {
+    if (wantsStream) {
+      res.writeHead(500, { "Content-Type": "text/event-stream" });
+      res.write(`data: ${JSON.stringify({ type: "done", data: { answer: "Chat is not configured. Add GEMINI_API_KEY in Vercel \u2192 Project Settings \u2192 Environment Variables." } })}\n\n`);
+      return res.end();
+    }
     return res.status(500).json(
       assistantPayload({
         answer: "Chat is not configured. Add GEMINI_API_KEY in Vercel \u2192 Project Settings \u2192 Environment Variables."
@@ -2200,25 +2321,60 @@ export default async function handler(req, res) {
     };
 
     if (useGemini) {
-      try {
-        modelOutput = await callGemini(SYSTEM_PROMPT, augmentedMessages, webSnippets, kb, answerStyle, {
-          ...baseOptions,
-          retrievedChunks
+      if (wantsStream) {
+        // Streaming path — send answer text as SSE chunks, metadata as final event
+        res.writeHead(200, {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache",
+          "Connection": "keep-alive"
         });
-      } catch (geminiErr) {
-        console.warn(`Gemini call failed, using fallback: ${geminiErr?.message || "unknown"}`);
-        usedFallback = true;
-        const fallbackContextCases = (retrievedChunks || [])
-          .filter(c => c.metadata && c.metadata.caseTitle && c.metadata.caseUrl)
-          .map(c => ({ title: c.metadata.caseTitle, url: c.metadata.caseUrl }))
-          .slice(0, 2);
-        modelOutput = buildLocalFallbackAnswer({
-          intent,
-          lastUser,
-          kb,
-          retrievedChunks,
-          contextCases: fallbackContextCases
-        });
+
+        try {
+          modelOutput = await callGemini(SYSTEM_PROMPT, augmentedMessages, webSnippets, kb, answerStyle, {
+            ...baseOptions,
+            retrievedChunks,
+            streamChunk: (text) => {
+              res.write(`data: ${JSON.stringify({ type: "chunk", text })}\n\n`);
+            }
+          });
+        } catch (geminiErr) {
+          console.warn(`Gemini streaming failed, using fallback: ${geminiErr?.message || "unknown"}`);
+          usedFallback = true;
+          const fallbackContextCases = (retrievedChunks || [])
+            .filter(c => c.metadata && c.metadata.caseTitle && c.metadata.caseUrl)
+            .map(c => ({ title: c.metadata.caseTitle, url: c.metadata.caseUrl }))
+            .slice(0, 2);
+          modelOutput = buildLocalFallbackAnswer({
+            intent,
+            lastUser,
+            kb,
+            retrievedChunks,
+            contextCases: fallbackContextCases
+          });
+          // Fallback answer sent as a single chunk
+          res.write(`data: ${JSON.stringify({ type: "chunk", text: modelOutput.answer || "" })}\n\n`);
+        }
+      } else {
+        try {
+          modelOutput = await callGemini(SYSTEM_PROMPT, augmentedMessages, webSnippets, kb, answerStyle, {
+            ...baseOptions,
+            retrievedChunks
+          });
+        } catch (geminiErr) {
+          console.warn(`Gemini call failed, using fallback: ${geminiErr?.message || "unknown"}`);
+          usedFallback = true;
+          const fallbackContextCases = (retrievedChunks || [])
+            .filter(c => c.metadata && c.metadata.caseTitle && c.metadata.caseUrl)
+            .map(c => ({ title: c.metadata.caseTitle, url: c.metadata.caseUrl }))
+            .slice(0, 2);
+          modelOutput = buildLocalFallbackAnswer({
+            intent,
+            lastUser,
+            kb,
+            retrievedChunks,
+            contextCases: fallbackContextCases
+          });
+        }
       }
     // Grok/xAI is disabled — only Gemini is active
     }
@@ -2239,6 +2395,10 @@ export default async function handler(req, res) {
     if (violatesOutputPolicy(answer)) {
       const refusal = "I can't share that. Try a question about UX, design, or Ryan's portfolio.";
       await logIfEnabled({ type:"policy_block_out", lastUser, answer, time: Date.now() });
+      if (wantsStream) {
+        res.write(`data: ${JSON.stringify({ type: "done", data: { answer: refusal, suggested_pills: [], hire_intent: false, context_cases: [], sources: [] } })}\n\n`);
+        return res.end();
+      }
       return res.json(assistantPayload({
         answer: refusal,
         suggested_pills: [],
@@ -2276,6 +2436,25 @@ export default async function handler(req, res) {
       }).catch(() => {});
     }
 
+    // Send the final answer text (polished) plus metadata
+    if (wantsStream) {
+      // The answer text was already streamed as chunks — now send the
+      // polished version so the client can update its display, plus metadata
+      res.write(`data: ${JSON.stringify({
+        type: "done",
+        data: {
+          answer,
+          suggested_pills,
+          hire_intent,
+          context_cases,
+          sources,
+          action_scroll_to,
+          action_highlight
+        }
+      })}\n\n`);
+      return res.end();
+    }
+
     return res.json(assistantPayload({
       answer,
       suggested_pills,
@@ -2288,6 +2467,13 @@ export default async function handler(req, res) {
   } catch (e) {
     const failure = "I'm having trouble reaching the portfolio assistant. Try asking about a case study, role fit, or Ryan's process.";
     await logIfEnabled({ type: "chat_error", lastUser, answer: failure, error: e?.message || "unknown" });
+    if (wantsStream) {
+      res.write(`data: ${JSON.stringify({
+        type: "done",
+        data: { answer: failure, suggested_pills: defaultSuggestedPills(intent, lastUser), hire_intent: false, context_cases: [], sources: [] }
+      })}\n\n`);
+      return res.end();
+    }
     return res.status(500).json(assistantPayload({
       answer: failure,
       suggested_pills: defaultSuggestedPills(intent, lastUser),
