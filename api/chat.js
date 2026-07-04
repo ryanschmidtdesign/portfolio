@@ -52,6 +52,58 @@ const MAX_OUT_CHARS = 4200;
 const MAX_LINK_CHARS = 14000;
 
 // -----------------------------------------------------------------------------
+// In-memory response cache and rate limiter (AI Gateway light)
+// -----------------------------------------------------------------------------
+const RESPONSE_CACHE = new Map();
+const RATE_LIMITS = new Map();
+const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX = 10; // max requests per window per client
+
+function cacheKey(message, intent, isFit) {
+  const str = `${message}|${intent}|${isFit}`;
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash.toString();
+}
+
+function getCachedResponse(message, intent, isFit) {
+  const key = cacheKey(message, intent, isFit);
+  const entry = RESPONSE_CACHE.get(key);
+  if (!entry) return null;
+  if (Date.now() - entry.timestamp > CACHE_TTL_MS) {
+    RESPONSE_CACHE.delete(key);
+    return null;
+  }
+  return entry.output;
+}
+
+function setCachedResponse(message, intent, isFit, output) {
+  const key = cacheKey(message, intent, isFit);
+  RESPONSE_CACHE.set(key, { output, timestamp: Date.now() });
+}
+
+function getClientIp(req) {
+  return req.headers["x-forwarded-for"]?.split(",")[0]?.trim()
+    || req.headers["x-real-ip"]
+    || req.socket?.remoteAddress
+    || "unknown";
+}
+
+function checkRateLimit(clientIp) {
+  const now = Date.now();
+  const windowStart = now - RATE_LIMIT_WINDOW_MS;
+  const timestamps = (RATE_LIMITS.get(clientIp) || []).filter(t => t > windowStart);
+  if (timestamps.length >= RATE_LIMIT_MAX) return false;
+  timestamps.push(now);
+  RATE_LIMITS.set(clientIp, timestamps);
+  return true;
+}
+
+// -----------------------------------------------------------------------------
 // KB loading (server-side fallback)
 // -----------------------------------------------------------------------------
 
@@ -2220,6 +2272,16 @@ export default async function handler(req, res) {
     const isFit = detectFitIntent(lastUser);
     intent = detectIntent(lastUser);
 
+    const clientIp = getClientIp(req);
+    if (!checkRateLimit(clientIp)) {
+      const rateLimitMsg = "You're asking a lot of questions at once — please slow down so I can give each one the attention it deserves.";
+      return wantsStream
+        ? (res.writeHead(200, { "Content-Type": "text/event-stream" }),
+          res.write(`data: ${JSON.stringify({ type: "done", data: { answer: rateLimitMsg, suggested_pills: ["Tell me about Ryan's UX process", "Show me a case study"], hire_intent: false, context_cases: [], sources: [] } })}\n\n`),
+          res.end())
+        : res.json(assistantPayload({ answer: rateLimitMsg, suggested_pills: ["Tell me about Ryan's UX process", "Show me a case study"], hire_intent: false, context_cases: [], sources: [] }));
+    }
+
     if (violatesInputPolicy(lastUser)) {
       const refusal = "I can't help with that. Let's focus on UX, design, or Ryan or his work.";
       await logIfEnabled({ type:"policy_refusal", lastUser, time: Date.now() });
@@ -2320,7 +2382,17 @@ export default async function handler(req, res) {
       lastUserOverride: lastUser
     };
 
-    if (useGemini) {
+    // In-memory response cache: skip Gemini for identical questions within 1 hour
+    const cached = getCachedResponse(lastUser, intent, isFit);
+    if (cached && !isFit && !shouldWebSearch) {
+      modelOutput = cached;
+      if (wantsStream) {
+        res.writeHead(200, { "Content-Type": "text/event-stream", "Cache-Control": "no-cache", "Connection": "keep-alive" });
+        res.write(`data: ${JSON.stringify({ type: "chunk", text: cached.answer || "" })}\n\n`);
+        res.write(`data: ${JSON.stringify({ type: "done", data: { answer: cached.answer || "", suggested_pills: cached.suggested_pills || [], hire_intent: cached.hire_intent || false, context_cases: cached.context_cases || [], sources: cached.sources || [] } })}\n\n`);
+        return res.end();
+      }
+    } else if (useGemini) {
       if (wantsStream) {
         // Streaming path — send answer text as SSE chunks, metadata as final event
         res.writeHead(200, {
@@ -2377,6 +2449,11 @@ export default async function handler(req, res) {
         }
       }
     // Grok/xAI is disabled — only Gemini is active
+    }
+
+    // Store successful Gemini responses in cache for future identical questions
+    if (!usedFallback && !isFit && !shouldWebSearch && modelOutput && !cached) {
+      setCachedResponse(lastUser, intent, isFit, modelOutput);
     }
 
     const metricAllowlist = buildMetricAllowlist(kb);
