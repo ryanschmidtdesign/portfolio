@@ -484,7 +484,7 @@ pre code {
 .case-study .tldr-label,
 .site-main {
   padding-top: 0;
-  padding-bottom: 12px;
+  padding-bottom: 64px;
   scroll-snap-type: none;
 }
 
@@ -736,7 +736,6 @@ code {
 .about-section {
   background: var(--gray-300);
   color: var(--text);
-  padding-bottom: var(--space-section-lg);
 }
 
 /* Wrapper behaves like a container */
