@@ -681,16 +681,7 @@
   }
 
 
-  function clearChat() {
-    state.history = [];
-    try { sessionStorage.removeItem('rs_chat_history'); } catch(e) {}
-    msgsEl.innerHTML = '';
-    seedIntro();
-    setPagePills();
-    if (inputEl) {
-      inputEl.value = '';
-    }
-  }
+  // clearChat removed — unused
 
   // --- Seeded intro message (hide on type/submit, reappear on hard refresh) ---
 
@@ -833,7 +824,7 @@ if (savedHist.length > 0) {
     lastFocusedEl = null;
   }
   
-  function togglePanel(){ panel.classList.contains('open') ? closePanel() : openPanel(); }
+  // togglePanel removed — unused
 
   function wireExternalTrigger() {
     const triggers = document.querySelectorAll('[data-assistant-trigger]');
@@ -1297,29 +1288,7 @@ if (savedHist.length > 0) {
     setPagePills();
   }
 
-  function renderSources(container, sources) {
-    if (!Array.isArray(sources) || !sources.length) return;
-    const wrapper = document.createElement('div');
-    wrapper.className = 'chat-sources';
-    const label = document.createElement('div');
-    label.className = 'chat-sources-label';
-    label.textContent = 'Sources';
-    const list = document.createElement('ul');
-    list.className = 'chat-sources-list';
-    sources.forEach(s => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = s.url;
-      a.textContent = s.title || s.url;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      li.appendChild(a);
-      list.appendChild(li);
-    });
-    wrapper.appendChild(label);
-    wrapper.appendChild(list);
-    container.appendChild(wrapper);
-  }
+  // renderSources removed — unused
 
   function renderContextCases(container, contextCases) {
     if (!Array.isArray(contextCases) || !contextCases.length) return;
