@@ -1,18 +1,15 @@
 // Vercel serverless function — /api/chat.js
 // Ported from netlify/functions/portfolio-chat.js
-// Uses Gemini as the only active model. Grok/xAI code retained for reference only.
+// Gemini only. Grok/xAI code removed — kept in git history if needed.
 
 // -----------------------------------------------------------------------------
 // Environment and constants
 // -----------------------------------------------------------------------------
 
-const XAI_API_KEY = process.env.XAI_API_KEY;
-const XAI_MODEL = process.env.XAI_MODEL || "grok-3-mini";
-const XAI_FIT_MODEL = process.env.XAI_FIT_MODEL || "grok-3";
-
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash";
 const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-3.5-flash";
+const GEMINI_FALLBACK_MODEL = process.env.GEMINI_FALLBACK_MODEL || "gemini-2.5-flash";
 const CSE_API_KEY = process.env.CSE_API_KEY || "";
 const CSE_ID = process.env.CSE_ID || "";
 const LOG_WEBHOOK_URL = process.env.LOG_WEBHOOK_URL || "";
@@ -1458,263 +1455,10 @@ function buildRetrievedKbContext(chunks = []) {
 }
 
 // -----------------------------------------------------------------------------
-// Grok (xAI) request/response handling — DISABLED
+// (Grok/xAI handler removed — superseded by Gemini)
 // -----------------------------------------------------------------------------
 
-/* Grok/xAI code retained for reference only.
-async function callGrok(systemPrompt, messages, webSnippets, kb, answerStyle, options = {}) {
-  const { pageUrl = "", sectionContext = null, useFitModel = false, lastUserOverride = "" } = options;
-
-  const lastUserMsg =
-    lastUserOverride ||
-    [...(messages || [])].reverse().find(m => m.role === "user")?.content ||
-    "";
-  const isFit = detectFitIntent(lastUserMsg);
-  const intent = detectIntent(lastUserMsg);
-
-  const simpleIntent =
-    intent === "hobbies" ||
-    intent === "bio" ||
-    intent === "meta_qa" ||
-    intent === "looking_for" ||
-    intent === "resume" ||
-    intent === "contact";
-
-  const shouldIncludePortfolioIndex =
-    intent === "case_select" || intent === "case_detail" || isFit;
-
-  const grokMessages = [];
-
-  // System prompt
-  grokMessages.push({ role: "system", content: systemPrompt });
-
-  // Portfolio index
-  if (shouldIncludePortfolioIndex && kb && kb.cases?.length) {
-    const ctx = kb.cases
-      .map(c => `- ${c.title} (URL: ${c.url || "none"}) \u2014 ${c.summary_short || c.summary || c.summaryShort || ""} [${(c.tags||[]).join(", ")}]`.trim())
-      .join("\n");
-    grokMessages.push({ role: "system", content: `### PORTFOLIO INDEX (high-level)\n${ctx}` });
-  }
-
-  // Ryan context
-  if (kb?.about || kb?.resume || kb?.links) {
-    const aboutLine = kb?.about?.one_liner || kb?.about?.headline || "";
-    const achievements = Array.isArray(kb?.resume?.achievements_top) ? kb.resume.achievements_top : [];
-    const linksLine = kb?.links ? `Links: ${Object.entries(kb.links).map(([k,v]) => `${k}: ${v}`).join(", ")}` : "";
-    const extra = [
-      aboutLine ? `About: ${aboutLine}` : "",
-      achievements.length ? `Top proof points:\n- ${achievements.slice(0, 4).join("\n- ")}` : "",
-      linksLine
-    ].filter(Boolean).join("\n");
-    if (extra) grokMessages.push({ role: "system", content: `### RYAN CONTEXT\n${extra}` });
-  }
-
-  // Policy
-  if (kb?.policy) {
-    const p = kb.policy;
-    const policyLines = [
-      "### POLICY (STRICT)",
-      p.allowed_personal_fields ? `Allowed personal info: ${p.allowed_personal_fields.join(", ")}` : "",
-      p.disallowed_fields ? `Disallowed info (DO NOT SHARE): ${p.disallowed_fields.join(", ")}` : "",
-      p.refusal_message ? `If asked for disallowed info, reply: "${p.refusal_message}"` : ""
-    ].filter(Boolean).join("\n");
-    grokMessages.push({ role: "system", content: policyLines });
-  }
-
-  // FAQ
-  if (kb?.faq?.length) {
-    const faqs = kb.faq.map(f => `Q: ${f.q}\nA: ${f.a}`).join("\n\n");
-    grokMessages.push({ role: "system", content: `### FAQ\n${faqs}` });
-  }
-
-  // Coming soon policy
-  const comingSoonPolicy = buildComingSoonPolicy(kb);
-  if (comingSoonPolicy && !simpleIntent) {
-    grokMessages.push({ role: "system", content: comingSoonPolicy });
-  }
-
-  // Format contract
-  if (kb?.answer_guidelines || kb?.fit_template) {
-    grokMessages.push({
-      role: "system",
-      content: buildFormatContract(kb, intent, isFit, answerStyle)
-    });
-  }
-
-  // Style examples
-  const examples = pickRelevantExamples(kb, intent, lastUserMsg, 3);
-  if (examples.length) {
-    const exampleText = examples
-      .map(ex =>
-        [
-          `Intent: ${ex.intent}`,
-          `User: ${ex.prompt}`,
-          `Assistant: ${ex.answer}`
-        ].join("\n")
-      )
-      .join("\n\n");
-    grokMessages.push({
-      role: "system",
-      content: `### STYLE EXAMPLES\n${exampleText}`
-    });
-  }
-
-  // Router context
-  const routerHint = buildRouterHint(kb);
-  if (routerHint && !simpleIntent) {
-    grokMessages.push({
-      role: "system",
-      content: `### ROUTER CONTEXT\n${routerHint}`
-    });
-  }
-
-  // Intent context
-  const intentCtx = buildIntentContext(kb, intent);
-  if (intentCtx) {
-    grokMessages.push({ role: "system", content: intentCtx });
-  }
-
-  // Looking for context
-  const lookingForCtx = buildLookingForContext(kb);
-  if (lookingForCtx && (intent === "looking_for" || intent === "contact" || intent === "role_fit" || isFit)) {
-    grokMessages.push({ role: "system", content: lookingForCtx });
-  }
-
-  // Engineering context
-  const engineeringCtx = buildEngineeringContext(kb);
-  if (engineeringCtx && (intent === "ux_engineer_fit" || intent === "technical_depth" || intent === "process" || isFit)) {
-    grokMessages.push({ role: "system", content: engineeringCtx });
-  }
-
-  // Points of view
-  const shouldForcePov =
-    intent === "process" ||
-    intent === "technical_depth" ||
-    intent === "ux_engineer_fit" ||
-    intent === "role_fit" ||
-    isFit;
-  const povCtx = buildPointsOfViewContext(kb, lastUserMsg, shouldForcePov);
-  if (povCtx) {
-    grokMessages.push({ role: "system", content: povCtx });
-  }
-
-  // Meta QA context
-  const metaQaCtx = buildMetaQaContext(kb);
-  if (metaQaCtx && intent === "meta_qa") {
-    grokMessages.push({ role: "system", content: metaQaCtx });
-  }
-
-  // Evidence by role
-  const evidenceCtx = buildEvidenceByRoleContext(kb, lastUserMsg);
-  if (evidenceCtx && (isFit || intent === "ux_engineer_fit" || intent === "role_fit")) {
-    grokMessages.push({ role: "system", content: evidenceCtx });
-  }
-
-  // Company fit patterns
-  const fitPatternsCtx = buildCompanyFitPatternsContext(kb, lastUserMsg);
-  if (fitPatternsCtx && isFit) {
-    grokMessages.push({ role: "system", content: fitPatternsCtx });
-  }
-
-  // Negative rules
-  const negativeCtx = buildNegativeRulesContext(kb);
-  if (negativeCtx && !simpleIntent) {
-    grokMessages.push({ role: "system", content: negativeCtx });
-  }
-
-  // Section context
-  const sectionCtx = buildSectionContext(kb, sectionContext, lastUserMsg);
-  if (sectionCtx) {
-    grokMessages.push({ role: "system", content: sectionCtx });
-  }
-
-  // Focused case context
-  let pickedCases = [];
-  if (kb?.cases?.length) {
-    const max = (intent === "case_select") ? 2 : (isFit ? 2 : 1);
-    const caseIds = chooseCaseIdsFromText(kb, messages, lastUserMsg, max, pageUrl, intent, isFit);
-    pickedCases = summarizePickedCases(kb, caseIds).slice(0, 2);
-    const focused = buildFocusedCaseContext(kb, caseIds);
-    if (focused) {
-      grokMessages.push({ role: "system", content: `### FOCUSED CASE CONTEXT\n${focused}` });
-    }
-  }
-
-  // Company/role hints for fit questions
-  if (isFit) {
-    const companyHint = cleanHint(extractCompanyHint(lastUserMsg));
-    const roleHint = cleanHint(extractRoleHint(lastUserMsg));
-    if (companyHint && !isBadHint(companyHint)) {
-      grokMessages.push({
-        role: "system",
-        content: `### COMPANY\nTarget company/context: ${companyHint}`
-      });
-    }
-    if (roleHint && !isBadHint(roleHint)) {
-      grokMessages.push({
-        role: "system",
-        content: `### ROLE\nTarget role/context: ${roleHint}`
-      });
-    }
-    grokMessages.push({
-      role: "system",
-      content:
-`### TASK MODE
-Fit question detected. Start with one strong takeaway sentence, then use 3-4 flowing bullets. Cover strengths, proof, and role/company mapping without labeling those sections.
-Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefixes). Integrate the closing naturally into the last bullet.
-`
-    });
-  }
-
-  // Web context
-  if (webSnippets && webSnippets.length) {
-    const ctx = webSnippets.map(s => `\u2022 ${s.title}\n  ${s.snippet}\n  ${s.link}`).join("\n\n");
-    grokMessages.push({ role: "system", content: `### WEB CONTEXT\n${ctx}\n\nCite lightly by title or domain.` });
-  }
-
-  // Conversation messages
-  for (const m of (messages || [])) {
-    grokMessages.push({
-      role: m.role === "assistant" ? "assistant" : "user",
-      content: m.content
-    });
-  }
-
-  const isDetailed = String(answerStyle || "").toLowerCase() === "detailed";
-  const model = useFitModel ? XAI_FIT_MODEL : XAI_MODEL;
-  const maxOutputTokens = useFitModel ? 800 : (isDetailed ? 1000 : 600);
-  const temperature = useFitModel ? 0.3 : (isDetailed ? 0.3 : 0.25);
-
-  const endpoint = "https://api.x.ai/v1/chat/completions";
-
-  const body = {
-    model,
-    messages: grokMessages,
-    temperature,
-    max_tokens: maxOutputTokens,
-    response_format: { type: "json_object" }
-  };
-
-  const resp = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${XAI_API_KEY}`
-    },
-    body: JSON.stringify(body)
-  });
-
-  if (!resp.ok) {
-    const errBody = await resp.text().catch(() => "");
-    throw new Error(`xAI error: ${resp.status} ${errBody.slice(0, 500)}`);
-  }
-
-  const data = await resp.json();
-  const text = data?.choices?.[0]?.message?.content || "";
-
-  return parseGeminiOutput(text, pickedCases, kb, isFit);
-}
-*/
+// Grok removed → see git history
 
 function safeExtractAnswer(raw) {
   if (typeof raw !== "string") return null;
@@ -1938,13 +1682,13 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
   }
 
   const isDetailed = String(answerStyle || "").toLowerCase() === "detailed";
-  const model = useFitModel ? GEMINI_FIT_MODEL : GEMINI_MODEL;
+  let model = useFitModel ? GEMINI_FIT_MODEL : GEMINI_MODEL;
   // Tokens must accommodate thinking tokens (~500-900) + JSON wrapper + answer text
   const maxOutputTokens = useFitModel ? 2000 : (isDetailed ? 2500 : 1800);
   const temperature = useFitModel ? 0.3 : (isDetailed ? 0.3 : 0.25);
 
   const endpointBase = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}`;
-  const endpoint = streamChunk
+  let endpoint = streamChunk
     ? `${endpointBase}:streamGenerateContent?alt=sse&key=${encodeURIComponent(GEMINI_API_KEY)}`
     : `${endpointBase}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
 
@@ -2051,6 +1795,42 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
     }
   }
   // Should only reach here if all retries exhausted
+  // If quota exhausted (429) on the primary model, try fallback model once
+  if (lastErr?.message?.includes("429") && model !== GEMINI_FALLBACK_MODEL) {
+    model = GEMINI_FALLBACK_MODEL;
+    const fbBase = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}`;
+    endpoint = streamChunk
+      ? `${fbBase}:streamGenerateContent?alt=sse&key=${encodeURIComponent(GEMINI_API_KEY)}`
+      : `${fbBase}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+    console.warn(`Gemini quota exhausted, retrying with fallback model ${model}`);
+    try {
+      const resp = await fetch(endpoint, {
+        method: "POST", headers: { "Content-Type":"application/json" }, body: JSON.stringify(body)
+      });
+      if (resp.ok) {
+        if (streamChunk) {
+          const fullText = await readGeminiStream(resp, streamChunk);
+          return parseGeminiOutput(fullText, pickedCases, kb, isFit);
+        }
+        const data = await resp.json();
+        const candidate = data?.candidates?.[0]?.content;
+        const parts = candidate?.parts;
+        const textRaw = Array.isArray(parts)
+          ? parts.map(p => p && p.text).filter(Boolean).join("\n")
+          : (candidate?.parts?.[0]?.text || "");
+        const result = parseGeminiOutput(textRaw, pickedCases, kb, isFit);
+        if (typeof result.answer === "string" && result.answer.trim().startsWith("{") && result.answer.includes('"answer"')) {
+          const extracted = safeExtractAnswer(textRaw);
+          if (extracted) result.answer = extracted;
+        }
+        return result;
+      }
+      throw new Error(`Gemini fallback error: ${resp.status} ${await resp.text()}`);
+    } catch (fbErr) {
+      console.warn(`Gemini fallback also failed: ${fbErr.message}`);
+      throw fbErr;
+    }
+  }
   throw lastErr || new Error("Gemini call failed after retries");
 }
 
@@ -2471,7 +2251,6 @@ export default async function handler(req, res) {
           });
         }
       }
-    // Grok/xAI is disabled — only Gemini is active
     }
 
     // Store successful Gemini responses in cache for future identical questions
