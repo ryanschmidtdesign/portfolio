@@ -1,4 +1,14 @@
 {
+  "name": "ryanschmidt-design",
+  "version": "1.0.0",
+  "private": true,
   "type": "module",
-  "private": true
+  "description": "Personal portfolio site for Ryan Schmidt — Senior Product Designer.",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "seed-kb": "node scripts/seed-kb.js",
+    "test:chat-api": "node scripts/test-chat-api.js"
+  }
 }

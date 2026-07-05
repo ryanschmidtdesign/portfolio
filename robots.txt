@@ -4,10 +4,8 @@ User-agent: *
 Allow: /
 
 # Exclude internal/build files
-Disallow: /netlify/
 Disallow: /scripts/
 Disallow: /.vscode/
-Disallow: /netlify.toml
 Disallow: /api/
 
 # Sitemap

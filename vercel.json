@@ -14,32 +14,14 @@
       ]
     }
   ],
+  "rewrites": [
+    { "source": "/about.html", "destination": "/pages/about.html" },
+    { "source": "/dashboard.html", "destination": "/pages/dashboard.html" },
+    { "source": "/inventory.html", "destination": "/pages/inventory.html" },
+    { "source": "/ai-coding-portfolio.html", "destination": "/pages/ai-coding-portfolio.html" },
+    { "source": "/member-portal-overhaul.html", "destination": "/pages/member-portal-overhaul.html" }
+  ],
   "redirects": [
-    {
-      "source": "/about.html",
-      "destination": "/pages/about.html",
-      "permanent": true
-    },
-    {
-      "source": "/dashboard.html",
-      "destination": "/pages/dashboard.html",
-      "permanent": true
-    },
-    {
-      "source": "/inventory.html",
-      "destination": "/pages/inventory.html",
-      "permanent": true
-    },
-    {
-      "source": "/ai-coding-portfolio.html",
-      "destination": "/pages/ai-coding-portfolio.html",
-      "permanent": true
-    },
-    {
-      "source": "/member-portal-overhaul.html",
-      "destination": "/pages/member-portal-overhaul.html",
-      "permanent": true
-    },
     {
       "source": "/design-system.html",
       "destination": "/ai-coding-portfolio.html",
