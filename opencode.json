@@ -1,8 +1,9 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "name": "ryanschmidt-design",
   "permission": "allow",
-  "instructions": "See _meta/AGENTS.md, _meta/CONTEXT.md, and _meta/AI_STYLE_GUIDE.md before making changes.",
+  "instructions": [
+    "See _meta/AGENTS.md, _meta/CONTEXT.md, and _meta/AI_STYLE_GUIDE.md before making changes."
+  ],
   "plugin": [
     "opencode-supermemory",
     "opencode-shell-strategy",
