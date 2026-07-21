@@ -1519,7 +1519,7 @@ if (savedHist.length > 0) {
       };
       if (state.sectionContext) payload.sectionContext = state.sectionContext;
 
-      const timeoutTimer = setTimeout(() => currentController.abort(), 60000);
+      var timeoutTimer = setTimeout(() => currentController.abort(), 60000);
       const res = await fetch(chatApi, {
         method:'POST',
         headers:{
