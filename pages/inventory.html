@@ -303,6 +303,16 @@
           </div>
         </header>
 
+        <section class="case-study-summary" aria-label="Case study summary">
+          <h2 class="case-study-summary__label">At a glance</h2>
+          <ul class="case-study-summary__list">
+            <li><strong>Situation:</strong> Inventory workflows were dense, error-prone, and difficult to navigate across purchasing and fulfillment tasks</li>
+            <li><strong>Task:</strong> Make inventory management feel faster, clearer, and more trustworthy for users handling real operational work</li>
+            <li><strong>Action:</strong> Mapped the workflow, clarified key states, and redesigned screens around the decisions users needed to make</li>
+            <li><strong>Result:</strong> Reduced cognitive load by turning a complicated workflow into a more structured, scannable experience</li>
+          </ul>
+        </section>
+
         <section id="problem" aria-label="Problem & goals">
           <div class="section-divider">
             <h2 data-reveal>Problem</h2>
@@ -380,6 +390,18 @@
           </div>
         </section>
 
+        <button class="audio-context-trigger" data-state="coming-soon" disabled aria-label="More context: Why we rejected the simpler inventory architecture">
+          <span class="audio-context-trigger__icon" aria-hidden="true"></span>
+          More Context from Ryan
+        </button>
+        <div class="audio-context-player" hidden>
+          <h4>Why we rejected the simpler inventory architecture</h4>
+          <p>A short breakdown of the product and engineering tradeoff behind choosing a unified real-time model instead of a faster but weaker MVP</p>
+          <audio controls preload="none">
+            <source src="" type="audio/mpeg" />
+          </audio>
+        </div>
+
         <section id="journey" data-reveal aria-label="Journey Map">
           <div class="section-divider">
             <h2>Solution Journey</h2>
@@ -417,6 +439,20 @@
             <div data-story-step>
               <span class="step-label">Align the model</span>
               <p class="step-copy">Built a single inventory system that reflected projects, purchases, and counts in one place.</p>
+              <!-- AUDIO-CONTEXT-PLACEHOLDER: MVP scope disagreement / advocacy for automated purchase orders -->
+              <button class="audio-context-trigger" data-audio-src="" aria-label="Hear more context: The MVP scope disagreement">
+                <span class="audio-context-trigger__icon" aria-hidden="true"></span>
+                Hear more context
+              </button>
+              <div class="audio-context-player" hidden>
+                <audio controls preload="none">
+                  <source src="" type="audio/mpeg" />
+                </audio>
+                <details class="audio-context-transcript">
+                  <summary>Transcript</summary>
+                  <p><!-- transcript text goes here once recorded --></p>
+                </details>
+              </div>
             </div>
             <div data-story-step>
               <span class="step-label">Surface the risk</span>
@@ -470,6 +506,18 @@
             For handoff, I documented how allocations, multi-location states, and receiving/reordering rules affect available inventory, so UI behavior stays consistent as the system model gets implemented. 
             The shared data model was aligned with engineering first, so the UI explains state rather than just showing flat quantities.
           </p>
+
+          <button class="audio-context-trigger" data-state="coming-soon" disabled aria-label="More context: The automation feature we intentionally postponed">
+            <span class="audio-context-trigger__icon" aria-hidden="true"></span>
+            More Context from Ryan
+          </button>
+          <div class="audio-context-player" hidden>
+            <h4>The automation feature we intentionally postponed</h4>
+            <p>Why the safer product decision was to build trust through alerts before automating purchasing decisions that could create expensive mistakes</p>
+            <audio controls preload="none">
+              <source src="" type="audio/mpeg" />
+            </audio>
+          </div>
         </section>
 
         <section id="validation" aria-label="Validation">
