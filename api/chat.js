@@ -2069,6 +2069,7 @@ export default async function handler(req, res) {
     const pageContext = body.pageContext || null;
     const sectionContext = body.sectionContext || null;
     const answerStyle = body.answerStyle || "concise";
+    const sessionToken = String(body.sessionToken || "").slice(0, 128) || null;
 
     lastUser = [...messages].reverse().find(m => m.role === "user")?.content || "";
     const isFit = detectFitIntent(lastUser);
@@ -2295,10 +2296,34 @@ export default async function handler(req, res) {
     });
 
     if (SUPABASE_HEADERS) {
+      let sessionId = null;
+
+      // Upsert session if token provided
+      if (sessionToken) {
+        const sessionResp = await supabaseFetch("/rest/v1/chat_sessions", {
+          method: "POST",
+          headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
+          body: JSON.stringify({
+            session_token: sessionToken,
+            page_url: String(pageContext?.url || "").slice(0, 512),
+            user_agent: String(req.headers["user-agent"] || "").slice(0, 256),
+            updated_at: new Date().toISOString()
+          })
+        });
+
+        if (sessionResp) {
+          const sessionRows = await sessionResp.json().catch(() => []);
+          if (Array.isArray(sessionRows) && sessionRows.length > 0) {
+            sessionId = sessionRows[0].id;
+          }
+        }
+      }
+
+      // Store messages (linked to session if available)
       supabaseFetch("/rest/v1/chat_messages", {
         method: "POST",
         body: JSON.stringify({
-          session_id: null,
+          session_id: sessionId,
           role: "user",
           content: String(lastUser || "").slice(0, 4000),
           metadata: { intent }
@@ -2307,7 +2332,7 @@ export default async function handler(req, res) {
       supabaseFetch("/rest/v1/chat_messages", {
         method: "POST",
         body: JSON.stringify({
-          session_id: null,
+          session_id: sessionId,
           role: "assistant",
           content: String(answer || "").slice(0, 4000),
           metadata: { suggested_pills, hire_intent, context_cases }

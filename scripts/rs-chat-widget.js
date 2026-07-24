@@ -3,6 +3,20 @@
   const HOST_ID = 'rs-chat-widget-root';
   if (document.getElementById(HOST_ID)) return; // avoid double injection
 
+  // Session token: persists per tab (sessionStorage), generated once per session
+  const SESSION_KEY = 'rs_chat_session_token';
+  function getOrCreateSessionToken() {
+    try {
+      let token = sessionStorage.getItem(SESSION_KEY);
+      if (token) return token;
+      token = crypto.randomUUID ? crypto.randomUUID() : 's_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+      sessionStorage.setItem(SESSION_KEY, token);
+      return token;
+    } catch {
+      return 's_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+    }
+  }
+
   // 1) Host + Shadow
   const host = document.createElement('div');
   host.id = HOST_ID;
@@ -1513,6 +1527,7 @@ if (savedHist.length > 0) {
       if (desc) pageContext.description = desc;
 
       const payload = {
+        sessionToken: getOrCreateSessionToken(),
         messages: state.history.slice(-12),
         answerStyle,
         pageContext
