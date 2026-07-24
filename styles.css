@@ -1699,6 +1699,163 @@ code {
   margin-bottom: 0;
 }
 
+/* -------------------------------------------------------
+   Case Study Summary Box
+--------------------------------------------------------*/
+.case-study-summary {
+  margin-block: var(--space-6);
+  max-width: var(--prose);
+  margin-inline: auto;
+  padding: var(--space-5) var(--space-6);
+  background: var(--ink-on-glass, rgba(255, 255, 255, 0.4));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.case-study-summary__label {
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+  font-size: var(--fs-md);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+  letter-spacing: var(--tracking-normal);
+}
+
+.case-study-summary__list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.case-study-summary__list li {
+  position: relative;
+  padding-left: var(--space-4);
+  margin-bottom: 0;
+}
+
+.case-study-summary__list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: var(--weight-semibold);
+}
+
+@media (max-width: 768px) {
+  .case-study-summary {
+    padding: var(--space-4);
+  }
+}
+
+/* -------------------------------------------------------
+   Audio Context Buttons
+--------------------------------------------------------*/
+.audio-context-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  vertical-align: middle;
+  margin: 0.25rem 0;
+}
+
+.audio-context-trigger:hover:not(:disabled) {
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.audio-context-trigger[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.audio-context-trigger[data-state="coming-soon"]::after {
+  content: "(Coming soon)";
+  font-style: italic;
+  font-weight: var(--weight-regular);
+  opacity: 0.8;
+  margin-left: 0.2rem;
+}
+
+.audio-context-trigger__icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%234F6EF7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M8 8v8M4 11v2M16 8v8M20 11v2"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.audio-context-player {
+  margin-block: var(--space-3);
+  max-width: var(--prose);
+  background: var(--gray-100);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.audio-context-player[hidden] {
+  display: none !important;
+}
+
+.audio-context-player audio {
+  width: 100%;
+  height: 36px;
+  outline: none;
+  border-radius: var(--radius-pill);
+}
+
+.audio-context-player audio:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.audio-context-transcript {
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.audio-context-transcript summary {
+  cursor: pointer;
+  font-weight: var(--weight-medium);
+  outline: none;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.audio-context-transcript summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.audio-context-transcript p {
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+  line-height: var(--lh-relaxed);
+}
+
 .callout--accent {
   background: var(--surface-elevated);
   box-shadow: var(--shadow-card-strong);

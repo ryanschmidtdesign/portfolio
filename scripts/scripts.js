@@ -624,3 +624,51 @@
     });
   }
 })();
+
+// ============================================================================
+// Audio Context Player Behavior
+// ============================================================================
+(function () {
+  const triggers = document.querySelectorAll('.audio-context-trigger');
+  if (!triggers.length) return;
+
+  triggers.forEach((trigger) => {
+    // 1) Fallback for missing audio (hide)
+    const src = trigger.getAttribute('data-audio-src');
+    if (!src) {
+      // By default we hide unrecorded placeholders
+      trigger.style.display = 'none';
+      return;
+    }
+
+    // 2) Bind click behavior
+    trigger.addEventListener('click', () => {
+      // Find the adjacent player
+      const player = trigger.nextElementSibling;
+      if (!player || !player.classList.contains('audio-context-player')) return;
+
+      const isHidden = player.hasAttribute('hidden');
+      if (isHidden) {
+        player.removeAttribute('hidden');
+        const audioEl = player.querySelector('audio');
+        
+        // Ensure source is loaded if we used preload="none"
+        const sourceEl = audioEl.querySelector('source');
+        if (sourceEl && !sourceEl.src) {
+          sourceEl.src = src;
+          audioEl.load();
+        }
+
+        if (audioEl) {
+          audioEl.focus();
+        }
+      } else {
+        player.setAttribute('hidden', '');
+        const audioEl = player.querySelector('audio');
+        if (audioEl) {
+          audioEl.pause();
+        }
+      }
+    });
+  });
+})();
