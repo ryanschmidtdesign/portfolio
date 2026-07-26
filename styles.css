@@ -1712,7 +1712,8 @@ code {
    Case Study Summary Box
 --------------------------------------------------------*/
 .case-study-summary {
-  margin-block: var(--space-6);
+  margin-bottom: var(--space-6);
+  margin-top: 0;
   max-width: var(--prose);
   margin-inline: auto;
   padding: var(--space-5) var(--space-6);
@@ -1743,7 +1744,7 @@ code {
 
 .case-study-summary__list li {
   position: relative;
-  padding-left: var(--space-4);
+  padding-left: 0;
   margin-bottom: 0;
   color: inherit;
 }
