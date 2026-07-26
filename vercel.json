@@ -25,6 +25,17 @@
   ],
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.ryanschmidt.design"
+        }
+      ],
+      "destination": "https://ryanschmidt.design/:path",
+      "permanent": true
+    },
+    {
       "source": "/design-system.html",
       "destination": "/ai-coding-portfolio.html",
       "permanent": true
