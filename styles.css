@@ -481,11 +481,14 @@ pre code {
   box-shadow: var(--focus-ring);
 }
 
-.case-study .tldr-label,
 .site-main {
   padding-top: 0;
   padding-bottom: 64px;
   scroll-snap-type: none;
+}
+
+.case-study .tldr-label {
+  padding: 0;
 }
 
 /* Site footer landmark — visually hidden, accessible to screen readers */
@@ -1731,7 +1734,7 @@ code {
 
 .case-study-summary__list {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -1911,7 +1914,7 @@ code {
   box-shadow: var(--shadow-card);
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: var(--space-3);
+  row-gap: var(--space-6);
   align-items: start;
   width: 100%;
   margin-inline: 0;
