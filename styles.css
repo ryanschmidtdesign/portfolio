@@ -489,6 +489,7 @@ pre code {
 
 .case-study .tldr-label {
   padding: 0;
+  padding-bottom: var(--space-2);
 }
 
 /* Site footer landmark — visually hidden, accessible to screen readers */
@@ -1724,7 +1725,7 @@ code {
   color: var(--text);
 }
 
-.case-study .case-study-summary__label {
+.case-study .case-study-summary .case-study-summary__label {
   margin-top: 0;
   margin-bottom: var(--space-3);
   font-size: var(--fs-md);
@@ -1744,17 +1745,16 @@ code {
 
 .case-study .case-study-summary__list li {
   position: relative;
-  padding-left: var(--space-3);
+  padding-left: 0;
   margin-bottom: 0;
   color: inherit;
 }
 
-.case-study-summary__list li::before {
+.case-study .case-study-summary__list li::before {
   content: "→";
-  position: absolute;
-  left: 0;
   color: var(--accent-text);
   font-weight: var(--weight-semibold);
+  margin-right: var(--space-3);
 }
 
 @media (max-width: 768px) {
