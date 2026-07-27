@@ -273,8 +273,8 @@
             <header class="tldr" aria-label="Executive summary">
               <h1 id="title" data-parallax="0.06">AI-Powered Custom Dashboards</h1>
           <p class="lead">
-            We knew that users were ignoring our default dashboards, but it wasn't simply giving them the KPI cards they wanted. 
-            I redesigned them into customizable, role-based dashboards with AI-supported summaries, increasing engagement by 71%.
+            Users were ignoring our default dashboards because the experience did not match how they monitored their work.
+            I redesigned the product around customizable, role-based dashboards with AI-supported summaries, increasing engagement by 71%.
           </p>
 
           <div class="tldr-meta">
@@ -313,10 +313,10 @@
         <section class="case-study-summary" aria-label="Case study summary">
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
-            <li><strong>Situation:</strong> Teams needed a clearer way to monitor work, priorities, and product health from one place</li>
-            <li><strong>Task:</strong> Turn scattered information into a focused dashboard that helped users understand what needed attention</li>
-            <li><strong>Action:</strong> Simplified the information architecture, prioritized core widgets, and designed layouts around decision-making speed</li>
-            <li><strong>Result:</strong> Created a cleaner dashboard experience that made complex operational data easier to scan and act on</li>
+            <li><strong>Situation:</strong> Default dashboards were being ignored, and leadership was considering an AI-first direction before users had a reliable way to orient around their own data</li>
+            <li><strong>Task:</strong> Define a dashboard strategy that gave teams trusted visibility into KPIs while still creating room for AI-supported reporting</li>
+            <li><strong>Action:</strong> Led research, reframed the product direction around role-based templates, and designed customizable dashboards with AI summaries layered on verifiable metrics</li>
+            <li><strong>Result:</strong> Increased dashboard engagement by 71%, with 62% of beta users creating multiple dashboards and an average interaction depth of 2 customizations per chart</li>
           </ul>
         </section>
 
@@ -325,25 +325,8 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            Teams ignored the dashboards we had in place. 
-            After conducting user research with 7 users and speaking to our sales and support teams, 
-            we discovered that users wanted more than just KPI cards - they wanted dashboards tailored to their specific business needs.
+            Across early user research, stakeholder conversations, and prototype testing, the pattern was consistent: users needed configurable dashboards anchored in familiar metrics before they trusted AI-generated summaries.
           </p>
-
-          <!-- AUDIO-CONTEXT-PLACEHOLDER: user research decision -->
-          <button class="audio-context-trigger" data-audio-src="" aria-label="Hear more context: Why 7 users was the right sample size">
-            <span class="audio-context-trigger__icon" aria-hidden="true"></span>
-            Hear more context
-          </button>
-          <div class="audio-context-player" hidden>
-            <audio controls preload="none">
-              <source src="" type="audio/mpeg" />
-            </audio>
-            <details class="audio-context-transcript">
-              <summary>Transcript</summary>
-              <p><!-- transcript text goes here once recorded --></p>
-            </details>
-          </div>
 
           <h3>Objectives</h3>
           <p>
@@ -398,31 +381,6 @@
           </p>
         </aside>
 
-        <section id="why-before-ai" aria-label="Why dashboards needed to exist before AI">
-          <div class="section-divider">
-            <h2>Why Dashboards Needed to Exist Before AI</h2>
-          </div>
-          <p>
-            Leadership believed users would eventually bypass traditional dashboards and simply ask AI questions.
-          </p>
-          <p>
-            Research suggested something different.
-          </p>
-          <p>
-            Participants consistently struggled to articulate what questions they should ask when they had not first seen their data. Users often did not know which metrics mattered most or which trends required attention.
-          </p>
-          <p>
-            That insight led to a hybrid strategy:
-          </p>
-          <ul>
-            <li>Dashboards establish awareness and trust</li>
-            <li>AI provides explanation and analysis</li>
-          </ul>
-          <p>
-            Rather than replacing dashboards, AI became a layer on top of them.
-          </p>
-        </section>
-
         <section id="design-approach" data-reveal aria-label="Design approach & decisions">
           <div class="section-divider">
             <h2>Design Approach & Decisions</h2>
@@ -430,9 +388,8 @@
           <ul data-progress-story>
             <li data-story-step>
               <span class="step-label">Scope the feature</span>
-              <p class="step-copy">Focused on role-based templates, with the ability to easily add additional dashboards and customize their dashboards.</p>
-              <p class="step-copy">Templates were never intended to be rigid experiences. Users could still create blank dashboards, build from a widget library, and fully customize layouts. Templates simply accelerated onboarding by presenting metrics relevant to each role.</p>
-              <p class="step-copy">Different company sizes and roles viewed success through different metrics. Users could show or hide metrics, reorganize dashboard sections, and select different visualization styles. The goal was making dashboards useful enough to replace spreadsheet exports.</p>
+              <p class="step-copy">I focused the release around role-based templates that helped users start quickly without locking them into rigid layouts. Users could start from a template, build from a blank dashboard, add widgets, rearrange sections, and choose visualization styles.</p>
+              <p class="step-copy">The goal was to make dashboards flexible enough to replace spreadsheet exports without forcing every team into the same view.</p>
             </li>
             <li data-story-step>
               <span class="step-label">Build trust with data</span>
@@ -450,36 +407,6 @@
             </figcaption>
           </figure>
 
-          <h3>Defining Decision: Dashboards vs. AI-first</h3>
-          <p>
-            The CTO believed users didn't want dashboards at all.
-            He assumed they'd simply prompt AI with their business questions instead. 
-            It was a reasonable hypothesis, but I thought it missed something.
-            <br><br>My argument: business owners don't always know what questions to ask. They don't know what they don't know. 
-            Without familiar KPIs in front of them, they have no anchor to even start exploring.
-            <br><br>I took the position to user interviews. Across 6 users, the pattern was consistent: people needed to see their data first before they knew what to dig into. 
-            That evidence moved the team to a hybrid approach:
-          </p>
-          <ul>
-            <li>Dashboards as the foundation for visibility and trust</li>
-            <li>AI layered on top for summarization and reporting</li>
-          </ul>
-          <p>
-            This ensured users could see and verify their data first, while still benefiting from AI-generated insights.
-          </p>
-
-          <button class="audio-context-trigger" data-state="coming-soon" disabled aria-label="More context: Convincing leadership that AI shouldn't replace dashboards">
-            <span class="audio-context-trigger__icon" aria-hidden="true"></span>
-            More Context from Ryan
-          </button>
-          <div class="audio-context-player" hidden>
-            <h4>Convincing leadership that AI shouldn't replace dashboards</h4>
-            <p>A quick explanation of how research helped turn an AI-first executive hypothesis into a more useful hybrid product direction</p>
-            <audio controls preload="none">
-              <source src="" type="audio/mpeg" />
-            </audio>
-          </div>
-
           <figure class="case-study-media">
             <video autoplay muted playsinline loop preload="auto" width="1440" height="754">
               <source src="../assets/case-studies/dashboards/generate-report.mp4" type="video/mp4">
@@ -488,6 +415,25 @@
           </figure>
         </section>
 
+
+        <section id="defining-decision" aria-label="Defining decision">
+          <div class="section-divider">
+            <h2>Defining Decision: Dashboards Before AI</h2>
+          </div>
+          <p>
+            Leadership believed users might eventually bypass traditional dashboards and ask AI direct business questions instead. It was a reasonable hypothesis, but research pointed to a different behavior: users struggled to ask useful questions before they had seen their own data.
+          </p>
+          <p>
+            My argument was that business owners needed familiar KPIs as anchors. Without visible metrics, trends, and exceptions in front of them, they had no reliable starting point for exploration.
+          </p>
+          <p>
+            Interviews supported that direction, so I pushed the team toward a hybrid model: dashboards would establish awareness and trust, while AI would explain and summarize the data users could already verify.
+          </p>
+          <ul>
+            <li><strong>Dashboards:</strong> visibility, orientation, and trust</li>
+            <li><strong>AI:</strong> summarization, reporting, and explanation</li>
+          </ul>
+        </section>
 
         <section id="prototyping" aria-label="Prototyping & validation">
           <div class="section-divider">
@@ -559,16 +505,11 @@
 
         <section id="lessons" aria-label="Lessons">
           <div class="section-divider">
-            <h2>Lessons</h2>
+            <h2>Lesson</h2>
           </div>
-          <ul>
-            <li><strong>Research is how you earn the right to push back.</strong> The CTO had a hypothesis that AI prompting would replace dashboards entirely. 
-              I disagreed, but opinion against opinion doesn't move anyone. 
-              Ten user/stakeholder interviews gave me something concrete to stand behind, and that's what changed the direction.</li>
-            <li><strong>Don't know what they don't know.</strong> The core UX insight was that users can't ask good questions without data in front of them. 
-              Turned out to apply to the internal debate too. 
-              Without research, we would have shipped something that felt innovative but still wasn't used.</li>
-          </ul>
+          <p>
+            The project reinforced that research is what makes pushback credible. The AI-first hypothesis was reasonable, but interviews showed users needed familiar KPIs before they could ask useful questions. That evidence shifted the team toward a hybrid model: dashboards for trust, AI for explanation.
+          </p>
         </section>
 
         <section id="next-steps" aria-label="Roadmap/Next" class="section--alt">

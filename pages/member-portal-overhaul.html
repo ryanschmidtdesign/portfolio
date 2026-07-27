@@ -259,8 +259,8 @@
         <header class="tldr" aria-label="Executive summary">
           <h1 id="title" data-parallax="0.06">Member Portal Redesign</h1>
           <p class="lead">
-            For a research membership business, navigation is how members perceive the value of the product. If members can't quickly reach the right reports, benchmarks, or peer insights, the content can be strong and still feel inaccessible.
-            <br><br>I'm redesigning the portal's IA, navigation, and overall design end to end, restructuring four levels of content hierarchy, aligning the UI to a validated content model, and shipping an MVP while a parallel rebrand adds real constraint.
+            For a research membership business, navigation is how members perceive product value. If members cannot quickly reach the right reports, benchmarks, or peer insights, strong content can still feel inaccessible.
+            <br><br>I'm redesigning the portal's IA, navigation, and core experience end to end, translating a validated four-level taxonomy into a usable product structure while shipping an MVP under the constraints of a parallel rebrand.
           </p>
 
           <div class="tldr-meta">
@@ -291,10 +291,10 @@
         <section class="case-study-summary" aria-label="Case study summary">
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
-            <li><strong>Situation:</strong> The member portal needed a clearer structure for content, events, profiles, groups, and peer engagement</li>
-            <li><strong>Task:</strong> Rework the experience so members could find value faster without relying on legacy navigation patterns</li>
-            <li><strong>Action:</strong> Redesigned key portal areas, tightened IA, reviewed edge cases, and partnered with stakeholders across content and product</li>
-            <li><strong>Result:</strong> Created a more modern member experience that better supports discovery, participation, and account management</li>
+            <li><strong>Situation:</strong> i4cp had a validated four-level content taxonomy, but the portal did not make that structure visible or easy for members to navigate</li>
+            <li><strong>Task:</strong> Translate the content model into navigation, IA, and page patterns that helped HR leaders find research without learning i4cp's internal structure</li>
+            <li><strong>Action:</strong> Redesigned the portal around Areas of Focus, Priorities, Topics, and content, using progressive disclosure to reduce noise while preserving depth</li>
+            <li><strong>Result:</strong> Designs are complete and in QA, with moderated validation planned around task success across the full IA hierarchy</li>
           </ul>
         </section>
 
@@ -303,17 +303,17 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            Members couldn't find what they came for. i4cp's value is in its research: reports, benchmarks, and peer insights organized around HR practice areas like leadership, talent, and culture.
+            Members came to i4cp for reports, benchmarks, and peer insights, but the portal made that value harder to reach than it needed to be. The taxonomy itself was not the problem. Researchers had already validated a four-level model across Areas of Focus, Priorities, Topics, and individual content.
           </p>
           <p>
-            The content model wasn't the problem. Years of member interviews and internal research had already produced a well-validated topic taxonomy before I joined. The gap was between that taxonomy and what the UI actually showed people.
+            My challenge was translating that model into navigation and page structures that matched how HR leaders looked for answers, without exposing the entire taxonomy at once.
           </p>
 
           <h3>Goals</h3>
           <ul>
             <li><strong>Close the gap between content model and navigation:</strong> Make the portal's structure legible to members from the moment they land</li>
             <li><strong>Reduce friction in research discovery:</strong> Help members get from intent to the right report, benchmark, or insight faster</li>
-            <li><strong>Ship a meaningful MVP:</strong> Deliver a better experience without waiting for every surface to be perfect</li>
+            <li><strong>Ship a meaningful MVP:</strong> Improve navigation, hierarchy, and visual clarity without waiting for every portal surface to be redesigned</li>
           </ul>
 
           <!-- Design Highlights: before/after slider component using data-splitter / image-splitter.js.
@@ -360,18 +360,6 @@
 
           <p>Moderated validation testing with active members is planned for July, focused on task success across the four IA levels.</p>
 
-          <button class="audio-context-trigger" data-state="coming-soon" disabled aria-label="More context: Why validated research still produces confusing products">
-            <span class="audio-context-trigger__icon" aria-hidden="true"></span>
-            More Context from Ryan
-          </button>
-          <div class="audio-context-player" hidden>
-            <h4>Why validated research still produces confusing products</h4>
-            <p>A short explanation of the difference between having a strong content model and turning that model into navigation members can actually use</p>
-            <audio controls preload="none">
-              <source src="" type="audio/mpeg" />
-            </audio>
-          </div>
-
           <figure class="case-study-media">
             <div class="image-splitter" data-splitter data-splitter-initial="50" aria-label="Before and after comparison of the content taxonomy">
               <div class="splitter-viewport">
@@ -400,32 +388,16 @@
           </figure>
         </section>
 
-        <section id="navigation-rationale" aria-label="Why this navigation structure">
+        <section id="ia-challenge" data-reveal aria-label="The IA challenge">
           <div class="section-divider">
-            <h2>Why This Navigation Structure</h2>
+            <h2>The IA Challenge: Four Levels Without Losing the Thread</h2>
           </div>
           <p>
-            The taxonomy was already validated.
-          </p>
-          <p>
-            The challenge was exposing that structure in a way that aligned with member expectations.
-          </p>
-          <p>
-            Previously, navigation reflected internal organizational structure.
-          </p>
-          <p>
-            The redesign shifted navigation toward member mental models by organizing content around how HR professionals actually think about their work.
+            The content model moved from broad member intent to specific resources across four levels: Areas of Focus, Priorities, Topics, and individual content. Previously, members had to understand i4cp's internal structure to navigate that depth. The redesign shifted the experience toward how HR leaders already think about their work.
           </p>
           <blockquote>
             <p>Previously, users had to understand i4cp's structure. The redesign makes the structure match how members already think.</p>
           </blockquote>
-        </section>
-
-
-        <section id="ia-challenge" data-reveal aria-label="The IA challenge">
-          <div class="section-divider">
-            <h2>The IA challenge: four levels without losing the thread</h2>
-          </div>
           <div class="ia-challenge-panel">
             <div class="ia-challenge-panel__header">
               <h3>Content hierarchy</h3>
@@ -462,21 +434,6 @@
               <p>
                 Progressive disclosure over flat navigation.
               </p>
-              
-              <!-- AUDIO-CONTEXT-PLACEHOLDER: progressive disclosure decision -->
-              <button class="audio-context-trigger" data-audio-src="" aria-label="Hear more context: The decision for progressive disclosure">
-                <span class="audio-context-trigger__icon" aria-hidden="true"></span>
-                Hear more context
-              </button>
-              <div class="audio-context-player" hidden>
-                <audio controls preload="none">
-                  <source src="" type="audio/mpeg" />
-                </audio>
-                <details class="audio-context-transcript">
-                  <summary>Transcript</summary>
-                  <p><!-- transcript text goes here once recorded --></p>
-                </details>
-              </div>
             </div>
             <div data-compare data-compare-default="progressive">
               <div class="compare-tabs">
@@ -491,7 +448,10 @@
               </div>
             </div>
             <p>
-              I structured the navigation so Areas of Focus orient members at the top level, with Priorities and Topics revealed as they narrow intent. The goal was to make four levels feel like a natural path, not a taxonomy buried in dropdowns.
+              I explored flatter navigation patterns, including an expandable-tree model, but they exposed too much hierarchy at once and made the entry point harder to scan. Progressive disclosure preserved access to the full taxonomy while revealing deeper levels only as members narrowed their intent.
+            </p>
+            <p>
+              Areas of Focus orient members at the top level, while Priorities and Topics appear as they move closer to a specific research need. The goal was to make four levels feel like a path, not a taxonomy buried in dropdowns.
             </p>
           </div>
 
@@ -550,37 +510,16 @@
           </figure>
         </section>
 
-        <section id="alternatives" aria-label="Alternatives explored">
-          <div class="section-divider">
-            <h2>Alternatives Explored</h2>
-          </div>
-          <p>
-            An expandable-tree approach was explored.
-          </p>
-          <p>
-            While comprehensive, the resulting experience became difficult to scan because of the depth and number of categories available.
-          </p>
-          <p>
-            The final direction reduced complexity while preserving access to the same content.
-          </p>
-        </section>
-
-
         <section id="constraints" aria-label="Constraints" class="section--alt">
           <div class="section-divider">
             <h2>Constraints</h2>
           </div>
           <ul>
             <li>
-              <strong>Parallel rebrand:</strong> A third-party consultant was evolving i4cp's visual identity at the same time. 
-              Ideally, we'd have built new tokenized variables in Figma and CSS from scratch. Due to timeline constraints, we had to map to the existing token structure instead.
+              <strong>Parallel rebrand:</strong> A third-party consultant was evolving i4cp's visual identity at the same time. Instead of rebuilding tokens from scratch, I mapped the new direction to the existing token structure so the MVP could keep moving.
             </li>
             <li>
-              <strong>MVP scope:</strong> A full IA overhaul touches nearly every surface of the portal. 
-              I phased the work deliberately. 
-              The MVP ships the restructured navigation and a completely refreshed look and feel, with small to moderate UX improvements.
-              Deeper UX improvements to follow post-MVP, with designs and tickets already ready to go. 
-              The goal was to ship something meaningfully better and more useful without waiting for every surface to be perfect.
+              <strong>MVP scope:</strong> A full IA overhaul touches nearly every portal surface, so I phased the work deliberately. The MVP ships restructured navigation and a refreshed visual system, with deeper workflow improvements already designed and ticketed for post-MVP.
             </li>
           </ul>
 
@@ -596,12 +535,12 @@
 
         <section id="status" aria-label="Status & next steps">
           <div class="section-divider">
-            <h2>Current status</h2>
+            <h2>Current Status</h2>
           </div>
           <ul>
-            <li><strong class="status-label--done">Designs complete:</strong> All shippable designs are complete and in the dev's hands.</li>
-            <li><strong class="status-label--pending">Validation:</strong> moderated member testing planned for July.</li>
-            <li><strong class="status-label--pending">Outcomes:</strong> not available yet; this case study will be updated after validation and launch data are available.</li>
+            <li><strong class="status-label--done">Designs complete:</strong> Shippable MVP designs are in engineering QA.</li>
+            <li><strong class="status-label--pending">Validation planned:</strong> Moderated member testing is planned for July.</li>
+            <li><strong class="status-label--pending">Outcomes pending:</strong> This case study will be updated after validation and launch data are available.</li>
           </ul>
 
           <h3>Planned validation criteria</h3>

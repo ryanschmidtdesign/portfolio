@@ -273,9 +273,9 @@
         <header class="tldr" aria-label="Executive summary">
           <h1 id="title" data-parallax="0.06">Real-Time Inventory</h1>
           <p class="lead">
-            Inventory wasn't just a workflow gap or a missing feature. 
-            Enterprise prospects expected it, and expected it to connect with purchasing and project workflows, while existing customers were using spreadsheets or other software because the product did not give them a trustworthy source of truth.
-            <br><br>We designed Inventory Management into a real-time, unified inventory system spanning projects, locations, and purchasing, reducing manual reconciliation, improving accuracy, and helping drive an 18% increase in recurring revenue.
+            Inventory was both a workflow gap and a sales blocker. Enterprise prospects expected it to connect with purchasing and project work, while existing customers relied on spreadsheets or external tools because the product lacked a trustworthy source of truth.
+            <br><br>
+            We designed Inventory Management into a real-time system spanning projects, locations, and purchasing, reducing manual reconciliation, improving accuracy, and helping drive an 18% increase in recurring revenue.
           </p>
 
           <div class="tldr-meta">
@@ -306,10 +306,10 @@
         <section class="case-study-summary" aria-label="Case study summary">
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
-            <li><strong>Situation:</strong> Inventory workflows were dense, error-prone, and difficult to navigate across purchasing and fulfillment tasks</li>
-            <li><strong>Task:</strong> Make inventory management feel faster, clearer, and more trustworthy for users handling real operational work</li>
-            <li><strong>Action:</strong> Mapped the workflow, clarified key states, and redesigned screens around the decisions users needed to make</li>
-            <li><strong>Result:</strong> Reduced cognitive load by turning a complicated workflow into a more structured, scannable experience</li>
+            <li><strong>Situation:</strong> Customers were tracking inventory in spreadsheets or external tools, while enterprise prospects expected inventory to be integrated with purchasing and project workflows</li>
+            <li><strong>Task:</strong> Create a trustworthy inventory system that reduced reconciliation, supported larger operational workflows, and removed a recurring enterprise sales blocker</li>
+            <li><strong>Action:</strong> Mapped real inventory workflows, aligned with PM and engineering on a real-time system model, and designed quantity-first flows with asset-level control where needed</li>
+            <li><strong>Result:</strong> Helped ship an MVP that contributed to +8% product adoption and +18% recurring revenue over the following year</li>
           </ul>
         </section>
 
@@ -318,9 +318,7 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            Every week, project managers spent hours reconciling stock counts across spreadsheets or jumping between different software. 
-            Sometimes, equipment went missing because nobody could trust the numbers. 
-            And enterprise prospects expected integrated inventory before they would sign — so the gap was also a sales blocker.
+            Project managers spent hours every week reconciling stock across spreadsheets and external tools, and enterprise prospects increasingly expected inventory to be part of a modern operations platform. Without integrated inventory, teams lacked a trustworthy source of truth and D-Tools risked losing deals to competitors with more complete workflows.
           </p>
 
           <h3>Objectives</h3>
@@ -332,30 +330,12 @@
           </ul>
         </section>
 
-        <section id="business-priority" aria-label="Why inventory became a business priority">
-          <div class="section-divider">
-            <h2>Why Inventory Became a Business Priority</h2>
-          </div>
-          <p>
-            Inventory increasingly became a requirement in enterprise sales conversations.
-          </p>
-          <p>
-            Sales teams repeatedly encountered prospects who expected inventory management to be part of a modern operations platform.
-          </p>
-          <p>
-            Without integrated inventory, D-Tools risked appearing incomplete compared to competitors.
-          </p>
-        </section>
-
         <section id="research" aria-label="Research" class="section--alt">
           <div class="section-divider">
             <h2>Research Insights</h2>
           </div>
           <p>
-            I started by understanding what the user's workflow actually looked like. 
-            This could be the user jumping between Cloud and a spreadsheet or Cloud and another software they're paying for, just for inventory.
-            One power user maintained a master spreadsheet with 14 tabs: one per project, plus cross-reference sheets, reconciliation logs, and a manual low-stock tracker highlighted in yellow. 
-            It took her two hours a day to keep current, and decisions were still made from stale data.
+            I mapped how teams tracked inventory outside the product, usually across spreadsheets or paid tools like Jetbuilt. One power user maintained a master spreadsheet with 14 tabs: one per project, plus cross-reference sheets, reconciliation logs, and a manual low-stock tracker highlighted in yellow. It took her two hours a day to keep current, and decisions were still made from stale data.
           </p>
           <p>
             Across 6 user interviews and workflow mapping sessions, the pattern was consistent:
@@ -416,75 +396,22 @@
           </div>
         </section>
 
-        <button class="audio-context-trigger" data-state="coming-soon" disabled aria-label="More context: Why we rejected the simpler inventory architecture">
-          <span class="audio-context-trigger__icon" aria-hidden="true"></span>
-          More Context from Ryan
-        </button>
-        <div class="audio-context-player" hidden>
-          <h4>Why we rejected the simpler inventory architecture</h4>
-          <p>A short breakdown of the product and engineering tradeoff behind choosing a unified real-time model instead of a faster but weaker MVP</p>
-          <audio controls preload="none">
-            <source src="" type="audio/mpeg" />
-          </audio>
-        </div>
-
-        <section id="journey" data-reveal aria-label="Journey Map">
+        <section id="system-model" aria-label="System model and tradeoffs" class="section--alt">
           <div class="section-divider">
-            <h2>Solution Journey</h2>
+            <h2>System Model &amp; Tradeoffs</h2>
           </div>
-          <div class="journey-cards">
-            <div class="journey-insights journey-card full-width">
-              <h3>Problems</h3>
-              <ul>
-                <li>Manual spreadsheet reconciliation hid low‑stock thresholds, causing delays and last‑minute emergency buys</li>
-                <li>Using external tools like Jetbuilt created fragmented inventory management, leading to higher error risk, duplicated effort, and unnecessary software costs.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="journey-hmw full-width">
-            <h3>How Might We</h3>
-            <p>How might we surface critical inventory risks and eliminate manual reconciliation or the need for more software?</p>
-          </div>
-
-          <div class="journey-cards">
-            <div class="journey-solutions journey-card full-width">
-              <h3>Solutions</h3>
-              <ul>
-                <li><strong>Surface risk:</strong> Visual low-stock and incoming-PO indicators on the inventory dashboard</li>
-                <li><strong>Automation:</strong> PO-driven stock updates and status changes across locations</li>
-                <li><strong>Unified system:</strong> Eliminated the need for external tools like Jetbuilt by providing a single, reliable source of truth</li>
-              </ul>
-            </div>
-          </div>
-          <div data-progress-story>
-            <div data-story-step>
-              <span class="step-label">Map the pain</span>
-              <p class="step-copy">Captured how spreadsheets or switching between software delayed decisions and concealed stock risk.</p>
-            </div>
-            <div data-story-step>
-              <span class="step-label">Align the model</span>
-              <p class="step-copy">Built a single inventory system that reflected projects, purchases, and counts in one place.</p>
-              <!-- AUDIO-CONTEXT-PLACEHOLDER: MVP scope disagreement / advocacy for automated purchase orders -->
-              <button class="audio-context-trigger" data-audio-src="" aria-label="Hear more context: The MVP scope disagreement">
-                <span class="audio-context-trigger__icon" aria-hidden="true"></span>
-                Hear more context
-              </button>
-              <div class="audio-context-player" hidden>
-                <audio controls preload="none">
-                  <source src="" type="audio/mpeg" />
-                </audio>
-                <details class="audio-context-transcript">
-                  <summary>Transcript</summary>
-                  <p><!-- transcript text goes here once recorded --></p>
-                </details>
-              </div>
-            </div>
-            <div data-story-step>
-              <span class="step-label">Surface the risk</span>
-              <p class="step-copy">Designed alerts and thresholds so low stock became visible before it became urgent.</p>
-            </div>
-          </div>
+          <p>
+            The core design challenge was not just showing inventory. It was defining how inventory changed state across purchasing, receiving, project allocation, location transfers, and asset-level tracking. A flat quantity would not explain why an item was available, allocated, incoming, or low-stock.
+          </p>
+          <p>
+            I worked with PM and engineering to align on a real-time model across projects, stock, and locations. That added complexity, but it removed duplicate sources of truth and made inventory data trustworthy everywhere users encountered it.
+          </p>
+          <ul>
+            <li><strong>Receiving defines truth:</strong> Inventory updates when a PO is received, including partial receiving, so users are not reconciling stale counts later</li>
+            <li><strong>Quantity-first by default:</strong> Smaller teams can quickly trust stock counts without managing unnecessary asset-level detail</li>
+            <li><strong>Asset-level when needed:</strong> Larger teams can track specific items for accountability, permissions, and enterprise workflows</li>
+            <li><strong>Manual reordering for MVP:</strong> Automatic purchasing was deferred because permissions, trust, and expensive unintended purchases made confirmation safer for the first release</li>
+          </ul>
 
           <figure class="case-study-media">
             <video autoplay muted playsinline loop preload="auto" width="2880" height="1496">
@@ -492,17 +419,6 @@
             </video>
             <figcaption>Low stock indicators, incoming POs, and bulk actions.</figcaption>
           </figure>
-        </section>
-
-        <section id="decisions" aria-label="Decisions and trade-offs" class="section--alt">
-          <div class="section-divider">
-            <h2>System model</h2>
-          </div>
-          <p>
-            The core design challenge wasn't just showing inventory. 
-            It was defining how inventory changed state across purchasing, receiving, project allocation, location transfers, and asset-level tracking. 
-            I worked with PM and engineering to align on a shared model so the UI could explain why an item was available, allocated, incoming, or low-stock instead of showing a flat quantity with no context.
-          </p>
 
           <figure class="case-study-media">
             <video autoplay muted playsinline loop preload="auto" width="2880" height="1496">
@@ -510,18 +426,6 @@
             </video>
             <figcaption>Movement history, allocations, and reorder settings.</figcaption>
           </figure>
-
-          <div class="section-divider">
-            <h2>Key decisions & tradeoffs</h2>
-          </div>
-          <ul>
-            <li><strong>Real-time unified model:</strong> Chose a single real-time system across locations despite added complexity, ensuring consistent, reliable stock counts everywhere</li>
-            <li><strong>Manual reordering (MVP):</strong> Automatic purchasing introduced permission complexity, trust concerns, and the risk of expensive unintended purchases. Instead of automating purchasing immediately, the MVP focused on alerts, visibility, and user confirmation.</li>
-          </ul>
-
-          <blockquote>
-            <p>We weren't trying to prove automation. We were trying to prove users trusted the workflow.</p>
-          </blockquote>
 
           <figure class="case-study-media">
             <picture>
@@ -532,34 +436,16 @@
           </figure>
 
           <p>
-            For handoff, I documented how allocations, multi-location states, and receiving/reordering rules affect available inventory, so UI behavior stays consistent as the system model gets implemented. 
-            The shared data model was aligned with engineering first, so the UI explains state rather than just showing flat quantities.
+            For handoff, I documented how allocations, multi-location states, and receiving/reordering rules affect available inventory, so UI behavior stays consistent as the system model gets implemented. The shared data model was aligned with engineering first, so the UI explains state rather than just showing flat quantities.
           </p>
-
-          <button class="audio-context-trigger" data-state="coming-soon" disabled aria-label="More context: The automation feature we intentionally postponed">
-            <span class="audio-context-trigger__icon" aria-hidden="true"></span>
-            More Context from Ryan
-          </button>
-          <div class="audio-context-player" hidden>
-            <h4>The automation feature we intentionally postponed</h4>
-            <p>Why the safer product decision was to build trust through alerts before automating purchasing decisions that could create expensive mistakes</p>
-            <audio controls preload="none">
-              <source src="" type="audio/mpeg" />
-            </audio>
-          </div>
         </section>
 
         <section id="validation" aria-label="Validation">
           <div class="section-divider">
-          <h2>Prototyping & Validation</h2>
+            <h2>Prototyping &amp; Validation</h2>
           </div>
-          <p>Ran three rounds of high‑fidelity Figma tests to validate receiving, alerts, multi‑location inventory, and reordering flows for clarity and error reduction.</p>
-
-          <h3>Defining decision: quantity-first by default, asset-level when needed (for larger company users)</h3>
           <p>
-            Testing showed that smaller teams wanted fast confidence in counts, while larger teams needed specific asset traceability for accountability. 
-            I designed the system to stay quantity-first by default, with asset-level tracking available where the workflow required it (also based on settings and permissions). 
-            This kept the common path simple without blocking enterprise-level control.
+            I ran three rounds of high-fidelity Figma tests to validate receiving, alerts, multi-location inventory, and reordering flows. Testing confirmed the quantity-first default was easier for smaller teams, while asset-level tracking remained necessary for larger teams with accountability requirements.
           </p>
         </section>
 
