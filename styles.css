@@ -3154,8 +3154,8 @@ figure.case-study-media {
   padding-left: 0;
   margin-top: var(--space-5);
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-5) var(--space-6);
+  flex-direction: column;
+  gap: var(--space-5);
   list-style-position: inside;
 }
 
