@@ -2,22 +2,22 @@
   const slidesData = [
     {
       title: "Dashboards",
-      summary: "Research-backed AI workflow design that balanced executive summaries with trusted, visible KPI data.",
+      summary: "71% engagement lift — dashboards went from ignored to the primary way teams monitor work.",
       url: "pages/dashboard.html"
     },
     {
       title: "Inventory",
-      summary: "A real-time operational workflow that replaced spreadsheet tracking with a trusted inventory model across locations, projects, and purchasing.",
+      summary: "Replaced spreadsheet chaos with one source of truth — driving +18% recurring revenue and +8% adoption.",
       url: "pages/inventory.html"
     },
     {
       title: "Member Portal",
-      summary: "An in-progress IA overhaul aligning a validated content taxonomy with navigation patterns for enterprise HR research discovery.",
+      summary: "Translated a validated taxonomy into scalable IA — MVP-ready designs now in engineering QA.",
       url: "pages/member-portal-overhaul.html"
     },
     {
       title: "Engineering<br>My Portfolio",
-      summary: "A portfolio rebuilt from scratch in code with Cursor, Gemini, and Antigravity — reusable patterns, custom features, and AI woven into the workflow.",
+      summary: "Fully custom site with AI chat and semantic search — idea to shipped feature in one session.",
       url: "pages/ai-coding-portfolio.html"
     }
   ];
@@ -56,11 +56,19 @@
       eyebrow.textContent = 'Case study';
     }
 
+    const body = document.createElement('span');
+    body.className = 'home-title__body';
+
     const text = document.createElement('span');
     text.className = 'home-title__text';
     text.innerHTML = s.title;
 
-    link.append(eyebrow, text);
+    const summary = document.createElement('span');
+    summary.className = 'home-title__summary';
+    summary.textContent = s.summary || '';
+
+    body.append(text, summary);
+    link.append(eyebrow, body);
     return link;
   }
 
