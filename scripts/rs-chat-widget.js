@@ -3,6 +3,17 @@
   const HOST_ID = 'rs-chat-widget-root';
   if (document.getElementById(HOST_ID)) return; // avoid double injection
 
+  let gsapLoaded = false;
+
+  function loadGSAP() {
+    if (gsapLoaded) return;
+    gsapLoaded = true;
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
+    s.async = true;
+    document.head.appendChild(s);
+  }
+
   // Session token: persists per tab (sessionStorage), generated once per session
   const SESSION_KEY = 'rs_chat_session_token';
   function getOrCreateSessionToken() {
@@ -152,7 +163,13 @@
         align-self:flex-start; background: rgba(255, 255, 255, 0.06);
         border-color: rgba(255, 255, 255, 0.08); color: #f8fafc;
         position: relative;
+        line-height: 1.5;
       }
+      .msg p { margin: 0; }
+      .msg p + p { margin-top: .5em; }
+      .msg ul { margin: .25em 0 0; padding-left: 1.25em; }
+      .msg li { margin-bottom: .25em; }
+      .msg li:last-child { margin-bottom: 0; }
 
       .msg.bot[data-seeded="true"] {
         opacity: .84;
@@ -766,6 +783,8 @@ if (savedHist.length > 0) {
       floatingPillsEl.setAttribute('aria-hidden', 'true');
     }
 
+    loadGSAP();
+
     if (window.gsap) {
       const miniWrapper = document.querySelector('.ai-mini-wrapper');
       if (miniWrapper) gsap.to(miniWrapper, { opacity: 0, duration: 0.2, ease: "power2.out" });
@@ -804,6 +823,8 @@ if (savedHist.length > 0) {
     if (miniInput) {
       miniInput.value = inputEl.value;
     }
+
+    loadGSAP();
 
     if (window.gsap) {
       const childrenToAnimate = shadow.querySelectorAll('.hdr, .msgs, .pills, .hire-card');
@@ -1534,7 +1555,7 @@ if (savedHist.length > 0) {
       };
       if (state.sectionContext) payload.sectionContext = state.sectionContext;
 
-      var timeoutTimer = setTimeout(() => currentController.abort(), 60000);
+      let timeoutTimer = setTimeout(() => currentController.abort(), 60000);
       const res = await fetch(chatApi, {
         method:'POST',
         headers:{

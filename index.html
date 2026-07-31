@@ -432,7 +432,7 @@
   <script src="./scripts/home-titles.js" defer></script>
 
   <!-- GSAP for smooth slider animations -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  
 
   <!-- Consolidated JavaScript -->
   <script src="./scripts/scripts.js?v=2" defer></script>
@@ -484,6 +484,13 @@
         }
       });
     })();
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
   </script>
 </body>
 
