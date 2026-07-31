@@ -1,0 +1,638 @@
+/* -------------------------------------------------------
+   Leadership & About
+   --------------------------------------------------------*/
+.leadership-section {
+  color: var(--text);
+}
+
+.builder-section {
+  background: var(--gray-200);
+  color: var(--text);
+}
+
+.about-section {
+  background: var(--gray-200);
+  color: var(--text);
+}
+
+.page-about .site-main {
+  background: var(--gray-200);
+}
+
+/* Wrapper behaves like a container */
+.leadership-wrapper {
+  padding-inline: var(--page-margin, var(--page-gutter));
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-7);
+}
+
+.page-about .about-content {
+  max-width: 76rem;
+  margin-inline: auto;
+}
+
+/* Prose rhythm inside leadership columns */
+.leadership-prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.leadership-prose aside p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-prose);
+  letter-spacing: var(--tracking-normal);
+  color: var(--text);
+  max-width: var(--prose);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* About page ink-reveal aside line spacing */
+.page-about [data-ink-reveal] .ink-reveal-line,
+.page-about [data-ink-reveal] .ink-reveal-svg {
+  display: block;
+  width: 100%;
+  margin-bottom: clamp(8px, 0.65rem, 12px);
+}
+
+.page-about [data-ink-reveal] p {
+  margin: 0;
+}
+
+/* About page section layout: intro + metrics above, timeline full-width below */
+.page-about .leadership-wrapper {
+  flex-wrap: wrap;
+  row-gap: var(--space-7);
+}
+
+.page-about .leadership-left {
+  flex: 1 1 min(58%, 42rem);
+}
+
+.page-about .leadership-right {
+  flex: 1 1 min(38%, 32rem);
+}
+
+/* Timelines become their own full-width row */
+.page-about .leadership-timeline,
+.page-about .mentorship-timeline {
+  flex: 0 0 100%;
+  width: 100%;
+  margin-top: clamp(var(--space-5), 4vw, var(--space-7));
+  position: relative;
+}
+
+.page-about .timeline-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(var(--space-6), 7vw, var(--space-10));
+  row-gap: var(--space-6);
+  position: relative;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.page-about .timeline-content {
+  max-width: 34ch;
+}
+
+.page-about .timeline-content strong {
+  font-size: clamp(var(--fs-control), 1.35vw, var(--fs-md));
+  line-height: var(--lh-md);
+}
+
+.page-about .timeline-content p {
+  max-width: 30ch;
+  font-size: clamp(var(--fs-sm), 1.1vw, var(--fs-body));
+  line-height: var(--lh-body);
+}
+
+@media (max-width: 760px) {
+  .page-about .timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding-left: var(--space-5);
+  }
+
+  .page-about .timeline-list::before {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: var(--line-thickness);
+    height: auto;
+    background: linear-gradient(180deg,
+        var(--surface-2) 0%,
+        var(--accent) 50%,
+        var(--surface-2) 100%);
+  }
+
+  .page-about .timeline-item {
+    padding-left: var(--space-5);
+  }
+
+  .page-about .timeline-item::before {
+    left: calc(-1 * var(--space-5));
+  }
+
+  .page-about .timeline-date {
+    margin-top: 0;
+  }
+
+  .page-about .timeline-content,
+  .page-about .timeline-content p {
+    max-width: none;
+  }
+}
+
+/* Fix: internal rhythm so text doesn't feel cramped */
+.leadership-left,
+.leadership-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.leadership-left {
+  flex: 0 0 55%;
+  min-width: 0;
+}
+
+.leadership-right {
+  flex: 0 0 42%;
+  min-width: 0;
+}
+
+/* Avoid double spacing: gap handles rhythm here */
+.leadership-section .section-title,
+.builder-section .section-title,
+.mentorship-section .section-title {
+  margin-bottom: 0;
+}
+
+.leadership-lede {
+  font-size: var(--fs-body);
+  line-height: var(--lh-prose);
+  letter-spacing: var(--tracking-normal);
+  font-weight: var(--weight-regular);
+  margin: 0;
+  color: var(--text);
+  max-width: var(--prose);
+  text-wrap: pretty;
+  hyphens: auto;
+}
+
+.metric-highlight--xl {
+  font-size: var(--fs-xl);
+  line-height: var(--lh-xl);
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-semibold);
+}
+
+/* Fix: make About stat cards feel intentional + prominent
+   (no nested "box in box" container) */
+.leadership-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+  align-content: start;
+  list-style: none;
+  padding-left: 0;
+}
+
+@media (max-width: 768px) {
+  .leadership-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stat cards */
+.leadership-metric {
+  position: relative;
+  max-width: none;
+  background: var(--card-bg-strong);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    border-color var(--dur-1) var(--ease-out);
+}
+
+.metric-body {
+  font-size: var(--type-body);
+  line-height: var(--lh-prose);
+  letter-spacing: var(--tracking-normal);
+  color: var(--text);
+  max-width: 48ch;
+  text-wrap: pretty;
+}
+
+.metric-text {
+  font-size: var(--fs-md);
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-md);
+  letter-spacing: var(--tracking-snug);
+}
+
+.leadership-metric .metric-label {
+  margin: 0;
+}
+
+.leadership-metric .metric-label strong {
+  display: block;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-xs);
+  letter-spacing: var(--tracking-normal);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+}
+
+/* About */
+.about-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.about-section .leadership-wrapper {
+  display: block;
+}
+
+.about-section .about-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-7);
+  align-items: start;
+  width: 100%;
+}
+
+
+/* Fix: use flex rhythm instead of margins (less cramped) */
+.about-text {
+  max-width: 42rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.about-section .section-title {
+  margin: 0;
+}
+
+.about-prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.about-text p,
+.about-lead {
+  font-size: var(--fs-body);
+  line-height: var(--lh-prose-loose);
+  color: var(--text);
+  margin: 0;
+  max-width: var(--prose);
+  text-wrap: pretty;
+  hyphens: auto;
+}
+
+.about-connections {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.about-connection {
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.about-connection .connection-activity {
+  display: block;
+  font-size: var(--fs-control);
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-3);
+  line-height: var(--lh-xs);
+}
+
+.about-connection p {
+  color: var(--text);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  margin: 0;
+}
+
+.about-image {
+  position: relative;
+  display: block;
+}
+
+.about-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/4;
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 900px) {
+  .leadership-wrapper {
+    flex-direction: column;
+    gap: var(--space-7);
+  }
+
+  .leadership-left,
+  .leadership-right {
+    width: 100%;
+  }
+}
+
+@media (max-width: 968px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .about-image {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-text p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .leadership-section,
+  .builder-section,
+  .mentorship-section,
+  .about-section {
+    padding-block: var(--space-8);
+    padding-inline: 0;
+  }
+}
+
+/* 1920px+ ULTRA-WIDE OPTIMIZATION — page-specific section spacing */
+@media (min-width: 1920px) {
+  .leadership-section,
+  .builder-section,
+  .mentorship-section,
+  .about-section {
+    padding-block: var(--space-section-lg);
+  }
+}
+
+/* ── AI Coding Portfolio case study ── */
+.case-study--ai-coding-portfolio {
+  font-size: var(--fs-body);
+  line-height: var(--lh-prose-loose);
+  --section-accent: var(--accent-text);
+  --section-accent-soft: var(--accent-cool-soft);
+}
+
+/* AI Coding Portfolio: widen System Architecture only */
+.case-study--ai-coding-portfolio #system-architecture {
+  max-width: min(900px, calc(100vw - (var(--page-gutter) * 2)));
+}
+
+/* Keep heading and caption aligned to the normal case-study reading column */
+.case-study--ai-coding-portfolio #system-architecture > .section-divider,
+.case-study--ai-coding-portfolio #system-architecture > .caption {
+  max-width: var(--prose);
+  margin-inline: auto;
+}
+
+.case-study--ai-coding-portfolio .sa-funnel {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: var(--space-4);
+  margin-block: var(--space-5);
+}
+
+.case-study--ai-coding-portfolio .sa-step {
+  position: relative;
+  min-height: 192px;
+  overflow: hidden;
+  padding: var(--space-3);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0.44));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.case-study--ai-coding-portfolio .sa-step-title {
+  color: var(--text);
+  font-size: var(--fs-md);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-tighter);
+  margin: 0;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.case-study--ai-coding-portfolio .sa-step-body {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text);
+  max-width: 24ch;
+}
+
+.case-study--ai-coding-portfolio .sa-chip {
+  align-self: flex-start;
+  width: fit-content;
+  margin-top: auto;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: rgb(79 110 247 / 0.10);
+  color: var(--accent-text);
+  font-size: var(--fs-xs);
+  font-weight: var(--weight-semibold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.case-study--ai-coding-portfolio .sa-chip--start {
+  background: rgb(79 110 247 / 0.12);
+  color: var(--accent-text);
+}
+
+.case-study--ai-coding-portfolio .sa-chip--end {
+  background: rgb(5 150 105 / 0.12);
+  color: var(--green);
+}
+
+/* Progression accent — subtle top bar on each card */
+.case-study--ai-coding-portfolio .sa-step::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: rgb(79 110 247 / 0.32);
+}
+
+.case-study--ai-coding-portfolio .sa-step:nth-child(2)::before {
+  background: rgb(79 110 247 / 0.42);
+}
+
+.case-study--ai-coding-portfolio .sa-step:nth-child(3)::before {
+  background: rgb(79 110 247 / 0.52);
+}
+
+.case-study--ai-coding-portfolio .sa-step:nth-child(4)::before {
+  background: rgb(5 150 105 / 0.48);
+}
+
+@media (max-width: 900px) {
+  .case-study--ai-coding-portfolio .sa-funnel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .case-study--ai-coding-portfolio .sa-funnel {
+    grid-template-columns: 1fr;
+  }
+
+  .case-study--ai-coding-portfolio .sa-step {
+    min-height: auto;
+  }
+}
+
+/* ── Member Portal IA Challenge ── */
+.case-study--member-portal .ia-challenge-panel {
+  margin-block: var(--space-5);
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  /* use the smaller spacing token so compare blocks match the smaller gap */
+  gap: var(--space-3);
+}
+
+.case-study--member-portal .ia-challenge-panel__header {
+  margin-bottom: 0;
+}
+
+.case-study--member-portal .ia-challenge-panel__header h3 {
+  margin: 0 0 var(--space-1);
+  font-size: var(--fs-body);
+  line-height: var(--lh-md);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+}
+
+.case-study--member-portal .ia-challenge-panel__header > p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-md);
+  max-width: none;
+  text-wrap: normal;
+}
+
+.case-study--member-portal .ia-challenge-panel [data-compare] {
+  /* remove extra margin; the panel uses flex gap for consistent spacing */
+  margin-bottom: 0;
+}
+
+.case-study--member-portal .ia-challenge-panel > p {
+  margin-top: 0;
+}
+
+/* File + chat 2-up pairing — tall screenshot + landscape screenshot side by side */
+.case-study--ai-coding-portfolio .file-chat-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 160px;
+  align-items: start;
+}
+
+.case-study--ai-coding-portfolio .file-chat-pair img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .case-study--ai-coding-portfolio .file-chat-pair {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: var(--space-5);
+  }
+}
+
+/* Member Portal: IA challenge — align compare panel padding with card content */
+.case-study--member-portal #ia-challenge [data-compare] .compare-panel {
+  /* No extra padding — keep text aligned with the card content (no indent) */
+  padding: 0 !important;
+}
+
+/* Ensure only the active compare-panel contributes to layout height.
+   Other panels are taken out of flow so they don't increase the container's height. */
+.case-study--member-portal #ia-challenge [data-compare] .compare-panels {
+  position: relative;
+}
+
+.case-study--member-portal #ia-challenge [data-compare] .compare-panel {
+  position: absolute;
+  inset: 0 0 auto 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.case-study--member-portal #ia-challenge [data-compare] .compare-panel.is-active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Remove the large default tab spacing for IA challenge compare blocks so both
+   panels share the same, smaller gap. This prevents an empty .compare-tabs
+   from adding extra vertical space. */
+.case-study--member-portal #ia-challenge [data-compare] .compare-tabs {
+  margin-bottom: var(--space-3) !important;
+}
+
+.case-study--member-portal #ia-challenge [data-compare] .compare-panel h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs-article-h3);
+  line-height: var(--lh-md);
+}
+
+.case-study--member-portal #ia-challenge [data-compare] .compare-panel p {
+  margin: 0;
+  line-height: var(--lh-prose);
+}
+
+.case-study--inventory [aria-label="Decisions and trade-offs"] .section-divider:nth-of-type(2) {
+  margin-top: 72px;
+}

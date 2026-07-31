@@ -1,0 +1,321 @@
+html {
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* -------------------------------------------------------
+   Global
+--------------------------------------------------------*/
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) rgba(0, 0, 0, 0.20);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* WebKit scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(79 110 247 / 0.92);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Global Selection Highlight */
+::selection {
+  background-color: var(--accent-soft, rgba(79, 110, 247, 0.2));
+  color: var(--text-display, var(--ink-on-glass));
+}
+
+/* Global Focus State Polish */
+:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+/* Fallbacks for experimental `text-wrap` usages: ensure sensible wrapping in
+   browsers that don't support `text-wrap: balance|pretty`. This keeps layout
+   stable and prevents overflow/poor wrapping on headings and long paragraphs. */
+:where(p, h1, h2, h3, h4, .section-title, .leadership-lede, .about-text, .metric-body, .timeline-content) {
+  overflow-wrap: anywhere;
+}
+
+/* Prevent accidental image dragging/highlighting for a more app-like feel */
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+body p {
+  text-wrap: pretty;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text);
+  font-weight: var(--weight-regular);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-gradient-end) 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  overscroll-behavior: none;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  font-variant-ligatures: contextual common-ligatures;
+}
+
+body.is-home {
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: none;
+  overflow: hidden;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  color: var(--text);
+  font-kerning: normal;
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-lg);
+}
+
+h1 {
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-2xl);
+}
+
+h2 {
+  font-size: var(--fs-xl);
+}
+
+h3 {
+  font-size: var(--fs-lg);
+}
+
+h4 {
+  font-size: var(--fs-md);
+}
+
+h5 {
+  font-size: var(--fs-body);
+}
+
+h6 {
+  font-size: var(--fs-sm);
+}
+
+strong,
+b {
+  font-weight: var(--weight-semibold);
+}
+
+/* Default link styling */
+a {
+  color: inherit;
+  text-decoration-color: rgba(17, 17, 17, 0.30);
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: max(1px, 0.06em);
+  text-underline-offset: 0.20em;
+  touch-action: manipulation;
+}
+
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+a,
+button,
+[role="menuitem"] {
+  touch-action: manipulation;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+code,
+pre code {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+/* Focus styles */
+:where(a, button, [role="button"], .btn, .dh-nav, .dh-dots button):focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+  box-shadow: var(--focus-ring);
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-body);
+  padding: 0.12em 0.35em;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text);
+}
+
+/* Duplicate selection rule removed (kept the global one near top). */
+
+/* -------------------------------------------------------
+   Premium hover glow (desktop only, subtle)
+   --------------------------------------------------------*/
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-parallax] {
+    transform: none !important;
+  }
+}
+
+@media print {
+  .site-footer {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: var(--ink-on-glass) !important;
+  }
+}
+
+/* =====================================================
+   PRINT MEDIA OPTIMIZATION
+   ===================================================== */
+@media print {
+
+  [data-webgl-hero],
+  [data-webgl-models],
+  [data-about-overlay],
+  #hamburger,
+  .hamburger-menu,
+  .ai-mini-wrapper,
+  .circular-progress-wrapper,
+  .rs-chat-widget {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+    font-size: 12pt;
+    line-height: 1.6;
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .site-main {
+    padding: 0 !important;
+  }
+
+  .case-study figure {
+    break-inside: avoid;
+  }
+
+  .case-study figure img,
+  .case-study figure video {
+    max-width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  pre, code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+    font-size: 10pt;
+    background: #f5f5f5 !important;
+    color: black !important;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  a:not([href^="#"])::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: var(--text-secondary);
+  }
+
+  nav a::after {
+    content: none !important;
+  }
+
+  .case-study .tldr h1,
+  .case-study .tldr .lead {
+    max-width: 100%;
+  }
+
+  .leadership-section,
+  .about-section,
+  section[id] {
+    page-break-inside: avoid;
+  }
+
+  h2, h3 {
+    page-break-after: avoid;
+  }
+}

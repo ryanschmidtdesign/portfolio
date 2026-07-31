@@ -1,0 +1,382 @@
+/* Non-home page margins */
+body:not(.is-home) {
+  --page-margin: 6rem;
+}
+
+.site-main {
+  padding-top: 0;
+  padding-bottom: 64px;
+  scroll-snap-type: none;
+}
+
+/* Site footer landmark — visually hidden, accessible to screen readers */
+.site-footer {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 1px, 1px);
+  white-space: nowrap;
+  border: 0;
+}
+
+.is-home .site-main {
+  padding-inline: var(--page-gutter);
+}
+
+body:not(.is-home) .site-main {
+  padding-inline: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: var(--page-gutter);
+}
+
+/* Homepage-specific container padding: increase left padding by 25% */
+.is-home .container {
+  padding: 0 clamp(0.9375rem, 5vw, 1.25rem);
+}
+
+/* Scroll anchors */
+.hero,
+.leadership-section,
+.builder-section,
+.mentorship-section,
+.about-section {
+  scroll-margin-top: clamp(var(--space-4), 10vw, 72px);
+}
+
+/* Parallax */
+[data-parallax] {
+  will-change: transform;
+  transition: transform 80ms linear;
+}
+
+
+/* Consistent section padding
+   (fix: avoid double horizontal padding; containers handle inline padding) */
+.leadership-section,
+.builder-section,
+.mentorship-section,
+.about-section {
+  padding-block: var(--page-margin, var(--space-section-md));
+  padding-inline: 0;
+}
+
+
+
+/* Research/process blocks should glow cool, not blue */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 0;
+  overflow: hidden;
+  color: var(--text);
+}
+
+
+
+/* -------------------------------------------------------
+   Three.js — Hero Fluid Shader Canvas
+   --------------------------------------------------------*/
+#hero-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Optimizations for ultra-wide 1920px+ viewports */
+
+@media (max-width: 768px) {
+
+  .leadership-section,
+  .builder-section,
+  .mentorship-section,
+  .about-section {
+    padding-block: var(--space-8);
+    padding-inline: 0;
+  }
+}
+
+/* 1440px OPTIMIZATION */
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .case-study figure img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* 1920px+ ULTRA-WIDE OPTIMIZATION */
+@media (min-width: 1920px) {
+
+  .case-study figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+  }
+
+  /* Increase spacing for breathing room on wide screens */
+  .leadership-section,
+  .builder-section,
+  .mentorship-section,
+  .about-section {
+    padding-block: var(--space-section-lg);
+  }
+
+  .section-divider {
+    margin-top: var(--space-9);
+    margin-bottom: var(--space-8);
+  }
+}
+
+/* Global floating menu + assistant mini chat */
+.hamburger {
+  position: fixed;
+  left: var(--space-5);
+  bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+  z-index: 240;
+  width: 56px;
+  height: 56px;
+  padding: var(--space-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--surface-dark-solid);
+  border: 1px solid var(--surface-dark-border);
+  box-shadow: var(--shadow-menu);
+  color: var(--text-on-accent);
+  cursor: pointer;
+  transition: transform 220ms var(--ease-out), background 180ms ease, box-shadow 180ms ease;
+}
+
+.hamburger:hover,
+.hamburger:focus-visible {
+  transform: translateY(-2px) scale(1.03);
+  background: rgba(10, 10, 10, 0.94);
+  box-shadow: var(--shadow-menu-hover);
+}
+
+.hamburger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(79, 110, 247, 0.16), var(--shadow-menu-hover);
+}
+
+.hamburger-inner {
+  position: relative;
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  transition: background 220ms ease;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transition: transform 280ms ease, opacity 220ms ease;
+}
+
+.hamburger-inner::before {
+  top: -7px;
+}
+
+.hamburger-inner::after {
+  top: 7px;
+}
+
+.hamburger.open .hamburger-inner {
+  background: transparent;
+}
+
+.hamburger.open .hamburger-inner::before {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open .hamburger-inner::after {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.hamburger-menu {
+  position: fixed;
+  left: var(--space-5);
+  bottom: calc(var(--hamburger-bottom, var(--space-5)) + var(--hamburger-size, 56px) + var(--space-2));
+  z-index: 220;
+  width: min(304px, 80vw);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--surface-dark-glass);
+  backdrop-filter: blur(var(--blur-md));
+  border: 1px solid var(--surface-dark-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.24);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.98);
+  transition: opacity 220ms var(--ease-menu), transform 220ms var(--ease-menu);
+  will-change: opacity, transform;
+}
+
+.hamburger-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.hamburger-menu a {
+  display: block;
+  color: var(--text-on-accent);
+  text-decoration: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-looser);
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 220ms var(--ease-menu), transform 220ms var(--ease-menu), color 160ms ease, background 160ms ease;
+  will-change: opacity, transform;
+}
+
+.hamburger-menu.show a {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hamburger-menu a:hover {
+  background: transparent;
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.hamburger-menu a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  background: transparent;
+  color: var(--accent);
+}
+
+.hamburger-menu a[aria-current="page"]:focus,
+.hamburger-menu a[aria-current="page"]:focus-visible {
+  text-decoration: none;
+}
+
+.hamburger-menu a[aria-current="page"] {
+  color: var(--accent);
+}
+
+.hamburger-menu a[aria-current="page"]:hover {
+  background: transparent;
+}
+
+/* Menu group — expandable submenu */
+.menu-item-group {
+  position: relative;
+}
+
+.menu-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  background: none;
+  border: none;
+  color: var(--text-on-accent);
+  text-decoration: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: var(--tracking-looser);
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 220ms var(--ease-menu), transform 220ms var(--ease-menu), color 160ms ease;
+  will-change: opacity, transform;
+}
+
+.menu-trigger::after {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  opacity: 0.6;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 260ms var(--ease-menu), opacity 160ms ease;
+  margin-left: auto;
+}
+
+.menu-item-group.is-open .menu-trigger::after {
+  transform: translateY(0) rotate(-135deg);
+  opacity: 0.8;
+}
+
+.hamburger-menu.show .menu-trigger {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-trigger:hover,
+.menu-trigger:focus-visible {
+  color: var(--accent);
+  transform: translateX(2px);
+  outline: none;
+}
+
+.menu-submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 260ms var(--ease-menu);
+}
+
+.menu-item-group.is-open .menu-submenu {
+  max-height: 260px;
+}
+
+.menu-submenu a {
+  padding-left: calc(var(--space-4) + var(--space-5));
+  font-size: 0.85rem;
+  display: block;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+.menu-item-group.is-open .menu-submenu a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile hamburger adjustments */
+@media (max-width: 768px) {
+  .hamburger {
+    left: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    --hamburger-bottom: 12px;
+    z-index: 280;
+  }
+}

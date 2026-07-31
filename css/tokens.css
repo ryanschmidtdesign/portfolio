@@ -1,0 +1,361 @@
+:root {
+  /* Layout */
+  --page-gutter: clamp(var(--space-4), 4vw, var(--space-6));
+  /* 16 → 32px */
+  --container-max: 88rem;
+  /* 1200px / 16 */
+  --impact-callout-max: 48.75rem;
+  /* 780px / 16 */
+  --prose: 66ch;
+  --prose-tight: 60ch;
+
+  /* Spacing scale (8px base grid) */
+  --space-1: 0.25rem;
+  /* 4px */
+  --space-2: 0.5rem;
+  /* 8px */
+  --space-3: 0.75rem;
+  /* 12px */
+  --space-4: 1rem;
+  /* 16px */
+  --space-5: 1.5rem;
+  /* 24px */
+  --space-6: 2rem;
+  /* 32px */
+  --space-7: 3rem;
+  /* 48px */
+  --space-8: 4rem;
+  /* 64px */
+  --space-9: 6rem;
+  /* 96px */
+
+  /* Macro tier (large desktop hero/section spacing) */
+  --space-10: 8rem;
+  /* 128px */
+
+  /* Fluid section padding — use instead of bespoke clamps */
+  --space-section-sm: clamp(2.5rem, 5vw, 4rem);
+  /* 40 → 64px  — compact sections */
+  --space-section-md: clamp(4rem, 7vw, 6rem);
+  /* 64 → 96px  — default */
+  --space-section-lg: clamp(5rem, 10vw, 8rem);
+  /* 80 → 128px — hero, anchor sections */
+
+  /* Typography */
+  /* ─── Font families ─────────────────────────────────────────────────── */
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont,
+    "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
+    Consolas, monospace;
+
+  /* ─── Type scale (modular, IBM Plex Sans-tuned) ─────────────────────── */
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-body: 17px;
+  --fs-md: 20px;
+  --fs-lg: 24px;
+  --fs-xl: 30px;
+  --fs-2xl: 38px;
+
+  /* Control text — Apple-style 15px for buttons; doesn't fit modular scale */
+  --fs-control: 15px;
+
+  /* Fluid display tier — replaces --fs-hero-* clamps AND --fs-metric */
+  --fs-display-sm: clamp(1.75rem, 1.4rem + 1.8vw, 2.5rem);
+  --fs-display-md: clamp(2.25rem, 1.8rem + 2.4vw, 3.5rem);
+  --fs-display-lg: clamp(2.75rem, 2rem + 4vw, 4.5rem);
+
+  /* ─── Line height (per-role, not universal) ─────────────────────────── */
+  --lh-2xs: 1.4;
+  --lh-xs: 1.45;
+  --lh-body: 1.55;
+  --lh-md: 1.45;
+  --lh-lg: 1.35;
+  --lh-xl: 1.25;
+  --lh-2xl: 1.2;
+  --lh-display: 1.1;
+
+  /* Long-form reading rhythm — unchanged, these are good */
+  --lh-prose: 1.7;
+  --lh-prose-loose: 1.75;
+
+  /* ─── Tracking (body + display ramp) ────────────────────────────────── */
+  --tracking-tightest: -0.04em;
+  --tracking-tighter: -0.025em;
+  --tracking-tight: -0.015em;
+  --tracking-snug: -0.005em;
+  --tracking-normal: 0;
+  --tracking-loose: 0.01em;
+  --tracking-looser: 0.025em;
+
+  /* Caps tracking — renamed from --ls-caps-* for consistency */
+  --tracking-caps-tight: 0.06em;
+  --tracking-caps: 0.08em;
+  --tracking-caps-wide: 0.12em;
+
+  /* ─── Font weight ramp ──────────────────────────────────────────────── */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* ─── Application tokens (intent-based — keep) ──────────────────────── */
+  --type-overline: var(--fs-xs);
+  --type-label: var(--fs-xs);
+  --type-body: var(--fs-body);
+  --type-heading-3: var(--fs-lg);
+  --type-heading-4: var(--fs-md);
+  --type-caption: var(--fs-sm);
+
+  /* Radii (single system) */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  --focus-outline-offset: 3px;
+
+  /* Motion (elegant + consistent) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-1: 120ms;
+  --dur-2: 180ms;
+  --dur-3: 300ms;
+  --dur-4: 450ms;
+
+  /* === Cool neutrals === */
+  --gray-100: #F7F9FA;
+  --gray-200: #F1F4F6;
+  --gray-300: #DCE3E8;
+  --bg: var(--gray-100);
+
+  /* Surface levels (more distinct steps) */
+  --surface-1: rgba(0, 0, 0, 0.06);
+  /* hover states */
+  --surface-2: rgba(0, 0, 0, 0.09);
+  /* active cards */
+
+  /* Card surfaces */
+  --card-bg-strong: var(--gray-200);
+
+  /* Elevated surface system — no borders, shadow + tone only */
+  --surface-elevated: rgba(15, 23, 42, 0.045);
+  /* callouts, asides, meta cards */
+  --surface-elevated-strong: rgba(15, 23, 42, 0.075);
+  /* impact callout, TLDR card */
+  --surface-code: rgba(15, 23, 42, 0.06);
+  /* code blocks, pre */
+
+  /* KPI system */
+  --kpi-gap: 3.25rem;
+  --kpi-label-size: var(--fs-xs);
+  --kpi-label-ls: var(--tracking-caps);
+  --kpi-label-line-height: var(--lh-2xs);
+  --kpi-label-color: var(--text-secondary);
+  --kpi-note-color: var(--text-secondary);
+
+  /* Borders (outline tone) */
+  --border-subtle: rgb(var(--rgb-outline) / 0.12);
+  --border: rgb(var(--rgb-outline) / 0.22);
+  --border-strong: rgb(var(--rgb-outline) / 0.35);
+  --border-interactive: rgb(var(--rgb-outline) / 0.45);
+
+  --border-w-strong: 2px;
+
+  --dot-size: 14px;
+  --line-thickness: 2px;
+
+  /* Backdrop blur tokens */
+  --blur-sm: 4px;
+  --blur-md: 18px;
+  --blur-lg: 24px;
+
+  /* Shadows (10% deeper than default) */
+  --shadow-1:
+    0 1px 2px rgb(15 23 42 / 0.07),
+    0 2px 4px rgb(15 23 42 / 0.11),
+    0 0 0 1px var(--border);
+
+  --shadow-2:
+    0 2px 4px rgb(15 23 42 / 0.07),
+    0 10px 20px rgb(15 23 42 / 0.13),
+    0 0 0 1px var(--border);
+
+  --shadow-3:
+    0 4px 8px rgb(15 23 42 / 0.09),
+    0 20px 40px rgb(15 23 42 / 0.18),
+    0 0 0 1px var(--border);
+
+  /* === Neutrals (slate) === */
+  --slate-600: #5D6873;
+  --slate-900: #1A2128;
+
+  /* Text (APCA intent: keep small text comfortably bright) */
+  --text: var(--slate-900);
+  --text-secondary: var(--slate-600);
+
+  /* Text on colored backgrounds */
+  --text-on-accent: #FFFFFF;
+
+  /* === Brand accent (canonical) — desaturated indigo === */
+  --accent: #4F6EF7;
+  --accent-hover: #3B5BDB;
+  --accent-text: #2D4FC4;
+  --accent-text-hover: #1F3A8F;
+  --accent-soft: rgb(79 110 247 / 0.12);
+  --accent-strong: rgb(79 110 247 / 0.24);
+
+  --color-primary: var(--accent);
+
+  /* === Status colors === */
+  --green: #059669;
+  --green-soft: rgb(5 150 105 / 0.12);
+  --amber: #D97706;
+  --amber-soft: rgb(217 119 6 / 0.12);
+  --red: #DC2626;
+  --red-soft: rgb(220 38 38 / 0.10);
+
+  /* Menu / elevated shadows */
+  --shadow-menu: 0 24px 64px rgba(0, 0, 0, 0.24);
+  --shadow-menu-hover: 0 28px 72px rgba(0, 0, 0, 0.28);
+  --ease-menu: cubic-bezier(.2, .9, .2, 1);
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px rgb(var(--rgb-accent-small) / 0.28);
+  --focus-outline: 2px solid var(--accent-text-hover);
+
+  /* Glass */
+  --glass-border: rgba(255, 255, 255, 0.34);
+
+  /* Article type ramp — opens H2/H3 separation */
+  --fs-article-h1: clamp(2.25rem, 1.6rem + 2.6vw, 3.25rem);
+  /* ~36 → 52px */
+  --fs-article-h2: clamp(1.625rem, 1.35rem + 1.1vw, 2rem);
+  /* ~26 → 32px */
+  --fs-article-h3: 1.25rem;
+  /* 20px */
+  --fs-article-lead: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+  /* ~18 → 21px */
+
+  /* Section rhythm */
+  --case-section-gap: clamp(3.5rem, 5vw, 5rem);
+  /* between sections */
+  --case-h2-to-body: var(--space-5);
+  /* 24px */
+  --case-h3-to-body: var(--space-3);
+  /* 12px */
+  --case-h3-top: var(--space-6);
+  /* 32px above sub-heading */
+
+  /* Elevation shadows tuned for light steel-gray bg */
+  --shadow-card:
+    0 1px 2px rgba(15, 23, 42, 0.07),
+    0 8px 24px rgba(15, 23, 42, 0.10);
+  --shadow-card-strong:
+    0 2px 4px rgba(15, 23, 42, 0.08),
+    0 16px 40px rgba(15, 23, 42, 0.13);
+
+  /* Nav ink */
+  --ink-on-glass: #0f172a;
+
+  /* Body gradient endpoint */
+  --bg-gradient-end: var(--gray-200);
+
+  /* Raw channels (lets you keep everything consistent) */
+  --rgb-white: 255 255 255;
+  --rgb-black: 0 0 0;
+  --rgb-blue: 79 110 247;
+  --rgb-outline: 26 33 40;
+  --rgb-accent-small: 79 110 247;
+  --rgb-cool: 79 110 247;
+
+  --img-frame: rgb(var(--rgb-white) / 0.16);
+  --img-matte: rgb(var(--rgb-black) / 0.22);
+
+  /* === Dark surfaces (cards on light bg) === */
+  --surface-dark: #060C16;
+  --surface-dark-edge: #0D1421;
+  --surface-dark-glass: rgb(6 12 22 / 0.82);
+  --surface-dark-solid: rgb(6 12 22 / 1);
+  --surface-dark-border: rgb(255 255 255 / 0.10);
+
+  /* === Hero overlay gradients === */
+}
+
+/* Optimizations for 1440px (important breakpoint) */
+@media (min-width: 1440px) and (max-width: 1599px) {
+  :root {
+    --container-max: 90rem;
+    /* 1440px */
+    --fs-body: 17px;
+    --fs-md: 21px;
+    --fs-lg: 25px;
+    --fs-xl: 31px;
+    --fs-2xl: 40px;
+    --space-9: 6.5rem;
+  }
+}
+
+/* Optimizations for ultra-wide 1920px+ viewports */
+@media (min-width: 1920px) {
+  :root {
+    --container-max: 100rem;
+    /* 1600px */
+    --fs-body: 18px;
+    --fs-md: 23px;
+    --fs-lg: 27px;
+    --fs-xl: 33px;
+    --fs-2xl: 44px;
+    --space-9: 7.5rem;
+    --kpi-gap: 4rem;
+  }
+}
+
+/* Large screens (1600px) - enhanced */
+@media (min-width: 1600px) {
+  :root {
+    --fs-body: 18px;
+    --fs-md: 22px;
+    --fs-lg: 26px;
+    --fs-xl: 32px;
+    --fs-2xl: 42px;
+    --space-9: 7rem;
+  }
+}
+
+/* =====================================================
+   MOBILE OPTIMIZATIONS (< 768px)
+   ===================================================== */
+@media (max-width: 768px) {
+  :root {
+    --container-max: 100%;
+    --page-gutter: 1rem;
+  }
+}
+
+/* =====================================================
+   TABLET OPTIMIZATIONS (768px - 1023px)
+   ===================================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --container-max: 100%;
+    --page-gutter: 1.5rem;
+  }
+}
+
+/* =====================================================
+   1440px OPTIMIZATION (Important Breakpoint)
+   ===================================================== */
+@media (min-width: 1400px) and (max-width: 1599px) {
+  :root {
+    --page-gutter: clamp(1rem, 3.5vw, 1.5rem);
+  }
+}
+
+/* =====================================================
+   1920px+ ULTRA-WIDE OPTIMIZATION
+   ===================================================== */
+@media (min-width: 1920px) {
+  :root {
+    --page-gutter: clamp(2rem, 4vw, 3rem);
+  }
+}
