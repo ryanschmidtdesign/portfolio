@@ -64,33 +64,8 @@
     return link;
   }
 
-  function buildAboutLink(isClone) {
-    const link = document.createElement('a');
-    link.className = 'home-title';
-    link.href = 'pages/about.html';
-    link.dataset.slideIndex = '-1';
-    link.setAttribute('aria-label', 'About — View case study');
-
-    if (isClone) {
-      link.setAttribute('aria-hidden', 'true');
-      link.tabIndex = -1;
-    } else {
-      link.dataset.reveal = '';
-      link.style.setProperty('--reveal-delay', `${Math.min(slidesData.length * 80, 240)}ms`);
-    }
-
-    const text = document.createElement('span');
-    text.className = 'home-title__text';
-    text.textContent = 'About';
-
-    link.append(text);
-    return link;
-  }
-
   slidesData.forEach((s, i) => track.appendChild(buildLink(s, i, false)));
-  track.appendChild(buildAboutLink(false));
   slidesData.forEach((s, i) => track.appendChild(buildLink(s, i, true)));
-  track.appendChild(buildAboutLink(true));
 
   container.appendChild(track);
 
