@@ -71,6 +71,6 @@ Personal portfolio site for Ryan Schmidt, Senior Product Designer. Static HTML/C
 - `scripts/scripts.js` — shared JS
 - `scripts/home-titles.js` — homepage titles
 - `scripts/rs-chat-widget.js` — AI chat widget
-- `scripts/circular-carousel.js` — carousel
+
 - `_meta/` — knowledge files (memory, skills, etc.)
 - `assets/` — llms.txt, resume PDF, images

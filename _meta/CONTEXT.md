@@ -45,7 +45,6 @@ Accessibility
 - JavaScript
 - JSON
 - Three.js
-- Next.js (limited usage)
 
 Favor existing architecture when possible.
 
