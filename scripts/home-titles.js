@@ -16,7 +16,7 @@
       url: "pages/member-portal-overhaul.html"
     },
     {
-      title: "AI-Coding<br>Portfolio",
+      title: "Engineering<br>My Portfolio",
       summary: "A portfolio rebuilt from scratch in code with Cursor, Gemini, and Antigravity — reusable patterns, custom features, and AI woven into the workflow.",
       url: "pages/ai-coding-portfolio.html"
     }
@@ -49,7 +49,12 @@
     const eyebrow = document.createElement('span');
     eyebrow.className = 'home-title__eyebrow';
     eyebrow.setAttribute('aria-hidden', 'true');
-    eyebrow.textContent = 'Case study';
+    if (s.title === "Dashboards") {
+      eyebrow.innerHTML = 'FEATURED<br>CASE STUDY';
+      eyebrow.classList.add('home-title__eyebrow--featured');
+    } else {
+      eyebrow.textContent = 'Case study';
+    }
 
     const text = document.createElement('span');
     text.className = 'home-title__text';

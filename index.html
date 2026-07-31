@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://ryanschmidt.design">
 
-  <title>Ryan Schmidt — Senior Product Designer</title>
+  <title>Ryan Schmidt — Senior Product Designer & UX Engineer</title>
   <meta name="description"
-    content="Portfolio of Ryan Schmidt, a Senior Product Designer specializing in research-heavy information architecture, member experience, and scalable design systems.">
+    content="Portfolio of Ryan Schmidt, a Senior Product Designer & UX Engineer specializing in research-heavy information architecture, member experience, and scalable design systems.">
   <meta name="author" content="Ryan Schmidt">
 
   <!-- SEO hygiene -->
@@ -20,13 +20,13 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Ryan Schmidt — Senior Product Designer">
-  <meta property="og:title" content="Ryan Schmidt — Senior Product Designer">
+  <meta property="og:site_name" content="Ryan Schmidt — Senior Product Designer & UX Engineer">
+  <meta property="og:title" content="Ryan Schmidt — Senior Product Designer & UX Engineer">
   <meta property="og:description"
     content="Research‑heavy IA, member experience, and design systems that turn complex B2B workflows into clear, shippable tools.">
   <meta property="og:url" content="https://ryanschmidt.design/">
   <meta property="og:image" content="https://ryanschmidt.design/assets/images/family-pic.jpg"> 
-  <meta property="og:image:alt" content="Ryan Schmidt — Senior Product Designer, Austin TX">
+  <meta property="og:image:alt" content="Ryan Schmidt — Senior Product Designer & UX Engineer, Austin TX">
   <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
@@ -34,10 +34,10 @@
 
   <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ryan Schmidt - Senior Product Designer">
-<meta name="twitter:description" content="Research-heavy IA, member experience, and design systems that turn complex B2B workflows into clear, shippable tools.">
+<meta name="twitter:title" content="Ryan Schmidt - Senior Product Designer & UX Engineer">
+<meta name="twitter:description" content="Portfolio of Ryan Schmidt.">
 <meta name="twitter:image" content="https://ryanschmidt.design/assets/images/family-pic.jpg">
-<meta name="twitter:image:alt" content="Ryan Schmidt - Senior Product Designer, Austin TX">
+<meta name="twitter:image:alt" content="Ryan Schmidt - Senior Product Designer & UX Engineer, Austin TX">
 
   <!-- Browser behavior / UX -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -87,10 +87,10 @@
             "@type": "Person",
             "@id": "https://ryanschmidt.design/#person",
             "name": "Ryan Schmidt",
-            "jobTitle": "Senior Product Designer",
+            "jobTitle": "Senior Product Designer & UX Engineer",
             "url": "https://ryanschmidt.design/",
             "image": "https://ryanschmidt.design/assets/images/family-pic.jpg",
-            "description": "Senior Product Designer who turns complex B2B SaaS workflows into clear, shippable tools.",
+            "description": "Senior Product Designer & UX Engineer who turns complex B2B SaaS workflows into clear, shippable tools.",
             "sameAs": [
               "https://www.linkedin.com/in/ryanschmidt1989/"
             ],
@@ -125,9 +125,9 @@
               },
               {
                 "@type": "Article",
-          "@id": "https://ryanschmidt.design/ai-coding-portfolio.html#work",
-          "name": "AI-Coding my Portfolio",
-          "url": "https://ryanschmidt.design/ai-coding-portfolio.html"
+                "@id": "https://ryanschmidt.design/ai-coding-portfolio.html#work",
+                "name": "Engineering My Portfolio",
+                "url": "https://ryanschmidt.design/ai-coding-portfolio.html"
               },
               {
                 "@type": "Article",
@@ -141,7 +141,7 @@
             "@type": "WebSite",
             "@id": "https://ryanschmidt.design/#website",
             "url": "https://ryanschmidt.design/",
-            "name": "Ryan Schmidt — Senior Product Designer",
+            "name": "Ryan Schmidt — Senior Product Designer & UX Engineer",
             "publisher": {
               "@id": "https://ryanschmidt.design/#person"
             },
@@ -151,14 +151,14 @@
             "@type": "WebPage",
             "@id": "https://ryanschmidt.design/#webpage",
             "url": "https://ryanschmidt.design/",
-            "name": "Ryan Schmidt — Senior Product Designer",
+            "name": "Ryan Schmidt — Senior Product Designer & UX Engineer",
             "isPartOf": {
               "@id": "https://ryanschmidt.design/#website"
             },
             "about": {
               "@id": "https://ryanschmidt.design/#person"
             },
-            "description": "Portfolio of Ryan Schmidt, Senior Product Designer in Austin, TX. Four case studies: AI-Powered Dashboards (+71% engagement), Real-Time Inventory (+18% recurring revenue), AI-Coding my Portfolio, and the i4cp Member Portal Overhaul (in progress).",
+            "description": "Portfolio of Ryan Schmidt, Senior Product Designer & UX Engineer in Austin, TX. Four case studies: AI-Powered Dashboards (+71% engagement), Real-Time Inventory (+18% recurring revenue), Engineering My Portfolio, and the i4cp Member Portal Overhaul (in progress).",
             "primaryImageOfPage": "https://ryanschmidt.design/assets/images/family-pic.jpg",
             "dateModified": "2026-06-29",
             "inLanguage": "en-US"
@@ -258,8 +258,8 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 7.5rem;
-      padding: 7.5rem 0.5rem 7.5rem 0;
+      gap: 6.5rem;
+      padding: 6.5rem 0.5rem 6.5rem 0;
       will-change: transform;
     }
     .home-title {
@@ -297,10 +297,17 @@
       text-transform: uppercase;
       color: #0f172a;
       white-space: nowrap;
+      text-align: center;
+    }
+
+    .home-title__eyebrow--featured {
+      color: #4F6EF7;
+      font-weight: 800;
+      margin-right: -1rem; /* Pull title back to align with others despite the 2-line eyebrow */
     }
 
     .home-title__text {
-      font-size: clamp(4rem, 8.5vw, 10.9rem);
+      font-size: clamp(3.6rem, 8vw, 10rem);
       line-height: 1.2;
       font-weight: 900;
       color: rgba(15, 23, 42, 0.25);
@@ -385,8 +392,8 @@
 
 <body class="is-home">
   <main id="main" class="home-gallery">
-    <h1 class="sr-only">Ryan Schmidt — Senior Product Designer</h1>
-    <div class="home-logo">Ryan<br>Schmidt<span class="home-role">Senior Product Designer</span></div>
+    <h1 class="sr-only">Ryan Schmidt — Senior Product Designer & UX Engineer</h1>
+    <div class="home-logo">Ryan<br>Schmidt<span class="home-role">Senior Product Designer<br>& UX Engineer</span></div>
 
     <div class="home-layout">
       <aside class="home-left">
@@ -408,7 +415,7 @@
             <a href="pages/dashboard.html">AI‑Powered Dashboards</a>
             <a href="pages/inventory.html">Real-Time Inventory</a>
             <a href="pages/member-portal-overhaul.html">Member Portal Redesign</a>
-            <a href="pages/ai-coding-portfolio.html">AI-Coding my Portfolio</a>
+            <a href="pages/ai-coding-portfolio.html">Engineering My Portfolio</a>
           </div>
         </div>
         <a href="assets/ryan-schmidt-resume-june-2026.pdf" target="_blank" rel="noopener">Resume</a>
