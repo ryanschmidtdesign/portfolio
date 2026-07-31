@@ -7,8 +7,8 @@
 // -----------------------------------------------------------------------------
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
-const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash";
-const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-3.5-flash";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.0-flash";
+const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-2.0-flash";
 const GEMINI_FALLBACK_MODEL = process.env.GEMINI_FALLBACK_MODEL || "gemini-2.5-flash";
 const CSE_API_KEY = process.env.CSE_API_KEY || "";
 const CSE_ID = process.env.CSE_ID || "";
@@ -1703,7 +1703,8 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
       topP: 0.9,
       topK: 32,
       maxOutputTokens,
-      responseMimeType: "application/json"
+      responseMimeType: "application/json",
+      responseModalities: ["TEXT"]
     }
   };
 
@@ -1744,9 +1745,15 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
         const data = await resp.json();
         const candidate = data?.candidates?.[0]?.content;
         const parts = candidate?.parts;
-        const textRaw = Array.isArray(parts)
+        let textRaw = Array.isArray(parts)
           ? parts.map(p => p && p.text).filter(Boolean).join("\n")
           : (candidate?.parts?.[0]?.text || "");
+        if (!textRaw && Array.isArray(parts) && parts.some(p => p.inlineData)) {
+          console.warn("Gemini returned audio inlineData instead of text in non-streaming response");
+          // If audio-only: re-fetch without streaming to force text
+          // This shouldn't happen with responseMimeType: "application/json" but guard anyway
+          textRaw = "";
+        }
 
         const result = parseGeminiOutput(textRaw, pickedCases, kb, isFit);
 
@@ -1770,11 +1777,12 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
 
         return result;
       }
-      // Retry 5xx (server errors) and 429 (rate limit) — rate limits use longer backoff
-      if ((resp.status === 429 || resp.status >= 500) && attempt < MAX_RETRIES) {
-        const delay = resp.status === 429
-          ? RETRY_DELAY_MS[attempt] * 3   // 3s, 6s for rate limits
-          : RETRY_DELAY_MS[attempt];       // 1s, 2s for 5xx
+      // Retry 5xx (server errors) — 429 (rate limit) is not retryable since quota won't recover in seconds
+      if (resp.status === 429) {
+        throw new Error(`Gemini 429: quota exhausted on ${model}`);
+      }
+      if (resp.status >= 500 && attempt < MAX_RETRIES) {
+        const delay = RETRY_DELAY_MS[attempt];  // 1s, 2s for 5xx
         console.warn(`Gemini ${resp.status} (attempt ${attempt + 1}), retrying in ${delay}ms`);
         await new Promise(r => setTimeout(r, delay));
         continue;
@@ -1866,11 +1874,13 @@ async function readGeminiStream(resp, streamChunk) {
           if (!jsonStr || jsonStr === "[DONE]") continue;
           try {
             const parsed = JSON.parse(jsonStr);
-            const text =
-              parsed?.candidates?.[0]?.content?.parts
-                ?.map(p => p.text || "")
-                .filter(Boolean)
-                .join("\n") || "";
+            const parts = parsed?.candidates?.[0]?.content?.parts;
+            const text = Array.isArray(parts)
+              ? parts.map(p => p.text || "").filter(Boolean).join("\n")
+              : "";
+            if (!text && Array.isArray(parts) && parts.some(p => p.inlineData)) {
+              console.warn("Gemini returned audio inlineData in SSE chunk; expected text");
+            }
             if (text.length > prevLen) {
               const delta = text.slice(prevLen);
               if (delta) streamChunk(delta);
