@@ -2,22 +2,22 @@
   const slidesData = [
     {
       title: "Dashboards",
-      summary: "71% engagement lift — dashboards went from ignored to the primary way teams monitor work.",
+      summary: "Turned dashboards into the primary way teams track work, driving a 71% engagement lift.",
       url: "pages/dashboard.html"
     },
     {
       title: "Inventory",
-      summary: "Replaced spreadsheet chaos with one source of truth — driving +18% recurring revenue and +8% adoption.",
+      summary: "Replaced spreadsheets with a single source of truth, increasing recurring revenue 18% and adoption 8%.",
       url: "pages/inventory.html"
     },
     {
       title: "Member Portal",
-      summary: "Translated a validated taxonomy into scalable IA — MVP-ready designs now in engineering QA.",
+      summary: "Turned a research-backed taxonomy into an MVP-ready portal now moving through engineering QA.",
       url: "pages/member-portal-overhaul.html"
     },
     {
       title: "Engineering<br>My Portfolio",
-      summary: "Fully custom site with AI chat and semantic search — idea to shipped feature in one session.",
+      summary: "Built a custom portfolio with AI chat and semantic search, shipping from idea to production in a single session.",
       url: "pages/ai-coding-portfolio.html"
     }
   ];
