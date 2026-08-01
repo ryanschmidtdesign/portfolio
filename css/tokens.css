@@ -91,7 +91,7 @@
   /* Caps tracking — renamed from --ls-caps-* for consistency */
   --tracking-caps-tight: 0.06em;
   --tracking-caps: 0.08em;
-  --tracking-caps-wide: 0.12em;
+  --tracking-caps-wide: 0.1em;
 
   /* ─── Font weight ramp ──────────────────────────────────────────────── */
   --weight-regular: 400;
