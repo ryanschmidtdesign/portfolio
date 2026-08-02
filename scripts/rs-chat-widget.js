@@ -915,13 +915,8 @@ if (savedHist.length > 0) {
       "Why progressive disclosure over flat navigation?",
       "What lessons did he learn?"
     ],
-    '/index.html': [
-      "Why is Ryan a fit at [Company]?",
-      "How do you approach AI in product UX?",
-      "Which case study best fits [product]?"
-    ],
     '/': [
-      "Why is Ryan a fit for this role?",
+      "Is Ryan a fit for my role?",
       "Show strongest proof points.",
       "Which case study should I read first?"
     ]
@@ -1627,7 +1622,7 @@ if (savedHist.length > 0) {
       }
 
       if (!res.ok && !data) {
-        renderErrorMessage(thinking, `I'm having trouble reaching the assistant right now (${res.status}). Try again in a moment, or ask something narrower like "Why is Ryan a fit for this role?"`, text);
+        renderErrorMessage(thinking, `I'm having trouble reaching the assistant right now (${res.status}). Try again in a moment, or ask something narrower like "Is Ryan a fit for my role?"`, text);
         return;
       }
 

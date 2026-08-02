@@ -122,7 +122,12 @@ function isBadHint(h = "") {
   return (
     t.length < 2 ||
     t.length > 80 ||
-    ["this", "that", "here", "my company", "the company", "your company", "portfolio"].includes(t)
+    [
+      "this", "that", "here", "my company", "the company", "your company", "portfolio",
+      "my role", "this role", "that role", "the role", "a role", "your role", "any role",
+      "an open role", "this position", "the position", "a position", "that position", "my position",
+      "this job", "the job", "a job", "that job", "my job", "this fit", "the fit", "a fit"
+    ].includes(t)
   );
 }
 
@@ -458,6 +463,14 @@ function extractRoleHint(text = "") {
   if (!m || !m[1]) return "";
   let candidate = m[1].split(/\s+(?:at|for|in)\s+/i)[0];
   return cleanHint(candidate);
+}
+
+// True when a fit question names a company or role worth evaluating against.
+// Used to avoid answering context-free fit questions with a guess.
+function fitQuestionHasContext(text = "") {
+  const companyHint = cleanHint(extractCompanyHint(text));
+  const roleHint = cleanHint(extractRoleHint(text));
+  return Boolean((companyHint && !isBadHint(companyHint)) || (roleHint && !isBadHint(roleHint)));
 }
 
 function normalizeText(s = "") {
@@ -2135,6 +2148,22 @@ export default async function handler(req, res) {
           suggested_pills: [
             "Paste the job description text or role summary.",
             "Ask about Ryan's fit for this role."
+          ],
+          hire_intent: false,
+          context_cases: [],
+          sources: []
+        }));
+      }
+
+      // A fit question with no role/company context (e.g. "Is Ryan a fit for my role?")
+      // would force Gemini to guess. Ask for the missing context instead.
+      if (!externalJd && !fitQuestionHasContext(lastUser)) {
+        const askForRole = "I can help with that — which role are you hiring for? Paste the job description (or share a link to it), and I'll map Ryan's experience to the specific requirements. If you'd rather just name the role and company, that works too.";
+        return res.json(assistantPayload({
+          answer: askForRole,
+          suggested_pills: [
+            "Paste a job description to evaluate",
+            "What roles is Ryan targeting?"
           ],
           hire_intent: false,
           context_cases: [],

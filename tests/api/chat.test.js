@@ -84,6 +84,37 @@ function normalizeText(s = "") {
   return String(s || "").replace(/\s+/g, " ").trim();
 }
 
+function isBadHint(h = "") {
+  const t = h.toLowerCase();
+  return (
+    t.length < 2 ||
+    t.length > 80 ||
+    [
+      "this", "that", "here", "my company", "the company", "your company", "portfolio",
+      "my role", "this role", "that role", "the role", "a role", "your role", "any role",
+      "an open role", "this position", "the position", "a position", "that position", "my position",
+      "this job", "the job", "a job", "that job", "my job", "this fit", "the fit", "a fit"
+    ].includes(t)
+  );
+}
+
+function extractRoleHint(text = "") {
+  const s = String(text || "").trim();
+  if (!s) return "";
+  const m =
+    s.match(/\bfit\s+(?:as|for)\s+(?:a|an|the)?\s*([^?.!,\n]{2,80})\s+\bat\b/i) ||
+    s.match(/\b(?:role|position)\s+(?:as|for)\s+(?:a|an|the)?\s*([^?.!,\n]{2,80})/i);
+  if (!m || !m[1]) return "";
+  let candidate = m[1].split(/\s+(?:at|for|in)\s+/i)[0];
+  return cleanHint(candidate);
+}
+
+function fitQuestionHasContext(text = "") {
+  const companyHint = cleanHint(extractCompanyHint(text));
+  const roleHint = cleanHint(extractRoleHint(text));
+  return Boolean((companyHint && !isBadHint(companyHint)) || (roleHint && !isBadHint(roleHint)));
+}
+
 function detectFitIntent(text = "") {
   const t = String(text).toLowerCase();
   const strong =
@@ -295,5 +326,59 @@ describe('detectIntent', () => {
   it('returns general for empty input', () => {
     expect(detectIntent('')).toBe('general');
     expect(detectIntent()).toBe('general');
+  });
+});
+
+describe('isBadHint', () => {
+  it('flags generic role references as bad hints', () => {
+    expect(isBadHint('this role')).toBe(true);
+    expect(isBadHint('my role')).toBe(true);
+    expect(isBadHint('a fit')).toBe(true);
+    expect(isBadHint('the position')).toBe(true);
+  });
+
+  it('accepts specific role titles', () => {
+    expect(isBadHint('Senior Product Designer')).toBe(false);
+    expect(isBadHint('Staff UX Engineer')).toBe(false);
+    expect(isBadHint('Google')).toBe(false);
+  });
+
+  it('flags too-short hints', () => {
+    expect(isBadHint('a')).toBe(true);
+    expect(isBadHint('')).toBe(true);
+  });
+});
+
+describe('extractRoleHint', () => {
+  it('extracts role after "fit for" + "at"', () => {
+    expect(extractRoleHint('Is Ryan a fit for a Senior Product Designer at Google?')).toBe('Senior Product Designer');
+  });
+
+  it('extracts role after "role as"', () => {
+    expect(extractRoleHint('How does Ryan fit the role as Staff UX Engineer?')).toBe('Staff UX Engineer');
+  });
+
+  it('returns empty for no role', () => {
+    expect(extractRoleHint('Is Ryan a fit for this role?')).toBe('');
+  });
+});
+
+describe('fitQuestionHasContext', () => {
+  it('true when a specific role is named', () => {
+    expect(fitQuestionHasContext('Is Ryan a fit for a Senior Product Designer at Google?')).toBe(true);
+  });
+
+  it('true when a company is named', () => {
+    expect(fitQuestionHasContext('How is Ryan a fit at Google?')).toBe(true);
+  });
+
+  it('false when only a generic role reference exists', () => {
+    expect(fitQuestionHasContext('Is Ryan a fit for this role?')).toBe(false);
+    expect(fitQuestionHasContext('Is Ryan a fit for my role?')).toBe(false);
+  });
+
+  it('false for empty input', () => {
+    expect(fitQuestionHasContext('')).toBe(false);
+    expect(fitQuestionHasContext()).toBe(false);
   });
 });
