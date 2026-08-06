@@ -2,7 +2,7 @@
 
 Senior Product Designer. Systems thinker. Builder.
 
-[ryanschmidt.com](https://ryanschmidt.com)
+[ryanschmidt.design](https://ryanschmidt.design)
 
 ## Stack
 
