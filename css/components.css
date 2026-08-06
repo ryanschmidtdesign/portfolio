@@ -482,7 +482,7 @@
   color: var(--text);
   max-width: var(--prose);
   text-wrap: pretty;
-  hyphens: auto;
+  hyphens: manual;
 }
 
 .case-study figcaption,
@@ -2023,19 +2023,29 @@ figure.case-study-media {
 }
 
 @media (max-width: 768px) {
+  .ai-mini-wrapper {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .ai-mini-input {
+    width: calc(100vw - 92px);
+    max-width: calc(100vw - 92px);
+  }
+
   .ai-mini-suggestions {
     right: 12px;
     bottom: calc(12px + env(safe-area-inset-bottom, 0px) + 64px);
-    width: min(420px, calc(100vw - 24px));
+    width: calc(100vw - 24px);
     max-width: calc(100vw - 24px);
     gap: 0.5rem;
   }
 
   .ai-mini-suggestion-pill {
-    max-width: min(360px, calc(100vw - 24px));
-    min-height: 44px;
+    max-width: calc(100vw - 24px);
+    min-height: 40px;
     font-size: 13px;
-    padding: 0.55rem 0.8rem;
+    padding: 0.5rem 0.8rem;
   }
 
   .ai-mini-suggestion-pill:nth-child(n+3) {

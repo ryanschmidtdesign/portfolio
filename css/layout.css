@@ -371,12 +371,28 @@ body:not(.is-home) .site-main {
   transform: translateY(0);
 }
 
-/* Mobile hamburger adjustments */
+/* Mobile layout adjustments */
 @media (max-width: 768px) {
   .hamburger {
     left: 12px;
     bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     --hamburger-bottom: 12px;
     z-index: 280;
+  }
+
+  .hamburger-menu {
+    left: 12px;
+  }
+
+  .site-main {
+    padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  }
+
+  section:last-of-type,
+  .leadership-section:last-of-type,
+  .builder-section:last-of-type,
+  .mentorship-section:last-of-type,
+  .about-section:last-of-type {
+    padding-bottom: calc(var(--space-8) + 80px + env(safe-area-inset-bottom, 0px));
   }
 }

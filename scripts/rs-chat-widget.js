@@ -94,6 +94,13 @@
         will-change: height;
         overflow: hidden;
       }
+      @media (max-width: 640px) {
+        .panel {
+          left: 12px;
+          right: 12px;
+          width: auto;
+        }
+      }
       .panel.open { visibility: visible; }
       .chat-body {
         display: flex; flex-direction: column;

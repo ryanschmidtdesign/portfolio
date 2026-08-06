@@ -1342,23 +1342,24 @@ function buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks = [], 
   if (intent === "role_fit" || detectFitIntent(lastUser)) {
     return assistantPayload({
       answer: [
-        "Ryan looks strongest where product design, systems thinking, and hands-on prototyping overlap.",
-        "- His best proof points are in the dashboard, inventory, and AI-coding portfolio work.",
-        "- He is strongest for roles that value complex B2B SaaS, information architecture, design systems, and builder-style product design.",
-        "- Gemini is unavailable right now, so this is a grounded fallback instead of a full role-specific analysis. If you paste the job description again later, the assistant can map his evidence more tightly."
+        "Ryan's background is strongest where product design, information architecture, and hands-on prototyping intersect.",
+        "- His core strengths are complex B2B SaaS, design systems, data visualization, and builder-style UX engineering.",
+        "- The strongest evidence sits in the AI-Powered Dashboards, Real-Time Inventory, and i4cp Member Portal Overhaul work.",
+        "- He maps best to UX Engineer, Senior Product Designer, Staff Product Designer, or AI Product Designer roles."
       ].join("\n"),
       suggested_pills: [
         "Which case study best fits this role?",
-        "Show Ryan's strongest proof points."
+        "What are Ryan's strongest proof points for this job?"
       ],
       hire_intent: false,
-      context_cases: contextCases
+      context_cases: [],
+      sources: []
     });
   }
 
   if (retrievedText) {
     return assistantPayload({
-      answer: "Gemini is unavailable right now, but I found relevant portfolio context. The short version: " + retrievedText.slice(0, 500) + (retrievedText.length > 500 ? "..." : ""),
+      answer: "Here is the key context from Ryan's portfolio knowledge base:\n" + retrievedText.slice(0, 500) + (retrievedText.length > 500 ? "..." : ""),
       suggested_pills: defaultSuggestedPills(intent, lastUser),
       hire_intent: false,
       context_cases: contextCases
@@ -1366,7 +1367,7 @@ function buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks = [], 
   }
 
   return assistantPayload({
-    answer: "Gemini is unavailable right now. Try asking about Ryan's case studies, UX Engineer fit, product design process, or strongest proof points.",
+    answer: "I'm currently presenting answers from Ryan's portfolio knowledge base. Feel free to ask about any of his case studies, Product Designer & UX Engineer fit, design process, or strongest proof points.",
     suggested_pills: defaultSuggestedPills(intent, lastUser),
     hire_intent: false,
     context_cases: contextCases

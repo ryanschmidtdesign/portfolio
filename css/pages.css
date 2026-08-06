@@ -186,7 +186,7 @@
   color: var(--text);
   max-width: var(--prose);
   text-wrap: pretty;
-  hyphens: auto;
+  hyphens: manual;
 }
 
 .metric-highlight--xl {
@@ -305,7 +305,7 @@
   margin: 0;
   max-width: var(--prose);
   text-wrap: pretty;
-  hyphens: auto;
+  hyphens: manual;
 }
 
 .about-connections {
@@ -362,13 +362,18 @@
 }
 
 @media (max-width: 968px) {
-  .about-content {
+  .about-content,
+  .about-section .about-content {
     grid-template-columns: 1fr;
     gap: var(--space-6);
   }
 
   .about-image {
     order: -1;
+  }
+
+  .about-text {
+    max-width: 100%;
   }
 }
 
