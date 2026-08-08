@@ -14,6 +14,7 @@
     "seed-kb": "node scripts/seed-kb.js",
     "test:chat-api": "node scripts/test-chat-api.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "validate:kb": "vitest run -t 'KB integrity'"
   }
 }

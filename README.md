@@ -19,7 +19,8 @@ Senior Product Designer. Systems thinker. Builder.
 |---|---|
 | `api/chat.js` | Serverless function — portfolio chat backed by Gemini |
 | `scripts/rs-chat-widget.js` | Client-side chat widget |
-| `assets/portfolio-kb.json` | Knowledge base (cases, FAQ, policy, answer guidelines) |
+| `assets/portfolio-kb.json` | Knowledge base (cases, capabilities, FAQ, policy, answer guidelines) |
+| `scripts/seed-kb.js` | Chunks KB and seeds embeddings into Supabase (RAG) |
 | `styles.css` | CSS entry point (imports modular files from `css/`) |
 | `css/tokens.css` | Design tokens & custom properties |
 | `css/base.css` | Reset, global defaults, base elements |
@@ -29,7 +30,7 @@ Senior Product Designer. Systems thinker. Builder.
 | `css/utilities.css` | Utility classes (`.sr-only`) |
 | `sw.js` | Service worker — cache-first for static assets, network-first for API |
 | `vitest.config.js` | Test runner config |
-| `tests/api/chat.test.js` | Chat API test suite (36 tests) |
+| `tests/api/chat.test.js` | Chat API test suite (57 tests) + KB integrity checks |
 | `.github/workflows/ci.yml` | CI pipeline (lint, HTML validate, test) |
 | `_meta/AGENTS.md` | AI context — mission, audience, design principles |
 

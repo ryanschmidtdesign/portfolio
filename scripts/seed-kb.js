@@ -113,6 +113,16 @@ function buildChunks() {
     }
   }
 
+  // Capabilities vocabulary
+  if (kb.capabilities) {
+    const text = Object.entries(kb.capabilities)
+      .map(([id, cap]) => `${id}: ${Object.entries(cap).map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`).join(' | ')}`)
+      .join('\n');
+    for (const c of chunkByTokens(text)) {
+      chunks.push({ chunk_text: c, source: 'capabilities', metadata: {} });
+    }
+  }
+
   // Evidence by role
   if (kb.evidence_by_role) {
     const text = Object.entries(kb.evidence_by_role)
