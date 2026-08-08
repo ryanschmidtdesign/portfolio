@@ -382,3 +382,113 @@ describe('fitQuestionHasContext', () => {
     expect(fitQuestionHasContext()).toBe(false);
   });
 });
+
+// ---------------------------------------------------------------------------
+// KB integrity: validates that assets/portfolio-kb.json is internally
+// consistent so the capability model, router, and role/company mappings
+// cannot drift out of sync with the case registry.
+// ---------------------------------------------------------------------------
+
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+const KB_PATH = fileURLToPath(new URL('../../assets/portfolio-kb.json', import.meta.url));
+const kb = JSON.parse(readFileSync(KB_PATH, 'utf8'));
+
+describe('KB integrity: capability model', () => {
+  it('defines a capabilities vocabulary with name and description', () => {
+    expect(kb.capabilities).toBeDefined();
+    for (const [id, cap] of Object.entries(kb.capabilities)) {
+      expect(typeof cap.name).toBe('string');
+      expect(cap.name.length).toBeGreaterThan(0);
+      expect(typeof cap.description).toBe('string');
+      expect(cap.description.length).toBeGreaterThan(0);
+      expect(id).toBe(id.replace(/[^a-z0-9_]/g, ''), `capability id "${id}" must be snake_case`);
+    }
+  });
+
+  it('every capability case reference resolves to a real case id', () => {
+    const caseIds = new Set(kb.cases.map((c) => c.id));
+    for (const [id, cap] of Object.entries(kb.capabilities)) {
+      for (const caseId of cap.cases) {
+        expect(caseIds.has(caseId), `capability "${id}" references unknown case "${caseId}"`).toBe(true);
+      }
+    }
+  });
+
+  it('every case capability reference resolves to a defined capability', () => {
+    const capIds = new Set(Object.keys(kb.capabilities));
+    for (const c of kb.cases) {
+      expect(Array.isArray(c.capabilities), `case "${c.id}" is missing capabilities`).toBe(true);
+      for (const cap of c.capabilities) {
+        expect(capIds.has(cap), `case "${c.id}" references unknown capability "${cap}"`).toBe(true);
+      }
+    }
+  });
+
+  it('every case has a short_title for display', () => {
+    for (const c of kb.cases) {
+      expect(typeof c.short_title).toBe('string');
+      expect(c.short_title.length).toBeGreaterThan(0);
+    }
+  });
+});
+
+describe('KB integrity: case registry', () => {
+  it('case ids are unique', () => {
+    const ids = kb.cases.map((c) => c.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it('case slugs are unique', () => {
+    const slugs = kb.cases.map((c) => c.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+  });
+});
+
+describe('KB integrity: role and company mappings', () => {
+  it('every evidence_by_role best_case resolves to a real case id', () => {
+    const caseIds = new Set(kb.cases.map((c) => c.id));
+    for (const [role, data] of Object.entries(kb.evidence_by_role)) {
+      for (const caseId of data.best_cases) {
+        expect(caseIds.has(caseId), `evidence_by_role.${role} references unknown case "${caseId}"`).toBe(true);
+      }
+    }
+  });
+
+  it('every company_fit_patterns best_case resolves to a real case id', () => {
+    const caseIds = new Set(kb.cases.map((c) => c.id));
+    for (const [pattern, data] of Object.entries(kb.company_fit_patterns)) {
+      for (const caseId of data.best_cases) {
+        expect(caseIds.has(caseId), `company_fit_patterns.${pattern} references unknown case "${caseId}"`).toBe(true);
+      }
+    }
+  });
+});
+
+describe('KB integrity: router', () => {
+  it('every keyword_to_case target resolves to a real case id', () => {
+    const caseIds = new Set(kb.cases.map((c) => c.id));
+    for (const [keyword, targets] of Object.entries(kb.router.keyword_to_case)) {
+      for (const caseId of targets) {
+        expect(caseIds.has(caseId), `router keyword "${keyword}" references unknown case "${caseId}"`).toBe(true);
+      }
+    }
+  });
+
+  it('every page_to_case target resolves to a real case id or null', () => {
+    const caseIds = new Set(kb.cases.map((c) => c.id));
+    for (const [page, caseId] of Object.entries(kb.router.page_to_case)) {
+      if (caseId !== null) {
+        expect(caseIds.has(caseId), `router page "${page}" references unknown case "${caseId}"`).toBe(true);
+      }
+    }
+  });
+
+  it('every fallback_case_order entry resolves to a real case id', () => {
+    const caseIds = new Set(kb.cases.map((c) => c.id));
+    for (const caseId of kb.router.fallback_case_order) {
+      expect(caseIds.has(caseId), `fallback_case_order references unknown case "${caseId}"`).toBe(true);
+    }
+  });
+});

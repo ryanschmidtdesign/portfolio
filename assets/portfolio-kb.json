@@ -1,8 +1,8 @@
 {
   "meta": {
     "owner": "Ryan Schmidt",
-    "version": "2.1",
-    "last_updated": "2026-06-23",
+    "version": "2.2",
+    "last_updated": "2026-08-08",
     "voice": "concise, conversational, outcome-first, lightly human. Never robotic.",
     "primary_goal": "Help the visitor decide Ryan is worth a 30-minute conversation, and make it easy to start one.",
     "audience": ["hiring managers", "design leaders", "peer designers", "recruiters"],
@@ -206,9 +206,11 @@
       "id": "member-portal-overhaul",
       "slug": "case-member-portal-overhaul",
       "title": "i4cp Member Portal Overhaul",
+      "short_title": "Member Portal Redesign",
       "url": "https://ryanschmidt.design/member-portal-overhaul.html",
       "status": "coming_soon",
       "tags": ["IA", "Research", "Member Experience", "UX Strategy"],
+      "capabilities": ["information_architecture", "research", "enterprise_saas", "complex_workflows"],
       "audience": "Enterprise members consuming research insights",
       "problem": "Members struggled to find key research quickly because of navigation and taxonomy friction.",
       "proof_points": [
@@ -236,8 +238,10 @@
       "id": "dashboard",
       "slug": "case-dashboard",
       "title": "AI-Powered Dashboards",
+      "short_title": "AI-Powered Dashboards",
       "url": "https://ryanschmidt.design/dashboard.html",
       "tags": ["Workflow", "Dashboards", "Decision Support", "AI"],
+      "capabilities": ["ai_product_design", "ux_engineering", "research", "enterprise_saas", "product_strategy", "complex_workflows", "prototyping"],
       "audience": "Internal leaders tracking KPIs and exceptions",
       "problem": "Fragmented metrics made it hard to spot priorities and act quickly.",
       "proof_points": [
@@ -304,8 +308,10 @@
       "id": "inventory",
       "slug": "case-inventory",
       "title": "Real-Time Inventory",
+      "short_title": "Real-Time Inventory",
       "url": "https://ryanschmidt.design/inventory.html",
       "tags": ["Enterprise", "Real-time", "Inventory", "MVP"],
+      "capabilities": ["enterprise_saas", "complex_workflows", "research", "product_strategy", "information_architecture", "prototyping"],
       "audience": "Ops managers overseeing stock across locations",
       "problem": "Spreadsheet handoffs caused mistrust in stock counts and fulfillment decisions.",
       "proof_points": [
@@ -375,8 +381,10 @@
       "id": "ai-coding-portfolio",
       "slug": "case-ai-coding-portfolio",
       "title": "AI-Coding my Portfolio",
+      "short_title": "Engineering My Portfolio",
       "url": "https://ryanschmidt.design/ai-coding-portfolio.html",
       "tags": ["AI Coding", "Portfolio", "Cursor", "Front-end", "UX Engineering"],
+      "capabilities": ["ux_engineering", "front_end_development", "ai_product_design", "prototyping"],
       "audience": "Hiring managers evaluating design-to-code and AI-augmented workflow skills",
       "problem": "Most portfolios show design thinking without demonstrating the ability to build and ship in code.",
       "proof_points": [
@@ -432,6 +440,62 @@
       ]
     }
   ],
+  "capabilities": {
+    "ai_product_design": {
+      "name": "AI Product Design",
+      "description": "Designing AI-enabled experiences that layer on trusted workflows and verifiable data rather than black-box outputs.",
+      "cases": ["dashboard", "ai-coding-portfolio"],
+      "keywords": ["ai product", "ai ux", "llm", "generative ai", "copilot", "agent", "ai-first"]
+    },
+    "ux_engineering": {
+      "name": "UX Engineering",
+      "description": "Moving from design intent to shipped front-end code, pairing early with engineers instead of relying on handoffs.",
+      "cases": ["ai-coding-portfolio", "dashboard"],
+      "keywords": ["ux engineer", "design engineer", "front-end", "code", "cursor", "prototypes in code"]
+    },
+    "information_architecture": {
+      "name": "Information Architecture",
+      "description": "Simplifying complex content and navigation so users can find what they need quickly.",
+      "cases": ["member-portal-overhaul", "inventory"],
+      "keywords": ["ia", "taxonomy", "navigation", "card sorting", "tree testing", "content discovery"]
+    },
+    "research": {
+      "name": "Research & Discovery",
+      "description": "Identifying real problems through interviews and evidence before designing, and letting findings shape decisions.",
+      "cases": ["member-portal-overhaul", "dashboard", "inventory"],
+      "keywords": ["research", "user interviews", "discovery", "usability tests", "journey mapping"]
+    },
+    "enterprise_saas": {
+      "name": "Enterprise SaaS",
+      "description": "Designing for complex operational workflows, governance, and adoption across business-critical systems.",
+      "cases": ["inventory", "dashboard", "member-portal-overhaul"],
+      "keywords": ["enterprise", "b2b", "saas", "internal tools", "ops", "governance"]
+    },
+    "product_strategy": {
+      "name": "Product Strategy",
+      "description": "Framing ambiguous problems, defining scope, and making defining decisions under constraints.",
+      "cases": ["dashboard", "inventory"],
+      "keywords": ["strategy", "defining decision", "scope", "mvp", "prioritization"]
+    },
+    "complex_workflows": {
+      "name": "Complex Workflows",
+      "description": "Supporting multi-surface, role-based, and multi-location workflows without losing clarity.",
+      "cases": ["inventory", "dashboard", "member-portal-overhaul"],
+      "keywords": ["workflow", "role-based", "multi-location", "real-time", "operational"]
+    },
+    "front_end_development": {
+      "name": "Front-End Development",
+      "description": "Building production front-end features with HTML, CSS, and JavaScript as part of a repeatable system.",
+      "cases": ["ai-coding-portfolio"],
+      "keywords": ["front-end", "html", "css", "javascript", "react", "component system"]
+    },
+    "prototyping": {
+      "name": "Prototyping",
+      "description": "Validating ideas with low-fi through high-fidelity and code prototypes before committing to build.",
+      "cases": ["dashboard", "inventory", "ai-coding-portfolio"],
+      "keywords": ["prototyping", "wireframes", "clickable prototypes", "hi-fi figma"]
+    }
+  },
   "faq": [
     {
       "q": "What does Ryan enjoy outside of work?",
