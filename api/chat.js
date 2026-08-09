@@ -621,11 +621,42 @@ function isComingSoonCase(kb, caseId) {
   return String(c?.status || "").toLowerCase() === "coming_soon";
 }
 
+// Map free text to capability ids by matching the capability name, its
+// keywords, or the first significant token of its name ("ai work" -> the "ai"
+// in "AI Product Design"). Short tokens (ai, ux) match as whole words so
+// "email" never reads as "ai".
+function capabilityIdsFromText(kb, text) {
+  const caps = kb?.capabilities || {};
+  const t = normalizeText(text).toLowerCase();
+  if (!t) return [];
+  const matches = [];
+  const tokenHit = (token) => {
+    const s = String(token || "").toLowerCase();
+    if (!s) return false;
+    if (s.length <= 3) {
+      return new RegExp(`(^|[^a-z0-9])${s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^a-z0-9]|$)`).test(t);
+    }
+    return t.includes(s);
+  };
+  for (const [id, cap] of Object.entries(caps)) {
+    const name = String(cap?.name || "").toLowerCase();
+    const firstNameToken = name.split(/[^a-z0-9]+/i)[0] || "";
+    const keywords = Array.isArray(cap?.keywords) ? cap.keywords : [];
+    const hit =
+      (name && t.includes(name)) ||
+      keywords.some(k => tokenHit(k)) ||
+      tokenHit(firstNameToken);
+    if (hit) matches.push(id);
+  }
+  return matches;
+}
+
 function userExplicitlyAskedForCase(kb, text, caseId) {
   const c = (kb?.cases || []).find(x => x.id === caseId);
   if (!c) return false;
   const t = normalizeText(text).toLowerCase();
-  const terms = [caseId, c.title, ...(c.tags || [])]
+  const capNames = (c.capabilities || []).map(id => kb?.capabilities?.[id]?.name).filter(Boolean);
+  const terms = [caseId, c.title, c.short_title, ...(c.tags || []), ...capNames]
     .filter(Boolean)
     .map(x => String(x).toLowerCase());
   return terms.some(term => term.length > 4 && t.includes(term));
@@ -680,6 +711,20 @@ function chooseCaseIdsFromText(kb, messagesArray, fallbackText, max = 2, pageUrl
     ? messagesArray.filter(m => m.role === "user").map(m => m.content).join(" ")
     : fallbackText;
   const t = normalizeText(recentUserText).toLowerCase();
+
+  // Capability-aware routing: mention of a capability (by name, keyword, or
+  // shorthand like "ai work") surfaces its associated cases before keyword routing.
+  const capIds = capabilityIdsFromText(kb, recentUserText);
+  for (const capId of capIds) {
+    const capCases = kb?.capabilities?.[capId]?.cases || [];
+    for (const id of capCases) {
+      if (!id || picked.includes(id)) continue;
+      if (isComingSoonCase(kb, id) && !userExplicitlyAskedForCase(kb, recentUserText, id)) continue;
+      picked.push(id);
+      if (picked.length >= max) return picked;
+    }
+  }
+
   const router = kb?.router || {};
   const map = router.keyword_to_case || router.keywordToCase || {};
   for (const [keyword, caseIds] of Object.entries(map)) {
@@ -1519,7 +1564,13 @@ async function callGemini(systemPrompt, messages, webSnippets, kb, answerStyle, 
 
   if (shouldIncludePortfolioIndex && kb && kb.cases?.length) {
     const ctx = kb.cases
-      .map(c => `- ${c.title} (URL: ${c.url || "none"}) \u2014 ${c.summary_short || c.summary || c.summaryShort || ""} [${(c.tags||[]).join(", ")}]`.trim())
+      .map(c => {
+        const capNames = (c.capabilities || [])
+          .map(id => kb.capabilities?.[id]?.name)
+          .filter(Boolean);
+        const tags = [...(c.tags || []), ...capNames].join(", ");
+        return `- ${c.title} (URL: ${c.url || "none"}) \u2014 ${c.summary_short || c.summary || c.summaryShort || ""} [${tags}]`.trim();
+      })
       .join("\n");
     contents.push({ role:"user", parts:[{ text: `### PORTFOLIO INDEX (high-level)\n${ctx}` }]});
   }

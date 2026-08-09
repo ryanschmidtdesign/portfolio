@@ -641,3 +641,67 @@
 .case-study--inventory [aria-label="Decisions and trade-offs"] .section-divider:nth-of-type(2) {
   margin-top: 72px;
 }
+
+/* -------------------------------------------------------
+   Homepage: selected work + how I create impact
+   --------------------------------------------------------*/
+.home-work,
+.home-impact {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--space-section-lg) var(--page-gutter);
+}
+
+.home-work .evidence-grid {
+  margin-top: var(--space-6);
+}
+
+.home-impact .impact-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+  padding: var(--space-6) var(--space-7);
+  background: var(--surface-elevated-strong);
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card-strong);
+}
+
+.home-impact .impact-metric {
+  text-align: center;
+}
+
+.home-impact .impact-metric .metric {
+  display: block;
+  font-size: var(--fs-display-sm);
+  line-height: var(--lh-display);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.home-impact .impact-metric .metric-label {
+  font-size: var(--kpi-label-size);
+  letter-spacing: var(--kpi-label-ls);
+  line-height: var(--kpi-label-line-height);
+  text-transform: uppercase;
+  color: var(--kpi-label-color);
+  display: block;
+  max-width: 28ch;
+  margin-inline: auto;
+}
+
+@media (max-width: 768px) {
+  .home-impact .impact-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .home-impact .impact-metrics {
+    grid-template-columns: 1fr;
+  }
+}

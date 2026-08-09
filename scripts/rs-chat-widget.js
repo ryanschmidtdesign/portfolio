@@ -925,7 +925,8 @@ if (savedHist.length > 0) {
     '/': [
       "Is Ryan a fit for my role?",
       "Show strongest proof points.",
-      "Which case study should I read first?"
+      "Show me the AI work",
+      "Which case fits an ops product?"
     ]
   };
 

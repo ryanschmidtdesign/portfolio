@@ -930,6 +930,94 @@
   color: var(--text);
 }
 
+/* -------------------------------------------------------
+   Evidence grid + capability pills (homepage + related evidence)
+   --------------------------------------------------------*/
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.evidence-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--surface-elevated);
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out), background 200ms var(--ease-out);
+}
+
+.evidence-card:hover,
+.evidence-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-strong);
+  background: var(--surface-elevated-strong);
+}
+
+.evidence-card h3 {
+  font-size: var(--fs-md);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--lh-md);
+  color: var(--text);
+  margin: 0;
+}
+
+.evidence-card p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-prose);
+  color: var(--text);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.evidence-card .capability-pills {
+  margin-top: auto;
+}
+
+.capability-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 0;
+}
+
+.capability-pill {
+  font-size: var(--fs-xs);
+  line-height: 1.2;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-caps-tight);
+  text-transform: uppercase;
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.625rem;
+}
+
+@media (max-width: 768px) {
+  .evidence-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Related Evidence sits outside the prose column so the grid has room */
+.case-study section#related {
+  max-width: var(--impact-callout-max);
+}
+
+.case-study section#related .evidence-grid {
+  margin-top: var(--space-4);
+}
+
 .case-study dl.meta dd {
   color: var(--text);
 }

@@ -383,6 +383,127 @@ describe('fitQuestionHasContext', () => {
   });
 });
 
+function capabilityIdsFromText(kb, text) {
+  const caps = kb?.capabilities || {};
+  const t = normalizeText(text).toLowerCase();
+  if (!t) return [];
+  const matches = [];
+  const tokenHit = (token) => {
+    const s = String(token || "").toLowerCase();
+    if (!s) return false;
+    if (s.length <= 3) {
+      return new RegExp(`(^|[^a-z0-9])${s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^a-z0-9]|$)`).test(t);
+    }
+    return t.includes(s);
+  };
+  for (const [id, cap] of Object.entries(caps)) {
+    const name = String(cap?.name || "").toLowerCase();
+    const firstNameToken = name.split(/[^a-z0-9]+/i)[0] || "";
+    const keywords = Array.isArray(cap?.keywords) ? cap.keywords : [];
+    const hit =
+      (name && t.includes(name)) ||
+      keywords.some(k => tokenHit(k)) ||
+      tokenHit(firstNameToken);
+    if (hit) matches.push(id);
+  }
+  return matches;
+}
+
+const miniKb = {
+  capabilities: {
+    ai_product_design: {
+      name: "AI Product Design",
+      keywords: ["ai product", "ai ux", "llm", "generative ai", "copilot", "agent", "ai-first"],
+      cases: ["dashboard", "ai-coding-portfolio"]
+    },
+    ux_engineering: {
+      name: "UX Engineering",
+      keywords: ["ux engineer", "design engineer", "front-end", "code", "cursor", "prototypes in code"],
+      cases: ["ai-coding-portfolio", "dashboard"]
+    },
+    information_architecture: {
+      name: "Information Architecture",
+      keywords: ["ia", "taxonomy", "navigation", "card sorting", "tree testing", "content discovery"],
+      cases: ["member-portal-overhaul", "inventory"]
+    },
+    research: {
+      name: "Research & Discovery",
+      keywords: ["research", "user interviews", "discovery", "usability tests", "journey mapping"],
+      cases: ["member-portal-overhaul", "dashboard", "inventory"]
+    },
+    enterprise_saas: {
+      name: "Enterprise SaaS",
+      keywords: ["enterprise", "b2b", "saas", "internal tools", "ops", "governance"],
+      cases: ["inventory", "dashboard", "member-portal-overhaul"]
+    },
+    product_strategy: {
+      name: "Product Strategy",
+      keywords: ["strategy", "defining decision", "scope", "mvp", "prioritization"],
+      cases: ["dashboard", "inventory"]
+    },
+    complex_workflows: {
+      name: "Complex Workflows",
+      keywords: ["workflow", "role-based", "multi-location", "real-time", "operational"],
+      cases: ["inventory", "dashboard", "member-portal-overhaul"]
+    },
+    front_end_development: {
+      name: "Front-End Development",
+      keywords: ["front-end", "html", "css", "javascript", "react", "component system"],
+      cases: ["ai-coding-portfolio"]
+    },
+    prototyping: {
+      name: "Prototyping",
+      keywords: ["prototyping", "wireframes", "clickable prototypes", "hi-fi figma"],
+      cases: ["dashboard", "inventory", "ai-coding-portfolio"]
+    }
+  }
+};
+
+describe('capabilityIdsFromText', () => {
+  it('maps "show me the AI work" to ai_product_design', () => {
+    expect(capabilityIdsFromText(miniKb, "show me the AI work")).toContain('ai_product_design');
+  });
+
+  it('maps "which case fits an ops product" to enterprise_saas', () => {
+    expect(capabilityIdsFromText(miniKb, "which case fits an ops product")).toContain('enterprise_saas');
+  });
+
+  it('maps "information architecture" to information_architecture', () => {
+    expect(capabilityIdsFromText(miniKb, "information architecture")).toContain('information_architecture');
+  });
+
+  it('maps "prototyping" to prototyping', () => {
+    expect(capabilityIdsFromText(miniKb, "prototyping")).toContain('prototyping');
+  });
+
+  it('maps "ux engineering" to ux_engineering', () => {
+    expect(capabilityIdsFromText(miniKb, "ux engineering")).toContain('ux_engineering');
+  });
+
+  it('maps "research" to research', () => {
+    expect(capabilityIdsFromText(miniKb, "research")).toContain('research');
+  });
+
+  it('returns empty array for empty or null text', () => {
+    expect(capabilityIdsFromText(miniKb, "")).toEqual([]);
+    expect(capabilityIdsFromText(miniKb, null)).toEqual([]);
+    expect(capabilityIdsFromText(miniKb, undefined)).toEqual([]);
+  });
+
+  it('returns empty array for gibberish text', () => {
+    expect(capabilityIdsFromText(miniKb, "fjkdsla jfdsaop")).toEqual([]);
+  });
+
+  it('returns empty array when capabilities are missing', () => {
+    expect(capabilityIdsFromText({}, "research")).toEqual([]);
+    expect(capabilityIdsFromText(null, "research")).toEqual([]);
+  });
+
+  it('does not match "email" as the "ai" token', () => {
+    expect(capabilityIdsFromText(miniKb, "what is ryan email?")).not.toContain('ai_product_design');
+  });
+});
+
 // ---------------------------------------------------------------------------
 // KB integrity: validates that assets/portfolio-kb.json is internally
 // consistent so the capability model, router, and role/company mappings
