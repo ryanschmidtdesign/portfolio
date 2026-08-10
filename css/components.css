@@ -1009,15 +1009,6 @@
   }
 }
 
-/* Related Evidence sits outside the prose column so the grid has room */
-.case-study section#related {
-  max-width: var(--impact-callout-max);
-}
-
-.case-study section#related .evidence-grid {
-  margin-top: var(--space-4);
-}
-
 .case-study dl.meta dd {
   color: var(--text);
 }
