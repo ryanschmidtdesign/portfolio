@@ -206,6 +206,14 @@
 
   --color-primary: var(--accent);
 
+  /* === Brand mark (Variant #12 — two overlapping hexagons) ===
+     Source of truth: scripts/generate-logo.js — keep in sync. */
+  --brand-primary: #4F8CFF;
+  --brand-secondary: #6BA3FF;
+  --brand-highlight: #D9ECFF;
+  --brand-bg: #081423;
+  --brand-bg-dark: #0F1E33;
+
   /* === Status colors === */
   --green: #059669;
   --green-soft: rgb(5 150 105 / 0.12);

@@ -25,18 +25,18 @@
   <meta property="og:description"
     content="Research‑heavy IA, member experience, and design systems that turn complex B2B workflows into clear, shippable tools.">
   <meta property="og:url" content="https://ryanschmidt.design/">
-  <meta property="og:image" content="https://ryanschmidt.design/assets/images/family-pic.jpg"> 
-  <meta property="og:image:alt" content="Ryan Schmidt — Senior Product Designer & UX Engineer, Austin TX">
+  <meta property="og:image" content="https://ryanschmidt.design/assets/logo/og-image.png">
+  <meta property="og:image:alt" content="Ryan Schmidt — Senior Product Designer & UX Engineer. Brand mark of two overlapping hexagons.">
   <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:type" content="image/png">
 <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ryan Schmidt - Senior Product Designer & UX Engineer">
 <meta name="twitter:description" content="Portfolio of Ryan Schmidt.">
-<meta name="twitter:image" content="https://ryanschmidt.design/assets/images/family-pic.jpg">
+<meta name="twitter:image" content="https://ryanschmidt.design/assets/logo/og-image.png">
 <meta name="twitter:image:alt" content="Ryan Schmidt - Senior Product Designer & UX Engineer, Austin TX">
 
   <!-- Browser behavior / UX -->
@@ -58,11 +58,12 @@
 
   <!-- CSS (preload + apply) -->
   <link rel="stylesheet" href="./styles.css">
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 
   <!-- Icons & manifest -->
-<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-<link rel="manifest" href="./site.webmanifest">
+  <link rel="icon" href="./favicon.ico" sizes="48x48">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="manifest" href="./site.webmanifest">
 <link rel="llms" href="/assets/llms.txt" type="text/markdown">
 <link rel="llms" href="/assets/llms-full.txt" type="text/markdown">
 
@@ -145,6 +146,7 @@
             "publisher": {
               "@id": "https://ryanschmidt.design/#person"
             },
+            "logo": "https://ryanschmidt.design/assets/logo/logo.svg",
             "inLanguage": "en-US"
           },
           {
@@ -212,18 +214,36 @@
       top: 18px;
       left: 18px;
       z-index: 220;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
       color: var(--accent);
-      font-size: 2rem;
-      font-weight: 900;
-      line-height: 1.1;
       text-decoration: none;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
       background: transparent;
       padding: 0;
       border-radius: 0;
       box-shadow: none;
       transition: transform 180ms ease, color 180ms ease;
+    }
+
+    .home-logo:hover {
+      transform: translateY(-1px);
+    }
+
+    .home-logo-mark {
+      display: block;
+      width: 36px;
+      height: 36px;
+      margin-bottom: 2px;
+    }
+
+    .home-logo-name {
+      font-size: 1.55rem;
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .home-role {
@@ -417,7 +437,11 @@
 <body class="is-home">
   <main id="main" class="home-gallery">
     <h1 class="sr-only">Ryan Schmidt — Senior Product Designer & UX Engineer</h1>
-    <div class="home-logo">Ryan<br>Schmidt<span class="home-role">Senior Product Designer<br>& UX Engineer</span></div>
+    <a class="home-logo" href="./index.html" aria-label="Ryan Schmidt — Senior Product Designer & UX Engineer, home">
+      <img class="home-logo-mark" src="./assets/logo/logo.svg" width="36" height="36" alt="" aria-hidden="true">
+      <span class="home-logo-name">Ryan<br>Schmidt</span>
+      <span class="home-role">Senior Product Designer<br>& UX Engineer</span>
+    </a>
 
     <div class="home-layout">
       <aside class="home-left">
@@ -566,6 +590,10 @@
   <script src="./scripts/rs-chat-widget.js?v=3" defer></script>
   </main>
   <footer class="site-footer">
+    <a class="site-footer-brand" href="./index.html">
+      <img src="./favicon.svg" width="16" height="16" alt="" aria-hidden="true">
+      Ryan Schmidt — Senior Product Designer &amp; UX Engineer
+    </a>
     <p>&copy; 2026 Ryan Schmidt</p>
   </footer>
   <script>

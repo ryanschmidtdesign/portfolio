@@ -33,6 +33,14 @@ Senior Product Designer. Systems thinker. Builder.
 | `tests/api/chat.test.js` | Chat API test suite (57 tests) + KB integrity checks |
 | `.github/workflows/ci.yml` | CI pipeline (lint, HTML validate, test) |
 | `_meta/AGENTS.md` | AI context — mission, audience, design principles |
+| `scripts/generate-logo.js` | Brand mark generator (Variant #12 — two overlapping hexagons) |
+
+## Brand
+
+- **Mark**: Variant #12 — two overlapping hexagons. Front hex `#4F8CFF` (slightly heavier stroke), rear hex `#6BA3FF` dimmed 15%, subtle overlap bloom, thin strokes, rounded corners. No shadows, no 3D. Symbolizes design + engineering collaboration and systems thinking.
+- **Assets**: `assets/logo/` (logo.svg, logo-dark.svg, logo-light.svg, og-image.png, social-avatar.png), root `favicon.svg` / `favicon.ico` / `apple-touch-icon.png`, `assets/icons/` (favicon-16/32/48.png + Android 192/512).
+- **Tokens**: `--brand-primary`, `--brand-secondary`, `--brand-highlight`, `--brand-bg`, `--brand-bg-dark` in `css/tokens.css`.
+- **Regenerate**: `node scripts/generate-logo.js` (uses `sharp`, a dev dependency).
 
 ## Chat Architecture
 

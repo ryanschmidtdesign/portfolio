@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ryan Schmidt favicon">
-  <rect width="64" height="64" rx="12" fill="#0F172A" />
-
-  <!-- central white plate for contrast -->
-  <circle cx="32" cy="32" r="18" fill="#F8FAFC" />
-
-  <!-- diagonal muted stripe accent to match the site palette -->
-  <rect x="8" y="28" width="48" height="10" rx="5" fill="#475569" transform="rotate(-28 32 32)" />
-
-  <!-- subtle inner ring to add polish -->
-  <circle cx="32" cy="32" r="20" fill="none" stroke="#0F172A" stroke-width="2" opacity="0.08" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ryan Schmidt — brand mark"><defs><radialGradient id="bloom" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D9ECFF" stop-opacity="0.30"/><stop offset="100%" stop-color="#D9ECFF" stop-opacity="0"/></radialGradient></defs><rect width="64" height="64" rx="14.08" fill="#081423"/><circle cx="32" cy="32" r="28.799999999999997" fill="url(#bloom)"/><path d="M27.968 51.2L44.59568775266122 41.599999999999994L44.59568775266122 22.39999999999999L27.967999999999996 12.8L11.34031224733878 22.4L11.340312247338776 41.599999999999994Z" fill="#6BA3FF" stroke="#6BA3FF" stroke-width="5.376" stroke-linejoin="round" opacity="0.85"/><path d="M36.032 51.2L52.65968775266122 41.599999999999994L52.65968775266121 22.39999999999999L36.032 12.8L19.404312247338776 22.4L19.404312247338773 41.599999999999994Z" fill="#4F8CFF" stroke="#4F8CFF" stroke-width="5.376" stroke-linejoin="round" opacity="1"/></svg>

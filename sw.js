@@ -2,6 +2,7 @@ const CACHE = 'portfolio-v2';
 const PRECACHE_URLS = [
   '/styles.css',
   '/favicon.svg',
+  '/favicon.ico',
   '/scripts/rs-chat-widget.js'
 ];
 
