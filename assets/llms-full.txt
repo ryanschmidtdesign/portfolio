@@ -18,7 +18,7 @@
 
 - Email: via LinkedIn
 - LinkedIn: https://www.linkedin.com/in/ryanschmidt1989/
-- Resume: https://ryanschmidt.design/assets/ryan-schmidt-resume-june-2026.pdf
+- Resume: https://ryanschmidt.design/assets/ryan-schmidt-resume-september-2026.pdf
 - AI assistant endpoint: https://ryanschmidt.design/api/chat (POST)
 
 ## About

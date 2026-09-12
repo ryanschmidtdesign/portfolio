@@ -32,7 +32,7 @@
   "links": {
     "site": "https://ryanschmidt.design",
     "about": "https://ryanschmidt.design/about.html",
-    "resume_pdf": "https://ryanschmidt.design/ryan-schmidt-resume-august-2026.pdf",
+    "resume_pdf": "https://ryanschmidt.design/assets/ryan-schmidt-resume-september-2026.pdf",
     "linkedin_public": "https://www.linkedin.com/in/ryanschmidt1989/",
     "primary_contact": "https://www.linkedin.com/in/ryanschmidt1989/"
   },
@@ -138,73 +138,70 @@
   },
   "resume": {
     "current_role": {
-      "title": "CX/UX Designer (Senior Product Designer)",
+      "title": "CX/UX Designer",
       "org": "i4cp (Institute for Corporate Productivity)",
-      "dates": "August 2024–Present",
+      "dates": "February 2026–Present",
       "highlights": [
-        "Restructured IA and navigation taxonomies; **+22% task success** (internal benchmark).",
-        "Standardized component tokens for research discovery, unifying patterns across platforms.",
-        "Partnering with engineering on member portal redesign and internal admin tooling."
+        "Sole designer across member portal, analytics, and admin tools; own the design system, UX standards, and roadmap prioritization.",
+        "Ship interactive HTML/CSS/JS prototypes to staging via Cursor, eliminating spec ambiguity before engineering starts.",
+        "Architect conversational AI workflows, turning complex HR research into prompt-driven insights.",
+        "Conduct qualitative user inquiry to shape requirements and align executive stakeholders on high-value roadmap initiatives."
       ]
     },
     "prior": [
       {
         "title": "Senior Product Designer",
         "org": "D-Tools, Inc.",
-        "dates": "January 2022–August 2024",
+        "dates": "October 2021–February 2026 (Promoted January 2025)",
         "highlights": [
-          "Built a tokenized design system of 100+ components reaching **92% engineer adoption** and cutting UI defects by **38%**.",
-          "Designed AI dashboard suite during early-access beta (**71% engagement**, **62% multi-dashboard adoption**).",
-          "Facilitated bi-weekly design critiques across 5 designers and 6 PMs to standardize enterprise UX."
+          "Owned Cloud UX across 5 core modules as platform scaled from 6,500 to 18,000 active users.",
+          "Architected real-time inventory MVP via field research and testing, driving an 18% recurring revenue lift and 8% YoY adoption.",
+          "Scaled design system to 100+ production components with 92% engineer adoption.",
+          "Designed AI dashboard suite during early-access beta (**71% engagement**, **62% multi-dashboard adoption**)."
         ]
       },
       {
-        "title": "Product Designer",
-        "org": "D-Tools, Inc.",
-        "dates": "February 2020–January 2022",
-        "highlights": [
-          "Led end-to-end design for core B2B workflows across web and mobile (**6,500 to 18,000 MAUs**).",
-          "Shipped real-time inventory MVP tied to **+18% recurring revenue** and **+8% product adoption** at 1 year.",
-          "Partnered closely with engineering, support, and sales to eliminate customer friction points."
-        ]
-      },
-      {
-        "title": "UX Design Mentor",
+        "title": "Senior Design Group Critique Facilitator",
         "org": "Designlab",
-        "dates": "February 2022–Present",
+        "dates": "May 2021–April 2026",
         "role_type": "part-time mentorship",
         "highlights": [
-          "Mentored 50+ emerging designers 1:1 through UX Academy curriculum, research, and capstone projects.",
-          "Facilitated 400+ structured group critique sessions as a Senior Facilitator."
+          "Facilitated 400+ structured critique sessions and mentored 1,500+ designers, coaching on problem framing, UX research methods, and design rationale."
         ],
         "disclose_only_if_asked": false
       },
       {
-        "title": "UX/UI Designer",
-        "org": "Bytemark",
-        "dates": "August 2018–January 2020",
+        "title": "Product Designer",
+        "org": "Bytemark, Inc.",
+        "dates": "2021",
         "highlights": [
-          "Designed white-label transit ticketing applications deployed across 15+ municipal transit agencies nationwide.",
-          "Built accessible mobile ticketing interfaces and responsive web administration portals."
+          "Designed white-label transit ticketing applications and mobile interfaces."
         ],
-        "disclose_only_if_asked": false,
-        "disclose_note": "Mention when visitor asks about mobile ticketing, transit, or earlier career history."
+        "disclose_only_if_asked": false
       },
       {
-        "title": "UI Designer & Developer",
+        "title": "UI/UX Designer & Operations Specialist",
         "org": "Texas Association of School Boards (TASB)",
-        "dates": "November 2015–August 2018",
+        "dates": "2014–2021",
         "highlights": [
-          "Designed and front-end coded enterprise web applications serving school board members statewide.",
-          "Built accessible, responsive interfaces using semantic HTML, CSS/Sass, and JavaScript."
+          "Designed enterprise web tools and conducted statewide facility research and demographic analysis."
         ],
-        "disclose_only_if_asked": false,
-        "disclose_note": "Mention when visitor asks about front-end coding foundations, HTML/CSS/JS experience, or earlier design-engineering background."
+        "disclose_only_if_asked": false
+      },
+      {
+        "title": "Aircrewman (AWF3)",
+        "org": "US Navy Reserve",
+        "dates": "2011–2014",
+        "highlights": [
+          "Naval aircrew operations with Secret Clearance."
+        ],
+        "disclose_only_if_asked": false
       }
     ],
     "education": [
-      { "degree": "B.S. in Communication (Graphic Design Concentration)", "school": "Clarion University of Pennsylvania", "dates": "2009–2013" },
-      { "degree": "Design System Certification", "school": "Memorisely", "dates": "2022" }
+      { "degree": "BA, Anthropology (Focus: Qualitative Research Methods)", "school": "Clarion University of Pennsylvania", "dates": "2008–2013" },
+      { "degree": "Fullstack Developer Certification", "school": "Scrimba", "dates": "2025" },
+      { "degree": "Design Systems Certification", "school": "Memorisely", "dates": "2022" }
     ],
     "skills_primary": ["Information Architecture", "Design Systems", "UX Strategy", "AI-augmented Product UX", "Prototyping in Code"],
     "skills_supporting": ["Research Ops", "Data Visualization", "Token Architecture", "Figma to React handoff", "HTML/CSS/JS"],

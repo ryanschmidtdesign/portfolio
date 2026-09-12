@@ -51,6 +51,36 @@
       "source": "/llms.txt",
       "destination": "/assets/llms.txt",
       "permanent": true
+    },
+    {
+      "source": "/assets/ryan-schmidt-resume-august-2026.pdf",
+      "destination": "/assets/ryan-schmidt-resume-september-2026.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/assets/ryan-schmidt-resume-june-2026.pdf",
+      "destination": "/assets/ryan-schmidt-resume-september-2026.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/ryan-schmidt-resume-september-2026.pdf",
+      "destination": "/assets/ryan-schmidt-resume-september-2026.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/ryan-schmidt-resume-august-2026.pdf",
+      "destination": "/assets/ryan-schmidt-resume-september-2026.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/resume.pdf",
+      "destination": "/assets/ryan-schmidt-resume-september-2026.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/resume",
+      "destination": "/assets/ryan-schmidt-resume-september-2026.pdf",
+      "permanent": false
     }
   ]
 }
