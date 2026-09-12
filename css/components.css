@@ -960,6 +960,12 @@
   background: var(--surface-elevated-strong);
 }
 
+.evidence-card:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: var(--shadow-card);
+  transition: transform 60ms cubic-bezier(0.2, 0, 0, 1);
+}
+
 .evidence-card h3 {
   font-size: var(--fs-md);
   font-weight: var(--weight-semibold);
@@ -2031,6 +2037,11 @@ figure.case-study-media {
 .ai-mini-send:hover {
   transform: translateY(-1px);
   background: var(--accent-hover);
+}
+
+.ai-mini-send:active {
+  transform: translateY(0) scale(0.94);
+  transition: transform 60ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .ai-mini-send:focus-visible {

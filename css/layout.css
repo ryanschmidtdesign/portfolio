@@ -168,6 +168,11 @@ body:not(.is-home) .site-main {
   box-shadow: var(--shadow-menu-hover);
 }
 
+.hamburger:active {
+  transform: translateY(0) scale(0.96);
+  transition: transform 60ms cubic-bezier(0.2, 0, 0, 1);
+}
+
 .hamburger:focus-visible {
   outline: none;
   box-shadow: 0 0 0 4px rgba(79, 110, 247, 0.16), var(--shadow-menu-hover);
