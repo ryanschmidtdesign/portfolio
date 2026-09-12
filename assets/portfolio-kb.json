@@ -40,8 +40,8 @@
     "headline": "Senior Product Designer at i4cp, working at the seam of design and engineering.",
     "one_liner": "Research-driven IA, design systems, and AI-augmented product UX for enterprise audiences.",
     "elevator_30s": "Ryan Schmidt is a Senior Product Designer at i4cp focused on information architecture, member experience, and AI-augmented product UX. He turns messy research and legacy interfaces into systems that scale, with measurable outcomes like task success, component reuse, and adoption. Strengths sit at the seam of design and engineering, including token-first design systems, prototyping in code, and AI tooling like Cursor and Claude.",
-    "bio_75_words": "Ryan Schmidt is a Senior Product Designer at i4cp who works at the seam of design and engineering. His focus is research-driven information architecture, design systems, and AI-augmented product UX for enterprise audiences. Recent outcomes include a 22% lift in task success, 85% component reuse on a token-first system, and a 71% jump in dashboard engagement during beta. He's based in Austin, TX.",
-    "bio_150_words": "Ryan Schmidt is a Senior Product Designer at i4cp (Institute for Corporate Productivity), where he leads platform experience strategy across member portal, internal admin, and research discovery surfaces. His focus is research-driven information architecture, token-first design systems, and AI-augmented product UX for enterprise audiences. Before i4cp, he led design system work at D-Tools, where he shipped 85% component reuse on a legacy B2B platform and cut white-labeling requests by roughly half. Ryan works at the seam of design and engineering, prototyping in code, partnering closely with engineers, and using AI tooling like Cursor and Claude to ship faster. Recent measurable outcomes include a 22% lift in task success after an IA overhaul, a 71% jump in dashboard engagement during beta, and an 18% lift in recurring revenue tied to a real-time inventory MVP. He's based in Austin, TX.",
+    "bio_75_words": "Ryan Schmidt is a Senior Product Designer at i4cp who works at the seam of design and engineering. His focus is research-driven information architecture, design systems, and AI-augmented product UX for enterprise audiences. Recent outcomes include a 22% lift in task success, 92% engineer adoption on a 100+ component design system, and a 71% jump in dashboard engagement during beta. He's based in Austin, TX.",
+    "bio_150_words": "Ryan Schmidt is a Senior Product Designer at i4cp (Institute for Corporate Productivity), where he leads platform experience strategy across member portal, internal admin, and research discovery surfaces. His focus is research-driven information architecture, token-first design systems, and AI-augmented product UX for enterprise audiences. Before i4cp, he led design system work at D-Tools, where he shipped a 100+ component system with 92% engineer adoption, cutting UI defects by 38%. Ryan works at the seam of design and engineering, prototyping in code, partnering closely with engineers, and using AI tooling like Cursor and Claude to ship faster. Recent measurable outcomes include a 22% lift in task success after an IA overhaul, a 71% jump in dashboard engagement during beta, and an 18% lift in recurring revenue tied to a real-time inventory MVP. He's based in Austin, TX.",
     "specialties": ["Information Architecture", "Design Systems", "AI-augmented Product UX", "Member Experience", "Design + Engineering Collaboration"],
     "keywords": ["IA", "navigation", "taxonomy", "onboarding", "content discovery", "component library", "tokens", "B2B SaaS", "enterprise research", "AI", "AI-augmented UX", "LLM", "decision support", "UX engineer", "design engineer", "prototyping in code", "Figma", "React", "Cursor", "Claude"],
     "principles": [
@@ -82,7 +82,7 @@
     {
       "id": "tokens_over_patches",
       "stance": "Most legacy UI problems aren't a redesign problem. They're a token problem.",
-      "context": "On an 8-year-old B2B platform, tokens plus governance got to 85% component reuse and cut white-labeling requests in half, without a big-bang rewrite.",
+      "context": "On an 8-year-old B2B platform, a tokenized design system of 100+ components achieved 92% engineer adoption and cut defects by 38%, without a big-bang rewrite.",
       "use_when": ["design system", "legacy ui", "consistency", "white labeling", "tokens"]
     },
     {
@@ -138,66 +138,80 @@
   },
   "resume": {
     "current_role": {
-      "title": "Senior Product Designer",
+      "title": "CX/UX Designer (Senior Product Designer)",
       "org": "i4cp (Institute for Corporate Productivity)",
-      "dates": "February 2026–Present",
+      "dates": "August 2024–Present",
       "highlights": [
-        "Restructured IA and onboarding; **+22% task success** (internal benchmark).",
-        "Standardized components for research discovery; **reduced time-to-insight**.",
-        "Partnering with engineering on a member portal redesign and internal admin tooling."
+        "Restructured IA and navigation taxonomies; **+22% task success** (internal benchmark).",
+        "Standardized component tokens for research discovery, unifying patterns across platforms.",
+        "Partnering with engineering on member portal redesign and internal admin tooling."
       ]
     },
     "prior": [
       {
         "title": "Senior Product Designer",
         "org": "D-Tools, Inc.",
-        "dates": "January 2025–February 2026",
+        "dates": "January 2022–August 2024",
         "highlights": [
-          "Owned design strategy across enterprise modules on an 8-year-old B2B platform.",
-          "Led the rollout of a token-first design system across multiple product lines."
+          "Built a tokenized design system of 100+ components reaching **92% engineer adoption** and cutting UI defects by **38%**.",
+          "Designed AI dashboard suite during early-access beta (**71% engagement**, **62% multi-dashboard adoption**).",
+          "Facilitated bi-weekly design critiques across 5 designers and 6 PMs to standardize enterprise UX."
         ]
       },
       {
         "title": "Product Designer",
         "org": "D-Tools, Inc.",
-        "dates": "October 2021–December 2024",
+        "dates": "February 2020–January 2022",
         "highlights": [
-          "Built a token-first design system reaching **~85% component reuse**.",
-          "Cut white-labeling requests by **~50%** through standardized UI patterns and governance.",
-          "Shipped real-time inventory MVP tied to **+18% recurring revenue** and **+8% product adoption** at 1 year."
+          "Led end-to-end design for core B2B workflows across web and mobile (**6,500 to 18,000 MAUs**).",
+          "Shipped real-time inventory MVP tied to **+18% recurring revenue** and **+8% product adoption** at 1 year.",
+          "Partnered closely with engineering, support, and sales to eliminate customer friction points."
         ]
       },
       {
-        "title": "UX Mentor",
+        "title": "UX Design Mentor",
         "org": "Designlab",
-        "dates": "May 2021–April 2026",
+        "dates": "February 2022–Present",
         "role_type": "part-time mentorship",
         "highlights": [
-          "Mentored junior designers through UX fundamentals, portfolio reviews, and career transitions over five years."
+          "Mentored 50+ emerging designers 1:1 through UX Academy curriculum, research, and capstone projects.",
+          "Facilitated 400+ structured group critique sessions as a Senior Facilitator."
         ],
         "disclose_only_if_asked": false
       },
       {
-        "title": "Product Designer",
+        "title": "UX/UI Designer",
         "org": "Bytemark",
-        "dates": "March 2021–October 2021",
+        "dates": "August 2018–January 2020",
         "highlights": [
-          "Worked across Bytemark's product suite with primary focus on the mobile app for transit ticketing.",
-          "Closest comparable competitor today would be Swiftly."
+          "Designed white-label transit ticketing applications deployed across 15+ municipal transit agencies nationwide.",
+          "Built accessible mobile ticketing interfaces and responsive web administration portals."
         ],
-        "disclose_only_if_asked": true,
-        "disclose_note": "Mention only if visitor asks about Bytemark, transit, mobile ticketing, or earlier work history."
+        "disclose_only_if_asked": false,
+        "disclose_note": "Mention when visitor asks about mobile ticketing, transit, or earlier career history."
+      },
+      {
+        "title": "UI Designer & Developer",
+        "org": "Texas Association of School Boards (TASB)",
+        "dates": "November 2015–August 2018",
+        "highlights": [
+          "Designed and front-end coded enterprise web applications serving school board members statewide.",
+          "Built accessible, responsive interfaces using semantic HTML, CSS/Sass, and JavaScript."
+        ],
+        "disclose_only_if_asked": false,
+        "disclose_note": "Mention when visitor asks about front-end coding foundations, HTML/CSS/JS experience, or earlier design-engineering background."
       }
     ],
     "education": [
-      { "degree": "B.A. in Anthropology", "school": "Clarion University" }
+      { "degree": "B.S. in Communication (Graphic Design Concentration)", "school": "Clarion University of Pennsylvania", "dates": "2009–2013" },
+      { "degree": "Design System Certification", "school": "Memorisely", "dates": "2022" }
     ],
     "skills_primary": ["Information Architecture", "Design Systems", "UX Strategy", "AI-augmented Product UX", "Prototyping in Code"],
-    "skills_supporting": ["Research Ops", "Data Visualization", "Token Architecture", "Figma to React handoff"],
+    "skills_supporting": ["Research Ops", "Data Visualization", "Token Architecture", "Figma to React handoff", "HTML/CSS/JS"],
     "achievements_top": [
       "Improved task success by **+22%** after IA/onboarding overhaul (internal).",
-      "Achieved **~85% component reuse** on a legacy B2B platform; cut white-labeling requests by **~50%**.",
-      "Increased dashboard engagement by **+71%** during beta (AI-Powered Dashboards case).",
+      "Built design system of 100+ components achieving **92% engineer adoption** and cutting frontend defects by **38%**.",
+      "Increased dashboard engagement by **+71%** during beta (**62% multi-dashboard adoption**).",
       "Drove **+18% recurring revenue** and **+8% product adoption** after Real-Time Inventory MVP (1-year outcomes)."
     ]
   },
@@ -580,7 +594,7 @@
   "deterministic_answers": {
   "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
   "looking_for": "Ryan is open to the right opportunity, especially roles where design and engineering share a seat. His strongest targets are UX Engineer, Senior Product Designer, Staff Product Designer, and AI Product Designer roles.",
-  "proof_points": "Ryan's strongest proof points are +22% task success after an IA/onboarding overhaul, ~85% component reuse with ~50% fewer white-labeling requests, +71% dashboard engagement during beta, and +18% recurring revenue after the Real-Time Inventory MVP.",
+  "proof_points": "Ryan's strongest proof points are +22% task success after an IA/onboarding overhaul, 100+ components with 92% engineer adoption (cutting UI defects by 38%), +71% dashboard engagement during beta, and +18% recurring revenue after the Real-Time Inventory MVP.",
   "ux_engineer_fit": "Yes. Ryan codes, prototypes in the browser, uses AI tooling daily, and works closely with engineers. The strongest evidence is his AI-Coding my Portfolio case, coded prototyping habits, and AI dashboard/product workflow thinking."
   },
 
@@ -607,7 +621,7 @@
     ],
     "proof": [
       "+71% dashboard engagement during beta.",
-      "~85% component reuse and ~50% fewer white-labeling requests.",
+      "92% engineer adoption across 100+ tokenized components (38% fewer defects).",
       "+18% recurring revenue after Real-Time Inventory MVP."
     ]
   },
@@ -631,7 +645,7 @@
     "use_when": ["figma", "design tool", "design systems platform", "collaboration tool"],
     "angle": "Emphasize design systems, token architecture, component governance, and designer-engineer workflow.",
     "best_cases": ["ai-coding-portfolio"],
-    "proof": ["~85% component reuse", "~50% fewer white-labeling requests", "partnered with 10+ engineers"]
+    "proof": ["92% engineer adoption (100+ components)", "38% fewer defects", "partnered with 10+ engineers"]
   },
   "ai_products": {
     "use_when": ["ai", "llm", "copilot", "agent", "automation", "analytics"],
@@ -643,7 +657,7 @@
     "use_when": ["enterprise", "b2b", "saas", "platform", "admin", "internal tools"],
     "angle": "Emphasize IA, scalable systems, adoption, governance, and reducing operational friction.",
     "best_cases": ["ai-coding-portfolio", "inventory", "dashboard"],
-    "proof": ["~85% component reuse", "+18% recurring revenue", "+8% product adoption"]
+    "proof": ["92% engineer adoption (100+ components)", "+18% recurring revenue", "+8% product adoption"]
   }
 },
 
@@ -828,7 +842,7 @@
     {
       "intent": "company_fit_specific",
       "prompt": "Why is Ryan a fit at Figma?",
-      "answer": "Ryan's strongest fit for a design-tool company is his ability to connect design systems, implementation constraints, and designer workflow. His D-Tools design system work reached **~85% component reuse** and cut white-labeling requests by **~50%**, which maps well to teams building tools for consistency, collaboration, and scale. Want the deeper version?"
+      "answer": "Ryan's strongest fit for a design-tool company is his ability to connect design systems, implementation constraints, and designer workflow. His D-Tools design system of 100+ components achieved **92% engineer adoption** and cut frontend defects by **38%**, which maps well to teams building tools for consistency, collaboration, and scale. Want the deeper version?"
     },
     {
       "intent": "ux_engineer_proof",
@@ -848,7 +862,7 @@
     {
       "intent": "about_short",
       "prompt": "Give me a 3-sentence bio of Ryan.",
-      "answer": "Ryan Schmidt is a Senior Product Designer at i4cp focused on research-heavy IA, design systems, and AI-augmented product UX. He works at the seam of design and engineering, prototyping in code and partnering tightly with engineers. Recent wins include **+22% task success** from an IA overhaul and **~85% component reuse** on a token-first design system. Want a longer version or a tailored fit for a specific role?"
+      "answer": "Ryan Schmidt is a Senior Product Designer at i4cp focused on research-heavy IA, design systems, and AI-augmented product UX. He works at the seam of design and engineering, prototyping in code and partnering tightly with engineers. Recent wins include **+22% task success** from an IA overhaul and **92% engineer adoption** on a 100+ component design system. Want a longer version or a tailored fit for a specific role?"
     },
     {
       "intent": "company_fit",
@@ -883,7 +897,7 @@
     {
       "intent": "resume_proof",
       "prompt": "What are Ryan's top 3 proof points?",
-      "answer": "**+22% task success** after the IA overhaul at i4cp, **~85% component reuse** on the D-Tools design system (with **~50% fewer** white-labeling requests), and **+71% dashboard engagement** in beta on the AI dashboard work. Want context on any of them?"
+      "answer": "**+22% task success** after the IA overhaul at i4cp, **92% engineer adoption** across 100+ components on the D-Tools design system (cutting UI defects by **38%**), and **+71% dashboard engagement** in beta on the AI dashboard work. Want context on any of them?"
     },
     {
       "intent": "looking_for",
@@ -913,7 +927,7 @@
     {
       "intent": "proudest_work",
       "prompt": "What project is Ryan most proud of and why?",
-      "answer": "The D-Tools design system, because it changed how the team shipped. Token-first foundation, **~85%** component reuse, **~50% fewer** white-labeling requests, and an intake process that kept it healthy after launch. It's the case where systems thinking did the heavy lifting."
+      "answer": "The D-Tools design system, because it changed how the team shipped. Token-first foundation of 100+ components, **92% engineer adoption**, **38% fewer defects**, and an intake process that kept it healthy after launch. It's the case where systems thinking did the heavy lifting."
     },
     {
       "intent": "research_under_constraints",
@@ -973,7 +987,7 @@
     {
       "intent": "company_fit_specific",
       "prompt": "Why is Ryan a fit at a B2B SaaS company like Stripe?",
-      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove **~85% component reuse** on a legacy B2B platform, cut white-labeling requests by **~50%**, and shipped an inventory MVP tied to **+18% recurring revenue**. For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
+      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove **92% engineer adoption** on a 100+ component design system on a legacy B2B platform, cut frontend defects by **38%**, and shipped an inventory MVP tied to **+18% recurring revenue**. For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
     },
     {
       "intent": "stakeholder_influence",
