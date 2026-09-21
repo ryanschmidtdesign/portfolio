@@ -209,11 +209,25 @@
 
   <style>
     /* Left vertical titles */
-    .home-logo {
+    .home-header {
       position: fixed;
       top: 18px;
       left: 18px;
       z-index: 220;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      width: clamp(260px, 20vw, 300px);
+    }
+    
+    .home-profile-photo {
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: -4px;
+    }
+
+    .home-logo {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -257,6 +271,34 @@
       line-height: 1.5;
       white-space: nowrap;
     }
+    
+    .home-positioning {
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .home-desktop-nav {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .home-desktop-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 180ms ease;
+    }
+
+    .home-desktop-nav a:hover {
+      color: var(--accent);
+    }
+
     body.is-home {
       background: var(--bg) !important;
     }
@@ -329,8 +371,8 @@
     .home-title__text {
       font-size: clamp(3.6rem, 8vw, 10rem);
       line-height: 1.05;
-      font-weight: 700;
-      color: rgba(15, 23, 42, 0.38);
+      font-weight: 600; /* reduced weight */
+      color: rgba(15, 23, 42, 0.7); /* much darker grey */
       letter-spacing: var(--tracking-tighter, -0.025em);
       text-transform: uppercase;
       max-width: 100%;
@@ -352,7 +394,7 @@
       line-height: 1.4;
       letter-spacing: 0.01em;
       text-transform: none;
-      color: rgba(15, 23, 42, 0.55);
+      color: #0f172a; /* near-black body colour */
       width: 100%;
       max-width: 100%;
       transition: color 180ms ease;
@@ -360,7 +402,7 @@
 
     .home-title:hover .home-title__summary,
     .home-title.is-active .home-title__summary {
-      color: rgba(15, 23, 42, 0.85);
+      color: #000;
     }
 
     .home-title[data-reveal] {
@@ -422,10 +464,40 @@
       gap: var(--space-6);
       min-width: 0;
     }
+    
+    .impact-metric {
+      transition: transform 0.2s ease;
+    }
+    a.impact-metric:hover {
+      transform: scale(1.05);
+    }
+
+    @media (min-width: 881px) {
+      .is-home header {
+        display: none !important;
+      }
+    }
 
     @media (max-width: 880px) {
       .home-layout {
         padding: 2rem 1.25rem;
+      }
+      .home-header {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+      }
+      .home-profile-photo {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 0;
+      }
+      .home-logo-mark {
+        display: none;
+      }
+      .home-positioning,
+      .home-desktop-nav {
+        display: none;
       }
       .home-titles { display: none; }
       .hamburger { left: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); --hamburger-bottom: 12px; z-index: 280; }
@@ -442,11 +514,21 @@
 <body class="is-home">
   <main id="main" class="home-gallery">
     <h1 class="sr-only">Ryan Schmidt — Senior Product Designer & UX Engineer</h1>
-    <a class="home-logo" href="./index.html" aria-label="Ryan Schmidt — Senior Product Designer & UX Engineer, home">
-      <img class="home-logo-mark" src="./assets/logo/logo.svg" width="36" height="36" alt="" aria-hidden="true">
-      <span class="home-logo-name">Ryan<br>Schmidt</span>
-      <span class="home-role">Senior Product Designer<br>& UX Engineer</span>
-    </a>
+    <div class="home-header">
+      <img src="https://via.placeholder.com/72" alt="Ryan Schmidt" class="home-profile-photo" width="72" height="72">
+      <a class="home-logo" href="./index.html" aria-label="Ryan Schmidt — Senior Product Designer & UX Engineer, home">
+        <img class="home-logo-mark" src="./assets/logo/logo.svg" width="36" height="36" alt="" aria-hidden="true">
+        <span class="home-logo-name">Ryan<br>Schmidt</span>
+        <span class="home-role">Senior Product Designer<br>& UX Engineer</span>
+      </a>
+      <p class="home-positioning">I design enterprise SaaS products where the workflow is the hard part — inventory, dashboards, taxonomies.</p>
+      <nav class="home-desktop-nav" aria-label="Desktop navigation">
+        <a href="#main">Work</a>
+        <a href="pages/about.html">About</a>
+        <a href="assets/ryan-schmidt-resume-september-2026.pdf" target="_blank">Resume</a>
+        <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank">LinkedIn</a>
+      </nav>
+    </div>
 
     <div class="home-layout">
       <aside class="home-left">
@@ -503,30 +585,30 @@
     <section class="home-impact" aria-label="How I create impact">
       <h2 class="sr-only">How I Create Impact</h2>
       <div class="impact-metrics">
-        <div class="impact-metric">
+        <a href="pages/dashboard.html" class="impact-metric" style="text-decoration:none; color:inherit; display:block;">
           <strong class="metric" data-animate>+71%</strong>
-          <span class="metric-label">dashboard engagement (beta)</span>
-        </div>
-        <div class="impact-metric">
+          <span class="metric-label">dashboard engagement (beta)<br><strong>D-Tools</strong></span>
+        </a>
+        <a href="pages/dashboard.html" class="impact-metric" style="text-decoration:none; color:inherit; display:block;">
           <strong class="metric" data-animate>62%</strong>
-          <span class="metric-label">multi-dashboard users (beta)</span>
-        </div>
-        <div class="impact-metric">
+          <span class="metric-label">multi-dashboard users (beta)<br><strong>D-Tools</strong></span>
+        </a>
+        <a href="pages/inventory.html" class="impact-metric" style="text-decoration:none; color:inherit; display:block;">
           <strong class="metric" data-animate>92%</strong>
-          <span class="metric-label">design system adoption (D-Tools)</span>
-        </div>
-        <div class="impact-metric">
+          <span class="metric-label">design system adoption<br><strong>D-Tools</strong></span>
+        </a>
+        <a href="pages/inventory.html" class="impact-metric" style="text-decoration:none; color:inherit; display:block;">
           <strong class="metric" data-animate>+8%</strong>
-          <span class="metric-label">product adoption (1-yr)</span>
-        </div>
-        <div class="impact-metric">
+          <span class="metric-label">product adoption (1-yr)<br><strong>D-Tools</strong></span>
+        </a>
+        <a href="pages/inventory.html" class="impact-metric" style="text-decoration:none; color:inherit; display:block;">
           <strong class="metric" data-animate>+18%</strong>
-          <span class="metric-label">recurring revenue (1-yr)</span>
-        </div>
-        <div class="impact-metric">
+          <span class="metric-label">recurring revenue (1-yr)<br><strong>D-Tools</strong></span>
+        </a>
+        <a href="pages/member-portal-overhaul.html" class="impact-metric" style="text-decoration:none; color:inherit; display:block;">
           <strong class="metric">~50%</strong>
-          <span class="metric-label">fewer white-labeling requests</span>
-        </div>
+          <span class="metric-label">fewer white-labeling requests<br><strong>D-Tools</strong></span>
+        </a>
       </div>
     </section>
 
