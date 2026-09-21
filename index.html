@@ -245,13 +245,6 @@
       transform: translateY(-1px);
     }
 
-    .home-logo-mark {
-      display: block;
-      width: 36px;
-      height: 36px;
-      margin-bottom: 2px;
-    }
-
     .home-logo-name {
       font-size: 1.55rem;
       font-weight: 900;
@@ -279,26 +272,6 @@
       margin: 0;
     }
 
-    .home-desktop-nav {
-      display: flex;
-      gap: 16px;
-      margin-top: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .home-desktop-nav a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 180ms ease;
-    }
-
-    .home-desktop-nav a:hover {
-      color: var(--accent);
-    }
-
     body.is-home {
       background: var(--bg) !important;
     }
@@ -306,7 +279,7 @@
 
     .home-titles {
       position: absolute;
-      inset: 0 auto 0 calc(5.8865625rem + 72.45px);
+      inset: 0 auto 0 clamp(320px, 25vw + 40px, 400px);
       z-index: 30;
       overflow: hidden; /* this is the carousel "window" — it scrolls itself now */
       padding-right: 3rem; /* Expanded the clipping container horizontally to prevent right-side text cutoff */
@@ -517,17 +490,10 @@
     <div class="home-header">
       <img src="https://via.placeholder.com/72" alt="Ryan Schmidt" class="home-profile-photo" width="72" height="72">
       <a class="home-logo" href="./index.html" aria-label="Ryan Schmidt — Senior Product Designer & UX Engineer, home">
-        <img class="home-logo-mark" src="./assets/logo/logo.svg" width="36" height="36" alt="" aria-hidden="true">
         <span class="home-logo-name">Ryan<br>Schmidt</span>
         <span class="home-role">Senior Product Designer<br>& UX Engineer</span>
       </a>
       <p class="home-positioning">I design enterprise SaaS products where the workflow is the hard part — inventory, dashboards, taxonomies.</p>
-      <nav class="home-desktop-nav" aria-label="Desktop navigation">
-        <a href="#main">Work</a>
-        <a href="pages/about.html">About</a>
-        <a href="assets/ryan-schmidt-resume-september-2026.pdf" target="_blank">Resume</a>
-        <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank">LinkedIn</a>
-      </nav>
     </div>
 
     <div class="home-layout">

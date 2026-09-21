@@ -401,3 +401,20 @@ body:not(.is-home) .site-main {
     padding-bottom: calc(var(--space-8) + 80px + env(safe-area-inset-bottom, 0px));
   }
 }
+
+/* Desktop overrides for always-visible navigation menu */
+@media (min-width: 881px) {
+  .hamburger {
+    display: none !important;
+  }
+  .hamburger-menu {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    bottom: var(--space-5) !important;
+  }
+  .hamburger-menu a, .hamburger-menu .menu-trigger {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
