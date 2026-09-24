@@ -2591,9 +2591,10 @@ figure.case-study-media {
   width: 100%;
   min-width: 420px;
   border-radius: 20px;
-  padding: 0 44px 0 16px;
-  height: 40px;
-  line-height: 40px;
+  padding: 10px 44px 10px 16px;
+  height: auto !important;
+  line-height: normal !important;
+  -webkit-appearance: none;
   margin: 0;
   vertical-align: middle;
   font-size: 14px;
@@ -2602,6 +2603,7 @@ figure.case-study-media {
 }
 
 .ai-mini-wrapper.consolidated-nav .ai-mini-input::placeholder {
+  line-height: normal !important;
   color: rgba(0,0,0,0.4);
 }
 
@@ -2615,7 +2617,7 @@ figure.case-study-media {
 .ai-mini-wrapper.consolidated-nav .ai-mini-send {
   position: absolute;
   right: 6px;
-  top: 18px;
+  top: 17px;
   background: var(--accent-primary, #4F6EF7);
   color: white;
   border: none;
@@ -2651,4 +2653,10 @@ figure.case-study-media {
   .ai-mini-wrapper.consolidated-nav .ai-mini-nav button.menu-trigger {
     font-size: 13px;
   }
+}
+
+
+/* Fix global layout overlap for floating NLI widget */
+body {
+  padding-bottom: 240px !important;
 }
