@@ -565,11 +565,9 @@
   
 
   function typewriterStop() {}
-  }
 
   // Restart typewriter when mini input is cleared manually
   
-
   // Will be called after wireExternalTrigger runs
   function initTypewriter() {}
 
