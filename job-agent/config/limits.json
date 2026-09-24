@@ -1,0 +1,9 @@
+{
+  "maxDailyApplications": 25,
+  "weeklyTokenBudget": 1500000,
+  "tokenAlertThresholdPercentage": 0.75,
+  "delayBetweenActionsMs": {
+    "min": 1500,
+    "max": 4000
+  }
+}

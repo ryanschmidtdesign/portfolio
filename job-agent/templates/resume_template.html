@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @page { margin: 28px 36px; size: A4; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #111827;
+      line-height: 1.4;
+      font-size: 13.5px;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      border-bottom: 2px solid #000;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .name {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin: 0 0 4px 0;
+    }
+    .title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #4b5563;
+      margin: 0 0 6px 0;
+    }
+    .contacts {
+      font-size: 12px;
+      color: #4b5563;
+    }
+    .contacts a {
+      color: #111827;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 3px;
+      margin: 14px 0 8px 0;
+      color: #1f2937;
+    }
+    .summary {
+      font-size: 13px;
+      color: #374151;
+      margin-bottom: 12px;
+    }
+    .job {
+      margin-bottom: 12px;
+    }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+    .job-role {
+      font-weight: 700;
+      font-size: 13.5px;
+    }
+    .job-company {
+      font-weight: 600;
+      color: #4b5563;
+    }
+    .job-dates {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    ul {
+      margin: 4px 0 0 16px;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 3px;
+      color: #374151;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      font-size: 12.5px;
+    }
+    .skill-group strong {
+      color: #111827;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1 class="name">{{name}}</h1>
+    <div class="title">{{headline}}</div>
+    <div class="contacts">
+      {{location}} &bull; {{phone}} &bull; <a href="mailto:{{email}}">{{email}}</a> &bull; <a href="{{portfolio}}">{{portfolio}}</a> &bull; <a href="{{linkedin}}">LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="section-title">Professional Summary</div>
+  <div class="summary">{{tailoredSummary}}</div>
+
+  <div class="section-title">Core Competencies & Stack</div>
+  <div class="skills-grid">
+    <div class="skill-group"><strong>Product & UX:</strong> {{uxSkills}}</div>
+    <div class="skill-group"><strong>Technical Prototyping:</strong> {{techSkills}}</div>
+    <div class="skill-group"><strong>Systems & Strategy:</strong> {{strategySkills}}</div>
+    <div class="skill-group"><strong>AI & Tooling:</strong> {{aiSkills}}</div>
+  </div>
+
+  <div class="section-title">Selected Experience</div>
+  {{experienceList}}
+
+  <div class="section-title">Education & Foundation</div>
+  <div class="job">
+    <div class="job-header">
+      <div><span class="job-role">{{degree}}</span> &bull; <span class="job-company">{{institution}}</span></div>
+      <div class="job-dates">2007 – 2011</div>
+    </div>
+  </div>
+</body>
+</html>

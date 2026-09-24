@@ -2547,6 +2547,16 @@ figure.case-study-media {
   overflow: visible !important;
 }
 
+
+.ai-mini-wrapper.consolidated-nav .menu-submenu::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 16px;
+}
+
 .ai-mini-wrapper.consolidated-nav .menu-item-group:hover .menu-submenu,
 .ai-mini-wrapper.consolidated-nav .menu-item-group:focus-within .menu-submenu {
   display: flex;
