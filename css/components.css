@@ -2438,7 +2438,7 @@ figure.case-study-media {
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(16px);
   padding: 12px;
-  border-radius: 28px;
+  border-radius: 16px;
   box-shadow: 0 12px 32px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
   border: 1px solid rgba(0,0,0,0.06);
   width: 100%;
@@ -2591,8 +2591,8 @@ figure.case-study-media {
   color: var(--text-primary);
   width: 100%;
   min-width: 420px;
-  border-radius: 20px;
-  padding: 10px 44px 10px 16px;
+  border-radius: 12px;
+  padding: 10px 44px 10px 20px;
   height: auto !important;
   line-height: normal !important;
   -webkit-appearance: none;
@@ -2622,7 +2622,7 @@ figure.case-study-media {
   background: var(--accent-primary, #4F6EF7);
   color: white;
   border: none;
-  border-radius: 14px;
+  border-radius: 8px;
   width: 28px;
   height: 28px;
   display: flex;

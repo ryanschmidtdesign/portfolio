@@ -851,21 +851,16 @@ if (savedHist.length > 0) {
   ensureKbLoaded().catch(() => {});
 
 
-  function initTypewriter() {
-    buildTypewriter();
-    
-  }
+  
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       wireExternalTrigger();
-      initTypewriter();
       buildFloatingCaseStudyPills();
       wireFloatingCaseStudyPills();
     });
   } else {
     wireExternalTrigger();
-    initTypewriter();
     buildFloatingCaseStudyPills();
     wireFloatingCaseStudyPills();
   }
@@ -992,11 +987,23 @@ if (savedHist.length > 0) {
     const inputEl = miniWrapper.querySelector('.ai-mini-input');
     if (inputEl) {
       const pills = getCurrentPagePills();
-      if (pills && pills.length > 0) {
-        inputEl.placeholder = "Try asking: \"" + pills[0] + "\"";
-      } else {
-        inputEl.placeholder = "Ask a question about Ryan's work...";
+      const targetText = (pills && pills.length > 0) 
+        ? "Try asking: \"" + pills[0] + "\"" 
+        : "Ask a question about Ryan's work...";
+      
+      let charIndex = 0;
+      inputEl.placeholder = "";
+      
+      function typeChar() {
+        if (charIndex < targetText.length) {
+          inputEl.placeholder += targetText.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeChar, 30 + Math.random() * 30);
+        }
       }
+      
+      // Delay the start of the typing animation slightly for better UX
+      setTimeout(typeChar, 400);
     }
 
     renderFloatingCaseStudyPills();
