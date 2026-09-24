@@ -1070,7 +1070,7 @@ if (savedHist.length > 0) {
   // ─── Floating Case-Study Pills (light-DOM) ─────────────────────────────────
 
   function buildFloatingCaseStudyPills() {
-    if (!isCaseStudyPage()) return;
+    
 
     const miniWrapper = document.querySelector('.ai-mini-wrapper');
     if (!miniWrapper) return;
@@ -1082,11 +1082,22 @@ if (savedHist.length > 0) {
     floatingPillsEl.setAttribute('aria-label', 'Suggested questions for this case study');
 
     miniWrapper.parentNode.insertBefore(floatingPillsEl, miniWrapper);
+
+    const inputEl = miniWrapper.querySelector('.ai-mini-input');
+    if (inputEl) {
+      const pills = getCurrentPagePills();
+      if (pills && pills.length > 0) {
+        inputEl.placeholder = "Try asking: \"" + pills[0] + "\"";
+      } else {
+        inputEl.placeholder = "Ask a question about Ryan's work...";
+      }
+    }
+
     renderFloatingCaseStudyPills();
   }
 
   function renderFloatingCaseStudyPills(customPills) {
-    if (!isCaseStudyPage()) return;
+    
     if (!floatingPillsEl) return;
 
     const pills = getCurrentPagePills(customPills).slice(0, 3);
@@ -1106,7 +1117,7 @@ if (savedHist.length > 0) {
 
   function wireFloatingCaseStudyPills() {
     if (floatingPillsBound) return;
-    if (!isCaseStudyPage()) return;
+    
 
     document.addEventListener('click', function (e) {
       const pill = e.target.closest('.ai-mini-suggestion-pill');

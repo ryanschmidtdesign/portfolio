@@ -2049,95 +2049,61 @@ figure.case-study-media {
   box-shadow: 0 0 0 4px rgba(79, 110, 247, 0.16);
 }
 
-/* Case-study floating suggestion pills above mini input */
+/* Global floating suggestion pills above mini input */
 .ai-mini-suggestions {
   position: fixed;
-  right: var(--space-5);
-  bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px) + 68px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px) + 114px);
   z-index: 239;
-  width: min(420px, calc(100vw - 84px));
-  max-width: min(420px, calc(100vw - 84px));
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-2);
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   pointer-events: none;
   opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity 180ms var(--ease-out),
-    transform 180ms var(--ease-out);
+  transition: opacity 240ms cubic-bezier(0.16, 1, 0.3, 1), transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  width: max-content;
+  max-width: calc(100vw - 24px);
 }
 
 .ai-mini-suggestions.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
 
 .ai-mini-suggestion-pill {
-  max-width: 100%;
-  border: 1px solid var(--surface-dark-border);
-  border-radius: var(--radius-pill);
-  padding: 0.625rem 1rem;
-  background: rgba(6, 12, 22, 0.82);
-  color: var(--text-on-accent);
-  box-shadow: var(--shadow-menu);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  color: var(--text-secondary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
   font-family: inherit;
-  font-size: var(--fs-sm);
-  font-weight: var(--weight-medium);
-  line-height: 1.2;
-  text-align: right;
+  font-size: 13px;
+  font-weight: 500;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   cursor: pointer;
-  transition:
-    transform 160ms var(--ease-out),
-    background 160ms ease,
-    border-color 160ms ease,
-    box-shadow 160ms ease;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
-.ai-mini-suggestion-pill:hover,
-.ai-mini-suggestion-pill:focus-visible {
-  transform: translateY(-1px);
-  background: rgba(15, 23, 42, 0.94);
-  border-color: rgba(79, 110, 247, 0.42);
-  box-shadow: var(--shadow-menu-hover);
+.ai-mini-suggestion-pill:hover {
+  background: white;
+  color: var(--text-primary);
+  border-color: rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
-.ai-mini-suggestion-pill:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(79, 110, 247, 0.16), var(--shadow-menu-hover);
-}
-
-@media (max-width: 768px) {
-  .ai-mini-wrapper {
-    right: 12px;
-    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .ai-mini-input {
-    width: calc(100vw - 92px);
-    max-width: calc(100vw - 92px);
-  }
-
+@media (max-width: 600px) {
   .ai-mini-suggestions {
-    right: 12px;
-    bottom: calc(12px + env(safe-area-inset-bottom, 0px) + 64px);
-    width: calc(100vw - 24px);
-    max-width: calc(100vw - 24px);
-    gap: 0.5rem;
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px) + 104px);
   }
-
-  .ai-mini-suggestion-pill {
-    max-width: calc(100vw - 24px);
-    min-height: 40px;
-    font-size: 13px;
-    padding: 0.5rem 0.8rem;
-  }
-
   .ai-mini-suggestion-pill:nth-child(n+3) {
     display: none;
   }
