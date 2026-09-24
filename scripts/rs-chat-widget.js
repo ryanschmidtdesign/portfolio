@@ -560,112 +560,18 @@
     'asking about cross-functional leadership...',
     'checking role fit for Staff Designer...',
   ];
-  let twIndex = 0;
-  let twChar = 0;
-  let twDeleting = false;
-  let twTimer = null;
-  let twWrapper = null;
-  let twTextEl = null;
+  
 
-  function buildTypewriter() {
-    const wrapper = document.querySelector('.ai-mini-wrapper');
-    if (!wrapper) return;
-    const input = wrapper.querySelector('.ai-mini-input');
-    if (!input) return;
-    input.style.color = 'transparent';
-    input.style.caretColor = '#f8fafc';
+  
 
-    const overlay = document.createElement('div');
-    overlay.className = 'tw-overlay';
-    overlay.innerHTML = '<span class="tw-pretext">Try\u00A0</span><span class="tw-text"></span><span class="tw-cursor">|</span>';
-    wrapper.appendChild(overlay);
-    twWrapper = overlay;
-    twTextEl = overlay.querySelector('.tw-text');
-  }
-
-  const twStyle = document.createElement('style');
-  twStyle.textContent = `
-    .tw-overlay {
-      position: absolute;
-      left: calc(1.25rem + 1px);
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      white-space: nowrap;
-      overflow: hidden;
-      color: rgba(0,0,0,0.4);
-      font-size: var(--fs-sm, 14px);
-      z-index: 242;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      max-width: calc(100% - 5rem);
-    }
-    .tw-pretext { color: rgba(255,255,255,0.35); flex-shrink: 0; }
-    .tw-text { overflow: hidden; white-space: nowrap; max-width: 32ch; }
-    .tw-cursor {
-      display: inline-block;
-      color: rgba(0,0,0,0.4);
-      font-weight: 300;
-      animation: tw-blink 0.8s step-end infinite;
-      margin-left: 1px;
-      flex-shrink: 0;
-    }
-    @keyframes tw-blink { 0%,100%{opacity:1} 50%{opacity:0} }
-  `;
-  document.head.appendChild(twStyle);
-
-  function typewriterStart() {
-    clearTimeout(twTimer);
-    if (!twWrapper || !twTextEl) return;
-    if (panel.classList.contains('open')) return;
-    const miniInput = document.querySelector('.ai-mini-input');
-    if (miniInput && miniInput.value.length > 0) return;
-    if (miniInput) miniInput.placeholder = '';
-    twWrapper.style.display = 'flex';
-    const current = typewriterPhrases[twIndex];
-    if (!twDeleting) {
-      twChar++;
-      twTextEl.textContent = current.substring(0, twChar);
-      if (twChar === current.length) {
-        twTimer = setTimeout(() => { twDeleting = true; typewriterStart(); }, 2000);
-        return;
-      }
-      twTimer = setTimeout(typewriterStart, 50 + Math.random() * 40);
-    } else {
-      twChar--;
-      twTextEl.textContent = current.substring(0, twChar);
-      if (twChar === 0) {
-        twDeleting = false;
-        twIndex = (twIndex + 1) % typewriterPhrases.length;
-        twTimer = setTimeout(typewriterStart, 300);
-        return;
-      }
-      twTimer = setTimeout(typewriterStart, 25 + Math.random() * 20);
-    }
-  }
-
-  function typewriterStop() {
-    clearTimeout(twTimer);
-    if (twWrapper) twWrapper.style.display = 'none';
-    const miniInput = document.querySelector('.ai-mini-input');
-    if (miniInput && miniInput.value.length === 0) {
-      miniInput.placeholder = 'Ask\u2026';
-    }
+  function typewriterStop() {}
   }
 
   // Restart typewriter when mini input is cleared manually
-  document.addEventListener('input', (e) => {
-    if (e.target && e.target.id === 'ai-mini-input' && e.target.value.length === 0 && !panel.classList.contains('open')) {
-      typewriterStart();
-    }
-  });
+  
 
   // Will be called after wireExternalTrigger runs
-  function initTypewriter() {
-    buildTypewriter();
-    typewriterStart();
-  }
+  function initTypewriter() {}
 
   // Small helper: escape HTML when interpolating untrusted strings
   function escapeHtml(value = '') {
@@ -848,14 +754,14 @@ if (savedHist.length > 0) {
           const miniWrapper = document.querySelector('.ai-mini-wrapper');
           if (miniWrapper) gsap.to(miniWrapper, { opacity: 1, duration: 0.3, ease: "power2.out" });
           restoreFloatingPills();
-          typewriterStart();
+          
         }
       });
     } else {
       // Fallback: close immediately without GSAP
       panel.classList.remove('open');
       backdrop.classList.remove('open');
-      typewriterStart();
+      
       panel.style.height = '';
       const miniWrapper = document.querySelector('.ai-mini-wrapper');
       if (miniWrapper) miniWrapper.style.opacity = '1';
@@ -949,7 +855,7 @@ if (savedHist.length > 0) {
 
   function initTypewriter() {
     buildTypewriter();
-    typewriterStart();
+    
   }
 
   if (document.readyState === 'loading') {
