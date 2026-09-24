@@ -562,11 +562,11 @@
     </main>
 
     <!-- Fixed floating bottom nav -->
-    <header>
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="hamburgerMenu" aria-expanded="false">
-        <span class="hamburger-inner" aria-hidden="true"></span>
-      </button>
-      <nav class="hamburger-menu" id="hamburgerMenu" aria-hidden="true" aria-label="Main navigation">
+    
+
+    <div class="ai-mini-wrapper consolidated-nav" data-assistant-trigger>
+      <nav class="ai-mini-nav" aria-label="Main navigation">
+
         <a href="../index.html">Home</a>
         <a href="../pages/about.html">About</a>
         <div class="menu-item-group">
@@ -579,12 +579,10 @@
           </div>
         </div>
         <a href="../assets/ryan-schmidt-resume-september-2026.pdf" target="_blank" rel="noopener">Resume</a>
-        <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener">LinkedIn</a>
-      </nav>
-    </header>
-
-    <div class="ai-mini-wrapper" data-assistant-trigger>
-      <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+              </nav>
+      <div class="ai-mini-input-container">
+        <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+      </div>
     </div>
 
     <!-- GSAP for smooth chat widget animations -->

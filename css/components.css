@@ -2457,3 +2457,170 @@ figure.case-study-media {
   max-width: var(--prose);
   line-height: var(--lh-prose-loose);
 }
+
+/* Consolidated Nav & AI Mini Wrapper */
+.ai-mini-wrapper.consolidated-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+  z-index: 240;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 12px;
+  border-radius: 32px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.05);
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  gap: 12px;
+}
+
+.ai-mini-wrapper.consolidated-nav .ai-mini-nav {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 16px 0;
+  width: 100%;
+}
+
+.ai-mini-wrapper.consolidated-nav .ai-mini-nav a,
+.ai-mini-wrapper.consolidated-nav .ai-mini-nav button.menu-trigger {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.ai-mini-wrapper.consolidated-nav .ai-mini-nav a:hover,
+.ai-mini-wrapper.consolidated-nav .ai-mini-nav button.menu-trigger:hover {
+  color: var(--text-primary);
+}
+
+.ai-mini-wrapper.consolidated-nav .ai-mini-nav a[aria-current="page"] {
+  color: var(--text-primary);
+  position: relative;
+}
+
+.ai-mini-wrapper.consolidated-nav .ai-mini-nav a[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-primary, #4F6EF7);
+  border-radius: 2px;
+}
+
+.ai-mini-wrapper.consolidated-nav .menu-item-group {
+  position: relative;
+}
+
+.ai-mini-wrapper.consolidated-nav .menu-submenu {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 8px;
+  min-width: 220px;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ai-mini-wrapper.consolidated-nav .menu-item-group:hover .menu-submenu,
+.ai-mini-wrapper.consolidated-nav .menu-item-group:focus-within .menu-submenu {
+  display: flex;
+}
+
+.ai-mini-wrapper.consolidated-nav .menu-submenu a {
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--text-secondary);
+}
+
+.ai-mini-wrapper.consolidated-nav .menu-submenu a:hover {
+  background: rgba(0,0,0,0.05);
+  color: var(--text-primary);
+}
+
+.ai-mini-wrapper.consolidated-nav .ai-mini-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 12px;
+}
+
+.ai-mini-wrapper.consolidated-nav .ai-mini-input {
+  background: var(--surface-subtle, #f5f5f5);
+  border: 1px solid transparent;
+  color: var(--text-primary);
+  width: 100%;
+  min-width: 420px;
+  border-radius: 20px;
+  padding: 0 44px 0 20px;
+  height: 48px;
+  box-shadow: none;
+}
+
+.ai-mini-wrapper.consolidated-nav .ai-mini-input::placeholder {
+  color: rgba(0,0,0,0.4);
+}
+
+.ai-mini-wrapper.consolidated-nav .ai-mini-input:focus {
+  background: white;
+  border-color: rgba(79, 110, 247, 0.5);
+  box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.12);
+}
+
+.ai-mini-wrapper.consolidated-nav .ai-mini-send {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--accent-primary, #4F6EF7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 241;
+  padding: 0;
+  margin-top: 6px;
+}
+
+@media (max-width: 600px) {
+  .ai-mini-wrapper.consolidated-nav .ai-mini-input {
+    min-width: unset;
+    width: 100%;
+  }
+  .ai-mini-wrapper.consolidated-nav .ai-mini-nav {
+    gap: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .ai-mini-wrapper.consolidated-nav .ai-mini-nav a,
+  .ai-mini-wrapper.consolidated-nav .ai-mini-nav button.menu-trigger {
+    font-size: 13px;
+  }
+}

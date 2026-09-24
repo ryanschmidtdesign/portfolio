@@ -519,14 +519,26 @@
         </div>
       </div>
     </section>
+    <section id="connect" class="about-section" aria-labelledby="connect-title" style="padding-top: var(--space-8); padding-bottom: calc(var(--space-8) * 2); border-top: 1px solid rgba(0,0,0,0.05); margin-top: var(--space-8);">
+      <div class="leadership-wrapper" style="text-align: center; max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: var(--space-4);">
+        <h2 id="connect-title" class="section-title" style="margin: 0; font-size: var(--fs-h2);">Let's Connect</h2>
+        <p class="about-lead" style="margin: 0; color: var(--text-secondary); font-size: var(--fs-body);">
+          I'm always open to talking about product design, engineering, or anything in between. Feel free to reach out.
+        </p>
+        <div style="display: flex; gap: var(--space-3); justify-content: center; margin-top: var(--space-2); flex-wrap: wrap;">
+          <a href="mailto:ryanschmidt1989@gmail.com" style="padding: 12px 24px; background: var(--text-primary, #111); color: white; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: var(--fs-sm);">Email Me</a>
+          <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" style="padding: 12px 24px; border: 1px solid rgba(0,0,0,0.1); color: var(--text-primary, #111); border-radius: 8px; text-decoration: none; font-weight: 500; font-size: var(--fs-sm);">LinkedIn</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Same fixed floating bottom nav -->
-  <header>
-    <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="hamburgerMenu" aria-expanded="false">
-      <span class="hamburger-inner" aria-hidden="true"></span>
-    </button>
-    <nav class="hamburger-menu" id="hamburgerMenu" aria-hidden="true" aria-label="Main navigation">
+  
+
+  <div class="ai-mini-wrapper consolidated-nav" data-assistant-trigger>
+      <nav class="ai-mini-nav" aria-label="Main navigation">
+
       <a href="../index.html">Home</a>
       <a href="../pages/about.html" aria-current="page">About</a>
         <div class="menu-item-group">
@@ -539,14 +551,12 @@
           </div>
         </div>
       <a href="../assets/ryan-schmidt-resume-september-2026.pdf" target="_blank" rel="noopener">Resume</a>
-      <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener">LinkedIn</a>
-    </nav>
-  </header>
-
-  <div class="ai-mini-wrapper" data-assistant-trigger>
-    <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+            </nav>
+      <div class="ai-mini-input-container">
+        <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
     <button id="ai-mini-send" class="ai-mini-send" aria-label="Send">→</button>
-  </div>
+      </div>
+    </div>
   
   <!-- GSAP for smooth chat widget animations -->
   
