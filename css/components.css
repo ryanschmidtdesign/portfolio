@@ -2054,7 +2054,7 @@ figure.case-study-media {
   position: fixed;
   left: 50%;
   transform: translateX(-50%) translateY(8px);
-  bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px) + 114px);
+  bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px) + 136px);
   z-index: 239;
   display: flex;
   flex-direction: row;
@@ -2102,7 +2102,7 @@ figure.case-study-media {
 
 @media (max-width: 600px) {
   .ai-mini-suggestions {
-    bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px) + 104px);
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px) + 124px);
   }
   .ai-mini-suggestion-pill:nth-child(n+3) {
     display: none;
@@ -2593,6 +2593,9 @@ figure.case-study-media {
   border-radius: 20px;
   padding: 0 44px 0 16px;
   height: 40px;
+  line-height: 40px;
+  margin: 0;
+  vertical-align: middle;
   font-size: 14px;
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
   transition: all 0.2s ease;
