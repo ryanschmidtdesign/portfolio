@@ -3,22 +3,26 @@
     {
       title: "Dashboards",
       summary: "Turned dashboards into the primary way teams track work, driving a 71% engagement lift.",
-      url: "pages/dashboard.html"
+      url: "pages/dashboard.html",
+      image: "assets/case-studies/dashboards/rename-dashboard.webp"
     },
     {
       title: "Inventory",
       summary: "Replaced spreadsheets with a single source of truth, increasing recurring revenue 18% and adoption 8%.",
-      url: "pages/inventory.html"
+      url: "pages/inventory.html",
+      image: "assets/case-studies/inventory/inventory-controls.webp"
     },
     {
       title: "Member Portal",
       summary: "Turned a research-backed taxonomy into an MVP-ready portal now moving through engineering QA.",
-      url: "pages/member-portal-overhaul.html"
+      url: "pages/member-portal-overhaul.html",
+      image: "assets/case-studies/member-portal/design-highlights/Home_new.webp"
     },
     {
       title: "Engineering<br>My Portfolio",
       summary: "Built a custom portfolio with AI chat and semantic search, shipping from idea to production in a single session.",
-      url: "pages/ai-coding-portfolio.html"
+      url: "pages/ai-coding-portfolio.html",
+      image: "assets/case-studies/ai-coding-portfolio/interactive-component.webp"
     }
   ];
 
@@ -69,6 +73,16 @@
 
     body.append(text, summary);
     link.append(eyebrow, body);
+    
+    if (s.image) {
+      const ghostWrapper = document.createElement('div');
+      ghostWrapper.className = 'home-title__ghost-wrapper';
+      const ghostInner = document.createElement('div');
+      ghostInner.className = 'home-title__ghost-inner';
+      ghostInner.style.backgroundImage = 'url(' + s.image + ')';
+      ghostWrapper.append(ghostInner);
+      link.append(ghostWrapper);
+    }
     return link;
   }
 
