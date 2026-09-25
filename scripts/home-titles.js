@@ -93,19 +93,32 @@
 
   if (window.marqueeRafId) cancelAnimationFrame(window.marqueeRafId);
 
-  let hoveredLinks = new Set();
   let scrollY = 0;
   const pxPerFrame = -0.6;
 
-  document.querySelectorAll('.home-title').forEach(link => {
-    link.addEventListener('mouseenter', () => hoveredLinks.add(link));
-    link.addEventListener('mouseleave', () => hoveredLinks.delete(link));
-  });
+  let mouseX = -1;
+  let mouseY = -1;
+  let activeLink = null;
+  let isHoveringContainer = false;
 
   container.addEventListener('wheel', (e) => {
     e.preventDefault();
     scrollY -= e.deltaY;
   }, { passive: false });
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    const rect = container.getBoundingClientRect();
+    isHoveringContainer = (
+      mouseX >= rect.left && mouseX <= rect.right &&
+      mouseY >= rect.top && mouseY <= rect.bottom
+    );
+  });
+  
+  document.addEventListener('mouseleave', () => {
+    isHoveringContainer = false;
+  });
 
   let touchStartY = 0;
   let isTouching = false;
@@ -124,7 +137,26 @@
   container.addEventListener('touchend', () => isTouching = false);
 
   function tick() {
-    if (hoveredLinks.size === 0 && !isTouching) {
+    let newActiveLink = null;
+    
+    if (isHoveringContainer && mouseX > -1 && mouseY > -1) {
+      const elements = document.elementsFromPoint(mouseX, mouseY);
+      newActiveLink = elements.find(el => el.classList.contains('home-title'));
+    }
+
+    if (activeLink !== newActiveLink) {
+      if (activeLink) activeLink.classList.remove('is-active');
+      if (newActiveLink) newActiveLink.classList.add('is-active');
+      activeLink = newActiveLink;
+    }
+    
+    if (activeLink) {
+      container.classList.add('is-hovering-link');
+    } else {
+      container.classList.remove('is-hovering-link');
+    }
+
+    if (!activeLink && !isTouching) {
       scrollY += pxPerFrame;
     }
 
