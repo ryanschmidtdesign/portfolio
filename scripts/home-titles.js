@@ -100,6 +100,9 @@
   let mouseY = -1;
   let activeLink = null;
   let isHoveringContainer = false;
+  let lastMouseX = -2;
+  let lastMouseY = -2;
+  let lastScrollY = -1;
 
   container.addEventListener('wheel', (e) => {
     e.preventDefault();
@@ -140,8 +143,15 @@
     let newActiveLink = null;
     
     if (isHoveringContainer && mouseX > -1 && mouseY > -1) {
-      const elements = document.elementsFromPoint(mouseX, mouseY);
-      newActiveLink = elements.find(el => el.classList.contains('home-title'));
+      if (Math.abs(mouseX - lastMouseX) > 0.5 || Math.abs(mouseY - lastMouseY) > 0.5 || Math.abs(scrollY - lastScrollY) > 0.5) {
+        const elements = document.elementsFromPoint(mouseX, mouseY);
+        newActiveLink = elements.find(el => el.classList.contains('home-title')) || null;
+        lastMouseX = mouseX;
+        lastMouseY = mouseY;
+        lastScrollY = scrollY;
+      } else {
+        newActiveLink = activeLink;
+      }
     }
 
     if (activeLink !== newActiveLink) {
@@ -160,7 +170,7 @@
       scrollY += pxPerFrame;
     }
 
-    const fullHeight = track.getBoundingClientRect().height;
+    const fullHeight = track.offsetHeight;
     if (fullHeight > 0) {
       const setHeight = fullHeight / 2;
       if (scrollY <= -setHeight) scrollY += setHeight;
