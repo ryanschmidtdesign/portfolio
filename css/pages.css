@@ -793,7 +793,7 @@
     .home-title {
       display: flex;
       align-items: baseline; /* Align eyebrow with text baseline */
-      gap: 1.25rem;
+      /* gap: 1.25rem; removed for absolute eyebrow */
       background: transparent;
       border: none;
       text-align: left;
@@ -814,11 +814,11 @@
     }
 
     .home-title__eyebrow {
+      position: absolute;
+      right: calc(100% + 1.25rem);
+      top: 1.65rem;
       writing-mode: vertical-rl;
       transform: rotate(180deg);
-      flex-shrink: 0;
-      margin-top: 0.15em; /* Slight adjustment to align with first word visually */
-      margin-bottom: 0;
       font-size: var(--fs-xs, 12px);
       font-weight: 700;
       letter-spacing: var(--tracking-caps-wide, 0.1em);
@@ -831,7 +831,7 @@
     .home-title__eyebrow--featured {
       color: #4F6EF7;
       font-weight: 800;
-      margin-right: -1rem; /* Pull title back to align with others despite the 2-line eyebrow */
+      /* margin-right removed */
     }
 
     .home-title__text {

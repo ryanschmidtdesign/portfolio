@@ -1012,6 +1012,7 @@ if (savedHist.length > 0) {
   function renderFloatingCaseStudyPills(customPills) {
     
     if (!floatingPillsEl) return;
+    if (canonicalPagePath(location.pathname) === '/') return;
 
     const pills = getCurrentPagePills(customPills).slice(0, 3);
     floatingPillsEl.innerHTML = '';
