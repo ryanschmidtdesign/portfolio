@@ -1,3 +1,11 @@
-node_modules/
-_site/
 .DS_Store
+.vercel
+.omo/
+node_modules/
+package-lock.json
+.env*
+job-agent/.chrome_profile/
+job-agent/screenshots/
+job-agent/.env*
+job-agent/src/storage/*.bak
+job-agent/src/storage/*.tmp*

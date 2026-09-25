@@ -8,7 +8,6 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.6",
     "sharp": "^0.32.6",
     "vitest": "^3.0.0"
   },
@@ -20,8 +19,6 @@
     "validate:kb": "vitest run -t 'KB integrity'",
     "agent": "npm --prefix job-agent start",
     "agent:dry-run": "npm --prefix job-agent run dry-run",
-    "dry-run": "npm --prefix job-agent run dry-run",
-    "build": "eleventy",
-    "dev": "eleventy --serve"
+    "dry-run": "npm --prefix job-agent run dry-run"
   }
 }

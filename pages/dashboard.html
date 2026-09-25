@@ -1,16 +1,277 @@
----
-layout: layout.njk
-title: "AI-Powered Dashboards — Ryan Schmidt"
-description: "Case study: AI-powered operational dashboard with role-based templates. +71% beta engagement, 62% multi-dashboard adoption, 2 avg interaction depth."
-og_title: "AI-Powered Dashboards — Ryan Schmidt"
-og_image: "https://ryanschmidt.design/assets/case-studies/dashboards/rename-dashboard.png"
-og_image_alt: "AI-powered dashboard showing role-based templates and live metric tiles"
-body_class: ""
-permalink: "{{ page.filePathStem }}.html"
-is_home: false
----
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Core -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<article class="case-study" aria-labelledby="title">
+    <link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://ryanschmidt.design">
+
+    <title>AI-Powered Dashboards — Ryan Schmidt</title>
+    <meta name="description" content="Case study: AI-powered operational dashboard with role-based templates. +71% beta engagement, 62% multi-dashboard adoption, 2 avg interaction depth.">
+    <meta name="author" content="Ryan Schmidt">
+
+    <!-- SEO hygiene -->
+    <link rel="canonical" href="https://ryanschmidt.design/dashboard.html">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+
+    <!-- Browser behavior / UX -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="application-name" content="Ryan Schmidt">
+    <meta name="apple-mobile-web-app-title" content="Ryan Schmidt">
+
+    <meta name="theme-color" content="#F5F5F5">
+
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Fonts (italics + only 400/500/600/700) -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+
+    <!-- CSS (preload + apply) -->
+    <link rel="stylesheet" href="../styles.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://ryanschmidt.design/#person",
+      "name": "Ryan Schmidt",
+      "jobTitle": "Senior Product Designer",
+      "url": "https://ryanschmidt.design/",
+      "image": "https://ryanschmidt.design/assets/images/family-pic.jpg",
+      "description": "Senior Product Designer who turns complex B2B SaaS workflows into clear, shippable tools.",
+      "sameAs": [
+        "https://www.linkedin.com/in/ryanschmidt1989/"
+      ],
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Austin, TX"
+      },
+      "knowsAbout": [
+        "Information architecture",
+        "Design systems",
+        "Onboarding and member experience",
+        "Content discovery",
+        "Data visualization",
+        "UX strategy",
+        "Design tokens",
+        "Prototyping in code",
+        "Research synthesis",
+        "AI-augmented product UX"
+      ],
+      "workExample": [
+        {
+          "@type": "Article",
+          "@id": "https://ryanschmidt.design/dashboard.html#work",
+          "name": "AI-Powered Dashboards",
+          "url": "https://ryanschmidt.design/dashboard.html"
+        },
+        {
+          "@type": "Article",
+          "@id": "https://ryanschmidt.design/inventory.html#work",
+          "name": "Real-Time Inventory",
+          "url": "https://ryanschmidt.design/inventory.html"
+        },
+        {
+          "@type": "Article",
+          "@id": "https://ryanschmidt.design/ai-coding-portfolio.html#work",
+          "name": "AI-Coding my Portfolio",
+          "url": "https://ryanschmidt.design/ai-coding-portfolio.html"
+        },
+        {
+          "@type": "Article",
+          "@id": "https://ryanschmidt.design/member-portal-overhaul.html#work",
+          "name": "i4cp Member Portal Overhaul",
+          "url": "https://ryanschmidt.design/member-portal-overhaul.html"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ryanschmidt.design/#website",
+      "url": "https://ryanschmidt.design/",
+      "name": "Ryan Schmidt \u2014 Senior Product Designer",
+      "publisher": {
+        "@id": "https://ryanschmidt.design/#person"
+      },
+      "logo": "https://ryanschmidt.design/assets/logo/logo.svg",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://ryanschmidt.design/dashboard.html#webpage",
+      "url": "https://ryanschmidt.design/dashboard.html",
+      "name": "AI-Powered Dashboards \u2014 Ryan Schmidt",
+      "isPartOf": {
+        "@id": "https://ryanschmidt.design/#website"
+      },
+      "about": {
+        "@id": "https://ryanschmidt.design/#person"
+      },
+      "description": "Case study: AI-powered operational dashboard. +71% beta engagement, 62% multi-dashboard adoption, 2 average interaction depth.",
+      "primaryImageOfPage": "https://ryanschmidt.design/assets/images/family-pic.jpg",
+      "dateModified": "2026-06-24",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Article",
+      "@id": "https://ryanschmidt.design/dashboard.html#work",
+      "name": "AI-Powered Dashboards",
+      "description": "Operational dashboard surfacing high-frequency tasks and prioritized alerts for enterprise users. Outcomes: +71% beta engagement, 62% multi-dashboard adoption, 2 avg interaction depth.",
+      "url": "https://ryanschmidt.design/dashboard.html",
+      "author": {
+        "@id": "https://ryanschmidt.design/#person"
+      },
+      "keywords": "Workflow, Dashboards, Decision Support, AI, UX Design, KPIs, Role-based templates",
+      "dateModified": "2026-06-24",
+      "headline": "AI-Powered Dashboards",
+      "datePublished": "2024-08-01",
+      "articleSection": "Case Study",
+      "inLanguage": "en-US",
+      "image": "https://ryanschmidt.design/assets/case-studies/dashboards/rename-dashboard.png",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "AI-augmented product UX"
+        },
+        {
+          "@type": "Thing",
+          "name": "Dashboards"
+        },
+        {
+          "@type": "Thing",
+          "name": "Decision support"
+        }
+      ],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Hiring managers, design leaders, recruiters"
+      },
+      "publisher": {
+        "@id": "https://ryanschmidt.design/#person"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://ryanschmidt.design/dashboard.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What outcome did the AI dashboard redesign achieve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "+71% dashboard engagement during beta, with 62% of users creating multiple dashboards and an average interaction depth of 2."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What was Ryan Schmidt's role on the AI dashboard project?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lead Product Designer and acting PM for five months. Owned problem definition, research, and IA while partnering with 4 engineers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did Ryan push back on an AI-first dashboard?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ten user interviews showed users needed familiar KPIs as anchors before they could form questions for AI. The hybrid approach (dashboards plus AI summarization on verifiable metrics) drove +71% beta engagement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What research methods were used on the dashboard project?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ten user interviews with 6 power users and 4 stakeholders, KPI mapping, wireframes, and usability tests of template selection, customization, and AI report generation."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://ryanschmidt.design/dashboard.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://ryanschmidt.design/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Case Studies"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI-Powered Dashboards"
+        }
+      ]
+    }
+  ]
+}
+      </script>
+
+    <!-- Vercel Analytics -->
+    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="icon" href="../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../favicon.svg?v=2" type="image/svg+xml">
+
+    <!-- Icons & manifest -->
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+  <link rel="llms" href="/assets/llms.txt" type="text/markdown">
+<link rel="llms" href="/assets/llms-full.txt" type="text/markdown">
+
+<!-- Sitemap reference -->
+<link rel="sitemap" type="application/xml" href="../sitemap.xml">
+
+<!-- DNS prefetch fallbacks (older browsers ignore preconnect) -->
+<link rel="dns-prefetch" href="https://generativelanguage.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+<!-- Preload fonts for faster rendering -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" as="style">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Ryan Schmidt — Senior Product Designer">
+  <meta property="og:title" content="AI-Powered Dashboards — Ryan Schmidt">
+  <meta property="og:description" content="Case study: Operational dashboard surfacing high-frequency tasks and prioritized alerts. +71% beta engagement, 62% multi-dashboard adoption.">
+  <meta property="og:url" content="https://ryanschmidt.design/dashboard.html">
+  <meta property="og:image" content="https://ryanschmidt.design/assets/case-studies/dashboards/rename-dashboard.png">
+  <meta property="og:image:alt" content="AI-powered dashboard showing role-based templates and live metric tiles">
+  <meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI-Powered Dashboards - Ryan Schmidt">
+<meta name="twitter:description" content="Case study: Operational dashboard surfacing high-frequency tasks and prioritized alerts. +71% beta engagement, 62% multi-dashboard adoption.">
+<meta name="twitter:image" content="https://ryanschmidt.design/assets/case-studies/dashboards/rename-dashboard.png">
+<meta name="twitter:image:alt" content="AI-powered dashboard showing role-based templates and live metric tiles">
+</head>
+
+  <body>
+    <main id="main" class="site-main">
+      <article class="case-study" aria-labelledby="title">
             <header class="tldr" aria-label="Executive summary">
               <h1 id="title" data-parallax="0.06">AI-Powered Custom Dashboards</h1>
           <p class="lead">
@@ -237,7 +498,7 @@ is_home: false
           <figure class="case-study-media">
             <picture>
               <source srcset="../assets/case-studies/dashboards/rename-dashboard.webp" type="image/webp">
-              <img src="../assets/case-studies/dashboards/rename-dashboard.webp" alt="Rename and manage dashboards for different workflows" width="1440" height="900" loading="lazy">
+              <img src="../assets/case-studies/dashboards/rename-dashboard.png" alt="Rename and manage dashboards for different workflows" width="1440" height="900" loading="lazy">
             </picture>
             <figcaption>Multiple dashboards supported team-specific views.</figcaption>
           </figure>
@@ -264,3 +525,48 @@ is_home: false
     </main>
 
     <!-- Fixed floating bottom nav -->
+    
+
+    <div class="ai-mini-wrapper consolidated-nav" data-assistant-trigger>
+      <nav class="ai-mini-nav" aria-label="Main navigation">
+
+        <a href="../index.html">Home</a>
+        <a href="../pages/about.html">About</a>
+        <div class="menu-item-group">
+          <button class="menu-trigger" aria-haspopup="true" aria-expanded="false">Case Studies</button>
+          <div class="menu-submenu">
+            <a href="../pages/dashboard.html" aria-current="page">AI‑Powered Dashboards</a>
+            <a href="../pages/inventory.html">Real-Time Inventory</a>
+            <a href="../pages/member-portal-overhaul.html">i4cp Member Portal</a>
+            <a href="../pages/ai-coding-portfolio.html">AI-Coding my Portfolio</a>
+          </div>
+        </div>
+        <a href="../assets/ryan-schmidt-resume-september-2026.pdf" target="_blank" rel="noopener">Resume</a>
+              </nav>
+      <div class="ai-mini-input-container">
+        <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+      </div>
+    </div>
+
+    <!-- GSAP for smooth chat widget animations -->
+    <!-- Consolidated JavaScript -->
+    <script src="../scripts/scripts.js?v=3" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=3" defer></script>
+    <footer class="site-footer">
+      <a class="site-footer-brand" href="../index.html">
+        <img src="../favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">
+        Ryan Schmidt — Senior Product Designer &amp; UX Engineer
+      </a>
+      <p>&copy; 2026 Ryan Schmidt</p>
+    </footer>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
+  </body>
+</html>
+
+
