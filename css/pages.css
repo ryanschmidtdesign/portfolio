@@ -705,3 +705,260 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Extracted from index.html */
+
+    /* Left vertical titles */
+    .home-header {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 220;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      width: clamp(260px, 20vw, 300px);
+    }
+
+    .home-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      color: var(--accent);
+      text-decoration: none;
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      transition: transform 180ms ease, color 180ms ease;
+    }
+
+    .home-logo:hover {
+      transform: translateY(-1px);
+    }
+
+    .home-logo-name {
+      font-size: 1.55rem;
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .home-role {
+      display: block;
+      margin-top: 3px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+    
+    .home-positioning {
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: var(--text);
+      margin: 0;
+    }
+
+    body.is-home {
+      background: var(--bg) !important;
+    }
+
+
+    .home-titles {
+      position: absolute;
+      inset: 0 auto 0 clamp(320px, 25vw + 40px, 400px);
+      z-index: 30;
+      overflow: hidden; /* this is the carousel "window" — it scrolls itself now */
+      padding-right: 3rem; /* Expanded the clipping container horizontally to prevent right-side text cutoff */
+      pointer-events: auto;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+    }
+
+    .home-titles__track {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6.5rem;
+      padding: 6.5rem 0.5rem 6.5rem 0;
+      will-change: transform;
+    }
+    .home-title {
+      display: flex;
+      align-items: baseline; /* Align eyebrow with text baseline */
+      gap: 1.25rem;
+      background: transparent;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      padding: 1.5rem 1.5rem 1.5rem 0.275rem; 
+      margin-block: -1.445rem;
+      margin-right: -1.225rem; 
+      text-decoration: none;
+      position: relative;
+      transform-origin: left center;
+      opacity: 0.90;
+      transform: translateX(0);
+      transition: opacity 300ms cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 300ms cubic-bezier(0.16, 1, 0.3, 1), 
+                  color 200ms ease, 
+                  filter 300ms cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
+    }
+
+    .home-title__eyebrow {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      flex-shrink: 0;
+      margin-top: 0.15em; /* Slight adjustment to align with first word visually */
+      margin-bottom: 0;
+      font-size: var(--fs-xs, 12px);
+      font-weight: 700;
+      letter-spacing: var(--tracking-caps-wide, 0.1em);
+      text-transform: uppercase;
+      color: #0f172a;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .home-title__eyebrow--featured {
+      color: #4F6EF7;
+      font-weight: 800;
+      margin-right: -1rem; /* Pull title back to align with others despite the 2-line eyebrow */
+    }
+
+    .home-title__text {
+      font-size: clamp(3.6rem, 8vw, 10rem);
+      line-height: 1.05;
+      font-weight: 600; /* reduced weight */
+      color: rgba(15, 23, 42, 0.7); /* much darker grey */
+      letter-spacing: var(--tracking-tighter, -0.025em);
+      text-transform: uppercase;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      transition: color 180ms ease;
+    }
+
+    .home-title__body {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .home-title__summary {
+      font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      color: #0f172a; /* near-black body colour */
+      width: 100%;
+      max-width: 100%;
+      transition: color 180ms ease;
+    }
+
+    .home-title:hover .home-title__summary,
+    .home-title.is-active .home-title__summary {
+      color: #000;
+    }
+
+    .home-title[data-reveal] {
+      opacity: 0;
+      transform: translateX(-28px);
+      --reveal-delay: 0ms;
+    }
+    .home-title[data-reveal].is-revealed {
+      opacity: 0.82;
+      transform: translateX(0);
+      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+                  transform 600ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+                  color 200ms ease,
+                  filter 600ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+    }
+
+    .home-title:hover,
+    .home-title.is-active {
+      transform: translateX(0) scale(1.05);
+      opacity: 1;
+      text-shadow: none;
+    }
+    
+    .home-title:hover .home-title__text,
+    .home-title.is-active .home-title__text {
+      color: #0f172a;
+    }
+
+    .home-title:active {
+      transform: scale(0.985) !important;
+      transition: transform 60ms cubic-bezier(0.2, 0, 0, 1) !important;
+    }
+
+    .home-titles:hover .home-title:not(:hover) {
+      opacity: 0.3 !important;
+      transform: translateX(0) scale(0.95);
+      filter: blur(2px);
+    }
+
+    /* .is-revealed has higher specificity than a plain :hover rule, so without this,
+       hovering a title that already played its reveal animation got stuck at 0.82
+       opacity instead of reaching 1. This is the actual bug behind issue #2. */
+    .home-title[data-reveal].is-revealed:hover,
+    .home-title[data-reveal].is-revealed.is-active {
+      opacity: 1;
+      transform: translateX(0) scale(1.05);
+    }
+    
+    .home-layout {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .home-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-6);
+      min-width: 0;
+    }
+    
+    .impact-metric {
+      transition: transform 0.2s ease;
+    }
+    a.impact-metric:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 880px) {
+      .home-layout {
+        padding: 2rem 1.25rem;
+      }
+      .home-header {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+      }
+      .home-logo-mark {
+        display: none;
+      }
+      .home-positioning,
+      .home-desktop-nav {
+        display: none;
+      }
+      .home-titles { display: none; }
+      .hamburger { left: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); --hamburger-bottom: 12px; z-index: 280; }
+      .nli-overlay { left: 50%; transform: translate(-50%, 0); width: calc(100% - 2rem); }
+    }
+  
