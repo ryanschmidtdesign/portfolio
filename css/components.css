@@ -2448,7 +2448,7 @@ figure.case-study-media {
 
 .ai-mini-wrapper.consolidated-nav .ai-mini-nav {
   display: flex;
-  gap: 12px; /* with 10px padding, total visual gap between text is 10 + 12 + 10 = 32px */
+  gap: 20px; /* with 10px padding, total visual gap between text is 10 + 12 + 10 = 32px */
   align-items: center;
   justify-content: center;
   padding: 4px 16px 12px;
@@ -2508,12 +2508,12 @@ figure.case-study-media {
 .ai-mini-wrapper.consolidated-nav .ai-mini-nav button.menu-trigger::after {
   content: '';
   display: block;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
   transform: translateY(-2px) rotate(45deg);
-  margin-left: 2px !important;
+  margin-left: 6px !important;
   opacity: 0.6;
   transition: transform 0.2s ease;
   box-sizing: border-box;
