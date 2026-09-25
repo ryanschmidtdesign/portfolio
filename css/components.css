@@ -2590,6 +2590,8 @@ figure.case-study-media {
   border: 1px solid transparent;
   color: var(--text-primary);
   width: 100%;
+  max-width: 100%;
+  flex: 1;
   min-width: 420px;
   border-radius: 12px;
   padding: 10px 44px 10px 20px;
