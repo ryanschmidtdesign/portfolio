@@ -1,0 +1,4 @@
+*.md
+_meta/
+node_modules/
+job-agent/

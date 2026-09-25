@@ -1,262 +1,16 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+---
+layout: layout.njk
+title: "Member Portal Redesign — Ryan Schmidt"
+description: "Case study: Research-led IA overhaul for i4cp's enterprise HR research portal. Four-level taxonomy, MVP designs complete, validation planned July 2026."
+og_title: "i4cp Member Portal Overhaul — Ryan Schmidt"
+og_image: "https://ryanschmidt.design/assets/case-studies/member-portal/member-portal-mockup.png"
+og_image_alt: "i4cp member portal homepage redesign showing restructured navigation and refreshed UI"
+body_class: ""
+permalink: "{{ page.filePathStem }}.html"
+is_home: false
+---
 
-    <link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://ryanschmidt.design">
-
-    <title>Member Portal Redesign — Ryan Schmidt</title>
-    <meta name="description" content="Case study: Research-led IA overhaul for i4cp's enterprise HR research portal. Four-level taxonomy, MVP designs complete, validation planned July 2026.">
-    <meta name="author" content="Ryan Schmidt">
-
-    <link rel="canonical" href="https://ryanschmidt.design/member-portal-overhaul.html">
-    <meta name="robots" content="index,follow,max-image-preview:large">
-
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="application-name" content="Ryan Schmidt">
-    <meta name="apple-mobile-web-app-title" content="Ryan Schmidt">
-
-    <meta name="theme-color" content="#F5F5F5">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-
-    <link rel="stylesheet" href="../styles.css">
-
-  <!-- Icons & manifest -->
-  <link rel="icon" href="../favicon.ico" sizes="48x48">
-  <link rel="icon" href="../favicon.svg?v=2" type="image/svg+xml">
-  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-  <link rel="manifest" href="../site.webmanifest">
-  <link rel="llms" href="/assets/llms.txt" type="text/markdown">
-<link rel="llms" href="/assets/llms-full.txt" type="text/markdown">
-
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://ryanschmidt.design/#person",
-      "name": "Ryan Schmidt",
-      "jobTitle": "Senior Product Designer",
-      "url": "https://ryanschmidt.design/",
-      "image": "https://ryanschmidt.design/assets/images/family-pic.jpg",
-      "description": "Senior Product Designer who turns complex B2B SaaS workflows into clear, shippable tools.",
-      "sameAs": [
-        "https://www.linkedin.com/in/ryanschmidt1989/"
-      ],
-      "homeLocation": {
-        "@type": "Place",
-        "name": "Austin, TX"
-      },
-      "knowsAbout": [
-        "Information architecture",
-        "Design systems",
-        "Onboarding and member experience",
-        "Content discovery",
-        "Data visualization",
-        "UX strategy",
-        "Design tokens",
-        "Prototyping in code",
-        "Research synthesis",
-        "AI-augmented product UX"
-      ],
-      "workExample": [
-        {
-          "@type": "Article",
-          "@id": "https://ryanschmidt.design/dashboard.html#work",
-          "name": "AI-Powered Dashboards",
-          "url": "https://ryanschmidt.design/dashboard.html"
-        },
-        {
-          "@type": "Article",
-          "@id": "https://ryanschmidt.design/inventory.html#work",
-          "name": "Real-Time Inventory",
-          "url": "https://ryanschmidt.design/inventory.html"
-        },
-        {
-          "@type": "Article",
-          "@id": "https://ryanschmidt.design/ai-coding-portfolio.html#work",
-          "name": "AI-Coding my Portfolio",
-          "url": "https://ryanschmidt.design/ai-coding-portfolio.html"
-        },
-        {
-          "@type": "Article",
-          "@id": "https://ryanschmidt.design/member-portal-overhaul.html#work",
-          "name": "i4cp Member Portal Overhaul",
-          "url": "https://ryanschmidt.design/member-portal-overhaul.html"
-        }
-      ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://ryanschmidt.design/#website",
-      "url": "https://ryanschmidt.design/",
-      "name": "Ryan Schmidt - Senior Product Designer",
-      "publisher": {
-        "@id": "https://ryanschmidt.design/#person"
-      },
-      "logo": "https://ryanschmidt.design/assets/logo/logo.svg",
-      "inLanguage": "en-US"
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://ryanschmidt.design/member-portal-overhaul.html#webpage",
-      "url": "https://ryanschmidt.design/member-portal-overhaul.html",
-      "name": "i4cp Member Portal Overhaul - Ryan Schmidt",
-      "isPartOf": {
-        "@id": "https://ryanschmidt.design/#website"
-      },
-      "about": {
-        "@id": "https://ryanschmidt.design/#person"
-      },
-      "description": "Case study in progress: Research-led navigation and IA overhaul for an enterprise HR research portal. Designs complete, validation testing planned July 2026.",
-      "primaryImageOfPage": "https://ryanschmidt.design/assets/images/family-pic.jpg",
-      "dateModified": "2026-06-24",
-      "inLanguage": "en-US"
-    },
-    {
-      "@type": "Article",
-      "@id": "https://ryanschmidt.design/member-portal-overhaul.html#work",
-      "name": "i4cp Member Portal Overhaul",
-      "description": "Research-led navigation and IA overhaul for an enterprise HR research portal serving Fortune 500 HR leaders. In progress: designs complete, validation testing planned July 2026.",
-      "url": "https://ryanschmidt.design/member-portal-overhaul.html",
-      "author": {
-        "@id": "https://ryanschmidt.design/#person"
-      },
-      "keywords": "IA, Research, Member Experience, UX Strategy, Navigation, HR research, Enterprise",
-      "dateModified": "2026-06-24",
-      "headline": "i4cp Member Portal Overhaul",
-      "datePublished": "2026-04-01",
-      "articleSection": "Case Study (in progress)",
-      "inLanguage": "en-US",
-      "image": "https://ryanschmidt.design/assets/case-studies/member-portal/member-portal-mockup.png",
-      "about": [
-        {
-          "@type": "Thing",
-          "name": "Information architecture"
-        },
-        {
-          "@type": "Thing",
-          "name": "Member experience"
-        },
-        {
-          "@type": "Thing",
-          "name": "Enterprise research portals"
-        }
-      ],
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Hiring managers, design leaders, recruiters"
-      },
-      "publisher": {
-        "@id": "https://ryanschmidt.design/#person"
-      }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://ryanschmidt.design/member-portal-overhaul.html#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is the i4cp Member Portal Overhaul?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A research-led IA and navigation overhaul for i4cp's member portal, which serves Fortune 500 HR leaders and chief people officers. The redesign restructures four levels of content hierarchy and aligns UI to a validated content model."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the current status of the member portal project?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Designs are complete and in engineering handoff. Moderated validation testing with active members is planned for July 2026, focused on task success across the four IA levels."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why progressive disclosure over flat navigation?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The content hierarchy has four distinct levels: Areas of Focus, Priorities, Topics, and Individual content. Exposing all orientation at once creates noise. Progressive disclosure surfaces depth as members narrow intent."
-          }
-        }
-      ]
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://ryanschmidt.design/member-portal-overhaul.html#breadcrumb",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://ryanschmidt.design/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Case Studies"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "i4cp Member Portal Overhaul"
-        }
-      ]
-    }
-  ]
-}
-</script>
-
-    <!-- Vercel Analytics -->
-    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
-    <script defer src="/_vercel/insights/script.js"></script>
-    <script defer src="/_vercel/speed-insights/script.js"></script>
-
-<!-- Sitemap reference -->
-<link rel="sitemap" type="application/xml" href="../sitemap.xml">
-
-<!-- DNS prefetch fallbacks (older browsers ignore preconnect) -->
-<link rel="dns-prefetch" href="https://generativelanguage.googleapis.com">
-<link rel="dns-prefetch" href="https://fonts.googleapis.com">
-<link rel="dns-prefetch" href="https://fonts.gstatic.com">
-
-
-<!-- Preload fonts for faster rendering -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" as="style">
-  
-  <!-- Open Graph -->
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Ryan Schmidt — Senior Product Designer">
-  <meta property="og:title" content="i4cp Member Portal Overhaul — Ryan Schmidt">
-  <meta property="og:description" content="Case study: Research-led navigation and IA overhaul for an enterprise HR research portal serving Fortune 500 HR leaders.">
-  <meta property="og:url" content="https://ryanschmidt.design/member-portal-overhaul.html">
-  <meta property="og:image" content="https://ryanschmidt.design/assets/case-studies/member-portal/member-portal-mockup.png">
-  <meta property="og:image:alt" content="i4cp member portal homepage redesign showing restructured navigation and refreshed UI">
-  <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/png">
-<meta property="og:locale" content="en_US">
-
-  <!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="i4cp Member Portal Overhaul - Ryan Schmidt">
-<meta name="twitter:description" content="Case study: Research-led navigation and IA overhaul for an enterprise HR research portal serving Fortune 500 HR leaders.">
-<meta name="twitter:image" content="https://ryanschmidt.design/assets/case-studies/member-portal/member-portal-mockup.png">
-<meta name="twitter:image:alt" content="i4cp member portal homepage redesign">
-</head>
-
-  <body>
-    <main id="main" class="site-main">
-      <article class="case-study case-study--member-portal" aria-labelledby="title">
+<article class="case-study case-study--member-portal" aria-labelledby="title">
 
         <header class="tldr" aria-label="Executive summary">
           <h1 id="title" data-parallax="0.06">Member Portal Redesign</h1>
@@ -326,13 +80,13 @@
                 <div class="splitter-before">
                   <picture>
                     <source srcset="../assets/case-studies/member-portal/design-highlights/home.webp" type="image/webp">
-                    <img src="../assets/case-studies/member-portal/design-highlights/home.png" alt="" role="presentation" class="no-reveal" width="3836" height="2158" loading="lazy">
+                    <img src="../assets/case-studies/member-portal/design-highlights/home.webp" alt="" role="presentation" class="no-reveal" width="3836" height="2158" loading="lazy">
                   </picture>
                 </div>
                 <div class="splitter-after" style="clip-path: inset(0 0 0 50%);">
                   <picture>
                     <source srcset="../assets/case-studies/member-portal/design-highlights/Home_new.webp" type="image/webp">
-                    <img src="../assets/case-studies/member-portal/design-highlights/Home_new.png" alt="" role="presentation" class="no-reveal" width="1440" height="900" loading="lazy">
+                    <img src="../assets/case-studies/member-portal/design-highlights/Home_new.webp" alt="" role="presentation" class="no-reveal" width="1440" height="900" loading="lazy">
                   </picture>
                 </div>
                 <div class="splitter-handle" role="slider" tabindex="0" aria-label="Comparison slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
@@ -367,13 +121,13 @@
                 <div class="splitter-before">
                   <picture>
                     <source srcset="../assets/case-studies/member-portal/design-highlights/en.webp" type="image/webp">
-                    <img src="../assets/case-studies/member-portal/design-highlights/en.png" alt="" role="presentation" class="no-reveal" width="3840" height="2166" loading="lazy">
+                    <img src="../assets/case-studies/member-portal/design-highlights/en.webp" alt="" role="presentation" class="no-reveal" width="3840" height="2166" loading="lazy">
                   </picture>
                 </div>
                 <div class="splitter-after" style="clip-path: inset(0 0 0 50%);">
                   <picture>
                     <source srcset="../assets/case-studies/member-portal/design-highlights/Expert Network - Reading a Post.webp" type="image/webp">
-                    <img src="../assets/case-studies/member-portal/design-highlights/Expert Network - Reading a Post.png" alt="" role="presentation" class="no-reveal" width="1440" height="900" loading="lazy">
+                    <img src="../assets/case-studies/member-portal/design-highlights/Expert Network - Reading a Post.webp" alt="" role="presentation" class="no-reveal" width="1440" height="900" loading="lazy">
                   </picture>
                 </div>
                 <div class="splitter-handle" role="slider" tabindex="0" aria-label="Comparison slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
@@ -462,13 +216,13 @@
                 <div class="splitter-before">
                   <picture>
                     <source srcset="../assets/case-studies/member-portal/design-highlights/navigation-old.webp" type="image/webp">
-                    <img src="../assets/case-studies/member-portal/design-highlights/navigation-old.png" alt="" role="presentation" class="no-reveal" width="3840" height="2160" draggable="false" loading="lazy">
+                    <img src="../assets/case-studies/member-portal/design-highlights/navigation-old.webp" alt="" role="presentation" class="no-reveal" width="3840" height="2160" draggable="false" loading="lazy">
                   </picture>
                 </div>
                 <div class="splitter-after" style="clip-path: inset(0 0 0 50%);">
                   <picture>
                     <source srcset="../assets/case-studies/member-portal/design-highlights/Navigation.webp" type="image/webp">
-                    <img src="../assets/case-studies/member-portal/design-highlights/Navigation.png" alt="" role="presentation" class="no-reveal" width="1440" height="900" draggable="false" loading="lazy">
+                    <img src="../assets/case-studies/member-portal/design-highlights/Navigation.webp" alt="" role="presentation" class="no-reveal" width="1440" height="900" draggable="false" loading="lazy">
                   </picture>
                 </div>
                 <div class="splitter-handle" role="slider" tabindex="0" aria-label="Comparison slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
@@ -489,13 +243,13 @@
                 <div class="splitter-before">
                   <picture>
                     <source srcset="../assets/case-studies/member-portal/design-highlights/ahri.webp" type="image/webp">
-                    <img src="../assets/case-studies/member-portal/design-highlights/ahri.png" alt="" role="presentation" class="no-reveal" width="3840" height="2164" draggable="false" loading="lazy">
+                    <img src="../assets/case-studies/member-portal/design-highlights/ahri.webp" alt="" role="presentation" class="no-reveal" width="3840" height="2164" draggable="false" loading="lazy">
                   </picture>
                 </div>
                 <div class="splitter-after" style="clip-path: inset(0 0 0 50%);">
                   <picture>
                     <source srcset="../assets/case-studies/member-portal/design-highlights/Ahri Full Page Redesign - Main.webp" type="image/webp">
-                    <img src="../assets/case-studies/member-portal/design-highlights/Ahri Full Page Redesign - Main.png" alt="" role="presentation" class="no-reveal" width="1440" height="900" draggable="false" loading="lazy">
+                    <img src="../assets/case-studies/member-portal/design-highlights/Ahri Full Page Redesign - Main.webp" alt="" role="presentation" class="no-reveal" width="1440" height="900" draggable="false" loading="lazy">
                   </picture>
                 </div>
                 <div class="splitter-handle" role="slider" tabindex="0" aria-label="Comparison slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
@@ -562,46 +316,3 @@
     </main>
 
     <!-- Fixed floating bottom nav -->
-    
-
-    <div class="ai-mini-wrapper consolidated-nav" data-assistant-trigger>
-      <nav class="ai-mini-nav" aria-label="Main navigation">
-
-        <a href="../index.html">Home</a>
-        <a href="../pages/about.html">About</a>
-        <div class="menu-item-group">
-          <button class="menu-trigger" aria-haspopup="true" aria-expanded="false">Case Studies</button>
-          <div class="menu-submenu">
-            <a href="../pages/dashboard.html">AI‑Powered Dashboards</a>
-            <a href="../pages/inventory.html">Real-Time Inventory</a>
-            <a href="../pages/member-portal-overhaul.html" aria-current="page">i4cp Member Portal</a>
-            <a href="../pages/ai-coding-portfolio.html">AI-Coding my Portfolio</a>
-          </div>
-        </div>
-        <a href="../assets/ryan-schmidt-resume-september-2026.pdf" target="_blank" rel="noopener">Resume</a>
-              </nav>
-      <div class="ai-mini-input-container">
-        <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
-      </div>
-    </div>
-
-    <!-- GSAP for smooth chat widget animations -->
-    <script src="../scripts/scripts.js?v=3" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=3" defer></script>
-    <script src="../scripts/image-splitter.js" defer></script>
-    <footer class="site-footer">
-      <a class="site-footer-brand" href="../index.html">
-        <img src="../favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">
-        Ryan Schmidt — Senior Product Designer &amp; UX Engineer
-      </a>
-      <p>&copy; 2026 Ryan Schmidt</p>
-    </footer>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-      });
-    }
-  </script>
-  </body>
-</html>
