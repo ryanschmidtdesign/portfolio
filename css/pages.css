@@ -773,7 +773,9 @@
 
     .home-titles {
       position: absolute;
-      inset: 0 auto 0 clamp(320px, 25vw + 40px, 400px);
+      inset: 0;
+      display: flex;
+      justify-content: center;
       z-index: 30;
       overflow: hidden; /* this is the carousel "window" — it scrolls itself now */
       padding-right: 3rem; /* Expanded the clipping container horizontally to prevent right-side text cutoff */
@@ -793,7 +795,7 @@
     .home-title {
       display: flex;
       align-items: baseline; /* Align eyebrow with text baseline */
-      /* gap: 1.25rem; removed for absolute eyebrow */
+      gap: 1.25rem;
       background: transparent;
       border: none;
       text-align: left;
@@ -814,11 +816,11 @@
     }
 
     .home-title__eyebrow {
-      position: absolute;
-      right: calc(100% + 1.25rem);
-      top: 1.65rem;
       writing-mode: vertical-rl;
       transform: rotate(180deg);
+      flex-shrink: 0;
+      margin-top: 0.15em; /* Slight adjustment to align with first word visually */
+      margin-bottom: 0;
       font-size: var(--fs-xs, 12px);
       font-weight: 700;
       letter-spacing: var(--tracking-caps-wide, 0.1em);
@@ -831,7 +833,7 @@
     .home-title__eyebrow--featured {
       color: #4F6EF7;
       font-weight: 800;
-      /* margin-right removed */
+      margin-right: -1rem; /* Pull title back to align with others despite the 2-line eyebrow */
     }
 
     .home-title__text {
