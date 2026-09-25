@@ -49,16 +49,16 @@
     Consolas, monospace;
 
   /* ─── Type scale (modular, IBM Plex Sans-tuned) ─────────────────────── */
-  --fs-xs: 12px;
-  --fs-sm: 14px;
-  --fs-body: 17px;
-  --fs-md: 20px;
-  --fs-lg: 24px;
-  --fs-xl: 30px;
-  --fs-2xl: 38px;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-body: 1.0625rem;
+  --fs-md: 1.25rem;
+  --fs-lg: 1.5rem;
+  --fs-xl: 1.875rem;
+  --fs-2xl: 2.375rem;
 
   /* Control text — Apple-style 15px for buttons; doesn't fit modular scale */
-  --fs-control: 15px;
+  --fs-control: 0.9375rem;
 
   /* Fluid display tier — replaces --fs-hero-* clamps AND --fs-metric */
   --fs-display-sm: clamp(1.75rem, 1.4rem + 1.8vw, 2.5rem);
