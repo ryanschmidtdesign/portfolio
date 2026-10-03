@@ -14,7 +14,7 @@
     },
     {
       title: "Member Portal",
-      summary: "Turned a research-backed taxonomy into an MVP-ready portal now moving through engineering QA.",
+      summary: "Untangled a massive taxonomy to accelerate time-to-value, boosting AI discovery usage by 500%.",
       url: "pages/member-portal-overhaul.html",
       image: "assets/case-studies/member-portal/design-highlights/Home_new.webp"
     },
