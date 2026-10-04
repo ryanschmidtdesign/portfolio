@@ -64,7 +64,7 @@ html.lenis body {
 
 /* Global Selection Highlight */
 ::selection {
-  background-color: var(--accent);
+  background-color: var(--spark);
   color: #FFFFFF;
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
 }
@@ -138,6 +138,12 @@ body.is-home {
   font-kerning: normal;
   font-weight: var(--weight-semibold);
   line-height: var(--lh-lg);
+}
+
+/* Optical Trimming: strip the invisible bounding-box leading 
+   so text aligns flush with cards, borders, and margins */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl) {
+  margin-top: -0.25em;
 }
 
 h1 {

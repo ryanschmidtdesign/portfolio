@@ -9,29 +9,19 @@
   --prose: 66ch;
   --prose-tight: 60ch;
 
-  /* Spacing scale (8px base grid) */
-  --space-1: 0.25rem;
-  /* 4px */
-  --space-2: 0.5rem;
-  /* 8px */
-  --space-3: 0.75rem;
-  /* 12px */
-  --space-4: 1rem;
-  /* 16px */
-  --space-5: 1.5rem;
-  /* 24px */
-  --space-6: 2rem;
-  /* 32px */
-  --space-7: 3rem;
-  /* 48px */
-  --space-8: 4rem;
-  /* 64px */
-  --space-9: 6rem;
-  /* 96px */
+  /* Spacing scale (8px micro, 1.5x geometric macro) */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem;  /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem;    /* 16px */
+  --space-5: 1.5rem;      /* 24px */
+  --space-6: 2.25rem;     /* 36px */
+  --space-7: 3.375rem;    /* 54px */
+  --space-8: 5.0625rem;   /* 81px */
+  --space-9: 7.6rem;      /* 121px */
 
   /* Macro tier (large desktop hero/section spacing) */
-  --space-10: 8rem;
-  /* 128px */
+  --space-10: 11.4rem;    /* 182px */
 
   /* Fluid section padding — use instead of bespoke clamps */
   --space-section-sm: clamp(2.5rem, 5vw, 4rem);
@@ -126,27 +116,27 @@
   --dur-3: 300ms;
   --dur-4: 450ms;
 
-  /* === Cool neutrals === */
-  --gray-100: #F7F9FA;
-  --gray-200: #F1F4F6;
-  --gray-300: #DCE3E8;
+  /* === Expensive Warm Neutrals (Alabaster base) === */
+  --gray-100: #FBFBF9;
+  --gray-200: #F2F2EF;
+  --gray-300: #E8E8E4;
   --bg: var(--gray-100);
 
   /* Surface levels (more distinct steps) */
-  --surface-1: rgba(0, 0, 0, 0.06);
+  --surface-1: rgba(0, 0, 0, 0.04);
   /* hover states */
-  --surface-2: rgba(0, 0, 0, 0.09);
+  --surface-2: rgba(0, 0, 0, 0.08);
   /* active cards */
 
   /* Card surfaces */
   --card-bg-strong: var(--gray-200);
 
   /* Elevated surface system — no borders, shadow + tone only */
-  --surface-elevated: rgba(15, 23, 42, 0.045);
+  --surface-elevated: rgba(15, 23, 42, 0.03);
   /* callouts, asides, meta cards */
-  --surface-elevated-strong: rgba(15, 23, 42, 0.075);
+  --surface-elevated-strong: rgba(15, 23, 42, 0.05);
   /* impact callout, TLDR card */
-  --surface-code: rgba(15, 23, 42, 0.06);
+  --surface-code: rgba(15, 23, 42, 0.04);
   /* code blocks, pre */
 
   /* KPI system */
@@ -158,10 +148,10 @@
   --kpi-note-color: var(--text-secondary);
 
   /* Borders (outline tone) */
-  --border-subtle: rgb(var(--rgb-outline) / 0.12);
-  --border: rgb(var(--rgb-outline) / 0.22);
-  --border-strong: rgb(var(--rgb-outline) / 0.35);
-  --border-interactive: rgb(var(--rgb-outline) / 0.45);
+  --border-subtle: rgb(var(--rgb-outline) / 0.08);
+  --border: rgb(var(--rgb-outline) / 0.16);
+  --border-strong: rgb(var(--rgb-outline) / 0.28);
+  --border-interactive: rgb(var(--rgb-outline) / 0.40);
 
   --border-w-strong: 2px;
 
@@ -204,13 +194,16 @@
   /* Text on colored backgrounds */
   --text-on-accent: #FFFFFF;
 
-  /* === Brand accent (canonical) — desaturated indigo === */
-  --accent: #4F6EF7;
-  --accent-hover: #3B5BDB;
-  --accent-text: #2D4FC4;
-  --accent-text-hover: #1F3A8F;
-  --accent-soft: rgb(79 110 247 / 0.12);
-  --accent-strong: rgb(79 110 247 / 0.24);
+  /* === Brand accent (canonical) — 2027 Electric Tension === */
+  --accent: #0033FF;
+  --accent-hover: #0022CC;
+  --accent-text: #0011AA;
+  --accent-text-hover: #000088;
+  --accent-soft: rgb(0 51 255 / 0.08);
+  --accent-strong: rgb(0 51 255 / 0.16);
+  
+  /* The spark - used for micro-tensions */
+  --spark: #FF3366;
 
   --color-primary: var(--accent);
 
