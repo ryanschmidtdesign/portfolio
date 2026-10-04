@@ -42,8 +42,9 @@
       .cursor {
         display: inline-block;
         width: 0.4em;
-        margin-left: 1px;
-        color: var(--accent, #4F6EF7);
+        margin-left: 2px;
+        color: var(--spark, #FF3366);
+        text-shadow: 0 0 12px var(--spark, #FF3366);
         animation: rs-cursor-blink 1s steps(1) infinite;
       }
       @keyframes rs-cursor-blink {
@@ -83,11 +84,12 @@
         height: 80px;
         display: flex; flex-direction: column;
         justify-content: flex-end;
-        background: rgba(255, 255, 255, 0.96);
-        backdrop-filter: blur(18px);
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: var(--blur-lg, blur(24px) saturate(180%));
+        -webkit-backdrop-filter: var(--blur-lg, blur(24px) saturate(180%));
         color: var(--text-primary, #111);
         border: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
         border-radius: 18px;
         visibility: hidden;
         z-index: 2147482999;
@@ -129,13 +131,14 @@
         display: grid;
         place-items: center;
         flex-shrink: 0;
-        transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+        transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
       }
       .hdr-close:hover {
         transform: translateY(-1px) scale(1.03);
         background: rgba(0, 0, 0, 0.08);
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
+        box-shadow: var(--glow-accent, 0 6px 18px rgba(0, 0, 0, 0.24));
+        transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), background 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1);
       }
       .hdr-close:focus-visible {
         outline: none;
@@ -163,8 +166,8 @@
       }
       .msg.user {
         white-space: pre-wrap;
-        align-self:flex-end; background: rgba(79, 110, 247, 0.2);
-        border-color: var(--accent, #4F6EF7); color: var(--text-primary, #111);
+        align-self:flex-end; background: var(--accent-strong, rgba(0, 51, 255, 0.16));
+        border-color: var(--accent, #0033FF); color: var(--text-primary, #111);
       }
       .msg.bot {
         align-self:flex-start; background: rgba(0, 0, 0, 0.03);
@@ -184,12 +187,15 @@
       }
 
       .msg.bot a {
-        color: var(--accent, #4F6EF7);
+        color: var(--accent, #0033FF);
         text-decoration: underline;
+        text-decoration-color: var(--accent-soft, rgba(0, 51, 255, 0.4));
         text-underline-offset: 2px;
+        transition: color 150ms ease, text-decoration-color 150ms ease;
       }
       .msg.bot a:hover {
-        color: var(--accent-hover, #3a56d4);
+        color: var(--accent-hover, #0022CC);
+        text-decoration-color: var(--accent, #0033FF);
       }
       .msg.bot strong {
         font-weight: var(--weight-semibold, 600);
@@ -203,11 +209,17 @@
         border: 1px solid rgba(0, 0, 0, 0.06);
         border-radius: var(--radius-md, 12px);
         overflow: hidden;
-        transition: transform .2s ease, border-color .2s ease;
+        transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
       }
       .chat-card:hover {
         transform: translateY(-2px);
-        border-color: var(--accent, #4F6EF7);
+        border-color: var(--accent, #0033FF);
+        box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255, 0.15));
+        transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), border-color 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      .chat-card:active {
+        transform: scale(0.98);
+        box-shadow: 0 0 0 transparent;
       }
       .chat-card-img {
         width: 100%;
@@ -372,8 +384,8 @@
         gap: var(--space-2, .5rem);
         margin: var(--space-3, .75rem) 0 var(--space-2, .5rem);
         padding: var(--space-4, 1rem);
-        background: linear-gradient(135deg, rgba(79, 110, 247,.13), rgba(79, 110, 247,.06));
-        border: 1px solid var(--accent, #4F6EF7);
+        background: linear-gradient(135deg, rgba(0, 51, 255,.13), rgba(0, 51, 255,.06));
+        border: 1px solid var(--accent, #0033FF);
         border-radius: var(--radius-md, 12px);
         text-align: center;
         position: relative;
@@ -383,7 +395,7 @@
         content: '';
         position: absolute;
         inset: -50%;
-        background: radial-gradient(circle, rgba(79, 110, 247,.18) 0%, transparent 65%);
+        background: radial-gradient(circle, rgba(0, 51, 255,.18) 0%, transparent 65%);
         animation: hire-pulse-bg 2.4s ease-in-out infinite;
         pointer-events: none;
       }
@@ -408,7 +420,7 @@
         gap: .4em;
         margin-top: var(--space-1, .25rem);
         padding: var(--space-2, .5rem) var(--space-4, 1rem);
-        background: linear-gradient(135deg, rgba(79, 110, 247,.98), rgba(79, 110, 247,.9));
+        background: linear-gradient(135deg, var(--accent, #0033FF), var(--accent-hover, #0022CC));
         color: var(--text-on-accent, #ffffff);
         font-weight: var(--weight-semibold, 600);
         font-size: var(--fs-sm, 14px);
@@ -416,12 +428,17 @@
         text-decoration: none;
         border: none;
         cursor: pointer;
-        transition: transform .18s ease, box-shadow .18s ease;
+        transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
         letter-spacing: .03em;
       }
       .hire-card-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 16px rgba(79, 110, 247,.35);
+        transform: translateY(-2px);
+        box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255,.35));
+        transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      .hire-card-btn:active {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 transparent;
       }
 
       /* Sources footnote */
@@ -704,13 +721,13 @@ if (savedHist.length > 0) {
 
       gsap.fromTo(panel,
         { height: 80 },
-        { height: fullHeight, duration: 0.6, ease: "power3.inOut" }
+        { height: fullHeight, duration: 0.7, ease: "expo.inOut" }
       );
 
       const childrenToAnimate = shadow.querySelectorAll('.hdr, .msgs, .pills, .hire-card');
       gsap.fromTo(childrenToAnimate,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: "power3.out", delay: 0.15 }
+        { y: 24, opacity: 0, filter: "blur(8px)", scale: 0.98 },
+        { y: 0, opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, stagger: 0.05, ease: "expo.out", delay: 0.2 }
       );
     } else {
       // Fallback: ensure panel has full height without GSAP
@@ -739,12 +756,12 @@ if (savedHist.length > 0) {
 
     if (window.gsap) {
       const childrenToAnimate = shadow.querySelectorAll('.hdr, .msgs, .pills, .hire-card');
-      gsap.to(childrenToAnimate, { y: 15, opacity: 0, duration: 0.25, ease: "power2.in" });
+      gsap.to(childrenToAnimate, { y: 16, opacity: 0, filter: "blur(4px)", scale: 0.98, duration: 0.25, ease: "expo.in" });
 
       gsap.to(panel, {
         height: 80,
-        duration: 0.5,
-        ease: "power3.inOut",
+        duration: 0.6,
+        ease: "expo.inOut",
         onComplete: () => {
           panel.classList.remove('open');
           backdrop.classList.remove('open');

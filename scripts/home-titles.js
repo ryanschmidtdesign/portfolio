@@ -2,25 +2,25 @@
   const slidesData = [
     {
       title: "Dashboards",
-      summary: "Turned dashboards into the primary way teams track work, driving a 71% engagement lift.",
+      summary: "Turned an ignored dashboard feature into the main way teams track their work, driving a 71% jump in adoption.",
       url: "pages/dashboard.html",
       image: "assets/case-studies/dashboards/rename-dashboard.webp"
     },
     {
       title: "Inventory",
-      summary: "Replaced spreadsheets with a single source of truth, increasing recurring revenue 18% and adoption 8%.",
+      summary: "Replaced messy spreadsheets with a real-time inventory system that unblocked enterprise deals and drove +18% MRR.",
       url: "pages/inventory.html",
       image: "assets/case-studies/inventory/inventory-controls.webp"
     },
     {
       title: "Member Portal",
-      summary: "Untangled a massive taxonomy to accelerate time-to-value, boosting AI discovery usage by 500%.",
+      summary: "Untangled a confusing architecture so members could actually find what they pay for, driving a 500% jump in AI usage.",
       url: "pages/member-portal-overhaul.html",
       image: "assets/case-studies/member-portal/design-highlights/Home_new.webp"
     },
     {
       title: "Engineering<br>My Portfolio",
-      summary: "Built a custom portfolio with AI chat and semantic search, shipping from idea to production in a single session.",
+      summary: "Built a custom portfolio from scratch to prove I can move from design to production without waiting on a handoff.",
       url: "pages/ai-coding-portfolio.html",
       image: "assets/case-studies/ai-coding-portfolio/interactive-component.webp"
     }
