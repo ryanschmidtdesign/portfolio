@@ -25,7 +25,7 @@ function initMagnetic() {
       const pullX = x * 0.15;
       const pullY = y * 0.15;
       
-      el.style.transform = `translate(${pullX}px, ${pullY}px) scale(1.02)`;
+      el.style.transform = `translate(${pullX}px, ${pullY}px)`;
       el.style.transition = `transform 50ms linear`;
     });
 
