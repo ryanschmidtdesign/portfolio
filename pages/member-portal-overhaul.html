@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <link rel="stylesheet" href="../styles.css">
 
@@ -231,7 +231,7 @@
 
 
 <!-- Preload fonts for faster rendering -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" as="style">
   
   <!-- Open Graph -->
   <meta property="og:type" content="article">
@@ -276,7 +276,7 @@
 
             <div class="tldr-kpis">
               <p class="tldr-label label">Impact</p>
-              <ul class="kpis kpis--hero">
+              <ul class="kpis kpis--hero" data-cascade>
                 <li>
                   <strong class="metric status-label--done">+500%</strong>
                   <span class="metric-label">increase in AI feature adoption</span>
@@ -541,11 +541,23 @@
           <p>
             The redesigned portal shipped to production in September 2026. By untangling the complex information architecture and aligning the navigation to our users' mental models, we successfully removed the friction that was causing early member churn.
           </p>
-          <ul>
-            <li><strong class="status-label--done">+500% AI Activation:</strong> By surfacing our AI discovery engine within the progressive disclosure flow, usage skyrocketed by 500% within the first month.</li>
-            <li><strong class="status-label--done">Legacy Search Sunset:</strong> The new architecture successfully bridged the gap to the content so well that we were able to completely remove the traditional keyword search bar. We received virtually zero member complaints regarding its removal.</li>
-            <li><strong class="status-label--done">Qualitative Feedback:</strong> Members directly interacting with the new browsing experience report that the architecture finally makes sense in how they think and speak in their day-to-day HR roles.</li>
-          </ul>
+          <div class="impact-metrics" data-cascade style="margin-block: var(--space-6);">
+            <div class="impact-metric">
+              <strong class="metric" data-animate>+500%</strong>
+              <span class="metric-label">AI Activation</span>
+              <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-3); max-width: none;">Usage skyrocketed within the first month by surfacing discovery in the flow.</p>
+            </div>
+            <div class="impact-metric">
+              <strong class="metric" data-animate>100%</strong>
+              <span class="metric-label">Legacy Search Sunset</span>
+              <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-3); max-width: none;">Bridged the gap so well we removed the traditional keyword search bar.</p>
+            </div>
+            <div class="impact-metric">
+              <strong class="metric" data-animate>High</strong>
+              <span class="metric-label">Mental Model Match</span>
+              <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-3); max-width: none;">Members report the architecture finally mirrors how they think and speak.</p>
+            </div>
+          </div>
 
           <h3>The "Aha!" Moment</h3>
           <p>

@@ -48,22 +48,23 @@
   --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
     Consolas, monospace;
 
-  /* ─── Type scale (modular, IBM Plex Sans-tuned) ─────────────────────── */
-  --fs-xs: 0.75rem;
-  --fs-sm: 0.875rem;
-  --fs-body: 1.0625rem;
-  --fs-md: 1.25rem;
-  --fs-lg: 1.5rem;
-  --fs-xl: 1.875rem;
-  --fs-2xl: 2.375rem;
+  /* ─── Type scale (Strict Major Third: 1.250 ratio, Base 17px) ───────── */
+  --fs-2xs: 0.68rem;     /* 10.88px - Micro labels */
+  --fs-xs: 0.85rem;      /* 13.6px - Utility */
+  --fs-control: 0.9375rem; /* 15px - Apple-style control text (intentional deviation) */
+  --fs-sm: 0.9375rem;    /* Also mapped to 15px */
+  --fs-body: 1.0625rem;  /* 17px - Base */
+  --fs-md: 1.328rem;     /* 21.25px */
+  --fs-lg: 1.66rem;      /* 26.56px */
+  --fs-xl: 2.075rem;     /* 33.2px */
+  --fs-2xl: 2.593rem;    /* 41.5px */
+  --fs-3xl: 3.242rem;    /* 51.87px */
+  --fs-4xl: 4.05rem;     /* 64.8px */
 
-  /* Control text — Apple-style 15px for buttons; doesn't fit modular scale */
-  --fs-control: 0.9375rem;
-
-  /* Fluid display tier — replaces --fs-hero-* clamps AND --fs-metric */
-  --fs-display-sm: clamp(1.75rem, 1.4rem + 1.8vw, 2.5rem);
-  --fs-display-md: clamp(2.25rem, 1.8rem + 2.4vw, 3.5rem);
-  --fs-display-lg: clamp(2.75rem, 2rem + 4vw, 4.5rem);
+  /* Fluid display tier — pushing the extremes */
+  --fs-display-sm: clamp(2.075rem, 1.5rem + 2vw, 3.242rem);
+  --fs-display-md: clamp(2.593rem, 2rem + 3vw, 4.05rem);
+  --fs-display-lg: clamp(3.242rem, 2.5rem + 5vw, 6.5rem);
 
   /* ─── Line height (per-role, not universal) ─────────────────────────── */
   --lh-2xs: 1.4;
@@ -73,7 +74,7 @@
   --lh-lg: 1.35;
   --lh-xl: 1.25;
   --lh-2xl: 1.2;
-  --lh-display: 1.1;
+  --lh-display: 1.05;
 
   /* Long-form reading rhythm — unchanged, these are good */
   --lh-prose: 1.7;
@@ -88,15 +89,18 @@
   --tracking-loose: 0.01em;
   --tracking-looser: 0.025em;
 
-  /* Caps tracking — renamed from --ls-caps-* for consistency */
+  /* Caps tracking — expanded for extreme high-tech aesthetic */
   --tracking-caps-tight: 0.06em;
-  --tracking-caps: 0.08em;
-  --tracking-caps-wide: 0.1em;
+  --tracking-caps: 0.1em;
+  --tracking-caps-wide: 0.15em;
+  --tracking-caps-extreme: 0.22em;
 
   /* ─── Font weight ramp ──────────────────────────────────────────────── */
+  --weight-light: 300;
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
+  --weight-bold: 700;
 
   /* ─── Application tokens (intent-based — keep) ──────────────────────── */
   --type-overline: var(--fs-xs);
@@ -164,34 +168,38 @@
   --dot-size: 14px;
   --line-thickness: 2px;
 
-  /* Backdrop blur tokens */
-  --blur-sm: 4px;
-  --blur-md: 18px;
-  --blur-lg: 24px;
+  /* Backdrop blur tokens (Adding saturation for optical glass feel) */
+  --blur-sm: blur(4px) saturate(140%);
+  --blur-md: blur(18px) saturate(160%);
+  --blur-lg: blur(24px) saturate(180%);
 
-  /* Shadows (10% deeper than default) */
+  /* Shadows (Rebuilt for depth, clarity, and physical realism) */
   --shadow-1:
-    0 1px 2px rgb(15 23 42 / 0.07),
-    0 2px 4px rgb(15 23 42 / 0.11),
+    0 1px 2px rgb(15 23 42 / 0.04),
+    0 2px 4px rgb(15 23 42 / 0.08),
     0 0 0 1px var(--border);
 
   --shadow-2:
-    0 2px 4px rgb(15 23 42 / 0.07),
-    0 10px 20px rgb(15 23 42 / 0.13),
+    0 2px 4px rgb(15 23 42 / 0.04),
+    0 12px 24px rgb(15 23 42 / 0.12),
     0 0 0 1px var(--border);
 
   --shadow-3:
-    0 4px 8px rgb(15 23 42 / 0.09),
-    0 20px 40px rgb(15 23 42 / 0.18),
+    0 4px 8px rgb(15 23 42 / 0.04),
+    0 24px 48px rgb(15 23 42 / 0.16),
     0 0 0 1px var(--border);
+
+  /* Emissive glows for interactive states */
+  --glow-accent: 0 8px 32px rgb(var(--rgb-cool) / 0.25);
+  --glow-accent-strong: 0 12px 48px rgb(var(--rgb-cool) / 0.40);
 
   /* === Neutrals (slate) === */
   --slate-600: #5D6873;
   --slate-900: #1A2128;
 
-  /* Text (APCA intent: keep small text comfortably bright) */
+  /* Text (Optical blending for secondary text) */
   --text: var(--slate-900);
-  --text-secondary: var(--slate-600);
+  --text-secondary: rgb(26 33 40 / 0.64);
 
   /* Text on colored backgrounds */
   --text-on-accent: #FFFFFF;
@@ -228,8 +236,8 @@
   --ease-menu: cubic-bezier(.2, .9, .2, 1);
 
   /* Focus */
-  --focus-ring: 0 0 0 3px rgb(var(--rgb-accent-small) / 0.28);
-  --focus-outline: 2px solid var(--accent-text-hover);
+  --focus-ring: 0 0 0 3px rgb(var(--rgb-cool) / 0.15), 0 0 16px rgb(var(--rgb-cool) / 0.25);
+  --focus-outline: 2px solid var(--accent);
 
   /* Glass */
   --glass-border: rgba(255, 255, 255, 0.34);

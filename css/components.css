@@ -48,23 +48,25 @@
 @keyframes metric-count-in {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    filter: blur(8px);
+    transform: translateY(16px) scale(0.96);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    filter: blur(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 .metric[data-animate] {
-  opacity: 0.55;
-  animation: metric-count-in 1.5s var(--ease-out) forwards;
+  opacity: 0.01;
+  animation: metric-count-in 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
 .metric.metric--animated {
   opacity: 1;
-  transition: opacity var(--dur-2) var(--ease-out);
+  transition: opacity 300ms var(--ease-out);
 }
 
 
@@ -126,12 +128,11 @@
   }
 }
 
-/* Big outcome numbers / key metrics */
 .metric {
   font-variant-numeric: tabular-nums;
   font-size: var(--fs-display-sm);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-light);
+  letter-spacing: var(--tracking-tightest);
   line-height: var(--lh-display);
   display: inline-block;
 }
@@ -250,19 +251,13 @@
   box-shadow: none;
 }
 
-/* Alternating section bands — uses ::before for full-bleed background */
+/* Alternating section bands removed for premium editorial whitespace */
 .case-study .section--alt {
   position: relative;
-  padding-block: var(--space-5);
 }
 
 .case-study .section--alt::before {
-  content: "";
-  position: absolute;
-  inset: 0 calc(50% - 50vw);
-  background: var(--surface-elevated);
-  pointer-events: none;
-  z-index: -1;
+  display: none;
 }
 
 /* Borders (outline tone) */
@@ -950,20 +945,23 @@
   box-shadow: var(--shadow-card);
   color: var(--text);
   text-decoration: none;
-  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out), background 200ms var(--ease-out);
+  /* Slow, inertial settle on mouse-leave */
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .evidence-card:hover,
 .evidence-card:focus-visible {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-card-strong);
+  box-shadow: var(--glow-accent);
   background: var(--surface-elevated-strong);
+  /* Instant, responsive snap on hover-in */
+  transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1), background 80ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .evidence-card:active {
-  transform: translateY(0) scale(0.985);
+  transform: translateY(0) scale(0.98);
   box-shadow: var(--shadow-card);
-  transition: transform 60ms cubic-bezier(0.2, 0, 0, 1);
+  transition: transform 60ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .evidence-card h3 {
@@ -1227,10 +1225,20 @@ figure.case-study-media {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  color: var(--ink-on-glass);
+  box-shadow: var(--shadow-card), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  color: #fff;
+  transition: box-shadow 200ms ease;
+}
+
+.image-splitter:hover .splitter-handle-icon,
+.image-splitter.is-dragging .splitter-handle-icon {
+  box-shadow: var(--glow-accent), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .splitter-handle-icon svg {
@@ -2031,17 +2039,22 @@ figure.case-study-media {
   place-items: center;
   font-size: 1.1rem;
   flex-shrink: 0;
-  transition: transform 220ms ease, background 220ms ease;
+  /* Slow, inertial settle on mouse-leave */
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ai-mini-send:hover {
   transform: translateY(-1px);
   background: var(--accent-hover);
+  box-shadow: var(--glow-accent);
+  /* Instant, responsive snap on hover-in */
+  transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), background 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .ai-mini-send:active {
   transform: translateY(0) scale(0.94);
-  transition: transform 60ms cubic-bezier(0.2, 0, 0, 1);
+  box-shadow: 0 0 0 transparent;
+  transition: transform 60ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .ai-mini-send:focus-visible {

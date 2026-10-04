@@ -496,19 +496,46 @@
   position: absolute;
   inset: 0 0 auto;
   height: 2px;
-  background: rgb(79 110 247 / 0.32);
+  background: rgb(var(--rgb-cool) / 0.32);
+  transition: height 200ms ease, background 200ms ease;
 }
 
 .case-study--ai-coding-portfolio .sa-step:nth-child(2)::before {
-  background: rgb(79 110 247 / 0.42);
+  background: rgb(var(--rgb-cool) / 0.42);
 }
 
 .case-study--ai-coding-portfolio .sa-step:nth-child(3)::before {
-  background: rgb(79 110 247 / 0.52);
+  background: rgb(var(--rgb-cool) / 0.52);
 }
 
 .case-study--ai-coding-portfolio .sa-step:nth-child(4)::before {
   background: rgb(5 150 105 / 0.48);
+}
+
+/* System interactive tracing */
+.case-study--ai-coding-portfolio .sa-step {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.case-study--ai-coding-portfolio .sa-funnel:hover .sa-step {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.case-study--ai-coding-portfolio .sa-funnel .sa-step:hover {
+  opacity: 1;
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: var(--glow-accent);
+  background: var(--surface-elevated-strong);
+  z-index: 10;
+  transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1), background 80ms cubic-bezier(0.19, 1, 0.22, 1), opacity 80ms ease;
+}
+
+.case-study--ai-coding-portfolio .sa-funnel .sa-step:hover::before {
+  height: 4px;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
 }
 
 @media (max-width: 900px) {
@@ -529,16 +556,10 @@
 
 /* ── Member Portal IA Challenge ── */
 .case-study--member-portal .ia-challenge-panel {
-  margin-block: var(--space-5);
-  padding: var(--space-5);
-  background: rgba(255, 255, 255, 0.58);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  margin-block: var(--space-7);
   display: flex;
   flex-direction: column;
-  /* use the smaller spacing token so compare blocks match the smaller gap */
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
 .case-study--member-portal .ia-challenge-panel__header {
