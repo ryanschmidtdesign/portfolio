@@ -46,7 +46,7 @@ metrics, and structured fit-matching. Endpoint: /api/chat (POST).
 
 - [i4cp Member Portal Overhaul](https://ryanschmidt.design/member-portal-overhaul.html)
   Research-led navigation and IA overhaul for an enterprise HR research portal.
-  Status: In progress — designs complete, validation testing planned July 2026.
+  Outcomes: Untangled complex IA to accelerate time-to-value, driving a 500% jump in AI discovery usage.
 
 ## Optional
 - https://ryanschmidt.design/assets/llms.txt — This file (LLMs summary)

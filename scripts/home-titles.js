@@ -26,6 +26,27 @@
     }
   ];
 
+  
+  // --- URL PARAMETER ROUTING (Growth Hack) ---
+  const urlParams = new URLSearchParams(window.location.search);
+  const targetRole = urlParams.get('role');
+  
+  if (targetRole === 'growth') {
+    // Move Member Portal to the front
+    const idx = slidesData.findIndex(s => s.title === "Member Portal");
+    if (idx > -1) {
+      const item = slidesData.splice(idx, 1)[0];
+      slidesData.unshift(item);
+    }
+  } else if (targetRole === 'eng') {
+    // Move Engineering to the front
+    const idx = slidesData.findIndex(s => s.title.includes("Engineering"));
+    if (idx > -1) {
+      const item = slidesData.splice(idx, 1)[0];
+      slidesData.unshift(item);
+    }
+  }
+
   const container = document.querySelector('.home-titles');
   if (!container) return;
 

@@ -684,3 +684,30 @@ xrayCards.forEach(card => {
     card.style.setProperty('--mouse-y', `${y}px`);
   });
 });
+
+// --- EASTER EGG: Console Message for Tech Recruiters / EMs ---
+setTimeout(() => {
+  console.log("%c👋 Ah, an Engineering Manager or DevTools snooper!", "font-size: 18px; font-weight: bold; color: #fff; background: #111; padding: 8px 12px; border-radius: 6px;");
+  console.log("%cSince you're looking under the hood: I built this entire site custom without a CMS, using semantic HTML, vanilla CSS/JS, and AI tooling. I don't just design systems—I can help your team ship them. Let's talk: ryanschmidt1989@gmail.com", "font-size: 14px; color: #444; padding-top: 8px; line-height: 1.5;");
+}, 1000);
+
+// --- URL PARAMETER ROUTING (Mobile Evidence Cards) ---
+(function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const targetRole = urlParams.get('role');
+  const grid = document.querySelector('.evidence-grid');
+  if (!grid || !targetRole) return;
+  
+  const cards = Array.from(grid.querySelectorAll('.evidence-card'));
+  let targetHref = '';
+  
+  if (targetRole === 'growth') targetHref = 'member-portal-overhaul.html';
+  if (targetRole === 'eng') targetHref = 'ai-coding-portfolio.html';
+  
+  if (targetHref) {
+    const targetCard = cards.find(c => c.getAttribute('href').includes(targetHref));
+    if (targetCard) {
+      grid.prepend(targetCard);
+    }
+  }
+})();
