@@ -276,7 +276,7 @@
         opacity: 0;
         transform: translateY(10px) scale(0.97);
         transition: opacity 220ms var(--ease-menu), transform 220ms var(--ease-menu),
-          background 160ms ease, border-color 160ms ease;
+          background 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
       }
       .pills.show .pill {
         opacity: 1;
@@ -287,8 +287,14 @@
       .pills.show .pill:nth-child(3) { transition-delay: 120ms; }
       .pill:hover,
       .pill:focus-visible {
-        background: rgba(79, 110, 247, 0.18);
-        border-color: var(--accent, #4F6EF7);
+        background: rgba(0, 51, 255, 0.12);
+        border-color: var(--accent, #0033FF);
+        box-shadow: var(--glow-accent, 0 4px 12px rgba(0, 51, 255, 0.12));
+        transition: background 80ms cubic-bezier(0.19, 1, 0.22, 1), border-color 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      .pill:active {
+        transform: scale(0.96);
+        box-shadow: 0 0 0 transparent;
       }
 
       /* Input & Textarea */
@@ -337,8 +343,8 @@
       }
       .text::placeholder { color: rgba(0,0,0,0.4); font-weight: var(--weight-regular, 400); line-height: 54px; }
       @keyframes gentleGlow {
-        0%, 100% { box-shadow: 0 0 0 0 rgba(79, 110, 247, 0.4); }
-        50% { box-shadow: 0 0 15px 2px rgba(79, 110, 247, 0.6); }
+        0%, 100% { box-shadow: 0 0 0 0 rgba(0, 51, 255, 0.4); }
+        50% { box-shadow: 0 0 15px 2px rgba(0, 51, 255, 0.6); }
       }
       .send {
         position: absolute;
@@ -346,7 +352,7 @@
         border-radius: 14px;
         width: 40px;
         height: 40px;
-        background: var(--accent, #4F6EF7);
+        background: var(--accent, #0033FF);
         color: var(--text-on-accent, #ffffff);
         border: none;
         font-size: 1.05rem;
@@ -355,15 +361,23 @@
         place-items: center;
         flex-shrink: 0;
         box-sizing: border-box;
-        transition: transform var(--dur-2) var(--ease-out), background var(--dur-2) var(--ease-out);
+        transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
       }
       .send:hover {
-        transform: translateY(-1px);
-        background: var(--accent-hover, #3B5BDB);
+        transform: translateY(-2px);
+        background: var(--accent-hover, #0022CC);
+        box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255, 0.25));
+        transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), background 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      .send:active {
+        transform: scale(0.92);
+        box-shadow: 0 0 0 transparent;
       }
       .send:disabled {
         opacity: 0.5;
         cursor: not-allowed;
+        transform: none !important;
+        box-shadow: none !important;
       }
 
 
