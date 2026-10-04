@@ -99,7 +99,6 @@ body {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--text);
-  padding-bottom: 240px;
   font-weight: var(--weight-regular);
   background-color: var(--bg);
   background-image: none;
@@ -133,7 +132,6 @@ body.is-home {
 
 :where(h1, h2, h3, h4, h5, h6) {
   color: var(--text);
-  padding-bottom: 240px;
   font-kerning: normal;
   font-weight: var(--weight-semibold);
   line-height: var(--lh-lg);
@@ -227,7 +225,6 @@ code {
   background: var(--surface-2);
   border: 1px solid var(--border-subtle);
   color: var(--text);
-  padding-bottom: 240px;
 }
 
 /* Duplicate selection rule removed (kept the global one near top). */
