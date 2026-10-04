@@ -65,6 +65,8 @@
 .page-about .leadership-wrapper {
   flex-wrap: wrap;
   row-gap: var(--space-7);
+  column-gap: var(--space-8);
+  justify-content: flex-start;
 }
 
 .page-about .leadership-left {
@@ -72,7 +74,7 @@
 }
 
 .page-about .leadership-right {
-  flex: 1 1 min(38%, 32rem);
+  flex: 0 0 42%;
 }
 
 /* Timelines become their own full-width row */
@@ -107,7 +109,8 @@
 }
 
 .page-about .timeline-content p {
-  max-width: 30ch;
+  max-width: 45ch;
+  text-wrap: pretty;
   font-size: clamp(var(--fs-sm), 1.1vw, var(--fs-body));
   line-height: var(--lh-body);
 }
@@ -764,7 +767,7 @@
       font-size: 1.55rem;
       font-weight: 900;
       line-height: 1.08;
-      letter-spacing: 0.05em;
+      letter-spacing: -0.02em;
       text-transform: uppercase;
     }
 
@@ -773,7 +776,7 @@
       margin-top: 3px;
       font-size: 0.7rem;
       font-weight: 500;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--text-secondary);
       line-height: 1.5;
@@ -864,7 +867,7 @@
     .home-title__eyebrow--featured {
       color: #0033FF;
       font-weight: 800;
-      margin-right: -1rem; /* Pull title back to align with others despite the 2-line eyebrow */
+      margin-right: 0rem; /* Pull title back to align with others despite the 2-line eyebrow */
     }
 
     .home-title__text {
@@ -884,7 +887,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.5rem;
+      gap: 1rem;
     }
 
     .home-title__summary {
@@ -894,8 +897,8 @@
       letter-spacing: 0.01em;
       text-transform: none;
       color: #0f172a; /* near-black body colour */
-      width: 100%;
-      max-width: 100%;
+      display: block;
+      max-width: 420px;
       transition: color 180ms ease;
     }
 

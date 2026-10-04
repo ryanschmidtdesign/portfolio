@@ -99,6 +99,7 @@ body {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--text);
+  padding-bottom: 240px;
   font-weight: var(--weight-regular);
   background-color: var(--bg);
   background-image: none;
