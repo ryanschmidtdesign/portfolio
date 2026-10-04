@@ -180,8 +180,8 @@
     0 0 0 1px var(--border);
 
   /* Emissive glows for interactive states */
-  --glow-accent: 0 8px 32px rgb(var(--rgb-cool) / 0.25);
-  --glow-accent-strong: 0 12px 48px rgb(var(--rgb-cool) / 0.40);
+  --glow-accent: 0 6px 20px rgb(var(--rgb-cool) / 0.12);
+  --glow-accent-strong: 0 8px 32px rgb(var(--rgb-cool) / 0.20);
 
   /* === Neutrals (slate) === */
   --slate-600: #5D6873;

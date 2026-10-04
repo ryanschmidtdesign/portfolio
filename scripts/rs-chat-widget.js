@@ -214,7 +214,7 @@
       .chat-card:hover {
         transform: translateY(-2px);
         border-color: var(--accent, #0033FF);
-        box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255, 0.15));
+        box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255, 0.08));
         transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), border-color 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1);
       }
       .chat-card:active {
@@ -366,7 +366,7 @@
       .send:hover {
         transform: translateY(-2px);
         background: var(--accent-hover, #0022CC);
-        box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255, 0.25));
+        box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255, 0.12));
         transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), background 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1);
       }
       .send:active {
@@ -447,7 +447,7 @@
       }
       .hire-card-btn:hover {
         transform: translateY(-2px);
-        box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255,.35));
+        box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255, 0.18));
         transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1);
       }
       .hire-card-btn:active {

@@ -2654,7 +2654,7 @@ figure.case-study-media {
 .ai-mini-wrapper.consolidated-nav .ai-mini-send:hover {
   transform: translateY(-2px);
   background: var(--accent-hover, #0022CC);
-  box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255, 0.25));
+  box-shadow: var(--glow-accent, 0 8px 32px rgba(0, 51, 255, 0.12));
   transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), background 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -2684,3 +2684,90 @@ figure.case-study-media {
 body {
   padding-bottom: 240px !important;
 }
+
+/* ==========================================================================
+   Bespoke Interactions: X-Ray Constraints Lens
+   ========================================================================== */
+.constraints-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.constraint-card {
+  position: relative;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: var(--space-5);
+  overflow: hidden;
+  cursor: crosshair;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.constraint-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+
+.constraint-content, .constraint-solution {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.constraint-label {
+  font-size: var(--fs-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--text-secondary);
+}
+
+.constraint-title {
+  font-size: var(--fs-md);
+  margin: 0;
+  line-height: var(--lh-tight);
+}
+
+.constraint-body {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-prose);
+  margin: 0;
+}
+
+/* The X-Ray Overlay */
+.constraint-solution.x-ray-reveal {
+  position: absolute;
+  inset: 0;
+  padding: var(--space-5);
+  background: var(--accent); /* Electric Blue */
+  color: white;
+  pointer-events: none;
+  
+  /* Mask properties to create the flashlight */
+  -webkit-mask-image: radial-gradient(circle 140px at var(--mouse-x, -100%) var(--mouse-y, -100%), black 30%, transparent 80%);
+  mask-image: radial-gradient(circle 140px at var(--mouse-x, -100%) var(--mouse-y, -100%), black 30%, transparent 80%);
+  
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.constraint-card:hover .constraint-solution.x-ray-reveal {
+  opacity: 1;
+}
+
+.constraint-solution.x-ray-reveal .constraint-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+.constraint-solution.x-ray-reveal .constraint-title {
+  color: white;
+}
+.constraint-solution.x-ray-reveal .constraint-body {
+  color: rgba(255, 255, 255, 0.9);
+}
+
