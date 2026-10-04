@@ -1722,6 +1722,7 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
       responseSchema: {
         type: "OBJECT",
         properties: {
+          thinking: { type: "STRING", description: "Internal reasoning scratchpad. Map out the proof chain, metrics, and tone constraints here BEFORE writing the final answer." },
           answer: { type: "STRING", description: "The conversational response to the user, strictly following voice rules." },
           suggested_pills: { type: "ARRAY", items: { type: "STRING" }, description: "1-2 short follow-up questions the user might want to ask next." },
           hire_intent: { type: "BOOLEAN", description: "Set to true ONLY if the user is asking about contacting Ryan, availability, or scheduling." },
@@ -1730,7 +1731,7 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
           action_scroll_to: { type: "STRING", description: "Optional section ID to scroll to on the current page." },
           action_highlight: { type: "STRING", description: "Optional CSS selector to highlight on the current page." }
         },
-        required: ["answer", "suggested_pills", "hire_intent"]
+        required: ["thinking", "answer", "suggested_pills", "hire_intent"]
       },
       responseModalities: ["TEXT"]
     }
