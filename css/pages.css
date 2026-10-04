@@ -217,6 +217,9 @@
 /* Stat cards */
 .leadership-metric {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
   max-width: none;
   background: var(--card-bg-strong);
   border: none;
@@ -230,18 +233,19 @@
 }
 
 .metric-body {
-  font-size: var(--type-body);
+  font-size: var(--fs-sm);
   line-height: var(--lh-prose);
   letter-spacing: var(--tracking-normal);
-  color: var(--text);
+  color: var(--text-secondary);
   max-width: 48ch;
+  margin: 0;
   text-wrap: pretty;
 }
 
 .metric-text {
-  font-size: var(--fs-md);
-  font-weight: var(--weight-semibold);
-  line-height: var(--lh-md);
+  font-size: var(--fs-lg);
+  font-weight: var(--weight-bold);
+  line-height: 1.15;
   letter-spacing: var(--tracking-snug);
 }
 
@@ -251,10 +255,10 @@
 
 .leadership-metric .metric-label strong {
   display: block;
-  font-size: var(--fs-sm);
-  line-height: var(--lh-xs);
-  letter-spacing: var(--tracking-normal);
-  font-weight: var(--weight-semibold);
+  font-size: var(--fs-md);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-snug);
+  font-weight: var(--weight-bold);
   color: var(--text);
 }
 
