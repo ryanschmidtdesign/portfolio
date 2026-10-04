@@ -402,17 +402,24 @@
             <h2>System Model &amp; Tradeoffs</h2>
           </div>
           <p>
-            The core design challenge was not just showing inventory. It was defining how inventory changed state across purchasing, receiving, project allocation, location transfers, and asset-level tracking. A flat quantity would not explain why an item was available, allocated, incoming, or low-stock.
+            The core design challenge was defining how inventory changed state across purchasing, receiving, project allocation, and location transfers. A flat quantity would not explain why an item was available, allocated, incoming, or low-stock.
+          </p>
+
+          <h3>The "Messy Middle": Navigating Engineering Constraints</h3>
+          <p>
+            My original design mandated a fully automated, real-time synchronization system. If inventory data isn't perfectly real-time, it instantly degrades user trust and leads to costly fulfillment errors. 
           </p>
           <p>
-            I worked with PM and engineering to align on a real-time model across projects, stock, and locations. That added complexity, but it removed duplicate sources of truth and made inventory data trustworthy everywhere users encountered it.
+            However, engineering surfaced that a true real-time websocket architecture would push the MVP launch back by several months. In a tough compromise with PM and engineering, we decided to ship a manual "refresh/sync" button for the MVP. It wasn't the ideal UX, but it was the necessary tradeoff to get the feature into users' hands and start capturing revenue while the backend matured.
           </p>
-          <ul>
-            <li><strong>Receiving defines truth:</strong> Inventory updates when a PO is received, including partial receiving, so users are not reconciling stale counts later</li>
-            <li><strong>Quantity-first by default:</strong> Smaller teams can quickly trust stock counts without managing unnecessary asset-level detail</li>
-            <li><strong>Asset-level when needed:</strong> Larger teams can track specific items for accountability, permissions, and enterprise workflows</li>
-            <li><strong>Manual reordering for MVP:</strong> Automatic purchasing was deferred because permissions, trust, and expensive unintended purchases made confirmation safer for the first release</li>
-          </ul>
+
+          <h3>Unblocking Enterprise Sales</h3>
+          <p>
+            During discovery, a clear fracture emerged: small businesses wanted simple quantity tracking, while enterprise clients demanded complex, asset-level tracking and accountability. If we built only for small businesses, we'd lose massive enterprise contracts. If we built only for enterprise, we'd alienate our core base.
+          </p>
+          <p>
+            The solution was a dual-track UX. I designed the system to be <strong>Quantity-first by default</strong> (keeping it frictionless for small teams), with a robust <strong>Asset-level "power user" layer</strong> hidden behind progressive disclosure. This specific design decision directly unblocked major enterprise contracts that were contingent on asset-level accountability.
+          </p>
 
           <figure class="case-study-media">
             <video autoplay muted playsinline loop preload="auto" width="2880" height="1496">
@@ -435,10 +442,6 @@
             </picture>
             <figcaption>Inventory settings and automation controls.</figcaption>
           </figure>
-
-          <p>
-            For handoff, I documented how allocations, multi-location states, and receiving/reordering rules affect available inventory, so UI behavior stays consistent as the system model gets implemented. The shared data model was aligned with engineering first, so the UI explains state rather than just showing flat quantities.
-          </p>
         </section>
 
         <section id="validation" aria-label="Validation">
