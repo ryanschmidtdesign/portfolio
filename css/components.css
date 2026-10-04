@@ -24,7 +24,10 @@
 }
 
 .label {
+  font-family: var(--font-mono);
   font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
   line-height: var(--lh-2xs);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-caps);
@@ -780,6 +783,7 @@
 }
 
 .case-study ul.kpis {
+  font-family: var(--font-mono);
   list-style: none;
   padding: 0;
   margin: 0;
@@ -996,6 +1000,7 @@
 }
 
 .capability-pill {
+  font-family: var(--font-mono);
   font-size: var(--fs-xs);
   line-height: 1.2;
   font-weight: var(--weight-medium);
