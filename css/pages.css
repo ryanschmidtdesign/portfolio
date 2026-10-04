@@ -809,9 +809,18 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 6.5rem;
-      padding: 6.5rem 0.5rem 6.5rem 0;
       will-change: transform;
+    }
+    .home-titles__group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6.5rem;
+      padding-bottom: 6.5rem; /* The gap between group 1 and group 2 */
+    }
+    .home-titles {
+      padding-top: 6.5rem; /* Ensures the first item starts lower */
+      padding-bottom: 6.5rem;
     }
     .home-title {
       position: relative;

@@ -32,14 +32,12 @@
   const targetRole = urlParams.get('role');
   
   if (targetRole === 'growth') {
-    // Move Member Portal to the front
     const idx = slidesData.findIndex(s => s.title === "Member Portal");
     if (idx > -1) {
       const item = slidesData.splice(idx, 1)[0];
       slidesData.unshift(item);
     }
   } else if (targetRole === 'eng') {
-    // Move Engineering to the front
     const idx = slidesData.findIndex(s => s.title.includes("Engineering"));
     if (idx > -1) {
       const item = slidesData.splice(idx, 1)[0];
@@ -107,9 +105,17 @@
     return link;
   }
 
-  slidesData.forEach((s, i) => track.appendChild(buildLink(s, i, false)));
-  slidesData.forEach((s, i) => track.appendChild(buildLink(s, i, true)));
+  // Create two separate groups for seamless looping
+  const group1 = document.createElement('div');
+  group1.className = 'home-titles__group';
+  slidesData.forEach((s, i) => group1.appendChild(buildLink(s, i, false)));
 
+  const group2 = document.createElement('div');
+  group2.className = 'home-titles__group';
+  slidesData.forEach((s, i) => group2.appendChild(buildLink(s, i, true)));
+
+  track.appendChild(group1);
+  track.appendChild(group2);
   container.appendChild(track);
 
   if (window.marqueeRafId) cancelAnimationFrame(window.marqueeRafId);
@@ -121,9 +127,6 @@
   let mouseY = -1;
   let activeLink = null;
   let isHoveringContainer = false;
-  let lastMouseX = -2;
-  let lastMouseY = -2;
-  let lastScrollY = -1;
 
   container.addEventListener('wheel', (e) => {
     e.preventDefault();
@@ -163,15 +166,11 @@
   function tick() {
     let newActiveLink = null;
     
-    if (isHoveringContainer && mouseX > -1 && mouseY > -1) {
-      if (Math.abs(mouseX - lastMouseX) > 0.5 || Math.abs(mouseY - lastMouseY) > 0.5 || Math.abs(scrollY - lastScrollY) > 0.5) {
-        const elements = document.elementsFromPoint(mouseX, mouseY);
+    // Only check for hover if the mouse is actually inside the container to avoid freezing
+    if (isHoveringContainer) {
+      const elements = document.elementsFromPoint(mouseX, mouseY);
+      if (elements) {
         newActiveLink = elements.find(el => el.classList.contains('home-title')) || null;
-        lastMouseX = mouseX;
-        lastMouseY = mouseY;
-        lastScrollY = scrollY;
-      } else {
-        newActiveLink = activeLink;
       }
     }
 
@@ -187,13 +186,14 @@
       container.classList.remove('is-hovering-link');
     }
 
+    // Only pause the scroll if they are hovering an ACTUAL link, not just resting in the empty space of the container
     if (!activeLink && !isTouching) {
       scrollY += pxPerFrame;
     }
 
-    const fullHeight = track.offsetHeight;
-    if (fullHeight > 0) {
-      const setHeight = fullHeight / 2;
+    // Loop exactly based on the height of ONE group, which represents 1 full set of items + gaps
+    const setHeight = group1.offsetHeight;
+    if (setHeight > 0) {
       if (scrollY <= -setHeight) scrollY += setHeight;
       if (scrollY > 0) scrollY -= setHeight;
     }
@@ -202,5 +202,9 @@
     window.marqueeRafId = requestAnimationFrame(tick);
   }
 
-  requestAnimationFrame(tick);
+  // Ensure fonts and layout calculate before starting tick so group height is accurate
+  setTimeout(() => {
+    requestAnimationFrame(tick);
+  }, 100);
+
 })();
