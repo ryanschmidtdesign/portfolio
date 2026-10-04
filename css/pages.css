@@ -874,7 +874,7 @@
 
     .home-title__text {
       font-size: clamp(3.6rem, 8vw, 10rem);
-      line-height: 0.85;
+      line-height: 1.05;
       font-weight: 600; /* reduced weight */
       color: rgba(15, 23, 42, 0.7); /* much darker grey */
       letter-spacing: var(--tracking-tighter, -0.025em);
@@ -889,7 +889,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.5rem;
+      gap: 1rem;
     }
 
     .home-title__summary {
@@ -900,7 +900,7 @@
       text-transform: none;
       color: #0f172a; /* near-black body colour */
       display: block;
-      max-width: min(420px, 45vw);
+      max-width: 420px;
       transition: color 180ms ease;
     }
 
@@ -1030,8 +1030,6 @@
       background-size: cover;
       background-position: top center;
       border-radius: 8px;
-      -webkit-mask-image: linear-gradient(to right, transparent, black 15%);
-      mask-image: linear-gradient(to right, transparent, black 15%);
       box-shadow: 0 32px 80px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
       transform: perspective(1200px) rotateY(-12deg) rotateX(4deg);
       transform-origin: center center;
