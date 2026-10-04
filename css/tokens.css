@@ -68,6 +68,8 @@
 
   /* Long-form reading rhythm — unchanged, these are good */
   --lh-prose: 1.7;
+  --lh-tight: 1.15;
+  --lh-relaxed: 1.8;
   --lh-prose-loose: 1.75;
 
   /* ─── Tracking (body + display ramp) ────────────────────────────────── */
@@ -179,6 +181,9 @@
     0 24px 48px rgb(15 23 42 / 0.16),
     0 0 0 1px var(--border);
 
+  --accent-cool-soft: rgb(var(--rgb-cool) / 0.12);
+  --divider-accent-width: 48px;
+  
   /* Emissive glows for interactive states */
   --glow-accent: 0 6px 20px rgb(var(--rgb-cool) / 0.12);
   --glow-accent-strong: 0 8px 32px rgb(var(--rgb-cool) / 0.20);
@@ -224,6 +229,7 @@
   --red-soft: rgb(220 38 38 / 0.10);
 
   /* Menu / elevated shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-menu: 0 24px 64px rgba(0, 0, 0, 0.24);
   --shadow-menu-hover: 0 28px 72px rgba(0, 0, 0, 0.28);
   --ease-menu: cubic-bezier(.2, .9, .2, 1);
