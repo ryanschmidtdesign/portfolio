@@ -2776,3 +2776,40 @@ body {
   color: rgba(255, 255, 255, 0.9);
 }
 
+
+/* DYNAMIC SPOTLIGHT HOVER (Linear style) */
+.evidence-grid {
+  position: relative;
+}
+
+.evidence-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Inner glow */
+.evidence-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(
+    800px circle at var(--x, -100px) var(--y, -100px),
+    rgba(0, 51, 255, 0.04),
+    transparent 40%
+  );
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.evidence-grid:hover .evidence-card::after {
+  opacity: 1;
+}
+
+/* Ensure content stays above the glow */
+.evidence-card > * {
+  position: relative;
+  z-index: 1;
+}
