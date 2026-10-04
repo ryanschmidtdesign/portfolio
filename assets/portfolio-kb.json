@@ -5,12 +5,38 @@
     "last_updated": "2026-08-08",
     "voice": "concise, conversational, outcome-first, lightly human. Never robotic.",
     "primary_goal": "Help the visitor decide Ryan is worth a 30-minute conversation, and make it easy to start one.",
-    "audience": ["hiring managers", "design leaders", "peer designers", "recruiters"],
+    "audience": [
+      "hiring managers",
+      "design leaders",
+      "peer designers",
+      "recruiters"
+    ],
     "notes": "Public summary only. No sensitive PII. Default to 1-2 sentences with a follow-up offer."
   },
   "policy": {
-    "allowed_personal_fields": ["role_titles", "employers", "dates", "education", "skills", "city_state", "hobbies", "interests", "volunteering", "personal_bio_public", "availability", "work_preferences"],
-    "disallowed_fields": ["phone", "street_address", "personal_email", "dob", "ids", "exact_comp", "current_employer_internal_details"],
+    "allowed_personal_fields": [
+      "role_titles",
+      "employers",
+      "dates",
+      "education",
+      "skills",
+      "city_state",
+      "hobbies",
+      "interests",
+      "volunteering",
+      "personal_bio_public",
+      "availability",
+      "work_preferences"
+    ],
+    "disallowed_fields": [
+      "phone",
+      "street_address",
+      "personal_email",
+      "dob",
+      "ids",
+      "exact_comp",
+      "current_employer_internal_details"
+    ],
     "refusal_message": "I can share public career details and portfolio facts, but not private contact info or sensitive stuff. LinkedIn's the best way to reach Ryan directly.",
     "anti_hallucination": [
       "Never invent metrics, dates, employers, technologies, or quotes.",
@@ -42,8 +68,35 @@
     "elevator_30s": "Ryan Schmidt is a Senior Product Designer at i4cp focused on information architecture, member experience, and AI-augmented product UX. He turns messy research and legacy interfaces into systems that scale, with measurable outcomes like task success, component reuse, and adoption. Strengths sit at the seam of design and engineering, including token-first design systems, prototyping in code, and AI tooling like Cursor and Claude.",
     "bio_75_words": "Ryan Schmidt is a Senior Product Designer at i4cp who works at the seam of design and engineering. His focus is research-driven information architecture, design systems, and AI-augmented product UX for enterprise audiences. Recent outcomes include a 22% lift in task success, 92% engineer adoption on a 100+ component design system, and a 71% jump in dashboard engagement during beta. He's based in Austin, TX.",
     "bio_150_words": "Ryan Schmidt is a Senior Product Designer at i4cp (Institute for Corporate Productivity), where he leads platform experience strategy across member portal, internal admin, and research discovery surfaces. His focus is research-driven information architecture, token-first design systems, and AI-augmented product UX for enterprise audiences. Before i4cp, he led design system work at D-Tools, where he shipped a 100+ component system with 92% engineer adoption, cutting UI defects by 38%. Ryan works at the seam of design and engineering, prototyping in code, partnering closely with engineers, and using AI tooling like Cursor and Claude to ship faster. Recent measurable outcomes include a 22% lift in task success after an IA overhaul, a 71% jump in dashboard engagement during beta, and an 18% lift in recurring revenue tied to a real-time inventory MVP. He's based in Austin, TX.",
-    "specialties": ["Information Architecture", "Design Systems", "AI-augmented Product UX", "Member Experience", "Design + Engineering Collaboration"],
-    "keywords": ["IA", "navigation", "taxonomy", "onboarding", "content discovery", "component library", "tokens", "B2B SaaS", "enterprise research", "AI", "AI-augmented UX", "LLM", "decision support", "UX engineer", "design engineer", "prototyping in code", "Figma", "React", "Cursor", "Claude"],
+    "specialties": [
+      "Information Architecture",
+      "Design Systems",
+      "AI-augmented Product UX",
+      "Member Experience",
+      "Design + Engineering Collaboration"
+    ],
+    "keywords": [
+      "IA",
+      "navigation",
+      "taxonomy",
+      "onboarding",
+      "content discovery",
+      "component library",
+      "tokens",
+      "B2B SaaS",
+      "enterprise research",
+      "AI",
+      "AI-augmented UX",
+      "LLM",
+      "decision support",
+      "UX engineer",
+      "design engineer",
+      "prototyping in code",
+      "Figma",
+      "React",
+      "Cursor",
+      "Claude"
+    ],
     "principles": [
       "**Clarity beats cleverness**",
       "**Evidence over opinion**",
@@ -51,14 +104,26 @@
       "**Systemize what works**",
       "**Build with engineers, not for them**"
     ],
-    "industries": ["B2B SaaS", "Enterprise/Research", "Internal Tools", "AI Products"],
+    "industries": [
+      "B2B SaaS",
+      "Enterprise/Research",
+      "Internal Tools",
+      "AI Products"
+    ],
     "location": "Austin, TX (US)",
     "hobbies": [
       "Photographing his son enjoying his childhood",
       "Playing guitar and bass",
       "Ice hockey twice a week"
     ],
-    "interests": ["Design systems", "IA patterns", "Data viz", "Typography", "Cooking", "AI tooling for designers"],
+    "interests": [
+      "Design systems",
+      "IA patterns",
+      "Data viz",
+      "Typography",
+      "Cooking",
+      "AI tooling for designers"
+    ],
     "off_hours": "Outside of work, Ryan plays guitar, cooks, and gets pucks slapped at him a couple nights a week. You'll also find him hunting good food when traveling.",
     "fun_facts": [
       "Follows the Steelers every Sunday in the fall.",
@@ -71,31 +136,59 @@
       "id": "ai_not_first",
       "stance": "AI should never be the first thing a user sees in a product they don't trust yet.",
       "context": "On the AI dashboard project, research showed users wanted familiar KPIs to orient themselves before exploring AI insights. Layering AI on verifiable data beat leading with it.",
-      "use_when": ["ai product role", "ai ux", "llm ux", "chatbot design", "ai-first vs human-first"]
+      "use_when": [
+        "ai product role",
+        "ai ux",
+        "llm ux",
+        "chatbot design",
+        "ai-first vs human-first"
+      ]
     },
     {
       "id": "design_engineering_seam",
       "stance": "The line between design and engineering is where the best work happens. Handoffs are where it dies.",
       "context": "Ryan prototypes in the browser, pairs early with engineers on feasibility, and uses Cursor and Claude to compress design cycles instead of throwing comps over a wall.",
-      "use_when": ["ux engineer", "design engineer", "collaboration", "handoff", "process"]
+      "use_when": [
+        "ux engineer",
+        "design engineer",
+        "collaboration",
+        "handoff",
+        "process"
+      ]
     },
     {
       "id": "tokens_over_patches",
       "stance": "Most legacy UI problems aren't a redesign problem. They're a token problem.",
       "context": "On an 8-year-old B2B platform, a tokenized design system of 100+ components achieved 92% engineer adoption and cut defects by 38%, without a big-bang rewrite.",
-      "use_when": ["design system", "legacy ui", "consistency", "white labeling", "tokens"]
+      "use_when": [
+        "design system",
+        "legacy ui",
+        "consistency",
+        "white labeling",
+        "tokens"
+      ]
     },
     {
       "id": "research_then_systemize",
       "stance": "Short research loops beat long research projects. Find the smallest unit of truth, then systemize it.",
       "context": "Ryan favors 6 to 10 interviews, tight prototype tests, and token-driven patterns over multi-month research efforts that don't ship.",
-      "use_when": ["research process", "how do you work", "research ops", "approach"]
+      "use_when": [
+        "research process",
+        "how do you work",
+        "research ops",
+        "approach"
+      ]
     },
     {
       "id": "mvp_for_trust",
       "stance": "MVPs aren't about feature scope. They're about earning trust before you add complexity.",
       "context": "The Real-Time Inventory MVP focused on the PO-received loop because trust in stock counts had to come before any automation. +18% recurring revenue followed.",
-      "use_when": ["mvp", "scoping", "shipping strategy", "real-time"]
+      "use_when": [
+        "mvp",
+        "scoping",
+        "shipping strategy",
+        "real-time"
+      ]
     }
   ],
   "looking_for": {
@@ -199,12 +292,36 @@
       }
     ],
     "education": [
-      { "degree": "BA, Anthropology (Focus: Qualitative Research Methods)", "school": "Clarion University of Pennsylvania", "dates": "2008–2013" },
-      { "degree": "Fullstack Developer Certification", "school": "Scrimba", "dates": "2025" },
-      { "degree": "Design Systems Certification", "school": "Memorisely", "dates": "2022" }
+      {
+        "degree": "BA, Anthropology (Focus: Qualitative Research Methods)",
+        "school": "Clarion University of Pennsylvania",
+        "dates": "2008–2013"
+      },
+      {
+        "degree": "Fullstack Developer Certification",
+        "school": "Scrimba",
+        "dates": "2025"
+      },
+      {
+        "degree": "Design Systems Certification",
+        "school": "Memorisely",
+        "dates": "2022"
+      }
     ],
-    "skills_primary": ["Information Architecture", "Design Systems", "UX Strategy", "AI-augmented Product UX", "Prototyping in Code"],
-    "skills_supporting": ["Research Ops", "Data Visualization", "Token Architecture", "Figma to React handoff", "HTML/CSS/JS"],
+    "skills_primary": [
+      "Information Architecture",
+      "Design Systems",
+      "UX Strategy",
+      "AI-augmented Product UX",
+      "Prototyping in Code"
+    ],
+    "skills_supporting": [
+      "Research Ops",
+      "Data Visualization",
+      "Token Architecture",
+      "Figma to React handoff",
+      "HTML/CSS/JS"
+    ],
     "achievements_top": [
       "Improved task success by **+22%** after IA/onboarding overhaul (internal).",
       "Built design system of 100+ components achieving **92% engineer adoption** and cutting frontend defects by **38%**.",
@@ -216,27 +333,67 @@
     {
       "id": "member-portal-overhaul",
       "slug": "case-member-portal-overhaul",
-      "title": "i4cp Member Portal Overhaul",
-      "short_title": "Member Portal Redesign",
+      "title": "i4cp Member Portal Growth Overhaul",
+      "short_title": "Member Portal Overhaul",
       "url": "https://ryanschmidt.design/member-portal-overhaul.html",
-      "status": "coming_soon",
-      "tags": ["IA", "Research", "Member Experience", "UX Strategy"],
-      "capabilities": ["information_architecture", "research", "enterprise_saas", "complex_workflows"],
-      "audience": "Enterprise members consuming research insights",
-      "problem": "Members struggled to find key research quickly because of navigation and taxonomy friction.",
-      "proof_points": [
-        "Case study is coming soon. Details will cover research, IA changes, and onboarding improvements.",
-        "Work includes research-led navigation and taxonomy decisions, with methods and artifacts to be published."
+      "status": "live",
+      "tags": [
+        "IA",
+        "Research",
+        "Member Experience",
+        "UX Strategy"
       ],
-      "constraints": ["Existing content models", "Multiple user types", "SEO plus internal vocabulary"],
-      "role": "Lead IA / UX",
-      "team": ["PM", "Eng", "Content/Research"],
+      "capabilities": [
+        "information_architecture",
+        "research",
+        "enterprise_saas",
+        "complex_workflows"
+      ],
+      "audience": "Enterprise members consuming research insights",
+      "problem": "The old taxonomy was so tangled that members assumed we just didn't have content for their specific roles or industries. Many just stopped logging in.",
+      "proof_points": [
+        "Overhauled the portal's architecture and core experience so members could actually find what they were paying for.",
+        "Replaced the traditional search bar with an AI discovery engine (Ahri) acting as an omnibar.",
+        "Designed fallback logic into the AI itself to handle traditional keyword searches, avoiding stakeholder pushback.",
+        "Drove a 500% jump in AI usage in the first month by putting AI discovery front and center."
+      ],
+      "constraints": [
+        "Stakeholder fear of removing traditional search",
+        "Complex legacy taxonomy"
+      ],
+      "role": "Lead UX Designer / PM",
+      "team": [
+        "PM",
+        "Eng",
+        "Content/Research"
+      ],
       "timeline": "12 weeks (discovery to rollout)",
-      "methods": ["Stakeholder interviews", "Card sorting", "Tree testing", "Prototyping"],
-      "components": ["Global nav", "Filters", "Cards", "Onboarding"],
-      "summary_short": "Research-led navigation, taxonomy, and onboarding overhaul for i4cp's member portal, with MVP designs complete.",
-      "outcomes": [],
-      "impact_narrative": "Coming soon.",
+      "methods": [
+        "Stakeholder interviews",
+        "Card sorting",
+        "Tree testing",
+        "Prototyping"
+      ],
+      "components": [
+        "Global nav",
+        "Filters",
+        "Cards",
+        "Onboarding"
+      ],
+      "summary_short": "Untangled a confusing architecture to help members find what they pay for, driving a 500% jump in AI usage.",
+      "outcomes": [
+        {
+          "metric": "**AI Activation**",
+          "value": "**+500%**",
+          "note": "AI usage jumped 500% in the first month"
+        },
+        {
+          "metric": "**Legacy Search Sunset**",
+          "value": "**100%**",
+          "note": "Removed the traditional keyword search bar with almost zero complaints"
+        }
+      ],
+      "impact_narrative": "By untangling the architecture, Ryan made it significantly faster for members to reach their \"Aha!\" moment, protecting long-term retention and driving a 500% jump in AI usage.",
       "sections": [
         {
           "id": "problem",
@@ -251,32 +408,69 @@
       "title": "AI-Powered Dashboards",
       "short_title": "AI-Powered Dashboards",
       "url": "https://ryanschmidt.design/dashboard.html",
-      "tags": ["Workflow", "Dashboards", "Decision Support", "AI"],
-      "capabilities": ["ai_product_design", "ux_engineering", "research", "enterprise_saas", "product_strategy", "complex_workflows", "prototyping"],
+      "tags": [
+        "Workflow",
+        "Dashboards",
+        "Decision Support",
+        "AI"
+      ],
+      "capabilities": [
+        "ai_product_design",
+        "ux_engineering",
+        "research",
+        "enterprise_saas",
+        "product_strategy",
+        "complex_workflows",
+        "prototyping"
+      ],
       "audience": "Internal leaders tracking KPIs and exceptions",
-      "problem": "Fragmented metrics made it hard to spot priorities and act quickly.",
+      "problem": "Users ignored static default dashboards while leadership wanted an AI-first UX. Research revealed users needed trustworthy KPI anchors before adopting AI insights.",
       "proof_points": [
-        "Redesigned dashboards into customizable, role-based templates to match how teams work.",
-        "Added prioritized alerts and progressive disclosure (drill-down panels) to reduce cognitive load.",
-        "Prototyped and tested end-to-end: choose template, customize widgets, generate AI report.",
-        "Beta outcome on the case page: +71% dashboard engagement.",
-        "62% of users created multiple dashboards; avg. interaction depth of 2.0 during beta."
+        "Designed customizable, role-based dashboards as the core anchor, layering AI summaries on top of verified metrics rather than replacing dashboards.",
+        "To prevent hallucination and maintain trust, constrained the LLM's context window exclusively to the JSON output of the user's active widgets.",
+        "Governed the UI closely with 4 engineering partners without a strict component library, relying on repeatable widget patterns to keep velocity high.",
+        "Turned an ignored dashboard feature into the main way teams track their work, driving a 71% jump in adoption."
       ],
-      "constraints": ["Multiple data owners", "Evolving metrics"],
-      "role": "UX Designer",
-      "team": ["PM", "DS/Analytics", "Eng"],
+      "constraints": [
+        "No mature design system",
+        "Executive push for AI vs User need for trust"
+      ],
+      "role": "Lead Product Designer & Acting PM",
+      "team": [
+        "PM",
+        "DS/Analytics",
+        "Eng"
+      ],
       "timeline": "8 weeks",
-      "methods": ["KPI mapping", "Wireframes", "Usability tests"],
-      "components": ["Tiles", "Alerts", "Drill-down panels"],
-      "summary_short": "Operational dashboard surfacing high-frequency tasks and prioritized alerts.",
-      "outcomes": [
-        { "metric": "**Engagement**", "value": "**+71%**", "note": "Beta dashboard engagement increase" },
-        { "metric": "**Multi-dashboard users**", "value": "**62%**", "note": "Beta" },
-        { "metric": "**Interaction depth**", "value": "**2.0**", "note": "Avg. during beta" },
-        { "metric": "**Time-on-task**", "direction": "**down**" },
-        { "metric": "**Decision speed**", "direction": "**up**" }
+      "methods": [
+        "KPI mapping",
+        "Wireframes",
+        "Usability tests"
       ],
-      "impact_narrative": "Prioritized metrics and progressive disclosure reduced cognitive load and sped up decisions.",
+      "components": [
+        "Tiles",
+        "Alerts",
+        "Drill-down panels"
+      ],
+      "summary_short": "Turned an ignored dashboard feature into the main way teams track their work, driving a 71% jump in adoption.",
+      "outcomes": [
+        {
+          "metric": "**Dashboard Engagement**",
+          "value": "**+71%**",
+          "note": "Increase in feature navigation"
+        },
+        {
+          "metric": "**Multi-dashboard users**",
+          "value": "**62%**",
+          "note": "Beta adoption"
+        },
+        {
+          "metric": "**Interaction depth**",
+          "value": "**2.0**",
+          "note": "Avg. during beta"
+        }
+      ],
+      "impact_narrative": "Drove a 71% increase in navigation clicks to the dashboard, transformed static reporting into an interactive sales-demo highlight, and established a trusted foundation for AI features.",
       "sections": [
         {
           "id": "problem",
@@ -321,30 +515,62 @@
       "title": "Real-Time Inventory",
       "short_title": "Real-Time Inventory",
       "url": "https://ryanschmidt.design/inventory.html",
-      "tags": ["Enterprise", "Real-time", "Inventory", "MVP"],
-      "capabilities": ["enterprise_saas", "complex_workflows", "research", "product_strategy", "information_architecture", "prototyping"],
+      "tags": [
+        "Enterprise",
+        "Real-time",
+        "Inventory",
+        "MVP"
+      ],
+      "capabilities": [
+        "enterprise_saas",
+        "complex_workflows",
+        "research",
+        "product_strategy",
+        "information_architecture",
+        "prototyping"
+      ],
       "audience": "Ops managers overseeing stock across locations",
-      "problem": "Spreadsheet handoffs caused mistrust in stock counts and fulfillment decisions.",
+      "problem": "Customers managed inventory in external spreadsheets, causing tracking errors and blocking enterprise sales deals.",
       "proof_points": [
-        "Replaced spreadsheet reconciliation with a unified, real-time inventory view across locations.",
-        "Designed quantity-first IA with optional asset-level detail to support both small and large teams.",
-        "Shipped an MVP (Dec 2024) centered on the PO-received loop to establish trust in stock counts.",
-        "Added alerts and threshold concepts to surface low-stock risk and reduce last-minute buys."
+        "Designed a unified inventory model across purchasing, projects, and locations. Prioritized data accuracy over complex automation for the MVP.",
+        "Fought for a dual-track UX: Quantity-first by default for smaller teams, but included a detailed power-user layer for asset-level tracking.",
+        "Unblocked larger enterprise clients who required asset-level tracking before purchasing.",
+        "Compromised with engineering to ship a manual \"refresh/sync\" button instead of websockets to get the feature out and capture revenue faster."
       ],
-      "constraints": ["Multi-location state", "Data freshness"],
+      "constraints": [
+        "Engineering timeline prevented real-time websockets",
+        "Conflicting needs of small vs enterprise users"
+      ],
       "role": "Product Designer",
-      "team": ["PM", "3 Engineers"],
-      "timeline": "12 weeks (MVP)",
-      "methods": ["Journey mapping", "Low-fi flows", "Clickable prototypes"],
-      "components": ["Table view", "Filters", "Status chips"],
-      "summary_short": "Single real-time view replacing spreadsheets, with clearer signals for action.",
-      "outcomes": [
-        { "metric": "**Product adoption**", "value": "**+8%**", "note": "1-year outcome" },
-        { "metric": "**Recurring revenue**", "value": "**+18%**", "note": "1-year outcome" },
-        { "metric": "**Release**", "value": "**MVP Dec 2024**" },
-        { "metric": "**Confidence**", "value": "**↑**", "note": "Ops reported better trust in counts" }
+      "team": [
+        "PM",
+        "3 Engineers"
       ],
-      "impact_narrative": "A unified, live inventory view helped teams align faster on stock actions.",
+      "timeline": "12 weeks (MVP)",
+      "methods": [
+        "Journey mapping",
+        "Low-fi flows",
+        "Clickable prototypes"
+      ],
+      "components": [
+        "Table view",
+        "Filters",
+        "Status chips"
+      ],
+      "summary_short": "Replaced messy spreadsheets with a real-time inventory system that unblocked enterprise deals and drove +18% MRR.",
+      "outcomes": [
+        {
+          "metric": "**Recurring Revenue**",
+          "value": "**+18%**",
+          "note": "Within the first year"
+        },
+        {
+          "metric": "**Product Adoption**",
+          "value": "**+8%**",
+          "note": "Within the first year"
+        }
+      ],
+      "impact_narrative": "Helped drive an 8% increase in product adoption and an 18% increase in recurring revenue within the first year, largely by unblocking enterprise deals.",
       "sections": [
         {
           "id": "problem",
@@ -394,8 +620,19 @@
       "title": "AI-Coding my Portfolio",
       "short_title": "Engineering My Portfolio",
       "url": "https://ryanschmidt.design/ai-coding-portfolio.html",
-      "tags": ["AI Coding", "Portfolio", "Cursor", "Front-end", "UX Engineering"],
-      "capabilities": ["ux_engineering", "front_end_development", "ai_product_design", "prototyping"],
+      "tags": [
+        "AI Coding",
+        "Portfolio",
+        "Cursor",
+        "Front-end",
+        "UX Engineering"
+      ],
+      "capabilities": [
+        "ux_engineering",
+        "front_end_development",
+        "ai_product_design",
+        "prototyping"
+      ],
       "audience": "Hiring managers evaluating design-to-code and AI-augmented workflow skills",
       "problem": "Most portfolios show design thinking without demonstrating the ability to build and ship in code.",
       "proof_points": [
@@ -404,17 +641,41 @@
         "Integrated AI coding tools (Cursor, Gemini, Antigravity) into a repeatable workflow, not one-off generation.",
         "Built end-to-end features including the AI chat widget, SEO structure, and interactive home experience."
       ],
-      "constraints": ["Solo build", "No engineering handoff", "Learning AI tooling limits in production"],
+      "constraints": [
+        "Solo build",
+        "No engineering handoff",
+        "Learning AI tooling limits in production"
+      ],
       "role": "Designer, front-end architect, and implementer",
-      "team": ["Self-directed"],
+      "team": [
+        "Self-directed"
+      ],
       "timeline": "2025–2026",
-      "methods": ["AI-assisted coding", "Prompt and pattern systems", "Code-first iteration"],
-      "components": ["Case study templates", "Chat widget", "Home gallery", "Navigation system"],
+      "methods": [
+        "AI-assisted coding",
+        "Prompt and pattern systems",
+        "Code-first iteration"
+      ],
+      "components": [
+        "Case study templates",
+        "Chat widget",
+        "Home gallery",
+        "Navigation system"
+      ],
       "summary_short": "Portfolio rebuilt in code with AI tools woven into a repeatable build workflow.",
       "outcomes": [
-        { "metric": "**Custom implementation**", "value": "No templates or CMS" },
-        { "metric": "**Reusable patterns**", "value": "Across all case studies" },
-        { "metric": "**AI workflow**", "value": "Integrated, not one-off" }
+        {
+          "metric": "**Custom implementation**",
+          "value": "No templates or CMS"
+        },
+        {
+          "metric": "**Reusable patterns**",
+          "value": "Across all case studies"
+        },
+        {
+          "metric": "**AI workflow**",
+          "value": "Integrated, not one-off"
+        }
       ],
       "impact_narrative": "Ryan can move from UX idea to shipped front-end feature without waiting on engineering handoffs.",
       "sections": [
@@ -455,56 +716,145 @@
     "ai_product_design": {
       "name": "AI Product Design",
       "description": "Designing AI-enabled experiences that layer on trusted workflows and verifiable data rather than black-box outputs.",
-      "cases": ["dashboard", "ai-coding-portfolio"],
-      "keywords": ["ai product", "ai ux", "llm", "generative ai", "copilot", "agent", "ai-first"]
+      "cases": [
+        "dashboard",
+        "ai-coding-portfolio"
+      ],
+      "keywords": [
+        "ai product",
+        "ai ux",
+        "llm",
+        "generative ai",
+        "copilot",
+        "agent",
+        "ai-first"
+      ]
     },
     "ux_engineering": {
       "name": "UX Engineering",
       "description": "Moving from design intent to shipped front-end code, pairing early with engineers instead of relying on handoffs.",
-      "cases": ["ai-coding-portfolio", "dashboard"],
-      "keywords": ["ux engineer", "design engineer", "front-end", "code", "cursor", "prototypes in code"]
+      "cases": [
+        "ai-coding-portfolio",
+        "dashboard"
+      ],
+      "keywords": [
+        "ux engineer",
+        "design engineer",
+        "front-end",
+        "code",
+        "cursor",
+        "prototypes in code"
+      ]
     },
     "information_architecture": {
       "name": "Information Architecture",
       "description": "Simplifying complex content and navigation so users can find what they need quickly.",
-      "cases": ["member-portal-overhaul", "inventory"],
-      "keywords": ["ia", "taxonomy", "navigation", "card sorting", "tree testing", "content discovery"]
+      "cases": [
+        "member-portal-overhaul",
+        "inventory"
+      ],
+      "keywords": [
+        "ia",
+        "taxonomy",
+        "navigation",
+        "card sorting",
+        "tree testing",
+        "content discovery"
+      ]
     },
     "research": {
       "name": "Research & Discovery",
       "description": "Identifying real problems through interviews and evidence before designing, and letting findings shape decisions.",
-      "cases": ["member-portal-overhaul", "dashboard", "inventory"],
-      "keywords": ["research", "user interviews", "discovery", "usability tests", "journey mapping"]
+      "cases": [
+        "member-portal-overhaul",
+        "dashboard",
+        "inventory"
+      ],
+      "keywords": [
+        "research",
+        "user interviews",
+        "discovery",
+        "usability tests",
+        "journey mapping"
+      ]
     },
     "enterprise_saas": {
       "name": "Enterprise SaaS",
       "description": "Designing for complex operational workflows, governance, and adoption across business-critical systems.",
-      "cases": ["inventory", "dashboard", "member-portal-overhaul"],
-      "keywords": ["enterprise", "b2b", "saas", "internal tools", "ops", "governance"]
+      "cases": [
+        "inventory",
+        "dashboard",
+        "member-portal-overhaul"
+      ],
+      "keywords": [
+        "enterprise",
+        "b2b",
+        "saas",
+        "internal tools",
+        "ops",
+        "governance"
+      ]
     },
     "product_strategy": {
       "name": "Product Strategy",
       "description": "Framing ambiguous problems, defining scope, and making defining decisions under constraints.",
-      "cases": ["dashboard", "inventory"],
-      "keywords": ["strategy", "defining decision", "scope", "mvp", "prioritization"]
+      "cases": [
+        "dashboard",
+        "inventory"
+      ],
+      "keywords": [
+        "strategy",
+        "defining decision",
+        "scope",
+        "mvp",
+        "prioritization"
+      ]
     },
     "complex_workflows": {
       "name": "Complex Workflows",
       "description": "Supporting multi-surface, role-based, and multi-location workflows without losing clarity.",
-      "cases": ["inventory", "dashboard", "member-portal-overhaul"],
-      "keywords": ["workflow", "role-based", "multi-location", "real-time", "operational"]
+      "cases": [
+        "inventory",
+        "dashboard",
+        "member-portal-overhaul"
+      ],
+      "keywords": [
+        "workflow",
+        "role-based",
+        "multi-location",
+        "real-time",
+        "operational"
+      ]
     },
     "front_end_development": {
       "name": "Front-End Development",
       "description": "Building production front-end features with HTML, CSS, and JavaScript as part of a repeatable system.",
-      "cases": ["ai-coding-portfolio"],
-      "keywords": ["front-end", "html", "css", "javascript", "react", "component system"]
+      "cases": [
+        "ai-coding-portfolio"
+      ],
+      "keywords": [
+        "front-end",
+        "html",
+        "css",
+        "javascript",
+        "react",
+        "component system"
+      ]
     },
     "prototyping": {
       "name": "Prototyping",
       "description": "Validating ideas with low-fi through high-fidelity and code prototypes before committing to build.",
-      "cases": ["dashboard", "inventory", "ai-coding-portfolio"],
-      "keywords": ["prototyping", "wireframes", "clickable prototypes", "hi-fi figma"]
+      "cases": [
+        "dashboard",
+        "inventory",
+        "ai-coding-portfolio"
+      ],
+      "keywords": [
+        "prototyping",
+        "wireframes",
+        "clickable prototypes",
+        "hi-fi figma"
+      ]
     }
   },
   "faq": [
@@ -587,99 +937,147 @@
       "a": "Because portfolio sites are slow and recruiters are fast. He wanted a way for visitors to get specific answers in 10 seconds instead of clicking through five pages."
     }
   ],
-
   "deterministic_answers": {
-  "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
-  "looking_for": "Ryan is open to the right opportunity, especially roles where design and engineering share a seat. His strongest targets are UX Engineer, Senior Product Designer, Staff Product Designer, and AI Product Designer roles.",
-  "proof_points": "Ryan's strongest proof points are +22% task success after an IA/onboarding overhaul, 100+ components with 92% engineer adoption (cutting UI defects by 38%), +71% dashboard engagement during beta, and +18% recurring revenue after the Real-Time Inventory MVP.",
-  "ux_engineer_fit": "Yes. Ryan codes, prototypes in the browser, uses AI tooling daily, and works closely with engineers. The strongest evidence is his AI-Coding my Portfolio case, coded prototyping habits, and AI dashboard/product workflow thinking."
+    "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
+    "looking_for": "Ryan is open to the right opportunity, especially roles where design and engineering share a seat. His strongest targets are UX Engineer, Senior Product Designer, Staff Product Designer, and AI Product Designer roles.",
+    "proof_points": "Ryan's strongest proof points are +22% task success after an IA/onboarding overhaul, 100+ components with 92% engineer adoption (cutting UI defects by 38%), +71% dashboard engagement during beta, and +18% recurring revenue after the Real-Time Inventory MVP.",
+    "ux_engineer_fit": "Yes. Ryan codes, prototypes in the browser, uses AI tooling daily, and works closely with engineers. The strongest evidence is his AI-Coding my Portfolio case, coded prototyping habits, and AI dashboard/product workflow thinking."
   },
-
   "evidence_by_role": {
-  "ux_engineer": {
-    "best_cases": ["ai-coding-portfolio", "dashboard"],
-    "strengths": [
-      "Prototypes in code and understands implementation tradeoffs.",
-      "Uses HTML, CSS, JavaScript, React fundamentals, Tailwind, Radix, shadcn, Cursor, and Claude.",
-      "Can bridge design intent, component systems, and engineering feasibility."
-    ],
-    "proof": [
-      "Built this portfolio end-to-end in code with Cursor, Gemini, and Antigravity.",
-      "Partners early with engineers instead of relying on handoffs.",
-      "Built AI chat features end-to-end, including prompts, KB, and routing."
-    ]
-  },
-  "staff_product_designer": {
-    "best_cases": ["ai-coding-portfolio", "dashboard", "inventory"],
-    "strengths": [
-      "Systems thinking across product surfaces.",
-      "Strong IA, product judgment, and stakeholder alignment.",
-      "Comfortable turning ambiguous product problems into scalable patterns."
-    ],
-    "proof": [
-      "+71% dashboard engagement during beta.",
-      "92% engineer adoption across 100+ tokenized components (38% fewer defects).",
-      "+18% recurring revenue after Real-Time Inventory MVP."
-    ]
-  },
-  "ai_product_designer": {
-    "best_cases": ["dashboard"],
-    "strengths": [
-      "Treats AI as a layer on trusted workflows, not a novelty UI.",
-      "Tests for user trust before expanding AI scope.",
-      "Connects AI output to verifiable data."
-    ],
-    "proof": [
-      "Pushed back on AI-first dashboard direction after research.",
-      "Layered AI summarization on familiar KPI workflows.",
-      "+71% beta engagement on AI-Powered Dashboards."
-    ]
-  }
-},
-
-"company_fit_patterns": {
-  "design_tools": {
-    "use_when": ["figma", "design tool", "design systems platform", "collaboration tool"],
-    "angle": "Emphasize design systems, token architecture, component governance, and designer-engineer workflow.",
-    "best_cases": ["ai-coding-portfolio"],
-    "proof": ["92% engineer adoption (100+ components)", "38% fewer defects", "partnered with 10+ engineers"]
-  },
-  "ai_products": {
-    "use_when": ["ai", "llm", "copilot", "agent", "automation", "analytics"],
-    "angle": "Emphasize trustworthy AI layered on familiar workflows, verifiable data, and human-in-the-loop decision support.",
-    "best_cases": ["dashboard"],
-    "proof": ["+71% dashboard engagement", "AI summarization on verified dashboard metrics"]
-  },
-  "enterprise_saas": {
-    "use_when": ["enterprise", "b2b", "saas", "platform", "admin", "internal tools"],
-    "angle": "Emphasize IA, scalable systems, adoption, governance, and reducing operational friction.",
-    "best_cases": ["ai-coding-portfolio", "inventory", "dashboard"],
-    "proof": ["92% engineer adoption (100+ components)", "+18% recurring revenue", "+8% product adoption"]
-  }
-},
-
-"negative_rules": {
-  "do_not_claim": [
-    "Do not say Ryan is a full-time software engineer.",
-    "Do not say Ryan owned production React code unless explicitly supported by context.",
-    "Do not say Ryan led i4cp before February 2026.",
-    "Do not claim published outcomes for coming-soon cases.",
-    "Do not mention Bytemark unless asked about Bytemark, transit, Swiftly, mobile ticketing, or earlier work history."
-  ],
-  "corrections": [
-    {
-      "false_assumption": "Ryan launched the i4cp member portal results publicly",
-      "correct_response": "That case is still coming soon. The public portfolio can speak to the research-led IA direction, but not final published outcomes yet."
+    "ux_engineer": {
+      "best_cases": [
+        "ai-coding-portfolio",
+        "dashboard"
+      ],
+      "strengths": [
+        "Prototypes in code and understands implementation tradeoffs.",
+        "Uses HTML, CSS, JavaScript, React fundamentals, Tailwind, Radix, shadcn, Cursor, and Claude.",
+        "Can bridge design intent, component systems, and engineering feasibility."
+      ],
+      "proof": [
+        "Built this portfolio end-to-end in code with Cursor, Gemini, and Antigravity.",
+        "Partners early with engineers instead of relying on handoffs.",
+        "Built AI chat features end-to-end, including prompts, KB, and routing."
+      ]
     },
-    {
-      "false_assumption": "Ryan is a software engineer",
-      "correct_response": "Ryan is a Senior Product Designer who codes and prototypes, not a full-time software engineer."
+    "staff_product_designer": {
+      "best_cases": [
+        "ai-coding-portfolio",
+        "dashboard",
+        "inventory"
+      ],
+      "strengths": [
+        "Systems thinking across product surfaces.",
+        "Strong IA, product judgment, and stakeholder alignment.",
+        "Comfortable turning ambiguous product problems into scalable patterns."
+      ],
+      "proof": [
+        "+71% dashboard engagement during beta.",
+        "92% engineer adoption across 100+ tokenized components (38% fewer defects).",
+        "+18% recurring revenue after Real-Time Inventory MVP."
+      ]
+    },
+    "ai_product_designer": {
+      "best_cases": [
+        "dashboard"
+      ],
+      "strengths": [
+        "Treats AI as a layer on trusted workflows, not a novelty UI.",
+        "Tests for user trust before expanding AI scope.",
+        "Connects AI output to verifiable data."
+      ],
+      "proof": [
+        "Pushed back on AI-first dashboard direction after research.",
+        "Layered AI summarization on familiar KPI workflows.",
+        "+71% beta engagement on AI-Powered Dashboards."
+      ]
     }
-  ]
-},
-
+  },
+  "company_fit_patterns": {
+    "design_tools": {
+      "use_when": [
+        "figma",
+        "design tool",
+        "design systems platform",
+        "collaboration tool"
+      ],
+      "angle": "Emphasize design systems, token architecture, component governance, and designer-engineer workflow.",
+      "best_cases": [
+        "ai-coding-portfolio"
+      ],
+      "proof": [
+        "92% engineer adoption (100+ components)",
+        "38% fewer defects",
+        "partnered with 10+ engineers"
+      ]
+    },
+    "ai_products": {
+      "use_when": [
+        "ai",
+        "llm",
+        "copilot",
+        "agent",
+        "automation",
+        "analytics"
+      ],
+      "angle": "Emphasize trustworthy AI layered on familiar workflows, verifiable data, and human-in-the-loop decision support.",
+      "best_cases": [
+        "dashboard"
+      ],
+      "proof": [
+        "+71% dashboard engagement",
+        "AI summarization on verified dashboard metrics"
+      ]
+    },
+    "enterprise_saas": {
+      "use_when": [
+        "enterprise",
+        "b2b",
+        "saas",
+        "platform",
+        "admin",
+        "internal tools"
+      ],
+      "angle": "Emphasize IA, scalable systems, adoption, governance, and reducing operational friction.",
+      "best_cases": [
+        "ai-coding-portfolio",
+        "inventory",
+        "dashboard"
+      ],
+      "proof": [
+        "92% engineer adoption (100+ components)",
+        "+18% recurring revenue",
+        "+8% product adoption"
+      ]
+    }
+  },
+  "negative_rules": {
+    "do_not_claim": [
+      "Do not say Ryan is a full-time software engineer.",
+      "Do not say Ryan owned production React code unless explicitly supported by context.",
+      "Do not say Ryan led i4cp before February 2026.",
+      "Do not claim published outcomes for coming-soon cases.",
+      "Do not mention Bytemark unless asked about Bytemark, transit, Swiftly, mobile ticketing, or earlier work history."
+    ],
+    "corrections": [
+      {
+        "false_assumption": "Ryan launched the i4cp member portal results publicly",
+        "correct_response": "That case is still coming soon. The public portfolio can speak to the research-led IA direction, but not final published outcomes yet."
+      },
+      {
+        "false_assumption": "Ryan is a software engineer",
+        "correct_response": "Ryan is a Senior Product Designer who codes and prototypes, not a full-time software engineer."
+      }
+    ]
+  },
   "fit_template": {
-    "order": ["takeaway", "strengths", "proof", "mapping", "closing"],
+    "order": [
+      "takeaway",
+      "strengths",
+      "proof",
+      "mapping",
+      "closing"
+    ],
     "max_words": 160,
     "takeaway_prompt": "In one sentence, state why Ryan is a strong fit for <Company/Product>.",
     "strengths_menu": [
@@ -690,41 +1088,260 @@
       "**Dashboards and decision support** that prioritize action"
     ],
     "proof_rules": {
-      "prefer_cases": ["dashboard", "ai-coding-portfolio", "inventory"],
+      "prefer_cases": [
+        "dashboard",
+        "ai-coding-portfolio",
+        "inventory"
+      ],
       "max_items": 2
     },
     "mapping_prompt": "In 2 to 3 bullets, connect strengths to <Company/Product>'s likely UX challenges based on role and domain. Start each bullet with a **bolded concept**.",
     "closing_prompt": "Offer a brief next step. Include an inline link to a relevant url, and a soft nudge to https://www.linkedin.com/in/ryanschmidt1989/ for a conversation when fit signal is strong."
   },
   "intents": [
-    { "id": "about_short", "examples": ["who is ryan", "tell me about ryan", "give me a bio"] },
-    { "id": "about_hobbies", "examples": ["what does ryan do for fun", "hobbies", "outside of work"] },
-    { "id": "company_fit", "examples": ["why fit at", "good fit for", "match for our team"] },
-    { "id": "company_fit_expanded", "examples": ["go deeper", "yes go deeper", "expand on fit", "tell me more about why Ryan fits", "give me the detailed fit answer"] },
-    { "id": "ux_engineer_fit", "examples": ["ux engineer", "design engineer", "can he code", "does he prototype in code"] },
-    { "id": "ai_adept_fit", "examples": ["ai product role", "ai design", "llm product", "ai ux"] },
-    { "id": "case_select", "examples": ["which case", "best example for", "show me work on"] },
-    { "id": "case_detail", "examples": ["tell me more about", "why this decision", "what was hard about"] },
-    { "id": "resume_proof", "examples": ["top proof points", "best outcomes", "biggest wins"] },
-    { "id": "looking_for", "examples": ["open to roles", "what is he looking for", "is he available", "what kind of role"] },
-    { "id": "tools_and_stack", "examples": ["what tools", "stack", "figma", "cursor", "claude"] },
-    { "id": "process", "examples": ["how does he work", "process", "approach to design"] },
-    { "id": "biggest_lesson", "examples": ["biggest mistake", "what did he learn", "got something wrong", "failure"] },
-    { "id": "disagreement_handling", "examples": ["disagree with pm", "conflict", "push back", "stakeholder"] },
-    { "id": "proudest_work", "examples": ["most proud", "favorite project", "best work"] },
-    { "id": "research_under_constraints", "examples": ["research with no time", "limited budget", "small team research"] },
-    { "id": "contact", "examples": ["how to reach", "contact", "email", "set up a call"] },
-    { "id": "meta_qa", "examples": ["are you an ai", "did ryan build you", "what can you answer", "how accurate are you", "why does this exist"] },
-    { "id": "off_topic_design", "examples": ["what makes good ux", "review my portfolio", "design advice"] },
-    { "id": "off_topic_unrelated", "examples": ["weather", "code my app", "homework"] },
-    { "id": "not_in_kb", "examples": ["asks about a project, employer, or fact not in the KB"] },
-    { "id": "clarification", "examples": ["question lacks the company, product, or role needed to answer well"] },
-    { "id": "leadership", "examples": ["has he managed people", "led a team", "leadership experience", "manage designers", "design leadership"] },
-    { "id": "differentiator", "examples": ["what sets him apart", "why hire ryan", "unique about ryan", "stand out", "different from other designers"] },
-    { "id": "compensation", "examples": ["salary expectations", "compensation", "how much does he want", "rate", "pay range"] },
-    { "id": "culture_add", "examples": ["what would he bring to the team", "culture fit", "team contribution", "beyond his skills", "design team culture"] },
-    { "id": "company_fit_specific", "examples": ["why is ryan a fit at", "ryan fit at", "ryan for [company]", "specific company fit"] },
-    { "id": "stakeholder_influence", "examples": ["influence without authority", "executive stakeholder", "convince leadership", "get buy-in", "drive alignment"] }
+    {
+      "id": "about_short",
+      "examples": [
+        "who is ryan",
+        "tell me about ryan",
+        "give me a bio"
+      ]
+    },
+    {
+      "id": "about_hobbies",
+      "examples": [
+        "what does ryan do for fun",
+        "hobbies",
+        "outside of work"
+      ]
+    },
+    {
+      "id": "company_fit",
+      "examples": [
+        "why fit at",
+        "good fit for",
+        "match for our team"
+      ]
+    },
+    {
+      "id": "company_fit_expanded",
+      "examples": [
+        "go deeper",
+        "yes go deeper",
+        "expand on fit",
+        "tell me more about why Ryan fits",
+        "give me the detailed fit answer"
+      ]
+    },
+    {
+      "id": "ux_engineer_fit",
+      "examples": [
+        "ux engineer",
+        "design engineer",
+        "can he code",
+        "does he prototype in code"
+      ]
+    },
+    {
+      "id": "ai_adept_fit",
+      "examples": [
+        "ai product role",
+        "ai design",
+        "llm product",
+        "ai ux"
+      ]
+    },
+    {
+      "id": "case_select",
+      "examples": [
+        "which case",
+        "best example for",
+        "show me work on"
+      ]
+    },
+    {
+      "id": "case_detail",
+      "examples": [
+        "tell me more about",
+        "why this decision",
+        "what was hard about"
+      ]
+    },
+    {
+      "id": "resume_proof",
+      "examples": [
+        "top proof points",
+        "best outcomes",
+        "biggest wins"
+      ]
+    },
+    {
+      "id": "looking_for",
+      "examples": [
+        "open to roles",
+        "what is he looking for",
+        "is he available",
+        "what kind of role"
+      ]
+    },
+    {
+      "id": "tools_and_stack",
+      "examples": [
+        "what tools",
+        "stack",
+        "figma",
+        "cursor",
+        "claude"
+      ]
+    },
+    {
+      "id": "process",
+      "examples": [
+        "how does he work",
+        "process",
+        "approach to design"
+      ]
+    },
+    {
+      "id": "biggest_lesson",
+      "examples": [
+        "biggest mistake",
+        "what did he learn",
+        "got something wrong",
+        "failure"
+      ]
+    },
+    {
+      "id": "disagreement_handling",
+      "examples": [
+        "disagree with pm",
+        "conflict",
+        "push back",
+        "stakeholder"
+      ]
+    },
+    {
+      "id": "proudest_work",
+      "examples": [
+        "most proud",
+        "favorite project",
+        "best work"
+      ]
+    },
+    {
+      "id": "research_under_constraints",
+      "examples": [
+        "research with no time",
+        "limited budget",
+        "small team research"
+      ]
+    },
+    {
+      "id": "contact",
+      "examples": [
+        "how to reach",
+        "contact",
+        "email",
+        "set up a call"
+      ]
+    },
+    {
+      "id": "meta_qa",
+      "examples": [
+        "are you an ai",
+        "did ryan build you",
+        "what can you answer",
+        "how accurate are you",
+        "why does this exist"
+      ]
+    },
+    {
+      "id": "off_topic_design",
+      "examples": [
+        "what makes good ux",
+        "review my portfolio",
+        "design advice"
+      ]
+    },
+    {
+      "id": "off_topic_unrelated",
+      "examples": [
+        "weather",
+        "code my app",
+        "homework"
+      ]
+    },
+    {
+      "id": "not_in_kb",
+      "examples": [
+        "asks about a project, employer, or fact not in the KB"
+      ]
+    },
+    {
+      "id": "clarification",
+      "examples": [
+        "question lacks the company, product, or role needed to answer well"
+      ]
+    },
+    {
+      "id": "leadership",
+      "examples": [
+        "has he managed people",
+        "led a team",
+        "leadership experience",
+        "manage designers",
+        "design leadership"
+      ]
+    },
+    {
+      "id": "differentiator",
+      "examples": [
+        "what sets him apart",
+        "why hire ryan",
+        "unique about ryan",
+        "stand out",
+        "different from other designers"
+      ]
+    },
+    {
+      "id": "compensation",
+      "examples": [
+        "salary expectations",
+        "compensation",
+        "how much does he want",
+        "rate",
+        "pay range"
+      ]
+    },
+    {
+      "id": "culture_add",
+      "examples": [
+        "what would he bring to the team",
+        "culture fit",
+        "team contribution",
+        "beyond his skills",
+        "design team culture"
+      ]
+    },
+    {
+      "id": "company_fit_specific",
+      "examples": [
+        "why is ryan a fit at",
+        "ryan fit at",
+        "ryan for [company]",
+        "specific company fit"
+      ]
+    },
+    {
+      "id": "stakeholder_influence",
+      "examples": [
+        "influence without authority",
+        "executive stakeholder",
+        "convince leadership",
+        "get buy-in",
+        "drive alignment"
+      ]
+    }
   ],
   "router": {
     "page_to_case": {
@@ -735,47 +1352,136 @@
       "/about.html": null
     },
     "keyword_to_case": {
-      "navigation": ["member-portal-overhaul"],
-      "taxonomy": ["member-portal-overhaul"],
-      "onboarding": ["member-portal-overhaul"],
-      "member portal": ["member-portal-overhaul"],
-      "i4cp": ["member-portal-overhaul"],
-      "discovery": ["dashboard"],
-      "filters": ["member-portal-overhaul"],
-      "data visualization": ["dashboard"],
-      "dashboard": ["dashboard"],
-      "ai-powered": ["dashboard"],
-      "ai product": ["dashboard"],
-      "ai ux": ["dashboard"],
-      "gen ai": ["dashboard"],
-      "generative ai": ["dashboard"],
-      "kpi": ["dashboard"],
-      "metrics": ["dashboard"],
-      "analytics": ["dashboard"],
-      "reports": ["dashboard"],
-      "inventory": ["inventory"],
-      "real-time": ["inventory"],
-      "spreadsheets": ["inventory"],
-      "ops": ["inventory"],
-      "stock": ["inventory"],
-      "mvp": ["inventory"],
-      "portfolio": ["ai-coding-portfolio"],
-      "cursor": ["ai-coding-portfolio", "dashboard"],
-      "gemini": ["ai-coding-portfolio", "dashboard"],
-      "antigravity": ["ai-coding-portfolio"],
-      "ai coding": ["ai-coding-portfolio"],
-      "vibe coding": ["ai-coding-portfolio"],
-      "build portfolio": ["ai-coding-portfolio"],
-      "front-end": ["ai-coding-portfolio"],
-      "frontend": ["ai-coding-portfolio"],
-      "ux engineer": ["ai-coding-portfolio", "dashboard"],
-      "design engineer": ["ai-coding-portfolio", "dashboard"],
-      "react": ["ai-coding-portfolio"],
-      "code": ["ai-coding-portfolio", "dashboard"],
-      "claude": ["ai-coding-portfolio", "dashboard"],
-      "prototyping": ["dashboard", "inventory"]
+      "navigation": [
+        "member-portal-overhaul"
+      ],
+      "taxonomy": [
+        "member-portal-overhaul"
+      ],
+      "onboarding": [
+        "member-portal-overhaul"
+      ],
+      "member portal": [
+        "member-portal-overhaul"
+      ],
+      "i4cp": [
+        "member-portal-overhaul"
+      ],
+      "discovery": [
+        "dashboard"
+      ],
+      "filters": [
+        "member-portal-overhaul"
+      ],
+      "data visualization": [
+        "dashboard"
+      ],
+      "dashboard": [
+        "dashboard"
+      ],
+      "ai-powered": [
+        "dashboard"
+      ],
+      "ai product": [
+        "dashboard"
+      ],
+      "ai ux": [
+        "dashboard"
+      ],
+      "gen ai": [
+        "dashboard"
+      ],
+      "generative ai": [
+        "dashboard"
+      ],
+      "kpi": [
+        "dashboard"
+      ],
+      "metrics": [
+        "dashboard"
+      ],
+      "analytics": [
+        "dashboard"
+      ],
+      "reports": [
+        "dashboard"
+      ],
+      "inventory": [
+        "inventory"
+      ],
+      "real-time": [
+        "inventory"
+      ],
+      "spreadsheets": [
+        "inventory"
+      ],
+      "ops": [
+        "inventory"
+      ],
+      "stock": [
+        "inventory"
+      ],
+      "mvp": [
+        "inventory"
+      ],
+      "portfolio": [
+        "ai-coding-portfolio"
+      ],
+      "cursor": [
+        "ai-coding-portfolio",
+        "dashboard"
+      ],
+      "gemini": [
+        "ai-coding-portfolio",
+        "dashboard"
+      ],
+      "antigravity": [
+        "ai-coding-portfolio"
+      ],
+      "ai coding": [
+        "ai-coding-portfolio"
+      ],
+      "vibe coding": [
+        "ai-coding-portfolio"
+      ],
+      "build portfolio": [
+        "ai-coding-portfolio"
+      ],
+      "front-end": [
+        "ai-coding-portfolio"
+      ],
+      "frontend": [
+        "ai-coding-portfolio"
+      ],
+      "ux engineer": [
+        "ai-coding-portfolio",
+        "dashboard"
+      ],
+      "design engineer": [
+        "ai-coding-portfolio",
+        "dashboard"
+      ],
+      "react": [
+        "ai-coding-portfolio"
+      ],
+      "code": [
+        "ai-coding-portfolio",
+        "dashboard"
+      ],
+      "claude": [
+        "ai-coding-portfolio",
+        "dashboard"
+      ],
+      "prototyping": [
+        "dashboard",
+        "inventory"
+      ]
     },
-    "fallback_case_order": ["dashboard", "ai-coding-portfolio", "inventory"]
+    "fallback_case_order": [
+      "dashboard",
+      "ai-coding-portfolio",
+      "inventory"
+    ]
   },
   "chips": {
     "default": [
@@ -889,12 +1595,12 @@
     {
       "intent": "case_detail",
       "prompt": "Why ship an MVP first on the inventory project?",
-      "answer": "To establish trust in stock counts before adding automation complexity. Teams were spending 2 to 3 hours a day reconciling spreadsheets with 15 to 20% error rates, so the MVP focused on the PO-received loop. Want the full set of tradeoffs?"
+      "answer": "To establish trust in stock counts before adding automation complexity. The engineering timeline couldn't support real-time websockets, so he compromised on a manual refresh button to get the feature out and capture revenue faster, directly unblocking enterprise deals. Want the full set of tradeoffs?"
     },
     {
       "intent": "resume_proof",
       "prompt": "What are Ryan's top 3 proof points?",
-      "answer": "**+22% task success** after the IA overhaul at i4cp, **92% engineer adoption** across 100+ components on the D-Tools design system (cutting UI defects by **38%**), and **+71% dashboard engagement** in beta on the AI dashboard work. Want context on any of them?"
+      "answer": "**+500% jump in AI usage** after an IA overhaul at i4cp, **+18% MRR** by unblocking enterprise deals with a new real-time inventory system, and **+71% dashboard engagement** in beta on the AI dashboard work. Want context on any of them?"
     },
     {
       "intent": "looking_for",
@@ -924,7 +1630,7 @@
     {
       "intent": "proudest_work",
       "prompt": "What project is Ryan most proud of and why?",
-      "answer": "The D-Tools design system, because it changed how the team shipped. Token-first foundation of 100+ components, **92% engineer adoption**, **38% fewer defects**, and an intake process that kept it healthy after launch. It's the case where systems thinking did the heavy lifting."
+      "answer": "The Member Portal Growth Overhaul, because it solved a massive business bottleneck. By restructuring the IA and replacing a traditional search bar with an AI discovery engine, he drove a **500% jump in AI usage** and protected long-term retention., and an intake process that kept it healthy after launch. It's the case where systems thinking did the heavy lifting."
     },
     {
       "intent": "research_under_constraints",
@@ -984,7 +1690,7 @@
     {
       "intent": "company_fit_specific",
       "prompt": "Why is Ryan a fit at a B2B SaaS company like Stripe?",
-      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove **92% engineer adoption** on a 100+ component design system on a legacy B2B platform, cut frontend defects by **38%**, and shipped an inventory MVP tied to **+18% recurring revenue**. For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
+      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove a **500% jump in AI adoption** through a complex IA overhaul, unblocked enterprise deals to drive **+18% MRR** with a new real-time inventory system, and increased dashboard adoption by **71%**. For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
     },
     {
       "intent": "stakeholder_influence",

@@ -1712,12 +1712,26 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
       parts: [{ text: systemPrompt }]
     },
     contents,
+    
     generationConfig: {
       temperature,
       topP: 0.9,
       topK: 32,
       maxOutputTokens,
       responseMimeType: "application/json",
+      responseSchema: {
+        type: "OBJECT",
+        properties: {
+          answer: { type: "STRING", description: "The conversational response to the user, strictly following voice rules." },
+          suggested_pills: { type: "ARRAY", items: { type: "STRING" }, description: "1-2 short follow-up questions the user might want to ask next." },
+          hire_intent: { type: "BOOLEAN", description: "Set to true ONLY if the user is asking about contacting Ryan, availability, or scheduling." },
+          context_cases: { type: "ARRAY", items: { type: "STRING" }, description: "IDs of the case studies mentioned (e.g. 'case-dashboard')." },
+          sources: { type: "ARRAY", items: { type: "STRING" }, description: "URLs to the case studies or sections referenced." },
+          action_scroll_to: { type: "STRING", description: "Optional section ID to scroll to on the current page." },
+          action_highlight: { type: "STRING", description: "Optional CSS selector to highlight on the current page." }
+        },
+        required: ["answer", "suggested_pills", "hire_intent"]
+      },
       responseModalities: ["TEXT"]
     }
   };
