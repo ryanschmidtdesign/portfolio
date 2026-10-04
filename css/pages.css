@@ -853,7 +853,7 @@
     }
 
     .home-title__eyebrow--featured {
-      color: #4F6EF7;
+      color: #0033FF;
       font-weight: 800;
       margin-right: -1rem; /* Pull title back to align with others despite the 2-line eyebrow */
     }

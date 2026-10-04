@@ -275,7 +275,7 @@
   --rgb-blue: 79 110 247;
   --rgb-outline: 26 33 40;
   --rgb-accent-small: 79 110 247;
-  --rgb-cool: 79 110 247;
+  --rgb-cool: 0 51 255;
 
   --img-frame: rgb(var(--rgb-white) / 0.16);
   --img-matte: rgb(var(--rgb-black) / 0.22);

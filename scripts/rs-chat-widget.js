@@ -142,7 +142,7 @@
       }
       .hdr-close:focus-visible {
         outline: none;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18), 0 0 0 3px rgba(79, 110, 247, 0.12);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18), 0 0 0 3px rgba(0, 51, 255, 0.12);
       }
       /* Messages (anti‑clipping) */
       .msgs {
@@ -240,7 +240,7 @@
       }
       .chat-card-action {
         display: block;
-        color: var(--accent, #4F6EF7);
+        color: var(--accent, #0033FF);
         font-size: 13px;
         font-weight: var(--weight-medium, 500);
       }
@@ -327,7 +327,7 @@
       }
       .text:focus {
         outline: none;
-        border-color: rgba(79, 110, 247, 0.5);
+        border-color: rgba(0, 51, 255, 0.5);
         box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24), 0 0 0 2px rgb(79 110 247 / 0.12);
         background: rgba(245, 245, 245, 1);
       }
@@ -485,8 +485,8 @@
         text-decoration-color: rgba(255, 255, 255, 0.20);
       }
       .chat-sources-list a:hover {
-        color: var(--accent, #4F6EF7);
-        text-decoration-color: var(--accent, #4F6EF7);
+        color: var(--accent, #0033FF);
+        text-decoration-color: var(--accent, #0033FF);
       }
 
       /* Dynamic loading state */
@@ -502,9 +502,9 @@
         width: 14px;
         height: 14px;
         border-radius: 50%;
-        background: var(--accent, #4F6EF7);
+        background: var(--accent, #0033FF);
         animation: orb-pulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        box-shadow: 0 0 8px rgba(79, 110, 247, 0.4);
+        box-shadow: 0 0 8px rgba(0, 51, 255, 0.4);
       }
       @keyframes orb-pulse {
         0% { transform: scale(0.8); opacity: 0.5; }
@@ -524,7 +524,7 @@
         display: inline-block;
         width: 6px;
         height: 1.1em;
-        background-color: var(--accent, #4F6EF7);
+        background-color: var(--accent, #0033FF);
         vertical-align: text-bottom;
         margin-left: 4px;
         animation: blink 1s step-end infinite;

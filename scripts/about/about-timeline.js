@@ -43,12 +43,12 @@
     }
 
     @keyframes _dot-pulse {
-      0%, 100% { box-shadow: 0 0 0 0px rgba(79, 110, 247, 0.45); }
-      50%       { box-shadow: 0 0 0 5px rgba(79, 110, 247, 0); }
+      0%, 100% { box-shadow: 0 0 0 0px rgba(0, 51, 255, 0.45); }
+      50%       { box-shadow: 0 0 0 5px rgba(0, 51, 255, 0); }
     }
     @keyframes _dot-pulse-current {
-      0%, 100% { box-shadow: 0 0 0 0px rgba(79, 110, 247, 0.6); }
-      50%       { box-shadow: 0 0 0 7px rgba(79, 110, 247, 0); }
+      0%, 100% { box-shadow: 0 0 0 0px rgba(0, 51, 255, 0.6); }
+      50%       { box-shadow: 0 0 0 7px rgba(0, 51, 255, 0); }
     }
 
     .timeline-list.has-canvas-rail .timeline-item::before {
@@ -73,7 +73,7 @@
 
     // Get accent color once — re-read only when ResizeObserver fires (theme unlikely to change)
     let accentColor = getComputedStyle(document.documentElement)
-      .getPropertyValue('--accent-cool').trim() || '#4F6EF7';
+      .getPropertyValue('--accent-cool').trim() || '#0033FF';
 
     // ── Cached layout values — recomputed on resize only ──────────────────────
     // dot center x = left:0 on ::before + translateX(dotSize/-2 + lineThickness/2)
@@ -98,7 +98,7 @@
       ) || 14;
 
       accentColor = getComputedStyle(document.documentElement)
-        .getPropertyValue('--accent-cool').trim() || '#4F6EF7';
+        .getPropertyValue('--accent-cool').trim() || '#0033FF';
 
       railX      = dotSize / 2; // dot center x within the list
       railTop    = firstRect.top  - listRect.top  + dotSize / 2;
