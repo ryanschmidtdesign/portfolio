@@ -1918,6 +1918,13 @@ figure.case-study-media {
   margin-top: var(--space-6);
 }
 
+.ink-reveal-wrapper p {
+  font-size: var(--fs-md);
+  line-height: var(--lh-md);
+  color: var(--text);
+  margin-top: var(--space-4);
+}
+
 [data-section-summary].is-open {
   max-height: 12rem;
   opacity: 1;
@@ -2974,4 +2981,37 @@ body {
   font-size: var(--fs-2xs);
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
+}
+/* Generic Buttons */
+.btn-primary,
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--radius-md, 8px);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--fs-sm);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--text-primary, #111);
+  color: white;
+  border: 1px solid transparent;
+}
+.btn-primary:hover {
+  background: #333;
+}
+
+.btn-outline {
+  background: white;
+  color: var(--text-primary, #111);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.btn-outline:hover {
+  background: var(--gray-100, #f7f7f7);
+  border-color: rgba(0, 0, 0, 0.2);
 }

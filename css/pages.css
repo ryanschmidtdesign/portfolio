@@ -16,7 +16,7 @@
 }
 
 .page-about .site-main {
-  background: var(--gray-200);
+  background: var(--bg);
 }
 
 /* Wrapper behaves like a container */
@@ -89,7 +89,7 @@
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   column-gap: clamp(var(--space-6), 7vw, var(--space-10));
   row-gap: var(--space-6);
   position: relative;
@@ -193,8 +193,8 @@
 .metric-highlight--xl {
   font-size: var(--fs-xl);
   line-height: var(--lh-xl);
-  letter-spacing: var(--tracking-tight);
-  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-snug);
+  font-weight: var(--weight-bold);
 }
 
 /* Fix: make About stat cards feel intentional + prominent
@@ -256,7 +256,7 @@
 /* About */
 .about-content {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-8);
   align-items: center;
 }
@@ -335,6 +335,8 @@
 .about-image {
   position: relative;
   display: block;
+  max-width: 480px;
+  margin-inline: auto;
 }
 
 .about-image img {
