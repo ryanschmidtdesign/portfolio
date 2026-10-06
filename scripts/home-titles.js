@@ -22,7 +22,7 @@
       title: "Engineering<br>My Portfolio",
       summary: "Built a custom portfolio from scratch to prove I can move from design to production without waiting on a handoff.",
       url: "pages/ai-coding-portfolio.html",
-      image: "assets/case-studies/ai-coding-portfolio/interactive-component.webp"
+      image: "assets/case-studies/ai-coding-portfolio/cursor-files.webp"
     }
   ];
 

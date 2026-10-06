@@ -1140,10 +1140,11 @@ figure.case-study-media {
 }
 
 figure.case-study-media[data-reveal] {
-  transform: translateX(-50%) translateY(20px);
+  transform: translateX(-50%);
+  transition: opacity .45s var(--ease-out);
 }
 figure.case-study-media[data-reveal].is-revealed {
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%);
 }
 
 .case-study-media .image-splitter {
@@ -2723,11 +2724,11 @@ body {
   background: var(--surface-1);
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
-  padding: var(--space-5);
+  padding: var(--space-4);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-4);
 }
 
 .constraint-content, .constraint-solution {
