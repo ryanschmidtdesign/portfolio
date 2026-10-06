@@ -293,7 +293,7 @@
             </div>
 
             <div>
-              <p class="label">Key outcomes</p>
+              <p class="label" style="margin-bottom: var(--space-3);">Key outcomes</p>
               <ul>
                 <li><strong>Fully custom site</strong> built without templates or CMS</li>
                 <li><strong>Reusable UI + code patterns</strong> across all case studies</li>
@@ -311,7 +311,7 @@
             <dd>Cursor, OpenCode CLI, Vercel, GitHub, Supabase</dd>
 
             <dt>Repository</dt>
-            <dd><a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="text-decoration:underline;">ryanschmidtdesign/portfolio ↗</a></dd>
+            <dd><a href="#TODO-INSERT-CORRECT-REPO-URL" target="_blank" rel="noopener" style="text-decoration:underline;">Update repository link ↗</a></dd>
 
             <dt>Scope</dt>
             <dd>Design, front-end architecture, AI workflow, and implementation</dd>
@@ -420,13 +420,16 @@
           </p>
         </section>
 
-        <section id="interactive-demo" aria-label="Interactive system demo" class="asd-shell" data-state="idle">
+        <section id="interactive-demo" aria-label="Interactive system demo" class="asd-shell" data-state="idle" style="background: var(--surface-elevated-strong); border: 1px solid var(--border-subtle);">
           <div class="asd-header">
             <p class="asd-eyebrow">Interactive walkthrough</p>
             <h2>See how the system works</h2>
             <p>
               Watch a visitor question travel through the portfolio assistant, from input to structured, context-aware answer, at your own pace.
             </p>
+            <figure class="case-study-media" style="margin-top: var(--space-5);">
+              <img src="../assets/case-studies/ai-coding-portfolio/interactive-component.webp" alt="Interactive walkthrough preview" loading="lazy" style="border-radius: var(--radius-md); box-shadow: var(--shadow-image); width: 100%;">
+            </figure>
           </div>
 
           <div class="asd-prompt-bar">
@@ -438,7 +441,7 @@
               autocomplete="off"
               aria-label="Ask the portfolio assistant a question"
             >
-            <button class="asd-send-btn" id="asdSend" type="button">
+            <button class="btn-primary asd-send-btn" id="asdSend" type="button" style="height: 48px;">
               Run walkthrough
             </button>
           </div>
@@ -784,13 +787,7 @@
             <li>SEO, AEO, accessibility, and metadata structure built directly into templates</li>
           </ul>
 
-          <figure class="case-study-media">
-            <picture>
-              <source srcset="../assets/case-studies/ai-coding-portfolio/interactive-component.webp" type="image/webp">
-              <img src="../assets/case-studies/ai-coding-portfolio/interactive-component.webp" alt="Reusable interactive component used across case study pages" width="2880" height="1502" loading="lazy">
-            </picture>
-            <figcaption>Reusable component pattern shared across case study pages.</figcaption>
-          </figure>
+
 
           <p>
             These replaced static pages with interactive, structured, and code-driven experiences.
@@ -927,6 +924,7 @@
           </div>
         </div>
         <a href="../assets/ryan-schmidt-resume-september-2026.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="../pages/about.html#lets-connect">Contact</a>
               </nav>
       <div class="ai-mini-input-container">
         <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />

@@ -417,6 +417,7 @@
 
 /* Keep heading and caption aligned to the normal case-study reading column */
 .case-study--ai-coding-portfolio #system-architecture > .section-divider,
+.case-study--ai-coding-portfolio #system-architecture > p,
 .case-study--ai-coding-portfolio #system-architecture > .caption {
   max-width: var(--prose);
   margin-inline: auto;
@@ -823,8 +824,8 @@
     .home-title {
       position: relative;
       display: flex;
-      align-items: baseline; /* Align eyebrow with text baseline */
-      gap: 1.25rem;
+      align-items: center; /* Align eyebrow with text baseline */
+      gap: 0.5rem;
       background: transparent;
       border: none;
       text-align: left;
@@ -893,7 +894,8 @@
       text-transform: none;
       color: #0f172a; /* near-black body colour */
       display: block;
-      max-width: 420px;
+      max-width: none;
+      white-space: nowrap;
       transition: color 180ms ease;
     }
 
