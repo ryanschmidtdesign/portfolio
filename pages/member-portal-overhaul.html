@@ -397,28 +397,110 @@
           <p>
             The content hierarchy spans four tiers: Areas of Focus, Priorities, Topics, and individual assets. The legacy portal mirrored our internal filing system. The redesign organizes research around the strategic questions members ask their teams.
           </p>
-          <div class="ia-challenge-panel">
+          <div class="ia-challenge-panel" data-ia-explorer>
             <div class="ia-challenge-panel__header">
-              <h3>Content hierarchy</h3>
+              <h3>Content hierarchy: Four Levels Without Losing the Thread</h3>
               <p>
-                The model moves from broad member intent to specific resources across four levels.
+                The model moves from broad member intent to specific resources across four tiers. Click each level to see how progressive disclosure keeps navigation calm.
               </p>
             </div>
+
+            <div class="ia-breadcrumb-trail" aria-label="Progressive drilldown trail">
+              <span class="crumb-segment is-active" data-crumb="areas">1. Areas of Focus</span>
+              <span class="crumb-separator" aria-hidden="true">/</span>
+              <span class="crumb-segment" data-crumb="priorities">2. Priorities</span>
+              <span class="crumb-separator" aria-hidden="true">/</span>
+              <span class="crumb-segment" data-crumb="topics">3. Topics</span>
+              <span class="crumb-separator" aria-hidden="true">/</span>
+              <span class="crumb-segment" data-crumb="content">4. Content Assets</span>
+            </div>
+
             <div data-compare data-compare-default="areas">
               <div class="compare-tabs">
               </div>
               <div class="compare-panels">
                 <div class="compare-panel" data-compare-state="areas">
-                  <p>The broadest practice domains (e.g. leadership, talent, culture)</p>
+                  <div class="ia-tier-preview">
+                    <span class="ia-tier-label">Level 1: Broadest Practice Domains</span>
+                    <div class="ia-cards-grid">
+                      <div class="ia-card ia-card--active">
+                        <strong>Leadership & Talent</strong>
+                        <span>Executive succession, retention, pipelines</span>
+                      </div>
+                      <div class="ia-card">
+                        <strong>Culture & DEI</strong>
+                        <span>Engagement, inclusion, culture change</span>
+                      </div>
+                      <div class="ia-card">
+                        <strong>Future of Work</strong>
+                        <span>Hybrid policy, AI workforce, skills</span>
+                      </div>
+                      <div class="ia-card">
+                        <strong>Total Rewards</strong>
+                        <span>Compensation, benefits, executive pay</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="compare-panel" data-compare-state="priorities">
-                  <p>The strategic questions within each area</p>
+                  <div class="ia-tier-preview">
+                    <span class="ia-tier-label">Level 2: Strategic Business Priorities (under Leadership)</span>
+                    <div class="ia-cards-grid">
+                      <div class="ia-card ia-card--active">
+                        <strong>Executive Succession Planning</strong>
+                        <span>Preparing bench strength for critical C-suite seats</span>
+                      </div>
+                      <div class="ia-card">
+                        <strong>High-Potential Retention</strong>
+                        <span>Mitigating flight risk for mission-critical leaders</span>
+                      </div>
+                      <div class="ia-card">
+                        <strong>Manager Coaching Effectiveness</strong>
+                        <span>Scaling people leader impact across business units</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="compare-panel" data-compare-state="topics">
-                  <p>Specific subject clusters within each priority</p>
+                  <div class="ia-tier-preview">
+                    <span class="ia-tier-label">Level 3: Specific Subject Clusters (under Succession)</span>
+                    <div class="ia-cards-grid">
+                      <div class="ia-card ia-card--active">
+                        <strong>C-Suite Turnover Benchmarks</strong>
+                        <span>Tenure data and unplanned departure trends</span>
+                      </div>
+                      <div class="ia-card">
+                        <strong>Internal vs. External Fill Ratios</strong>
+                        <span>Cost and time-to-productivity comparisons</span>
+                      </div>
+                      <div class="ia-card">
+                        <strong>Boardroom Readiness Criteria</strong>
+                        <span>Evaluation rubrics for potential CEOs</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="compare-panel" data-compare-state="content">
-                  <p>Articles, videos, webinars, benchmarks</p>
+                  <div class="ia-tier-preview">
+                    <span class="ia-tier-label">Level 4: Delivered Content Assets</span>
+                    <div class="ia-cards-grid">
+                      <div class="ia-card ia-card--deliverable">
+                        <span class="deliv-badge">📄 Research Report</span>
+                        <strong>2026 Executive Succession Benchmark</strong>
+                        <span>38 pages · Defensible peer comparisons</span>
+                      </div>
+                      <div class="ia-card ia-card--deliverable">
+                        <span class="deliv-badge">📊 Interactive Tool</span>
+                        <strong>Succession Pipeline Risk Calculator</strong>
+                        <span>Model bench strength across your leadership team</span>
+                      </div>
+                      <div class="ia-card ia-card--deliverable">
+                        <span class="deliv-badge">🎥 Member Roundtable</span>
+                        <strong>Board Succession Best Practices</strong>
+                        <span>Peer insights from Fortune 500 CHROs</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -578,6 +660,80 @@
           <p>
             Instead of cluttering the header with two different search inputs, I pitched combining them into one smart bar. If someone typed a full question, Ahri synthesized an answer from our research. If they just typed a two-word keyword like "succession planning," the bar smoothly returned traditional search results. That compromise gave stakeholders confidence, kept the header clean, and let us sunset the old search system without disrupting anyone's daily workflow.
           </p>
+
+          <div class="omnibar-sim-widget" data-omnibar-sim>
+            <div class="omnibar-sim-header">
+              <span class="omnibar-sim-title">Interactive Omnibar Query Routing Simulation</span>
+              <p class="omnibar-sim-desc">Test how the omnibar detects query intent to route between conversational AI synthesis and keyword lookup.</p>
+            </div>
+
+            <div class="omnibar-chip-triggers" role="tablist" aria-label="Omnibar query modes">
+              <button type="button" class="query-chip is-active" data-query-type="ai" role="tab" aria-selected="true">
+                <span class="chip-sparkle" aria-hidden="true">✨</span> Try Natural Question: <em>"What are hybrid return-to-office benchmarks?"</em>
+              </button>
+              <button type="button" class="query-chip" data-query-type="keyword" role="tab" aria-selected="false">
+                <span class="chip-search" aria-hidden="true">🔍</span> Try Keyword: <em>"succession planning"</em>
+              </button>
+            </div>
+
+            <div class="mock-omnibar-input-shell">
+              <span class="omnibar-icon" id="simOmniIcon" aria-hidden="true">✨</span>
+              <input type="text" class="mock-omnibar-input" id="simOmniInput" value="What are hybrid return-to-office benchmarks?" readonly aria-label="Simulated search omnibar query">
+              <span class="omnibar-mode-pill" id="simOmniMode">AI Synthesis Mode</span>
+            </div>
+
+            <div class="omnibar-result-canvas">
+              <!-- AI Synthesis View -->
+              <div class="omnibar-view is-active" data-sim-view="ai">
+                <div class="ahri-answer-bubble">
+                  <div class="ahri-bubble-header">
+                    <strong>Ask Ahri Synthesis</strong>
+                    <span class="ahri-latency">0.4s · 3 studies analyzed</span>
+                  </div>
+                  <p class="ahri-bubble-body">
+                    i4cp research indicates companies with flexible hybrid schedules report <strong>22% lower unwanted turnover</strong> among high performers compared to strict 5-day mandates. 68% of enterprise talent leaders prioritize manager autonomy over uniform company-wide attendance policies.
+                  </p>
+                  <div class="ahri-citations">
+                    <span class="ahri-citation">📄 2026 Flexible Work & Productivity Report (i4cp)</span>
+                    <span class="ahri-citation">📊 Enterprise Return-to-Office Pulse Survey</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Keyword Lookup View -->
+              <div class="omnibar-view" data-sim-view="keyword">
+                <div class="keyword-results-head">
+                  <span class="keyword-count">14 Research Assets Found</span>
+                  <div class="keyword-filter-chips">
+                    <span class="k-filter is-active">All (14)</span>
+                    <span class="k-filter">Tools (4)</span>
+                    <span class="k-filter">Reports (6)</span>
+                    <span class="k-filter">Webinars (4)</span>
+                  </div>
+                </div>
+                <ul class="keyword-results-list">
+                  <li>
+                    <span class="res-type">Interactive Tool</span>
+                    <strong>Executive Succession Planning Risk Matrix</strong>
+                    <span class="res-meta">Updated Sept 2026 · Spreadsheet & Assessment</span>
+                  </li>
+                  <li>
+                    <span class="res-type">Research Study</span>
+                    <strong>Benchmarking Next-Gen Leadership Pipelines</strong>
+                    <span class="res-meta">48 pages · Global enterprise sample (n=820)</span>
+                  </li>
+                  <li>
+                    <span class="res-type">Executive Brief</span>
+                    <strong>Boardroom Succession Readiness in Volatile Markets</strong>
+                    <span class="res-meta">12 pages · C-Suite strategy series</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p class="omnibar-sim-footer">
+              <strong>The Architecture:</strong> Single input, dual routing. Members get instant research synthesis or fast keyword lookups without a confusing toggle.
+            </p>
+          </div>
 
           <h3>Designing for High-Stakes Member Decisions</h3>
           <p>

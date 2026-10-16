@@ -393,12 +393,72 @@
           <p>
             The core design challenge was defining how an item moved across its lifecycle. A flat stock count fails operational teams because it doesn't explain what can actually be used today. We structured inventory around four distinct states:
           </p>
-          <ul>
-            <li><strong>On Order (Incoming):</strong> Committed on an open PO, visible to project managers for scheduling before physical delivery</li>
-            <li><strong>Available:</strong> Checked into a central warehouse or van, ready for immediate project assignment</li>
-            <li><strong>Allocated:</strong> Staged or reserved for an active job, locking the count so another PM can't accidentally take it</li>
-            <li><strong>Low Stock:</strong> Below pre-set safety thresholds, triggering visible reorder prompts before field teams run dry</li>
-          </ul>
+          <div class="inventory-stepper-widget" data-inventory-stepper>
+            <div class="stepper-header">
+              <span class="stepper-eyebrow">Interactive Lifecycle Model</span>
+              <p class="stepper-instruction">Click any stage to simulate how item state, location, and PM allocations update in real time.</p>
+            </div>
+
+            <div class="stepper-track" role="tablist" aria-label="Inventory lifecycle states">
+              <button type="button" class="stepper-node is-active" data-step="order" role="tab" aria-selected="true">
+                <span class="node-dot"></span>
+                <span class="node-label">1. On Order</span>
+                <span class="node-sub">Committed on PO</span>
+              </button>
+              <div class="stepper-connector" aria-hidden="true"></div>
+              <button type="button" class="stepper-node" data-step="available" role="tab" aria-selected="false">
+                <span class="node-dot"></span>
+                <span class="node-label">2. Available</span>
+                <span class="node-sub">Warehouse shelf</span>
+              </button>
+              <div class="stepper-connector" aria-hidden="true"></div>
+              <button type="button" class="stepper-node" data-step="allocated" role="tab" aria-selected="false">
+                <span class="node-dot"></span>
+                <span class="node-label">3. Allocated</span>
+                <span class="node-sub">Locked for project</span>
+              </button>
+              <div class="stepper-connector" aria-hidden="true"></div>
+              <button type="button" class="stepper-node" data-step="lowstock" role="tab" aria-selected="false">
+                <span class="node-dot"></span>
+                <span class="node-label">4. Low Stock</span>
+                <span class="node-sub">Safety threshold</span>
+              </button>
+            </div>
+
+            <div class="stepper-sim-card">
+              <div class="sim-card-header">
+                <div class="sim-item-info">
+                  <span class="sim-sku">SKU: CR-DM-16X16</span>
+                  <h4 class="sim-name">Crestron 16-Port 4K DigitalMedia Matrix Switcher</h4>
+                </div>
+                <div class="sim-status-badge badge--order" id="simStatusBadge">
+                  ● Inbound: PO #4892
+                </div>
+              </div>
+
+              <div class="sim-grid">
+                <div class="sim-cell">
+                  <span class="sim-cell-label">Current Location</span>
+                  <strong class="sim-cell-val" id="simLocation">En Route (FedEx Freight · ETA Tomorrow)</strong>
+                </div>
+                <div class="sim-cell">
+                  <span class="sim-cell-label">Available for New Projects</span>
+                  <strong class="sim-cell-val" id="simAvailableCount">0 units (6 expected)</strong>
+                </div>
+                <div class="sim-cell">
+                  <span class="sim-cell-label">Project Manager Impact</span>
+                  <strong class="sim-cell-val" id="simSchedule">Visible on calendar for install staging</strong>
+                </div>
+              </div>
+
+              <div class="sim-footer">
+                <span class="sim-rule-icon" aria-hidden="true">💡</span>
+                <span class="sim-rule-text" id="simRuleText">
+                  <strong>The Rule:</strong> Incoming POs display on project planning boards before physical arrival so PMs don't re-order hardware already on trucks.
+                </span>
+              </div>
+            </div>
+          </div>
 
           <h3>Tradeoffs: Real-Time Sync vs. Shipping on Time</h3>
           <p>
@@ -415,6 +475,66 @@
           <p>
             I designed a dual-track UX: <strong>Quantity-first by default</strong> for everyday rapid receiving, with an optional <strong>asset-level tracking layer</strong> for serialized items and warranty audits. That choice kept check-ins fast for small operators while giving enterprise procurement the serialization audit trail they needed to sign contracts.
           </p>
+
+          <div class="dual-track-demo" data-dual-track>
+            <div class="dual-track-header">
+              <span class="dual-track-title">Interactive Dual-Track Receiving Flow</span>
+              <div class="dual-track-tabs" role="tablist" aria-label="Receiving flow comparison">
+                <button type="button" class="dual-tab-btn is-active" data-track="small" role="tab" aria-selected="true">
+                  ⚡ Small AV Shop (Fast Receiving)
+                </button>
+                <button type="button" class="dual-tab-btn" data-track="enterprise" role="tab" aria-selected="false">
+                  🏢 Commercial Enterprise (Serialized)
+                </button>
+              </div>
+            </div>
+
+            <div class="dual-track-canvas">
+              <!-- Small Shop Mode -->
+              <div class="dual-panel is-active" data-panel="small">
+                <div class="mock-receiving-row">
+                  <div class="mock-item-meta">
+                    <strong>Cat6 Plenum 1000ft Bulk Cable (Blue)</strong>
+                    <span>PO #4109 · Distributor: Liberty AV Solutions</span>
+                  </div>
+                  <div class="mock-stepper-control">
+                    <span class="stepper-qty-label">Qty Received:</span>
+                    <div class="stepper-pill">
+                      <span class="stepper-btn" aria-hidden="true">−</span>
+                      <span class="stepper-val">20</span>
+                      <span class="stepper-btn" aria-hidden="true">+</span>
+                    </div>
+                    <span class="mock-done-pill">✓ Received in 12s</span>
+                  </div>
+                </div>
+                <p class="dual-track-caption">
+                  <strong>Quantity-first default:</strong> Zero required modals. Installers tap once to confirm bulk arrival and immediately load vans for the day.
+                </p>
+              </div>
+
+              <!-- Enterprise Serialized Mode -->
+              <div class="dual-panel" data-panel="enterprise">
+                <div class="mock-receiving-row">
+                  <div class="mock-item-meta">
+                    <strong>Sony VPL-XW5000 4K Laser Cinema Projector</strong>
+                    <span>Unit Cost: $5,999 · Warranty: 3-Year Commercial</span>
+                  </div>
+                  <div class="mock-serial-input-group">
+                    <span class="barcode-icon" aria-hidden="true">▦</span>
+                    <input type="text" class="mock-serial-input" value="SN: VPL-849204-AX" readonly aria-label="Scanned serial number">
+                    <span class="mock-verified-badge">✓ Serial Verified</span>
+                  </div>
+                </div>
+                <div class="mock-audit-sub">
+                  <span>Assigned Van: <strong>Service Van #3 (Tech: Marcus R.)</strong></span>
+                  <span>Audit Trail: <strong>Warranty Registered to Job #309</strong></span>
+                </div>
+                <p class="dual-track-caption">
+                  <strong>Asset-level audit layer:</strong> Enforces serialization for high-value equipment without slowing down routine commodity receiving.
+                </p>
+              </div>
+            </div>
+          </div>
 
           <h3>Reusing component patterns</h3>
           <p>

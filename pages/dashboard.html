@@ -344,28 +344,52 @@
             <h2>Research Insights</h2>
           </div>
         
-          <div class="callout research-grid u-measure" aria-label="Research findings mapped to design implications" data-cascade>
+          <div class="callout research-grid u-measure decision-bridges" aria-label="Research findings mapped to design implications" data-cascade>
             <div class="research-column">
-              <h3 class="research-column-title">Research</h3>
-              <ul>
-                <li>
-                  <strong>Interviews:</strong> 10 users (6 power users, 4 stakeholders)
+              <h3 class="research-column-title">Research Findings</h3>
+              <ul class="bridge-list">
+                <li class="bridge-item" data-bridge="templates" tabindex="0">
+                  <span class="bridge-tag">Finding 1</span>
+                  <div class="bridge-content">
+                    <strong>Core insight:</strong> Users either ignored dashboards entirely or exported raw numbers into Monday Excel sheets.
+                  </div>
                 </li>
-                <li>
-                  <strong>Core insight:</strong> Users either ignored dashboards entirely or rarely used them
+                <li class="bridge-item" data-bridge="speed" tabindex="0">
+                  <span class="bridge-tag">Finding 2</span>
+                  <div class="bridge-content">
+                    <strong>Workflow friction:</strong> Operators needed fast routines—customizing a morning view couldn't feel like building a report from scratch.
+                  </div>
                 </li>
-                <li>
-                  <strong>Constraint:</strong> Sales needed immediate visual impact for live client demos
+                <li class="bridge-item" data-bridge="sales" tabindex="0">
+                  <span class="bridge-tag">Finding 3</span>
+                  <div class="bridge-content">
+                    <strong>Sales constraint:</strong> Sales reps needed immediate visual punch for live demos to win enterprise clients.
+                  </div>
                 </li>
               </ul>
             </div>
         
             <div class="research-column">
-              <h3 class="research-column-title">Design implications</h3>
-              <ul>
-                <li>Prioritize role-based templates over a single generic layout</li>
-                <li>Make customization and AI report generation fast and obvious to reduce friction</li>
-                <li>Design one or two “demo‑ready” views that give sales instant visual impact</li>
+              <h3 class="research-column-title">Design Decisions</h3>
+              <ul class="bridge-list">
+                <li class="bridge-item" data-bridge="templates" tabindex="0">
+                  <span class="bridge-tag">Decision 1</span>
+                  <div class="bridge-content">
+                    <strong>Role-based templates:</strong> Replaced static layouts with starter templates matching specific daily routines.
+                  </div>
+                </li>
+                <li class="bridge-item" data-bridge="speed" tabindex="0">
+                  <span class="bridge-tag">Decision 2</span>
+                  <div class="bridge-content">
+                    <strong>Fast card manipulation:</strong> Drag-and-drop rearrangement and 1-click AI summaries from active widgets.
+                  </div>
+                </li>
+                <li class="bridge-item" data-bridge="sales" tabindex="0">
+                  <span class="bridge-tag">Decision 3</span>
+                  <div class="bridge-content">
+                    <strong>Demo-ready views:</strong> Pre-populated executive layouts that sales could pull up instantly during discovery calls.
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
@@ -426,6 +450,66 @@
             <li><strong>Dashboards:</strong> show current status, surface anomalies, and give operators an anchor</li>
             <li><strong>AI summaries:</strong> pull out key highlights and generate quick updates for stakeholders</li>
           </ul>
+
+          <div class="interactive-split-demo" data-split-preview>
+            <div class="split-demo-header">
+              <span class="split-demo-title">Interactive Model Comparison</span>
+              <div class="split-demo-controls" role="tablist" aria-label="Dashboard vs AI split view">
+                <button type="button" class="split-toggle-btn is-active" data-split-mode="dash" role="tab" aria-selected="true">
+                  <span class="split-icon" aria-hidden="true">📊</span> Operator Mode: Dashboards
+                </button>
+                <button type="button" class="split-toggle-btn" data-split-mode="ai" role="tab" aria-selected="false">
+                  <span class="split-icon" aria-hidden="true">✨</span> Executive Mode: AI Brief
+                </button>
+              </div>
+            </div>
+
+            <div class="split-preview-canvas">
+              <!-- Operator Dashboard View -->
+              <div class="split-view-panel is-active" data-view="dash">
+                <div class="mini-kpi-grid">
+                  <div class="mini-kpi-card">
+                    <span class="mini-kpi-label">Open Tickets</span>
+                    <strong class="mini-kpi-val">14</strong>
+                    <span class="mini-badge badge--alert">3 Escalated</span>
+                  </div>
+                  <div class="mini-kpi-card">
+                    <span class="mini-kpi-label">Deliveries</span>
+                    <strong class="mini-kpi-val">8/8</strong>
+                    <span class="mini-badge badge--success">On Schedule</span>
+                  </div>
+                  <div class="mini-kpi-card">
+                    <span class="mini-kpi-label">Gross Margin</span>
+                    <strong class="mini-kpi-val">31.4%</strong>
+                    <span class="mini-badge badge--warning">−2.1% WoW</span>
+                  </div>
+                </div>
+                <p class="split-preview-caption">
+                  <strong>The Operational Anchor:</strong> Field managers glance at verified numbers at 7:00 AM without having to formulate an open prompt.
+                </p>
+              </div>
+
+              <!-- AI Summary View -->
+              <div class="split-view-panel" data-view="ai">
+                <div class="mini-ai-card">
+                  <div class="mini-ai-head">
+                    <span class="mini-ai-badge">✨ Generated Brief</span>
+                    <span class="mini-ai-timestamp">1 click from active widgets</span>
+                  </div>
+                  <p class="mini-ai-text">
+                    "Morning dispatch brief: <strong>3 escalated service tickets</strong> require immediate technician reassignment. Margin dipped <strong>2.1%</strong> on Job #402 due to unbilled overtime, while all <strong>8 warehouse deliveries</strong> remain on schedule."
+                  </p>
+                  <div class="mini-ai-sources">
+                    <span class="source-tag">Linked: Service Tickets</span>
+                    <span class="source-tag">Linked: Margin Tracker</span>
+                  </div>
+                </div>
+                <p class="split-preview-caption">
+                  <strong>The Synthesis Layer:</strong> Grounded strictly in visible on-screen metrics—verifiable in seconds, zero hallucinations.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section id="execution" aria-label="Execution Constraints" class="section--alt">

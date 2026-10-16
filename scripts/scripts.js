@@ -137,6 +137,71 @@
             else handleSend();
           }
         });
+
+        // Ambient Typewriter Rotator for mini-chat input
+        (function initTypewriter() {
+          const prompts = [
+            "Ask about Ryan's projects, design-to-code workflow, or role fit…",
+            "Ask: How did Ryan drive 71% dashboard adoption?",
+            "Ask: Why choose progressive disclosure over flat navigation?",
+            "Ask: How did the inventory system balance real-time sync with speed?",
+            "Ask: What is Ryan's approach to design tokens and front-end code?",
+            "Paste a job description or link to check role fit…"
+          ];
+
+          let promptIdx = 0;
+          let charIdx = 0;
+          let isDeleting = false;
+          let isPaused = false;
+          let typewriterTimer = null;
+          const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+          function tick() {
+            if (isPaused || prefersReduced) return;
+            const currentPrompt = prompts[promptIdx];
+
+            if (!isDeleting) {
+              charIdx++;
+              aiInput.setAttribute('placeholder', currentPrompt.substring(0, charIdx));
+              if (charIdx >= currentPrompt.length) {
+                isDeleting = true;
+                typewriterTimer = setTimeout(tick, 3400); // Read time for visitor
+                return;
+              }
+              typewriterTimer = setTimeout(tick, 45 + Math.random() * 25); // Natural typing rhythm
+            } else {
+              charIdx--;
+              aiInput.setAttribute('placeholder', currentPrompt.substring(0, charIdx));
+              if (charIdx <= 0) {
+                isDeleting = false;
+                promptIdx = (promptIdx + 1) % prompts.length;
+                typewriterTimer = setTimeout(tick, 600); // Pause before next prompt starts
+                return;
+              }
+              typewriterTimer = setTimeout(tick, 22); // Fast deletion
+            }
+          }
+
+          if (!prefersReduced) {
+            typewriterTimer = setTimeout(tick, 1600);
+          }
+
+          aiInput.addEventListener('focus', () => {
+            isPaused = true;
+            clearTimeout(typewriterTimer);
+            aiInput.setAttribute('placeholder', 'Type a question or paste a job link…');
+          });
+
+          aiInput.addEventListener('blur', () => {
+            if (!aiInput.value.trim()) {
+              isPaused = false;
+              charIdx = 0;
+              isDeleting = false;
+              clearTimeout(typewriterTimer);
+              typewriterTimer = setTimeout(tick, 1000);
+            }
+          });
+        })();
       }
     } catch (e) { console.error('Floating nav init error', e); }
   });
@@ -518,6 +583,222 @@
       })
     }).catch(() => {});
   });
+
+  // ==========================================================================
+  // Interactive Decision Bridges (pages/dashboard.html)
+  // ==========================================================================
+  const bridgesContainer = document.querySelector('.decision-bridges');
+  if (bridgesContainer) {
+    const bridgeItems = bridgesContainer.querySelectorAll('.bridge-item[data-bridge]');
+    bridgeItems.forEach((item) => {
+      const bridgeKey = item.dataset.bridge;
+      const highlight = (activate) => {
+        bridgesContainer.classList.toggle('has-hover', activate);
+        bridgeItems.forEach((other) => {
+          other.classList.toggle('is-linked', activate && other.dataset.bridge === bridgeKey);
+        });
+      };
+      item.addEventListener('mouseenter', () => highlight(true));
+      item.addEventListener('mouseleave', () => highlight(false));
+      item.addEventListener('focus', () => highlight(true));
+      item.addEventListener('blur', () => highlight(false));
+    });
+  }
+
+  // ==========================================================================
+  // Interactive Split Demo: Operator vs AI Brief (pages/dashboard.html)
+  // ==========================================================================
+  const splitDemo = document.querySelector('[data-split-preview]');
+  if (splitDemo) {
+    const buttons = splitDemo.querySelectorAll('.split-toggle-btn');
+    const panels = splitDemo.querySelectorAll('.split-view-panel');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.dataset.splitMode;
+        buttons.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('is-active', active);
+          b.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach((p) => {
+          p.classList.toggle('is-active', p.dataset.view === mode);
+        });
+      });
+    });
+  }
+
+  // ==========================================================================
+  // Inventory State Machine Stepper (pages/inventory.html)
+  // ==========================================================================
+  const inventoryStepper = document.querySelector('[data-inventory-stepper]');
+  if (inventoryStepper) {
+    const nodes = inventoryStepper.querySelectorAll('.stepper-node');
+    const statusBadge = document.getElementById('simStatusBadge');
+    const locationEl = document.getElementById('simLocation');
+    const availableEl = document.getElementById('simAvailableCount');
+    const scheduleEl = document.getElementById('simSchedule');
+    const ruleTextEl = document.getElementById('simRuleText');
+
+    const stateData = {
+      order: {
+        badgeClass: 'badge--order',
+        badgeText: '● Inbound: PO #4892',
+        location: 'En Route (FedEx Freight · ETA Tomorrow)',
+        available: '0 units (6 expected)',
+        schedule: 'Visible on calendar for install staging',
+        rule: '<strong>The Rule:</strong> Incoming POs display on project planning boards before physical arrival so PMs don\'t re-order hardware already on trucks.'
+      },
+      available: {
+        badgeClass: 'badge--success',
+        badgeText: '● Verified: Shelf A-12',
+        location: 'Main Warehouse (Bay 1 · Shelf A-12)',
+        available: '6 units in stock',
+        schedule: 'Ready for immediate staging & checkout',
+        rule: '<strong>The Rule:</strong> Checking items in against a PO automatically increments central warehouse stock within 30 seconds.'
+      },
+      allocated: {
+        badgeClass: 'badge--warning',
+        badgeText: '● Locked: Job #309',
+        location: 'Staged: Warehouse Bay 2 (Apex Corporate HQ)',
+        available: '2 units (4 locked for Job #309)',
+        schedule: 'Locked against duplicate reservations by other PMs',
+        rule: '<strong>The Rule:</strong> Staging equipment for an active project immediately deducts it from the available pool while preserving physical count.'
+      },
+      lowstock: {
+        badgeClass: 'badge--alert',
+        badgeText: '● Low Stock: Threshold Reached',
+        location: 'Main Warehouse Shelf A-12 (1 unit left)',
+        available: '1 unit (< 3 safety minimum)',
+        schedule: 'Auto-prompts purchasing for reorder PO',
+        rule: '<strong>The Rule:</strong> Early low-stock alerts notify purchasing leads before field crews arrive at job sites empty-handed.'
+      }
+    };
+
+    nodes.forEach((node) => {
+      node.addEventListener('click', () => {
+        const step = node.dataset.step;
+        if (!stateData[step]) return;
+        nodes.forEach((n) => {
+          const active = n === node;
+          n.classList.toggle('is-active', active);
+          n.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+
+        const data = stateData[step];
+        if (statusBadge) {
+          statusBadge.className = 'sim-status-badge ' + data.badgeClass;
+          statusBadge.textContent = data.badgeText;
+        }
+        if (locationEl) locationEl.textContent = data.location;
+        if (availableEl) availableEl.textContent = data.available;
+        if (scheduleEl) scheduleEl.textContent = data.schedule;
+        if (ruleTextEl) ruleTextEl.innerHTML = data.rule;
+      });
+    });
+  }
+
+  // ==========================================================================
+  // Dual-Track Receiving Switcher (pages/inventory.html)
+  // ==========================================================================
+  const dualTrackDemo = document.querySelector('[data-dual-track]');
+  if (dualTrackDemo) {
+    const tabs = dualTrackDemo.querySelectorAll('.dual-tab-btn');
+    const panels = dualTrackDemo.querySelectorAll('.dual-panel');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const track = tab.dataset.track;
+        tabs.forEach((t) => {
+          const active = t === tab;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach((p) => {
+          p.classList.toggle('is-active', p.dataset.panel === track);
+        });
+      });
+    });
+  }
+
+  // ==========================================================================
+  // IA Cascading Drilldown Explorer (pages/member-portal-overhaul.html)
+  // ==========================================================================
+  const iaExplorer = document.querySelector('[data-ia-explorer]');
+  if (iaExplorer) {
+    const crumbs = iaExplorer.querySelectorAll('.crumb-segment');
+    const compareWrapper = iaExplorer.querySelector('[data-compare]');
+    if (compareWrapper) {
+      crumbs.forEach((crumb) => {
+        crumb.addEventListener('click', () => {
+          const target = crumb.dataset.crumb;
+          const matchingBtn = compareWrapper.querySelector(`[data-compare-button="${target}"]`);
+          if (matchingBtn) matchingBtn.click();
+        });
+      });
+
+      const syncCrumbs = () => {
+        const activeState = compareWrapper.dataset.compareActive || 'areas';
+        crumbs.forEach((c) => {
+          c.classList.toggle('is-active', c.dataset.crumb === activeState);
+        });
+      };
+
+      const observer = new MutationObserver(syncCrumbs);
+      observer.observe(compareWrapper, { attributes: true, attributeFilter: ['data-compare-active'] });
+      syncCrumbs();
+    }
+  }
+
+  // ==========================================================================
+  // Omnibar Query Simulator (pages/member-portal-overhaul.html)
+  // ==========================================================================
+  const omniSim = document.querySelector('[data-omnibar-sim]');
+  if (omniSim) {
+    const chips = omniSim.querySelectorAll('.query-chip');
+    const inputEl = document.getElementById('simOmniInput');
+    const modePill = document.getElementById('simOmniMode');
+    const iconEl = document.getElementById('simOmniIcon');
+    const views = omniSim.querySelectorAll('.omnibar-view');
+
+    const queryData = {
+      ai: {
+        val: 'What are hybrid return-to-office benchmarks?',
+        mode: 'AI Synthesis Mode',
+        modeClass: 'pill--ai',
+        icon: '✨'
+      },
+      keyword: {
+        val: 'succession planning',
+        mode: 'Keyword Lookup Mode',
+        modeClass: 'pill--keyword',
+        icon: '🔍'
+      }
+    };
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const type = chip.dataset.queryType;
+        if (!queryData[type]) return;
+
+        chips.forEach((c) => {
+          const active = c === chip;
+          c.classList.toggle('is-active', active);
+          c.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+
+        const data = queryData[type];
+        if (inputEl) inputEl.value = data.val;
+        if (modePill) {
+          modePill.textContent = data.mode;
+          modePill.className = 'omnibar-mode-pill ' + data.modeClass;
+        }
+        if (iconEl) iconEl.textContent = data.icon;
+
+        views.forEach((v) => {
+          v.classList.toggle('is-active', v.dataset.simView === type);
+        });
+      });
+    });
+  }
 
   const systemInput = document.querySelector('.asd-fake-input');
   if (systemInput) {
