@@ -297,7 +297,7 @@
               <ul class="kpis kpis--hero" data-cascade>
                 <li>
                   <strong class="metric" data-animate>+71%</strong>
-                  <span class="metric-label">increase in feature navigation</span>
+                  <span class="metric-label">dashboard engagement (beta)</span>
                 </li>
                 <li>
                   <strong class="metric" data-animate>62%</strong>
@@ -326,19 +326,14 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            Across early user research, stakeholder conversations, and prototype testing, the pattern was consistent: users needed configurable dashboards anchored in familiar metrics before they trusted AI-generated summaries.
+            D-Tools offered a single static dashboard that tried to serve sales, operations, and service teams with the same generic widgets. Because it reflected none of their specific day-to-day rhythms, teams rarely opened it—managers simply exported raw data into custom spreadsheets every Monday morning. Meanwhile, leadership was eager to explore an AI-first interface where users would ask questions directly. The core product challenge was figuring out how to deliver real operational value and introduce AI capabilities when users weren't even engaging with our baseline data.
           </p>
 
           <h3>Objectives</h3>
-          <p>
-            The goal wasn't just to add metric cards to the existing dashboards or to introduce another dashboard. 
-            Rather, we made them customizable, permissions-based, and highly editable. 
-            Users could create and save multiple dashboards, each tailored to their specific business needs.
-            We also added AI-powered summarized reporting capabilities, which became a highlight in sales demos.
-          </p>
           <ul>
-            <li>Personalized dashboard creation</li>
-            <li>AI-generated executive reports</li>
+            <li>Role-based starter templates to replace external spreadsheet routines</li>
+            <li>Customizable widget layouts with drag-and-drop editing and team-specific views</li>
+            <li>AI-assisted executive summaries anchored directly in visible, verified metrics</li>
           </ul>
         </section>
 
@@ -358,7 +353,7 @@
                   <strong>Core insight:</strong> Users either ignored dashboards entirely or rarely used them
                 </li>
                 <li>
-                  <strong>Constraint:</strong> Sales needed immediate “wow” dashboards for demos, so we wanted all three features in the same release
+                  <strong>Constraint:</strong> Sales needed immediate visual impact for live client demos
                 </li>
               </ul>
             </div>
@@ -377,8 +372,7 @@
         <aside class="callout what-i-got-wrong-card">
           <h2>What I got wrong first</h2>
           <p>
-            I initially thought we would redesign the existing dashboards and add multiple others (for service, sales, and operations). 
-            Research showed the opposite: teams wanted role-specific views they could switch between, not a wall of KPIs.
+            I initially assumed we should build three rigid, pre-configured department dashboards—one each for sales, service, and operations. But user interviews quickly proved that no two integrators run their operations the same way. A service manager at a 15-person shop tracks completely different exceptions than one managing 50 field technicians. We pivoted from rigid department views to modular starter templates that users could customize, rename, and save.
           </p>
         </aside>
 
@@ -444,14 +438,8 @@
             Operating as both the lead designer and acting PM meant I had to be strict about scope. One of the biggest challenges on this project was that we didn't have a real design system in place. 
           </p>
           <p>
-            We really just had a set of variants and some basic rules written up about usage. Designing a dense, customizable dashboard meant I had to govern the UI very closely with engineering. Without the safety net of a strict component library, I relied on simpler, more repeatable widget patterns just to keep our engineering velocity high.
+            We really just had a set of variants and some basic rules written up about usage. Designing a dense, customizable dashboard meant I had to govern the UI very closely with engineering. Without the safety net of a strict component library, I relied on simpler, more repeatable widget patterns to keep engineering velocity high and avoid layout regressions.
           </p>
-          <figure class="case-study-media" data-reveal>
-            <video autoplay muted playsinline loop preload="auto" width="1440" height="754">
-              <source src="../assets/case-studies/dashboards/edit-dashboard.mp4" type="video/mp4">
-            </video>
-            <figcaption>Heavy reliance on consistent, repeatable patterns kept velocity high.</figcaption>
-          </figure>
         </section>
         <section id="prototyping" aria-label="Prototyping & validation">
           <div class="section-divider">
@@ -526,7 +514,7 @@
             <h2>Lesson</h2>
           </div>
           <p>
-            The project reinforced that research is what makes pushback credible. The AI-first hypothesis was reasonable, but interviews showed users needed familiar KPIs before they could ask useful questions. That evidence shifted the team toward a hybrid model: dashboards for trust, AI for explanation.
+            Senior product design is often about protecting user clarity from industry hype cycles. When leadership was eager to bypass dashboards entirely for conversational AI, it would have been easy to follow the trend. But grounding our pushback in user research gave us the credibility to advocate for what operators actually needed: stable, verifiable anchors before automated insights. Constraining AI to summarizing visible widget data earned daily adoption where open-ended chat would have failed.
           </p>
         </section>
 

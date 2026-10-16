@@ -349,32 +349,20 @@
 
           <h3>Defining Decision</h3>
           <p>
-            We could have shipped a simpler, spreadsheet-like solution with periodic updates.
+            We could have shipped an isolated stock tracker with periodic syncs. Instead, I pushed for a unified inventory model directly wired into purchasing and active projects.
           </p>
           <p>
-            Instead, I pushed for a real-time, unified inventory system across projects and locations (such as warehouses, vans, and job sites). 
-            While this added technical complexity, it eliminated duplicate sources of truth and ensured teams could trust inventory data everywhere.
+            While this increased cross-team scope, it eliminated duplicate sources of truth. When a purchase order is received—even partially—the quantities immediately reflect across warehouses, job sites, and field vans.
           </p>
 
           <aside data-reveal class="callout">
             <h3>Design Responses</h3>
             <ol>
-              <li><strong>Receiving defines truth:</strong> Inventory updates the moment a PO is received, even partially received, eliminating lag and reconciliation gaps</li>
-              <li><strong>Unified data model:</strong> One system across projects and stock, removing duplication and conflicting counts</li>
-              <li><strong>Surface risk early:</strong> Low-stock alerts and reorder signals make inventory issues visible before they become urgent</li>
+              <li><strong>Receiving defines truth:</strong> Inventory updates the moment items are checked in against a PO, eliminating manual spreadsheet logs</li>
+              <li><strong>Unified relational model:</strong> One continuous ledger connecting purchasing, current stock, and project allocations</li>
+              <li><strong>Early risk signals:</strong> Automated low-stock thresholds and reorder triggers before shortages delay a job site</li>
             </ol>
           </aside>
-
-          <h3>Enterprise-First Design Tradeoff</h3>
-          <p>
-            The hardest challenge was determining how much enterprise capability needed to exist on day one.
-          </p>
-          <p>
-            Enterprise customers required sophisticated workflows, but exposing every capability immediately would have created unnecessary complexity for smaller customers.
-          </p>
-          <p>
-            The solution was creating an enterprise-capable foundation while keeping day-to-day workflows approachable.
-          </p>
 
           <div data-compare data-compare-default="spreadsheet">
             <div class="compare-tabs">
@@ -382,16 +370,15 @@
             <div class="compare-panels">
               <div class="compare-panel" data-compare-state="spreadsheet" data-tone="bad">
                 <h3>Legacy spreadsheet workflow</h3>
-                <p>Some users manually reconciled counts, split data across tabs, and made decisions from stale information.</p>
+                <p>Teams spent 2–3 hours daily reconciling counts across 14+ tabs, making costly project purchasing decisions from stale data.</p>
               </div>
               <div class="compare-panel" data-compare-state="software" data-tone="bad">
-                <h3>Money spent on another tool</h3>
-                <p>Most users used another piece of software, like Jetbuilt, to manage inventory. 
-                  Multiple tools meant more error-prone workflows and extra costs for users.</p>
+                <h3>Third-party tool tax</h3>
+                <p>Paying for separate tools like Jetbuilt created duplicate data entry, disconnected project costs, and frequent tracking errors.</p>
               </div>
               <div class="compare-panel" data-compare-state="system" data-tone="good">
-                <h3>Unified real-time inventory</h3>
-                <p>A single source of truth surfaced stock risk early, reduced reconciliation, and made decisions faster and more reliable.</p>
+                <h3>Unified inventory platform</h3>
+                <p>A single source of truth connecting POs directly to job allocations, cutting manual reconciliation and surfacing stock risk early.</p>
               </div>
             </div>
           </div>
@@ -402,23 +389,29 @@
             <h2>System Model &amp; Tradeoffs</h2>
           </div>
           <p>
-            The core design challenge was defining how inventory changed state across purchasing, receiving, project allocation, and location transfers. A flat quantity would not explain why an item was available, allocated, incoming, or low-stock.
+            The core design challenge was defining how an item moved across its lifecycle. A flat stock count fails operational teams because it doesn't explain what can actually be used today. We structured inventory around four distinct states:
+          </p>
+          <ul>
+            <li><strong>On Order (Incoming):</strong> Committed on an open PO, visible to project managers for scheduling before physical delivery</li>
+            <li><strong>Available:</strong> Checked into a central warehouse or van, ready for immediate project assignment</li>
+            <li><strong>Allocated:</strong> Staged or reserved for an active job, locking the count so another PM can't accidentally take it</li>
+            <li><strong>Low Stock:</strong> Below pre-set safety thresholds, triggering visible reorder prompts before field teams run dry</li>
+          </ul>
+
+          <h3>The "Messy Middle": Pragmatic Engineering Tradeoffs</h3>
+          <p>
+            I originally advocated for full WebSocket-driven, bi-directional live sync across all client sessions. If an installer checks out equipment in the warehouse, every PM's screen should reflect it instantly.
+          </p>
+          <p>
+            However, our engineering team evaluated the backend requirements and found a true real-time streaming infrastructure would push our MVP launch back by several months. To hit our December deadline and unblock pending enterprise sales, the PM and I compromised: the database updated immediately on receiving, but client views used a prominent manual refresh/sync trigger paired with contextual state badges. It wasn't the pure real-time UX I initially pitched, but it shipped on time, preserved data integrity, and delivered immediate business value.
           </p>
 
-          <h3>The "Messy Middle": Navigating Engineering Constraints</h3>
+          <h3>Unblocking Enterprise Deals: The Dual-Track UX</h3>
           <p>
-            I originally pushed hard for a fully automated, real-time synchronization system. If inventory data isn't real-time, it's error-prone and degrades user trust. 
+            During discovery, we hit a clear split: small residential shops wanted fast, friction-free quantity counts, while commercial enterprise clients demanded rigorous, asset-level serialization for high-value equipment. Forcing serial numbers on small shops would kill adoption; omitting them would lose six-figure enterprise contracts.
           </p>
           <p>
-            However, building a true real-time backend would have pushed the MVP launch back by months. To meet the deadline, the PM and I compromised, shipping a manual "refresh/sync" button for the MVP. It wasn't the ideal UX, but it was the tradeoff required to get the feature out and start capturing revenue.
-          </p>
-
-          <h3>Unblocking Enterprise Sales</h3>
-          <p>
-            During discovery, we hit a clear split: small businesses wanted simple quantity tracking, but enterprise clients required complex, asset-level tracking. If we didn't include the complex tracking, we would lose enterprise deals.
-          </p>
-          <p>
-            I fought for a dual-track UX. We made it <strong>Quantity-first by default</strong> for smaller teams, but included a detailed <strong>"power-user" layer</strong> for asset-level tracking. That specific design decision is what unblocked the larger enterprise clients who required this feature before purchasing.
+            I designed a dual-track UX: <strong>Quantity-first by default</strong> for everyday rapid receiving, with an optional <strong>asset-level tracking layer</strong> for serialized items and warranty audits. That single architectural choice gave small shops 10-second check-ins while giving enterprise procurement the governance they required to sign deals.
           </p>
 
           <figure class="case-study-media">
@@ -449,7 +442,10 @@
             <h2>Prototyping &amp; Validation</h2>
           </div>
           <p>
-            I ran three rounds of high-fidelity Figma tests to validate receiving, alerts, multi-location inventory, and reordering flows. Testing confirmed the quantity-first default was easier for smaller teams, while asset-level tracking remained necessary for larger teams with accountability requirements.
+            I led three rounds of prototype testing with six active customers across both shop profiles. In Round 1, our combined receiving flow forced users through serial-number modals, causing small operators to abandon the flow in frustration.
+          </p>
+          <p>
+            By Round 3, separating fast bulk-quantity check-ins from deep serialization testing proved successful: small teams completed receiving in under 30 seconds, while commercial operators successfully tracked high-value hardware across multi-van fleets without support.
           </p>
         </section>
 
@@ -479,12 +475,10 @@
             <h2>Lessons & Next Steps</h2>
           </div>
           <p>
-            The biggest lesson was that operational products earn trust through state clarity. 
-            Users did not just need to know how many items were in stock; they needed to understand why the number was trustworthy, where it came from, and what would happen next.
+            Operational software lives or dies on trust. If a warehouse lead or field technician doubts a stock count even once, they abandon the software and fall right back into spreadsheets. The feature succeeded not because it looked polished, but because every number showed its receipts: where it came from, which job had it reserved, and when the next PO was arriving.
           </p>
           <ul>
-            <li><strong>Next:</strong> Now that teams trust the counts, the natural next step is auto-PO creation from thresholds and mobile scanning, 
-              automating the parts we intentionally held back in the MVP.</li>
+            <li><strong>Next:</strong> With trust in stock counts established, the logical follow-ups are mobile barcode scanning and automated reorder PO generation from minimum thresholds—automations we intentionally held back to keep the MVP focused.</li>
           </ul>
         </section>
       </article>

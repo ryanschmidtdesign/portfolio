@@ -200,7 +200,7 @@
           "name": "What stack was used?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "HTML, CSS, JavaScript, partial Next.js, and experimental Three.js for the home gallery and interactive elements."
+            "text": "Semantic HTML, modular CSS with design tokens, vanilla JavaScript, Vercel serverless functions, Supabase pgvector, and the Gemini API."
           }
         }
       ]
@@ -305,7 +305,7 @@
 
           <dl class="meta">
             <dt>Stack</dt>
-            <dd>HTML, CSS, JavaScript, Next.js (partial), Three.js (experimental)</dd>
+            <dd>Semantic HTML, Modular CSS, JavaScript, Vercel Serverless Functions, Supabase (pgvector), Gemini API</dd>
 
             <dt>Tools</dt>
             <dd>Cursor, OpenCode CLI, Vercel, GitHub, Supabase</dd>
@@ -462,7 +462,7 @@
             <!-- Function -->
             <div class="asd-node asd-function-node" data-id="function" data-accent="function">
               <div class="asd-node-top">
-                <span class="asd-kicker">Netlify function</span>
+                <span class="asd-kicker">Vercel serverless function</span>
                 <div class="asd-dot"></div>
               </div>
               <h3>Orchestrator</h3>
@@ -627,7 +627,7 @@
             const steps = [
               { id: 'input', label: 'Step 1/5', msg: 'Visitor submits a question from the chat widget.', delay: 160 },
               { id: 'flow-1', label: 'Step 1/5', msg: 'Question moves into the assistant pipeline.', delay: 120 },
-              { id: 'function', label: 'Step 2/5', msg: 'Netlify function parses intent and routes the request.', delay: 260 },
+              { id: 'function', label: 'Step 2/5', msg: 'Serverless function parses intent and routes the request.', delay: 260 },
               { id: 'substep-1', label: 'Step 2/5', msg: 'Parse question intent.', delay: 80 },
               { id: 'substep-2', label: 'Step 2/5', msg: 'Check portfolio context.', delay: 100 },
               { id: 'substep-3', label: 'Step 2/5', msg: 'Route to knowledge retrieval.', delay: 100 },
@@ -739,10 +739,9 @@
             <h2>Building the system</h2>
           </div>
 
-          <h3>Start in code, not design tools</h3>
+          <h3>Designing directly in the browser</h3>
           <p>
-            Designing in Figma first slowed iteration. Working directly in HTML and CSS provided 
-            faster feedback loops and immediate validation.
+            Designing in Figma first created unnecessary translation lag. Moving directly into HTML and modular CSS eliminated mockup-to-production friction, letting me evaluate typographic hierarchy, responsive reflow, and interaction feel under actual browser constraints.
           </p>
 
           <figure class="case-study-media file-chat-pair">
@@ -762,16 +761,14 @@
             </div>
           </figure>
 
-          <h3>Treat AI like a junior engineer</h3>
+          <h3>Governance through markdown constraints</h3>
           <p>
-            AI didn't replace decision-making. It required direction, constraints, and review. 
-            The quality of output depended entirely on how clearly the problem was framed.
+            Rather than relying on ad-hoc conversational prompting, I established explicit systemic constraints through structured project markdown files (<code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">CONTEXT.md</code> and <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">AGENTS.md</code>). These codified tone guidelines, banned corporate buzzwords, and established non-negotiable accessibility standards before generating a single line of code.
           </p>
 
-          <h3>Build patterns early</h3>
+          <h3>Modular token architecture</h3>
           <p>
-            Instead of writing one-off code for each page, I created reusable structures 
-            that could scale across the portfolio.
+            To prevent AI-assisted coding from devolving into 4,000 lines of unmaintainable spaghetti styles, I separated CSS into a disciplined token hierarchy (<code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">tokens.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">base.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">layout.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">components.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">pages.css</code>). This kept component patterns modular, eliminated styling collisions, and preserved sub-second page performance.
           </p>
         </section>
 
@@ -868,37 +865,32 @@
             <h2>What Didn't Work</h2>
           </div>
           <p>
-            At one point the portfolio included dark mode and a Windows 95-inspired theme.
+            Early on, I went down a rabbit hole building multiple visual skins, including a dark mode and a retro Windows 95 theme (alongside the terminal mode). While they were fun technical experiments, maintaining three separate color palettes and border paradigms tripled CSS token maintenance and distracted from the case studies themselves.
           </p>
           <p>
-            Both significantly increased CSS complexity.
-          </p>
-          <p>
-            The decision was made to focus on features that delivered greater user value.
+            I stripped the site back to a single high-contrast light theme to keep the design system maintainable and focused on content clarity. The lesson was straightforward: just because AI makes generating code fast doesn't mean you should keep every feature you prototype.
           </p>
         </section>
 
         <section id="lessons" aria-label="Lessons & next" class="section--alt">
           <div class="section-divider">
-            <h2>Lessons & next</h2>
+            <h2>Lessons & Next Steps</h2>
           </div>
 
           <h3>Lessons</h3>
           <p>
-            The tools didn't just speed up execution. 
-            They exposed how much of good output depends on how clearly the problem is framed going in.
+            AI-assisted coding doesn't replace engineering rigor; it increases the need for it. Without clear architecture upfront, an LLM will gladly generate 4,000 lines of spaghetti code and duplicate styles.
           </p>
           <ul>
-            <li><strong>AI amplifies structure.</strong> Clear thinking produces better output</li>
-            <li><strong>Speed needs discipline.</strong> Without constraints and direction, code degrades quickly</li>
-            <li><strong>Iteration is the real advantage.</strong> Faster loops matter more than automation</li>
+            <li><strong>Context is the real system:</strong> Writing strict governance rules (<code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">_meta/AGENTS.md</code>) produced far better output than endlessly tweaking one-off prompts.</li>
+            <li><strong>Prototypes in code beat static mockups:</strong> Validating interaction feel, keyboard navigation, and responsive reflow in the browser caught edge cases Figma never surfaced.</li>
+            <li><strong>Velocity requires discipline:</strong> When you can build anything in an afternoon, knowing what to cut is more important than knowing what to add.</li>
           </ul>
 
           <h3>Next</h3>
           <ul>
-            <li>Improve assistant accuracy with better retrieval evaluation</li>
-            <li>Add targeted interactive demos where they clarify case-study decisions</li>
-            <li>Use Three.js/WebGL only where motion supports comprehension, not decoration</li>
+            <li>Fine-tune vector retrieval evaluation for more precise project citations in the chat widget</li>
+            <li>Add lightweight code sandboxes for interactive case-study components</li>
           </ul>
         </section>
 

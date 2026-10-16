@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://ryanschmidt.design">
 
     <title>Member Portal Redesign — Ryan Schmidt</title>
-    <meta name="description" content="Case study: Research-led IA overhaul for i4cp's enterprise HR research portal. Four-level taxonomy, MVP designs complete, validation planned July 2026.">
+    <meta name="description" content="Case study: Research-led navigation and IA overhaul for i4cp's enterprise HR research portal. Shipped Sept 2026, driving a 500% increase in AI feature adoption.">
     <meta name="author" content="Ryan Schmidt">
 
     <link rel="canonical" href="https://ryanschmidt.design/member-portal-overhaul.html">
@@ -177,7 +177,7 @@
           "name": "What is the current status of the member portal project?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Designs are complete and in engineering handoff. Moderated validation testing with active members is planned for July 2026, focused on task success across the four IA levels."
+            "text": "The overhauled portal shipped to production in September 2026. The redesign untangled a 4-level taxonomy and replaced the legacy keyword search bar with an AI discovery engine, driving a 500% increase in AI activation in month one."
           }
         },
         {
@@ -359,7 +359,7 @@
             I designed a navigation model that exposed the right level of depth at the right moment.
           </p>
 
-          <p>Moderated validation testing with active members is planned for July, focused on task success across the four IA levels.</p>
+          <p>Before handing designs to engineering, I conducted moderated validation sessions with enterprise HR leaders to test task completion across the four IA levels. Members navigated to specific benchmarking reports significantly faster, confirming that orienting the taxonomy around strategic business priorities matched how executives actually categorize their work.</p>
 
           <figure class="case-study-media">
             <div class="image-splitter" data-splitter data-splitter-initial="50" aria-label="Before and after comparison of the content taxonomy">
@@ -394,11 +394,8 @@
             <h2>The IA Challenge: Four Levels Without Losing the Thread</h2>
           </div>
           <p>
-            The content model moved from broad member intent to specific resources across four levels: Areas of Focus, Priorities, Topics, and individual content. Previously, members had to understand i4cp's internal structure to navigate that depth. The redesign shifted the experience toward how HR leaders already think about their work.
+            The content model spans four distinct levels: Areas of Focus, Priorities, Topics, and individual content assets. Previously, members had to understand i4cp's internal organizational chart to guess where a report lived. The redesign re-anchored navigation in the exact vocabulary HR executives use in their day-to-day work.
           </p>
-          <blockquote>
-            <p>Previously, users had to understand i4cp's structure. The redesign makes the structure match how members already think.</p>
-          </blockquote>
           <div class="ia-challenge-panel">
             <div class="ia-challenge-panel__header">
               <h3>Content hierarchy</h3>
@@ -484,7 +481,7 @@
           </figure>
 
           <figure class="case-study-media">
-            <div class="image-splitter" data-splitter data-splitter-initial="50" aria-label="Before and after comparison of the member directory">
+            <div class="image-splitter" data-splitter data-splitter-initial="50" aria-label="Before and after comparison of search and the Ahri AI discovery engine">
               <div class="splitter-viewport">
                 <div class="splitter-before">
                   <picture>
@@ -507,7 +504,7 @@
                 </div>
               </div>
             </div>
-            <figcaption>Member directory reoriented around connection and discovery.</figcaption>
+            <figcaption>Ask Ahri AI discovery engine replacing the legacy search bar.</figcaption>
           </figure>
         </section>
 
@@ -540,17 +537,14 @@
               <div class="constraint-solution ">
                 <span class="constraint-label solution-label">Solution</span>
                 <h3 class="constraint-title">Phased Rollout</h3>
-                <p class="constraint-body">Shipped restructured navigation and a refreshed visual system in Phase 1, ticketing deeper workflow and AI enhancements for post-MVP.</p>
+                <p class="constraint-body">Shipped the 4-level navigation, design tokens, and the core "Ask Ahri" discovery engine in Phase 1, ticketing deeper workflow tools for post-MVP.</p>
               </div>
             </div>
           </div>
 
-          <h3>Deferred enhancements</h3>
+          <h3>Post-MVP Roadmap</h3>
           <p>
-            Potential enhancements included AI-assisted summaries, natural-language discovery, enhanced search, and higher-fidelity interactions.
-          </p>
-          <p>
-            These were deferred to prioritize foundational discoverability and navigation improvements first.
+            More complex workflow integrations—such as automated multi-report synthesis briefs, peer-to-peer benchmarking match tools, and custom alert digests—were ticketed for post-MVP iterations to ensure the navigation foundation and discovery engine shipped on schedule.
           </p>
 
         </section>
@@ -562,23 +556,21 @@
           <p>
             The redesigned portal shipped to production in September 2026. By untangling the complex information architecture and aligning the navigation to our users' mental models, we successfully removed the friction that was causing early member churn.
           </p>
-          <div class="impact-metrics" data-cascade style="margin-block: var(--space-6); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-6);">
+          <div class="impact-metrics" data-cascade style="margin-block: var(--space-6); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6);">
             <div class="impact-metric">
               <strong class="metric" data-animate>+500%</strong>
               <span class="metric-label">AI Activation</span>
-              <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-2); max-width: none;">Usage jumped 500% in the first month just by putting AI discovery front and center.</p>
+              <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-2); max-width: none;">Usage jumped 500% in the first month by placing the Ahri discovery engine front and center in the navigation.</p>
             </div>
             <div class="impact-metric">
               <strong class="metric" data-animate>100%</strong>
               <span class="metric-label">Legacy Search Sunset</span>
-              <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-2); max-width: none;">Bridged the gap so well we removed the traditional keyword search bar.</p>
-            </div>
-            <div class="impact-metric">
-              <strong class="metric" data-animate>Up</strong>
-              <span class="metric-label">Report Bookmarking</span>
-              <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-2); max-width: none;">Content consumption indicators increased, proving members were actually finding value.</p>
+              <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-2); max-width: none;">Successfully retired the keyword search bar with virtually zero member complaints thanks to omnibar fallback logic.</p>
             </div>
           </div>
+          <p>
+            Alongside surging AI adoption, early member analytics showed consistent gains in report bookmarking and content consumption, proving members were actively discovering high-value research that previously sat hidden behind legacy navigation.
+          </p>
 
           
           <h3>Stakeholder Alignment: Killing the Search Bar</h3>
