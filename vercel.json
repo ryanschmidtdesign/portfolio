@@ -13,12 +13,17 @@
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://generativelanguage.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://ryanschmidt.design; connect-src 'self' https://generativelanguage.googleapis.com https://ggmkmymtilpkezkpihxt.supabase.co https://r.jina.ai https://www.googleapis.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://ryanschmidt.design; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
         }
       ]
     }
   ],
   "rewrites": [
+    { "source": "/about", "destination": "/pages/about.html" },
+    { "source": "/dashboard", "destination": "/pages/dashboard.html" },
+    { "source": "/inventory", "destination": "/pages/inventory.html" },
+    { "source": "/ai-coding-portfolio", "destination": "/pages/ai-coding-portfolio.html" },
+    { "source": "/member-portal-overhaul", "destination": "/pages/member-portal-overhaul.html" },
     { "source": "/about.html", "destination": "/pages/about.html" },
     { "source": "/dashboard.html", "destination": "/pages/dashboard.html" },
     { "source": "/inventory.html", "destination": "/pages/inventory.html" },
@@ -50,6 +55,21 @@
     {
       "source": "/llms.txt",
       "destination": "/assets/llms.txt",
+      "permanent": true
+    },
+    {
+      "source": "/llms-full.txt",
+      "destination": "/assets/llms-full.txt",
+      "permanent": true
+    },
+    {
+      "source": "/assets/ryan-schmidt-resume-september-2026.pdf",
+      "destination": "/assets/ryan-schmidt-resume-october-2026.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/ryan-schmidt-resume-september-2026.pdf",
+      "destination": "/assets/ryan-schmidt-resume-october-2026.pdf",
       "permanent": true
     },
     {

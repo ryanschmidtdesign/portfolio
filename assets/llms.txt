@@ -51,5 +51,5 @@ metrics, and structured fit-matching. Endpoint: /api/chat (POST).
 ## Optional
 - https://ryanschmidt.design/assets/llms.txt — This file (LLMs summary)
 - https://ryanschmidt.design/assets/llms-full.txt — Full LLMs.txt with detailed case study synopses
-- https://ryanschmidt.design/portfolio-kb.json — Full KB used by the on-site AI assistant.
+- https://ryanschmidt.design/assets/portfolio-kb.json — Full KB used by the on-site AI assistant.
 - https://ryanschmidt.design/assets/ryan-schmidt-resume-october-2026.pdf

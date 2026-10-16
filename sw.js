@@ -1,12 +1,17 @@
-const CACHE = 'portfolio-v2';
+const CACHE = 'portfolio-v3';
 const PRECACHE_URLS = [
+  '/404.html',
   '/styles.css',
+  '/css/tokens.css',
+  '/css/base.css',
+  '/css/layout.css',
+  '/css/components.css',
+  '/css/pages.css',
+  '/css/utilities.css',
   '/favicon.svg',
   '/favicon.ico',
   '/scripts/rs-chat-widget.js'
 ];
-
-const CHAT_API_PATTERN = /^\/api\/chat/;
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
@@ -30,9 +35,21 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
+  
+  // Never intercept non-GET requests (e.g. POST /api/track-resume)
+  if (request.method !== 'GET') {
+    return;
+  }
+
   const url = new URL(request.url);
 
-  if (CHAT_API_PATTERN.test(url.pathname)) {
+  // Never cache API routes
+  if (url.pathname.startsWith('/api/')) {
+    return;
+  }
+
+  // Ignore non-http/https schemes
+  if (!url.protocol.startsWith('http')) {
     return;
   }
 
@@ -44,13 +61,16 @@ self.addEventListener('fetch', (event) => {
   }
 
   event.respondWith(
-    caches.match(request).then((cached) => {
+    caches.match(request, { ignoreSearch: true }).then((cached) => {
       const network = fetch(request).then((response) => {
         if (response.ok && response.type === 'basic') {
           const clone = response.clone();
           caches.open(CACHE).then((cache) => cache.put(request, clone));
         }
         return response;
+      }).catch((err) => {
+        if (cached) return cached;
+        throw err;
       });
 
       if (cached) {
@@ -62,3 +82,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+

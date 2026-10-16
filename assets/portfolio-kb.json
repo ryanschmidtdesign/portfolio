@@ -66,8 +66,8 @@
     "headline": "Senior Product Designer at i4cp, working at the seam of design and engineering.",
     "one_liner": "Research-driven IA, design systems, and AI-augmented product UX for enterprise audiences.",
     "elevator_30s": "Ryan Schmidt is a Senior Product Designer at i4cp focused on information architecture, member experience, and AI-augmented product UX. He turns messy research and legacy interfaces into systems that scale, with measurable outcomes like task success, component reuse, and adoption. Strengths sit at the seam of design and engineering, including token-first design systems, prototyping in code, and AI tooling like Cursor and Claude.",
-    "bio_75_words": "Ryan Schmidt is a Senior Product Designer at i4cp who works at the seam of design and engineering. His focus is research-driven information architecture, design systems, and AI-augmented product UX for enterprise audiences. Recent outcomes include a 22% lift in task success, 92% engineer adoption on a 100+ component design system, and a 71% jump in dashboard engagement during beta. He's based in Austin, TX.",
-    "bio_150_words": "Ryan Schmidt is a Senior Product Designer at i4cp (Institute for Corporate Productivity), where he leads platform experience strategy across member portal, internal admin, and research discovery surfaces. His focus is research-driven information architecture, token-first design systems, and AI-augmented product UX for enterprise audiences. Before i4cp, he led design system work at D-Tools, where he shipped a 100+ component system with 92% engineer adoption, cutting UI defects by 38%. Ryan works at the seam of design and engineering, prototyping in code, partnering closely with engineers, and using AI tooling like Cursor and Claude to ship faster. Recent measurable outcomes include a 22% lift in task success after an IA overhaul, a 71% jump in dashboard engagement during beta, and an 18% lift in recurring revenue tied to a real-time inventory MVP. He's based in Austin, TX.",
+    "bio_75_words": "Ryan Schmidt is a Senior Product Designer at i4cp who works at the seam of design and engineering. His focus is research-driven information architecture, design systems, and AI-augmented product UX for enterprise audiences. Recent outcomes include +500% AI feature activation at i4cp, 92% engineer adoption on a 100+ component design system, and a 71% jump in dashboard engagement during beta. He's based in Austin, TX.",
+    "bio_150_words": "Ryan Schmidt is a Senior Product Designer at i4cp (Institute for Corporate Productivity), where he leads platform experience strategy across member portal, internal admin, and research discovery surfaces. His focus is research-driven information architecture, token-first design systems, and AI-augmented product UX for enterprise audiences. Before i4cp, he led design system work at D-Tools, where he shipped a 100+ component system with 92% engineer adoption, cutting UI defects by 38%. Ryan works at the seam of design and engineering, prototyping in code, partnering closely with engineers, and using AI tooling like Cursor and Claude to ship faster. Recent measurable outcomes include a 500% jump in AI feature activation after the i4cp portal overhaul, a 71% jump in dashboard engagement during beta, and an 18% lift in recurring revenue tied to a real-time inventory MVP. He's based in Austin, TX.",
     "specialties": [
       "Information Architecture",
       "Design Systems",
@@ -194,10 +194,10 @@
   "looking_for": {
     "status": "Open to the right opportunity.",
     "target_roles_ranked": [
-      "UX Engineer",
       "Senior Product Designer",
+      "Lead Product Designer",
       "Staff Product Designer",
-      "Product Designer",
+      "UX Engineer",
       "AI Product Designer"
     ],
     "what_matters": [
@@ -323,7 +323,7 @@
       "HTML/CSS/JS"
     ],
     "achievements_top": [
-      "Improved task success by **+22%** after IA/onboarding overhaul (internal).",
+      "Drove **+500%** AI feature activation after i4cp Member Portal overhaul.",
       "Built design system of 100+ components achieving **92% engineer adoption** and cutting frontend defects by **38%**.",
       "Increased dashboard engagement by **+71%** during beta (**62% multi-dashboard adoption**).",
       "Drove **+18% recurring revenue** and **+8% product adoption** after Real-Time Inventory MVP (1-year outcomes)."
@@ -397,8 +397,28 @@
       "sections": [
         {
           "id": "problem",
-          "heading": "Problem",
-          "summary": "Members struggled to find key research quickly because of navigation and taxonomy friction across multiple user types."
+          "heading": "Problem & Goals",
+          "summary": "Members struggled to find key research because the legacy navigation and tangled 4-level taxonomy created high friction. The goal was to untangle content discovery and drive AI adoption."
+        },
+        {
+          "id": "research",
+          "heading": "Research & Validation",
+          "summary": "Validated the 4-level taxonomy with executive HR leaders in moderated sessions, confirming that organizing research by strategic business priorities matched member mental models."
+        },
+        {
+          "id": "ia-challenge",
+          "heading": "The IA Challenge: Four Levels Without Losing the Thread",
+          "summary": "Defined a progressive disclosure model spanning Areas of Focus, Priorities, Topics, and Content assets to prevent exposing the entire taxonomy upfront."
+        },
+        {
+          "id": "constraints",
+          "heading": "Constraints: Parallel Rebrand & MVP Scope",
+          "summary": "Mapped UI to strict design tokens to absorb an evolving third-party rebrand, and phased delivery to ship 4-level navigation and the Ask Ahri engine on schedule."
+        },
+        {
+          "id": "outcomes",
+          "heading": "Outcomes & Impact",
+          "summary": "Shipped to production in September 2026. Drove a 500% increase in AI activation, successfully sunset the legacy keyword search bar with omnibar fallback logic, and accelerated member time-to-insight."
         }
       ]
     },
@@ -939,8 +959,8 @@
   ],
   "deterministic_answers": {
     "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
-    "looking_for": "Ryan is open to the right opportunity, especially roles where design and engineering share a seat. His strongest targets are UX Engineer, Senior Product Designer, Staff Product Designer, and AI Product Designer roles.",
-    "proof_points": "Ryan's strongest proof points are +22% task success after an IA/onboarding overhaul, 100+ components with 92% engineer adoption (cutting UI defects by 38%), +71% dashboard engagement during beta, and +18% recurring revenue after the Real-Time Inventory MVP.",
+    "looking_for": "Ryan is open to the right opportunity, especially roles where design and engineering share a seat. His strongest targets are Senior Product Designer, Lead Product Designer, Staff Product Designer, and UX Engineer roles.",
+    "proof_points": "Ryan's strongest proof points are +500% AI feature activation after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption (cutting UI defects by 38%), +71% dashboard engagement during beta, and +18% recurring revenue after the Real-Time Inventory MVP.",
     "ux_engineer_fit": "Yes. Ryan codes, prototypes in the browser, uses AI tooling daily, and works closely with engineers. The strongest evidence is his AI-Coding my Portfolio case, coded prototyping habits, and AI dashboard/product workflow thinking."
   },
   "evidence_by_role": {
@@ -1060,10 +1080,6 @@
       "Do not mention Bytemark unless asked about Bytemark, transit, Swiftly, mobile ticketing, or earlier work history."
     ],
     "corrections": [
-      {
-        "false_assumption": "Ryan launched the i4cp member portal results publicly",
-        "correct_response": "That case is still coming soon. The public portfolio can speak to the research-led IA direction, but not final published outcomes yet."
-      },
       {
         "false_assumption": "Ryan is a software engineer",
         "correct_response": "Ryan is a Senior Product Designer who codes and prototypes, not a full-time software engineer."
@@ -1565,7 +1581,7 @@
     {
       "intent": "about_short",
       "prompt": "Give me a 3-sentence bio of Ryan.",
-      "answer": "Ryan Schmidt is a Senior Product Designer at i4cp focused on research-heavy IA, design systems, and AI-augmented product UX. He works at the seam of design and engineering, prototyping in code and partnering tightly with engineers. Recent wins include **+22% task success** from an IA overhaul and **92% engineer adoption** on a 100+ component design system. Want a longer version or a tailored fit for a specific role?"
+      "answer": "Ryan Schmidt is a Senior Product Designer at i4cp focused on research-heavy IA, design systems, and AI-augmented product UX. He works at the seam of design and engineering, prototyping in code and partnering tightly with engineers. Recent wins include **+500% AI feature activation** from the i4cp member portal overhaul and **92% engineer adoption** on a 100+ component design system. Want a longer version or a tailored fit for a specific role?"
     },
     {
       "intent": "company_fit",
@@ -1630,7 +1646,7 @@
     {
       "intent": "proudest_work",
       "prompt": "What project is Ryan most proud of and why?",
-      "answer": "The Member Portal Growth Overhaul, because it solved a massive business bottleneck. By restructuring the IA and replacing a traditional search bar with an AI discovery engine, he drove a **500% jump in AI usage** and protected long-term retention., and an intake process that kept it healthy after launch. It's the case where systems thinking did the heavy lifting."
+      "answer": "The Member Portal Growth Overhaul, because it solved a major business bottleneck. By restructuring the IA and replacing a traditional search bar with an AI discovery engine, he drove a **+500% jump in AI usage** and protected long-term member retention. It's the case where systems thinking did the heavy lifting."
     },
     {
       "intent": "research_under_constraints",

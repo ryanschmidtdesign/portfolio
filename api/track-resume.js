@@ -10,25 +10,33 @@ const SUPABASE_HEADERS = SUPABASE_KEY ? {
   "Content-Type": "application/json"
 } : null;
 
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
+function setCorsHeaders(req, res) {
+  const origin = req.headers?.origin || "";
+  const isAllowed = origin === "https://ryanschmidt.design" ||
+    origin === "https://www.ryanschmidt.design" ||
+    origin.startsWith("http://localhost:") ||
+    origin.startsWith("http://127.0.0.1:");
+  
+  res.setHeader("Access-Control-Allow-Origin", isAllowed ? origin : "https://ryanschmidt.design");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Vary", "Origin");
+}
 
 export default async function handler(req, res) {
+  setCorsHeaders(req, res);
   if (req.method === "OPTIONS") {
-    return res.status(204).setHeader("Access-Control-Allow-Origin", "*").end();
+    return res.status(204).end();
   }
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method Not Allowed" });
   }
 
   try {
-    const sessionToken = String(req.body.sessionToken || req.body.session_token || "").slice(0, 128) || null;
-    const referrer = String(req.headers["referer"] || req.headers["referrer"] || "").slice(0, 512) || null;
-    const pageUrl = String(req.body.pageUrl || req.body.page_url || "").slice(0, 512) || null;
-    const userAgent = String(req.headers["user-agent"] || "").slice(0, 256) || null;
+    const sessionToken = String(req.body?.sessionToken || req.body?.session_token || "").slice(0, 128) || null;
+    const referrer = String(req.headers?.["referer"] || req.headers?.["referrer"] || "").slice(0, 512) || null;
+    const pageUrl = String(req.body?.pageUrl || req.body?.page_url || "").slice(0, 512) || null;
+    const userAgent = String(req.headers?.["user-agent"] || "").slice(0, 256) || null;
 
     if (SUPABASE_HEADERS) {
       await fetch(`${SUPABASE_URL}/rest/v1/resume_downloads`, {

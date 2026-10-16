@@ -16,9 +16,7 @@
     "test:chat-api": "node scripts/test-chat-api.js",
     "test": "vitest run",
     "test:watch": "vitest",
-    "validate:kb": "vitest run -t 'KB integrity'",
-    "agent": "npm --prefix job-agent start",
-    "agent:dry-run": "npm --prefix job-agent run dry-run",
-    "dry-run": "npm --prefix job-agent run dry-run"
+    "validate:kb": "vitest run -t 'KB integrity'"
   }
 }
+

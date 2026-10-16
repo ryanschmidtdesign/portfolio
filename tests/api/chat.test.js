@@ -1,170 +1,21 @@
 import { describe, it, expect } from 'vitest';
 
-// Pure functions extracted from api/chat.js for unit testing.
-// api/chat.js uses export default with mixed require() imports,
-// so internal functions are not directly importable.
+import {
+  sanitize,
+  polishAnswerText,
+  isPrivateHostname,
+  extractCompanyHint,
+  detectIntent,
+  isBadHint,
+  extractRoleHint,
+  fitQuestionHasContext,
+  cleanHint,
+  sanitizeSources,
+  KB_FALLBACK
+} from '../../api/chat.js';
 
-function sanitize(text = "") {
-  return String(text).replace(/<[^>]*>/g, "").slice(0, 4200);
-}
 
-function polishAnswerText(text = "") {
-  let s = String(text || "");
-  s = s.replace(/—/g, ", ");
-  s = s.replace(/–/g, "-");
-  const bannedReplacements = [
-    [/as an ai[,]?\s*/gi, ""],
-    [/i'?d be happy to\s*/gi, ""],
-    [/\bleverage\b/gi, "use"],
-    [/\butilize\b/gi, "use"],
-    [/\bpassionate about\b/gi, "focused on"],
-    [/\bdelve into\b/gi, "look at"],
-    [/\bsynergy\b/gi, "fit"],
-    [/\brobust\b/gi, "strong"],
-    [/\bseamless\b/gi, "smooth"],
-  ];
-  for (const [re, replacement] of bannedReplacements) {
-    s = s.replace(re, replacement);
-  }
-  s = s.replace(/\s{2,}/g, " ");
-  s = s.replace(/\s+,/g, ",");
-  s = s.replace(/,\s*,/g, ",");
-  return s.trim();
-}
 
-function isPrivateHostname(hostname = "") {
-  const h = String(hostname || "").toLowerCase();
-  if (!h) return true;
-  if (h === "localhost" || h.endsWith(".local")) return true;
-  if (/^\d{1,3}(\.\d{1,3}){3}$/.test(h)) {
-    const [a, b] = h.split(".").map(n => parseInt(n, 10));
-    if (a === 10) return true;
-    if (a === 127) return true;
-    if (a === 192 && b === 168) return true;
-    if (a === 172 && b >= 16 && b <= 31) return true;
-    return false;
-  }
-  return false;
-}
-
-function cleanHint(s = "") {
-  return String(s)
-    .replace(/[\u2014\u2013]/g, "-")
-    .replace(/\s+/g, " ")
-    .replace(/^[\s"'""''()]+|[\s"'""''()]+$/g, "")
-    .replace(/[?.!,;:]+$/g, "")
-    .trim();
-}
-
-function extractCompanyHint(text = "") {
-  const s = String(text || "").trim();
-  if (!s) return "";
-  const patterns = [
-    /\bfit\s+(?:at|for|in)\s+([^?.!,\n]{2,80})/i,
-    /\b(?:work|join|apply|interview)\s+(?:at|for)\s+([^?.!,\n]{2,80})/i,
-    /\b(?:at|for)\s+([A-Z][A-Za-z0-9&.\-_ ]{2,80})/,
-  ];
-  for (const re of patterns) {
-    const m = s.match(re);
-    if (m && m[1]) {
-      let candidate = m[1].split(/\s+(?:as|on|about|because|given|with|and|or|but|how|why|when|where|while|that)\s+/i)[0];
-      candidate = candidate.split(/\s[\u2013\u2014]\s/)[0];
-      candidate = candidate.replace(/\s+(and|or|how|why|when|where).*$/i, '').trim();
-      return cleanHint(candidate);
-    }
-  }
-  const paren = s.match(/^([A-Z][A-Za-z0-9&.\-_ ]{2,60})\s*\(/);
-  if (paren && paren[1]) return cleanHint(paren[1]);
-  const atAny = s.match(/\bat\s+([A-Z][A-Za-z0-9&.\-_ ]{2,80})/);
-  if (atAny && atAny[1]) return cleanHint(atAny[1]);
-  return "";
-}
-
-function normalizeText(s = "") {
-  return String(s || "").replace(/\s+/g, " ").trim();
-}
-
-function isBadHint(h = "") {
-  const t = h.toLowerCase();
-  return (
-    t.length < 2 ||
-    t.length > 80 ||
-    [
-      "this", "that", "here", "my company", "the company", "your company", "portfolio",
-      "my role", "this role", "that role", "the role", "a role", "your role", "any role",
-      "an open role", "this position", "the position", "a position", "that position", "my position",
-      "this job", "the job", "a job", "that job", "my job", "this fit", "the fit", "a fit"
-    ].includes(t)
-  );
-}
-
-function extractRoleHint(text = "") {
-  const s = String(text || "").trim();
-  if (!s) return "";
-  const m =
-    s.match(/\bfit\s+(?:as|for)\s+(?:a|an|the)?\s*([^?.!,\n]{2,80})\s+\bat\b/i) ||
-    s.match(/\b(?:role|position)\s+(?:as|for)\s+(?:a|an|the)?\s*([^?.!,\n]{2,80})/i);
-  if (!m || !m[1]) return "";
-  let candidate = m[1].split(/\s+(?:at|for|in)\s+/i)[0];
-  return cleanHint(candidate);
-}
-
-function fitQuestionHasContext(text = "") {
-  const companyHint = cleanHint(extractCompanyHint(text));
-  const roleHint = cleanHint(extractRoleHint(text));
-  return Boolean((companyHint && !isBadHint(companyHint)) || (roleHint && !isBadHint(roleHint)));
-}
-
-function detectFitIntent(text = "") {
-  const t = String(text).toLowerCase();
-  const strong =
-    /\b(why|how)\b.*\b(fit|suited|qualified|right for)\b/.test(t) ||
-    /\b(good fit|great fit|strong fit|best fit)\b/.test(t) ||
-    /\b(why)\b.*\b(ryan)\b.*\b(at|for)\b/.test(t) ||
-    /\b(should)\b.*\b(ryan)\b.*\b(join|work|apply)\b/.test(t) ||
-    /\b(would)\b.*\b(ryan)\b.*\b(be)\b.*\b(a)\b.*\b(fit)\b/.test(t);
-  const medium =
-    /\bfit\b.*\b(at|for)\b/.test(t) ||
-    /\b(relevant)\b.*\b(to|for|at)\b/.test(t) ||
-    /\b(align|alignment)\b.*\b(with)\b/.test(t) ||
-    /\b(compare)\b.*\b(for|to)\b/.test(t);
-  return strong || medium;
-}
-
-function detectIntent(text = "") {
-  const t = normalizeText(text).toLowerCase();
-  if (!t) return "general";
-  const contact = /\b(contact|email|hire|interview|schedule|reach out|availability|talk to|connect|call)\b/.test(t);
-  const roleFit = detectFitIntent(t);
-  const caseCompare = /\b(compare|best case|which case|match(es|ing)?|versus|vs|choose|recommend)\b/.test(t);
-  const proofPoints = /\b(outcome|impact|results|proof|metrics|evidence|adoption|engagement|success|score)\b/.test(t);
-  const process = /\b(process|workflow|methodology|approach|how (?:he|ryan|i) works|decision|strategy|design approach)\b/.test(t);
-  const technical = /\b(code|prototype|front[- ]?end|frontend|react|typescript|javascript|tailwind|radix|shadcn|three\.js|threejs|three js|interaction|animation|system|engineering|technical|ai|llm|data visualization|design system|tokens|component implementation)\b/.test(t);
-  const leadership = /\b(ownership|owner|leadership|mentor|mentoring|stakeholder|pm|product manager|cross[- ]?functional|teamwork|collaborat)\b/.test(t);
-  const metaQa = /\b(are you (an? )?ai|did ryan (build|make|write) you|how accurate are you|why does this (exist|chat exist)|can you (actually )?answer)\b/.test(t);
-  const lookingFor = /\b(open to (new |a )?role|looking for (a )?(new |another )?role|is (he|ryan) available|what (is |')?(he|ryan) looking|target role|what kind of role|hiring (situation|status))\b/.test(t);
-  const uxEngineerFit = /\b(ux engineer|design engineer|front[- ]?end|frontend|can he code|does he (code|prototype|build)|prototype in code|coded prototype|build with engineers|engineering team|technical designer|figma to code|react|typescript|tailwind|component implementation)\b/.test(t);
-  if (metaQa) return "meta_qa";
-  if (lookingFor) return "looking_for";
-  if (uxEngineerFit) return "ux_engineer_fit";
-  if (contact) return "contact";
-  if (roleFit) return "role_fit";
-  if (caseCompare) return "case_compare";
-  if (proofPoints) return "proof_points";
-  if (process) return "process";
-  if (technical) return "technical_depth";
-  if (leadership) return "leadership";
-  if (/\b(resume|cv)\b/.test(t) || /\b(download|view)\b.*\bresume\b/.test(t)) return "resume";
-  if (/\b(hobbies|outside work|off hours|free time|interests|fun facts)\b/.test(t)) return "hobbies";
-  if (/\b(who is ryan|about ryan|bio|biography|summary)\b/.test(t)) return "bio";
-  if (/\b(which|what)\b.*\bcase\b/.test(t) || /\b(best)\b.*\bcase\b/.test(t) || /\bcompare|comparison|versus|vs\b/.test(t)) {
-    return "case_select";
-  }
-  if (/\b(dashboard|inventory|design system|tokens|navigation|taxonomy|onboarding|discovery|filters)\b/.test(t)) {
-    return "case_detail";
-  }
-  return "general";
-}
 
 describe('sanitize', () => {
   it('strips HTML tags', () => {
@@ -492,3 +343,35 @@ describe('KB integrity: router', () => {
     }
   });
 });
+
+describe('api/chat serverless helpers', () => {
+  it('loads KB_FALLBACK cleanly in ESM', () => {
+    expect(KB_FALLBACK).not.toBeNull();
+    expect(KB_FALLBACK.cases.length).toBeGreaterThan(0);
+  });
+
+  it('isPrivateHostname blocks metadata service and loopbacks', () => {
+    expect(isPrivateHostname('169.254.169.254')).toBe(true);
+    expect(isPrivateHostname('::1')).toBe(true);
+    expect(isPrivateHostname('0.0.0.0')).toBe(true);
+    expect(isPrivateHostname('100.64.0.1')).toBe(true);
+    expect(isPrivateHostname('google.com')).toBe(false);
+    expect(isPrivateHostname('ryanschmidt.design')).toBe(false);
+  });
+
+  it('sanitizeSources normalizes string URLs and objects', () => {
+    const sources = [
+      'https://ryanschmidt.design/pages/dashboard.html',
+      '/pages/inventory.html',
+      { title: 'Member Portal', url: 'https://ryanschmidt.design/pages/member-portal-overhaul.html' },
+      null,
+      'invalid-url'
+    ];
+    const sanitized = sanitizeSources(sources);
+    expect(sanitized.length).toBe(3);
+    expect(sanitized[0].url).toBe('https://ryanschmidt.design/pages/dashboard.html');
+    expect(sanitized[1].url).toBe('https://ryanschmidt.design/pages/inventory.html');
+    expect(sanitized[2].title).toBe('Member Portal');
+  });
+});
+

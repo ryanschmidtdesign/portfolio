@@ -65,140 +65,78 @@
     try {
       // Safety: ensure Lenis (if loaded) is running so page scroll works
       try { if (window.lenis && typeof window.lenis.start === 'function') { window.lenis.start(); document.documentElement.classList.remove('lenis-stopped'); } } catch(e){}
-      const hamburger = document.getElementById('hamburger');
-      const menu = document.getElementById('hamburgerMenu');
-
-      if (hamburger && menu) {
-        let onMenuKey = null;
-
-        const toggleMenu = (event) => {
-          if (event) event.stopPropagation();
-          if (window.__hamburgerToggleLocked) return;
-          window.__hamburgerToggleLocked = true;
-          setTimeout(() => { window.__hamburgerToggleLocked = false; }, 40);
-
-          const open = !menu.classList.contains('show');
-          if (open) {
-            menu.classList.add('show');
-            allMenuItems.forEach(item => item.removeAttribute('tabindex'));
-          }
-          else {
-            menu.classList.remove('show');
-            menu.querySelectorAll('.menu-item-group.is-open').forEach(g => {
-              Array.from(g.querySelectorAll('.menu-submenu a')).forEach(l => l.style.transitionDelay = '0ms');
-              g.classList.remove('is-open');
-            });
-            allMenuItems.forEach(item => item.setAttribute('tabindex', '-1'));
-          }
-          hamburger.classList.toggle('open', open);
-          hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
-          menu.setAttribute('aria-hidden', open ? 'false' : 'true');
-          document.body.classList.toggle('menu-open', open);
-
-          const focusable = Array.from(menu.querySelectorAll('a, button:not([disabled])'));
-          if (open) {
-            if (!onMenuKey) {
-              onMenuKey = (e) => {
-                if (e.key === 'Escape') {
-                  toggleMenu();
-                  hamburger.focus();
-                  return;
-                }
-                if (e.key === 'Tab') {
-                  const first = focusable[0];
-                  const last = focusable[focusable.length - 1];
-                  if (e.shiftKey && document.activeElement === first) {
-                    e.preventDefault();
-                    last.focus();
-                  } else if (!e.shiftKey && document.activeElement === last) {
-                    e.preventDefault();
-                    first.focus();
-                  }
-                }
-              };
-            }
-            document.addEventListener('keydown', onMenuKey);
-          } else if (onMenuKey) {
-            document.removeEventListener('keydown', onMenuKey);
-          }
+      // Consolidated nav submenu toggle
+      document.querySelectorAll('.menu-trigger').forEach(trigger => {
+        const group = trigger.closest('.menu-item-group');
+        if (!group) return;
+        
+        const toggleSubmenu = (open) => {
+          const shouldOpen = open !== undefined ? open : !group.classList.contains('is-open');
+          group.classList.toggle('is-open', shouldOpen);
+          trigger.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
         };
 
-        hamburger.addEventListener('click', toggleMenu);
-        hamburger.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleMenu();
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleSubmenu();
+        });
+
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            toggleSubmenu(false);
           }
         });
+      });
 
-        document.addEventListener('click', function(event){
-          if (!menu.classList.contains('show')) return;
-          if (hamburger.contains(event.target) || menu.contains(event.target)) return;
-          menu.classList.remove('show');
-          menu.querySelectorAll('.menu-item-group.is-open').forEach(g => {
-            Array.from(g.querySelectorAll('.menu-submenu a')).forEach(l => l.style.transitionDelay = '0ms');
-            g.classList.remove('is-open');
+      // Close submenu on click outside or Escape
+      document.addEventListener('click', (e) => {
+        document.querySelectorAll('.menu-item-group.is-open').forEach(group => {
+          if (!group.contains(e.target)) {
+            group.classList.remove('is-open');
+            const trigger = group.querySelector('.menu-trigger');
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.menu-item-group.is-open').forEach(group => {
+            group.classList.remove('is-open');
+            const trigger = group.querySelector('.menu-trigger');
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
           });
-          hamburger.classList.remove('open');
-          hamburger.setAttribute('aria-expanded', 'false');
-          menu.setAttribute('aria-hidden', 'true');
-          document.body.classList.remove('menu-open');
-          allMenuItems.forEach(item => item.setAttribute('tabindex', '-1'));
-          hamburger.focus();
-        });
-
-        const allMenuItems = Array.from(menu.querySelectorAll('a, .menu-trigger'));
-        let itemIndex = 0;
-        allMenuItems.forEach((item) => {
-          item.style.transitionDelay = `${itemIndex * 20}ms`;
-          itemIndex++;
-        });
-        allMenuItems.forEach(item => item.setAttribute('tabindex', '-1'));
-
-        // Submenu click toggle with staggered drop
-        menu.querySelectorAll('.menu-trigger').forEach(trigger => {
-          trigger.addEventListener('click', () => {
-            const group = trigger.closest('.menu-item-group');
-            if (!group) return;
-            const isOpen = group.classList.contains('is-open');
-            const links = Array.from(group.querySelectorAll('.menu-submenu a'));
-
-            if (isOpen) {
-              links.forEach(link => link.style.transitionDelay = '0ms');
-              group.classList.remove('is-open');
-              trigger.setAttribute('aria-expanded', 'false');
-            } else {
-              group.classList.add('is-open');
-              trigger.setAttribute('aria-expanded', 'true');
-              links.forEach((link, i) => { link.style.transitionDelay = `${i * 30}ms`; });
-              menu.querySelectorAll('.menu-item-group.is-open').forEach(other => {
-                if (other !== group) {
-                  Array.from(other.querySelectorAll('.menu-submenu a')).forEach(l => l.style.transitionDelay = '0ms');
-                  other.classList.remove('is-open');
-                  const otherTrigger = other.querySelector('.menu-trigger');
-                  if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
-                }
-              });
-            }
-          });
-        });
-      }
+        }
+      });
 
       const aiSend = document.getElementById('ai-mini-send');
       const aiInput = document.getElementById('ai-mini-input');
-      if (aiSend && aiInput) {
-        // On case-study pages, rs-chat-widget.js owns the mini-input via
-        // wireExternalTrigger (opens panel on focus) and floating pills send
-        // directly — skip the redundant event dispatch to avoid double-send.
-        const isCaseStudy = document.body.classList.contains('case-study');
-        aiSend.addEventListener('click', function(){
-          if (isCaseStudy) return;
+      if (aiInput) {
+        const handleSend = function() {
           const q = aiInput.value.trim();
           if (!q) return;
-          document.dispatchEvent(new CustomEvent('rs:ask-section', { detail: { prompt: q, sectionContext: { heading: 'Mini AI' } } }));
+          const isCaseStudy = document.body.classList.contains('case-study');
+          const pageTitle = document.title || 'Page';
+          document.dispatchEvent(new CustomEvent('rs:ask-section', {
+            detail: {
+              prompt: q,
+              sectionContext: { heading: isCaseStudy ? pageTitle : 'Mini AI' }
+            }
+          }));
           aiInput.value = '';
+        };
+
+        if (aiSend) {
+          aiSend.addEventListener('click', handleSend);
+        }
+
+        aiInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            if (aiSend) aiSend.click();
+            else handleSend();
+          }
         });
-        aiInput.addEventListener('keypress', function(e){ if (e.key === 'Enter') aiSend.click(); });
       }
     } catch (e) { console.error('Floating nav init error', e); }
   });
@@ -328,7 +266,12 @@
   }
 
   function animateMetric(el) {
-    const original = el.textContent.trim();
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.classList.add("metric--animated");
+      return;
+    }
+    const targetNode = el.querySelector('.metric-highlight') || el;
+    const original = targetNode.textContent.trim();
     const target = parseMetric(original);
     if (target === null) {
       el.classList.add("metric--animated");
@@ -343,7 +286,7 @@
       // ease-out
       const eased = 1 - Math.pow(1 - t, 3);
       const current = target * eased;
-      el.textContent = formatMetric(original, current);
+      targetNode.textContent = formatMetric(original, current);
       if (t < 1) {
         requestAnimationFrame(step);
       } else {
@@ -459,31 +402,7 @@
 // ============================================================================
 // Feature 9: Subtle Grain / Noise Overlay (Phase 2)
 // ============================================================================
-// Feature 11: Progressive Image Reveal (Phase 2)
-// ============================================================================
-(function () {
-  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReduced) return;
-
-  const images = document.querySelectorAll(".case-study img:not(.no-reveal)");
-  if (!images.length) return;
-
-  images.forEach(img => {
-    img.style.clipPath = "inset(0 100% 0 0)";
-  });
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.clipPath = "inset(0 0 0 0)";
-        entry.target.style.transition = "clip-path 0.8s cubic-bezier(0.22, 1, 0.36, 1)";
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { rootMargin: "0px 0px -40px 0px", threshold: 0 });
-
-  images.forEach(img => observer.observe(img));
-})();
+// (Feature 11 removed — Progressive clip-path image wipe caused slow-loading appearance)
 
 // (Feature removed — Sticky Section Navigation Rail was removed)
 
@@ -585,28 +504,17 @@
     updateState(initial);
   });
 
-  [...document.querySelectorAll("[data-section-summary]")].forEach((wrapper) => {
-    const toggle = wrapper.querySelector(".summary-toggle");
-    const content = wrapper.querySelector(".summary-content");
-    if (!toggle || !content) return;
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.addEventListener("click", () => {
-      const expanded = toggle.getAttribute("aria-expanded") === "true";
-      wrapper.classList.toggle("is-open", !expanded);
-      toggle.setAttribute("aria-expanded", String(!expanded));
-      toggle.textContent = expanded ? "View summary" : "Hide summary";
-    });
-  });
-
   // Resume download tracking
   document.addEventListener("click", (e) => {
     const link = e.target.closest('a[href*="ryan-schmidt-resume"][href$=".pdf"]');
     if (!link) return;
+    const sessionToken = sessionStorage.getItem('rs_chat_session_token') || null;
     fetch("/api/track-resume", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        pageUrl: location.pathname
+        pageUrl: location.pathname,
+        sessionToken
       })
     }).catch(() => {});
   });
@@ -624,66 +532,6 @@
     });
   }
 })();
-
-// ============================================================================
-// Audio Context Player Behavior
-// ============================================================================
-(function () {
-  const triggers = document.querySelectorAll('.audio-context-trigger');
-  if (!triggers.length) return;
-
-  triggers.forEach((trigger) => {
-    // 1) Fallback for missing audio (hide)
-    const src = trigger.getAttribute('data-audio-src');
-    if (!src) {
-      // By default we hide unrecorded placeholders
-      trigger.style.display = 'none';
-      return;
-    }
-
-    // 2) Bind click behavior
-    trigger.addEventListener('click', () => {
-      // Find the adjacent player
-      const player = trigger.nextElementSibling;
-      if (!player || !player.classList.contains('audio-context-player')) return;
-
-      const isHidden = player.hasAttribute('hidden');
-      if (isHidden) {
-        player.removeAttribute('hidden');
-        const audioEl = player.querySelector('audio');
-        
-        // Ensure source is loaded if we used preload="none"
-        const sourceEl = audioEl.querySelector('source');
-        if (sourceEl && !sourceEl.src) {
-          sourceEl.src = src;
-          audioEl.load();
-        }
-
-        if (audioEl) {
-          audioEl.focus();
-        }
-      } else {
-        player.setAttribute('hidden', '');
-        const audioEl = player.querySelector('audio');
-        if (audioEl) {
-          audioEl.pause();
-        }
-      }
-    });
-  });
-})();
-
-// --- X-Ray Card Lens ---
-const xrayCards = document.querySelectorAll('.x-ray-card');
-xrayCards.forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty('--mouse-x', `${x}px`);
-    card.style.setProperty('--mouse-y', `${y}px`);
-  });
-});
 
 // --- EASTER EGG: Console Message for Tech Recruiters / EMs ---
 setTimeout(() => {

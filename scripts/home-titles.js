@@ -187,7 +187,8 @@
     }
 
     // Only pause the scroll if they are hovering an ACTUAL link, not just resting in the empty space of the container
-    if (!activeLink && !isTouching) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!activeLink && !isTouching && !prefersReducedMotion && !document.hidden) {
       scrollY += pxPerFrame;
     }
 
@@ -198,7 +199,9 @@
       if (scrollY > 0) scrollY -= setHeight;
     }
 
-    track.style.transform = `translateY(${scrollY}px)`;
+    if (!prefersReducedMotion) {
+      track.style.transform = `translateY(${scrollY}px)`;
+    }
     window.marqueeRafId = requestAnimationFrame(tick);
   }
 
@@ -208,3 +211,4 @@
   }, 100);
 
 })();
+

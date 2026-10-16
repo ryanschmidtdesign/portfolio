@@ -418,6 +418,12 @@
         50% { opacity: 1; transform: scale(1.1); }
       }
       .hire-card-emoji { font-size: 2rem; line-height: 1; }
+      .hire-card-title {
+        font-weight: var(--weight-semibold, 600);
+        font-size: var(--fs-md, 16px);
+        color: var(--text-primary, #111);
+        margin-bottom: 4px;
+      }
       .hire-card-label {
         font-weight: var(--weight-semibold, 600);
         font-size: var(--fs-sm, 14px);
@@ -426,7 +432,40 @@
       }
       .hire-card-sub {
         font-size: 12px;
-        color: rgba(255, 255, 255, 0.65);
+        color: var(--text-secondary, #475569);
+      }
+      .hire-card-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .hire-card-actions a {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        border-radius: var(--radius-pill, 999px);
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: transform 0.15s ease;
+      }
+      .hire-card-actions a:first-child {
+        background: var(--accent, #0033FF);
+        color: #ffffff;
+      }
+      .hire-card-actions a:first-child:hover {
+        opacity: 0.92;
+        transform: translateY(-1px);
+      }
+      .hire-card-actions a:last-child {
+        background: rgba(0, 0, 0, 0.05);
+        color: var(--text-primary, #111);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      .hire-card-actions a:last-child:hover {
+        background: rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
       }
       .hire-card-btn {
         display: inline-flex;
@@ -459,13 +498,13 @@
       .chat-sources {
         margin-top: var(--space-2, .5rem);
         padding-top: var(--space-2, .5rem);
-        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
       }
       .chat-sources-label {
         font-size: 11px;
         text-transform: uppercase;
         letter-spacing: .08em;
-        color: rgba(255, 255, 255, 0.50);
+        color: var(--text-secondary, #475569);
         font-weight: var(--weight-medium, 500);
         margin-bottom: .3em;
       }
@@ -479,10 +518,10 @@
       }
       .chat-sources-list a {
         font-size: 12px;
-        color: rgba(255, 255, 255, 0.65);
+        color: var(--text-secondary, #475569);
         text-decoration: underline;
         text-underline-offset: 2px;
-        text-decoration-color: rgba(255, 255, 255, 0.20);
+        text-decoration-color: rgba(0, 0, 0, 0.20);
       }
       .chat-sources-list a:hover {
         color: var(--accent, #0033FF);
@@ -495,7 +534,7 @@
         align-items: center;
         gap: 12px;
         padding: var(--space-2, .5rem) var(--space-3, .75rem);
-        color: rgba(255, 255, 255, 0.65);
+        color: var(--text-secondary, #475569);
         font-size: var(--fs-sm, 14px);
       }
       .loading-orb {
@@ -1086,6 +1125,7 @@ if (savedHist.length > 0) {
 
   function isSafeHref(href = '') {
     const value = String(href || '').trim();
+    if (value.startsWith('//')) return false;
     return (
       /^https:\/\//i.test(value) ||
       /^http:\/\//i.test(value) ||
@@ -1511,6 +1551,7 @@ if (savedHist.length > 0) {
         answerStyle,
         pageContext
       };
+      if (state.kb) payload.kb = state.kb;
       if (state.sectionContext) payload.sectionContext = state.sectionContext;
 
       let timeoutTimer = setTimeout(() => currentController.abort(), 60000);

@@ -2557,7 +2557,8 @@ figure.case-study-media[data-reveal].is-revealed {
 }
 
 .ai-mini-wrapper.consolidated-nav .menu-item-group:hover button.menu-trigger::after,
-.ai-mini-wrapper.consolidated-nav .menu-item-group:focus-within button.menu-trigger::after {
+.ai-mini-wrapper.consolidated-nav .menu-item-group:focus-within button.menu-trigger::after,
+.ai-mini-wrapper.consolidated-nav .menu-item-group.is-open button.menu-trigger::after {
   transform: translateY(1px) rotate(-135deg);
   opacity: 0.9;
 }
@@ -2596,7 +2597,8 @@ figure.case-study-media[data-reveal].is-revealed {
 }
 
 .ai-mini-wrapper.consolidated-nav .menu-item-group:hover .menu-submenu,
-.ai-mini-wrapper.consolidated-nav .menu-item-group:focus-within .menu-submenu {
+.ai-mini-wrapper.consolidated-nav .menu-item-group:focus-within .menu-submenu,
+.ai-mini-wrapper.consolidated-nav .menu-item-group.is-open .menu-submenu {
   display: flex;
 }
 

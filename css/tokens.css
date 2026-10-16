@@ -1,6 +1,7 @@
 :root {
   /* Layout */
   --page-gutter: clamp(var(--space-4), 4vw, var(--space-6));
+  --page-margin: var(--page-gutter);
   /* 16 → 32px */
   --container-max: 88rem;
   /* 1200px / 16 */
@@ -194,13 +195,18 @@
 
   /* Text (Optical blending for secondary text) */
   --text: var(--slate-900);
+  --text-primary: var(--text);
   --text-secondary: rgb(26 33 40 / 0.64);
 
   /* Text on colored backgrounds */
   --text-on-accent: #FFFFFF;
 
+  /* Surface subtle alias */
+  --surface-subtle: var(--surface-1);
+
   /* === Brand accent (canonical) — 2027 Electric Tension === */
   --accent: #0033FF;
+  --accent-primary: var(--accent);
   --accent-hover: #0022CC;
   --accent-text: #0011AA;
   --accent-text-hover: #000088;

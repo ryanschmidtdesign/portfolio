@@ -117,7 +117,7 @@
         "@id": "https://ryanschmidt.design/#person"
       },
       "description": "Case study: AI-powered operational dashboard. +71% beta engagement, 62% multi-dashboard adoption, 2 average interaction depth.",
-      "primaryImageOfPage": "https://ryanschmidt.design/assets/images/family-pic.jpg",
+      "primaryImageOfPage": "https://ryanschmidt.design/assets/case-studies/dashboards/rename-dashboard.png",
       "dateModified": "2026-06-24",
       "inLanguage": "en-US"
     },
@@ -210,12 +210,14 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Case Studies"
+          "name": "Case Studies",
+          "item": "https://ryanschmidt.design/#work"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "AI-Powered Dashboards"
+          "name": "AI-Powered Dashboards",
+          "item": "https://ryanschmidt.design/dashboard.html"
         }
       ]
     }
@@ -270,6 +272,7 @@
 </head>
 
   <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <main id="main" class="site-main">
       <article class="case-study" aria-labelledby="title">
             <header class="tldr" aria-label="Executive summary">
@@ -315,9 +318,9 @@
         <section class="case-study-summary" aria-label="Case study summary">
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
-            <li><strong>Business Problem:</strong> Users ignored static default dashboards while leadership wanted an AI-first UX. Research revealed users needed trustworthy KPI anchors before adopting AI insights.</li>
-            <li><strong>My Key Decisions:</strong> Designed customizable, role-based dashboards as the core anchor, layering AI summaries on top of verified metrics rather than replacing dashboards.</li>
-            <li><strong>Impact & Outcomes:</strong> Drove a <strong>71% increase in navigation clicks to the dashboard</strong>, <strong>62% multi-dashboard adoption</strong>, and transformed static reporting into an interactive sales-demo highlight.</li>
+            <li><strong>The Problem:</strong> Nobody opened the old static dashboard. Sales, service, and operations all dumped raw data into their own Monday morning spreadsheets instead. Meanwhile, leadership was pushing for a conversational AI interface that users weren't ready to trust.</li>
+            <li><strong>What I Built:</strong> Role-based starter templates that teams could customize, rearrange, and save. We kept AI tightly scoped to summarizing visible numbers on the screen rather than trying to replace dashboards with open-ended chat.</li>
+            <li><strong>The Result:</strong> Beta engagement jumped 71%, over 60% of users created multiple custom dashboards, and sales started using the customizable views as a core live demo feature.</li>
           </ul>
         </section>
 
@@ -326,14 +329,14 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            D-Tools offered a single static dashboard that tried to serve sales, operations, and service teams with the same generic widgets. Because it reflected none of their specific day-to-day rhythms, teams rarely opened it—managers simply exported raw data into custom spreadsheets every Monday morning. Meanwhile, leadership was eager to explore an AI-first interface where users would ask questions directly. The core product challenge was figuring out how to deliver real operational value and introduce AI capabilities when users weren't even engaging with our baseline data.
+            D-Tools had a single static dashboard that tried to serve sales, operations, and service teams with the exact same widgets. Because it didn't match anyone's actual daily routine, people barely looked at it. Managers just exported raw data into Excel every Monday morning and built their own charts. At the same time, leadership was excited about an AI-first interface where people would ask questions in a chat box. The real challenge was figuring out how to give teams useful day-to-day tools while introducing AI in a way that felt practical, not gimmicky.
           </p>
 
           <h3>Objectives</h3>
           <ul>
-            <li>Role-based starter templates to replace external spreadsheet routines</li>
-            <li>Customizable widget layouts with drag-and-drop editing and team-specific views</li>
-            <li>AI-assisted executive summaries anchored directly in visible, verified metrics</li>
+            <li>Give teams starter templates matching their specific role so they stop exporting to Excel</li>
+            <li>Let users rearrange widgets, resize cards, and save multiple views for different routines</li>
+            <li>Keep AI summaries strictly tied to visible numbers on the screen so users can verify every claim</li>
           </ul>
         </section>
 
@@ -372,7 +375,7 @@
         <aside class="callout what-i-got-wrong-card">
           <h2>What I got wrong first</h2>
           <p>
-            I initially assumed we should build three rigid, pre-configured department dashboards—one each for sales, service, and operations. But user interviews quickly proved that no two integrators run their operations the same way. A service manager at a 15-person shop tracks completely different exceptions than one managing 50 field technicians. We pivoted from rigid department views to modular starter templates that users could customize, rename, and save.
+            My first instinct was to design three fixed department dashboards: one for sales, one for service, and one for operations. That was a mistake. Our user interviews made it clear that no two integration shops run the same way. A service manager with a 15-person team cares about totally different daily fires than one coordinating 50 technicians in the field. Fixed templates would have created the exact same problem as the old dashboard. We scrapped the rigid views and shifted to modular starter templates that users could rearrange, rename, and save as their own.
           </p>
         </aside>
 
@@ -388,8 +391,7 @@
             </li>
             <li data-story-step>
               <span class="step-label">Build trust with data</span>
-              <p class="step-copy">Limited AI to verifiable metrics after research showed users trusted dashboards more than opaque outputs. 
-                The AI was not allowed to invent conclusions; it could only summarize the visible data on the dashboard so users could trace the AI's logic back to a specific chart. To prevent hallucination and maintain trust, I worked with engineering to constrain the LLM's context window exclusively to the JSON output of the user's active widgets.</p>
+              <p class="step-copy">We kept AI strictly tied to verifiable numbers on the screen. The model wasn't allowed to draw speculative conclusions; it could only summarize the visible data on the active dashboard. To prevent hallucinations and keep users confident in the numbers, I worked with engineering to constrain the LLM context window exclusively to the JSON payload of the user's active widgets.</p>
             </li>
           </ul>
 
@@ -398,7 +400,7 @@
               <source src="../assets/case-studies/dashboards/new-dashboard.mp4" type="video/mp4">
             </video>
             <figcaption>
-              Role‑based templates that match how teams work.
+              Role-based templates gave teams a sensible starting point without locking them into a fixed layout.
             </figcaption>
           </figure>
 
@@ -406,7 +408,7 @@
             <video autoplay muted playsinline loop preload="auto" width="1440" height="754">
               <source src="../assets/case-studies/dashboards/generate-report.mp4" type="video/mp4">
             </video>
-            <figcaption>AI-generated reports enabled quick stakeholder updates.</figcaption>
+            <figcaption>The AI summary only pulls from active charts on the screen, making it easy to fact-check in seconds.</figcaption>
           </figure>
         </section>
 
@@ -416,17 +418,17 @@
             <h2>Defining Decision: Dashboards Before AI</h2>
           </div>
           <p>
-            Leadership believed users might eventually bypass traditional dashboards and ask AI direct business questions instead. It was a reasonable hypothesis, but research pointed to a different behavior: users struggled to ask useful questions before they had seen their own data.
+            There was a lot of excitement internally around jumping straight to conversational AI. The theory was that users wouldn't need dashboards if they could just type questions into a prompt box. But in our user sessions, almost nobody knew what to ask an empty text box. Operators don't wake up with abstract prompts; they look for red flags, anomalies, and quick status checks on active projects.
           </p>
           <p>
-            My argument was that business owners needed familiar KPIs as anchors. Without visible metrics, trends, and exceptions in front of them, they had no reliable starting point for exploration.
+            My pushback was straightforward: you have to give people visual ground to stand on first. Once managers can see their numbers, trends, and bottlenecks, an AI summary that highlights anomalies becomes genuinely helpful.
           </p>
           <p>
-            Interviews supported that direction, so I pushed the team toward a hybrid model: dashboards would establish awareness and trust, while AI would explain and summarize the data users could already verify.
+            Interviews backed that up, so we landed on a clear split:
           </p>
           <ul>
-            <li><strong>Dashboards:</strong> visibility, orientation, and trust</li>
-            <li><strong>AI:</strong> summarization, reporting, and explanation</li>
+            <li><strong>Dashboards:</strong> show current status, surface anomalies, and give operators an anchor</li>
+            <li><strong>AI summaries:</strong> pull out key highlights and generate quick updates for stakeholders</li>
           </ul>
         </section>
 
@@ -435,10 +437,10 @@
             <h2>Execution Constraints: Managing Without a Design System</h2>
           </div>
           <p>
-            Operating as both the lead designer and acting PM meant I had to be strict about scope. One of the biggest challenges on this project was that we didn't have a real design system in place. 
+            Because I was splitting my time as lead designer and acting PM, keeping scope under control was non-negotiable. We also didn't have a shared design system yet. That came directly after this project, when I built and rolled out our 100+ component library across D-Tools Cloud.
           </p>
           <p>
-            We really just had a set of variants and some basic rules written up about usage. Designing a dense, customizable dashboard meant I had to govern the UI very closely with engineering. Without the safety net of a strict component library, I relied on simpler, more repeatable widget patterns to keep engineering velocity high and avoid layout regressions.
+            Back then, we were working with basic UI kit variants and loose guidelines. That meant I had to sit closely with our front-end engineers every week. Instead of inventing unique card styles or fancy animations, I stuck to a few consistent widget wrappers and standard grid increments. It kept code clean and prevented the dashboard from breaking when users resized their screens.
           </p>
         </section>
         <section id="prototyping" aria-label="Prototyping & validation">
@@ -447,21 +449,18 @@
           </div>
 
           <p>
-            I prototyped the end-to-end flow in Figma and tested it with 5 target users — from choosing a template to customizing widgets and generating an AI summary.
+            I prototyped the full flow in Figma and tested it with five target users, walking them through picking a template, rearranging cards, and generating a report.
           </p>
-          <h3>Iteration: more KPI cards, more control</h3>
+          <h3>Iteration: more data density, more control</h3>
           <p>
-            Early concepts kept dashboards minimal. 
-            Research showed teams wanted a large set of KPI cards for the metrics they already knew we tracked—and they wanted to rearrange and edit them to match how they run their day.
-            I expanded the design to support dense KPI cards with fast drag‑and‑drop editing and rearranging. 
-            That increased scope and timeline, but it removed the core adoption blocker: visibility and control.
+            Our early prototypes were pretty minimal, but users immediately asked for more data density. They wanted quick-hit KPI counters for the numbers they check every single morning, and they wanted to drag those cards right to the top of the page. Adding that level of customization stretched our timeline a bit, but it made the difference between something operators would actually leave open on a second monitor and another tool they'd ignore.
           </p>
 
           <figure class="case-study-media" data-reveal>
             <video autoplay muted playsinline loop preload="auto" width="1440" height="754">
               <source src="../assets/case-studies/dashboards/edit-dashboard.mp4" type="video/mp4">
             </video>
-            <figcaption>Fast customization with drag-and-drop widget layouts.</figcaption>
+            <figcaption>Dragging and resizing cards directly on the canvas so managers could organize their morning scan.</figcaption>
           </figure>
 
           <ul>
@@ -496,16 +495,15 @@
             </div>
           </div>
           <p>
-            Users reached an average interaction depth of 2 customizations per chart, showing they weren’t just viewing dashboards. 
-            They were actively tailoring charts to fit specific operational questions and workflows.
+            Users reached an average interaction depth of 2 customizations per chart, showing they were actively tailoring widgets to answer specific questions about their projects.
           </p>
 
           <figure class="case-study-media" data-reveal>
             <picture>
               <source srcset="../assets/case-studies/dashboards/rename-dashboard.webp" type="image/webp">
-              <img src="../assets/case-studies/dashboards/rename-dashboard.webp" alt="Rename and manage dashboards for different workflows" width="1440" height="900" loading="lazy">
+              <img src="../assets/case-studies/dashboards/rename-dashboard.webp" alt="Rename and manage dashboards for different workflows" width="1440" height="900" loading="lazy" class="no-reveal">
             </picture>
-            <figcaption>Multiple dashboards supported team-specific views.</figcaption>
+            <figcaption>Users could save separate views for Monday pipeline reviews, inventory checks, and service dispatch.</figcaption>
           </figure>
         </section>
 
@@ -514,7 +512,7 @@
             <h2>Lesson</h2>
           </div>
           <p>
-            Senior product design is often about protecting user clarity from industry hype cycles. When leadership was eager to bypass dashboards entirely for conversational AI, it would have been easy to follow the trend. But grounding our pushback in user research gave us the credibility to advocate for what operators actually needed: stable, verifiable anchors before automated insights. Constraining AI to summarizing visible widget data earned daily adoption where open-ended chat would have failed.
+            It’s easy to get swept up in technology trends, especially when executive teams are excited to ship something with "AI" on the landing page. But our user research gave us clear cover to push back. Integrators didn't want a chatbot; they wanted to know if their morning deliveries were late and whether their service jobs were profitable. By treating AI as a tool that summarizes visible chart data rather than an all-knowing chat assistant, we built something operators could actually trust and use every day.
           </p>
         </section>
 
@@ -551,6 +549,7 @@
               </nav>
       <div class="ai-mini-input-container">
         <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+        <button id="ai-mini-send" class="ai-mini-send" aria-label="Send">→</button>
       </div>
     </div>
 

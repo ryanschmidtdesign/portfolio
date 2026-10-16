@@ -127,8 +127,7 @@ body::after {
 body.is-home {
   min-height: 100vh;
   min-height: 100dvh;
-  max-height: none;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 :where(h1, h2, h3, h4, h5, h6) {

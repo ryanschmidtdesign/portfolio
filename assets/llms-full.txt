@@ -100,7 +100,7 @@ https://ryanschmidt.design/pages/inventory.html
 
 https://ryanschmidt.design/pages/member-portal-overhaul.html
 
-**Status:** In progress — designs complete, validation testing planned July 2026.
+**Status:** Shipped — live in production September 2026.
 
 **Problem:** Members couldn't find what they came for. The portal's navigation didn't reflect how content was actually structured. A well-validated content taxonomy existed but wasn't visible in the UI.
 
@@ -114,9 +114,9 @@ https://ryanschmidt.design/pages/member-portal-overhaul.html
 
 **Key decision:** Progressive disclosure over flat navigation. Areas of Focus orient at the top level; deeper levels reveal progressively as members narrow intent.
 
-**Constraints:** Parallel rebrand (third-party consultant evolving visual identity simultaneously). MVP scope means restructured navigation and refreshed look/feel ship first, deeper UX improvements follow.
+**Constraints:** Parallel rebrand (third-party consultant evolving visual identity simultaneously). Abstracted UI into strict design tokens to insulate core development from identity shifts.
 
-**Progress:** Designs complete, in staging for QA. Moderated member testing planned for July 2026, focused on task success across the four IA levels.
+**Outcomes:** +500% AI feature activation in month one; successfully sunset the legacy keyword search bar with omnibar fallback logic.
 
 ### AI-Coding my Portfolio
 
@@ -132,7 +132,7 @@ https://ryanschmidt.design/pages/ai-coding-portfolio.html
 
 **System architecture:** Prompts → Patterns → Components → Features. Structured prompts connected to real product features.
 
-**Interactive system demo:** Visits a question → Netlify function (orchestrator) → Branch: Supabase pgvector (1,400+ chunks) + Gemini 2.5 Flash → Answer. System metrics: ~1.3k tokens generated, 12 chunks retrieved, 26ms vector search.
+**Interactive system demo:** Visits a question → Vercel serverless function (orchestrator) → Branch: Supabase pgvector (1,400+ chunks) + Gemini 2.5 Flash → Answer. System metrics: ~1.3k tokens generated, 12 chunks retrieved, 26ms vector search.
 
 **Key decisions:** AI treated like a junior engineer — needs direction, constraints, review. Patterns built early for reuse. Database-driven RAG replaced a single JSON file with semantic search.
 

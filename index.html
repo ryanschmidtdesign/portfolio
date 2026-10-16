@@ -163,7 +163,7 @@
             "about": {
               "@id": "https://ryanschmidt.design/#person"
             },
-            "description": "Portfolio of Ryan Schmidt, Senior B2B SaaS Product Designer & UX Engineer in Austin, TX. Four case studies: AI-Powered Dashboards (+71% engagement), Real-Time Inventory (+18% recurring revenue), Engineering My Portfolio, and and the i4cp Member Portal Overhaul (+500% AI adoption).",
+            "description": "Portfolio of Ryan Schmidt, Senior B2B SaaS Product Designer & UX Engineer in Austin, TX. Four case studies: AI-Powered Dashboards (+71% engagement), Real-Time Inventory (+18% recurring revenue), Engineering My Portfolio, and the i4cp Member Portal Overhaul (+500% AI adoption).",
             "primaryImageOfPage": "https://ryanschmidt.design/assets/images/family-pic.jpg",
             "dateModified": "2026-06-29",
             "inLanguage": "en-US"
@@ -219,6 +219,7 @@
 </head>
 
 <body class="is-home">
+  <a href="#main" class="skip-link">Skip to main content</a>
   <main id="main" class="home-gallery">
     <h1 class="sr-only">Ryan Schmidt — Senior B2B SaaS Product Designer & UX Engineer</h1>
     <div class="home-header">
@@ -311,8 +312,8 @@
         </a>
         <a href="pages/member-portal-overhaul.html" class="impact-metric"
           style="text-decoration:none; color:inherit; display:block;">
-          <strong class="metric">~50%</strong>
-          <span class="metric-label">fewer white-labeling requests<br><strong>D-Tools</strong></span>
+          <strong class="metric" data-animate>+500%</strong>
+          <span class="metric-label">AI feature activation<br><strong>i4cp</strong></span>
         </a>
       </div>
     </section>
@@ -352,31 +353,6 @@
     <!-- Consolidated JavaScript -->
     <script src="./scripts/magnetic.js" defer></script>
     <script src="./scripts/scripts.js?v=3" defer></script>
-  <script src="./scripts/magnetic.js" defer></script>
-
-    <!-- NLI Connection Logic -->
-    <script>
-      (function () {
-        const miniInput = document.getElementById('ai-mini-input');
-        if (miniInput) miniInput.addEventListener('keypress', function (e) {
-          if (e.key === 'Enter') {
-            const query = miniInput.value.trim();
-            if (!query) return;
-            miniInput.value = '';
-            const trigger = document.querySelector('[data-assistant-trigger]');
-            if (trigger) trigger.click();
-            setTimeout(() => {
-              document.dispatchEvent(new CustomEvent("rs:ask-section", {
-                detail: {
-                  prompt: query,
-                  sectionContext: { heading: "Homepage NLI" }
-                }
-              }));
-            }, 300);
-          }
-        });
-      })();
-    </script>
 
     <script src="./scripts/rs-chat-widget.js?v=3" defer></script>
   </main>
@@ -390,25 +366,6 @@
       <p>&copy; 2026 Ryan Schmidt</p>
     </div>
   </footer>
-  <script>
-    // Ensure the homepage puts the AI input first and avoids duplicate cards.
-    (function () {
-      document.addEventListener('DOMContentLoaded', function () {
-        try {
-          // Hamburger menu entrance stagger
-          const hamburger = document.getElementById('hamburger');
-          const menu = document.getElementById('hamburgerMenu');
-          if (hamburger && menu) {
-            menu.querySelectorAll('a').forEach((link, index) => {
-              link.style.transitionDelay = `${index * 20}ms`;
-            });
-          }
-        } catch (e) {
-          console.error('Homepage DOM safety script error', e);
-        }
-      });
-    })();
-  </script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

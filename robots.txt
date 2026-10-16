@@ -2,9 +2,11 @@
 
 User-agent: *
 Allow: /
+Allow: /scripts/
+Allow: /css/
 
-# Exclude internal/build files
-Disallow: /scripts/
+# Exclude internal/backend files
+Disallow: /_meta/
 Disallow: /.vscode/
 Disallow: /api/
 

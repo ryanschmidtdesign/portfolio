@@ -125,7 +125,7 @@
         "@id": "https://ryanschmidt.design/#person"
       },
       "description": "Case study: Real-time inventory view replacing spreadsheets. +18% recurring revenue and +8% product adoption.",
-      "primaryImageOfPage": "https://ryanschmidt.design/assets/images/family-pic.jpg",
+      "primaryImageOfPage": "https://ryanschmidt.design/assets/case-studies/inventory/inventory-controls.png",
       "dateModified": "2026-06-24",
       "inLanguage": "en-US"
     },
@@ -144,7 +144,7 @@
       "datePublished": "2024-12-01",
       "articleSection": "Case Study",
       "inLanguage": "en-US",
-      "image": "https://ryanschmidt.design/assets/case-studies/inventory/inventory-settings.png",
+      "image": "https://ryanschmidt.design/assets/case-studies/inventory/inventory-controls.png",
       "about": [
         {
           "@type": "Thing",
@@ -218,12 +218,14 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Case Studies"
+          "name": "Case Studies",
+          "item": "https://ryanschmidt.design/#work"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Real-Time Inventory"
+          "name": "Real-Time Inventory",
+          "item": "https://ryanschmidt.design/inventory.html"
         }
       ]
     }
@@ -254,8 +256,8 @@
   <meta property="og:title" content="Real-Time Inventory — Ryan Schmidt">
   <meta property="og:description" content="Case study: Single real-time inventory view replacing spreadsheets. +18% recurring revenue, +8% product adoption over one year.">
   <meta property="og:url" content="https://ryanschmidt.design/inventory.html">
-  <meta property="og:image" content="https://ryanschmidt.design/assets/case-studies/inventory/inventory-settings.png">
-  <meta property="og:image:alt" content="Inventory settings for alerts, thresholds, and automation rules">
+  <meta property="og:image" content="https://ryanschmidt.design/assets/case-studies/inventory/inventory-controls.png">
+  <meta property="og:image:alt" content="Inventory controls for alerts, thresholds, and automation rules">
   <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -265,19 +267,20 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Real-Time Inventory - Ryan Schmidt">
 <meta name="twitter:description" content="Case study: Single real-time inventory view replacing spreadsheets. +18% recurring revenue, +8% product adoption over one year.">
-<meta name="twitter:image" content="https://ryanschmidt.design/assets/case-studies/inventory/inventory-settings.png">
+<meta name="twitter:image" content="https://ryanschmidt.design/assets/case-studies/inventory/inventory-controls.png">
 <meta name="twitter:image:alt" content="Inventory item detail with movement history, allocations, and reorder settings">
 </head>
 
   <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <main id="main" class="site-main">
       <article class="case-study case-study--inventory" aria-labelledby="title">
         <header class="tldr" aria-label="Executive summary">
           <h1 id="title" data-parallax="0.06">Real-Time Inventory</h1>
           <p class="lead">
-            Inventory was both a workflow gap and a sales blocker. Enterprise prospects expected it to connect with purchasing and project work, while existing customers relied on spreadsheets or external tools because the product lacked a trustworthy source of truth.
+            Integrators were tracking millions of dollars in equipment across spreadsheets, whiteboards, and sticky notes because our software didn't have an inventory tool. It was frustrating existing customers, but worse, it was killing our enterprise sales pipeline whenever a 50-person shop asked, "Where do I track warehouse stock?"
             <br><br>
-            We designed Inventory Management into a real-time system spanning projects, locations, and purchasing, reducing manual reconciliation, improving accuracy, and helping drive an 18% increase in recurring revenue.
+            I led product design for our inventory system, connecting purchase orders directly to active jobs and service vans so teams always knew what was in stock, what was spoken for, and what was arriving tomorrow.
           </p>
 
           <div class="tldr-meta">
@@ -285,7 +288,7 @@
               <p class="tldr-label label" data-reveal>My role</p>
               <p>
                 <strong>Lead Product Designer (team of 3)</strong> <br>
-                Drove problem framing, research, and system design, partnering closely with PM and engineering to define scope, align on a unified data model, and ship a high-impact MVP.
+                Led research, information architecture, and core UI, working day-to-day with our PM and lead engineer to balance customer needs against backend complexity and ship on time.
               </p>
             </div>
 
@@ -308,9 +311,9 @@
         <section class="case-study-summary" aria-label="Case study summary">
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
-            <li><strong>Business Problem:</strong> Customers managed inventory in external spreadsheets, causing tracking errors and blocking enterprise sales deals.</li>
-            <li><strong>My Key Decisions:</strong> Designed a unified inventory model across purchasing, projects, and locations. For the MVP, we prioritized data accuracy over complex automation.</li>
-            <li><strong>Impact & Outcomes:</strong> Contributed to an <strong>8% increase in product adoption</strong> and an <strong>18% increase in recurring revenue</strong>, and unblocked enterprise deal sign-offs.</li>
+            <li><strong>The Problem:</strong> Customers spent hours every week manually checking stock between spreadsheets and third-party tools. Enterprise deals stalled because we couldn't track hardware past the initial purchasing stage.</li>
+            <li><strong>What I Built:</strong> A connected inventory ledger linking purchase orders directly to warehouses, job sites, and field vans. We intentionally deferred barcode scanning and automatic PO reorders to focus 100% on bulletproof count accuracy.</li>
+            <li><strong>The Result:</strong> The release unblocked stalled enterprise contracts, cut hours of weekly manual reconciliation for existing shops, and helped drive an 18% lift in recurring revenue over the following year.</li>
           </ul>
         </section>
 
@@ -319,15 +322,15 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            Project managers spent hours every week reconciling stock across spreadsheets and external tools, and enterprise prospects increasingly expected inventory to be part of a modern operations platform. Without integrated inventory, teams lacked a trustworthy source of truth and D-Tools risked losing deals to competitors with more complete workflows.
+            Every Monday morning, project managers and warehouse leads were stuck playing detective: comparing packing slips against handwritten notes and Excel tabs to figure out where 20 high-end amplifiers had disappeared to. If our software couldn't tell them whether an item was sitting in the main warehouse or already loaded on a technician's van, they had to rely on separate tools or call someone on the phone. For enterprise buyers, not having that built-in was an immediate dealbreaker.
           </p>
 
           <h3>Objectives</h3>
           <ul>
-            <li>Eliminate manual tracking and errors</li>
-            <li>Eliminate dependency on additional software</li>
-            <li>Automate alerts and reorders</li>
-            <li>Integrate with purchasing/projects</li>
+            <li>Stop teams from having to double-enter equipment into external spreadsheets</li>
+            <li>Connect receiving docks directly to job schedules so PMs know when parts arrive</li>
+            <li>Give warehouse managers clear visibility into low stock before job sites stall</li>
+            <li>Make checking items in fast enough that installers don't bypass the system</li>
           </ul>
         </section>
 
@@ -349,18 +352,18 @@
 
           <h3>Defining Decision</h3>
           <p>
-            We could have shipped an isolated stock tracker with periodic syncs. Instead, I pushed for a unified inventory model directly wired into purchasing and active projects.
+            The easiest option was building a standalone stock list that teams updated manually at the end of the week. But that would have just created another spreadsheet inside our app. Instead, I pushed to connect inventory directly into our purchasing and project workflows.
           </p>
           <p>
-            While this increased cross-team scope, it eliminated duplicate sources of truth. When a purchase order is received—even partially—the quantities immediately reflect across warehouses, job sites, and field vans.
+            It meant a larger scope and more cross-team coordination, but it solved the root problem: the second someone checks in a box on the receiving dock, the quantities update immediately for the project manager planning tomorrow's install.
           </p>
 
           <aside data-reveal class="callout">
-            <h3>Design Responses</h3>
+            <h3>How we structured it</h3>
             <ol>
-              <li><strong>Receiving defines truth:</strong> Inventory updates the moment items are checked in against a PO, eliminating manual spreadsheet logs</li>
-              <li><strong>Unified relational model:</strong> One continuous ledger connecting purchasing, current stock, and project allocations</li>
-              <li><strong>Early risk signals:</strong> Automated low-stock thresholds and reorder triggers before shortages delay a job site</li>
+              <li><strong>Receiving is the source of truth:</strong> Stock updates the moment someone checks in items against a purchase order, so nobody has to manually update spreadsheets.</li>
+              <li><strong>One connected ledger:</strong> Items flow naturally from PO to central storage, out to a job site or van, and finally onto the customer invoice.</li>
+              <li><strong>Early low-stock warnings:</strong> Visual badges flag parts that drop below safety limits before a crew gets stuck on site without cables or mounts.</li>
             </ol>
           </aside>
 
@@ -411,29 +414,34 @@
             During discovery, we hit a clear split: small residential shops wanted fast, friction-free quantity counts, while commercial enterprise clients demanded rigorous, asset-level serialization for high-value equipment. Forcing serial numbers on small shops would kill adoption; omitting them would lose six-figure enterprise contracts.
           </p>
           <p>
-            I designed a dual-track UX: <strong>Quantity-first by default</strong> for everyday rapid receiving, with an optional <strong>asset-level tracking layer</strong> for serialized items and warranty audits. That single architectural choice gave small shops 10-second check-ins while giving enterprise procurement the governance they required to sign deals.
+            I designed a dual-track UX: <strong>Quantity-first by default</strong> for everyday rapid receiving, with an optional <strong>asset-level tracking layer</strong> for serialized items and warranty audits. That single choice kept check-ins fast for small operators while giving enterprise procurement the serialization audit trail they needed to sign contracts.
+          </p>
+
+          <h3>Reusing component patterns</h3>
+          <p>
+            We had a tight 12-week window to get this into customer hands before year-end. Because we could pull data tables, modals, and status badges straight from the component library I had established across D-Tools Cloud, our front-end engineers didn't have to build custom UI elements from scratch. That shaved weeks off development and kept bugs to a minimum during a fast-paced sprint.
           </p>
 
           <figure class="case-study-media">
             <video autoplay muted playsinline loop preload="auto" width="2880" height="1496">
               <source src="../assets/case-studies/inventory/inventory-modal.mp4" type="video/mp4">
             </video>
-            <figcaption>Low stock indicators, incoming POs, and bulk actions.</figcaption>
+            <figcaption>Quick-check dashboard showing incoming POs and highlighting items that dropped below minimum stock.</figcaption>
           </figure>
 
           <figure class="case-study-media">
             <video autoplay muted playsinline loop preload="auto" width="2880" height="1496">
               <source src="../assets/case-studies/inventory/inventory-assets.mp4" type="video/mp4">
             </video>
-            <figcaption>Movement history, allocations, and reorder settings.</figcaption>
+            <figcaption>Item detail view showing which active jobs have parts reserved so PMs don't accidentally grab someone else's gear.</figcaption>
           </figure>
 
           <figure class="case-study-media">
             <picture>
               <source srcset="../assets/case-studies/inventory/inventory-controls.webp" type="image/webp">
-              <img src="../assets/case-studies/inventory/inventory-controls.webp" alt="Inventory settings for alerts, thresholds, and automation rules" width="1440" height="754" loading="lazy">
+              <img src="../assets/case-studies/inventory/inventory-controls.webp" alt="Inventory settings for alerts, thresholds, and automation rules" width="1440" height="754" loading="lazy" class="no-reveal">
             </picture>
-            <figcaption>Inventory settings and automation controls.</figcaption>
+            <figcaption>Threshold rules letting managers set automated alerts before critical accessories run out.</figcaption>
           </figure>
         </section>
 
@@ -475,10 +483,10 @@
             <h2>Lessons & Next Steps</h2>
           </div>
           <p>
-            Operational software lives or dies on trust. If a warehouse lead or field technician doubts a stock count even once, they abandon the software and fall right back into spreadsheets. The feature succeeded not because it looked polished, but because every number showed its receipts: where it came from, which job had it reserved, and when the next PO was arriving.
+            Operational software lives or dies on trust. If a warehouse lead or field technician doubts a stock count even once, they abandon the software and go right back to their notebooks and Excel tabs. This feature succeeded because every number showed its work: where the item came from, which project had it claimed, and when the replacement was arriving.
           </p>
           <ul>
-            <li><strong>Next:</strong> With trust in stock counts established, the logical follow-ups are mobile barcode scanning and automated reorder PO generation from minimum thresholds—automations we intentionally held back to keep the MVP focused.</li>
+            <li><strong>What comes next:</strong> Once teams trusted the baseline counts, the next logical steps were mobile barcode scanning in the warehouse and auto-generating reorder POs when stock hits minimums. We held those back from the MVP on purpose to make sure the foundation was rock-solid first.</li>
           </ul>
         </section>
       </article>
@@ -507,6 +515,7 @@
               </nav>
       <div class="ai-mini-input-container">
         <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+        <button id="ai-mini-send" class="ai-mini-send" aria-label="Send">→</button>
       </div>
     </div>
 

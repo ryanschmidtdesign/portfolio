@@ -1,7 +1,9 @@
-// scripts/seed-kb.js
-// Run: node scripts/seed-kb.js
-// Loads portfolio-kb.json, chunks content, generates embeddings, inserts into Supabase.
-// Requires GEMINI_API_KEY env var.
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const SUPABASE_URL = 'https://ggmkmymtilpkezkpihxt.supabase.co';
@@ -11,9 +13,6 @@ if (!GEMINI_API_KEY || !SUPABASE_SERVICE_KEY) {
   console.error('Missing required env vars: GEMINI_API_KEY, SUPABASE_SERVICE_KEY');
   process.exit(1);
 }
-
-const fs = require('fs');
-const path = require('path');
 
 const KB_PATH = path.join(__dirname, '..', 'assets', 'portfolio-kb.json');
 const kb = JSON.parse(fs.readFileSync(KB_PATH, 'utf8'));

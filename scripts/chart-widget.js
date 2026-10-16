@@ -26,7 +26,7 @@
           <span class="tooltip-val">84</span>
         </div>
       </div>
-      <figcaption style="margin-top:0; padding:1rem; border-top:1px solid var(--gray-300); background:var(--gray-100);">Hover to interact. Custom component built in vanilla JS/CSS to demonstrate execution ability.</figcaption>
+      <figcaption style="margin-top:0; padding:1rem; border-top:1px solid var(--gray-300); background:var(--gray-100);">Interactive KPI prototype demonstrating responsive bar chart states and tooltip inspection.</figcaption>
     `;
 
     injectTarget.parentNode.insertBefore(wrapper, injectTarget);
@@ -73,8 +73,8 @@
           const rect = bar.getBoundingClientRect();
           const chartRect = chartArea.getBoundingClientRect();
           
-          tooltip.style.left = \`\${rect.left - chartRect.left + (rect.width/2)}px\`;
-          tooltip.style.top = \`\${rect.top - chartRect.top}px\`;
+          tooltip.style.left = `${rect.left - chartRect.left + (rect.width/2)}px`;
+          tooltip.style.top = `${rect.top - chartRect.top}px`;
           
           dateLabel.textContent = d.label;
           valLabel.textContent = d.val;
@@ -87,7 +87,7 @@
 
         // Trigger animation
         setTimeout(() => {
-          bar.style.height = \`\${d.val}%\`;
+          bar.style.height = `${d.val}%`;
         }, 50 * i);
       });
     }

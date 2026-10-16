@@ -2,14 +2,17 @@
 // Ported from netlify/functions/portfolio-chat.js
 // Gemini only. Grok/xAI code removed — kept in git history if needed.
 
+import fs from "node:fs";
+import path from "node:path";
+
 // -----------------------------------------------------------------------------
 // Environment and constants
 // -----------------------------------------------------------------------------
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
-const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-1.5-pro";
-const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-1.5-pro";
-const GEMINI_FALLBACK_MODEL = process.env.GEMINI_FALLBACK_MODEL || "gemini-3.5-flash";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-2.5-flash";
+const GEMINI_FALLBACK_MODEL = process.env.GEMINI_FALLBACK_MODEL || "gemini-1.5-flash";
 const CSE_API_KEY = process.env.CSE_API_KEY || "";
 const CSE_ID = process.env.CSE_ID || "";
 const LOG_WEBHOOK_URL = process.env.LOG_WEBHOOK_URL || "";
@@ -106,12 +109,14 @@ function checkRateLimit(clientIp) {
 
 let KB_FALLBACK = null;
 try {
-  const fs = require("fs");
-  const path = require("path");
   const kbPath = path.join(process.cwd(), "assets", "portfolio-kb.json");
-  const raw = fs.readFileSync(kbPath, "utf8");
-  KB_FALLBACK = JSON.parse(raw);
-} catch {}
+  if (fs.existsSync(kbPath)) {
+    const raw = fs.readFileSync(kbPath, "utf8");
+    KB_FALLBACK = JSON.parse(raw);
+  }
+} catch (err) {
+  console.warn("Failed to load KB_FALLBACK:", err?.message || err);
+}
 
 // -----------------------------------------------------------------------------
 // Policy and safety checks
@@ -205,13 +210,15 @@ function extractFirstUrl(text = "") {
 }
 
 function isPrivateHostname(hostname = "") {
-  const h = String(hostname || "").toLowerCase();
+  const h = String(hostname || "").toLowerCase().trim();
   if (!h) return true;
-  if (h === "localhost" || h.endsWith(".local")) return true;
+  if (h === "localhost" || h.endsWith(".local") || h.endsWith(".internal")) return true;
+  if (h === "::1" || h === "0.0.0.0" || h.startsWith("fe80:") || h.startsWith("fc00:") || h.startsWith("fd00:")) return true;
   if (/^\d{1,3}(\.\d{1,3}){3}$/.test(h)) {
     const [a, b] = h.split(".").map(n => parseInt(n, 10));
-    if (a === 10) return true;
-    if (a === 127) return true;
+    if (a === 0 || a === 10 || a === 127) return true;
+    if (a === 169 && b === 254) return true; // Link-local / Cloud metadata (169.254.169.254)
+    if (a === 100 && b >= 64 && b <= 127) return true; // CGNAT RFC 6598
     if (a === 192 && b === 168) return true;
     if (a === 172 && b >= 16 && b <= 31) return true;
     return false;
@@ -314,6 +321,14 @@ async function fetchJobDescriptionFromUrl(urlObj) {
       const jina = await fetchReadableTextViaJina(urlObj);
       if (jina) return { url: jina.url, excerpt: jina.excerpt, via: "jina" };
       return { error: `I couldn\u2019t fetch that link (HTTP ${resp.status}). Paste the job description text instead.` };
+    }
+    if (resp.url) {
+      try {
+        const finalHost = new URL(resp.url).hostname;
+        if (isPrivateHostname(finalHost)) {
+          return { error: "Destination host is not permitted. Paste the job description text instead." };
+        }
+      } catch {}
     }
     const ct = (resp.headers.get("content-type") || "").toLowerCase();
     if (ct.includes("application/pdf")) {
@@ -635,7 +650,7 @@ function buildComingSoonPolicy(kb) {
   const cases = (kb?.cases || []).filter(c => isComingSoonCase(kb, c.id));
   if (!cases.length) return "";
   const lines = cases.map((c) =>
-    `- ${c.title} (${c.id}): in progress \u2014 do NOT claim outcomes or unpublished details. If asked, say it's coming soon and point to published work ([AI-Powered Dashboards](https://ryanschmidt.design/dashboard.html), [AI-Coding my Portfolio](https://ryanschmidt.design/ai-coding-portfolio.html), or [Real-Time Inventory](https://ryanschmidt.design/inventory.html)).`
+    `- ${c.title} (${c.id}): in progress \u2014 do NOT claim outcomes or unpublished details. If asked, say it's coming soon and point to published work ([AI-Powered Dashboards](https://ryanschmidt.design/dashboard.html), [Real-Time Inventory](https://ryanschmidt.design/inventory.html), [i4cp Member Portal Overhaul](https://ryanschmidt.design/member-portal-overhaul.html), or [AI-Coding my Portfolio](https://ryanschmidt.design/ai-coding-portfolio.html)).`
   );
   return [
     "### COMING SOON CASES (deflect)",
@@ -836,8 +851,20 @@ function sanitizeSources(sources) {
   return sources
     .map((item) => {
       if (!item) return null;
+      if (typeof item === "string") {
+        const trimmed = item.trim();
+        let url = normalizeUrl(trimmed);
+        if (!url && trimmed.startsWith("/")) {
+          url = normalizeUrl(`https://ryanschmidt.design${trimmed}`);
+        }
+        return url ? { title: trimmed, url } : null;
+      }
       const title = String(item.title || item.name || item.label || "").trim();
-      const url = normalizeUrl(item.url || item.link || item.href || "");
+      let rawUrl = item.url || item.link || item.href || "";
+      if (typeof rawUrl === "string" && rawUrl.startsWith("/")) {
+        rawUrl = `https://ryanschmidt.design${rawUrl}`;
+      }
+      const url = normalizeUrl(rawUrl);
       if (!url) return null;
       return { title: title || url, url };
     })
@@ -1806,9 +1833,10 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
 
         return result;
       }
-      // Retry 5xx (server errors) — 429 (rate limit) is not retryable since quota won't recover in seconds
+      // Retry 5xx (server errors) — 429 (rate limit) drops out of loop to try fallback model
       if (resp.status === 429) {
-        throw new Error(`Gemini 429: quota exhausted on ${model}`);
+        lastErr = new Error(`Gemini 429: quota exhausted on ${model}`);
+        break;
       }
       if (resp.status >= 500 && attempt < MAX_RETRIES) {
         const delay = RETRY_DELAY_MS[attempt];  // 1s, 2s for 5xx
@@ -1831,7 +1859,7 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
       throw err;
     }
   }
-  // Should only reach here if all retries exhausted
+  // Should only reach here if all retries exhausted or 429 occurred
   // If quota exhausted (429) on the primary model, try fallback model once
   if (lastErr?.message?.includes("429") && model !== GEMINI_FALLBACK_MODEL) {
     model = GEMINI_FALLBACK_MODEL;
@@ -1881,7 +1909,6 @@ async function readGeminiStream(resp, streamChunk) {
   const decoder = new TextDecoder();
   let buf = "";
   let fullText = "";
-  let prevLen = 0;
 
   try {
     while (true) {
@@ -1910,11 +1937,16 @@ async function readGeminiStream(resp, streamChunk) {
             if (!text && Array.isArray(parts) && parts.some(p => p.inlineData)) {
               console.warn("Gemini returned audio inlineData in SSE chunk; expected text");
             }
-            if (text.length > prevLen) {
-              const delta = text.slice(prevLen);
+            if (text) {
+              let delta = "";
+              if (fullText && text.startsWith(fullText)) {
+                delta = text.slice(fullText.length);
+                fullText = text;
+              } else {
+                delta = text;
+                fullText += text;
+              }
               if (delta) streamChunk(delta);
-              prevLen = text.length;
-              fullText = text;
             }
           } catch {
             // Partial JSON chunk — skip, next frame will fill it
@@ -1952,7 +1984,7 @@ PROOF CHAINING (REQUIRED)
 - Every substantive claim about Ryan's skills or work must include a case study reference or measurable outcome.
 - Bad: "Ryan is strong at design systems."
 - Good: "Ryan built a token-first design system of 100+ components that reached **92% engineer adoption** and cut frontend defects by **38%** (D-Tools)."
-- Good: "After an IA overhaul at i4cp, task success improved by **+22%**."
+- Good: "After an IA overhaul at i4cp, AI feature activation jumped by **+500%**."
 - If a claim cannot be backed by a KB case study or outcome, rephrase or omit it.
 - In fit answers, each bullet should chain a strength to a specific proof point.
 
@@ -2060,10 +2092,17 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-function setCorsHeaders(res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+function setCorsHeaders(req, res) {
+  const origin = req.headers?.origin || "";
+  const isAllowed = origin === "https://ryanschmidt.design" ||
+    origin === "https://www.ryanschmidt.design" ||
+    origin.startsWith("http://localhost:") ||
+    origin.startsWith("http://127.0.0.1:");
+  
+  res.setHeader("Access-Control-Allow-Origin", isAllowed ? origin : "https://ryanschmidt.design");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Vary", "Origin");
 }
 
 // -----------------------------------------------------------------------------
@@ -2071,7 +2110,7 @@ function setCorsHeaders(res) {
 // -----------------------------------------------------------------------------
 
 export default async function handler(req, res) {
-  setCorsHeaders(res);
+  setCorsHeaders(req, res);
 
   if (req.method === "OPTIONS") {
     return res.status(204).send("");
@@ -2442,3 +2481,17 @@ export default async function handler(req, res) {
     }));
   }
 }
+
+export {
+  sanitize,
+  polishAnswerText,
+  isPrivateHostname,
+  extractCompanyHint,
+  detectIntent,
+  isBadHint,
+  extractRoleHint,
+  fitQuestionHasContext,
+  cleanHint,
+  sanitizeSources,
+  KB_FALLBACK
+};

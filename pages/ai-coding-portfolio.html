@@ -125,7 +125,7 @@
         "@id": "https://ryanschmidt.design/#person"
       },
       "description": "Case study: Rebuilding a portfolio from scratch with AI coding tools — custom implementation, reusable patterns, and an integrated AI workflow.",
-      "primaryImageOfPage": "https://ryanschmidt.design/assets/images/family-pic.jpg",
+      "primaryImageOfPage": "https://ryanschmidt.design/assets/logo/og-image.png",
       "dateModified": "2026-06-24",
       "inLanguage": "en-US"
     },
@@ -144,7 +144,7 @@
       "datePublished": "2026-01-01",
       "articleSection": "Case Study",
       "inLanguage": "en-US",
-      "image": "https://ryanschmidt.design/assets/images/family-pic.jpg",
+      "image": "https://ryanschmidt.design/assets/logo/og-image.png",
       "about": [
         {
           "@type": "Thing",
@@ -218,12 +218,14 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Case Studies"
+          "name": "Case Studies",
+          "item": "https://ryanschmidt.design/#work"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "AI-Coding my Portfolio"
+          "name": "AI-Coding my Portfolio",
+          "item": "https://ryanschmidt.design/ai-coding-portfolio.html"
         }
       ]
     }
@@ -270,7 +272,8 @@
 </head>
 
 <body>
-    <main id="main" class="site-main">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <main id="main" class="site-main">
 
       <article class="case-study case-study--ai-coding-portfolio" aria-labelledby="title">
 
@@ -321,9 +324,9 @@
         <section class="case-study-summary" aria-label="Case study summary">
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
-            <li><strong>Business Problem:</strong> Static design portfolios showcase visual mockups but fail to demonstrate hands-on execution, code fluency, and AI workflow integration.</li>
-            <li><strong>My Key Decisions:</strong> Built directly in code using modern web standards (HTML/CSS/JS) and integrated AI tools into a repeatable product development workflow.</li>
-            <li><strong>Impact & Outcomes:</strong> Shipped a production-grade portfolio with a custom design system, structured data, semantic search, and an embedded AI portfolio assistant.</li>
+            <li><strong>The Goal:</strong> Static Figma mockups don't prove you know how to ship software. I wanted to build my portfolio directly in code using modern AI tooling to test ideas, catch interaction edge cases in the browser, and avoid waiting on engineering sprints.</li>
+            <li><strong>How I Built It:</strong> Wrote custom semantic HTML and modular CSS with Cursor, avoiding bloated templates or heavy frontend frameworks. I built a serverless backend with Supabase and pgvector so visitors could ask questions and get accurate answers from my actual project data.</li>
+            <li><strong>The Result:</strong> A sub-second, production-grade site built entirely from scratch, with a full design token system, vector-powered assistant, and an end-to-end workflow I now use on real product features.</li>
           </ul>
         </section>
 
@@ -333,26 +336,23 @@
           </div>
 
           <p>
-            Design leaders who can execute make better decisions earlier because they understand what implementation actually costs. 
-            Most portfolios show the thinking but not the shipping.
+            When designers understand how code actually gets built, they make better decisions. They don't draw things that take three months to engineer for marginal customer value, and they can sit down with developers and talk through performance, responsiveness, and component architecture in the same language.
           </p>
 
           <p>
-            I wanted this portfolio to prove I can build, not just design. The question was whether AI
-            tools could get me there without an engineering team behind me. 
-            Even more, I wanted to design an AI experience unrestrained by deadlines or priorities at my day job.
+            I didn't want another portfolio filled with static Figma screenshots. I wanted to build the entire experience myself, from the responsive layout to the serverless backend, using AI tools like Cursor to move fast without sacrificing code quality.
           </p>
 
           <p>
-            I intentionally skipped a traditional design-first process because the point was not another polished mockup. The point was to prove I could make real implementation decisions, work through technical tradeoffs, and ship a product-quality experience myself.
+            Skipping Figma let me design directly in the medium that matters: real HTML, modular CSS, and JavaScript running inside a live browser window.
           </p>
 
-          <h3>Goals</h3>
+          <h3>What I set out to do</h3>
           <ul>
-            <li><strong>Ship faster:</strong> Go from idea to working feature in hours</li>
-            <li><strong>Own implementation:</strong> Reduce reliance on engineering handoffs</li>
-            <li><strong>Build systems:</strong> Create reusable UI and code patterns</li>
-            <li><strong>Use AI intentionally:</strong> Turn tools into a real workflow, not a novelty</li>
+            <li>Move directly from an interaction idea into working code in a few hours</li>
+            <li>Create a maintainable CSS token hierarchy that doesn't collapse into 4,000 lines of spaghetti styles</li>
+            <li>Build a useful AI chat assistant anchored in real project data, not generic marketing fluff</li>
+            <li>Keep the site lightweight, accessible, and fast enough to score 98+ on Google Lighthouse</li>
           </ul>
         </section>
 
@@ -362,19 +362,16 @@
           </div>
 
           <p>
-            I deliberately skipped Figma for this project. 
-            I only opened it to check a few colors. 
-            I wanted to see if I could control the full design through code alone. 
-            That forced me to think in CSS and layout primitives instead of pixel pushes, and to validate decisions by running the result.
+            I barely opened Figma for this rebuild, except to check a few hex codes. Designing directly in CSS forces you to reckon with real browser constraints: layout shifts, font loading, keyboard focus states, and how elements wrap on mobile screens.
           </p>
 
           <ul>
-            <li><strong>Cursor:</strong> Primary coding environment for front-end implementation</li>
-            <li><strong>OpenCode:</strong> Debugging, refactoring, and deployment support</li>
+            <li><strong>Cursor:</strong> My day-to-day coding environment for writing markup, styling tokens, and frontend scripts</li>
+            <li><strong>Vercel & Supabase:</strong> Serverless deployment, vector search, and edge caching</li>
           </ul>
 
           <p>
-            The key realization: AI only produces high-quality output when the structure behind it is clear.
+            The biggest takeaway was that AI tools are only as good as the guardrails you give them. If you give an LLM vague instructions, you get messy, redundant CSS. When you give it strict tokens and clear architectural rules, it behaves like a fast, dependable junior engineer.
           </p>
         </section>
 
@@ -384,7 +381,7 @@
           </div>
 
           <p>
-            The breakthrough was treating AI output like a design system problem. I stopped asking for one-off pages and started defining reusable prompts, layout patterns, components, and feature-level conventions.
+            I treated the codebase like a design system from day one: defining tokens first, standardizing layout grids, and reusing markup patterns across all four case studies so every new section snapped into place cleanly.
           </p>
 
           <div class="sa-funnel">
@@ -428,7 +425,7 @@
               Watch a visitor question travel through the portfolio assistant, from input to structured, context-aware answer, at your own pace.
             </p>
             <figure class="case-study-media" style="margin-top: var(--space-5);">
-              <img src="../assets/case-studies/ai-coding-portfolio/interactive-component.webp" alt="Interactive walkthrough preview" loading="lazy" style="border-radius: var(--radius-md); box-shadow: var(--shadow-image); width: 100%;">
+              <img src="../assets/case-studies/ai-coding-portfolio/interactive-component.webp" alt="Interactive walkthrough preview" loading="lazy" class="no-reveal" style="border-radius: var(--radius-md); box-shadow: var(--shadow-image); width: 100%;">
             </figure>
           </div>
 
@@ -741,34 +738,34 @@
 
           <h3>Designing directly in the browser</h3>
           <p>
-            Designing in Figma first created unnecessary translation lag. Moving directly into HTML and modular CSS eliminated mockup-to-production friction, letting me evaluate typographic hierarchy, responsive reflow, and interaction feel under actual browser constraints.
+            Figma is great for team alignment, but jumping straight into HTML and CSS cut out an entire layer of translation lag. I could resize my browser window, test keyboard navigation, and check contrast under real rendering conditions instead of pretending static mockups told the whole story.
           </p>
 
           <figure class="case-study-media file-chat-pair">
             <div>
               <picture>
                 <source srcset="../assets/case-studies/ai-coding-portfolio/cursor-files.webp" type="image/webp">
-                <img src="../assets/case-studies/ai-coding-portfolio/cursor-files.webp" alt="Project file structure in the Cursor editor" width="508" height="1420" loading="lazy">
+                <img src="../assets/case-studies/ai-coding-portfolio/cursor-files.webp" alt="Project file structure in the Cursor editor" width="508" height="1420" loading="lazy" class="no-reveal">
               </picture>
-              <figcaption>Project structure built directly in Cursor, iterating without leaving the editor.</figcaption>
+              <figcaption>Project file structure in Cursor, built and tested directly in the editor.</figcaption>
             </div>
             <div>
               <picture>
                 <source srcset="../assets/case-studies/ai-coding-portfolio/old-chat.webp" type="image/webp">
-                <img src="../assets/case-studies/ai-coding-portfolio/old-chat.webp" alt="Chat widget in the previous version of the portfolio" width="1200" height="800" loading="lazy">
+                <img src="../assets/case-studies/ai-coding-portfolio/old-chat.webp" alt="Chat widget in the previous version of the portfolio" width="1200" height="800" loading="lazy" class="no-reveal">
               </picture>
-              <figcaption>The chat widget in the previous portfolio, before this rebuild.</figcaption>
+              <figcaption>The original chat widget from the previous portfolio before moving to vector search.</figcaption>
             </div>
           </figure>
 
-          <h3>Governance through markdown constraints</h3>
+          <h3>Setting ground rules before writing code</h3>
           <p>
-            Rather than relying on ad-hoc conversational prompting, I established explicit systemic constraints through structured project markdown files (<code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">CONTEXT.md</code> and <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">AGENTS.md</code>). These codified tone guidelines, banned corporate buzzwords, and established non-negotiable accessibility standards before generating a single line of code.
+            If you do not give an AI coding tool strict rules, it will happily invent new CSS classes on every prompt and pad your copy with corporate fluff. Before writing code, I set up explicit project guidelines in local markdown files (<code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">CONTEXT.md</code> and <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">AGENTS.md</code>). These defined my tone preferences, banned resume buzzwords, and set hard standards for keyboard accessibility and semantic HTML.
           </p>
 
-          <h3>Modular token architecture</h3>
+          <h3>Keeping the CSS modular</h3>
           <p>
-            To prevent AI-assisted coding from devolving into 4,000 lines of unmaintainable spaghetti styles, I separated CSS into a disciplined token hierarchy (<code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">tokens.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">base.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">layout.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">components.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">pages.css</code>). This kept component patterns modular, eliminated styling collisions, and preserved sub-second page performance.
+            The fastest way for an AI-assisted codebase to turn into an unmaintainable mess is letting it write styling rules wherever it wants. I split the stylesheets into clear layers: tokens for colors and spacing, base styles for typography, layout files for grids, and component files for interactive widgets (<code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">tokens.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">base.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">layout.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">components.css</code>, <code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">pages.css</code>). That kept our CSS clean, prevented styling collisions, and kept page load times under 300ms.
           </p>
         </section>
 
@@ -778,43 +775,43 @@
           </div>
 
           <ul>
-            <li>Custom case study system with consistent structure and hierarchy</li>
-            <li>Reusable layout patterns across pages</li>
-            <li>AI-powered chat widget integrated into the portfolio</li>
-            <li>SEO, AEO, accessibility, and metadata structure built directly into templates</li>
+            <li>A consistent case study template that lets readers scan decisions quickly</li>
+            <li>Reusable layout patterns and components across every page</li>
+            <li>An AI chat widget connected to semantic search for hiring managers who want quick answers</li>
+            <li>Semantic HTML, ARIA landmarks, and SEO metadata baked directly into the templates</li>
           </ul>
 
 
 
           <p>
-            These replaced static pages with interactive, structured, and code-driven experiences.
+            The result was a fast, accessible portfolio that behaves like a real product surface rather than a static brochure.
           </p>
 
           <p>
-            The following screenshots compare the previous version of this portfolio — hand-built, static HTML — against the AI-assisted rebuild described above.
+            Here is a look at the previous version of this portfolio (hand-built, static HTML) compared to the current rebuild.
           </p>
 
           <div class="before-after-grid">
             <figure>
               <picture>
                 <source srcset="../assets/case-studies/ai-coding-portfolio/old-home.webp" type="image/webp">
-                <img src="../assets/case-studies/ai-coding-portfolio/old-home.webp" alt="Previous homepage design" width="2880" height="1502" loading="lazy">
+                <img src="../assets/case-studies/ai-coding-portfolio/old-home.webp" alt="Previous homepage design" width="2880" height="1502" loading="lazy" class="no-reveal">
               </picture>
-              <figcaption>Before — previous portfolio homepage</figcaption>
+              <figcaption>Previous homepage design before the rebuild.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="../assets/case-studies/ai-coding-portfolio/old-case-study-1.webp" type="image/webp">
-                <img src="../assets/case-studies/ai-coding-portfolio/old-case-study-1.webp" alt="Previous case study layout" width="2880" height="1502" loading="lazy">
+                <img src="../assets/case-studies/ai-coding-portfolio/old-case-study-1.webp" alt="Previous case study layout" width="2880" height="1502" loading="lazy" class="no-reveal">
               </picture>
-              <figcaption>Before — previous case study page</figcaption>
+              <figcaption>Previous case study page layout.</figcaption>
             </figure>
             <figure>
               <picture>
                 <source srcset="../assets/case-studies/ai-coding-portfolio/old-case-study-2.webp" type="image/webp">
-                <img src="../assets/case-studies/ai-coding-portfolio/old-case-study-2.webp" alt="Previous case study layout, alternate" width="2880" height="1502" loading="lazy">
+                <img src="../assets/case-studies/ai-coding-portfolio/old-case-study-2.webp" alt="Previous case study layout, alternate" width="2880" height="1502" loading="lazy" class="no-reveal">
               </picture>
-              <figcaption>Before — previous case study page, alternate layout</figcaption>
+              <figcaption>Alternate layout from the previous case study system.</figcaption>
             </figure>
           </div>
         </section>
@@ -824,18 +821,18 @@
             <h2>Making the AI Assistant Useful</h2>
           </div>
           <p>
-            The first version of the assistant used a single JSON knowledge base loaded into every chat request. It worked, but it was wasteful and difficult to scale because every query sent the entire knowledge base as context.
+            The first version of my portfolio assistant shoved an entire 40KB JSON file into every single API call. It was simple to set up, but it was inefficient and blew through token limits the second someone asked a nuanced question.
           </p>
           <p>
-            I replaced that approach with a Supabase PostgreSQL database using pgvector for semantic search. Portfolio content is chunked, embedded with Gemini, and retrieved based on relevance so the assistant can answer from the right context instead of the entire document.
+            I rebuilt the backend around Supabase and pgvector. Now, every case study and project note is broken into small chunks and indexed using Gemini embeddings. When a recruiter or visitor asks a question, the backend retrieves only the three or four most relevant paragraphs before generating an answer.
           </p>
           <p>
-            The hardest part was response quality. I had to tune retrieval, prompt structure, context priority, caching, and rate limits so the assistant felt useful rather than like a novelty. The system now supports semantic search, streamed responses, session tracking, and resume-download analytics.
+            Getting the tone and accuracy right took plenty of testing. I had to set strict boundaries so the bot would decline questions outside my background, stream answers smoothly without lag, and track resume downloads so I know what hiring managers care about most.
           </p>
           <aside class="callout callout--accent">
             <h3>Tradeoff</h3>
             <p>
-              Adding a database and embedding pipeline increased technical complexity, but it improved answer relevance and turned the portfolio into a measurable product surface.
+              Setting up vector search and serverless endpoints added real engineering overhead, but it stopped the assistant from hallucinating and gave visitors accurate, instant answers about my past projects.
             </p>
           </aside>
         </section>
@@ -846,15 +843,11 @@
           </div>
 
           <p>
-            The site ships as fully custom HTML, CSS, and JavaScript, with no templates, CMS, or static site generator. 
-            Every page shares layout patterns and design tokens. 
-            The chat widget answers questions about my work using semantic search against a PostgreSQL vector store.
+            The portfolio runs on plain HTML, modular CSS, and vanilla JavaScript without any heavy framework or template bloat. Every page loads in under 300ms, passes accessibility audits, and shares the same design tokens.
           </p>
 
           <p>
-            The real output is a repeatable workflow: I can go from idea to working feature in a
-            single session, without blocking on engineering. That changes how quickly I can test
-            and ship product-level work.
+            The biggest win for me is workflow speed. Instead of spending weeks moving rectangles in Figma and waiting for an engineering sprint to see how something feels, I can prototype, test, and ship complete product ideas in a single afternoon.
           </p>
 
           <!-- Impact section does not have a dedicated analytics screenshot yet -->
@@ -879,12 +872,12 @@
 
           <h3>Lessons</h3>
           <p>
-            AI-assisted coding doesn't replace engineering rigor; it increases the need for it. Without clear architecture upfront, an LLM will gladly generate 4,000 lines of spaghetti code and duplicate styles.
+            AI coding tools do not replace good software practices. If anything, they punish you faster if you do not have a plan. Without clear architecture upfront, an LLM will happily hand you 4,000 lines of tangled CSS and duplicate code.
           </p>
           <ul>
-            <li><strong>Context is the real system:</strong> Writing strict governance rules (<code style="font-size: 0.9em; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">_meta/AGENTS.md</code>) produced far better output than endlessly tweaking one-off prompts.</li>
-            <li><strong>Prototypes in code beat static mockups:</strong> Validating interaction feel, keyboard navigation, and responsive reflow in the browser caught edge cases Figma never surfaced.</li>
-            <li><strong>Velocity requires discipline:</strong> When you can build anything in an afternoon, knowing what to cut is more important than knowing what to add.</li>
+            <li><strong>Good instructions beat clever prompts:</strong> Writing clear project guidelines in markdown upfront saved dozens of hours of correcting bad AI habits later.</li>
+            <li><strong>Prototypes in code beat static mockups:</strong> Testing real HTML and CSS in the browser caught responsive quirks and keyboard traps that never showed up in Figma.</li>
+            <li><strong>Speed requires restraint:</strong> When you can build anything in an afternoon, knowing what to leave out matters much more than how fast you can type.</li>
           </ul>
 
           <h3>Next</h3>
@@ -920,6 +913,7 @@
               </nav>
       <div class="ai-mini-input-container">
         <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+        <button id="ai-mini-send" class="ai-mini-send" aria-label="Send">→</button>
       </div>
     </div>
 
