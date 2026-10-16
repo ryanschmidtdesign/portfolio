@@ -181,7 +181,7 @@
           
           if (target === 'resume.pdf') {
             printLine('Opening resume...');
-            window.open('/assets/ryan-schmidt-resume-october-2026.pdf', '_blank');
+            window.open('/assets/ryan-schmidt-resume.pdf', '_blank');
           } else if (target === 'contact.sh') {
             printLine('Initiating email protocol...');
             window.location.href = 'mailto:ryanschmidt1989@gmail.com';

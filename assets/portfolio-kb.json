@@ -58,7 +58,7 @@
   "links": {
     "site": "https://ryanschmidt.design",
     "about": "https://ryanschmidt.design/about.html",
-    "resume_pdf": "https://ryanschmidt.design/assets/ryan-schmidt-resume-october-2026.pdf",
+    "resume_pdf": "https://ryanschmidt.design/assets/ryan-schmidt-resume.pdf",
     "linkedin_public": "https://www.linkedin.com/in/ryanschmidt1989/",
     "primary_contact": "https://www.linkedin.com/in/ryanschmidt1989/"
   },
@@ -201,8 +201,8 @@
       "AI Product Designer"
     ],
     "what_matters": [
-      "Roles where design and engineering share a seat, not a handoff.",
-      "Building, not just specifying. Prototyping in code is a feature, not a bug.",
+      "Roles where designers build their designs in code as well as Figma — the new standard for product design.",
+      "Building, not just specifying. Prototyping and shipping in code alongside engineers.",
       "Real users, real outcomes, and a team that ships.",
       "AI-augmented workflows treated as a product surface, not a demo."
     ],
@@ -959,7 +959,7 @@
   ],
   "deterministic_answers": {
     "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
-    "looking_for": "Ryan is open to the right opportunity, especially roles where design and engineering share a seat. His strongest targets are Senior Product Designer, Lead Product Designer, Staff Product Designer, and UX Engineer roles.",
+    "looking_for": "Ryan is open to the right opportunity, specifically roles where designers build their designs in code as well as Figma — the new standard for modern product design. His strongest targets are Senior, Lead, or Staff Product Designer and UX Engineer roles.",
     "proof_points": "Ryan's strongest proof points are +500% AI feature activation after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption (cutting UI defects by 38%), +71% dashboard engagement during beta, and +18% recurring revenue after the Real-Time Inventory MVP.",
     "ux_engineer_fit": "Yes. Ryan codes, prototypes in the browser, uses AI tooling daily, and works closely with engineers. The strongest evidence is his AI-Coding my Portfolio case, coded prototyping habits, and AI dashboard/product workflow thinking."
   },
@@ -1621,7 +1621,7 @@
     {
       "intent": "looking_for",
       "prompt": "Is Ryan looking for a new role?",
-      "answer": "Yes, for the right opportunity. He's especially interested in roles where design and engineering share a seat, including **UX Engineer**, **Senior** or **Staff Product Designer**, and **AI Product Designer** roles. If you have something close, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start the conversation."
+      "answer": "Yes, for the right opportunity. He's looking for teams where designers build their designs in code as well as Figma — whether that's titled **Senior or Staff Product Designer**, **Lead Product Designer**, or **UX Engineer**. If you have something close, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start the conversation."
     },
     {
       "intent": "tools_and_stack",
