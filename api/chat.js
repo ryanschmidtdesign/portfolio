@@ -1122,9 +1122,9 @@ function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
       }
     }
     return {
-      answer: "I had trouble formatting that cleanly. Try asking about Ryan's case studies, UX Engineer fit, or strongest proof points.",
+      answer: "I had trouble formatting that cleanly. Try asking about Ryan's case studies, technical skills, or design experience.",
       suggested_pills: [
-        "Show Ryan's strongest proof points.",
+        "What are Ryan's strongest projects?",
         "Is Ryan a UX Engineer fit?"
       ],
       hire_intent: false,
@@ -1369,14 +1369,14 @@ function buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks = [], 
   if (intent === "role_fit" || detectFitIntent(lastUser)) {
     return assistantPayload({
       answer: [
-        "Ryan's background is strongest where product design, information architecture, and hands-on prototyping intersect.",
-        "- His core strengths are complex B2B SaaS, design systems, data visualization, and builder-style UX engineering.",
-        "- The strongest evidence sits in the AI-Powered Dashboards, Real-Time Inventory, and i4cp Member Portal Overhaul work.",
-        "- He maps best to UX Engineer, Senior Product Designer, Staff Product Designer, or AI Product Designer roles."
+        "Ryan focuses on complex B2B products where information architecture and code-level prototyping come together.",
+        "- His background covers design systems, data visualization, and building working UI directly in code.",
+        "- You can see how he works in the AI-Powered Dashboards, Real-Time Inventory, and i4cp Member Portal case studies.",
+        "- He's well-suited for Senior or Staff Product Designer, UX Engineer, and AI Product Design roles where design and engineering collaborate closely."
       ].join("\n"),
       suggested_pills: [
         "Which case study best fits this role?",
-        "What are Ryan's strongest proof points for this job?"
+        "What are Ryan's most relevant projects for this job?"
       ],
       hire_intent: false,
       context_cases: [],
@@ -1394,7 +1394,7 @@ function buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks = [], 
   }
 
   return assistantPayload({
-    answer: "I'm currently presenting answers from Ryan's portfolio knowledge base. Feel free to ask about any of his case studies, Product Designer & UX Engineer fit, design process, or strongest proof points.",
+    answer: "I'm currently presenting answers from Ryan's portfolio knowledge base. Feel free to ask about any of his case studies, his background in design and front-end code, or how he approaches product problems.",
     suggested_pills: defaultSuggestedPills(intent, lastUser),
     hire_intent: false,
     context_cases: contextCases

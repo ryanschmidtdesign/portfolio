@@ -112,7 +112,7 @@
     ],
     "location": "Austin, TX (US)",
     "hobbies": [
-      "Photographing his son enjoying his childhood",
+      "Taking photos of his son exploring outside",
       "Playing guitar and bass",
       "Ice hockey twice a week"
     ],
@@ -128,7 +128,7 @@
     "fun_facts": [
       "Follows the Steelers every Sunday in the fall.",
       "Keeps a tiny notebook of IA sketch ideas for navigation patterns.",
-      "Has opinions about espresso machines you didn't ask for."
+      "Spends way too much time dialing in morning espresso."
     ]
   },
   "points_of_view": [
@@ -146,7 +146,7 @@
     },
     {
       "id": "design_engineering_seam",
-      "stance": "The line between design and engineering is where the best work happens. Handoffs are where it dies.",
+      "stance": "Design and engineering work best as a shared conversation. When ideas are thrown over a fence as static mockups, the nuance gets lost.",
       "context": "Ryan prototypes in the browser, pairs early with engineers on feasibility, and uses Cursor and Claude to compress design cycles instead of throwing comps over a wall.",
       "use_when": [
         "ux engineer",
@@ -237,8 +237,8 @@
       "highlights": [
         "Sole designer across member portal, analytics, and admin tools; own the design system, UX standards, and roadmap prioritization.",
         "Ship interactive HTML/CSS/JS prototypes to staging via Cursor, eliminating spec ambiguity before engineering starts.",
-        "Architect conversational AI workflows, turning complex HR research into prompt-driven insights.",
-        "Conduct qualitative user inquiry to shape requirements and align executive stakeholders on high-value roadmap initiatives."
+        "Designed the Ask Ahri AI search experience, helping members query research through natural language with verified citations.",
+        "Run user interviews with enterprise HR executives to validate navigation models and guide product priorities."
       ]
     },
     "prior": [
@@ -383,17 +383,17 @@
       "summary_short": "Untangled a confusing architecture to help members find what they pay for, driving a 500% jump in AI usage.",
       "outcomes": [
         {
-          "metric": "**AI Activation**",
+          "metric": "**AI Tool Usage**",
           "value": "**+500%**",
           "note": "AI usage jumped 500% in the first month"
         },
         {
-          "metric": "**Legacy Search Sunset**",
-          "value": "**100%**",
-          "note": "Removed the traditional keyword search bar with almost zero complaints"
+          "metric": "**Search Regressions**",
+          "value": "**0**",
+          "note": "Retired the legacy search input with zero support tickets or keyword fallback failures"
         }
       ],
-      "impact_narrative": "By untangling the architecture, Ryan made it significantly faster for members to reach their \"Aha!\" moment, protecting long-term retention and driving a 500% jump in AI usage.",
+      "impact_narrative": "By untangling the architecture, Ryan made it faster for members to find critical benchmarks, protecting retention and driving a 500% jump in AI usage.",
       "sections": [
         {
           "id": "problem",

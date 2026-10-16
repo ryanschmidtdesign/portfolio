@@ -699,7 +699,7 @@
 
 // 1) Put your message here
 const SEED_TEXT =
-'Ask how Ryan’s case studies demonstrate product judgment, design leadership, or fit for a role. Paste a job description or link, and I’ll map the strongest evidence.';
+'Ask me anything about Ryan’s work, past projects, or role fit. You can even paste a job description or link to see relevant case studies.';
 
 // 2) Storage flag and reload detection
 const SEED_KEY = 'ai.hasAsked';
@@ -878,29 +878,29 @@ if (savedHist.length > 0) {
     '/dashboard.html': [
       "How did you drive 71% more engagement?",
       "Walk me through your UX research process.",
-      "What lessons did he learn?"
+      "What were the key tradeoffs?"
     ],
     '/inventory.html': [
       "Why start with an MVP?",
       "How did you get stakeholder buy-in?",
-      "What lessons did he learn?"
+      "What were the biggest tradeoffs?"
     ],
     '/ai-coding-portfolio.html': [
       "What tools and workflow did you use?",
       "Why a database over a JSON file?",
-      "What lessons did he learn?"
+      "What were the key takeaways?"
     ],
     '/about.html': [
       "What does your mentorship work look like?",
-      "What lessons did he learn?"
+      "What is your design philosophy?"
     ],
     '/member-portal-overhaul.html': [
       "Why progressive disclosure over flat navigation?",
-      "What lessons did he learn?"
+      "What was the hardest tradeoff?"
     ],
     '/': [
       "Is Ryan a fit for my role?",
-      "Show strongest proof points.",
+      "What are his strongest projects?",
       "Which case study should I read first?"
     ]
   };

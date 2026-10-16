@@ -278,7 +278,7 @@
         <header class="tldr" aria-label="Executive summary">
           <h1 id="title" data-parallax="0.06">Real-Time Inventory</h1>
           <p class="lead">
-            Integrators were tracking millions of dollars in equipment across spreadsheets, whiteboards, and sticky notes because our software didn't have an inventory tool. It was frustrating existing customers, but worse, it was killing our enterprise sales pipeline whenever a 50-person shop asked, "Where do I track warehouse stock?"
+            Integrators were tracking millions of dollars in equipment across spreadsheets, whiteboards, and sticky notes because our software didn't have an inventory tool. Existing customers were frustrated, and larger integration firms were walking away during sales demos because we couldn't answer a basic question: "Where do we track warehouse stock?"
             <br><br>
             I led product design for our inventory system, connecting purchase orders directly to active jobs and service vans so teams always knew what was in stock, what was spoken for, and what was arriving tomorrow.
           </p>
@@ -312,7 +312,7 @@
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
             <li><strong>The Problem:</strong> Customers spent hours every week manually checking stock between spreadsheets and third-party tools. Enterprise deals stalled because we couldn't track hardware past the initial purchasing stage.</li>
-            <li><strong>What I Built:</strong> A connected inventory ledger linking purchase orders directly to warehouses, job sites, and field vans. We intentionally deferred barcode scanning and automatic PO reorders to focus 100% on bulletproof count accuracy.</li>
+            <li><strong>What I Built:</strong> A connected inventory ledger linking purchase orders directly to warehouses, job sites, and field vans. We held back barcode scanning and automated reordering for v2 to make sure baseline stock counts were completely reliable first.</li>
             <li><strong>The Result:</strong> The release unblocked stalled enterprise contracts, cut hours of weekly manual reconciliation for existing shops, and helped drive an 18% lift in recurring revenue over the following year.</li>
           </ul>
         </section>
@@ -401,20 +401,20 @@
             <li><strong>Low Stock:</strong> Below pre-set safety thresholds, triggering visible reorder prompts before field teams run dry</li>
           </ul>
 
-          <h3>The "Messy Middle": Pragmatic Engineering Tradeoffs</h3>
+          <h3>Tradeoffs: Real-Time Sync vs. Shipping on Time</h3>
           <p>
             I originally advocated for full WebSocket-driven, bi-directional live sync across all client sessions. If an installer checks out equipment in the warehouse, every PM's screen should reflect it instantly.
           </p>
           <p>
-            However, our engineering team evaluated the backend requirements and found a true real-time streaming infrastructure would push our MVP launch back by several months. To hit our December deadline and unblock pending enterprise sales, the PM and I compromised: the database updated immediately on receiving, but client views used a prominent manual refresh/sync trigger paired with contextual state badges. It wasn't the pure real-time UX I initially pitched, but it shipped on time, preserved data integrity, and delivered immediate business value.
+            However, our engineering team evaluated the backend requirements and found a true real-time streaming infrastructure would push our MVP launch back by several months. To hit our December deadline and unblock pending enterprise sales, the PM and I compromised: the database updated immediately on receiving, but client views used a prominent manual refresh/sync trigger paired with contextual state badges. It wasn't the instantaneous sync I originally drew up, but it protected our launch date, kept the database reliable, and solved the actual customer problem without dragging the project out for months.
           </p>
 
-          <h3>Unblocking Enterprise Deals: The Dual-Track UX</h3>
+          <h3>Balancing Fast Receiving with Serialization Audits</h3>
           <p>
             During discovery, we hit a clear split: small residential shops wanted fast, friction-free quantity counts, while commercial enterprise clients demanded rigorous, asset-level serialization for high-value equipment. Forcing serial numbers on small shops would kill adoption; omitting them would lose six-figure enterprise contracts.
           </p>
           <p>
-            I designed a dual-track UX: <strong>Quantity-first by default</strong> for everyday rapid receiving, with an optional <strong>asset-level tracking layer</strong> for serialized items and warranty audits. That single choice kept check-ins fast for small operators while giving enterprise procurement the serialization audit trail they needed to sign contracts.
+            I designed a dual-track UX: <strong>Quantity-first by default</strong> for everyday rapid receiving, with an optional <strong>asset-level tracking layer</strong> for serialized items and warranty audits. That choice kept check-ins fast for small operators while giving enterprise procurement the serialization audit trail they needed to sign contracts.
           </p>
 
           <h3>Reusing component patterns</h3>
@@ -453,7 +453,7 @@
             I led three rounds of prototype testing with six active customers across both shop profiles. In Round 1, our combined receiving flow forced users through serial-number modals, causing small operators to abandon the flow in frustration.
           </p>
           <p>
-            By Round 3, separating fast bulk-quantity check-ins from deep serialization testing proved successful: small teams completed receiving in under 30 seconds, while commercial operators successfully tracked high-value hardware across multi-van fleets without support.
+            By Round 3, separating fast bulk check-ins from deep serialization paid off: small shops could receive a delivery in thirty seconds, while commercial teams still had the audit trail they needed for warranty tracking.
           </p>
         </section>
 
@@ -461,8 +461,8 @@
           <div class="section-divider">
             <h2>Impact</h2>
           </div>
-          <p class="impact-lede">The system replaced fragmented tracking with a single source of truth, reducing reconciliation time, improving project accuracy, and surfacing unused inventory.
-            <br><br>One customer uncovered thousands of dollars in unused equipment, highlighting how much value had been hidden in disconnected workflows.</p>
+          <p class="impact-lede">The system replaced scattered notes and spreadsheets with one verified count across the company, saving managers hours of weekly reconciliations.
+            <br><br>One customer uncovered thousands of dollars in unused equipment sitting in forgotten corners of their shop, proving how much hardware gets lost in disconnected workflows.</p>
           <div class="impact-callout">
             <div class="impact-metric">
               <strong class="metric" data-animate>+8%</strong>
@@ -483,7 +483,7 @@
             <h2>Lessons & Next Steps</h2>
           </div>
           <p>
-            Operational software lives or dies on trust. If a warehouse lead or field technician doubts a stock count even once, they abandon the software and go right back to their notebooks and Excel tabs. This feature succeeded because every number showed its work: where the item came from, which project had it claimed, and when the replacement was arriving.
+            In warehouse software, trust is binary. If a technician drives to a job site and the four switches the app said were in stock aren't in the van, they stop using the app and go back to pen and paper. This feature succeeded because every number explained its history: where the item came from, which project had it claimed, and when the replacement was arriving.
           </p>
           <ul>
             <li><strong>What comes next:</strong> Once teams trusted the baseline counts, the next logical steps were mobile barcode scanning in the warehouse and auto-generating reorder POs when stock hits minimums. We held those back from the MVP on purpose to make sure the foundation was rock-solid first.</li>

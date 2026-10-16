@@ -297,7 +297,7 @@
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
             <li><strong>The Problem:</strong> The portal buried thousands of research papers behind a confusing internal taxonomy. Members gave up looking and assumed i4cp didn't cover their industry, putting renewals at risk.</li>
-            <li><strong>The Bet:</strong> If we restructured navigation around real executive job priorities and gave them a smart search tool (Ahri) with keyword fallback, members could jump straight to the data they needed in seconds.</li>
+            <li><strong>What I Built:</strong> Restructured the four-tier taxonomy around executive priorities, introduced progressive disclosure to keep navigation calm, and unified AI search and keyword lookup into a single omnibar.</li>
             <li><strong>The Result:</strong> Shipped to production in September 2026. AI tool adoption jumped 500%, and we retired the old keyword search box without member pushback.</li>
           </ul>
         </section>
@@ -307,7 +307,7 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            i4cp produces incredible enterprise HR research, but members were struggling to find it. The portal's navigation had grown organically over years, ending up organized like an internal org chart rather than a member resource. If a VP of Talent wanted a compensation benchmark, they had to click through three arbitrary categories and hope for the best.
+            i4cp publishes extensive workforce research and benchmarks, but members were struggling to find relevant studies. The portal's navigation had grown organically over years, ending up organized like an internal org chart rather than a member resource. If a VP of Talent wanted a compensation benchmark, they had to click through three arbitrary categories and hope for the best.
           </p>
           <p>
             Usage logs told a frustrating story. Members would log in, get overwhelmed by cluttered menus, type a desperate keyword into the old search bar, get a wall of irrelevant links, and leave. Our AI assistant, Ahri, was tucked away where nobody noticed it. My job was to rebuild the entire navigation model and make finding research feel effortless.
@@ -360,7 +360,7 @@
             I didn't have to invent a new taxonomy from scratch. Our research team had already drafted a four-level hierarchy based on interviews with member companies.
           </p>
           <p>
-            The real UX challenge was making that four-level structure intuitive on screen. If you throw all four levels into a megamenu, users get analysis paralysis. If you hide them too deep, nobody explores. I spent the research phase testing progressive navigation models with actual enterprise HR leaders, measuring how quickly they could track down specific benchmarking reports.
+            Putting all four tiers into a giant megamenu overwhelmed users with dozens of competing links. Hiding them inside nested drill-downs meant members rarely discovered related research. I spent research sessions testing how to progressively reveal deeper topics only after a member selected a primary focus area.
           </p>
 
           <figure class="case-study-media">
@@ -396,7 +396,7 @@
             <h2>The IA Challenge: Four Levels Without Losing the Thread</h2>
           </div>
           <p>
-            The content hierarchy spans four tiers: Areas of Focus, Priorities, Topics, and individual assets. In the old portal, finding a report felt like guessing how i4cp filed its paperwork. In the new model, navigation follows how people actually work.
+            The content hierarchy spans four tiers: Areas of Focus, Priorities, Topics, and individual assets. The legacy portal mirrored our internal filing system. The redesign organizes research around the strategic questions members ask their teams.
           </p>
           <div class="ia-challenge-panel">
             <div class="ia-challenge-panel__header">
@@ -562,9 +562,9 @@
               <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-2); max-width: none;">Making Ahri the central search omnibar led to a 5x increase in queries during the first month.</p>
             </div>
             <div class="impact-metric">
-              <strong class="metric" data-animate>100%</strong>
-              <span class="metric-label">Search Migration</span>
-              <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-2); max-width: none;">Completely replaced the legacy search bar without member confusion by adding automatic keyword fallback.</p>
+              <strong class="metric" data-animate>0</strong>
+              <span class="metric-label">Search Regressions</span>
+              <p style="font-size: var(--fs-sm); line-height: var(--lh-prose); color: var(--text-secondary); margin-top: var(--space-2); max-width: none;">Retired the legacy search input and transitioned members to the Ahri omnibar with zero support tickets or keyword fallback failures.</p>
             </div>
           </div>
           <p>
@@ -580,7 +580,7 @@
             Instead of cluttering the header with two different search inputs, I pitched combining them into one smart bar. If someone typed a full question, Ahri synthesized an answer from our research. If they just typed a two-word keyword like "succession planning," the bar smoothly returned traditional search results. That compromise gave stakeholders confidence, kept the header clean, and let us sunset the old search system without disrupting anyone's daily workflow.
           </p>
 
-          <h3>Helping Members Find the Needle in the Haystack</h3>
+          <h3>Designing for High-Stakes Member Decisions</h3>
           <p>
             Nobody renews a research membership just because they like logging in. Members stay because when their CEO asks for benchmarking data on hybrid work policies, they can find exact, defensible numbers in three minutes instead of spending hours digging.
           </p>
