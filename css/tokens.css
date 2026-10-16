@@ -252,8 +252,8 @@
   /* ~36 → 52px */
   --fs-article-h2: clamp(1.625rem, 1.35rem + 1.1vw, 2rem);
   /* ~26 → 32px */
-  --fs-article-h3: 1.25rem;
-  /* 20px */
+  --fs-article-h3: 1.375rem;
+  /* 22px — restores proper hierarchy above --fs-md (21.25px) */
   --fs-article-lead: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
   /* ~18 → 21px */
 
@@ -307,12 +307,24 @@
   :root {
     --container-max: 90rem;
     /* 1440px */
-    --fs-body: 17px;
-    --fs-md: 21px;
-    --fs-lg: 25px;
-    --fs-xl: 31px;
-    --fs-2xl: 40px;
+    --fs-body: 1.0625rem; /* 17px */
+    --fs-md: 1.3125rem;   /* 21px */
+    --fs-lg: 1.5625rem;   /* 25px */
+    --fs-xl: 1.9375rem;   /* 31px */
+    --fs-2xl: 2.5rem;     /* 40px */
     --space-9: 6.5rem;
+  }
+}
+
+/* Large screens (1600px) - enhanced */
+@media (min-width: 1600px) and (max-width: 1919px) {
+  :root {
+    --fs-body: 1.125rem;  /* 18px */
+    --fs-md: 1.375rem;    /* 22px */
+    --fs-lg: 1.625rem;    /* 26px */
+    --fs-xl: 2rem;        /* 32px */
+    --fs-2xl: 2.625rem;   /* 42px */
+    --space-9: 7rem;
   }
 }
 
@@ -321,25 +333,13 @@
   :root {
     --container-max: 100rem;
     /* 1600px */
-    --fs-body: 18px;
-    --fs-md: 23px;
-    --fs-lg: 27px;
-    --fs-xl: 33px;
-    --fs-2xl: 44px;
+    --fs-body: 1.125rem;  /* 18px */
+    --fs-md: 1.4375rem;   /* 23px */
+    --fs-lg: 1.6875rem;   /* 27px */
+    --fs-xl: 2.0625rem;   /* 33px */
+    --fs-2xl: 2.75rem;    /* 44px */
     --space-9: 7.5rem;
     --kpi-gap: 4rem;
-  }
-}
-
-/* Large screens (1600px) - enhanced */
-@media (min-width: 1600px) {
-  :root {
-    --fs-body: 18px;
-    --fs-md: 22px;
-    --fs-lg: 26px;
-    --fs-xl: 32px;
-    --fs-2xl: 42px;
-    --space-9: 7rem;
   }
 }
 

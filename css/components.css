@@ -240,8 +240,8 @@
 /* Mobile: prevent “too big” body type + keep margins efficient */
 @media (max-width: 768px) {
   .case-study {
-    --fs-body: 16px;
-    --fs-md: 18px;
+    --fs-body: 1rem;      /* 16px */
+    --fs-md: 1.125rem;   /* 18px */
   }
 }
 
