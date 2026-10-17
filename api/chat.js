@@ -11,7 +11,7 @@ import path from "node:path";
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
-const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-2.5-flash";
+const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-2.5-pro";
 const GEMINI_FALLBACK_MODEL = process.env.GEMINI_FALLBACK_MODEL || "gemini-1.5-flash";
 const CSE_API_KEY = process.env.CSE_API_KEY || "";
 const CSE_ID = process.env.CSE_ID || "";
@@ -1408,13 +1408,13 @@ function buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks = [], 
 async function generateQueryEmbedding(text = "") {
   if (!GEMINI_API_KEY || !GEMINI_API_KEY.trim()) return null;
 
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:embedContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
 
   const resp = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "models/gemini-embedding-2",
+      model: "models/text-embedding-004",
       content: { parts: [{ text: String(text || "").slice(0, 2000) }] },
       outputDimensionality: 768
     })
@@ -1859,15 +1859,14 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
       throw err;
     }
   }
-  // Should only reach here if all retries exhausted or 429 occurred
-  // If quota exhausted (429) on the primary model, try fallback model once
-  if (lastErr?.message?.includes("429") && model !== GEMINI_FALLBACK_MODEL) {
-    model = GEMINI_FALLBACK_MODEL;
+  // If quota exhausted (429) or model error occurs on the primary model, try fallback model once
+  if ((lastErr?.message?.includes("429") || lastErr?.message?.includes("404") || lastErr?.message?.includes("not found")) && model !== GEMINI_FALLBACK_MODEL) {
+    model = (model === GEMINI_FIT_MODEL && GEMINI_FIT_MODEL !== GEMINI_MODEL) ? GEMINI_MODEL : GEMINI_FALLBACK_MODEL;
     const fbBase = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}`;
     endpoint = streamChunk
       ? `${fbBase}:streamGenerateContent?alt=sse&key=${encodeURIComponent(GEMINI_API_KEY)}`
       : `${fbBase}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
-    console.warn(`Gemini quota exhausted, retrying with fallback model ${model}`);
+    console.warn(`Gemini error (${lastErr?.message || "error"}), retrying with fallback model ${model}`);
     try {
       const resp = await fetch(endpoint, {
         method: "POST", headers: { "Content-Type":"application/json" }, body: JSON.stringify(body)
@@ -1988,18 +1987,24 @@ PROOF CHAINING (REQUIRED)
 - If a claim cannot be backed by a KB case study or outcome, rephrase or omit it.
 - In fit answers, each bullet should chain a strength to a specific proof point.
 
-VOICE
-- Sound like a real human, not an assistant. Confident, concise, lightly funny when it fits.
-- Contractions (he's, it's, that's). Vary sentence length.
-- Specific verbs (shipped, rebuilt, cut, replaced, scaled, drove).
-- Never use em dashes (use periods or commas).
-- Never use: leverage, utilize, passionate about, I'm thrilled, I'm excited to, delve into, in today's fast-paced world, synergy, robust, seamless, As an AI, I'd be happy to.
+VOICE & CRAFT
+- Sound like an ultra-sharp design director or technical chief of staff representing Ryan. Confident, candid, warm, and highly articulate.
+- Talk about Ryan in third person. You are his portfolio assistant, not Ryan himself.
+- Contractions (he's, it's, that's). Vary sentence length and rhythm.
+- Specific, active verbs (shipped, rebuilt, cut, replaced, scaled, drove).
+- Never use em dashes (use periods, commas, or colons).
+- Never use AI clichés: leverage, utilize, passionate about, I'm thrilled, I'm excited to, delve into, in today's fast-paced world, synergy, robust, seamless, As an AI, I'd be happy to.
+- Never use formulaic, repetitive closing questions like "Want the longer version?", "Want me to go deeper?", or "Should I expand?". Avoid rhetorical question endings.
 
-LENGTH
-- DEFAULT: 1 to 2 sentences, then offer a follow-up. ("Want the longer version?")
-- EXPAND to 3-5 bullets ONLY when: user asks for depth, it's a fit-for-company question, or answerStyle=detailed.
-- Detailed mode: up to ~180 words.
-- Never dump everything in the first reply.
+CORE PHILOSOPHY & POSITIONING
+- Building designs in code as well as Figma is the modern standard for product design. Ryan believes designers should build what they design rather than throwing static artboards over the fence.
+- Target roles: Senior Product Designer, Lead Product Designer, Staff Product Designer, and UX Engineer.
+
+LENGTH & SUBSTANCE
+- Deliver 2 to 4 crisp, high-signal sentences for general questions. Lead directly with substantive insights, architectural decisions, and measurable outcomes.
+- For deep questions, case breakdowns, or fit-for-company queries: provide a structured answer with 3-4 tight bullets.
+- Detailed mode: up to ~200 words.
+- Never give curt 1-sentence answers that leave the visitor with a dead end. Give genuine substance immediately.
 
 AUDIENCE
 - Hiring manager/design leader signals: lead with outcomes, scope, tradeoffs, scale.
@@ -2046,7 +2051,7 @@ Return ONLY valid JSON with these fields:
 
 Field rules:
 - answer: Markdown bolding (**text**) for emphasis. Inline links [Text](url). Never markdown headers. Never section labels.
-- suggested_pills: 2 highly relevant follow-up questions.
+- suggested_pills: Exactly 2 highly relevant, specific follow-up questions that invite the visitor deeper into the topic just discussed. NEVER return generic prompts like "Which case study should I read first?" or "Show the strongest proof points."
 - context_cases: Up to 2 case studies cited.
 - sources: Up to 3 URLs cited.
 - action_scroll_to / action_highlight: CSS selector or text snippet, ONLY if matching content exists on pageContext.url.
@@ -2172,20 +2177,6 @@ export default async function handler(req, res) {
       }));
     }
 
-    const deterministicAnswer = isSimpleDirectQuestion(lastUser)
-      ? getDeterministicAnswer(intent, kb)
-      : null;
-
-    if (deterministicAnswer && !isFit) {
-      await logIfEnabled({ type: "deterministic_answer", intent, lastUser, time: Date.now() });
-      const messageCount = messages.filter(m => m.role === "user").length;
-      const selectiveHireIntent = shouldShowHireIntent(intent, lastUser, messageCount, isFit);
-      return res.json(assistantPayload({
-        answer: deterministicAnswer,
-        suggested_pills: defaultSuggestedPills(intent, lastUser),
-        hire_intent: selectiveHireIntent
-      }));
-    }
 
     let externalJd = null;
     if (isFit) {
