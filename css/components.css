@@ -966,14 +966,13 @@
 .evidence-card:hover,
 .evidence-card:focus-visible {
   transform: translateY(-2px);
-  box-shadow: var(--glow-accent);
+  box-shadow: 0 12px 32px rgba(0, 85, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
   background: var(--surface-elevated-strong);
-  /* Instant, responsive snap on hover-in */
-  transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1), background 80ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1), background 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .evidence-card:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0) scale(0.985);
   box-shadow: var(--shadow-card);
   transition: transform 60ms cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -985,6 +984,11 @@
   line-height: var(--lh-md);
   color: var(--text);
   margin: 0;
+  transition: color 200ms ease;
+}
+
+.evidence-card:hover h3 {
+  color: var(--accent);
 }
 
 .evidence-card p {
@@ -1018,8 +1022,15 @@
   text-transform: uppercase;
   color: var(--accent-text);
   background: var(--accent-soft);
+  border: 1px solid rgba(0, 85, 255, 0.08);
   border-radius: var(--radius-pill);
   padding: 0.25rem 0.625rem;
+  transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.evidence-card:hover .capability-pill {
+  border-color: rgba(0, 85, 255, 0.22);
+  background: rgba(0, 85, 255, 0.10);
 }
 
 @media (max-width: 768px) {
@@ -1969,15 +1980,17 @@ figure.case-study-media[data-reveal].is-revealed {
   position: fixed;
   top: 1.5rem;
   right: 1.5rem;
-  width: 60px;
-  height: 60px;
+  width: 52px;
+  height: 52px;
   z-index: 9999;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.4s ease;
-  background: var(--surface-1, rgba(255, 255, 255, 0.06));
+  transform: scale(0.9) translateY(-4px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
   backdrop-filter: blur(var(--blur-sm));
   -webkit-backdrop-filter: blur(var(--blur-sm));
   display: flex;
@@ -1987,6 +2000,7 @@ figure.case-study-media[data-reveal].is-revealed {
 
 .circular-progress-wrapper.is-visible {
   opacity: 1;
+  transform: scale(1) translateY(0);
 }
 
 .circular-progress-svg {
@@ -2491,6 +2505,12 @@ figure.case-study-media[data-reveal].is-revealed {
   width: 100%;
   max-width: 600px;
   gap: 0;
+  transition: box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1), transform 260ms cubic-bezier(0.16, 1, 0.3, 1), border-color 260ms ease;
+}
+
+.ai-mini-wrapper.consolidated-nav:focus-within {
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.10), 0 0 0 1px rgba(0, 85, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.98);
+  border-color: rgba(0, 85, 255, 0.25);
 }
 
 .ai-mini-wrapper.consolidated-nav .ai-mini-nav {
@@ -2578,15 +2598,17 @@ figure.case-study-media[data-reveal].is-revealed {
 }
 
 .ai-mini-wrapper.consolidated-nav .menu-submenu {
-  display: none;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
   position: absolute;
   bottom: 100%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(8px) scale(0.96);
   background: white;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
   padding: 8px;
   min-width: 220px;
   flex-direction: column;
@@ -2594,8 +2616,9 @@ figure.case-study-media[data-reveal].is-revealed {
   margin-bottom: 16px;
   max-height: none !important;
   overflow: visible !important;
+  pointer-events: none;
+  transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 180ms cubic-bezier(0.16, 1, 0.3, 1), visibility 180ms;
 }
-
 
 .ai-mini-wrapper.consolidated-nav .menu-submenu::after {
   content: '';
@@ -2609,7 +2632,10 @@ figure.case-study-media[data-reveal].is-revealed {
 .ai-mini-wrapper.consolidated-nav .menu-item-group:hover .menu-submenu,
 .ai-mini-wrapper.consolidated-nav .menu-item-group:focus-within .menu-submenu,
 .ai-mini-wrapper.consolidated-nav .menu-item-group.is-open .menu-submenu {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0) scale(1);
+  pointer-events: auto;
 }
 
 .ai-mini-wrapper.consolidated-nav .menu-submenu a {
@@ -2908,8 +2934,13 @@ body {
 .polaroid-trigger:hover .polaroid-popup,
 .polaroid-trigger:focus-visible .polaroid-popup {
   opacity: 1;
-  transform: translate(-50%, 0) scale(1);
+  transform: translate(-50%, -3px) scale(1.02);
   pointer-events: auto;
+}
+
+.polaroid-trigger:hover .polaroid-frame,
+.polaroid-trigger:focus-visible .polaroid-frame {
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .polaroid-frame {
@@ -3012,11 +3043,13 @@ body {
   background: var(--surface-elevated-strong);
   border-color: var(--accent);
   box-shadow: 0 4px 14px rgba(0, 85, 255, 0.08);
+  transform: translateX(3px);
   outline: none;
 }
 
 .decision-bridges.has-hover .bridge-item:not(.is-linked) {
   opacity: 0.45;
+  transform: translateX(0);
 }
 
 .bridge-tag {
@@ -3105,13 +3138,24 @@ body {
   padding: var(--space-5);
 }
 
+@keyframes atelierFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .split-view-panel {
   display: none;
-  animation: fadeIn 200ms ease;
 }
 
 .split-view-panel.is-active {
   display: block;
+  animation: atelierFadeIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .mini-kpi-grid {
@@ -3285,6 +3329,7 @@ body {
 .stepper-node.is-active .node-dot {
   background: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-subtle, rgba(0, 85, 255, 0.15));
+  transform: scale(1.25);
 }
 
 .stepper-node.is-active .node-label {
@@ -3462,11 +3507,11 @@ body {
 
 .dual-panel {
   display: none;
-  animation: fadeIn 200ms ease;
 }
 
 .dual-panel.is-active {
   display: block;
+  animation: atelierFadeIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .mock-receiving-row {
@@ -3784,11 +3829,11 @@ body {
 
 .omnibar-view {
   display: none;
-  animation: fadeIn 200ms ease;
 }
 
 .omnibar-view.is-active {
   display: block;
+  animation: atelierFadeIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .ahri-answer-bubble {
