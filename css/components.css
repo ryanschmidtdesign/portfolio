@@ -2960,12 +2960,8 @@ body {
   transform: rotate(-3deg);
 }
 
-.polaroid-popup--hockey .polaroid-frame {
-  transform: rotate(2.5deg);
-}
-
 .polaroid-popup--cooking .polaroid-frame {
-  transform: rotate(-2deg);
+  transform: rotate(2.5deg);
 }
 
 .polaroid-frame img {
