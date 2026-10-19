@@ -40,6 +40,7 @@
     Consolas, monospace;
 
   /* ─── Type scale (Strict Major Third: 1.250 ratio, Base 17px) ───────── */
+  --fs-3xs: 0.544rem;    /* 8.704px - Micro labels / eyebrows (Strict 1.250 Major Third) */
   --fs-2xs: 0.68rem;     /* 10.88px - Micro labels */
   --fs-xs: 0.85rem;      /* 13.6px - Utility */
   --fs-control: 0.9375rem; /* 15px - Apple-style control text (intentional deviation) */
@@ -58,6 +59,7 @@
   --fs-display-lg: clamp(3.242rem, 2.5rem + 5vw, 6.5rem);
 
   /* ─── Line height (per-role, not universal) ─────────────────────────── */
+  --lh-3xs: 1.35;
   --lh-2xs: 1.4;
   --lh-xs: 1.45;
   --lh-body: 1.55;

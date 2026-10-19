@@ -2,28 +2,24 @@
   const slidesData = [
     {
       title: "Dashboards",
-      outcome: "+71% Beta Engagement · D-Tools",
       summary: "Redesigned static dashboards into role-based views with anchored AI summaries, increasing beta engagement by 71%.",
       url: "pages/dashboard.html",
       image: "assets/case-studies/dashboards/rename-dashboard.webp"
     },
     {
       title: "Inventory",
-      outcome: "+18% Recurring Revenue · D-Tools",
       summary: "Connected purchase orders directly to warehouse bins and active jobs, eliminating spreadsheet reconciliations and driving +18% MRR.",
       url: "pages/inventory.html",
       image: "assets/case-studies/inventory/inventory-controls.webp"
     },
     {
       title: "Member Portal",
-      outcome: "+500% AI Activation · i4cp",
       summary: "Restructured i4cp's research taxonomy and introduced a unified AI discovery omnibar, lifting AI feature adoption by 500%.",
       url: "pages/member-portal-overhaul.html",
       image: "assets/case-studies/member-portal/design-highlights/Home_new.webp"
     },
     {
       title: "Engineering<br>My Portfolio",
-      outcome: "Token System · AI RAG · Live Code",
       summary: "Prototyped and shipped directly in HTML, modular CSS, and JavaScript using Cursor to test interactions in working code.",
       url: "pages/ai-coding-portfolio.html",
       image: "assets/case-studies/ai-coding-portfolio/cursor-files.webp"
@@ -94,16 +90,7 @@
     summary.className = 'home-title__summary';
     summary.textContent = s.summary || '';
 
-    const metaRow = document.createElement('span');
-    metaRow.className = 'home-title__meta-row';
-    if (s.outcome) {
-      const pill = document.createElement('span');
-      pill.className = 'home-title__outcome-pill';
-      pill.innerHTML = `<span>${s.outcome}</span><span class="home-title__outcome-arrow" aria-hidden="true">→</span>`;
-      metaRow.appendChild(pill);
-    }
-
-    body.append(text, summary, metaRow);
+    body.append(text, summary);
     link.append(eyebrow, body);
     
     if (s.image) {
