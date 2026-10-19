@@ -523,9 +523,9 @@
                 btn.type = 'button';
                 btn.className = 'ai-mini-cmdk';
                 btn.setAttribute('data-cmdk-trigger', '');
-                btn.setAttribute('aria-label', 'Open CLI and Command Palette (Command + K)');
-                btn.title = 'Open CLI & Command Palette (⌘K)';
-                btn.innerHTML = `<span class="ai-mini-cmdk__label">CLI</span><kbd class="ai-mini-cmdk__kbd">⌘K</kbd>`;
+                btn.setAttribute('aria-label', 'Open Command Palette (Command + K)');
+                btn.title = 'Open Command Palette & Inspector (⌘K)';
+                btn.innerHTML = `<kbd class="ai-mini-cmdk__kbd">⌘K</kbd>`;
                 const sendBtn = container.querySelector('#ai-mini-send');
                 if (sendBtn) {
                     container.insertBefore(btn, sendBtn);
