@@ -285,7 +285,7 @@
                 </li>
                 <li>
                   <strong class="metric status-label--done">Shipped</strong>
-                  <span class="metric-label">live in production Sept 2026</span>
+                  <span class="metric-label">live in production Sept 2025</span>
                 </li>
               </ul>
             </div>
@@ -297,7 +297,7 @@
           <ul class="case-study-summary__list">
             <li><strong>The Problem:</strong> The portal buried thousands of research papers behind a confusing internal taxonomy. Members gave up looking and assumed i4cp didn't cover their industry, putting renewals at risk.</li>
             <li><strong>What I Built:</strong> Restructured the four-tier taxonomy around executive priorities, introduced progressive disclosure to keep navigation calm, and unified AI search and keyword lookup into a single omnibar.</li>
-            <li><strong>The Result:</strong> Shipped to production in September 2026. AI tool adoption jumped 500%, and we retired the old keyword search box without member pushback.</li>
+            <li><strong>The Result:</strong> Shipped to production in September 2025. AI tool adoption jumped 500%, and we retired the old keyword search box without member pushback.</li>
           </ul>
         </section>
 
@@ -634,7 +634,7 @@
             <h2>Outcomes & Impact</h2>
           </div>
           <p>
-            The redesigned portal went live in September 2026. Untangling the navigation and simplifying discovery directly helped member retention, turning what used to be a frustrating scavenger hunt into an intuitive library.
+            The redesigned portal went live in September 2025. Untangling the navigation and simplifying discovery directly helped member retention, turning what used to be a frustrating scavenger hunt into an intuitive library.
           </p>
           <div class="impact-metrics" data-cascade style="margin-block: var(--space-6); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6);">
             <div class="impact-metric">
@@ -703,29 +703,34 @@
               <!-- Keyword Lookup View -->
               <div class="omnibar-view" data-sim-view="keyword">
                 <div class="keyword-results-head">
-                  <span class="keyword-count">14 Research Assets Found</span>
-                  <div class="keyword-filter-chips">
-                    <span class="k-filter is-active">All (14)</span>
-                    <span class="k-filter">Tools (4)</span>
-                    <span class="k-filter">Reports (6)</span>
-                    <span class="k-filter">Webinars (4)</span>
+                  <span class="keyword-count" id="simKeywordCount">14 Research Assets Found</span>
+                  <div class="keyword-filter-chips" role="tablist" aria-label="Filter keyword results">
+                    <button type="button" class="k-filter is-active" data-kfilter="all" data-kcount="14 Research Assets Found">All (14)</button>
+                    <button type="button" class="k-filter" data-kfilter="tools" data-kcount="4 Interactive Tools Found">Tools (4)</button>
+                    <button type="button" class="k-filter" data-kfilter="reports" data-kcount="6 Research Reports Found">Reports (6)</button>
+                    <button type="button" class="k-filter" data-kfilter="webinars" data-kcount="4 Member Webinars Found">Webinars (4)</button>
                   </div>
                 </div>
                 <ul class="keyword-results-list">
-                  <li>
+                  <li data-kcat="tools">
                     <span class="res-type">Interactive Tool</span>
                     <strong>Executive Succession Planning Risk Matrix</strong>
-                    <span class="res-meta">Updated Sept 2026 · Spreadsheet & Assessment</span>
+                    <span class="res-meta">Updated Sept 2025 · Spreadsheet &amp; Assessment</span>
                   </li>
-                  <li>
+                  <li data-kcat="reports">
                     <span class="res-type">Research Study</span>
                     <strong>Benchmarking Next-Gen Leadership Pipelines</strong>
                     <span class="res-meta">48 pages · Global enterprise sample (n=820)</span>
                   </li>
-                  <li>
+                  <li data-kcat="reports">
                     <span class="res-type">Executive Brief</span>
                     <strong>Boardroom Succession Readiness in Volatile Markets</strong>
                     <span class="res-meta">12 pages · C-Suite strategy series</span>
+                  </li>
+                  <li data-kcat="webinars" hidden>
+                    <span class="res-type">Member Roundtable</span>
+                    <strong>CHRO Playbook: Emergency CEO Transition Planning</strong>
+                    <span class="res-meta">54 min recording · Fortune 500 panel</span>
                   </li>
                 </ul>
               </div>
@@ -769,15 +774,19 @@
               </nav>
       <div class="ai-mini-input-container">
         <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+        <button type="button" class="ai-mini-cmdk" data-cmdk-trigger aria-label="Open CLI Command Palette (Command+K)" title="Open CLI Command Palette &amp; Inspector (⌘K)">
+          <span class="ai-mini-cmdk__label">CLI</span>
+          <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
+        </button>
         <button id="ai-mini-send" class="ai-mini-send" aria-label="Send">→</button>
       </div>
     </div>
 
     <!-- GSAP for smooth chat widget animations -->
-    <script src="../scripts/cli-mode.js" defer></script>
-    <script src="../scripts/scripts.js?v=3" defer></script>
-  <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=3" defer></script>
+    <script src="../scripts/cli-mode.js?v=4" defer></script>
+    <script src="../scripts/scripts.js?v=4" defer></script>
+    <script src="../scripts/magnetic.js" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=4" defer></script>
     <script src="../scripts/image-splitter.js" defer></script>
     <footer class="site-footer">
       <a class="site-footer-brand" href="../index.html">

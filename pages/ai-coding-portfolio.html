@@ -909,16 +909,20 @@
               </nav>
       <div class="ai-mini-input-container">
         <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+        <button type="button" class="ai-mini-cmdk" data-cmdk-trigger aria-label="Open CLI Command Palette (Command+K)" title="Open CLI Command Palette &amp; Inspector (⌘K)">
+          <span class="ai-mini-cmdk__label">CLI</span>
+          <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
+        </button>
         <button id="ai-mini-send" class="ai-mini-send" aria-label="Send">→</button>
       </div>
     </div>
 
     <!-- GSAP for smooth chat widget animations -->
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js" defer></script>
-    <script src="../scripts/scripts.js?v=3" defer></script>
-  <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=3" defer></script>
+    <script src="../scripts/cli-mode.js?v=4" defer></script>
+    <script src="../scripts/scripts.js?v=4" defer></script>
+    <script src="../scripts/magnetic.js" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=4" defer></script>
     <footer class="site-footer">
       <a class="site-footer-brand" href="../index.html">
         <img src="../favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">

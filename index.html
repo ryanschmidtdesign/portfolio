@@ -235,90 +235,6 @@
       </aside>
     </div>
 
-    <section class="home-work" aria-label="Selected work">
-      <h2 class="sr-only">Selected Work</h2>
-      <div class="evidence-grid" data-cascade>
-        <a class="evidence-card" href="pages/dashboard.html" data-reveal>
-          <h3>AI-Powered Dashboards</h3>
-          <p>Redesigned static dashboards into role-based views with anchored AI summaries, increasing beta engagement by 71%.</p>
-          <ul class="capability-pills" aria-label="Capabilities">
-            <li class="capability-pill">AI Product UX</li>
-            <li class="capability-pill">Data Visualization</li>
-            <li class="capability-pill">Design Systems</li>
-            <li class="capability-pill">Role-Based IA</li>
-          </ul>
-        </a>
-        <a class="evidence-card" href="pages/inventory.html" data-reveal>
-          <h3>Real-Time Inventory</h3>
-          <p>Connected purchase orders directly to warehouse bins and active jobs, eliminating spreadsheet reconciliations and driving +18% MRR.</p>
-          <ul class="capability-pills" aria-label="Capabilities">
-            <li class="capability-pill">Operational SaaS</li>
-            <li class="capability-pill">Data Modeling</li>
-            <li class="capability-pill">Workflow Design</li>
-            <li class="capability-pill">Enterprise ERP</li>
-          </ul>
-        </a>
-        <a class="evidence-card" href="pages/member-portal-overhaul.html" data-reveal>
-          <h3>Member Portal Redesign</h3>
-          <p>Restructured i4cp's research taxonomy and introduced a unified AI discovery omnibar, lifting AI feature adoption by 500%.</p>
-          <ul class="capability-pills" aria-label="Capabilities">
-            <li class="capability-pill">Information Architecture</li>
-            <li class="capability-pill">Search UX</li>
-            <li class="capability-pill">Content Discovery</li>
-            <li class="capability-pill">User Research</li>
-          </ul>
-        </a>
-        <a class="evidence-card" href="pages/ai-coding-portfolio.html" data-reveal>
-          <h3>Engineering My Portfolio</h3>
-          <p>Prototyped and shipped directly in HTML, modular CSS, and JavaScript using Cursor to test interactions in working code.</p>
-          <ul class="capability-pills" aria-label="Capabilities">
-            <li class="capability-pill">UX Engineering</li>
-            <li class="capability-pill">Design Tokens</li>
-            <li class="capability-pill">AI Tooling</li>
-            <li class="capability-pill">Performance</li>
-          </ul>
-        </a>
-      </div>
-    </section>
-
-    <section class="home-impact" aria-label="How I create impact">
-      <h2 class="sr-only">How I Create Impact</h2>
-      <div class="impact-metrics" data-cascade>
-        <a href="pages/dashboard.html" class="impact-metric"
-          style="text-decoration:none; color:inherit; display:block;">
-          <strong class="metric" data-animate>+71%</strong>
-          <span class="metric-label">dashboard engagement (beta)<br><strong>D-Tools</strong></span>
-        </a>
-        <a href="pages/dashboard.html" class="impact-metric"
-          style="text-decoration:none; color:inherit; display:block;">
-          <strong class="metric" data-animate>62%</strong>
-          <span class="metric-label">multi-dashboard users (beta)<br><strong>D-Tools</strong></span>
-        </a>
-        <a href="pages/inventory.html" class="impact-metric"
-          style="text-decoration:none; color:inherit; display:block;">
-          <strong class="metric" data-animate>92%</strong>
-          <span class="metric-label">design system adoption<br><strong>D-Tools</strong></span>
-        </a>
-        <a href="pages/inventory.html" class="impact-metric"
-          style="text-decoration:none; color:inherit; display:block;">
-          <strong class="metric" data-animate>+8%</strong>
-          <span class="metric-label">product adoption (1-yr)<br><strong>D-Tools</strong></span>
-        </a>
-        <a href="pages/inventory.html" class="impact-metric"
-          style="text-decoration:none; color:inherit; display:block;">
-          <strong class="metric" data-animate>+18%</strong>
-          <span class="metric-label">recurring revenue (1-yr)<br><strong>D-Tools</strong></span>
-        </a>
-        <a href="pages/member-portal-overhaul.html" class="impact-metric"
-          style="text-decoration:none; color:inherit; display:block;">
-          <strong class="metric" data-animate>+500%</strong>
-          <span class="metric-label">AI feature activation<br><strong>i4cp</strong></span>
-        </a>
-      </div>
-    </section>
-
-
-
     <div class="ai-mini-wrapper consolidated-nav" data-assistant-trigger>
       <nav class="ai-mini-nav" aria-label="Main navigation">
 
@@ -340,20 +256,24 @@
         <input type="text" id="ai-mini-input" class="ai-mini-input"
           placeholder="Ask about Ryan's projects, design-to-code workflow, or role fit…"
           autocomplete="off" aria-label="Ask about Ryan's projects, technical skills, or design experience" />
+        <button type="button" class="ai-mini-cmdk" data-cmdk-trigger aria-label="Open CLI Command Palette (Command+K)" title="Open CLI Command Palette &amp; Inspector (⌘K)">
+          <span class="ai-mini-cmdk__label">CLI</span>
+          <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
+        </button>
         <button id="ai-mini-send" class="ai-mini-send" aria-label="Send">→</button>
       </div>
     </div>
 
-    <script src="./scripts/cli-mode.js" defer></script>
+    <script src="./scripts/cli-mode.js?v=4" defer></script>
 
     <!-- Homepage case study titles -->
-    <script src="./scripts/home-titles.js?v=3" defer></script>
+    <script src="./scripts/home-titles.js?v=4" defer></script>
 
     <!-- Consolidated JavaScript -->
     <script src="./scripts/magnetic.js" defer></script>
-    <script src="./scripts/scripts.js?v=3" defer></script>
+    <script src="./scripts/scripts.js?v=4" defer></script>
 
-    <script src="./scripts/rs-chat-widget.js?v=3" defer></script>
+    <script src="./scripts/rs-chat-widget.js?v=4" defer></script>
   </main>
   <footer class="site-footer">
     <a class="site-footer-brand" href="./index.html">

@@ -21,6 +21,25 @@
 
     this.container.classList.add('splitter-initialized');
 
+    // Inject Before / After corner badges if not already present
+    if (!this.viewport.querySelector('.splitter-badge--before')) {
+      this.badgeBefore = document.createElement('span');
+      this.badgeBefore.className = 'splitter-badge splitter-badge--before';
+      this.badgeBefore.textContent = this.container.getAttribute('data-before-label') || 'Before';
+      this.viewport.appendChild(this.badgeBefore);
+    } else {
+      this.badgeBefore = this.viewport.querySelector('.splitter-badge--before');
+    }
+
+    if (!this.viewport.querySelector('.splitter-badge--after')) {
+      this.badgeAfter = document.createElement('span');
+      this.badgeAfter.className = 'splitter-badge splitter-badge--after';
+      this.badgeAfter.textContent = this.container.getAttribute('data-after-label') || 'After';
+      this.viewport.appendChild(this.badgeAfter);
+    } else {
+      this.badgeAfter = this.viewport.querySelector('.splitter-badge--after');
+    }
+
     this.update(this.position);
 
     // Allow dragging from the handle AND from the viewport area (better UX on touch)
@@ -95,6 +114,13 @@
     this.handle.style.left = percent + '%';
     this.handle.style.transform = 'translateX(-50%)';
     this.handle.setAttribute('aria-valuenow', Math.round(percent));
+
+    if (this.badgeBefore) {
+      this.badgeBefore.classList.toggle('is-occluded', percent < 16);
+    }
+    if (this.badgeAfter) {
+      this.badgeAfter.classList.toggle('is-occluded', percent > 84);
+    }
   };
 
   document.addEventListener('DOMContentLoaded', function () {

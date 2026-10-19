@@ -1121,16 +1121,18 @@ function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
         return { answer: sanitize(String(repairedAnswer)), ...empty };
       }
     }
+    const fallbackCases = reconcileContextCases(kb, pickedCases, pickedCases);
     return {
-      answer: "I had trouble formatting that cleanly. Try asking about Ryan's case studies, technical skills, or design experience.",
+      answer: "Ryan's strongest shipped outcomes span **BI Analytics at D-Tools Cloud** (+71% beta engagement across 17 KPIs), **Inventory, Purchasing & Receiving at D-Tools** (+18% recurring revenue via an auditable mobile-to-ledger workflow), and the **i4cp AI Search & Member Portal Overhaul** (+500% AI synthesis activation and +10% YoY renewal lift).",
       suggested_pills: [
-        "What are Ryan's strongest projects?",
-        "Is Ryan a UX Engineer fit?"
+        "How did he drive +71% BI dashboard engagement?",
+        "Tell me about the i4cp AI search overhaul",
+        "Is Ryan a fit for a Staff/Lead Product Designer role?"
       ],
       hire_intent: false,
       action_scroll_to: "",
       action_highlight: "",
-      context_cases: reconcileContextCases(kb, pickedCases, pickedCases),
+      context_cases: fallbackCases,
       sources: []
     };
   }
@@ -1725,7 +1727,7 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
   const isDetailed = String(answerStyle || "").toLowerCase() === "detailed";
   let model = useFitModel ? GEMINI_FIT_MODEL : GEMINI_MODEL;
   // Tokens must accommodate thinking tokens (~500-900) + JSON wrapper + answer text
-  const maxOutputTokens = useFitModel ? 2000 : (isDetailed ? 2500 : 1800);
+  const maxOutputTokens = useFitModel ? 2600 : (isDetailed ? 2800 : 2400);
   const temperature = useFitModel ? 0.3 : (isDetailed ? 0.3 : 0.25);
 
   const endpointBase = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}`;
@@ -1749,7 +1751,6 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
       responseSchema: {
         type: "OBJECT",
         properties: {
-          thinking: { type: "STRING", description: "Internal reasoning scratchpad. Map out the proof chain, metrics, and tone constraints here BEFORE writing the final answer." },
           answer: { type: "STRING", description: "The conversational response to the user, strictly following voice rules." },
           suggested_pills: { type: "ARRAY", items: { type: "STRING" }, description: "1-2 short follow-up questions the user might want to ask next." },
           hire_intent: { type: "BOOLEAN", description: "Set to true ONLY if the user is asking about contacting Ryan, availability, or scheduling." },
@@ -1758,7 +1759,7 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
           action_scroll_to: { type: "STRING", description: "Optional section ID to scroll to on the current page." },
           action_highlight: { type: "STRING", description: "Optional CSS selector to highlight on the current page." }
         },
-        required: ["thinking", "answer", "suggested_pills", "hire_intent"]
+        required: ["answer", "suggested_pills", "hire_intent"]
       },
       responseModalities: ["TEXT"]
     }

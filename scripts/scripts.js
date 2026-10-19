@@ -137,71 +137,6 @@
             else handleSend();
           }
         });
-
-        // Ambient Typewriter Rotator for mini-chat input
-        (function initTypewriter() {
-          const prompts = [
-            "Ask about Ryan's projects, design-to-code workflow, or role fit…",
-            "Ask: How did Ryan drive 71% dashboard adoption?",
-            "Ask: Why choose progressive disclosure over flat navigation?",
-            "Ask: How did the inventory system balance real-time sync with speed?",
-            "Ask: What is Ryan's approach to design tokens and front-end code?",
-            "Paste a job description or link to check role fit…"
-          ];
-
-          let promptIdx = 0;
-          let charIdx = 0;
-          let isDeleting = false;
-          let isPaused = false;
-          let typewriterTimer = null;
-          const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-          function tick() {
-            if (isPaused || prefersReduced) return;
-            const currentPrompt = prompts[promptIdx];
-
-            if (!isDeleting) {
-              charIdx++;
-              aiInput.setAttribute('placeholder', currentPrompt.substring(0, charIdx));
-              if (charIdx >= currentPrompt.length) {
-                isDeleting = true;
-                typewriterTimer = setTimeout(tick, 3400); // Read time for visitor
-                return;
-              }
-              typewriterTimer = setTimeout(tick, 45 + Math.random() * 25); // Natural typing rhythm
-            } else {
-              charIdx--;
-              aiInput.setAttribute('placeholder', currentPrompt.substring(0, charIdx));
-              if (charIdx <= 0) {
-                isDeleting = false;
-                promptIdx = (promptIdx + 1) % prompts.length;
-                typewriterTimer = setTimeout(tick, 600); // Pause before next prompt starts
-                return;
-              }
-              typewriterTimer = setTimeout(tick, 22); // Fast deletion
-            }
-          }
-
-          if (!prefersReduced) {
-            typewriterTimer = setTimeout(tick, 1600);
-          }
-
-          aiInput.addEventListener('focus', () => {
-            isPaused = true;
-            clearTimeout(typewriterTimer);
-            aiInput.setAttribute('placeholder', 'Type a question or paste a job link…');
-          });
-
-          aiInput.addEventListener('blur', () => {
-            if (!aiInput.value.trim()) {
-              isPaused = false;
-              charIdx = 0;
-              isDeleting = false;
-              clearTimeout(typewriterTimer);
-              typewriterTimer = setTimeout(tick, 1000);
-            }
-          });
-        })();
       }
     } catch (e) { console.error('Floating nav init error', e); }
   });
@@ -379,7 +314,7 @@
 })();
 
 // ============================================================================
-// Upgraded Circular Scroll Progress Indicator
+// Upgraded Circular Scroll Progress Indicator & Back-to-Top Control
 // ============================================================================
 (function () {
   const path = window.location.pathname;
@@ -388,14 +323,31 @@
 
   const wrapper = document.createElement("div");
   wrapper.className = "circular-progress-wrapper";
+  wrapper.setAttribute("role", "button");
+  wrapper.setAttribute("tabindex", "0");
+  wrapper.setAttribute("aria-label", "Scroll back to top");
+  wrapper.setAttribute("title", "Back to top");
   
   wrapper.innerHTML = `
-    <svg class="circular-progress-svg" viewBox="0 0 48 48">
+    <svg class="circular-progress-svg" viewBox="0 0 48 48" aria-hidden="true">
       <circle class="circular-progress-bg" cx="24" cy="24" r="20"></circle>
       <circle class="circular-progress-value" cx="24" cy="24" r="20"></circle>
     </svg>
+    <span class="circular-progress-arrow" aria-hidden="true">↑</span>
   `;
   document.body.appendChild(wrapper);
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  wrapper.addEventListener("click", scrollToTop);
+  wrapper.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      scrollToTop();
+    }
+  });
 
   const circle = wrapper.querySelector('.circular-progress-value');
   const radius = circle.r.baseVal.value;
@@ -820,23 +772,71 @@ setTimeout(() => {
   console.log("%cSince you're looking under the hood: I built this entire site custom without a CMS, using semantic HTML, vanilla CSS/JS, and AI tooling. I don't just design systems—I can help your team ship them. Let's talk: ryanschmidt1989@gmail.com", "font-size: 14px; color: #444; padding-top: 8px; line-height: 1.5;");
 }, 1000);
 
-// --- URL PARAMETER ROUTING (Mobile Evidence Cards) ---
-(function() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const targetRole = urlParams.get('role');
-  const grid = document.querySelector('.evidence-grid');
-  if (!grid || !targetRole) return;
-  
-  const cards = Array.from(grid.querySelectorAll('.evidence-card'));
-  let targetHref = '';
-  
-  if (targetRole === 'growth') targetHref = 'member-portal-overhaul.html';
-  if (targetRole === 'eng') targetHref = 'ai-coding-portfolio.html';
-  
-  if (targetHref) {
-    const targetCard = cards.find(c => c.getAttribute('href').includes(targetHref));
-    if (targetCard) {
-      grid.prepend(targetCard);
-    }
+// ============================================================================
+// Interactive Case Study Microinteractions (Stepper, Keyword Filters, Spotlight)
+// ============================================================================
+(function () {
+  // 1. Inventory Receiving Quantity Stepper (pages/inventory.html)
+  const stepperBtns = document.querySelectorAll('.stepper-btn[data-step-delta]');
+  const stepperVal = document.getElementById('simStepperVal');
+  const stepperDone = document.getElementById('simStepperDone');
+  if (stepperBtns.length && stepperVal) {
+    let currentQty = 8;
+    const maxQty = 8;
+    stepperBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const delta = parseInt(btn.getAttribute('data-step-delta'), 10) || 0;
+        currentQty = Math.max(0, Math.min(maxQty, currentQty + delta));
+        stepperVal.textContent = `${currentQty} / ${maxQty}`;
+        stepperVal.classList.remove('is-pulsing');
+        void stepperVal.offsetWidth;
+        stepperVal.classList.add('is-pulsing');
+        setTimeout(() => stepperVal.classList.remove('is-pulsing'), 220);
+
+        if (stepperDone) {
+          if (currentQty === maxQty) {
+            stepperDone.textContent = '✓ All 8 Received';
+            stepperDone.style.opacity = '1';
+          } else if (currentQty === 0) {
+            stepperDone.textContent = 'Pending Receipt (0/8)';
+            stepperDone.style.opacity = '0.75';
+          } else {
+            stepperDone.textContent = `Partial Receipt (${currentQty}/${maxQty} logged)`;
+            stepperDone.style.opacity = '0.9';
+          }
+        }
+      });
+    });
   }
+
+  // 2. Member Portal Keyword Filter Pills (pages/member-portal-overhaul.html)
+  const kFilters = document.querySelectorAll('.k-filter[data-kfilter]');
+  const kCount = document.getElementById('simKeywordCount');
+  const kItems = document.querySelectorAll('.keyword-results-list li[data-kcat]');
+  if (kFilters.length && kItems.length) {
+    kFilters.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-kfilter');
+        const countText = btn.getAttribute('data-kcount');
+        kFilters.forEach((b) => b.classList.toggle('active', b === btn));
+        if (kCount && countText) kCount.textContent = countText;
+
+        kItems.forEach((li) => {
+          const itemCat = li.getAttribute('data-kcat');
+          const match = cat === 'all' || itemCat === cat;
+          li.style.display = match ? '' : 'none';
+        });
+      });
+    });
+  }
+
+  // 3. Radial Cursor Spotlight on Constraint & Evidence Cards
+  const spotlightCards = document.querySelectorAll('.constraint-card, .evidence-card');
+  spotlightCards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    });
+  });
 })();

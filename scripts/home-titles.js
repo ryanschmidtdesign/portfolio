@@ -2,24 +2,28 @@
   const slidesData = [
     {
       title: "Dashboards",
+      outcome: "+71% Beta Engagement · D-Tools",
       summary: "Redesigned static dashboards into role-based views with anchored AI summaries, increasing beta engagement by 71%.",
       url: "pages/dashboard.html",
       image: "assets/case-studies/dashboards/rename-dashboard.webp"
     },
     {
       title: "Inventory",
+      outcome: "+18% Recurring Revenue · D-Tools",
       summary: "Connected purchase orders directly to warehouse bins and active jobs, eliminating spreadsheet reconciliations and driving +18% MRR.",
       url: "pages/inventory.html",
       image: "assets/case-studies/inventory/inventory-controls.webp"
     },
     {
       title: "Member Portal",
+      outcome: "+500% AI Activation · i4cp",
       summary: "Restructured i4cp's research taxonomy and introduced a unified AI discovery omnibar, lifting AI feature adoption by 500%.",
       url: "pages/member-portal-overhaul.html",
       image: "assets/case-studies/member-portal/design-highlights/Home_new.webp"
     },
     {
       title: "Engineering<br>My Portfolio",
+      outcome: "Token System · AI RAG · Live Code",
       summary: "Prototyped and shipped directly in HTML, modular CSS, and JavaScript using Cursor to test interactions in working code.",
       url: "pages/ai-coding-portfolio.html",
       image: "assets/case-studies/ai-coding-portfolio/cursor-files.webp"
@@ -90,7 +94,16 @@
     summary.className = 'home-title__summary';
     summary.textContent = s.summary || '';
 
-    body.append(text, summary);
+    const metaRow = document.createElement('span');
+    metaRow.className = 'home-title__meta-row';
+    if (s.outcome) {
+      const pill = document.createElement('span');
+      pill.className = 'home-title__outcome-pill';
+      pill.innerHTML = `<span>${s.outcome}</span><span class="home-title__outcome-arrow" aria-hidden="true">→</span>`;
+      metaRow.appendChild(pill);
+    }
+
+    body.append(text, summary, metaRow);
     link.append(eyebrow, body);
     
     if (s.image) {
@@ -166,11 +179,16 @@
   function tick() {
     let newActiveLink = null;
     
-    // Only check for hover if the mouse is actually inside the container to avoid freezing
-    if (isHoveringContainer) {
+    // Only check for hover if the mouse is actually inside the container and not over a floating UI dock/modal
+    if (isHoveringContainer && mouseX >= 0 && mouseY >= 0) {
       const elements = document.elementsFromPoint(mouseX, mouseY);
-      if (elements) {
-        newActiveLink = elements.find(el => el.classList.contains('home-title')) || null;
+      if (elements && elements.length) {
+        const blockedByOverlay = elements.some(el =>
+          el.closest && el.closest('.ai-mini-wrapper, .home-header, .rs-cmd-overlay, #rs-chat-root, .site-footer')
+        );
+        if (!blockedByOverlay) {
+          newActiveLink = elements.find(el => el.classList && el.classList.contains('home-title')) || null;
+        }
       }
     }
 
