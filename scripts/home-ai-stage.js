@@ -162,6 +162,7 @@
 
     let html = escapeHtml(tokenized);
     html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
     html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     html = html.replace(/\u0000LINK(\d+)\u0000/g, (match, idx) => {
@@ -171,7 +172,9 @@
       const safeHref = normalizeInternalHref(String(href || '').trim());
       if (!isSafeHref(safeHref)) return escapeHtml(label);
 
-      const safeLabel = escapeHtml(label).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      const safeLabel = escapeHtml(label)
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
       const escapedHref = escapeHtml(safeHref);
       const isExternal = /^https?:\/\//i.test(safeHref);
       const targetAttrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
@@ -208,6 +211,25 @@
         flushList();
         continue;
       }
+
+      // Headings (### or ## or #)
+      const headingMatch = line.match(/^(#{1,4})\s+(.+)$/);
+      if (headingMatch) {
+        flushParagraph();
+        flushList();
+        blocks.push(`<h3>${renderInlineMarkdown(headingMatch[2])}</h3>`);
+        continue;
+      }
+
+      // Blockquotes (> quote)
+      const quoteMatch = line.match(/^>\s*(.+)$/);
+      if (quoteMatch) {
+        flushParagraph();
+        flushList();
+        blocks.push(`<blockquote>${renderInlineMarkdown(quoteMatch[1])}</blockquote>`);
+        continue;
+      }
+
       const bullet = line.match(/^[-*•]\s+(.+)$/);
       const numbered = line.match(/^\d+[.)]\s+(.+)$/);
       const listMatch = bullet || numbered;
@@ -238,6 +260,7 @@
   function activateStage() {
     stageRoot.classList.add('is-stage-active');
     stageView.hidden = false;
+    if (omnibarInput) omnibarInput.placeholder = 'Ask a follow up...';
   }
 
   function resetStage() {
@@ -245,18 +268,26 @@
       try { state.controller.abort(); } catch {}
     }
     state.inFlight = false;
+    state.history = [];
     stageStream.innerHTML = '';
     stageView.hidden = true;
     stageRoot.classList.remove('is-stage-active');
     document.querySelectorAll('.home-intent-card.is-active').forEach((c) => c.classList.remove('is-active'));
+    if (omnibarInput) {
+      omnibarInput.value = '';
+      omnibarInput.placeholder = 'Ask me anything...';
+    }
     renderPills(DEFAULT_PILLS);
   }
 
   function scrollToNewestCard(el) {
-    if (!el || !stageStream) return;
-    setTimeout(() => {
-      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 30);
+    if (!stageStream) return;
+    requestAnimationFrame(() => {
+      stageStream.scrollTo({
+        top: stageStream.scrollHeight,
+        behavior: 'smooth'
+      });
+    });
   }
 
   function renderPills(pills = DEFAULT_PILLS) {
@@ -281,204 +312,213 @@
 
   function renderWorkShowcaseCard() {
     activateStage();
-    stageStream.innerHTML = '';
-    const block = document.createElement('section');
-    block.className = 'home-stage-block home-stage-block--work';
-    block.innerHTML = `
-      <div class="home-stage-block__header">
-        <div class="home-stage-block__meta">
-          <span class="home-stage-badge">✦ SELECTED WORK · 4 SHIPPED CASE STUDIES</span>
-          <span class="home-stage-sub">Click any case study to read the full deep dive, or ask the AI about a specific project</span>
+    // 1. User message bubble (Copilot style)
+    const userMsg = document.createElement('div');
+    userMsg.className = 'home-chat-msg home-chat-msg--user';
+    userMsg.innerHTML = `<div class="home-chat-bubble home-chat-bubble--user">Show me your case studies with real impact</div>`;
+    stageStream.appendChild(userMsg);
+
+    // 2. Assistant message container
+    const botMsg = document.createElement('div');
+    botMsg.className = 'home-chat-msg home-chat-msg--assistant';
+    botMsg.innerHTML = `
+      <div class="home-chat-bubble home-chat-bubble--assistant">
+        <div class="home-chat-prose">
+          <p>Here are 4 featured case studies with verifiable product and business impact:</p>
         </div>
-      </div>
-      <div class="home-work-grid">
-        ${CASE_STUDIES.map(
-          (c) => `
-          <article class="home-work-card">
-            <div class="home-work-card__body">
-              <div class="home-work-card__top-row">
-                <span class="home-work-card__eyebrow">${escapeHtml(c.eyebrow)}</span>
-                <span class="home-work-kpi">${escapeHtml(c.metric)}</span>
+        <div class="home-work-grid">
+          ${CASE_STUDIES.map(
+            (c) => `
+            <article class="home-work-card">
+              <div class="home-work-card__body">
+                <div class="home-work-card__top-row">
+                  <span class="home-work-card__eyebrow">${escapeHtml(c.eyebrow)}</span>
+                  <span class="home-work-kpi">${escapeHtml(c.metric)}</span>
+                </div>
+                <h3 class="home-work-card__title">
+                  <a href="${c.url}">${escapeHtml(c.title)}</a>
+                </h3>
+                <p class="home-work-card__summary">${escapeHtml(c.summary)}</p>
+                <div class="home-work-card__actions">
+                  <a href="${c.url}" class="home-work-btn home-work-btn--primary">
+                    <span>Read Case Study</span>
+                    <span aria-hidden="true">→</span>
+                  </a>
+                  <button type="button" class="home-work-btn home-work-btn--ai" data-ai-prompt="${escapeHtml(c.aiPrompt)}">
+                    <span aria-hidden="true">✦</span>
+                    <span>Ask AI Summary</span>
+                  </button>
+                </div>
               </div>
-              <h3 class="home-work-card__title">
-                <a href="${c.url}">${escapeHtml(c.title)}</a>
-              </h3>
-              <p class="home-work-card__summary">${escapeHtml(c.summary)}</p>
-              <div class="home-work-card__actions">
-                <a href="${c.url}" class="home-work-btn home-work-btn--primary">
-                  <span>Read Case Study</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-                <button type="button" class="home-work-btn home-work-btn--ai" data-ai-prompt="${escapeHtml(c.aiPrompt)}">
-                  <span aria-hidden="true">✦</span>
-                  <span>Ask AI Summary</span>
-                </button>
-              </div>
-            </div>
-          </article>
-        `
-        ).join('')}
+            </article>
+          `
+          ).join('')}
+        </div>
       </div>
     `;
 
-    block.querySelectorAll('[data-ai-prompt]').forEach((btn) => {
+    botMsg.querySelectorAll('[data-ai-prompt]').forEach((btn) => {
       btn.addEventListener('click', () => {
         const prompt = btn.getAttribute('data-ai-prompt');
         if (prompt) askGeminiOnStage(prompt);
       });
     });
 
-    stageStream.appendChild(block);
-    scrollToNewestCard(block);
+    stageStream.appendChild(botMsg);
+    requestAnimationFrame(() => {
+      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
+    });
     renderPills([
       'Which case study should I read first?',
       'How did you drive 71% more dashboard engagement?',
-      'How did you lift AI adoption by 500% at i4cp?',
-      'How did the Inventory MVP drive +18% MRR?'
+      'How did you lift AI adoption by 500% at i4cp?'
     ]);
   }
 
   function renderResumeDossierCard() {
     activateStage();
-    stageStream.innerHTML = '';
-    const block = document.createElement('section');
-    block.className = 'home-stage-block home-stage-block--resume';
-    block.innerHTML = `
-      <div class="home-stage-block__header">
-        <div class="home-stage-block__meta">
-          <span class="home-stage-badge home-stage-badge--emerald">● EXECUTIVE DOSSIER · CURRICULUM VITAE</span>
-          <span class="home-stage-sub">Austin, TX · Open to Remote, Hybrid, or Austin-based Senior / Staff / UX Engineer Roles</span>
+    // 1. User message bubble (Copilot style)
+    const userMsg = document.createElement('div');
+    userMsg.className = 'home-chat-msg home-chat-msg--user';
+    userMsg.innerHTML = `<div class="home-chat-bubble home-chat-bubble--user">Can I see your resume and career highlights?</div>`;
+    stageStream.appendChild(userMsg);
+
+    // 2. Assistant message container
+    const botMsg = document.createElement('div');
+    botMsg.className = 'home-chat-msg home-chat-msg--assistant';
+    botMsg.innerHTML = `
+      <div class="home-chat-bubble home-chat-bubble--assistant">
+        <div class="home-chat-prose">
+          <p>Here is my executive summary, career highlights, and downloadable resume:</p>
         </div>
-        <div class="home-stage-block__cta">
-          <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-dossier-pdf-btn">
-            <span>Open Full Resume (PDF)</span>
+        <div class="home-dossier-metrics">
+          <div class="home-dossier-stat">
+            <span class="home-dossier-stat__val">+500%</span>
+            <span class="home-dossier-stat__lbl">AI Search Activation (i4cp)</span>
+          </div>
+          <div class="home-dossier-stat">
+            <span class="home-dossier-stat__val">+71%</span>
+            <span class="home-dossier-stat__lbl">Beta BI Engagement (D-Tools)</span>
+          </div>
+          <div class="home-dossier-stat">
+            <span class="home-dossier-stat__val">92%</span>
+            <span class="home-dossier-stat__lbl">Eng Adoption (100+ Components)</span>
+          </div>
+          <div class="home-dossier-stat">
+            <span class="home-dossier-stat__val">+18%</span>
+            <span class="home-dossier-stat__lbl">Recurring Revenue Lift (Inventory)</span>
+          </div>
+        </div>
+
+        <div class="home-dossier-timeline">
+          <div class="home-dossier-role">
+            <div class="home-dossier-role__head">
+              <div>
+                <strong>Senior Product / CX-UX Designer</strong> · <span class="home-dossier-org">i4cp</span>
+              </div>
+              <span class="home-dossier-date">Feb 2026 – Present</span>
+            </div>
+            <p>Lead platform experience strategy across member portal, AI research synthesis (Ask Ahri), and internal admin tools. Ship interactive HTML/CSS/JS prototypes via Cursor to eliminate spec ambiguity.</p>
+          </div>
+
+          <div class="home-dossier-role">
+            <div class="home-dossier-role__head">
+              <div>
+                <strong>Senior Product Designer</strong> · <span class="home-dossier-org">D-Tools, Inc.</span>
+              </div>
+              <span class="home-dossier-date">Oct 2021 – Feb 2026</span>
+            </div>
+            <p>Owned Cloud UX across 5 core B2B SaaS modules as platform scaled from 6,500 to 18,000+ active users. Architected the 0→1 real-time inventory MVP (+18% MRR), AI BI dashboard suite (+71% engagement), and 100+ component tokenized design system.</p>
+          </div>
+
+          <div class="home-dossier-role">
+            <div class="home-dossier-role__head">
+              <div>
+                <strong>Senior Design Group Critique Facilitator</strong> · <span class="home-dossier-org">Designlab</span>
+              </div>
+              <span class="home-dossier-date">May 2021 – Apr 2026</span>
+            </div>
+            <p>Facilitated 400+ live critique sessions and mentored 1,500+ product designers on problem framing, UX research synthesis, and systems thinking.</p>
+          </div>
+        </div>
+
+        <div class="home-dossier-footer">
+          <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-work-btn home-work-btn--primary">
+            <span>Download Resume PDF</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+          <a href="pages/about.html" class="home-work-btn home-work-btn--ghost">
+            <span>Read Full Leadership &amp; Bio</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" class="home-work-btn home-work-btn--ghost">
+            <span>Connect on LinkedIn</span>
             <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
-
-      <div class="home-dossier-metrics">
-        <div class="home-dossier-stat">
-          <span class="home-dossier-stat__val">+500%</span>
-          <span class="home-dossier-stat__lbl">AI Search Activation (i4cp)</span>
-        </div>
-        <div class="home-dossier-stat">
-          <span class="home-dossier-stat__val">+71%</span>
-          <span class="home-dossier-stat__lbl">Beta BI Engagement (D-Tools)</span>
-        </div>
-        <div class="home-dossier-stat">
-          <span class="home-dossier-stat__val">92%</span>
-          <span class="home-dossier-stat__lbl">Eng Adoption (100+ Components)</span>
-        </div>
-        <div class="home-dossier-stat">
-          <span class="home-dossier-stat__val">+18%</span>
-          <span class="home-dossier-stat__lbl">Recurring Revenue Lift (Inventory)</span>
-        </div>
-      </div>
-
-      <div class="home-dossier-timeline">
-        <div class="home-dossier-role">
-          <div class="home-dossier-role__head">
-            <div>
-              <strong>Senior Product / CX-UX Designer</strong> · <span class="home-dossier-org">i4cp (Institute for Corporate Productivity)</span>
-            </div>
-            <span class="home-dossier-date">Feb 2026 – Present</span>
-          </div>
-          <p>Lead platform experience strategy across member portal, AI research synthesis (Ask Ahri), and internal admin tools. Ship interactive HTML/CSS/JS prototypes via Cursor to eliminate spec ambiguity.</p>
-        </div>
-
-        <div class="home-dossier-role">
-          <div class="home-dossier-role__head">
-            <div>
-              <strong>Senior Product Designer</strong> · <span class="home-dossier-org">D-Tools, Inc.</span>
-            </div>
-            <span class="home-dossier-date">Oct 2021 – Feb 2026</span>
-          </div>
-          <p>Owned Cloud UX across 5 core B2B SaaS modules as platform scaled from 6,500 to 18,000+ active users. Architected the 0→1 real-time inventory MVP (+18% MRR), AI BI dashboard suite (+71% engagement), and 100+ component tokenized design system.</p>
-        </div>
-
-        <div class="home-dossier-role">
-          <div class="home-dossier-role__head">
-            <div>
-              <strong>Senior Design Group Critique Facilitator</strong> · <span class="home-dossier-org">Designlab</span>
-            </div>
-            <span class="home-dossier-date">May 2021 – Apr 2026</span>
-          </div>
-          <p>Facilitated 400+ live critique sessions and mentored 1,500+ product designers on problem framing, UX research synthesis, and systems thinking.</p>
-        </div>
-      </div>
-
-      <div class="home-dossier-footer">
-        <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-work-btn home-work-btn--primary">
-          <span>Download Resume PDF</span>
-          <span aria-hidden="true">↓</span>
-        </a>
-        <a href="pages/about.html" class="home-work-btn home-work-btn--ghost">
-          <span>Read Full Leadership &amp; Bio</span>
-          <span aria-hidden="true">→</span>
-        </a>
-        <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" class="home-work-btn home-work-btn--ghost">
-          <span>Connect on LinkedIn</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </div>
     `;
 
-    stageStream.appendChild(block);
-    scrollToNewestCard(block);
+    stageStream.appendChild(botMsg);
+    requestAnimationFrame(() => {
+      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
+    });
     renderPills([
       'Is Ryan a fit for a Staff Product Designer role?',
       'Tell me about his design system experience',
-      'How does he collaborate with engineers?',
-      'What roles is Ryan looking for?'
+      'How does he collaborate with engineers?'
     ]);
   }
 
   function renderApproachBlueprintCard() {
     activateStage();
-    stageStream.innerHTML = '';
-    const block = document.createElement('section');
-    block.className = 'home-stage-block home-stage-block--approach';
-    block.innerHTML = `
-      <div class="home-stage-block__header">
-        <div class="home-stage-block__meta">
-          <span class="home-stage-badge home-stage-badge--amber">✦ DESIGN PHILOSOPHY · SYSTEMS &amp; AI IN PRACTICE</span>
-          <span class="home-stage-sub">How Ryan turns messy enterprise research and legacy interfaces into shippable code</span>
-        </div>
-      </div>
+    // 1. User message bubble (Copilot style)
+    const userMsg = document.createElement('div');
+    userMsg.className = 'home-chat-msg home-chat-msg--user';
+    userMsg.innerHTML = `<div class="home-chat-bubble home-chat-bubble--user">What is your product design approach and philosophy?</div>`;
+    stageStream.appendChild(userMsg);
 
-      <div class="home-pillars-grid">
-        <div class="home-pillar-card">
-          <div class="home-pillar-card__num">01 // TRUST BEFORE AI</div>
-          <h4>Anchor AI on Verifiable Data</h4>
-          <p>AI shouldn't be the first thing a user sees in a workflow they don't trust yet. Layering synthesis on verifiable KPIs drove +71% to +500% adoption.</p>
+    // 2. Assistant message container
+    const botMsg = document.createElement('div');
+    botMsg.className = 'home-chat-msg home-chat-msg--assistant';
+    botMsg.innerHTML = `
+      <div class="home-chat-bubble home-chat-bubble--assistant">
+        <div class="home-chat-prose">
+          <p>Here is my approach to product design, systems architecture, and AI in practice:</p>
         </div>
-        <div class="home-pillar-card">
-          <div class="home-pillar-card__num">02 // THE DESIGN-ENG SEAM</div>
-          <h4>Prototype in the Browser</h4>
-          <p>Static handoffs lose nuance. Ryan pairs Figma token architecture with live HTML/CSS/JS prototypes in Cursor &amp; Claude alongside engineers.</p>
-        </div>
-        <div class="home-pillar-card">
-          <div class="home-pillar-card__num">03 // TOKENS OVER PATCHES</div>
-          <h4>Systemize What Works</h4>
-          <p>Most legacy UI debt is a token problem. Scaling a 100+ component tokenized system achieved 92% engineer adoption and cut UI defects by 38%.</p>
+        <div class="home-pillars-grid">
+          <div class="home-pillar-card">
+            <div class="home-pillar-card__num">01 // TRUST BEFORE AI</div>
+            <h4>Anchor AI on Verifiable Data</h4>
+            <p>AI shouldn't be the first thing a user sees in a workflow they don't trust yet. Layering synthesis on verifiable KPIs drove +71% to +500% adoption.</p>
+          </div>
+          <div class="home-pillar-card">
+            <div class="home-pillar-card__num">02 // THE DESIGN-ENG SEAM</div>
+            <h4>Prototype in the Browser</h4>
+            <p>Static handoffs lose nuance. Ryan pairs Figma token architecture with live HTML/CSS/JS prototypes in Cursor &amp; Claude alongside engineers.</p>
+          </div>
+          <div class="home-pillar-card">
+            <div class="home-pillar-card__num">03 // TOKENS OVER PATCHES</div>
+            <h4>Systemize What Works</h4>
+            <p>Most legacy UI debt is a token problem. Scaling a 100+ component tokenized system achieved 92% engineer adoption and cut UI defects by 38%.</p>
+          </div>
         </div>
       </div>
     `;
 
-    stageStream.appendChild(block);
-    scrollToNewestCard(block);
+    stageStream.appendChild(botMsg);
+    requestAnimationFrame(() => {
+      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
+    });
     renderPills([
       'How do you validate AI features with users?',
       'Tell me about your 100+ component design system',
-      'How do you use Cursor and Claude in your workflow?',
-      'What are his strongest projects?'
+      'How do you use Cursor and Claude in your workflow?'
     ]);
   }
 
   function renderCLITelemetryStageCard(command) {
     activateStage();
-    stageStream.innerHTML = '';
     const cmd = command.replace(/^\//, '').toLowerCase().trim();
 
     if (cmd === 'work' || cmd === 'ls' || cmd === 'projects') {
@@ -507,48 +547,53 @@
     const domInteractive = navTiming ? `${Math.round(navTiming.domInteractive)}ms` : '< 42ms';
     const currentAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0033FF';
 
-    const block = document.createElement('section');
-    block.className = 'home-stage-block home-stage-block--cli';
-    block.innerHTML = `
-      <div class="home-stage-block__header">
-        <div class="home-stage-block__meta">
-          <span class="home-stage-badge home-stage-badge--violet">&gt;_ CLI TELEMETRY · /${escapeHtml(cmd || 'status')}</span>
-          <span class="home-stage-sub">Live runtime inspection &amp; UX engineering controls</span>
-        </div>
-      </div>
+    // 1. User message bubble (Copilot style)
+    const userMsg = document.createElement('div');
+    userMsg.className = 'home-chat-msg home-chat-msg--user';
+    userMsg.innerHTML = `<div class="home-chat-bubble home-chat-bubble--user">/${escapeHtml(cmd || 'perf')}</div>`;
+    stageStream.appendChild(userMsg);
 
-      <div class="home-cli-grid">
-        <div class="home-cli-card">
-          <span class="home-cli-card__lbl">DOM Interactive</span>
-          <strong class="home-cli-card__val">${domInteractive}</strong>
-          <span class="home-cli-card__sub">${domCount} live nodes · ${scriptsCount} scripts</span>
+    // 2. Assistant message container
+    const botMsg = document.createElement('div');
+    botMsg.className = 'home-chat-msg home-chat-msg--assistant';
+    botMsg.innerHTML = `
+      <div class="home-chat-bubble home-chat-bubble--assistant">
+        <div class="home-chat-prose">
+          <p>Live runtime telemetry &amp; UX engineering controls:</p>
         </div>
-        <div class="home-cli-card">
-          <span class="home-cli-card__lbl">Stack Architecture</span>
-          <strong class="home-cli-card__val">Zero-Build ES6</strong>
-          <span class="home-cli-card__sub">Strict 1.250 Major Third CSS Tokens</span>
+        <div class="home-cli-grid">
+          <div class="home-cli-card">
+            <span class="home-cli-card__lbl">DOM Interactive</span>
+            <strong class="home-cli-card__val">${domInteractive}</strong>
+            <span class="home-cli-card__sub">${domCount} live nodes · ${scriptsCount} scripts</span>
+          </div>
+          <div class="home-cli-card">
+            <span class="home-cli-card__lbl">Stack Architecture</span>
+            <strong class="home-cli-card__val">Zero-Build ES6</strong>
+            <span class="home-cli-card__sub">Strict 1.250 Major Third CSS Tokens</span>
+          </div>
+          <div class="home-cli-card">
+            <span class="home-cli-card__lbl">Active Accent Token</span>
+            <strong class="home-cli-card__val">${escapeHtml(currentAccent)}</strong>
+            <span class="home-cli-card__sub">Live CSS Custom Property</span>
+          </div>
         </div>
-        <div class="home-cli-card">
-          <span class="home-cli-card__lbl">Active Accent Token</span>
-          <strong class="home-cli-card__val">${escapeHtml(currentAccent)}</strong>
-          <span class="home-cli-card__sub">Live CSS Custom Property</span>
-        </div>
-      </div>
 
-      <div class="home-cli-actions">
-        <button type="button" class="home-cli-btn" data-cli-act="xray">
-          <span>⌖ Toggle Live DOM X-Ray Inspector</span>
-        </button>
-        <button type="button" class="home-cli-btn" data-cli-act="tokens">
-          <span>◈ Cycle Live Accent Token (--accent)</span>
-        </button>
-        <button type="button" class="home-cli-btn" data-cli-act="cmdk">
-          <span>⌘K Open Full Command Palette</span>
-        </button>
+        <div class="home-cli-actions">
+          <button type="button" class="home-cli-btn" data-cli-act="xray">
+            <span>⌖ Toggle Live DOM X-Ray Inspector</span>
+          </button>
+          <button type="button" class="home-cli-btn" data-cli-act="tokens">
+            <span>◈ Cycle Live Accent Token (--accent)</span>
+          </button>
+          <button type="button" class="home-cli-btn" data-cli-act="cmdk">
+            <span>⌘K Open Full Command Palette</span>
+          </button>
+        </div>
       </div>
     `;
 
-    block.querySelectorAll('[data-cli-act]').forEach((btn) => {
+    botMsg.querySelectorAll('[data-cli-act]').forEach((btn) => {
       btn.addEventListener('click', () => {
         const act = btn.getAttribute('data-cli-act');
         if (act === 'xray' && window.rsCommandPalette) {
@@ -556,7 +601,7 @@
         } else if (act === 'tokens' && window.rsCommandPalette) {
           window.rsCommandPalette.cycleTheme();
           const updatedAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
-          const valEl = block.querySelectorAll('.home-cli-card__val')[2];
+          const valEl = botMsg.querySelectorAll('.home-cli-card__val')[2];
           if (valEl && updatedAccent) valEl.textContent = updatedAccent;
         } else if (act === 'cmdk' && window.rsCommandPalette) {
           window.rsCommandPalette.open();
@@ -564,12 +609,14 @@
       });
     });
 
-    stageStream.appendChild(block);
-    scrollToNewestCard(block);
+    stageStream.appendChild(botMsg);
+    requestAnimationFrame(() => {
+      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
   // ---------------------------------------------------------------------------
-  // Live Gemini 2.5 Flash RAG Streaming on the Main Stage
+  // Live Gemini 2.5 Flash RAG Streaming on the Main Stage (Copilot Chat Flow)
   // ---------------------------------------------------------------------------
 
   async function askGeminiOnStage(rawQuestion, options = {}) {
@@ -577,7 +624,6 @@
     if (!question || state.inFlight) return;
 
     activateStage();
-    stageStream.innerHTML = '';
     state.inFlight = true;
     omnibarSend.disabled = true;
 
@@ -586,36 +632,36 @@
     }
     state.controller = new AbortController();
 
-    const turnEl = document.createElement('article');
-    turnEl.className = 'home-ai-turn';
-    turnEl.innerHTML = `
-      <div class="home-ai-turn__user">
-        <span class="home-ai-turn__user-label">You asked</span>
-        <div class="home-ai-turn__user-bubble">${escapeHtml(question)}</div>
-      </div>
-      <div class="home-ai-turn__bot">
-        <div class="home-ai-turn__bot-header">
-          <span class="home-ai-turn__dot"></span>
-          <span class="home-ai-turn__bot-title">Ryan's Portfolio AI</span>
-          <span class="home-ai-turn__bot-tag">Gemini 2.5 RAG · Grounded in Shipped Work</span>
+    // 1. Append User Message Bubble (Right-aligned, matching Copilot)
+    const userMsg = document.createElement('div');
+    userMsg.className = 'home-chat-msg home-chat-msg--user';
+    userMsg.innerHTML = `<div class="home-chat-bubble home-chat-bubble--user">${escapeHtml(question)}</div>`;
+    stageStream.appendChild(userMsg);
+
+    // 2. Append Assistant Message Container (Left-aligned, matching Copilot)
+    const botMsg = document.createElement('div');
+    botMsg.className = 'home-chat-msg home-chat-msg--assistant';
+    botMsg.innerHTML = `
+      <div class="home-chat-bubble home-chat-bubble--assistant">
+        <div class="home-chat-loading">
+          <span class="home-chat-loading__dot"></span>
+          <span class="home-chat-loading__dot"></span>
+          <span class="home-chat-loading__dot"></span>
         </div>
-        <div class="home-ai-turn__body">
-          <div class="home-ai-loading">
-            <span class="home-ai-loading__text">Synthesizing evidence from case studies &amp; career dossier...</span>
-            <span class="loading-dots" aria-hidden="true"><span></span><span></span><span></span></span>
-          </div>
-        </div>
-        <div class="home-ai-turn__sources" hidden></div>
+        <div class="home-chat-prose"></div>
+        <div class="home-chat-sources" hidden></div>
+        <div class="home-chat-followups" hidden></div>
       </div>
     `;
+    stageStream.appendChild(botMsg);
+    requestAnimationFrame(() => {
+      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-    stageStream.appendChild(turnEl);
-    if (!options.skipScrollOnStart) {
-      scrollToNewestCard(turnEl);
-    }
-
-    const bodyEl = turnEl.querySelector('.home-ai-turn__body');
-    const sourcesEl = turnEl.querySelector('.home-ai-turn__sources');
+    const loadingEl = botMsg.querySelector('.home-chat-loading');
+    const proseEl = botMsg.querySelector('.home-chat-prose');
+    const sourcesEl = botMsg.querySelector('.home-chat-sources');
+    const followupsEl = botMsg.querySelector('.home-chat-followups');
 
     state.history.push({ role: 'user', content: question });
 
@@ -661,6 +707,9 @@
                 const parsed = JSON.parse(line.slice(6).trim());
                 if (parsed.type === 'chunk') {
                   accumulatedText += parsed.text || '';
+                  if (loadingEl && !loadingEl.hidden) loadingEl.hidden = true;
+                  proseEl.innerHTML = parseMarkdown(sanitizeAnswer(accumulatedText));
+                  scrollToNewestCard(botMsg);
                 } else if (parsed.type === 'done') {
                   data = parsed.data || {};
                   if (!data.answer && accumulatedText) {
@@ -688,6 +737,8 @@
         data = await res.json().catch(() => ({}));
       }
 
+      if (loadingEl) loadingEl.remove();
+
       if (!res.ok && !data) {
         throw new Error(`Status ${res.status}`);
       }
@@ -698,46 +749,60 @@
           : "Here's how Ryan approaches complex B2B SaaS & AI systems: he combines deep qualitative research with tokenized design systems and browser-native prototyping. Ask about a specific project like **AI-Powered Dashboards (+71% engagement)** or **i4cp Member Portal (+500% AI activation)**.";
 
       const cleanHtml = parseMarkdown(sanitizeAnswer(rawAns));
-      bodyEl.innerHTML = `<div class="home-ai-prose">${cleanHtml}</div>`;
-
+      proseEl.innerHTML = cleanHtml;
       state.history.push({ role: 'assistant', content: rawAns });
 
       // Render cited case study pills/links if returned
       if (data && Array.isArray(data.context_cases) && data.context_cases.length) {
         sourcesEl.hidden = false;
         sourcesEl.innerHTML = `
-          <span class="home-ai-sources__lbl">Verified Sources:</span>
-          <div class="home-ai-sources__list">
+          <span class="home-chat-sources__label">Sources:</span>
+          <div class="home-chat-sources__chips">
             ${data.context_cases
               .slice(0, 3)
               .map((c) => {
                 const href = normalizeInternalHref(c.url || '#');
-                return `<a href="${escapeHtml(href)}" class="home-ai-source-chip"><span>${escapeHtml(c.title || 'Case Study')}</span><span aria-hidden="true">→</span></a>`;
+                return `<a href="${escapeHtml(href)}" class="home-chat-source-chip"><span>${escapeHtml(c.title || 'Case Study')}</span><span aria-hidden="true">↗</span></a>`;
               })
               .join('')}
           </div>
         `;
       }
 
+      // Render follow-up pills if returned
       if (data && Array.isArray(data.suggested_pills) && data.suggested_pills.length) {
+        followupsEl.hidden = false;
+        followupsEl.innerHTML = `
+          ${data.suggested_pills
+            .slice(0, 3)
+            .map((p) => `<button type="button" class="home-chat-followup-pill" data-prompt="${escapeHtml(p)}">${escapeHtml(p)}</button>`)
+            .join('')}
+        `;
+        followupsEl.querySelectorAll('.home-chat-followup-pill').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const p = btn.getAttribute('data-prompt');
+            if (p) askGeminiOnStage(p);
+          });
+        });
         renderPills(data.suggested_pills);
       }
+      scrollToNewestCard(botMsg);
     } catch (err) {
       if (err.name === 'AbortError') return;
-      // Graceful local KB synthesis fallback so the homepage stage always feels instant and authoritative
-      bodyEl.innerHTML = `
-        <div class="home-ai-prose">
-          <p><strong>Ryan Schmidt</strong> is a Senior B2B SaaS Product Designer &amp; UX Engineer in Austin, TX who works at the seam of design and engineering.</p>
-          <ul>
-            <li><strong>AI-Powered Dashboards (D-Tools):</strong> Drove <strong>+71% beta engagement</strong> and <strong>62% multi-dashboard adoption</strong> by anchoring AI opportunity summaries on verifiable KPIs. <a href="pages/dashboard.html">Read case study →</a></li>
-            <li><strong>i4cp Member Portal Overhaul:</strong> Restructured enterprise research IA and launched the Ask Ahri AI search omnibar, lifting <strong>AI feature activation by +500%</strong>. <a href="pages/member-portal-overhaul.html">Read case study →</a></li>
-            <li><strong>Real-Time Inventory MVP (D-Tools):</strong> Connected POs to warehouse bins and active jobs, driving an <strong>+18% recurring revenue lift</strong>. <a href="pages/inventory.html">Read case study →</a></li>
-          </ul>
-        </div>
+      if (loadingEl) loadingEl.remove();
+      proseEl.innerHTML = `
+        <p><strong>Ryan Schmidt</strong> is a Senior B2B SaaS Product Designer &amp; UX Engineer in Austin, TX who works at the seam of design and engineering.</p>
+        <ul>
+          <li><strong>AI-Powered Dashboards (D-Tools):</strong> Drove <strong>+71% beta engagement</strong> and <strong>62% multi-dashboard adoption</strong> by anchoring AI opportunity summaries on verifiable KPIs. <a href="pages/dashboard.html">Read case study →</a></li>
+          <li><strong>i4cp Member Portal Overhaul:</strong> Restructured enterprise research IA and launched the Ask Ahri AI search omnibar, lifting <strong>AI feature activation by +500%</strong>. <a href="pages/member-portal-overhaul.html">Read case study →</a></li>
+          <li><strong>Real-Time Inventory MVP (D-Tools):</strong> Connected POs to warehouse bins and active jobs, driving an <strong>+18% recurring revenue lift</strong>. <a href="pages/inventory.html">Read case study →</a></li>
+        </ul>
       `;
+      scrollToNewestCard(botMsg);
     } finally {
       state.inFlight = false;
       omnibarSend.disabled = false;
+      if (omnibarInput) omnibarInput.placeholder = 'Ask a follow up...';
     }
   }
 
