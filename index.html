@@ -58,7 +58,7 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=6">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -263,33 +263,18 @@
       <a href="pages/about.html#lets-connect" class="home-topnav__link">Contact</a>
     </nav>
 
-    <div class="home-topbar__right">
-      <button type="button" class="home-topbar__cmdk" data-cmdk-trigger aria-label="Open Command Palette and Inspector (Command+K)" title="Open Command Palette &amp; Live DOM Inspector (⌘K)">
-        <span class="home-topbar__cmdk-label">Inspector</span>
-        <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
-      </button>
-    </div>
+    <div class="home-topbar__right" aria-hidden="true"></div>
   </header>
 
   <main id="main" class="home-ai-canvas">
     <h1 class="sr-only">Ryan Schmidt — Senior B2B SaaS Product Designer &amp; UX Engineer</h1>
 
     <div class="home-ai-stage" id="home-ai-stage">
-      <!-- Ambient Studio Glow & Subtle Editorial Marginalia -->
+      <!-- Ambient Studio Glow -->
       <div class="home-ambient-glow" aria-hidden="true"></div>
-      <div class="home-marginalia home-marginalia--left" aria-hidden="true">
-        <span>30.2672° N, 97.7431° W · AUSTIN, TX</span>
-      </div>
-      <div class="home-marginalia home-marginalia--right" aria-hidden="true">
-        <span>GEMINI 2.5 FLASH RAG · ZERO-BUILD STACK</span>
-      </div>
 
       <!-- Centerpiece Greeting & Value Proposition -->
       <section class="home-greeting" aria-label="Introduction">
-        <div class="home-greeting__status">
-          <span class="home-greeting__pulse" aria-hidden="true"></span>
-          <span>Interactive Portfolio &amp; UX Engineering Console</span>
-        </div>
         <h2 class="home-greeting__headline">
           Hi, I’m <em class="home-greeting__serif">Ryan.</em>
         </h2>
@@ -434,13 +419,13 @@
       </section>
     </div>
 
-    <script src="./scripts/cli-mode.js?v=5" defer></script>
-    <script src="./scripts/home-ai-stage.js?v=5" defer></script>
+    <script src="./scripts/cli-mode.js?v=6" defer></script>
+    <script src="./scripts/home-ai-stage.js?v=6" defer></script>
 
     <!-- Consolidated JavaScript -->
     <script src="./scripts/magnetic.js" defer></script>
-    <script src="./scripts/scripts.js?v=5" defer></script>
-    <script src="./scripts/rs-chat-widget.js?v=5" defer></script>
+    <script src="./scripts/scripts.js?v=6" defer></script>
+    <script src="./scripts/rs-chat-widget.js?v=6" defer></script>
   </main>
   <footer class="site-footer">
     <a class="site-footer-brand" href="./index.html">
