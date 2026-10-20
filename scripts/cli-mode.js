@@ -872,6 +872,52 @@
                     }
                 }
             });
+            // Wire subpage slash popover if present
+            const subSlashBtn = document.getElementById('subpage-slash-btn');
+            const subSlashPopover = document.getElementById('subpage-slash-popover');
+            if (subSlashBtn && subSlashPopover) {
+                subSlashBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isHidden = subSlashPopover.hidden;
+                    subSlashPopover.hidden = !isHidden;
+                    subSlashBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+                });
+
+                subSlashPopover.querySelectorAll('[data-slash-cmd]').forEach((btn) => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const cmd = btn.getAttribute('data-slash-cmd');
+                        subSlashPopover.hidden = true;
+                        subSlashBtn.setAttribute('aria-expanded', 'false');
+                        if (cmd === 'xray') {
+                            this.toggleInspector();
+                        } else if (cmd === 'tokens') {
+                            this.cycleTheme();
+                        } else if (cmd === 'perf' || cmd === 'skills') {
+                            this.open();
+                            this.runCLICommand(cmd);
+                        } else if (cmd === 'work') {
+                            this.open();
+                        } else if (cmd === 'resume') {
+                            window.open('../assets/ryan-schmidt-resume.pdf', '_blank');
+                        } else if (cmd === 'approach') {
+                            document.dispatchEvent(new CustomEvent('rs:ask-section', {
+                                detail: {
+                                    prompt: "What is Ryan's design philosophy and approach to AI?",
+                                    sectionContext: { heading: "Design Philosophy" }
+                                }
+                            }));
+                        }
+                    });
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!subSlashPopover.hidden && !subSlashPopover.contains(e.target) && e.target !== subSlashBtn) {
+                        subSlashPopover.hidden = true;
+                        subSlashBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
         }
 
         isDirectCLICommand(raw) {

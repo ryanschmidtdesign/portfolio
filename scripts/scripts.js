@@ -115,7 +115,37 @@
         const handleSend = function() {
           const q = aiInput.value.trim();
           if (!q) return;
-          const isCaseStudy = document.body.classList.contains('case-study');
+
+          // Direct CLI command interception
+          const lower = q.toLowerCase();
+          if (lower === '/xray' || lower === 'xray') {
+            window.rsCommandPalette?.toggleInspector();
+            aiInput.value = '';
+            return;
+          }
+          if (lower === '/tokens' || lower === 'tokens') {
+            window.rsCommandPalette?.cycleTheme();
+            aiInput.value = '';
+            return;
+          }
+          if (lower === '/perf' || lower === 'perf' || lower === '/skills' || lower === 'skills') {
+            window.rsCommandPalette?.open();
+            window.rsCommandPalette?.runCLICommand(lower.replace('/', ''));
+            aiInput.value = '';
+            return;
+          }
+          if (lower === '/work' || lower === 'work') {
+            window.rsCommandPalette?.open();
+            aiInput.value = '';
+            return;
+          }
+          if (lower === '/resume' || lower === 'resume') {
+            window.open('../assets/ryan-schmidt-resume.pdf', '_blank');
+            aiInput.value = '';
+            return;
+          }
+
+          const isCaseStudy = document.body.classList.contains('case-study') || !!document.querySelector('.case-study');
           const pageTitle = document.title || 'Page';
           document.dispatchEvent(new CustomEvent('rs:ask-section', {
             detail: {

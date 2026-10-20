@@ -31,7 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../styles.css?v=10">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -234,6 +234,54 @@
 
 
   <body class="page-about">
+    <!-- Top Editorial Header Bar (unified with homepage) -->
+    <header class="home-topbar" role="banner">
+      <a href="../index.html" class="home-logo" aria-label="Ryan Schmidt — Senior SaaS Product Designer">
+        <span class="home-logo-name">Ryan Schmidt</span>
+        <span class="home-role">Senior SaaS Product Designer</span>
+      </a>
+
+      <nav class="home-topnav" aria-label="Main navigation">
+        <a href="../index.html" class="home-topnav__link">
+          <span>Home</span>
+        </a>
+        <div class="menu-item-group home-topnav__group">
+          <button type="button" class="menu-trigger home-topnav__link" aria-haspopup="true" aria-expanded="false">
+            <span>Work</span>
+            <svg class="home-topnav__chevron" width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="menu-submenu home-topnav__submenu">
+            <a href="dashboard.html">
+              <span>AI‑Powered Dashboards</span>
+              <span class="home-submenu-kpi">+71%</span>
+            </a>
+            <a href="member-portal-overhaul.html">
+              <span>i4cp Member Portal</span>
+              <span class="home-submenu-kpi">+500%</span>
+            </a>
+            <a href="inventory.html">
+              <span>Real-Time Inventory</span>
+              <span class="home-submenu-kpi">+18% MRR</span>
+            </a>
+            <a href="ai-coding-portfolio.html">
+              <span>Engineering My Portfolio</span>
+              <span class="home-submenu-kpi">Code</span>
+            </a>
+          </div>
+        </div>
+        <a href="about.html" class="home-topnav__link is-current" aria-current="page">
+          <span class="home-topnav__dot" aria-hidden="true"></span>
+          <span>About</span>
+        </a>
+        <a href="../assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-topnav__link">Resume</a>
+        <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" class="home-topnav__link">LinkedIn</a>
+      </nav>
+
+      <div class="home-topbar__right" aria-hidden="true"></div>
+    </header>
+
   <main id="main" class="site-main">
     <h1 class="sr-only">About Ryan Schmidt</h1>
     <!-- Leadership section -->
@@ -372,46 +420,61 @@
     </section>
   </main>
 
-  <!-- Same fixed floating bottom nav -->
-  
+  <!-- Floating AI & CLI Omnibar Dock (unified with homepage) -->
+  <div class="ai-mini-wrapper subpage-omnibar-dock" data-assistant-trigger>
+    <div class="subpage-omnibar-shell">
+      <form class="subpage-omnibar-form" id="subpage-omnibar-form" onsubmit="return false;">
+        <div class="subpage-omnibar-top">
+          <input type="text" id="ai-mini-input" class="subpage-omnibar-input ai-mini-input" placeholder="Ask about Ryan's background, leadership, or philosophy..." autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+        </div>
+        <div class="subpage-omnibar-bottom">
+          <div class="subpage-omnibar-bottom__left">
+            <div class="home-slash-wrap">
+              <button type="button" class="home-slash-btn" id="subpage-slash-btn" aria-label="Quick CLI &amp; Showcase actions" aria-expanded="false" title="Quick commands &amp; actions">+</button>
+              <div class="home-slash-popover" id="subpage-slash-popover" hidden>
+                <div class="home-slash-popover__title">Quick Commands</div>
+                <button type="button" data-slash-cmd="work"><span>/work</span><span>Show 4 Case Studies</span></button>
+                <button type="button" data-slash-cmd="approach"><span>/approach</span><span>Design &amp; AI Philosophy</span></button>
+                <button type="button" data-slash-cmd="resume"><span>/resume</span><span>Executive Dossier &amp; PDF</span></button>
+                <button type="button" data-slash-cmd="xray"><span>/xray</span><span>Toggle Live DOM Inspector</span></button>
+                <button type="button" data-slash-cmd="tokens"><span>/tokens</span><span>Cycle Live Accent Token</span></button>
+                <button type="button" data-slash-cmd="perf"><span>/perf</span><span>Runtime &amp; Stack Telemetry</span></button>
+              </div>
+            </div>
+            <div class="subpage-stage-pills" id="subpage-stage-pills" aria-label="Suggested questions">
+              <button type="button" class="home-prompt-pill" data-prompt="What does your mentorship work look like?">Mentorship work</button>
+              <button type="button" class="home-prompt-pill" data-prompt="What is your product design philosophy?">Design philosophy</button>
+              <button type="button" class="home-prompt-pill" data-prompt="How do you lead cross-functional alignment with engineering?">Leadership style</button>
+            </div>
+          </div>
 
-  <div class="ai-mini-wrapper consolidated-nav" data-assistant-trigger>
-      <nav class="ai-mini-nav" aria-label="Main navigation">
-
-      <a href="../index.html">Home</a>
-      <a href="../pages/about.html" aria-current="page">About</a>
-        <div class="menu-item-group">
-          <button class="menu-trigger" aria-haspopup="true" aria-expanded="false">Case Studies</button>
-          <div class="menu-submenu">
-            <a href="../pages/dashboard.html">AI‑Powered Dashboards</a>
-            <a href="../pages/inventory.html">Real-Time Inventory</a>
-            <a href="../pages/member-portal-overhaul.html">i4cp Member Portal</a>
-            <a href="../pages/ai-coding-portfolio.html">AI-Coding my Portfolio</a>
+          <div class="subpage-omnibar-actions">
+            <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette (Command+K)" title="Open Command Palette &amp; Inspector (⌘K)">
+              <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
+            </button>
+            <button type="submit" id="ai-mini-send" class="home-omnibar-send" aria-label="Send prompt">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="19" x2="12" y2="5"></line>
+                <polyline points="5 12 12 5 19 12"></polyline>
+              </svg>
+            </button>
           </div>
         </div>
-      <a href="../assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener">Resume</a>
-      <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener">LinkedIn</a>
-            </nav>
-      <div class="ai-mini-input-container">
-        <input type="text" id="ai-mini-input" class="ai-mini-input" placeholder="Ask…" autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
-        <button type="button" class="ai-mini-cmdk" data-cmdk-trigger aria-label="Open Command Palette (Command+K)" title="Open Command Palette &amp; Inspector (⌘K)">
-          <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
-        </button>
-        <button id="ai-mini-send" class="ai-mini-send" aria-label="Send">→</button>
-      </div>
+      </form>
     </div>
+  </div>
   
   <!-- GSAP for smooth chat widget animations -->
   
   <!-- Consolidated JavaScript -->
-  <script src="../scripts/cli-mode.js?v=5" defer></script>
-  <script src="../scripts/scripts.js?v=5" defer></script>
+  <script src="../scripts/cli-mode.js?v=10" defer></script>
+  <script src="../scripts/scripts.js?v=10" defer></script>
   <script src="../scripts/magnetic.js" defer></script>
 
   <!-- Interactive enhancements -->
   <script src="../scripts/about/about-particles.js" defer></script>
 
-  <script src="../scripts/rs-chat-widget.js?v=5" defer></script>
+  <script src="../scripts/rs-chat-widget.js?v=10" defer></script>
 
   <footer class="site-footer">
     <a class="site-footer-brand" href="../index.html">

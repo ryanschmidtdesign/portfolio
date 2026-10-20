@@ -1192,7 +1192,7 @@ if (savedHist.length > 0) {
     
 
     document.addEventListener('click', function (e) {
-      const pill = e.target.closest('.ai-mini-suggestion-pill');
+      const pill = e.target.closest('.ai-mini-suggestion-pill, .subpage-stage-pills .home-prompt-pill');
       if (!pill) return;
 
       e.preventDefault();
