@@ -87,10 +87,9 @@
   ];
 
   const DEFAULT_PILLS = [
-    'What are his strongest projects?',
-    'Is Ryan a fit for a Senior/Staff role?',
-    'How does he use AI & code in design?',
-    'Walk me through the +71% dashboard lift'
+    'Strongest projects?',
+    'How do you use AI?',
+    'Check role fit'
   ];
 
   const state = {
@@ -263,12 +262,12 @@
   function renderPills(pills = DEFAULT_PILLS) {
     if (!stagePillsEl) return;
     stagePillsEl.innerHTML = '';
-    pills.slice(0, 4).forEach((text) => {
+    pills.slice(0, 3).forEach((text) => {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'home-prompt-pill';
       btn.dataset.prompt = text;
-      btn.innerHTML = `<span class="home-prompt-pill__spark" aria-hidden="true">✦</span><span>${escapeHtml(text)}</span>`;
+      btn.textContent = text;
       btn.addEventListener('click', () => {
         handleInputOrAction(text);
       });
