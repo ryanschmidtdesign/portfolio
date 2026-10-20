@@ -324,10 +324,18 @@
   function scrollToNewestCard(el) {
     if (!stageStream) return;
     requestAnimationFrame(() => {
-      stageStream.scrollTo({
-        top: stageStream.scrollHeight,
-        behavior: 'smooth'
-      });
+      if (el && typeof el.offsetTop === 'number') {
+        const targetTop = Math.max(0, el.offsetTop - 8);
+        stageStream.scrollTo({
+          top: targetTop,
+          behavior: 'smooth'
+        });
+      } else {
+        stageStream.scrollTo({
+          top: stageStream.scrollHeight,
+          behavior: 'smooth'
+        });
+      }
     });
   }
 
