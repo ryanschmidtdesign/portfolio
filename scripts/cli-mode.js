@@ -689,39 +689,26 @@
                     group: 'Direct Actions',
                     icon: '↓',
                     title: 'View Resume (PDF)',
-                    sub: 'Open Ryan_Schmidt_Resume.pdf in a new tab',
+                    sub: 'Open ryan-schmidt-resume.pdf in a new tab',
                     badge: 'PDF',
                     keywords: 'resume cv pdf download hire',
                     action: () => {
-                        const resumePath = inPagesDir ? '../assets/Ryan_Schmidt_Resume.pdf' : 'assets/Ryan_Schmidt_Resume.pdf';
+                        const resumePath = inPagesDir ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
                         window.open(resumePath, '_blank', 'noopener');
                         this.close();
                     }
                 },
                 {
-                    id: 'act-email',
+                    id: 'act-linkedin',
                     group: 'Direct Actions',
-                    icon: '✉',
-                    title: 'Copy Email Address (ryanschmidt@me.com)',
-                    sub: 'Copy directly to clipboard for quick outreach',
-                    badge: 'Copy',
-                    keywords: 'email contact copy hire reach out',
+                    icon: '↗',
+                    title: 'Connect on LinkedIn',
+                    sub: 'linkedin.com/in/ryanschmidt1989 — Fastest path to start a conversation',
+                    badge: 'Connect',
+                    keywords: 'linkedin contact hire reach out message',
                     action: () => {
-                        if (navigator.clipboard) {
-                            navigator.clipboard.writeText('ryanschmidt@me.com');
-                        }
-                        this.showOutputCard('Clipboard Updated', `
-                            <div class="rs-cmd-output__grid">
-                                <div class="rs-cmd-output__card">
-                                    <div class="rs-cmd-output__card-label">Copied to Clipboard</div>
-                                    <div class="rs-cmd-output__card-val">ryanschmidt@me.com</div>
-                                </div>
-                                <div class="rs-cmd-output__card">
-                                    <div class="rs-cmd-output__card-label">LinkedIn</div>
-                                    <div class="rs-cmd-output__card-val">linkedin.com/in/ryanschmidtdesign</div>
-                                </div>
-                            </div>
-                        `);
+                        window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
+                        this.close();
                     }
                 }
             ];
@@ -958,7 +945,7 @@
                     <div class="rs-cmd-output__grid">
                         <div class="rs-cmd-output__card">
                             <div class="rs-cmd-output__card-label">Role</div>
-                            <div class="rs-cmd-output__card-val">Lead Product Designer &amp; Design Leader</div>
+                            <div class="rs-cmd-output__card-val">Senior Product Designer &amp; UX Engineer</div>
                         </div>
                         <div class="rs-cmd-output__card">
                             <div class="rs-cmd-output__card-label">Signature Impact</div>
@@ -966,7 +953,7 @@
                         </div>
                         <div class="rs-cmd-output__card">
                             <div class="rs-cmd-output__card-label">Direct Contact</div>
-                            <div class="rs-cmd-output__card-val">ryanschmidt@me.com</div>
+                            <div class="rs-cmd-output__card-val">linkedin.com/in/ryanschmidt1989</div>
                         </div>
                     </div>
                 `);
@@ -1077,11 +1064,19 @@
         }
 
         triggerAIChat(query) {
+            if (typeof window.rsHomeStageAsk === 'function' && document.body.classList.contains('is-home')) {
+                window.rsHomeStageAsk(query);
+                return;
+            }
             const miniInput = document.getElementById('ai-mini-input');
             const miniSend = document.getElementById('ai-mini-send');
             if (miniInput && miniSend) {
                 miniInput.value = query;
                 miniSend.click();
+            } else {
+                document.dispatchEvent(new CustomEvent('rs:ask-section', {
+                    detail: { prompt: query, sectionContext: { heading: 'Command Palette' } }
+                }));
             }
         }
 
