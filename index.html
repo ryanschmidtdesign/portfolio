@@ -286,34 +286,36 @@
           <span class="home-intent-arrow" aria-hidden="true">→</span>
         </button>
 
-        <!-- Card 4: Ask anything -->
-        <button type="button" class="home-intent-card" data-home-intent="cli">
+        <!-- Card 4: Leadership & Role Fit -->
+        <button type="button" class="home-intent-card" data-home-intent="leadership">
           <span class="home-intent-icon home-intent-icon--violet" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
           </span>
           <div class="home-intent-card__content">
-            <span class="home-intent-card__title">Ask anything</span>
-            <span class="home-intent-card__desc">Projects, role fit, or live DOM X-Ray</span>
+            <span class="home-intent-card__title">Leadership &amp; Role Fit</span>
+            <span class="home-intent-card__desc">15+ years in B2B SaaS, systems &amp; mentorship</span>
           </div>
           <span class="home-intent-arrow" aria-hidden="true">→</span>
         </button>
       </section>
 
-      <!-- Conversational Chat Stream (Copilot / Modern Chat Flow) -->
+      <!-- Stage Showcase & Interactive Stream -->
       <section class="home-chat-thread" id="home-stage-view" aria-live="polite" hidden>
         <div class="home-chat-thread__header">
           <div class="home-chat-thread__status">
             <span class="home-chat-thread__dot" aria-hidden="true"></span>
-            <span>Ryan Schmidt AI · Live Session</span>
+            <span id="home-stage-status-text">Featured Case Studies · Shipped Impact</span>
           </div>
-          <button type="button" class="home-chat-reset-btn" id="home-stage-reset" title="Reset conversation" aria-label="Reset conversation">
+          <button type="button" class="home-chat-reset-btn" id="home-stage-reset" title="Back to overview" aria-label="Back to overview">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-              <path d="M3 3v5h5"/>
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
-            <span>Reset session</span>
+            <span id="home-stage-reset-label">Back to overview</span>
           </button>
         </div>
         <div class="home-chat-stream" id="home-stage-stream"></div>
@@ -369,34 +371,32 @@
                 type="text"
                 id="home-omnibar-input"
                 class="home-omnibar-input"
-                placeholder="Ask me anything..."
+                placeholder="Search case studies, ask a question, or press ⌘K..."
                 autocomplete="off"
-                aria-label="Ask about Ryan's projects, paste a job description, or run a CLI command"
+                aria-label="Search Ryan's work, ask a question, or run a command"
               />
             </div>
 
             <div class="home-omnibar-bottom">
               <div class="home-omnibar-bottom__left">
                 <div class="home-slash-wrap">
-                  <button type="button" class="home-slash-btn" id="home-slash-btn" aria-label="Quick CLI &amp; Showcase actions" aria-expanded="false" title="Quick commands &amp; actions">+</button>
+                  <button type="button" class="home-slash-btn" id="home-slash-btn" aria-label="Quick actions" aria-expanded="false" title="Quick actions">+</button>
                   <div class="home-slash-popover" id="home-slash-popover" hidden>
                     <div class="home-slash-popover__title">Quick Commands</div>
-                    <button type="button" data-slash-cmd="work"><span>/work</span><span>Show 4 Case Studies</span></button>
-                    <button type="button" data-slash-cmd="approach"><span>/approach</span><span>Design &amp; AI Philosophy</span></button>
-                    <button type="button" data-slash-cmd="resume"><span>/resume</span><span>Executive Dossier &amp; PDF</span></button>
-                    <button type="button" data-slash-cmd="xray"><span>/xray</span><span>Toggle Live DOM Inspector</span></button>
-                    <button type="button" data-slash-cmd="tokens"><span>/tokens</span><span>Cycle Live Accent Token</span></button>
-                    <button type="button" data-slash-cmd="perf"><span>/perf</span><span>Runtime &amp; Stack Telemetry</span></button>
+                    <button type="button" data-slash-cmd="work"><span>/work</span><span>Featured Case Studies</span></button>
+                    <button type="button" data-slash-cmd="approach"><span>/approach</span><span>Design Philosophy &amp; Craft</span></button>
+                    <button type="button" data-slash-cmd="resume"><span>/resume</span><span>Experience &amp; Resume PDF</span></button>
+                    <button type="button" data-slash-cmd="about"><span>/about</span><span>Leadership &amp; Background</span></button>
+                    <button type="button" data-slash-cmd="contact"><span>/contact</span><span>Get in Touch &amp; LinkedIn</span></button>
                   </div>
                 </div>
-                <div class="home-stage-pills" id="home-stage-pills" aria-label="Suggested prompts"></div>
               </div>
 
               <div class="home-omnibar-actions">
-                <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette (Command+K)" title="Open Command Palette &amp; Inspector (⌘K)">
+                <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette (Command+K)" title="Open Command Palette (⌘K)">
                   <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
                 </button>
-                <button type="submit" id="home-omnibar-send" class="home-omnibar-send" aria-label="Submit prompt">
+                <button type="submit" id="home-omnibar-send" class="home-omnibar-send" aria-label="Submit search or question">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <line x1="12" y1="19" x2="12" y2="5"></line>
                     <polyline points="5 12 12 5 19 12"></polyline>
@@ -406,7 +406,6 @@
             </div>
           </form>
         </div>
-        <p class="home-chat-disclaimer">Grounded in Ryan Schmidt's shipped case studies &amp; verified project outcomes.</p>
       </section>
     </div>
 
@@ -416,7 +415,6 @@
     <!-- Consolidated JavaScript -->
     <script src="./scripts/magnetic.js" defer></script>
     <script src="./scripts/scripts.js?v=15" defer></script>
-    <script src="./scripts/rs-chat-widget.js?v=15" defer></script>
   </main>
   <footer class="site-footer">
     <a class="site-footer-brand" href="./index.html">

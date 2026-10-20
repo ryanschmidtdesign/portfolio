@@ -654,31 +654,25 @@
             </nav>
           </div>
           <div class="subpage-omnibar-top">
-            <input type="text" id="ai-mini-input" class="subpage-omnibar-input ai-mini-input" placeholder="Ask about AI-Powered Dashboards..." autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
+            <input type="text" id="ai-mini-input" class="subpage-omnibar-input ai-mini-input" placeholder="Search case studies or press ⌘K..." autocomplete="off" aria-label="Search case studies, jump to page, or press Command+K" />
           </div>
           <div class="subpage-omnibar-bottom">
             <div class="subpage-omnibar-bottom__left">
               <div class="home-slash-wrap">
-                <button type="button" class="home-slash-btn" id="subpage-slash-btn" aria-label="Quick CLI &amp; Showcase actions" aria-expanded="false" title="Quick commands &amp; actions">+</button>
+                <button type="button" class="home-slash-btn" id="subpage-slash-btn" aria-label="Quick actions" aria-expanded="false" title="Quick actions">+</button>
                 <div class="home-slash-popover" id="subpage-slash-popover" hidden>
                   <div class="home-slash-popover__title">Quick Commands</div>
-                  <button type="button" data-slash-cmd="work"><span>/work</span><span>Show 4 Case Studies</span></button>
-                  <button type="button" data-slash-cmd="approach"><span>/approach</span><span>Design &amp; AI Philosophy</span></button>
-                  <button type="button" data-slash-cmd="resume"><span>/resume</span><span>Executive Dossier &amp; PDF</span></button>
-                  <button type="button" data-slash-cmd="xray"><span>/xray</span><span>Toggle Live DOM Inspector</span></button>
-                  <button type="button" data-slash-cmd="tokens"><span>/tokens</span><span>Cycle Live Accent Token</span></button>
-                  <button type="button" data-slash-cmd="perf"><span>/perf</span><span>Runtime &amp; Stack Telemetry</span></button>
+                  <button type="button" data-slash-cmd="work"><span>/work</span><span>Featured Case Studies</span></button>
+                  <button type="button" data-slash-cmd="approach"><span>/approach</span><span>Design Philosophy &amp; Craft</span></button>
+                  <button type="button" data-slash-cmd="resume"><span>/resume</span><span>Experience &amp; Resume PDF</span></button>
+                  <button type="button" data-slash-cmd="about"><span>/about</span><span>Leadership &amp; Background</span></button>
+                  <button type="button" data-slash-cmd="contact"><span>/contact</span><span>Get in Touch &amp; LinkedIn</span></button>
                 </div>
-              </div>
-              <div class="subpage-stage-pills" id="subpage-stage-pills" aria-label="Suggested questions">
-                <button type="button" class="home-prompt-pill" data-prompt="How did you drive 71% more engagement on the dashboard redesign?">71% engagement?</button>
-                <button type="button" class="home-prompt-pill" data-prompt="Walk me through your UX research process on the dashboard project.">Research process</button>
-                <button type="button" class="home-prompt-pill" data-prompt="What were the key tradeoffs on the dashboard feature?">Key tradeoffs</button>
               </div>
             </div>
 
             <div class="subpage-omnibar-actions">
-              <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette (Command+K)" title="Open Command Palette &amp; Inspector (⌘K)">
+              <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette (Command+K)" title="Open Command Palette (⌘K)">
                 <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
               </button>
               <button type="submit" id="ai-mini-send" class="home-omnibar-send" aria-label="Send prompt">

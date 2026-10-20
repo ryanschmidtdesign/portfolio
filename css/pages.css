@@ -1220,12 +1220,16 @@ body.is-home {
     justify-content: space-between;
     gap: 8px;
   }
-  /* Anchor the Work submenu to the left edge so it never leaves the viewport */
+  .home-topnav__group {
+    position: static;
+  }
+  /* Anchor the Work submenu above the entire dock on mobile so it never collides with row 1 */
   .home-topnav__submenu {
     right: auto;
-    left: -10px;
+    left: 14px;
+    bottom: calc(100% + 12px);
     transform-origin: bottom left;
-    min-width: min(260px, calc(100vw - 48px));
+    min-width: min(260px, calc(100vw - 28px));
   }
 }
 
@@ -1289,7 +1293,7 @@ body.is-home {
 }
 
 .home-slash-wrap {
-  position: relative;
+  position: static;
   flex-shrink: 0;
 }
 
@@ -1329,8 +1333,8 @@ body.is-home {
 
 .home-slash-popover {
   position: absolute;
-  bottom: calc(100% + 10px);
-  left: 0;
+  bottom: calc(100% + 12px);
+  left: 14px;
   width: 260px;
   background: #FFFFFF;
   border: 1px solid rgba(15, 23, 42, 0.1);
@@ -1394,39 +1398,6 @@ body.is-home {
 
 .home-slash-popover button:hover {
   background: rgba(0, 51, 255, 0.06);
-}
-
-.home-stage-pills {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-}
-
-.home-prompt-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 11px;
-  border-radius: 999px;
-  background: transparent;
-  border: 1px solid rgba(15, 23, 42, 0.09);
-  font-family: var(--font-sans);
-  font-size: 0.74rem;
-  font-weight: 500;
-  color: #52524E;
-  cursor: pointer;
-  transition: all 150ms ease;
-}
-
-.home-prompt-pill:hover {
-  background: #F6F5F2;
-  border-color: rgba(15, 23, 42, 0.2);
-  color: #141413;
-}
-
-.home-prompt-pill:active {
-  transform: scale(0.96);
-  transition: transform 60ms ease;
 }
 
 .home-omnibar-actions {
@@ -1494,15 +1465,7 @@ body.is-home {
   cursor: not-allowed;
 }
 
-/* Suppress redundant external floating pills above dock */
-.ai-mini-suggestions {
-  display: none !important;
-}
-
 @media (max-width: 600px) {
-  .subpage-stage-pills .home-prompt-pill:nth-child(n+3) {
-    display: none;
-  }
   .subpage-omnibar-dock {
     width: calc(100% - 16px);
   }
@@ -1600,6 +1563,7 @@ body.is-home {
 
 .home-chat-stream,
 .home-stage-stream {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -1607,12 +1571,10 @@ body.is-home {
   min-height: 0;
   max-height: clamp(300px, 54vh, 560px);
   overflow-y: auto;
-  padding: 8px 8px 14px 2px;
+  padding: 10px 8px 16px 2px;
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: rgba(15, 23, 42, 0.18) transparent;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8px, #000 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 8px, #000 100%);
 }
 
 .home-chat-stream::-webkit-scrollbar,
@@ -2483,20 +2445,6 @@ body.is-home {
   letter-spacing: 0.02em;
 }
 
-/* Chat Disclaimer under bottom omnibar */
-.home-chat-disclaimer {
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 0;
-  width: 100%;
-  font-size: 0.68rem;
-  color: #94A3B8;
-  text-align: center;
-  margin: 0;
-  font-weight: 400;
-  pointer-events: none;
-}
-
 body.is-home .site-footer {
   display: none !important;
 }
@@ -2585,10 +2533,6 @@ body.is-home .site-footer {
   .home-topnav__link {
     font-size: 0.72rem;
     padding: 2px 2px;
-  }
-  .home-chat-disclaimer {
-    font-size: 0.62rem;
-    top: calc(100% + 3px);
   }
 }
 

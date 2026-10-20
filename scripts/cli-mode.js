@@ -453,12 +453,12 @@
                 },
                 {
                     id: 'act-ai-projects',
-                    group: 'Ask Portfolio AI',
-                    icon: '✦',
-                    title: 'Ask AI: "What are his strongest projects and measurable outcomes?"',
-                    sub: 'Synthesized evidence across D-Tools Cloud and i4cp outcomes',
-                    badge: 'Ask AI ✦',
-                    keywords: 'ask ai strongest projects outcomes impact metrics results case studies',
+                    group: 'Interactive Inquiries',
+                    icon: '↗',
+                    title: 'Strongest projects and verified business impact',
+                    sub: 'Outcomes across D-Tools Cloud, i4cp, and design systems',
+                    badge: 'Inquiry ↗',
+                    keywords: 'strongest projects outcomes impact metrics results case studies d-tools i4cp',
                     action: () => {
                         this.close();
                         this.triggerAIChat('What are his strongest projects and measurable outcomes?');
@@ -466,12 +466,12 @@
                 },
                 {
                     id: 'act-ai-leadership',
-                    group: 'Ask Portfolio AI',
-                    icon: '✦',
-                    title: 'Ask AI: "What is his leadership style and design approach?"',
-                    sub: 'Player-coach leadership, design system governance, and AI prototyping',
-                    badge: 'Ask AI ✦',
-                    keywords: 'ask ai leadership style philosophy management workflow craft',
+                    group: 'Interactive Inquiries',
+                    icon: '↗',
+                    title: 'Design leadership, team workflows & prototyping',
+                    sub: 'Player-coach leadership, token governance, and browser prototyping',
+                    badge: 'Inquiry ↗',
+                    keywords: 'leadership style philosophy management workflow craft team design systems',
                     action: () => {
                         this.close();
                         this.triggerAIChat('What is his leadership style and design approach?');
@@ -543,13 +543,19 @@
                         const cmd = btn.getAttribute('data-slash-cmd');
                         subSlashPopover.hidden = true;
                         subSlashBtn.setAttribute('aria-expanded', 'false');
+                        const path = window.location.pathname || '/';
+                        const inPagesDir = path.includes('/pages/');
+                        const resumePath = inPagesDir ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
+                        const aboutPath = inPagesDir ? 'about.html' : 'pages/about.html';
+
                         if (cmd === 'work') {
                             this.open();
                         } else if (cmd === 'resume') {
-                            const path = window.location.pathname || '/';
-                            const inPagesDir = path.includes('/pages/');
-                            const resumePath = inPagesDir ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
                             window.open(resumePath, '_blank', 'noopener');
+                        } else if (cmd === 'about') {
+                            window.location.href = aboutPath;
+                        } else if (cmd === 'contact') {
+                            window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
                         } else if (cmd === 'approach') {
                             document.dispatchEvent(new CustomEvent('rs:ask-section', {
                                 detail: {

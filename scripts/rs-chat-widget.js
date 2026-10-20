@@ -1,5 +1,6 @@
 // scripts/rs-chat-widget.js
 (() => {
+  if (document.body.classList.contains('is-home')) return;
   const HOST_ID = 'rs-chat-widget-root';
   if (document.getElementById(HOST_ID)) return; // avoid double injection
 
@@ -656,9 +657,9 @@
             <div class="hdr-title-group">
               <div class="hdr-title-row">
                 <span class="hdr-status-dot" aria-hidden="true"></span>
-                <h2 id="rs-chat-title" class="hdr-title">Ryan's Portfolio Guide</h2>
+                <h2 id="rs-chat-title" class="hdr-title">Ryan Schmidt · Interactive Dossier</h2>
               </div>
-              <p class="hdr-sub">Gemini 2.5 RAG · Grounded in Shipped Work</p>
+              <p class="hdr-sub">Verified Project Outcomes &amp; Case Studies</p>
               <p id="rs-chat-desc" class="visually-hidden">
                 Ask questions about Ryan's case studies, design work, or fit for a role.
               </p>
@@ -1852,7 +1853,7 @@ if (savedHist.length > 0) {
           </svg>
           <span class="chat-copy-lbl">Copy</span>
         </button>
-        <span class="chat-telemetry-tag">Gemini 2.5 · Grounded</span>
+        <span class="chat-telemetry-tag">Verified Project Outcomes</span>
       `;
       const copyBtn = actBar.querySelector('.chat-copy-btn');
       const copyLbl = actBar.querySelector('.chat-copy-lbl');

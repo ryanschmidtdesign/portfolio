@@ -298,10 +298,17 @@
     return s.trim();
   }
 
+  function updateStageHeader(title = 'Featured Case Studies · Shipped Impact', buttonLabel = 'Back to overview') {
+    const statusEl = document.getElementById('home-stage-status-text');
+    const btnEl = document.getElementById('home-stage-reset-label');
+    if (statusEl) statusEl.textContent = title;
+    if (btnEl) btnEl.textContent = buttonLabel;
+  }
+
   function activateStage() {
     stageRoot.classList.add('is-stage-active');
     stageView.hidden = false;
-    if (omnibarInput) omnibarInput.placeholder = 'Ask a follow up...';
+    if (omnibarInput) omnibarInput.placeholder = 'Search case studies, ask a question, or press ⌘K...';
   }
 
   function resetStage() {
@@ -316,18 +323,24 @@
     document.querySelectorAll('.home-intent-card.is-active').forEach((c) => c.classList.remove('is-active'));
     if (omnibarInput) {
       omnibarInput.value = '';
-      omnibarInput.placeholder = 'Ask me anything...';
+      omnibarInput.placeholder = 'Search case studies, ask a question, or press ⌘K...';
     }
-    renderPills(DEFAULT_PILLS);
+    updateStageHeader('Featured Case Studies · Shipped Impact', 'Back to overview');
   }
 
   function scrollToNewestCard(el) {
     if (!stageStream) return;
     requestAnimationFrame(() => {
-      if (el && typeof el.offsetTop === 'number') {
-        const targetTop = Math.max(0, el.offsetTop - 8);
+      if (stageStream.children.length <= 1) {
+        stageStream.scrollTop = 0;
+        return;
+      }
+      if (el && typeof el.getBoundingClientRect === 'function') {
+        const streamRect = stageStream.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        const targetTop = stageStream.scrollTop + (elRect.top - streamRect.top) - 12;
         stageStream.scrollTo({
-          top: targetTop,
+          top: Math.max(0, targetTop),
           behavior: 'smooth'
         });
       } else {
@@ -339,45 +352,31 @@
     });
   }
 
-  function renderPills(pills = DEFAULT_PILLS) {
-    if (!stagePillsEl) return;
-    stagePillsEl.innerHTML = '';
-    pills.slice(0, 3).forEach((text) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'home-prompt-pill';
-      btn.dataset.prompt = text;
-      btn.textContent = text;
-      btn.addEventListener('click', () => {
-        handleInputOrAction(text);
-      });
-      stagePillsEl.appendChild(btn);
-    });
+  function renderPills() {
+    // Stage pills removed for streamlined design
   }
 
   // ---------------------------------------------------------------------------
-  // Linear / Vercel / Aerospace UX Helpers: Telemetry Header, Toolbars & Actions
+  // Linear / Vercel UX Helpers: Header, Toolbars & Actions
   // ---------------------------------------------------------------------------
 
   const userPromptHistory = [];
   let promptHistoryIndex = -1;
 
-  function createAssistantHeader(tagText = 'RAG Grounded · Gemini 2.5') {
+  function createAssistantHeader(tagText = 'Interactive Dossier') {
     return `
       <div class="home-chat-bot-header">
         <div class="home-chat-bot-identity">
-          <span class="home-chat-bot-spark" aria-hidden="true">✦</span>
-          <span class="home-chat-bot-name">Ryan Schmidt AI</span>
+          <span class="home-chat-bot-name">Ryan Schmidt</span>
         </div>
         <div class="home-chat-telemetry-tag">
-          <span class="home-chat-telemetry-dot" aria-hidden="true"></span>
           <span class="home-chat-telemetry-lbl">${escapeHtml(tagText)}</span>
         </div>
       </div>
     `;
   }
 
-  function createAssistantToolbar(provenance = 'Austin, TX · Shipped Evidence') {
+  function createAssistantToolbar(provenance = 'Austin, TX · Shipped Outcomes') {
     return `
       <div class="home-chat-toolbar">
         <div class="home-chat-toolbar__left">
@@ -473,16 +472,16 @@
 
   function renderWorkShowcaseCard() {
     activateStage();
-    const userMsg = createUserMessage('Show me your case studies with real impact');
-    stageStream.appendChild(userMsg);
+    updateStageHeader('Featured Case Studies · Shipped Impact', 'Back to overview');
+    stageStream.innerHTML = '';
+    stageStream.scrollTop = 0;
 
-    const botMsg = document.createElement('div');
-    botMsg.className = 'home-chat-msg home-chat-msg--assistant';
-    botMsg.innerHTML = `
+    const showcase = document.createElement('div');
+    showcase.className = 'home-chat-msg home-chat-msg--assistant';
+    showcase.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
-        ${createAssistantHeader('Featured Work · Shipped Impact')}
         <div class="home-chat-prose">
-          <p>Here are 4 featured case studies with verifiable product and business impact:</p>
+          <p>Featured B2B SaaS platforms, design systems, and AI workflows shipped with verifiable business outcomes:</p>
         </div>
         <div class="home-work-grid">
           ${CASE_STUDIES.map(
@@ -502,10 +501,6 @@
                     <span>Read Case Study</span>
                     <span aria-hidden="true">→</span>
                   </a>
-                  <button type="button" class="home-work-btn home-work-btn--ai" data-ai-prompt="${escapeHtml(c.aiPrompt)}">
-                    <span aria-hidden="true">✦</span>
-                    <span>Ask AI Summary</span>
-                  </button>
                 </div>
               </div>
             </article>
@@ -516,35 +511,23 @@
       </div>
     `;
 
-    botMsg.querySelectorAll('[data-ai-prompt]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const prompt = btn.getAttribute('data-ai-prompt');
-        if (prompt) askGeminiOnStage(prompt);
-      });
-    });
-
-    stageStream.appendChild(botMsg);
-    attachBotToolbar(botMsg, () => 'Featured Case Studies by Ryan Schmidt:\n- AI-Powered BI Dashboards (+71% Beta Engagement)\n- i4cp Member Portal Overhaul (+500% AI Activation)\n- Real-Time Inventory MVP (+18% Recurring Revenue)\n- Engineering an AI-Native Portfolio in Code');
-    scrollToNewestCard(botMsg);
-    renderPills([
-      'Which case study should I read first?',
-      'How did you drive 71% more dashboard engagement?',
-      'How did you lift AI adoption by 500% at i4cp?'
-    ]);
+    stageStream.appendChild(showcase);
+    attachBotToolbar(showcase, () => 'Featured Case Studies by Ryan Schmidt:\n- AI-Powered BI Dashboards (+71% Beta Engagement)\n- i4cp Member Portal Overhaul (+500% AI Activation)\n- Real-Time Inventory MVP (+18% Recurring Revenue)\n- Engineering an AI-Native Portfolio in Code');
+    scrollToNewestCard(showcase);
   }
 
   function renderResumeDossierCard() {
     activateStage();
-    const userMsg = createUserMessage('Can I see your resume and career highlights?');
-    stageStream.appendChild(userMsg);
+    updateStageHeader('Experience & Career Highlights · Austin, TX', 'Back to overview');
+    stageStream.innerHTML = '';
+    stageStream.scrollTop = 0;
 
-    const botMsg = document.createElement('div');
-    botMsg.className = 'home-chat-msg home-chat-msg--assistant';
-    botMsg.innerHTML = `
+    const card = document.createElement('div');
+    card.className = 'home-chat-msg home-chat-msg--assistant';
+    card.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
-        ${createAssistantHeader('Career Dossier · Austin, TX')}
         <div class="home-chat-prose">
-          <p>Here is my executive summary, career highlights, and downloadable resume:</p>
+          <p>15+ years leading B2B SaaS product design, tokenized design systems, and AI-accelerated workflows:</p>
         </div>
         <div class="home-dossier-metrics">
           <div class="home-dossier-stat">
@@ -615,58 +598,102 @@
       </div>
     `;
 
-    stageStream.appendChild(botMsg);
-    attachBotToolbar(botMsg, () => 'Ryan Schmidt — Senior SaaS Product Designer\nAustin, TX\nHighlights: +500% AI Activation at i4cp, +71% BI Engagement at D-Tools, 92% Design System Adoption.\nResume: assets/ryan-schmidt-resume.pdf');
-    scrollToNewestCard(botMsg);
-    renderPills([
-      'Is Ryan a fit for a Staff Product Designer role?',
-      'Tell me about his design system experience',
-      'How does he collaborate with engineers?'
-    ]);
+    stageStream.appendChild(card);
+    attachBotToolbar(card, () => 'Ryan Schmidt — Senior SaaS Product Designer\nAustin, TX\nHighlights: +500% AI Activation at i4cp, +71% BI Engagement at D-Tools, 92% Design System Adoption.\nResume: assets/ryan-schmidt-resume.pdf');
+    scrollToNewestCard(card);
   }
 
   function renderApproachBlueprintCard() {
     activateStage();
-    const userMsg = createUserMessage('What is your product design approach and philosophy?');
-    stageStream.appendChild(userMsg);
+    updateStageHeader('Design Philosophy & Craft', 'Back to overview');
+    stageStream.innerHTML = '';
+    stageStream.scrollTop = 0;
 
-    const botMsg = document.createElement('div');
-    botMsg.className = 'home-chat-msg home-chat-msg--assistant';
-    botMsg.innerHTML = `
+    const card = document.createElement('div');
+    card.className = 'home-chat-msg home-chat-msg--assistant';
+    card.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
-        ${createAssistantHeader('Design Philosophy · Browser-Native Prototyping')}
         <div class="home-chat-prose">
-          <p>Here is my approach to product design, systems architecture, and AI in practice:</p>
+          <p>My approach to product design, systems architecture, and AI in practice:</p>
         </div>
         <div class="home-pillars-grid">
           <div class="home-pillar-card">
             <div class="home-pillar-card__num">01 // TRUST BEFORE AI</div>
             <h4>Anchor AI on Verifiable Data</h4>
-            <p>AI shouldn't be the first thing a user sees in a workflow they don't trust yet. Layering synthesis on verifiable KPIs drove +71% to +500% adoption.</p>
+            <p>AI shouldn't be the first thing a user sees in a workflow they don't trust yet. In high-stakes B2B tools, users need orientation and verifiable KPIs before predictive synthesis. Layering AI on verified data drove +71% to +500% adoption.</p>
           </div>
           <div class="home-pillar-card">
             <div class="home-pillar-card__num">02 // THE DESIGN-ENG SEAM</div>
             <h4>Prototype in the Browser</h4>
-            <p>Static handoffs lose nuance. Ryan pairs Figma token architecture with live HTML/CSS/JS prototypes in Cursor &amp; Claude alongside engineers.</p>
+            <p>Static handoffs lose nuance. I pair Figma token architectures with live HTML, CSS, and vanilla JavaScript prototypes in Cursor &amp; Claude alongside engineering partners to eliminate spec ambiguity.</p>
           </div>
           <div class="home-pillar-card">
             <div class="home-pillar-card__num">03 // TOKENS OVER PATCHES</div>
             <h4>Systemize What Works</h4>
-            <p>Most legacy UI debt is a token problem. Scaling a 100+ component tokenized system achieved 92% engineer adoption and cut UI defects by 38%.</p>
+            <p>Most legacy UI debt is a systems problem. Scaling a 100+ component tokenized design system at D-Tools achieved 92% engineering adoption and cut interface defects by 38% across five product teams.</p>
           </div>
         </div>
         ${createAssistantToolbar('Systems Thinking · Prototyping in Code')}
       </div>
     `;
 
-    stageStream.appendChild(botMsg);
-    attachBotToolbar(botMsg, () => 'Product Design Approach:\n1. Trust Before AI: Anchor AI on verifiable KPIs.\n2. The Design-Eng Seam: Prototype in the browser with live tokens.\n3. Tokens Over Patches: Systemize what works to cut defect rates.');
-    scrollToNewestCard(botMsg);
-    renderPills([
-      'How do you validate AI features with users?',
-      'Tell me about your 100+ component design system',
-      'How do you use Cursor and Claude in your workflow?'
-    ]);
+    stageStream.appendChild(card);
+    attachBotToolbar(card, () => 'Product Design Approach:\n1. Trust Before AI: Anchor AI on verifiable KPIs.\n2. The Design-Eng Seam: Prototype in the browser with live tokens.\n3. Tokens Over Patches: Systemize what works to cut defect rates.');
+    scrollToNewestCard(card);
+  }
+
+  function renderLeadershipRoleFitCard() {
+    activateStage();
+    updateStageHeader('Leadership & Role Fit · Senior SaaS Product Designer', 'Back to overview');
+    stageStream.innerHTML = '';
+    stageStream.scrollTop = 0;
+
+    const card = document.createElement('div');
+    card.className = 'home-chat-msg home-chat-msg--assistant';
+    card.innerHTML = `
+      <div class="home-chat-bubble home-chat-bubble--assistant">
+        <div class="home-chat-prose">
+          <p>I partner directly with founders, product leaders, and engineering teams to turn complex B2B workflows and AI opportunities into intuitive software that ships.</p>
+        </div>
+        <div class="home-pillars-grid">
+          <div class="home-pillar-card">
+            <div class="home-pillar-card__num">CORE ROLES</div>
+            <h4>Senior / Staff Product Designer &amp; UX Engineer</h4>
+            <p>Ideal for high-ownership product design seats requiring systems leadership, 0→1 workflow discovery, and browser-native prototyping alongside engineers.</p>
+          </div>
+          <div class="home-pillar-card">
+            <div class="home-pillar-card__num">LEADERSHIP STYLE</div>
+            <h4>Player-Coach &amp; Systems Advocate</h4>
+            <p>15+ years of practical craft. I write PRDs, maintain token architectures, mentor designers, and build directly in HTML/CSS/JS to compress discovery loops.</p>
+          </div>
+          <div class="home-pillar-card">
+            <div class="home-pillar-card__num">LOCATION &amp; FIT</div>
+            <h4>Austin, TX · Remote &amp; Hybrid</h4>
+            <p>Available for senior, staff, or lead product design roles with teams shipping mission-critical B2B SaaS, developer tools, or AI-accelerated products.</p>
+          </div>
+        </div>
+
+        <div class="home-dossier-footer">
+          <a href="pages/about.html" class="home-work-btn home-work-btn--primary">
+            <span>Read About Ryan</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-work-btn home-work-btn--ghost">
+            <span>View Resume (PDF)</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+          <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" class="home-work-btn home-work-btn--ghost">
+            <span>Message on LinkedIn</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        ${createAssistantToolbar('Austin, TX · Open to Great Opportunities')}
+      </div>
+    `;
+
+    stageStream.appendChild(card);
+    attachBotToolbar(card, () => 'Ryan Schmidt — Leadership & Role Fit:\n- Senior / Staff Product Designer & UX Engineer\n- Austin, TX (Open to Remote / Hybrid)\n- Portfolio: ryanschmidt.design\n- Resume: assets/ryan-schmidt-resume.pdf');
+    scrollToNewestCard(card);
   }
 
   function renderCLITelemetryStageCard(command) {
@@ -681,6 +708,14 @@
       renderResumeDossierCard();
       return;
     }
+    if (cmd === 'approach' || cmd === 'philosophy') {
+      renderApproachBlueprintCard();
+      return;
+    }
+    if (cmd === 'leadership' || cmd === 'about' || cmd === 'role' || cmd === 'contact' || cmd === 'email' || cmd === 'hire') {
+      renderLeadershipRoleFitCard();
+      return;
+    }
     if (cmd === 'xray' || cmd === 'inspect') {
       if (window.rsCommandPalette && typeof window.rsCommandPalette.toggleInspector === 'function') {
         window.rsCommandPalette.toggleInspector(true);
@@ -691,6 +726,7 @@
       if (window.rsCommandPalette && typeof window.rsCommandPalette.cycleTheme === 'function') {
         window.rsCommandPalette.cycleTheme();
       }
+      return;
     }
 
     const domCount = document.querySelectorAll('*').length;
@@ -706,9 +742,9 @@
     botMsg.className = 'home-chat-msg home-chat-msg--assistant';
     botMsg.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
-        ${createAssistantHeader('Telemetry Console · Zero-Build ES6')}
+        ${createAssistantHeader('Runtime Architecture · Zero-Build')}
         <div class="home-chat-prose">
-          <p>Live runtime telemetry &amp; UX engineering controls:</p>
+          <p>Runtime telemetry &amp; UX engineering metrics:</p>
         </div>
         <div class="home-cli-grid">
           <div class="home-cli-card">
@@ -739,7 +775,7 @@
             <span>⌘K Open Full Command Palette</span>
           </button>
         </div>
-        ${createAssistantToolbar('Client Telemetry · Performance Observer')}
+        ${createAssistantToolbar('Austin, TX · Zero-Build Architecture')}
       </div>
     `;
 
@@ -773,6 +809,7 @@
     if (!question || state.inFlight) return;
 
     activateStage();
+    updateStageHeader('Interactive Inquiry · Dossier', 'Clear conversation');
     state.inFlight = true;
     omnibarSend.disabled = true;
 
@@ -785,12 +822,12 @@
     const userMsg = createUserMessage(question);
     stageStream.appendChild(userMsg);
 
-    // 2. Assistant Message Container (Linear / Vercel telemetry header & actions)
+    // 2. Assistant Message Container
     const botMsg = document.createElement('div');
     botMsg.className = 'home-chat-msg home-chat-msg--assistant';
     botMsg.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
-        ${createAssistantHeader('RAG Grounded · Gemini 2.5')}
+        ${createAssistantHeader('Interactive Dossier · Austin, TX')}
         <div class="home-chat-loading">
           <span class="home-chat-loading__dot"></span>
           <span class="home-chat-loading__dot"></span>
@@ -799,7 +836,7 @@
         <div class="home-chat-prose"></div>
         <div class="home-chat-sources" hidden></div>
         <div class="home-chat-followups" hidden></div>
-        ${createAssistantToolbar('Austin, TX · Shipped Evidence')}
+        ${createAssistantToolbar('Austin, TX · Verified Outcomes')}
       </div>
     `;
     stageStream.appendChild(botMsg);
@@ -1007,9 +1044,8 @@
         renderApproachBlueprintCard();
       } else if (intent === 'resume') {
         renderResumeDossierCard();
-      } else if (intent === 'cli') {
-        renderCLITelemetryStageCard('perf');
-        omnibarInput.focus();
+      } else if (intent === 'leadership' || intent === 'cli') {
+        renderLeadershipRoleFitCard();
       }
     });
   });
@@ -1089,6 +1125,9 @@
         if (cmd === 'work') renderWorkShowcaseCard();
         else if (cmd === 'resume') renderResumeDossierCard();
         else if (cmd === 'approach') renderApproachBlueprintCard();
+        else if (cmd === 'leadership') renderLeadershipRoleFitCard();
+        else if (cmd === 'about') window.location.href = 'pages/about.html';
+        else if (cmd === 'contact') window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
         else if (cmd) renderCLITelemetryStageCard(cmd);
       });
     });
@@ -1100,9 +1139,6 @@
       }
     });
   }
-
-  // Initialize default prompt pills
-  renderPills(DEFAULT_PILLS);
 
   // URL Parameter support (?intent=work or ?q=...)
   const params = new URLSearchParams(window.location.search);
