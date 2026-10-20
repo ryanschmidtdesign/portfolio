@@ -31,9 +31,9 @@
                 .rs-cmd-overlay {
                     position: fixed;
                     inset: 0;
-                    background: rgba(15, 23, 42, 0.42);
-                    backdrop-filter: blur(8px);
-                    -webkit-backdrop-filter: blur(8px);
+                    background: rgba(15, 23, 42, 0.48);
+                    backdrop-filter: blur(20px) saturate(180%);
+                    -webkit-backdrop-filter: blur(20px) saturate(180%);
                     z-index: 10000;
                     display: flex;
                     align-items: flex-start;
@@ -42,22 +42,22 @@
                     padding-inline: 16px;
                     opacity: 0;
                     pointer-events: none;
-                    transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1);
+                    transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1);
                 }
                 .rs-cmd-overlay.is-open {
                     opacity: 1;
                     pointer-events: auto;
                 }
                 .rs-cmd-modal {
-                    width: min(580px, 100%);
+                    width: min(590px, 100%);
                     max-height: 80vh;
                     background: #FAF9F6;
-                    border: 1px solid rgba(15, 23, 42, 0.1);
+                    border: 1px solid rgba(15, 23, 42, 0.09);
                     border-radius: 18px;
                     box-shadow:
                         inset 0 1px 0 rgba(255, 255, 255, 0.95),
-                        0 24px 60px -12px rgba(15, 23, 42, 0.22),
-                        0 6px 16px rgba(15, 23, 42, 0.06);
+                        0 32px 72px -16px rgba(15, 23, 42, 0.28),
+                        0 4px 16px rgba(15, 23, 42, 0.05);
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
@@ -71,7 +71,7 @@
                     display: flex;
                     align-items: center;
                     gap: 12px;
-                    padding: 13px 16px;
+                    padding: 14px 18px;
                     border-bottom: 1px solid rgba(15, 23, 42, 0.07);
                     background: #FFFFFF;
                 }
@@ -84,7 +84,7 @@
                     border: none;
                     background: transparent;
                     font-family: var(--font-sans, -apple-system, sans-serif);
-                    font-size: 0.94rem;
+                    font-size: 0.98rem;
                     font-weight: 500;
                     color: #141413;
                     outline: none;
@@ -93,6 +93,7 @@
                 }
                 .rs-cmd-input::placeholder {
                     color: #94A3B8;
+                    font-weight: 400;
                 }
                 .rs-cmd-esc {
                     display: inline-flex;
@@ -100,11 +101,12 @@
                     padding: 2px 6px;
                     font-family: var(--font-mono, monospace);
                     font-size: 0.65rem;
-                    font-weight: 500;
+                    font-weight: 600;
                     border-radius: 5px;
-                    background: rgba(15, 23, 42, 0.05);
-                    color: #8E8D87;
-                    border: 1px solid rgba(15, 23, 42, 0.08);
+                    background: #FFFFFF;
+                    color: #64748B;
+                    border: 1px solid rgba(15, 23, 42, 0.12);
+                    box-shadow: 0 1px 1px rgba(15, 23, 42, 0.06), inset 0 1px 0 #fff;
                     flex-shrink: 0;
                     user-select: none;
                 }
@@ -135,13 +137,16 @@
                     cursor: pointer;
                     text-decoration: none;
                     color: inherit;
-                    transition: background 120ms ease;
+                    transition: all 120ms ease;
                     user-select: none;
                     margin-bottom: 2px;
+                    border-left: 2.5px solid transparent;
                 }
                 .rs-cmd-item:hover,
                 .rs-cmd-item.is-selected {
-                    background: rgba(0, 51, 255, 0.07);
+                    background: rgba(0, 51, 255, 0.055);
+                    border-left-color: var(--accent, #0033FF);
+                    border-radius: 4px 10px 10px 4px;
                 }
                 .rs-cmd-item.is-selected .rs-cmd-item__title {
                     color: var(--accent, #0033FF);
@@ -174,7 +179,7 @@
                     gap: 2px;
                 }
                 .rs-cmd-item__title {
-                    font-size: 0.85rem;
+                    font-size: 0.86rem;
                     font-weight: 600;
                     color: #141413;
                     line-height: 1.25;
@@ -190,6 +195,41 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
+                .rs-cmd-item__right {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 7px;
+                    flex-shrink: 0;
+                }
+                .rs-cmd-item__kpi {
+                    font-family: var(--font-mono, monospace);
+                    font-size: 0.65rem;
+                    font-weight: 600;
+                    padding: 2px 7px;
+                    border-radius: 6px;
+                    letter-spacing: -0.01em;
+                    white-space: nowrap;
+                }
+                .rs-cmd-kpi--cobalt {
+                    background: rgba(0, 51, 255, 0.08);
+                    color: #0033FF;
+                    border: 1px solid rgba(0, 51, 255, 0.18);
+                }
+                .rs-cmd-kpi--emerald {
+                    background: rgba(16, 185, 129, 0.09);
+                    color: #059669;
+                    border: 1px solid rgba(16, 185, 129, 0.22);
+                }
+                .rs-cmd-kpi--terracotta {
+                    background: rgba(200, 100, 70, 0.1);
+                    color: #C86446;
+                    border: 1px solid rgba(200, 100, 70, 0.22);
+                }
+                .rs-cmd-kpi--slate {
+                    background: rgba(15, 23, 42, 0.05);
+                    color: #475569;
+                    border: 1px solid rgba(15, 23, 42, 0.08);
+                }
                 .rs-cmd-item__badge {
                     font-family: var(--font-mono, monospace);
                     font-size: 0.65rem;
@@ -197,16 +237,28 @@
                     padding: 2px 7px;
                     border-radius: 6px;
                     background: rgba(15, 23, 42, 0.04);
-                    color: #475569;
+                    color: #64748B;
                     border: 1px solid rgba(15, 23, 42, 0.06);
-                    flex-shrink: 0;
                     white-space: nowrap;
+                }
+                .rs-cmd-item__return {
+                    font-family: var(--font-mono, monospace);
+                    font-size: 0.72rem;
+                    color: var(--accent, #0033FF);
+                    opacity: 0;
+                    transform: translateX(-2px);
+                    transition: all 120ms ease;
+                }
+                .rs-cmd-item.is-selected .rs-cmd-item__return,
+                .rs-cmd-item:hover .rs-cmd-item__return {
+                    opacity: 1;
+                    transform: translateX(0);
                 }
                 .rs-cmd-footer {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    padding: 8px 14px;
+                    padding: 8px 16px;
                     border-top: 1px solid rgba(15, 23, 42, 0.07);
                     background: #FAF9F6;
                     font-size: 0.68rem;
@@ -215,21 +267,26 @@
                 }
                 .rs-cmd-footer__brand {
                     letter-spacing: 0.02em;
+                    color: #64748B;
                 }
                 .rs-cmd-footer__shortcuts {
                     display: inline-flex;
                     align-items: center;
-                    gap: 8px;
+                    gap: 10px;
                 }
                 .rs-cmd-key {
                     display: inline-flex;
                     align-items: center;
-                    padding: 1px 4px;
+                    justify-content: center;
+                    min-width: 17px;
+                    padding: 1.5px 5px;
                     border-radius: 4px;
-                    background: rgba(15, 23, 42, 0.05);
+                    background: #FFFFFF;
                     color: #475569;
-                    border: 1px solid rgba(15, 23, 42, 0.08);
-                    font-size: 0.62rem;
+                    border: 1px solid rgba(15, 23, 42, 0.14);
+                    box-shadow: 0 1px 1px rgba(15, 23, 42, 0.08), inset 0 1px 0 #fff;
+                    font-size: 0.65rem;
+                    font-weight: 600;
                 }
                 @media (max-width: 600px) {
                     .rs-cmd-footer__brand {
@@ -256,7 +313,7 @@
             this.overlay.innerHTML = `
                 <div class="rs-cmd-modal">
                     <div class="rs-cmd-search">
-                        <svg class="rs-cmd-search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <svg class="rs-cmd-search__icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <circle cx="11" cy="11" r="8"></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         </svg>
@@ -303,6 +360,8 @@
                     title: 'BI Analytics & Opportunity Signals — D-Tools Cloud',
                     sub: '+71% Beta Engagement · Executive KPI system & pipeline forecasting',
                     badge: 'Case Study',
+                    kpi: '+71% Beta',
+                    kpiType: 'cobalt',
                     keywords: 'dashboard bi analytics d-tools cloud opportunity signals kpi pipeline b2b',
                     action: () => { window.location.href = `${prefix}dashboard.html`; }
                 },
@@ -313,6 +372,8 @@
                     title: 'Inventory, Purchasing & Receiving — D-Tools Cloud',
                     sub: '+18% Recurring Revenue · Auditable ledger & interactive stepper',
                     badge: 'Case Study',
+                    kpi: '+18% MRR',
+                    kpiType: 'emerald',
                     keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain',
                     action: () => { window.location.href = `${prefix}inventory.html`; }
                 },
@@ -323,6 +384,8 @@
                     title: 'AI Search & Member Portal Overhaul — i4cp',
                     sub: '+500% AI Activation · Conversational synthesis & enterprise research',
                     badge: 'Case Study',
+                    kpi: '+500% AI',
+                    kpiType: 'terracotta',
                     keywords: 'i4cp member portal ai search synthesis rag overhaul enterprise',
                     action: () => { window.location.href = `${prefix}member-portal-overhaul.html`; }
                 },
@@ -333,6 +396,8 @@
                     title: 'Designing & Building an AI-Native Portfolio',
                     sub: 'Zero-Build Stack · Gemini 2.5 Flash RAG · Token Architecture',
                     badge: 'Architecture',
+                    kpi: 'Zero-Build',
+                    kpiType: 'slate',
                     keywords: 'portfolio ai rag gemini coding tokens architecture vanilla',
                     action: () => { window.location.href = `${prefix}ai-coding-portfolio.html`; }
                 },
@@ -344,7 +409,7 @@
                     icon: 'RS',
                     title: 'About Ryan Schmidt — Leadership & Background',
                     sub: '15+ years leading B2B SaaS, Design Systems, and AI-accelerated teams',
-                    badge: 'About',
+                    badge: 'Profile',
                     keywords: 'about bio leadership experience career history philosophy background',
                     action: () => { window.location.href = `${prefix}about.html`; }
                 },
@@ -366,7 +431,7 @@
                     icon: '↓',
                     title: 'View Resume (PDF)',
                     sub: 'Open ryan-schmidt-resume.pdf in a new tab',
-                    badge: 'PDF',
+                    badge: 'PDF ↗',
                     keywords: 'resume cv pdf download hire background experience',
                     action: () => {
                         window.open(resumePath, '_blank', 'noopener');
@@ -379,7 +444,7 @@
                     icon: '↗',
                     title: 'Connect on LinkedIn',
                     sub: 'linkedin.com/in/ryanschmidt1989 — Message or network directly',
-                    badge: 'LinkedIn',
+                    badge: 'Connect ↗',
                     keywords: 'linkedin contact hire reach out message connect social',
                     action: () => {
                         window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
@@ -392,7 +457,7 @@
                     icon: '✦',
                     title: 'Ask AI: "What are his strongest projects and measurable outcomes?"',
                     sub: 'Synthesized evidence across D-Tools Cloud and i4cp outcomes',
-                    badge: 'Ask AI',
+                    badge: 'Ask AI ✦',
                     keywords: 'ask ai strongest projects outcomes impact metrics results case studies',
                     action: () => {
                         this.close();
@@ -405,7 +470,7 @@
                     icon: '✦',
                     title: 'Ask AI: "What is his leadership style and design approach?"',
                     sub: 'Player-coach leadership, design system governance, and AI prototyping',
-                    badge: 'Ask AI',
+                    badge: 'Ask AI ✦',
                     keywords: 'ask ai leadership style philosophy management workflow craft',
                     action: () => {
                         this.close();
@@ -564,7 +629,11 @@
                             <span class="rs-cmd-item__sub">${item.sub}</span>
                         </div>
                     </div>
-                    <span class="rs-cmd-item__badge">${item.badge}</span>
+                    <div class="rs-cmd-item__right">
+                        ${item.kpi ? `<span class="rs-cmd-item__kpi rs-cmd-kpi--${item.kpiType}">${item.kpi}</span>` : ''}
+                        <span class="rs-cmd-item__badge">${item.badge}</span>
+                        <span class="rs-cmd-item__return" aria-hidden="true">↵</span>
+                    </div>
                 `;
 
                 row.addEventListener('click', () => {
