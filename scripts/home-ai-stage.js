@@ -165,6 +165,9 @@
     html = html.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
     html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
+    // KPI & Metric Telemetry Badges (e.g., +71%, +500%, +18%, 62%, 92%, +38%)
+    html = html.replace(/(\+?\d+(?:\.\d+)?%)/g, '<span class="home-chat-kpi-badge">$1</span>');
+
     html = html.replace(/\u0000LINK(\d+)\u0000/g, (match, idx) => {
       const token = linkTokens[Number(idx)];
       if (!token) return match;
@@ -185,10 +188,13 @@
   }
 
   function parseMarkdown(text = '') {
-    const lines = String(text || '').replace(/\r/g, '').split('\n');
+    const rawLines = String(text || '').replace(/\r/g, '').split('\n');
     const blocks = [];
     let paragraph = [];
     let listItems = [];
+    let inCodeBlock = false;
+    let codeBlockLang = '';
+    let codeBlockLines = [];
 
     function flushParagraph() {
       if (!paragraph.length) return;
@@ -204,8 +210,42 @@
       listItems = [];
     }
 
-    for (const rawLine of lines) {
+    function flushCodeBlock() {
+      if (!inCodeBlock) return;
+      const rawCode = codeBlockLines.join('\n');
+      const escapedCode = escapeHtml(rawCode);
+      const langLabel = escapeHtml(codeBlockLang || 'code');
+      blocks.push(
+        `<div class="home-chat-codeblock"><div class="home-chat-codeblock__header"><span class="home-chat-codeblock__lang">${langLabel}</span><button type="button" class="home-chat-codeblock__copy" data-code="${escapeHtml(rawCode)}" title="Copy code" aria-label="Copy code"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button></div><pre><code>${escapedCode}</code></pre></div>`
+      );
+      codeBlockLines = [];
+      inCodeBlock = false;
+      codeBlockLang = '';
+    }
+
+    for (const rawLine of rawLines) {
       const line = rawLine.trim();
+
+      // Check code block fence
+      const fenceMatch = line.match(/^```([a-zA-Z0-9_-]*)/);
+      if (fenceMatch) {
+        if (!inCodeBlock) {
+          flushParagraph();
+          flushList();
+          inCodeBlock = true;
+          codeBlockLang = fenceMatch[1] || '';
+          codeBlockLines = [];
+        } else {
+          flushCodeBlock();
+        }
+        continue;
+      }
+
+      if (inCodeBlock) {
+        codeBlockLines.push(rawLine);
+        continue;
+      }
+
       if (!line) {
         flushParagraph();
         flushList();
@@ -244,6 +284,7 @@
 
     flushParagraph();
     flushList();
+    if (inCodeBlock) flushCodeBlock();
     return blocks.join('');
   }
 
@@ -307,22 +348,131 @@
   }
 
   // ---------------------------------------------------------------------------
+  // Linear / Vercel / Aerospace UX Helpers: Telemetry Header, Toolbars & Actions
+  // ---------------------------------------------------------------------------
+
+  const userPromptHistory = [];
+  let promptHistoryIndex = -1;
+
+  function createAssistantHeader(tagText = 'RAG Grounded · Gemini 2.5') {
+    return `
+      <div class="home-chat-bot-header">
+        <div class="home-chat-bot-identity">
+          <span class="home-chat-bot-spark" aria-hidden="true">✦</span>
+          <span class="home-chat-bot-name">Ryan Schmidt AI</span>
+        </div>
+        <div class="home-chat-telemetry-tag">
+          <span class="home-chat-telemetry-dot" aria-hidden="true"></span>
+          <span class="home-chat-telemetry-lbl">${escapeHtml(tagText)}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  function createAssistantToolbar(provenance = 'Austin, TX · Shipped Evidence') {
+    return `
+      <div class="home-chat-toolbar">
+        <div class="home-chat-toolbar__left">
+          <button type="button" class="home-chat-action-btn home-chat-copy-btn" title="Copy response" aria-label="Copy response">
+            <svg class="home-chat-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span class="home-chat-action-lbl">Copy</span>
+          </button>
+        </div>
+        <div class="home-chat-toolbar__right">
+          <span class="home-chat-telemetry-model">${escapeHtml(provenance)}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  function createUserMessage(promptText) {
+    const userMsg = document.createElement('div');
+    userMsg.className = 'home-chat-msg home-chat-msg--user';
+    userMsg.innerHTML = `
+      <div class="home-chat-bubble home-chat-bubble--user">
+        <span class="home-chat-bubble__text">${escapeHtml(promptText)}</span>
+        <button type="button" class="home-chat-user-copy" title="Copy prompt" aria-label="Copy prompt">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
+    `;
+    const copyBtn = userMsg.querySelector('.home-chat-user-copy');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        try {
+          await navigator.clipboard.writeText(promptText);
+          copyBtn.classList.add('is-copied');
+          setTimeout(() => copyBtn.classList.remove('is-copied'), 1500);
+        } catch {}
+      });
+    }
+    return userMsg;
+  }
+
+  function attachBotToolbar(botMsg, textToCopy) {
+    const toolbar = botMsg.querySelector('.home-chat-toolbar');
+    if (!toolbar) return;
+    const copyBtn = toolbar.querySelector('.home-chat-copy-btn');
+    const copyLbl = toolbar.querySelector('.home-chat-action-lbl');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          const content = typeof textToCopy === 'function' ? textToCopy() : (textToCopy || botMsg.querySelector('.home-chat-prose')?.innerText || '');
+          await navigator.clipboard.writeText(content.trim());
+          copyBtn.classList.add('is-copied');
+          if (copyLbl) copyLbl.textContent = 'Copied!';
+          setTimeout(() => {
+            copyBtn.classList.remove('is-copied');
+            if (copyLbl) copyLbl.textContent = 'Copy';
+          }, 2000);
+        } catch (e) {
+          console.warn('Copy failed:', e);
+        }
+      });
+    }
+  }
+
+  function bindCodeblockCopies(container) {
+    if (!container) return;
+    container.querySelectorAll('.home-chat-codeblock__copy').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const code = btn.getAttribute('data-code');
+        if (!code) return;
+        try {
+          await navigator.clipboard.writeText(code);
+          const span = btn.querySelector('span');
+          if (span) span.textContent = 'Copied!';
+          btn.classList.add('is-copied');
+          setTimeout(() => {
+            if (span) span.textContent = 'Copy';
+            btn.classList.remove('is-copied');
+          }, 2000);
+        } catch {}
+      });
+    });
+  }
+
+  // ---------------------------------------------------------------------------
   // Rich Interactive Stage Renderers (Work Showcase, Approach, Resume, CLI)
   // ---------------------------------------------------------------------------
 
   function renderWorkShowcaseCard() {
     activateStage();
-    // 1. User message bubble (Copilot style)
-    const userMsg = document.createElement('div');
-    userMsg.className = 'home-chat-msg home-chat-msg--user';
-    userMsg.innerHTML = `<div class="home-chat-bubble home-chat-bubble--user">Show me your case studies with real impact</div>`;
+    const userMsg = createUserMessage('Show me your case studies with real impact');
     stageStream.appendChild(userMsg);
 
-    // 2. Assistant message container
     const botMsg = document.createElement('div');
     botMsg.className = 'home-chat-msg home-chat-msg--assistant';
     botMsg.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
+        ${createAssistantHeader('Featured Work · Shipped Impact')}
         <div class="home-chat-prose">
           <p>Here are 4 featured case studies with verifiable product and business impact:</p>
         </div>
@@ -354,6 +504,7 @@
           `
           ).join('')}
         </div>
+        ${createAssistantToolbar('4 Shipped Case Studies · Austin, TX')}
       </div>
     `;
 
@@ -365,9 +516,8 @@
     });
 
     stageStream.appendChild(botMsg);
-    requestAnimationFrame(() => {
-      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    attachBotToolbar(botMsg, () => 'Featured Case Studies by Ryan Schmidt:\n- AI-Powered BI Dashboards (+71% Beta Engagement)\n- i4cp Member Portal Overhaul (+500% AI Activation)\n- Real-Time Inventory MVP (+18% Recurring Revenue)\n- Engineering an AI-Native Portfolio in Code');
+    scrollToNewestCard(botMsg);
     renderPills([
       'Which case study should I read first?',
       'How did you drive 71% more dashboard engagement?',
@@ -377,17 +527,14 @@
 
   function renderResumeDossierCard() {
     activateStage();
-    // 1. User message bubble (Copilot style)
-    const userMsg = document.createElement('div');
-    userMsg.className = 'home-chat-msg home-chat-msg--user';
-    userMsg.innerHTML = `<div class="home-chat-bubble home-chat-bubble--user">Can I see your resume and career highlights?</div>`;
+    const userMsg = createUserMessage('Can I see your resume and career highlights?');
     stageStream.appendChild(userMsg);
 
-    // 2. Assistant message container
     const botMsg = document.createElement('div');
     botMsg.className = 'home-chat-msg home-chat-msg--assistant';
     botMsg.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
+        ${createAssistantHeader('Career Dossier · Austin, TX')}
         <div class="home-chat-prose">
           <p>Here is my executive summary, career highlights, and downloadable resume:</p>
         </div>
@@ -456,13 +603,13 @@
             <span aria-hidden="true">↗</span>
           </a>
         </div>
+        ${createAssistantToolbar('Austin, TX · Senior SaaS Product Designer')}
       </div>
     `;
 
     stageStream.appendChild(botMsg);
-    requestAnimationFrame(() => {
-      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    attachBotToolbar(botMsg, () => 'Ryan Schmidt — Senior SaaS Product Designer\nAustin, TX\nHighlights: +500% AI Activation at i4cp, +71% BI Engagement at D-Tools, 92% Design System Adoption.\nResume: assets/ryan-schmidt-resume.pdf');
+    scrollToNewestCard(botMsg);
     renderPills([
       'Is Ryan a fit for a Staff Product Designer role?',
       'Tell me about his design system experience',
@@ -472,17 +619,14 @@
 
   function renderApproachBlueprintCard() {
     activateStage();
-    // 1. User message bubble (Copilot style)
-    const userMsg = document.createElement('div');
-    userMsg.className = 'home-chat-msg home-chat-msg--user';
-    userMsg.innerHTML = `<div class="home-chat-bubble home-chat-bubble--user">What is your product design approach and philosophy?</div>`;
+    const userMsg = createUserMessage('What is your product design approach and philosophy?');
     stageStream.appendChild(userMsg);
 
-    // 2. Assistant message container
     const botMsg = document.createElement('div');
     botMsg.className = 'home-chat-msg home-chat-msg--assistant';
     botMsg.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
+        ${createAssistantHeader('Design Philosophy · Browser-Native Prototyping')}
         <div class="home-chat-prose">
           <p>Here is my approach to product design, systems architecture, and AI in practice:</p>
         </div>
@@ -503,13 +647,13 @@
             <p>Most legacy UI debt is a token problem. Scaling a 100+ component tokenized system achieved 92% engineer adoption and cut UI defects by 38%.</p>
           </div>
         </div>
+        ${createAssistantToolbar('Systems Thinking · Prototyping in Code')}
       </div>
     `;
 
     stageStream.appendChild(botMsg);
-    requestAnimationFrame(() => {
-      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    attachBotToolbar(botMsg, () => 'Product Design Approach:\n1. Trust Before AI: Anchor AI on verifiable KPIs.\n2. The Design-Eng Seam: Prototype in the browser with live tokens.\n3. Tokens Over Patches: Systemize what works to cut defect rates.');
+    scrollToNewestCard(botMsg);
     renderPills([
       'How do you validate AI features with users?',
       'Tell me about your 100+ component design system',
@@ -547,17 +691,14 @@
     const domInteractive = navTiming ? `${Math.round(navTiming.domInteractive)}ms` : '< 42ms';
     const currentAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0033FF';
 
-    // 1. User message bubble (Copilot style)
-    const userMsg = document.createElement('div');
-    userMsg.className = 'home-chat-msg home-chat-msg--user';
-    userMsg.innerHTML = `<div class="home-chat-bubble home-chat-bubble--user">/${escapeHtml(cmd || 'perf')}</div>`;
+    const userMsg = createUserMessage(`/${escapeHtml(cmd || 'perf')}`);
     stageStream.appendChild(userMsg);
 
-    // 2. Assistant message container
     const botMsg = document.createElement('div');
     botMsg.className = 'home-chat-msg home-chat-msg--assistant';
     botMsg.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
+        ${createAssistantHeader('Telemetry Console · Zero-Build ES6')}
         <div class="home-chat-prose">
           <p>Live runtime telemetry &amp; UX engineering controls:</p>
         </div>
@@ -590,6 +731,7 @@
             <span>⌘K Open Full Command Palette</span>
           </button>
         </div>
+        ${createAssistantToolbar('Client Telemetry · Performance Observer')}
       </div>
     `;
 
@@ -610,9 +752,8 @@
     });
 
     stageStream.appendChild(botMsg);
-    requestAnimationFrame(() => {
-      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    attachBotToolbar(botMsg, () => `Telemetry: DOM Interactive: ${domInteractive}, Nodes: ${domCount}, Accent: ${currentAccent}`);
+    scrollToNewestCard(botMsg);
   }
 
   // ---------------------------------------------------------------------------
@@ -632,17 +773,16 @@
     }
     state.controller = new AbortController();
 
-    // 1. Append User Message Bubble (Right-aligned, matching Copilot)
-    const userMsg = document.createElement('div');
-    userMsg.className = 'home-chat-msg home-chat-msg--user';
-    userMsg.innerHTML = `<div class="home-chat-bubble home-chat-bubble--user">${escapeHtml(question)}</div>`;
+    // 1. User Message (with 1-click micro-copy prompt action)
+    const userMsg = createUserMessage(question);
     stageStream.appendChild(userMsg);
 
-    // 2. Append Assistant Message Container (Left-aligned, matching Copilot)
+    // 2. Assistant Message Container (Linear / Vercel telemetry header & actions)
     const botMsg = document.createElement('div');
     botMsg.className = 'home-chat-msg home-chat-msg--assistant';
     botMsg.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
+        ${createAssistantHeader('RAG Grounded · Gemini 2.5')}
         <div class="home-chat-loading">
           <span class="home-chat-loading__dot"></span>
           <span class="home-chat-loading__dot"></span>
@@ -651,11 +791,12 @@
         <div class="home-chat-prose"></div>
         <div class="home-chat-sources" hidden></div>
         <div class="home-chat-followups" hidden></div>
+        ${createAssistantToolbar('Austin, TX · Shipped Evidence')}
       </div>
     `;
     stageStream.appendChild(botMsg);
     requestAnimationFrame(() => {
-      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
+      stageStream.scrollTo({ top: stageStream.scrollHeight, behavior: 'smooth' });
     });
 
     const loadingEl = botMsg.querySelector('.home-chat-loading');
@@ -708,7 +849,7 @@
                 if (parsed.type === 'chunk') {
                   accumulatedText += parsed.text || '';
                   if (loadingEl && !loadingEl.hidden) loadingEl.hidden = true;
-                  proseEl.innerHTML = parseMarkdown(sanitizeAnswer(accumulatedText));
+                  proseEl.innerHTML = parseMarkdown(sanitizeAnswer(accumulatedText)) + '<span class="home-chat-cursor" aria-hidden="true"></span>';
                   scrollToNewestCard(botMsg);
                 } else if (parsed.type === 'done') {
                   data = parsed.data || {};
@@ -750,6 +891,8 @@
 
       const cleanHtml = parseMarkdown(sanitizeAnswer(rawAns));
       proseEl.innerHTML = cleanHtml;
+      bindCodeblockCopies(proseEl);
+      attachBotToolbar(botMsg, () => proseEl.innerText.trim());
       state.history.push({ role: 'assistant', content: rawAns });
 
       // Render cited case study pills/links if returned
@@ -798,6 +941,8 @@
           <li><strong>Real-Time Inventory MVP (D-Tools):</strong> Connected POs to warehouse bins and active jobs, driving an <strong>+18% recurring revenue lift</strong>. <a href="pages/inventory.html">Read case study →</a></li>
         </ul>
       `;
+      bindCodeblockCopies(proseEl);
+      attachBotToolbar(botMsg, () => proseEl.innerText.trim());
       scrollToNewestCard(botMsg);
     } finally {
       state.inFlight = false;
@@ -813,6 +958,9 @@
   function handleInputOrAction(rawInput) {
     const text = String(rawInput || '').trim();
     if (!text) return;
+
+    userPromptHistory.push(text);
+    promptHistoryIndex = -1;
 
     const lower = text.toLowerCase();
 
@@ -857,6 +1005,42 @@
       }
     });
   });
+
+  // Bind Omnibar keyboard history (ArrowUp recalls previous prompts)
+  if (omnibarInput) {
+    omnibarInput.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') {
+        if (omnibarInput.value === '' || promptHistoryIndex !== -1) {
+          if (userPromptHistory.length > 0) {
+            e.preventDefault();
+            if (promptHistoryIndex === -1) {
+              promptHistoryIndex = userPromptHistory.length - 1;
+            } else if (promptHistoryIndex > 0) {
+              promptHistoryIndex--;
+            }
+            omnibarInput.value = userPromptHistory[promptHistoryIndex];
+            requestAnimationFrame(() => {
+              omnibarInput.selectionStart = omnibarInput.selectionEnd = omnibarInput.value.length;
+            });
+          }
+        }
+      } else if (e.key === 'ArrowDown') {
+        if (promptHistoryIndex !== -1) {
+          e.preventDefault();
+          if (promptHistoryIndex < userPromptHistory.length - 1) {
+            promptHistoryIndex++;
+            omnibarInput.value = userPromptHistory[promptHistoryIndex];
+            requestAnimationFrame(() => {
+              omnibarInput.selectionStart = omnibarInput.selectionEnd = omnibarInput.value.length;
+            });
+          } else {
+            promptHistoryIndex = -1;
+            omnibarInput.value = '';
+          }
+        }
+      }
+    });
+  }
 
   // Bind Omnibar form submit
   if (omnibarForm) {

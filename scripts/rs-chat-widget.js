@@ -39,8 +39,8 @@
     <style>
       :host {
         all: initial;
-        --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        --font-mono: 'JetBrains Mono', monospace;
+        --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
         --accent: #0033FF;
         --accent-hover: #0026CC;
         --accent-soft: rgba(0, 51, 255, 0.08);
@@ -212,28 +212,85 @@
         overflow-wrap: anywhere;
         padding: 11px 14px;
         border-radius: 14px;
-        border: 1px solid rgba(15, 23, 42, 0.07);
-        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
         font-size: 14px;
       }
       .msg.user {
         white-space: pre-wrap;
         align-self: flex-end;
-        background: var(--accent);
-        border-color: var(--accent);
-        color: #FFFFFF;
+        background: #FFFFFF;
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        color: #0F172A;
         border-bottom-right-radius: 4px;
         font-weight: 500;
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
       }
       .msg.bot {
         align-self: flex-start;
         max-width: 100%;
         background: #FFFFFF;
-        border-color: rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(15, 23, 42, 0.08);
         color: var(--text-primary);
         position: relative;
         line-height: 1.58;
         border-bottom-left-radius: 4px;
+        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+      }
+      .chat-action-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 8px;
+        padding-top: 6px;
+        border-top: 1px solid rgba(15, 23, 42, 0.06);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: #64748B;
+      }
+      .chat-copy-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 8px;
+        border-radius: 6px;
+        background: rgba(15, 23, 42, 0.04);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 600;
+        color: #475569;
+        cursor: pointer;
+        transition: all 140ms ease;
+      }
+      .chat-copy-btn:hover {
+        background: rgba(0, 51, 255, 0.08);
+        color: var(--accent);
+        border-color: rgba(0, 51, 255, 0.22);
+      }
+      .chat-copy-btn.is-copied {
+        background: #10B981;
+        color: #FFFFFF;
+        border-color: #10B981;
+      }
+      .chat-telemetry-tag {
+        font-size: 10.5px;
+        color: #94A3B8;
+        letter-spacing: 0.02em;
+      }
+      .chat-kpi-badge {
+        display: inline-flex;
+        align-items: baseline;
+        font-family: var(--font-mono);
+        font-size: 0.88em;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: #0F172A;
+        background: rgba(0, 51, 255, 0.07);
+        border: 1px solid rgba(0, 51, 255, 0.18);
+        padding: 1px 5px;
+        border-radius: 4px;
+        margin: 0 1px;
       }
       .msg p { margin: 0; }
       .msg p + p { margin-top: 0.55em; }
@@ -898,9 +955,37 @@ if (savedHist.length > 0) {
     });
     
     const miniInput = document.getElementById('ai-mini-input');
+    const miniForm = document.getElementById('subpage-omnibar-form');
     if (miniInput) {
       miniInput.addEventListener('click', () => {
         if (!panel.classList.contains('open')) openPanel();
+      });
+      miniInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const val = miniInput.value.trim();
+          if (val) {
+            miniInput.value = '';
+            openPanel();
+            send(val);
+          } else {
+            openPanel();
+          }
+        }
+      });
+    }
+
+    if (miniForm) {
+      miniForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const val = miniInput ? miniInput.value.trim() : '';
+        if (val) {
+          if (miniInput) miniInput.value = '';
+          openPanel();
+          send(val);
+        } else {
+          openPanel();
+        }
       });
     }
   }
@@ -1241,8 +1326,11 @@ if (savedHist.length > 0) {
     // Step 2: Escape the full string (links are now placeholder tokens, safe).
     let html = escapeHtml(tokenized);
 
-    // Step 3: Bold runs on escaped text. Safe because **text** has no entities.
+    // Step 3: Bold, Italic, Code & KPI badges.
     html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+    html = html.replace(/(\+?\d+(?:\.\d+)?%)/g, '<span class="chat-kpi-badge">$1</span>');
 
     // Step 4: Restore links, escaping label and href independently.
     // Defensive: if a stray token appears with no matching entry (rare, but
@@ -1753,6 +1841,36 @@ if (savedHist.length > 0) {
         scrollToBottom(true);
       }
 
+      // Action bar with 1-click Copy
+      const actBar = document.createElement('div');
+      actBar.className = 'chat-action-bar';
+      actBar.innerHTML = `
+        <button type="button" class="chat-copy-btn" title="Copy response" aria-label="Copy response">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span class="chat-copy-lbl">Copy</span>
+        </button>
+        <span class="chat-telemetry-tag">Gemini 2.5 · Grounded</span>
+      `;
+      const copyBtn = actBar.querySelector('.chat-copy-btn');
+      const copyLbl = actBar.querySelector('.chat-copy-lbl');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(ans);
+            copyBtn.classList.add('is-copied');
+            if (copyLbl) copyLbl.textContent = 'Copied!';
+            setTimeout(() => {
+              copyBtn.classList.remove('is-copied');
+              if (copyLbl) copyLbl.textContent = 'Copy';
+            }, 2000);
+          } catch {}
+        });
+      }
+      thinking.appendChild(actBar);
+
       // Feature 1: Hire Intent card
       if (data && data.hire_intent === true) {
         renderHireCard(thinking);
@@ -1890,6 +2008,15 @@ if (savedHist.length > 0) {
       send(prompt);
     }
   });
+
+  window.rsChatWidget = {
+    open: openPanel,
+    close: closePanel,
+    send: (msg) => {
+      openPanel();
+      send(msg);
+    }
+  };
 
   // No auto-open
 })();
