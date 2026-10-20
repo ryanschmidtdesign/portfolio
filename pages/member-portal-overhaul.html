@@ -25,9 +25,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <!-- Fonts (IBM Plex Sans + Newsreader italic serif for editorial accents) -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <link rel="stylesheet" href="../styles.css?v=12">
+    <link rel="stylesheet" href="../styles.css?v=13">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -299,10 +300,12 @@
     </header>
 
     <main id="main" class="site-main">
-      <article class="case-study case-study--member-portal" aria-labelledby="title">
+      <div class="subpage-ambient-glow" aria-hidden="true"></div>
 
-                <header class="tldr" aria-label="Executive summary">
-          <h1 id="title" data-parallax="0.06">Member Portal Growth Overhaul</h1>
+      <article class="case-study case-study--member-portal" aria-labelledby="title">
+        <header class="tldr" aria-label="Executive summary">
+          <div class="about-hero__badge" style="margin-bottom: 14px;">✦ ENTERPRISE IA &amp; AI · +500% ADOPTION</div>
+          <h1 id="title" data-parallax="0.06">i4cp Member Portal &amp; <em class="serif-accent">AI Search</em></h1>
           <p class="lead">
             When your entire business is research subscriptions, bad navigation kills renewals. Our old taxonomy was organized around internal departments, so members couldn't find benchmarks for their specific roles and assumed the content didn't exist. Many stopped logging in altogether.
             <br><br>As the sole designer, I rebuilt the portal's information architecture from the ground up, replaced the clunky search bar with an AI search omnibar, and organized everything around how HR executives actually think.
@@ -846,10 +849,10 @@
     </div>
 
     <!-- GSAP for smooth chat widget animations -->
-    <script src="../scripts/cli-mode.js?v=12" defer></script>
-    <script src="../scripts/scripts.js?v=12" defer></script>
+    <script src="../scripts/cli-mode.js?v=13" defer></script>
+    <script src="../scripts/scripts.js?v=13" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=12" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=13" defer></script>
     <script src="../scripts/image-splitter.js" defer></script>
     <footer class="site-footer">
       <a class="site-footer-brand" href="../index.html">

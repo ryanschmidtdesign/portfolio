@@ -27,11 +27,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <!-- Fonts (IBM Plex Sans + Newsreader italic serif for editorial accents) -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../styles.css?v=12">
+  <link rel="stylesheet" href="../styles.css?v=13">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -278,7 +278,19 @@
     </header>
 
   <main id="main" class="site-main">
-    <h1 class="sr-only">About Ryan Schmidt</h1>
+    <div class="subpage-ambient-glow" aria-hidden="true"></div>
+
+    <!-- Editorial Hero -->
+    <section class="about-hero" aria-label="Introduction">
+      <span class="about-hero__badge">✦ LEADERSHIP, SYSTEMS &amp; CRAFT</span>
+      <h1 class="about-hero__headline">
+        Designing at the seam of <em class="serif-accent">systems</em> &amp; <em class="serif-accent">craft.</em>
+      </h1>
+      <p class="about-hero__sub">
+        Senior SaaS Product Designer in Austin, TX. I partner directly with founders, product leaders, and engineering teams to turn ambiguous requirements, dense B2B workflows, and AI opportunities into intuitive software that ships.
+      </p>
+    </section>
+
     <!-- Leadership section -->
     <section id="leadership" data-reveal class="leadership-section" aria-labelledby="leadership-title">
       <div class="leadership-wrapper">
@@ -470,14 +482,14 @@
   <!-- GSAP for smooth chat widget animations -->
   
   <!-- Consolidated JavaScript -->
-  <script src="../scripts/cli-mode.js?v=12" defer></script>
-  <script src="../scripts/scripts.js?v=12" defer></script>
+  <script src="../scripts/cli-mode.js?v=13" defer></script>
+  <script src="../scripts/scripts.js?v=13" defer></script>
   <script src="../scripts/magnetic.js" defer></script>
 
   <!-- Interactive enhancements -->
   <script src="../scripts/about/about-particles.js" defer></script>
 
-  <script src="../scripts/rs-chat-widget.js?v=12" defer></script>
+  <script src="../scripts/rs-chat-widget.js?v=13" defer></script>
 
   <footer class="site-footer">
     <a class="site-footer-brand" href="../index.html">

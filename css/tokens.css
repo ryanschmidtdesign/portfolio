@@ -106,9 +106,10 @@
   --type-caption: var(--fs-sm);
 
   /* Radii (single system) */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
   --radius-pill: 999px;
 
   --focus-outline-offset: 3px;
@@ -121,27 +122,27 @@
   --dur-3: 300ms;
   --dur-4: 450ms;
 
-  /* === Expensive Warm Neutrals (Alabaster base) === */
-  --gray-100: #FAFAFA;
-  --gray-200: #F4F4F5;
-  --gray-300: #E4E4E7;
-  --bg: var(--gray-100);
+  /* === Expensive Warm Atelier Neutrals (Homepage Canvas) === */
+  --gray-100: #FAF9F6;
+  --gray-200: #F4F2EC;
+  --gray-300: #E7E5DD;
+  --bg: #FAF9F6;
 
   /* Surface levels (more distinct steps) */
-  --surface-1: rgba(0, 0, 0, 0.04);
+  --surface-1: rgba(15, 23, 42, 0.03);
   /* hover states */
-  --surface-2: rgba(0, 0, 0, 0.08);
+  --surface-2: rgba(15, 23, 42, 0.06);
   /* active cards */
 
   /* Card surfaces */
-  --card-bg-strong: var(--gray-200);
+  --card-bg-strong: #FFFFFF;
 
-  /* Elevated surface system — no borders, shadow + tone only */
-  --surface-elevated: rgba(15, 23, 42, 0.03);
+  /* Elevated surface system — clean white cards on warm canvas */
+  --surface-elevated: #FFFFFF;
   /* callouts, asides, meta cards */
-  --surface-elevated-strong: rgba(15, 23, 42, 0.05);
+  --surface-elevated-strong: #FFFFFF;
   /* impact callout, TLDR card */
-  --surface-code: rgba(15, 23, 42, 0.04);
+  --surface-code: #FAF9F6;
   /* code blocks, pre */
 
   /* KPI system */
@@ -153,10 +154,10 @@
   --kpi-note-color: var(--text-secondary);
 
   /* Borders (outline tone) */
-  --border-subtle: rgb(var(--rgb-outline) / 0.08);
-  --border: rgb(var(--rgb-outline) / 0.16);
-  --border-strong: rgb(var(--rgb-outline) / 0.28);
-  --border-interactive: rgb(var(--rgb-outline) / 0.40);
+  --border-subtle: rgba(15, 23, 42, 0.065);
+  --border: rgba(15, 23, 42, 0.10);
+  --border-strong: rgba(15, 23, 42, 0.20);
+  --border-interactive: rgba(15, 23, 42, 0.35);
 
   --border-w-strong: 2px;
 
@@ -269,13 +270,13 @@
   --case-h3-top: var(--space-6);
   /* 32px above sub-heading */
 
-  /* Elevation shadows tuned for light steel-gray bg */
+  /* Elevation shadows tuned for warm Atelier canvas */
   --shadow-card:
-    0 1px 2px rgba(15, 23, 42, 0.07),
-    0 8px 24px rgba(15, 23, 42, 0.10);
+    0 1px 3px rgba(15, 23, 42, 0.02),
+    0 8px 22px -8px rgba(15, 23, 42, 0.05);
   --shadow-card-strong:
-    0 2px 4px rgba(15, 23, 42, 0.08),
-    0 16px 40px rgba(15, 23, 42, 0.13);
+    0 2px 6px rgba(15, 23, 42, 0.03),
+    0 14px 32px -10px rgba(15, 23, 42, 0.08);
 
   /* Nav ink */
   --ink-on-glass: #0f172a;
