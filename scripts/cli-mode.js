@@ -738,11 +738,21 @@
     }
 
     // Initialize when DOM is ready
+    function initSubpagePlaceholder() {
+        const miniInput = document.getElementById('ai-mini-input');
+        if (miniInput && window.innerWidth <= 600) {
+            miniInput.placeholder = 'Search case studies...';
+        }
+    }
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             window.rsCommandPalette = new AtelierCommandPalette();
+            initSubpagePlaceholder();
         });
     } else {
         window.rsCommandPalette = new AtelierCommandPalette();
+        initSubpagePlaceholder();
     }
+    window.addEventListener('resize', initSubpagePlaceholder);
 })();

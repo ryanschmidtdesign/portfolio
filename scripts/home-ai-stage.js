@@ -305,10 +305,24 @@
     if (btnEl) btnEl.textContent = buttonLabel;
   }
 
+  function getDefaultPlaceholder() {
+    return window.innerWidth <= 600
+      ? 'Search case studies or ask...'
+      : 'Search case studies, ask a question, or press ⌘K...';
+  }
+
+  function updatePlaceholder() {
+    if (!omnibarInput || stageRoot.classList.contains('is-stage-active')) return;
+    omnibarInput.placeholder = getDefaultPlaceholder();
+  }
+
+  window.addEventListener('resize', updatePlaceholder);
+  updatePlaceholder();
+
   function activateStage() {
     stageRoot.classList.add('is-stage-active');
     stageView.hidden = false;
-    if (omnibarInput) omnibarInput.placeholder = 'Search case studies, ask a question, or press ⌘K...';
+    if (omnibarInput) omnibarInput.placeholder = getDefaultPlaceholder();
   }
 
   function resetStage() {
@@ -323,7 +337,7 @@
     document.querySelectorAll('.home-intent-card.is-active').forEach((c) => c.classList.remove('is-active'));
     if (omnibarInput) {
       omnibarInput.value = '';
-      omnibarInput.placeholder = 'Search case studies, ask a question, or press ⌘K...';
+      omnibarInput.placeholder = getDefaultPlaceholder();
     }
     updateStageHeader('Featured Case Studies · Shipped Impact', 'Back to overview');
   }
@@ -487,6 +501,11 @@
           ${CASE_STUDIES.map(
             (c) => `
             <article class="home-work-card">
+              ${c.image ? `
+                <a href="${c.url}" class="home-work-card__media" tabindex="-1" aria-hidden="true">
+                  <img src="${c.image}" alt="${escapeHtml(c.title)}" loading="lazy">
+                </a>
+              ` : ''}
               <div class="home-work-card__body">
                 <div class="home-work-card__top-row">
                   <span class="home-work-card__eyebrow">${escapeHtml(c.eyebrow)}</span>

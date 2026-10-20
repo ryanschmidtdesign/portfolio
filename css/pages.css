@@ -1028,43 +1028,43 @@ body.is-home {
 }
 
 .home-intent-icon {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(15, 23, 42, 0.04);
+  color: #1E293B;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
 .home-intent-icon svg {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
 }
 
 .home-intent-card:hover .home-intent-icon {
-  transform: scale(1.04);
+  transform: scale(1.05);
+  background: rgba(200, 100, 70, 0.08);
+  color: #C86446;
+  border-color: rgba(200, 100, 70, 0.2);
 }
 
-.home-intent-icon--blue {
-  background: #EEF4FF;
-  color: #2563EB;
+.home-intent-icon--blue,
+.home-intent-icon--emerald,
+.home-intent-icon--violet {
+  background: rgba(15, 23, 42, 0.04);
+  color: #1E293B;
+  border: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .home-intent-icon--terracotta {
-  background: #FDF0EC;
+  background: rgba(200, 100, 70, 0.07);
   color: #C86446;
-}
-
-.home-intent-icon--emerald {
-  background: #ECFDF5;
-  color: #059669;
-}
-
-.home-intent-icon--violet {
-  background: #F3EFFE;
-  color: #7C3AED;
+  border-color: rgba(200, 100, 70, 0.15);
 }
 
 .home-intent-card__content {
@@ -1768,6 +1768,29 @@ body.is-home {
   transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease, border-color 180ms ease;
 }
 
+.home-work-card__media {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #EDECE8;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+}
+
+.home-work-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.home-work-card:hover .home-work-card__media img {
+  transform: scale(1.035);
+}
+
 .home-work-card:hover {
   transform: translateY(-1px);
   border-color: rgba(0, 51, 255, 0.28);
@@ -2449,6 +2472,11 @@ body.is-home .site-footer {
   display: none !important;
 }
 
+/* Ensure subpages have comfortable clearance above the fixed bottom CLI dock */
+body:not(.is-home) main.site-main {
+  padding-bottom: 140px !important;
+}
+
 /* Responsive Breakpoints for Homepage AI Stage */
 @media (max-width: 860px) {
   .home-work-grid,
@@ -2523,6 +2551,14 @@ body.is-home .site-footer {
   .subpage-omnibar-input {
     font-size: 0.86rem;
     padding: 1px 2px 2px;
+  }
+  .home-omnibar-cmdk,
+  .subpage-omnibar-cmdk {
+    display: none !important;
+  }
+  .home-work-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
   .home-omnibar-identity__name {
     font-size: 0.74rem;
