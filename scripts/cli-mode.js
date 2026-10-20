@@ -991,7 +991,7 @@
                     <div class="rs-cmd-output__grid">
                         <div class="rs-cmd-output__card">
                             <div class="rs-cmd-output__card-label">Role</div>
-                            <div class="rs-cmd-output__card-val">Senior Product Designer &amp; UX Engineer</div>
+                            <div class="rs-cmd-output__card-val">Senior SaaS Product Designer</div>
                         </div>
                         <div class="rs-cmd-output__card">
                             <div class="rs-cmd-output__card-label">Signature Impact</div>

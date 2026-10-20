@@ -934,7 +934,7 @@
       if (err.name === 'AbortError') return;
       if (loadingEl) loadingEl.remove();
       proseEl.innerHTML = `
-        <p><strong>Ryan Schmidt</strong> is a Senior B2B SaaS Product Designer &amp; UX Engineer in Austin, TX who works at the seam of design and engineering.</p>
+        <p><strong>Ryan Schmidt</strong> is a Senior SaaS Product Designer in Austin, TX who works at the seam of design and engineering.</p>
         <ul>
           <li><strong>AI-Powered Dashboards (D-Tools):</strong> Drove <strong>+71% beta engagement</strong> and <strong>62% multi-dashboard adoption</strong> by anchoring AI opportunity summaries on verifiable KPIs. <a href="pages/dashboard.html">Read case study →</a></li>
           <li><strong>i4cp Member Portal Overhaul:</strong> Restructured enterprise research IA and launched the Ask Ahri AI search omnibar, lifting <strong>AI feature activation by +500%</strong>. <a href="pages/member-portal-overhaul.html">Read case study →</a></li>

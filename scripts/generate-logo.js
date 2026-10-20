@@ -186,7 +186,7 @@ files.push(["favicon.svg", tileMark(64, BG)]);
     `<rect width="1200" height="630" fill="url(#halo)"/>` +
     strokedMark(270, 315, 150, { color: HIGHLIGHT, alpha: 0.18, r: 230 }) +
     `<text x="510" y="300" font-family="Helvetica Neue, Arial, sans-serif" font-size="76" font-weight="700" fill="#FFFFFF" letter-spacing="-1">Ryan Schmidt</text>` +
-    `<text x="512" y="355" font-family="Helvetica Neue, Arial, sans-serif" font-size="34" font-weight="500" fill="#9FB4D9" letter-spacing="0.5">Senior Product Designer &amp; UX Engineer</text>` +
+    `<text x="512" y="355" font-family="Helvetica Neue, Arial, sans-serif" font-size="34" font-weight="500" fill="#9FB4D9" letter-spacing="0.5">Senior SaaS Product Designer</text>` +
     `<text x="512" y="410" font-family="Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" fill="${BLUE_SECONDARY}" letter-spacing="4">ryanschmidt.design</text>` +
     `</svg>`;
   files.push(["assets/logo/og-image.svg", defs(svg)]);

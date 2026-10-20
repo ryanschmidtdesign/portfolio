@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Personal portfolio site for Ryan Schmidt — Senior Product Designer.",
+  "description": "Personal portfolio site for Ryan Schmidt — Senior SaaS Product Designer.",
   "engines": {
     "node": ">=18"
   },

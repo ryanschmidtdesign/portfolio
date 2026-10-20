@@ -1,4 +1,4 @@
-# Ryan Schmidt — Senior Product Designer
+# Ryan Schmidt — Senior SaaS Product Designer
 
 > Ryan Schmidt is a CX/UX designer at i4cp focused on information architecture, member experience, and AI-augmented product UX. He turns messy research and legacy interfaces into systems that scale, with measurable outcomes like task success, component reuse, and adoption. Strengths sit at the seam of design and engineering: token-first design systems, prototyping in code, and AI tooling like Cursor and Claude. Based in Austin, TX.
 

@@ -10,7 +10,7 @@
    ========================================================================== */
 @media print {
   body { background: white !important; color: black !important; font-size: 11pt; }
-  .ai-mini-wrapper, .site-footer, .home-titles, video, .image-splitter .splitter-handle, button { display: none !important; }
+  .ai-mini-wrapper, .site-footer, video, .image-splitter .splitter-handle, button { display: none !important; }
   .case-study { width: 100%; max-width: none; margin: 0; padding: 0; }
   .tldr { page-break-after: avoid; }
   h1, h2, h3 { color: black !important; page-break-after: avoid; }
