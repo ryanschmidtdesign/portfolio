@@ -87,10 +87,10 @@
   ];
 
   const DEFAULT_PILLS = [
-    'Design a better dashboard',
-    'How do you use AI in design?',
     'What are his strongest projects?',
-    'Is Ryan a fit for a Senior/Staff role?'
+    'Is Ryan a fit for a Senior/Staff role?',
+    'How does he use AI & code in design?',
+    'Walk me through the +71% dashboard lift'
   ];
 
   const state = {
@@ -251,16 +251,13 @@
     stageRoot.classList.remove('is-stage-active');
     document.querySelectorAll('.home-intent-card.is-active').forEach((c) => c.classList.remove('is-active'));
     renderPills(DEFAULT_PILLS);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function scrollToNewestCard(el) {
-    if (!el) return;
+    if (!el || !stageStream) return;
     setTimeout(() => {
-      const rect = el.getBoundingClientRect();
-      const offset = window.scrollY + rect.top - 108;
-      window.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
-    }, 60);
+      stageStream.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 30);
   }
 
   function renderPills(pills = DEFAULT_PILLS) {
@@ -285,6 +282,7 @@
 
   function renderWorkShowcaseCard() {
     activateStage();
+    stageStream.innerHTML = '';
     const block = document.createElement('section');
     block.className = 'home-stage-block home-stage-block--work';
     block.innerHTML = `
@@ -298,22 +296,15 @@
         ${CASE_STUDIES.map(
           (c) => `
           <article class="home-work-card">
-            <a href="${c.url}" class="home-work-card__media" aria-label="Read ${escapeHtml(c.title)} case study">
-              <img src="${c.image}" alt="${escapeHtml(c.title)}" loading="lazy" />
-              <div class="home-work-card__badges">
-                <span class="home-work-kpi">${escapeHtml(c.metric)}</span>
-                <span class="home-work-kpi home-work-kpi--subtle">${escapeHtml(c.secondaryMetric)}</span>
-              </div>
-            </a>
             <div class="home-work-card__body">
-              <div class="home-work-card__eyebrow">${escapeHtml(c.eyebrow)}</div>
+              <div class="home-work-card__top-row">
+                <span class="home-work-card__eyebrow">${escapeHtml(c.eyebrow)}</span>
+                <span class="home-work-kpi">${escapeHtml(c.metric)}</span>
+              </div>
               <h3 class="home-work-card__title">
                 <a href="${c.url}">${escapeHtml(c.title)}</a>
               </h3>
               <p class="home-work-card__summary">${escapeHtml(c.summary)}</p>
-              <div class="home-work-card__tags">
-                ${c.tags.map((t) => `<span class="home-work-tag">${escapeHtml(t)}</span>`).join('')}
-              </div>
               <div class="home-work-card__actions">
                 <a href="${c.url}" class="home-work-btn home-work-btn--primary">
                   <span>Read Case Study</span>
@@ -344,12 +335,13 @@
       'Which case study should I read first?',
       'How did you drive 71% more dashboard engagement?',
       'How did you lift AI adoption by 500% at i4cp?',
-      'Paste a job link to check role fit'
+      'How did the Inventory MVP drive +18% MRR?'
     ]);
   }
 
   function renderResumeDossierCard() {
     activateStage();
+    stageStream.innerHTML = '';
     const block = document.createElement('section');
     block.className = 'home-stage-block home-stage-block--resume';
     block.innerHTML = `
@@ -445,6 +437,7 @@
 
   function renderApproachBlueprintCard() {
     activateStage();
+    stageStream.innerHTML = '';
     const block = document.createElement('section');
     block.className = 'home-stage-block home-stage-block--approach';
     block.innerHTML = `
@@ -459,29 +452,34 @@
         <div class="home-pillar-card">
           <div class="home-pillar-card__num">01 // TRUST BEFORE AI</div>
           <h4>Anchor AI on Verifiable Data</h4>
-          <p>AI should never be the first thing a user sees in a workflow they don't trust yet. On D-Tools BI and i4cp Ask Ahri, layering conversational synthesis on top of verifiable KPIs and citations drove +71% to +500% adoption.</p>
+          <p>AI shouldn't be the first thing a user sees in a workflow they don't trust yet. Layering synthesis on verifiable KPIs drove +71% to +500% adoption.</p>
         </div>
         <div class="home-pillar-card">
           <div class="home-pillar-card__num">02 // THE DESIGN-ENG SEAM</div>
-          <h4>Prototype in the Browser, Not Over a Fence</h4>
-          <p>Static handoffs lose interaction nuance. Ryan pairs Figma token architecture with live HTML/CSS/JS prototypes in Cursor &amp; Claude so engineers build from working state machines.</p>
+          <h4>Prototype in the Browser</h4>
+          <p>Static handoffs lose nuance. Ryan pairs Figma token architecture with live HTML/CSS/JS prototypes in Cursor &amp; Claude alongside engineers.</p>
         </div>
         <div class="home-pillar-card">
           <div class="home-pillar-card__num">03 // TOKENS OVER PATCHES</div>
           <h4>Systemize What Works</h4>
-          <p>Most legacy B2B UI debt isn't a visual redesign problem—it's a token architecture problem. Scaling a 100+ component tokenized system achieved 92% engineer adoption and cut UI defects by 38%.</p>
+          <p>Most legacy UI debt is a token problem. Scaling a 100+ component tokenized system achieved 92% engineer adoption and cut UI defects by 38%.</p>
         </div>
       </div>
     `;
 
     stageStream.appendChild(block);
     scrollToNewestCard(block);
-    // Also stream a tailored AI synthesis right below it for conversational depth
-    askGeminiOnStage('How do you approach product design, information architecture, and using AI in your workflow?', { skipScrollOnStart: true });
+    renderPills([
+      'How do you validate AI features with users?',
+      'Tell me about your 100+ component design system',
+      'How do you use Cursor and Claude in your workflow?',
+      'What are his strongest projects?'
+    ]);
   }
 
   function renderCLITelemetryStageCard(command) {
     activateStage();
+    stageStream.innerHTML = '';
     const cmd = command.replace(/^\//, '').toLowerCase().trim();
 
     if (cmd === 'work' || cmd === 'ls' || cmd === 'projects') {
@@ -580,6 +578,7 @@
     if (!question || state.inFlight) return;
 
     activateStage();
+    stageStream.innerHTML = '';
     state.inFlight = true;
     omnibarSend.disabled = true;
 
