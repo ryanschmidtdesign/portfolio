@@ -1,4 +1,4 @@
-const CACHE = 'portfolio-v7';
+const CACHE = 'portfolio-v8';
 const PRECACHE_URLS = [
   '/404.html',
   '/styles.css',

@@ -705,11 +705,8 @@ body.is-home {
   color: #0F172A;
   text-decoration: none;
   justify-self: start;
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.home-logo:hover {
-  transform: translateY(-1px);
+  cursor: default;
+  user-select: none;
 }
 
 .home-logo-name {
@@ -2096,74 +2093,4 @@ body.is-home .site-footer {
   color: var(--text);
   margin-bottom: var(--space-2);
   letter-spacing: var(--tracking-snug);
-}
-
-/* -------------------------------------------------------
-   Let's Connect CTA
-   --------------------------------------------------------*/
-.connect-cta {
-  position: relative;
-  margin-top: var(--space-8);
-  padding: clamp(3rem, 6vw, 5rem);
-  background: var(--surface-dark-solid);
-  color: var(--text-on-accent);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-}
-
-.connect-cta::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top right, rgba(0, 51, 255, 0.15), transparent 60%);
-  pointer-events: none;
-}
-
-.connect-cta .section-title {
-  color: white;
-  margin-bottom: var(--space-4);
-}
-
-.connect-cta p {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: var(--fs-body);
-  max-width: 60ch;
-  line-height: var(--lh-prose);
-}
-
-.connect-cta .connect-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  margin-top: var(--space-6);
-}
-
-.connect-cta a.btn-primary {
-  background: white;
-  color: var(--surface-dark-solid);
-  font-weight: var(--weight-bold);
-  padding: 14px 28px;
-}
-
-.connect-cta a.btn-primary:hover {
-  background: #f0f0f0;
-  transform: translateY(-2px);
-}
-
-.connect-cta a.btn-outline-light {
-  display: inline-flex;
-  align-items: center;
-  padding: 14px 28px;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: var(--radius-md);
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.connect-cta a.btn-outline-light:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.4);
 }
