@@ -682,7 +682,7 @@ body.is-home {
   justify-content: space-between;
 }
 
-/* Top Editorial Header Bar */
+/* Top Editorial Header Bar (Clean centered navigation) */
 .home-topbar {
   position: relative;
   z-index: 230;
@@ -690,10 +690,9 @@ body.is-home {
   max-width: 1360px;
   margin-inline: auto;
   padding: 16px clamp(1.25rem, 4vw, 3rem) 8px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: center;
   flex-shrink: 0;
 }
 
@@ -1193,8 +1192,69 @@ a.home-logo:hover .home-logo-name {
 .home-omnibar-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
+}
+
+/* CLI Omnibar Identity Header (Ryan Schmidt · Senior SaaS Product Designer) */
+.home-omnibar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2px 7px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  margin-bottom: 2px;
+}
+
+.home-omnibar-identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  user-select: none;
+  min-width: 0;
+}
+
+.home-omnibar-identity__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.16);
+  flex-shrink: 0;
+}
+
+.home-omnibar-identity__name {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #0F172A;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.home-omnibar-identity__sep {
+  font-size: 0.7rem;
+  color: #CBD5E1;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.home-omnibar-identity__title {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748B;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .home-omnibar-identity__title {
+    font-size: 0.58rem;
+    letter-spacing: 0.03em;
+  }
 }
 
 .home-omnibar-top {
@@ -2311,21 +2371,13 @@ body.is-home .site-footer {
 /* Responsive Breakpoints for Homepage AI Stage */
 @media (max-width: 860px) {
   .home-topbar {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-    row-gap: 12px;
-    padding: 14px 1.25rem;
-  }
-  .home-logo {
-    justify-self: center;
-    align-items: center;
+    padding: 12px 1rem;
+    justify-content: center;
   }
   .home-topbar__right {
     display: none;
   }
   .home-topnav {
-    justify-self: center;
     max-width: 100%;
     flex-wrap: wrap;
     justify-content: center;

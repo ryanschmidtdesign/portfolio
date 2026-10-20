@@ -33,7 +33,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=11">
+    <link rel="stylesheet" href="../styles.css?v=12">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -274,11 +274,6 @@
   <body>
     <!-- Top Editorial Header Bar (unified with homepage) -->
     <header class="home-topbar" role="banner">
-      <a href="../index.html" class="home-logo" aria-label="Ryan Schmidt — Senior SaaS Product Designer">
-        <span class="home-logo-name">Ryan Schmidt</span>
-        <span class="home-role">Senior SaaS Product Designer</span>
-      </a>
-
       <nav class="home-topnav" aria-label="Main navigation">
         <a href="../index.html" class="home-topnav__link">
           <span>Home</span>
@@ -656,6 +651,14 @@
     <div class="ai-mini-wrapper subpage-omnibar-dock" data-assistant-trigger>
       <div class="subpage-omnibar-shell">
         <form class="subpage-omnibar-form" id="subpage-omnibar-form" onsubmit="return false;">
+          <div class="home-omnibar-header">
+            <div class="home-omnibar-identity">
+              <span class="home-omnibar-identity__dot" aria-hidden="true"></span>
+              <span class="home-omnibar-identity__name">Ryan Schmidt</span>
+              <span class="home-omnibar-identity__sep" aria-hidden="true">·</span>
+              <span class="home-omnibar-identity__title">Senior SaaS Product Designer</span>
+            </div>
+          </div>
           <div class="subpage-omnibar-top">
             <input type="text" id="ai-mini-input" class="subpage-omnibar-input ai-mini-input" placeholder="Ask about AI-Powered Dashboards..." autocomplete="off" aria-label="Ask about Ryan's work, case studies, or role fit" />
           </div>
@@ -698,10 +701,10 @@
 
     <!-- GSAP for smooth chat widget animations -->
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=11" defer></script>
-    <script src="../scripts/scripts.js?v=11" defer></script>
+    <script src="../scripts/cli-mode.js?v=12" defer></script>
+    <script src="../scripts/scripts.js?v=12" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=11" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=12" defer></script>
     <footer class="site-footer">
       <a class="site-footer-brand" href="../index.html">
         <img src="../favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">
