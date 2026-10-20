@@ -96,7 +96,7 @@ body {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--text);
-  padding-bottom: clamp(100px, 12vh, 130px);
+  padding-bottom: calc(clamp(110px, 12vh, 136px) + env(safe-area-inset-bottom, 0px));
   font-weight: var(--weight-regular);
   background-color: var(--bg);
   background-image: none;
@@ -106,7 +106,7 @@ body {
   overscroll-behavior: none;
   text-rendering: optimizeLegibility;
   font-kerning: normal;
-  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "cv02" 1, "cv03" 1, "ss01" 1;
   font-variant-ligatures: contextual common-ligatures;
 }
 

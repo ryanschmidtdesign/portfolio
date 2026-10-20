@@ -227,7 +227,7 @@ body:not(.is-home) .site-main {
     padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
   }
 
-  section:last-of-type,
+  .site-main > section:last-of-type,
   .leadership-section:last-of-type,
   .builder-section:last-of-type,
   .mentorship-section:last-of-type,
