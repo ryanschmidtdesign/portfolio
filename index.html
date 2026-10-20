@@ -58,7 +58,7 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
-  <link rel="stylesheet" href="./styles.css?v=16">
+  <link rel="stylesheet" href="./styles.css?v=17">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -219,213 +219,342 @@
 </head>
 
 <body class="is-home">
-  <main id="main" class="home-ai-canvas">
-    <h1 class="sr-only">Ryan Schmidt — Senior SaaS Product Designer</h1>
+  <!-- Top anchor -->
+  <div id="top"></div>
 
-    <div class="home-ai-stage" id="home-ai-stage">
-      <!-- Ambient Studio Glow -->
-      <div class="home-ambient-glow" aria-hidden="true"></div>
+  <!-- Ambient Studio Glow -->
+  <div class="home-ambient-glow" aria-hidden="true"></div>
 
-      <!-- Centerpiece Greeting & Value Proposition -->
-      <section class="home-greeting" aria-label="Introduction">
-        <h2 class="home-greeting__headline">
-          Hi, I’m <em class="home-greeting__serif">Ryan</em>.
-        </h2>
-        <p class="home-greeting__sub">
-          I’m a senior product designer &amp; UX engineer who turns complex B2B workflows into intuitive, AI-powered systems that ship.
+  <main id="main" class="home-main">
+    <!-- Hero Section -->
+    <header class="home-hero">
+      <div class="home-hero__meta">
+        <span class="home-hero__status-dot"></span>
+        <span class="home-hero__status-text">Available for Senior &amp; Staff Product Design roles</span>
+      </div>
+      <h1 class="home-hero__title">
+        Hi, I’m <em class="home-hero__serif">Ryan</em>.
+      </h1>
+      <p class="home-hero__lead">
+        Senior product designer &amp; UX engineer with 6+ years designing B2B SaaS platforms, tokenized design systems, and AI workflows that ship.
+      </p>
+      <div class="home-hero__tags">
+        <span class="home-tag">B2B SaaS</span>
+        <span class="home-tag">Design Systems</span>
+        <span class="home-tag">UX Engineering</span>
+        <span class="home-tag">AI Workflows</span>
+        <span class="home-tag">Austin, TX</span>
+      </div>
+    </header>
+
+    <!-- Selected Work Section -->
+    <section class="home-section" id="work" aria-label="Selected Work">
+      <div class="home-section__header">
+        <span class="home-section__eyebrow">01 / Selected Work</span>
+        <h2 class="home-section__title">Case Studies &amp; Shipped Outcomes</h2>
+        <p class="home-section__desc">
+          Complex B2B platforms, tokenized design systems, and AI workflows shipped with verifiable business outcomes.
         </p>
-      </section>
+      </div>
 
-      <!-- 2x2 Intent-Routing Cards Grid (Horizontal Single-Row Layout) -->
-      <section class="home-intent-grid" aria-label="Explore Ryan's work and experience">
-        <!-- Card 1: Show me your work -->
-        <button type="button" class="home-intent-card" data-home-intent="work">
-          <span class="home-intent-icon home-intent-icon--blue" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 20V10"/>
-              <path d="M12 20V4"/>
-              <path d="M6 20v-6"/>
-            </svg>
-          </span>
-          <div class="home-intent-card__content">
-            <span class="home-intent-card__title">Show me your work</span>
-            <span class="home-intent-card__desc">4 shipped case studies (+71%, +500%)</span>
+      <div class="home-work-grid">
+        <!-- Project 1: D-Tools Dashboards -->
+        <article class="home-project-card">
+          <a href="pages/dashboard.html" class="home-project-card__media-link" aria-label="Read AI-Powered Dashboards case study">
+            <div class="home-project-card__media">
+              <img src="assets/case-studies/dashboards/rename-dashboard.webp" alt="D-Tools Cloud executive dashboard showing custom reporting widgets" loading="lazy">
+            </div>
+          </a>
+          <div class="home-project-card__body">
+            <div class="home-project-card__top">
+              <span class="home-project-card__client">D-Tools Cloud · 2024</span>
+              <span class="home-kpi-badge home-kpi-badge--blue">+71% Beta Engagement</span>
+            </div>
+            <h3 class="home-project-card__title">
+              <a href="pages/dashboard.html">AI-Powered BI Dashboards &amp; Opportunity Signals</a>
+            </h3>
+            <p class="home-project-card__summary">
+              Redesigned static reporting into role-based executive views with anchored AI summaries grounded in verifiable KPIs, driving 62% multi-dashboard adoption.
+            </p>
+            <div class="home-project-card__footer">
+              <div class="home-project-card__tags">
+                <span>B2B SaaS</span>
+                <span>AI UX</span>
+                <span>Data Vis</span>
+              </div>
+              <a href="pages/dashboard.html" class="home-project-card__cta" aria-label="Read AI-Powered Dashboards case study">
+                <span>Read Case Study</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
-          <span class="home-intent-arrow" aria-hidden="true">→</span>
-        </button>
+        </article>
 
-        <!-- Card 2: How do you approach design? -->
-        <button type="button" class="home-intent-card" data-home-intent="approach">
-          <span class="home-intent-icon home-intent-icon--terracotta" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z"/>
-            </svg>
-          </span>
-          <div class="home-intent-card__content">
-            <span class="home-intent-card__title">How do you approach design?</span>
-            <span class="home-intent-card__desc">Process, principles &amp; prototyping in code</span>
+        <!-- Project 2: i4cp Member Portal -->
+        <article class="home-project-card">
+          <a href="pages/member-portal-overhaul.html" class="home-project-card__media-link" aria-label="Read i4cp Member Portal case study">
+            <div class="home-project-card__media">
+              <img src="assets/case-studies/member-portal/design-highlights/Home_new.webp" alt="i4cp Member Portal redesign homepage" loading="lazy">
+            </div>
+          </a>
+          <div class="home-project-card__body">
+            <div class="home-project-card__top">
+              <span class="home-project-card__client">i4cp · 2023–2024</span>
+              <span class="home-kpi-badge home-kpi-badge--terracotta">+500% AI Activation</span>
+            </div>
+            <h3 class="home-project-card__title">
+              <a href="pages/member-portal-overhaul.html">Enterprise Member Portal &amp; AI Search Overhaul</a>
+            </h3>
+            <p class="home-project-card__summary">
+              Restructured enterprise HR research taxonomy and introduced a unified AI discovery omnibar with grounded citations, lifting feature activation by +500%.
+            </p>
+            <div class="home-project-card__footer">
+              <div class="home-project-card__tags">
+                <span>Information Architecture</span>
+                <span>RAG Search</span>
+                <span>Member Portal</span>
+              </div>
+              <a href="pages/member-portal-overhaul.html" class="home-project-card__cta" aria-label="Read i4cp Member Portal case study">
+                <span>Read Case Study</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
-          <span class="home-intent-arrow" aria-hidden="true">→</span>
-        </button>
+        </article>
 
-        <!-- Card 3: Can I see your resume? -->
-        <button type="button" class="home-intent-card" data-home-intent="resume">
-          <span class="home-intent-icon home-intent-icon--emerald" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-              <line x1="10" y1="9" x2="8" y2="9"/>
-            </svg>
-          </span>
-          <div class="home-intent-card__content">
-            <span class="home-intent-card__title">Can I see your resume?</span>
-            <span class="home-intent-card__desc">15+ years experience, skills &amp; PDF</span>
+        <!-- Project 3: Real-Time Inventory -->
+        <article class="home-project-card">
+          <a href="pages/inventory.html" class="home-project-card__media-link" aria-label="Read Real-Time Inventory case study">
+            <div class="home-project-card__media">
+              <img src="assets/case-studies/inventory/inventory-controls.webp" alt="Real-time inventory item tracking and bin management" loading="lazy">
+            </div>
+          </a>
+          <div class="home-project-card__body">
+            <div class="home-project-card__top">
+              <span class="home-project-card__client">D-Tools Cloud · 2023</span>
+              <span class="home-kpi-badge home-kpi-badge--emerald">+18% MRR Lift</span>
+            </div>
+            <h3 class="home-project-card__title">
+              <a href="pages/inventory.html">Real-Time Inventory, Purchasing &amp; Receiving MVP</a>
+            </h3>
+            <p class="home-project-card__summary">
+              Connected purchase orders directly to warehouse bins and active field jobs, eliminating spreadsheet reconciliations and cutting audit cycles by 60%.
+            </p>
+            <div class="home-project-card__footer">
+              <div class="home-project-card__tags">
+                <span>0→1 Product</span>
+                <span>Workflow Automation</span>
+                <span>Supply Chain</span>
+              </div>
+              <a href="pages/inventory.html" class="home-project-card__cta" aria-label="Read Real-Time Inventory case study">
+                <span>Read Case Study</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
-          <span class="home-intent-arrow" aria-hidden="true">→</span>
-        </button>
+        </article>
 
-        <!-- Card 4: Leadership & Role Fit -->
-        <button type="button" class="home-intent-card" data-home-intent="leadership">
-          <span class="home-intent-icon home-intent-icon--violet" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </span>
-          <div class="home-intent-card__content">
-            <span class="home-intent-card__title">Leadership &amp; Role Fit</span>
-            <span class="home-intent-card__desc">Senior/Staff SaaS &amp; systems leadership</span>
+        <!-- Project 4: AI Coding Portfolio -->
+        <article class="home-project-card">
+          <a href="pages/ai-coding-portfolio.html" class="home-project-card__media-link" aria-label="Read Engineering My Portfolio case study">
+            <div class="home-project-card__media">
+              <img src="assets/case-studies/ai-coding-portfolio/cursor-files.webp" alt="VS Code and terminal showing the tokenized architecture" loading="lazy">
+            </div>
+          </a>
+          <div class="home-project-card__body">
+            <div class="home-project-card__top">
+              <span class="home-project-card__client">UX Engineering · 2025</span>
+              <span class="home-kpi-badge home-kpi-badge--slate">Zero-Build Code</span>
+            </div>
+            <h3 class="home-project-card__title">
+              <a href="pages/ai-coding-portfolio.html">Engineering an AI-Native Portfolio in Code</a>
+            </h3>
+            <p class="home-project-card__summary">
+              Designed and built in semantic HTML, tokenized CSS, and vanilla ES6 with an embedded RAG assistant, ⌘K command palette, and 100/100 Lighthouse performance.
+            </p>
+            <div class="home-project-card__footer">
+              <div class="home-project-card__tags">
+                <span>Design Tokens</span>
+                <span>Prototyping in Code</span>
+                <span>Open Source</span>
+              </div>
+              <a href="pages/ai-coding-portfolio.html" class="home-project-card__cta" aria-label="Read Engineering My Portfolio case study">
+                <span>Read Case Study</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
-          <span class="home-intent-arrow" aria-hidden="true">→</span>
-        </button>
-      </section>
+        </article>
+      </div>
+    </section>
 
-      <!-- Stage Showcase & Interactive Stream -->
-      <section class="home-chat-thread" id="home-stage-view" aria-live="polite" hidden>
-        <div class="home-chat-thread__header">
-          <div class="home-chat-thread__status">
-            <span class="home-chat-thread__dot" aria-hidden="true"></span>
-            <span id="home-stage-status-text">Featured Case Studies · Shipped Impact</span>
-          </div>
-          <button type="button" class="home-chat-reset-btn" id="home-stage-reset" title="Back to overview" aria-label="Back to overview">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
-            <span id="home-stage-reset-label">Back to overview</span>
-          </button>
+    <!-- Approach Section -->
+    <section class="home-section" id="approach" aria-label="Design Philosophy">
+      <div class="home-section__header">
+        <span class="home-section__eyebrow">02 / Philosophy</span>
+        <h2 class="home-section__title">How I Approach Design &amp; Craft</h2>
+        <p class="home-section__desc">
+          Core principles developed over 6+ years shipping complex B2B SaaS, governing design systems, and writing production frontend code.
+        </p>
+      </div>
+
+      <div class="home-principles-grid">
+        <div class="home-principle-card">
+          <span class="home-principle-num">01</span>
+          <h3 class="home-principle-title">Systemizer’s Instinct</h3>
+          <p class="home-principle-text">
+            I don’t just design isolated views—I design engines. Tokenized design systems, strict typographic rhythm, and component APIs that scale across product lines without visual rot.
+          </p>
         </div>
-        <div class="home-chat-stream" id="home-stage-stream"></div>
-      </section>
-
-      <!-- Centerpiece AI & CLI Command Omnibar -->
-      <section class="home-omnibar-section" aria-label="Ask AI or run CLI command">
-        <div class="home-omnibar-shell">
-          <form class="home-omnibar-form" id="home-omnibar-form" autocomplete="off">
-            <div class="home-omnibar-header">
-              <div class="home-omnibar-identity">
-                <span class="home-omnibar-identity__name">Ryan Schmidt</span>
-              </div>
-              <nav class="home-topnav" aria-label="Main navigation">
-                <a href="./index.html" class="home-topnav__link is-current" aria-current="page">
-                  <span class="home-topnav__dot" aria-hidden="true"></span>
-                  <span>Home</span>
-                </a>
-                <div class="menu-item-group home-topnav__group">
-                  <button type="button" class="menu-trigger home-topnav__link" aria-haspopup="true" aria-expanded="false">
-                    <span>Work</span>
-                    <svg class="home-topnav__chevron" width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                      <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </button>
-                  <div class="menu-submenu home-topnav__submenu">
-                    <a href="pages/dashboard.html">
-                      <span>AI‑Powered Dashboards</span>
-                      <span class="home-submenu-kpi">+71%</span>
-                    </a>
-                    <a href="pages/member-portal-overhaul.html">
-                      <span>i4cp Member Portal</span>
-                      <span class="home-submenu-kpi">+500%</span>
-                    </a>
-                    <a href="pages/inventory.html">
-                      <span>Real-Time Inventory</span>
-                      <span class="home-submenu-kpi">+18% MRR</span>
-                    </a>
-                    <a href="pages/ai-coding-portfolio.html">
-                      <span>Engineering My Portfolio</span>
-                      <span class="home-submenu-kpi">Code</span>
-                    </a>
-                  </div>
-                </div>
-                <a href="pages/about.html" class="home-topnav__link">About</a>
-                <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-topnav__link">Resume</a>
-                <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" class="home-topnav__link">LinkedIn</a>
-              </nav>
-            </div>
-
-            <div class="home-omnibar-top">
-              <input
-                type="text"
-                id="home-omnibar-input"
-                class="home-omnibar-input"
-                placeholder="Search case studies, ask a question, or press ⌘K..."
-                autocomplete="off"
-                aria-label="Search Ryan's work, ask a question, or run a command"
-              />
-            </div>
-
-            <div class="home-omnibar-bottom">
-              <div class="home-omnibar-bottom__left">
-                <div class="home-slash-wrap">
-                  <button type="button" class="home-slash-btn" id="home-slash-btn" aria-label="Quick actions" aria-expanded="false" title="Quick actions">+</button>
-                  <div class="home-slash-popover" id="home-slash-popover" hidden>
-                    <div class="home-slash-popover__title">Quick Commands</div>
-                    <button type="button" data-slash-cmd="work"><span>/work</span><span>Featured Case Studies</span></button>
-                    <button type="button" data-slash-cmd="approach"><span>/approach</span><span>Design Philosophy &amp; Craft</span></button>
-                    <button type="button" data-slash-cmd="resume"><span>/resume</span><span>Experience &amp; Resume PDF</span></button>
-                    <button type="button" data-slash-cmd="about"><span>/about</span><span>Leadership &amp; Background</span></button>
-                    <button type="button" data-slash-cmd="contact"><span>/contact</span><span>Get in Touch &amp; LinkedIn</span></button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="home-omnibar-actions">
-                <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette (Command+K)" title="Open Command Palette (⌘K)">
-                  <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
-                </button>
-                <button type="submit" id="home-omnibar-send" class="home-omnibar-send" aria-label="Submit search or question">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="12" y1="19" x2="12" y2="5"></line>
-                    <polyline points="5 12 12 5 19 12"></polyline>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </form>
+        <div class="home-principle-card">
+          <span class="home-principle-num">02</span>
+          <h3 class="home-principle-title">Designing in Code</h3>
+          <p class="home-principle-text">
+            Static Figma mocks hide latency, responsive edge cases, and real kinetic weight. I build prototypes in semantic HTML, CSS, and modern JavaScript to compress discovery loops from day one.
+          </p>
         </div>
-      </section>
-    </div>
+        <div class="home-principle-card">
+          <span class="home-principle-num">03</span>
+          <h3 class="home-principle-title">Verifiable Outcomes</h3>
+          <p class="home-principle-text">
+            Design craft is only as valuable as the behavior it shifts. Every case study anchors on measurable results: +71% beta engagement, +500% feature activation, or 60% faster customer audit loops.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <script src="./scripts/cli-mode.js?v=16" defer></script>
-    <script src="./scripts/home-ai-stage.js?v=16" defer></script>
-
-    <!-- Consolidated JavaScript -->
-    <script src="./scripts/magnetic.js" defer></script>
-    <script src="./scripts/scripts.js?v=16" defer></script>
+    <!-- Background & About Summary Section -->
+    <section class="home-section home-about-section" id="about" aria-label="Background &amp; Experience">
+      <div class="home-about-card">
+        <div class="home-about-card__content">
+          <span class="home-section__eyebrow">03 / Background</span>
+          <h2 class="home-about-card__title">Senior SaaS Product Designer &amp; UX Engineer</h2>
+          <p class="home-about-card__text">
+            I’ve spent 6+ years at the seam of product design, information architecture, and frontend engineering. Over 5 years at Designlab, I mentored 1,500+ emerging designers and facilitated 400+ critique sessions.
+          </p>
+          <p class="home-about-card__text">
+            Based in Austin, TX. Open to Senior and Staff Product Designer or Design Engineering roles at design-led teams.
+          </p>
+          <div class="home-about-card__actions">
+            <a href="pages/about.html" class="home-btn home-btn--primary">
+              <span>Read Full Story &amp; Leadership</span>
+              <span aria-hidden="true">→</span>
+            </a>
+            <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-btn home-btn--secondary">
+              <span>Download Resume (PDF)</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- Persistent Floating CLI & Omnibar Dock -->
+  <section class="home-omnibar-section" aria-label="Ask AI or run CLI command">
+    <div class="home-omnibar-shell">
+      <form class="home-omnibar-form" id="home-omnibar-form" autocomplete="off">
+        <div class="home-omnibar-header">
+          <div class="home-omnibar-identity">
+            <span class="home-omnibar-identity__name">Ryan Schmidt</span>
+          </div>
+          <nav class="home-topnav" aria-label="Main navigation">
+            <a href="#top" class="home-topnav__link is-current">
+              <span class="home-topnav__dot" aria-hidden="true"></span>
+              <span>Home</span>
+            </a>
+            <div class="menu-item-group home-topnav__group">
+              <a href="#work" class="home-topnav__link">
+                <span>Work</span>
+                <svg class="home-topnav__chevron" width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <div class="menu-submenu home-topnav__submenu">
+                <a href="pages/dashboard.html">
+                  <span>AI‑Powered Dashboards</span>
+                  <span class="home-submenu-kpi">+71%</span>
+                </a>
+                <a href="pages/member-portal-overhaul.html">
+                  <span>i4cp Member Portal</span>
+                  <span class="home-submenu-kpi">+500%</span>
+                </a>
+                <a href="pages/inventory.html">
+                  <span>Real-Time Inventory</span>
+                  <span class="home-submenu-kpi">+18% MRR</span>
+                </a>
+                <a href="pages/ai-coding-portfolio.html">
+                  <span>Engineering My Portfolio</span>
+                  <span class="home-submenu-kpi">Code</span>
+                </a>
+              </div>
+            </div>
+            <a href="#approach" class="home-topnav__link">Approach</a>
+            <a href="pages/about.html" class="home-topnav__link">About</a>
+            <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-topnav__link">Resume</a>
+            <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" class="home-topnav__link">LinkedIn</a>
+          </nav>
+        </div>
+
+        <div class="home-omnibar-top">
+          <input
+            type="text"
+            id="home-omnibar-input"
+            class="home-omnibar-input"
+            placeholder="Search case studies, ask a question, or press ⌘K..."
+            autocomplete="off"
+            aria-label="Search Ryan's work, ask a question, or run a command"
+          />
+        </div>
+
+        <div class="home-omnibar-bottom">
+          <div class="home-omnibar-bottom__left">
+            <div class="home-slash-wrap">
+              <button type="button" class="home-slash-btn" id="home-slash-btn" aria-label="Quick actions" aria-expanded="false" title="Quick actions">+</button>
+              <div class="home-slash-popover" id="home-slash-popover" hidden>
+                <div class="home-slash-popover__title">Quick Commands</div>
+                <button type="button" data-slash-cmd="work"><span>/work</span><span>Jump to Selected Work</span></button>
+                <button type="button" data-slash-cmd="approach"><span>/approach</span><span>Design Philosophy &amp; Craft</span></button>
+                <button type="button" data-slash-cmd="resume"><span>/resume</span><span>Experience &amp; Resume PDF</span></button>
+                <button type="button" data-slash-cmd="about"><span>/about</span><span>Leadership &amp; Background</span></button>
+                <button type="button" data-slash-cmd="contact"><span>/contact</span><span>Connect on LinkedIn</span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="home-omnibar-actions">
+            <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette (Command+K)" title="Open Command Palette (⌘K)">
+              <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
+            </button>
+            <button type="submit" id="home-omnibar-send" class="home-omnibar-send" aria-label="Submit search or question">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="19" x2="12" y2="5"></line>
+                <polyline points="5 12 12 5 19 12"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Clean Editorial Footer -->
   <footer class="site-footer">
-    <a class="site-footer-brand" href="./index.html">
+    <a class="site-footer-brand" href="#top">
       <img src="./favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">
       Ryan Schmidt — Senior SaaS Product Designer
     </a>
-    <div style="display:flex; gap:1rem; align-items:center;">
+    <div style="display:flex; gap:1.25rem; align-items:center;">
       <a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="color:var(--text-secondary); text-decoration:none; font-size:var(--font-xs);">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" style="color:var(--text-secondary); text-decoration:none; font-size:var(--font-xs);">LinkedIn ↗</a>
       <p>&copy; 2026 Ryan Schmidt</p>
     </div>
   </footer>
+
+  <script src="./scripts/cli-mode.js?v=17" defer></script>
+  <script src="./scripts/magnetic.js" defer></script>
+  <script src="./scripts/scripts.js?v=17" defer></script>
+  <script src="./scripts/home-page.js?v=17" defer></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

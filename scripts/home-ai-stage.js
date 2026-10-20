@@ -546,7 +546,7 @@
     card.innerHTML = `
       <div class="home-chat-bubble home-chat-bubble--assistant">
         <div class="home-chat-prose">
-          <p>15+ years leading B2B SaaS product design, tokenized design systems, and AI-accelerated workflows:</p>
+          <p>6+ years leading B2B SaaS product design, tokenized design systems, and AI-accelerated workflows:</p>
         </div>
         <div class="home-dossier-metrics">
           <div class="home-dossier-stat">
@@ -683,7 +683,7 @@
           <div class="home-pillar-card">
             <div class="home-pillar-card__num">LEADERSHIP STYLE</div>
             <h4>Player-Coach &amp; Systems Advocate</h4>
-            <p>15+ years of practical craft. I write PRDs, maintain token architectures, mentor designers, and build directly in HTML/CSS/JS to compress discovery loops.</p>
+            <p>6+ years of practical craft. I write PRDs, maintain token architectures, mentor designers, and build directly in HTML/CSS/JS to compress discovery loops.</p>
           </div>
           <div class="home-pillar-card">
             <div class="home-pillar-card__num">LOCATION &amp; FIT</div>

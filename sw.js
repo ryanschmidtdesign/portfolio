@@ -1,4 +1,4 @@
-const CACHE = 'portfolio-v16';
+const CACHE = 'portfolio-v17';
 const PRECACHE_URLS = [
   '/404.html',
   '/styles.css',
@@ -10,6 +10,8 @@ const PRECACHE_URLS = [
   '/css/utilities.css',
   '/favicon.svg',
   '/favicon.ico',
+  '/scripts/home-page.js',
+  '/scripts/cli-mode.js',
   '/scripts/rs-chat-widget.js'
 ];
 

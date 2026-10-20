@@ -408,7 +408,7 @@
                     group: 'Pages & Profile',
                     icon: 'RS',
                     title: 'About Ryan Schmidt — Leadership & Background',
-                    sub: '15+ years leading B2B SaaS, Design Systems, and AI-accelerated teams',
+                    sub: '6+ years leading B2B SaaS, Design Systems, and AI-accelerated teams',
                     badge: 'Profile',
                     keywords: 'about bio leadership experience career history philosophy background',
                     action: () => { window.location.href = `${prefix}about.html`; }
@@ -714,12 +714,18 @@
             this.open();
         }
 
-        open() {
+        open(initialQuery = '') {
             this.isOpen = true;
             this.overlay.classList.add('is-open');
-            this.inputEl.value = '';
-            this.renderList('');
-            setTimeout(() => this.inputEl.focus(), 50);
+            const q = String(initialQuery || '');
+            this.inputEl.value = q;
+            this.renderList(q);
+            setTimeout(() => {
+                this.inputEl.focus();
+                if (q) {
+                    this.inputEl.selectionStart = this.inputEl.selectionEnd = q.length;
+                }
+            }, 50);
         }
 
         close() {
