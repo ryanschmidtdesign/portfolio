@@ -33,10 +33,10 @@
   /* 80 → 128px — hero, anchor sections */
 
   /* Typography */
-  /* ─── Font families ─────────────────────────────────────────────────── */
-  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont,
+  /* ─── Font families (Option 3: Papercraft & Woodblock Workshop) ─────── */
+  --font-sans: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont,
     "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
+  --font-mono: "Space Mono", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
     Consolas, monospace;
 
   /* ─── Type scale (Strict Major Third: 1.250 ratio, Base 17px) ───────── */
