@@ -1582,9 +1582,9 @@ body.is-home {
 .home-project-card__top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 10px;
-  flex-wrap: wrap;
+  margin-bottom: 2px;
 }
 
 .home-project-card__client {
@@ -1596,39 +1596,43 @@ body.is-home {
   color: #5C5245;
 }
 
-/* Cut-Out Paper KPI Badges */
+/* Outcome Metric Annotation (Non-CTA marker/stamp on paper) */
 .home-kpi-badge {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  padding: 4px 10px;
+  letter-spacing: -0.01em;
+  padding: 3px 8px;
   border-radius: 0 !important;
-  clip-path: polygon(0% 0.8%, 50% 0%, 100% 0.7%, 99.4% 50%, 100% 100%, 50% 99.4%, 0% 100%, 0.6% 50%);
-  filter: drop-shadow(0 1px 2px rgba(45, 30, 15, 0.25));
+  clip-path: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  border-left: 3px solid currentColor;
+  text-transform: none;
 }
 .home-kpi-badge--blue {
-  background: #1971C2;
-  color: #FFFFFF;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-bottom: 1.5px solid #1864AB;
+  background: rgba(24, 100, 171, 0.08);
+  color: #1864AB;
+  border-left-color: #1971C2;
 }
 .home-kpi-badge--terracotta {
-  background: #FA5252;
-  color: #FFFFFF;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-bottom: 1.5px solid #E03131;
+  background: rgba(224, 49, 49, 0.08);
+  color: #C92A2A;
+  border-left-color: #E03131;
 }
 .home-kpi-badge--emerald {
-  background: #2B8A3E;
-  color: #FFFFFF;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-bottom: 1.5px solid #237032;
+  background: rgba(43, 138, 62, 0.08);
+  color: #237032;
+  border-left-color: #2B8A3E;
 }
 .home-kpi-badge--slate {
-  background: #E8590C;
-  color: #FFFFFF;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-bottom: 1.5px solid #D9480F;
+  background: rgba(232, 89, 12, 0.08);
+  color: #D9480F;
+  border-left-color: #E8590C;
 }
 
 .home-project-card__title {
@@ -2220,21 +2224,7 @@ body.is-home {
 }
 
 .home-slash-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 0 !important;
-  clip-path: polygon(0% 0.8%, 50% 0%, 100% 0.7%, 99.4% 50%, 100% 100%, 50% 99.4%, 0% 100%, 0.6% 50%);
-  border: 1.5px solid #D8C7B2;
-  background: #F4ECDA;
-  color: #5C5245;
-  font-size: 1.1rem;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 160ms ease;
-  filter: drop-shadow(0 1px 2px rgba(45, 30, 15, 0.2));
+  display: none !important;
 }
 
 .home-slash-btn:hover,
