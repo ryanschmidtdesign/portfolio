@@ -698,9 +698,10 @@ body.is-home {
 .home-topnav {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  justify-content: center;
+  gap: var(--space-5, 24px);
   flex-shrink: 0;
-  margin-left: auto;
+  margin: 0 auto;
 }
 
 .home-topnav__link {
@@ -1417,47 +1418,28 @@ body.is-home {
   padding: 0;
 }
 
-/* CLI Omnibar Header: identity (left) + site navigation (right) */
+/* CLI Omnibar Header: centered site navigation */
 .home-omnibar-header {
   grid-area: header;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-  padding: 0 2px 7px;
+  justify-content: center;
+  padding: 0 4px 7px;
   border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   margin-bottom: 2px;
 }
 
-.home-omnibar-identity {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  user-select: none;
-  min-width: 0;
-}
-
-.home-omnibar-identity__name {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  color: #0F172A;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-/* Stack identity above navigation once both can no longer share one row */
 @media (max-width: 720px) {
   .home-omnibar-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 7px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 2px 6px;
   }
   .home-topnav {
-    margin-left: 0;
+    margin: 0 auto;
     justify-content: space-between;
-    gap: 8px;
+    gap: clamp(8px, 2.8vw, 16px);
+    width: 100%;
   }
   .home-topnav__group {
     position: static;
@@ -1467,6 +1449,9 @@ body.is-home {
     right: auto;
     left: 14px;
     bottom: calc(100% + 12px);
+    transform-origin: bottom left;
+  }
+}
     transform-origin: bottom left;
     min-width: min(260px, calc(100vw - 28px));
   }
@@ -2822,11 +2807,8 @@ body:not(.is-home) .site-footer {
     grid-template-columns: 1fr;
     gap: 10px;
   }
-  .home-omnibar-identity__name {
-    font-size: 0.74rem;
-  }
   .home-topnav {
-    gap: 6px;
+    gap: 8px;
   }
   .home-topnav__link {
     font-size: 0.72rem;
