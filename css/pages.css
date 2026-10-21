@@ -816,7 +816,11 @@ html:has(body.is-home) {
 }
 
 body.is-home {
-  background: #FAF9F6 !important;
+  background-color: #F6F0E4 !important; /* Classroom wooden desk parchment surface */
+  background-image: 
+    radial-gradient(rgba(100, 70, 35, 0.05) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.75) 1px, transparent 1px);
+  background-size: 14px 14px, 22px 22px;
   color: var(--text);
   overflow-x: hidden;
   overflow-y: auto;
@@ -833,7 +837,7 @@ body.is-home {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-5, 24px);
+  gap: clamp(14px, 2.8vw, 24px);
   flex-shrink: 0;
   margin: 0 auto;
 }
@@ -846,14 +850,16 @@ body.is-home {
   gap: 4px;
   width: auto;
   min-height: 0;
-  padding: 3px 2px;
-  border-radius: 6px;
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 500;
+  padding: 3px 6px;
+  border-radius: 0 !important;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 0;
-  color: #6E6D68;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4A2B11; /* Stamped wood brown */
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
   text-decoration: none;
   white-space: nowrap;
   background: transparent;
@@ -861,7 +867,7 @@ body.is-home {
   cursor: pointer;
   opacity: 1 !important;
   transform: none !important;
-  transition: color 160ms ease;
+  transition: all 140ms ease;
 }
 
 .home-topnav__link::after {
@@ -871,30 +877,25 @@ body.is-home {
 
 .home-topnav__link:hover,
 .home-topnav__link:focus-visible {
-  color: #141413;
-  background: transparent;
-  transform: none !important;
+  color: #1A0D03;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+  transform: translateY(-1px) !important;
 }
 
 .home-topnav__link.is-current {
-  color: #141413;
-  font-weight: 600;
+  color: #1A0D03;
+  font-weight: 800;
+  border-bottom: 2.5px solid #E03131 !important; /* Teacher's red pencil underline */
 }
 
 .home-topnav__dot {
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #C86446;
+  display: none !important;
 }
 
 .home-topnav__chevron {
-  opacity: 0.65;
+  opacity: 0.75;
   transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  color: #4A2B11;
 }
 
 .home-topnav__group {
@@ -906,8 +907,7 @@ body.is-home {
   transform: rotate(180deg);
 }
 
-/* Submenu opens upward — the CLI sits low on the home stage and docks
-   to the bottom of the viewport on subpages. */
+/* Lined 3x5 Index Card Work Submenu */
 .home-topnav__submenu {
   position: absolute;
   top: auto;
@@ -916,25 +916,26 @@ body.is-home {
   left: auto;
   transform: translateY(6px) scale(0.97);
   transform-origin: bottom right;
-  min-width: 260px;
+  min-width: 270px;
   max-height: none !important;
   overflow: visible !important;
   background: #FFFDF8;
+  /* Ruled lines: red vertical left margin at 24px, light blue horizontal rules every 24px */
   background-image: 
-    radial-gradient(rgba(70, 50, 30, 0.05) 1px, transparent 1px),
-    radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+    linear-gradient(90deg, transparent 24px, rgba(239, 68, 68, 0.45) 24px, rgba(239, 68, 68, 0.45) 26px, transparent 26px),
+    repeating-linear-gradient(180deg, transparent 0px, transparent 24px, rgba(147, 197, 253, 0.5) 24px, rgba(147, 197, 253, 0.5) 25.5px);
   border-radius: 0 !important;
   clip-path: polygon(0% 0.5%, 50% 0%, 100% 0.4%, 99.6% 50%, 100% 100%, 50% 99.6%, 0% 100%, 0.4% 50%);
   border: 1.5px solid #D8C7B2;
-  border-top: 2px solid rgba(255, 255, 255, 0.9);
-  border-bottom: 2.5px solid rgba(70, 50, 30, 0.22);
-  padding: 8px;
-  filter:
-    drop-shadow(0 1px 2px rgba(45, 30, 15, 0.35))
-    drop-shadow(0 12px 28px rgba(45, 30, 15, 0.22));
+  border-top: 2px solid rgba(255, 255, 255, 0.95);
+  border-bottom: 2.5px solid rgba(70, 50, 30, 0.25);
+  padding: 10px 8px 10px 14px;
+  box-shadow:
+    0 2px 4px rgba(45, 25, 10, 0.25),
+    0 12px 28px rgba(45, 25, 10, 0.22);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -966,29 +967,30 @@ body.is-home {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 9px 12px !important;
-  border-radius: 10px;
+  padding: 8px 12px !important;
+  border-radius: 0 !important;
+  font-family: var(--font-sans);
   font-size: 0.84rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.25;
-  color: #334155;
+  color: #2D2721;
   text-decoration: none;
   opacity: 1 !important;
   transform: none !important;
-  transition: background-color 150ms ease, color 150ms ease, padding-left 150ms ease;
+  transition: background-color 140ms ease, color 140ms ease, transform 140ms ease;
 }
 
 .home-topnav__submenu a:hover,
 .home-topnav__submenu a:focus-visible {
-  background: rgba(0, 51, 255, 0.06);
-  color: var(--accent, #C86446);
-  padding-left: 15px !important;
+  background: rgba(224, 49, 49, 0.08);
+  color: #C92A2A;
+  transform: translateX(2px) !important;
 }
 
 .home-topnav__submenu a[aria-current="page"] {
-  color: #141413;
-  font-weight: 600;
-  background: rgba(15, 23, 42, 0.04);
+  color: #C92A2A;
+  font-weight: 700;
+  background: rgba(224, 49, 49, 0.06);
 }
 
 .home-submenu-kpi {
@@ -996,15 +998,17 @@ body.is-home {
   font-size: 0.68rem;
   font-weight: 700;
   padding: 2px 7px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.05);
-  color: #475569;
+  border-radius: 0 !important;
+  clip-path: polygon(0% 0.8%, 50% 0%, 100% 0.7%, 99.4% 50%, 100% 100%, 50% 99.4%, 0% 100%, 0.6% 50%);
+  background: #FFE3E3;
+  color: #C92A2A;
+  border: 1px solid rgba(224, 49, 49, 0.3);
   flex-shrink: 0;
 }
 
 .home-topnav__submenu a:hover .home-submenu-kpi {
-  background: rgba(0, 51, 255, 0.12);
-  color: var(--accent, #C86446);
+  background: #E03131;
+  color: #FFFFFF;
 }
 
 /* ==========================================================================
@@ -1386,8 +1390,24 @@ body.is-home {
 /* Sections */
 .home-section {
   padding-block: clamp(3.5rem, 7vh, 5.5rem);
-  border-top: 3px dashed rgba(70, 50, 30, 0.18); /* Scissor cutting line */
+  border-top: 2.5px dashed rgba(90, 60, 30, 0.22); /* Scissor cutting line */
   position: relative;
+}
+
+.home-section::before {
+  content: "✂ --------------------------------------------------------------------------------------------------------------------------------";
+  position: absolute;
+  top: -9px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #9C7D5C;
+  letter-spacing: 2px;
+  pointer-events: none;
+  opacity: 0.85;
 }
 
 .home-section__header {
@@ -1396,18 +1416,19 @@ body.is-home {
 
 .home-section__eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #E03131;
-  background: rgba(255, 255, 255, 0.85);
+  color: #FFFFFF;
+  background: #E03131;
   display: inline-block;
   padding: 3px 10px;
-  border-radius: 4px;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
+  border-radius: 0 !important;
+  clip-path: polygon(0% 0.8%, 50% 0%, 100% 0.7%, 99.4% 50%, 100% 100%, 50% 99.4%, 0% 100%, 0.6% 50%);
+  box-shadow: 0 1px 3px rgba(45, 25, 10, 0.3);
   margin-bottom: 0.6rem;
-  transform: rotate(-1deg);
+  transform: rotate(-1.2deg);
 }
 
 .home-section__title {
@@ -2009,11 +2030,11 @@ body.is-home {
 .home-omnibar-section,
 .subpage-omnibar-dock {
   position: fixed;
-  bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
-  width: min(660px, calc(100vw - 32px));
-  max-width: 660px;
+  width: min(680px, calc(100vw - 28px));
+  max-width: 680px;
   z-index: 260;
   pointer-events: auto;
   margin: 0;
@@ -2021,82 +2042,61 @@ body.is-home {
   transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease;
 }
 
+/* Authentic 12-Inch Wooden School Ruler & Desk Pencil Well Dock */
 .home-omnibar-shell,
 .subpage-omnibar-shell {
   position: relative;
   width: 100%;
-  background: #FFFDF7;
+  /* Golden birch / maple wood grain school ruler */
+  background: #ECC274;
   background-image: 
-    radial-gradient(rgba(70, 50, 30, 0.05) 1px, transparent 1px),
-    radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px);
-  background-size: 12px 12px, 18px 18px;
+    linear-gradient(180deg, #F8DB98 0%, #EAB65E 14%, #DB9F41 82%, #C48529 100%),
+    repeating-linear-gradient(90deg, rgba(140, 80, 20, 0.035) 0px, rgba(140, 80, 20, 0.035) 2px, transparent 2px, transparent 8px);
   border-radius: 0 !important;
-  clip-path: polygon(0% 0.35%, 25% 0%, 50% 0.3%, 75% 0.1%, 100% 0.25%, 99.8% 50%, 100% 100%, 75% 99.7%, 50% 100%, 25% 99.65%, 0% 100%, 0.2% 50%);
-  border-top: 2px solid rgba(255, 255, 255, 0.85);
-  border-left: 1.5px solid rgba(70, 50, 30, 0.14);
-  border-right: 1.5px solid rgba(70, 50, 30, 0.14);
-  border-bottom: 2.5px solid rgba(70, 50, 30, 0.24);
-  padding: 10px 14px 10px;
-  filter:
-    drop-shadow(0 1px 2px rgba(45, 30, 15, 0.35))
-    drop-shadow(0 8px 18px rgba(45, 30, 15, 0.22))
-    drop-shadow(0 22px 48px rgba(45, 30, 15, 0.18));
-  transition: filter 220ms ease;
+  clip-path: polygon(0% 0.3%, 50% 0%, 100% 0.3%, 99.8% 50%, 100% 100%, 50% 99.7%, 0% 100%, 0.2% 50%);
+  /* Brass metal straight-edge strip along the top edge */
+  border-top: 3.5px solid #C49733 !important;
+  border-left: 2px solid #8C571D;
+  border-right: 2px solid #8C571D;
+  border-bottom: 3.5px solid #63380B;
+  padding: 8px 14px 10px;
+  box-shadow: 
+    0 2px 4px rgba(45, 25, 10, 0.35),
+    0 12px 28px rgba(45, 25, 10, 0.22),
+    0 28px 56px rgba(45, 25, 10, 0.16);
+  transition: box-shadow 220ms ease, transform 180ms ease;
 }
 
-/* Scotch Tape Strips on both ends of the ruler dock */
+/* Etched 1/16", 1/8", and 1/4" inch ruler measurement ticks across the top metal edge */
 .home-omnibar-shell::before,
 .subpage-omnibar-shell::before {
   content: "";
   position: absolute;
-  top: -8px;
-  left: 20px;
-  width: 55px;
-  height: 18px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.45) 0%,
-    rgba(255, 255, 255, 0.75) 50%,
-    rgba(255, 255, 255, 0.4) 100%
-  );
-  box-shadow: 0 1px 3px rgba(40, 25, 12, 0.12), inset 0 0 2px rgba(255, 255, 255, 0.6);
-  border-left: 2px dotted rgba(255, 255, 255, 0.85);
-  border-right: 2px dotted rgba(255, 255, 255, 0.85);
-  transform: rotate(-2.5deg);
-  z-index: 4;
+  top: 0;
+  left: 8px;
+  right: 8px;
+  height: 6px;
+  background-image: 
+    repeating-linear-gradient(90deg, #5C3814 0px, #5C3814 1px, transparent 1px, transparent 12px),
+    repeating-linear-gradient(90deg, #422307 0px, #422307 1.5px, transparent 1.5px, transparent 24px),
+    repeating-linear-gradient(90deg, #2A1402 0px, #2A1402 2px, transparent 2px, transparent 48px);
   pointer-events: none;
-  border-radius: 0 !important;
+  z-index: 3;
+  opacity: 0.75;
 }
 
 .home-omnibar-shell::after,
 .subpage-omnibar-shell::after {
-  content: "";
-  position: absolute;
-  top: -8px;
-  right: 20px;
-  width: 55px;
-  height: 18px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.45) 0%,
-    rgba(255, 255, 255, 0.75) 50%,
-    rgba(255, 255, 255, 0.4) 100%
-  );
-  box-shadow: 0 1px 3px rgba(40, 25, 12, 0.12), inset 0 0 2px rgba(255, 255, 255, 0.6);
-  border-left: 2px dotted rgba(255, 255, 255, 0.85);
-  border-right: 2px dotted rgba(255, 255, 255, 0.85);
-  transform: rotate(2.5deg);
-  z-index: 4;
-  pointer-events: none;
-  border-radius: 0 !important;
+  content: none !important;
+  display: none !important;
 }
 
 .home-omnibar-shell:focus-within,
 .subpage-omnibar-shell:focus-within {
-  filter:
-    drop-shadow(0 2px 4px rgba(45, 30, 15, 0.4))
-    drop-shadow(0 10px 22px rgba(250, 82, 82, 0.25))
-    drop-shadow(0 26px 54px rgba(45, 30, 15, 0.22));
+  box-shadow: 
+    0 4px 8px rgba(45, 25, 10, 0.4),
+    0 16px 36px rgba(45, 25, 10, 0.28),
+    0 32px 64px rgba(224, 49, 49, 0.22);
 }
 
 .home-omnibar-form,
@@ -2113,14 +2113,14 @@ body.is-home {
   padding: 0;
 }
 
-/* CLI Omnibar Header: centered site navigation */
+/* CLI Omnibar Header: centered site navigation on ruler */
 .home-omnibar-header {
   grid-area: header;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 4px 7px;
-  border-bottom: 2px dashed rgba(70, 50, 30, 0.14); /* Scissor dotted fold line */
+  padding: 2px 4px 6px;
+  border-bottom: 1.5px dashed rgba(90, 50, 15, 0.25);
   margin-bottom: 2px;
 }
 
@@ -2128,21 +2128,20 @@ body.is-home {
   .home-omnibar-header {
     flex-direction: row;
     justify-content: center;
-    padding: 0 2px 6px;
+    padding: 0 2px 5px;
   }
   .home-topnav {
     margin: 0 auto;
     justify-content: space-between;
-    gap: clamp(8px, 2.8vw, 16px);
+    gap: clamp(8px, 2.5vw, 14px);
     width: 100%;
   }
   .home-topnav__group {
     position: static;
   }
-  /* Anchor the Work submenu above the entire dock on mobile so it never collides with row 1 */
   .home-topnav__submenu {
     right: auto;
-    left: 14px;
+    left: 10px;
     bottom: calc(100% + 12px);
     transform-origin: bottom left;
     min-width: min(260px, calc(100vw - 28px));
@@ -2158,25 +2157,35 @@ body.is-home {
   width: 100%;
 }
 
+/* Sunk Pencil Tray: Elementary school lined practice paper */
 .home-omnibar-input,
 .subpage-omnibar-input {
   width: 100%;
-  height: 36px !important;
+  height: 38px !important;
   max-width: none !important;
-  border: 1.5px solid #D8C7B2 !important;
+  border: 1.5px solid #9C6622 !important;
   outline: none !important;
   box-shadow: 
-    inset 0 3px 6px rgba(45, 30, 15, 0.28),
-    inset 0 1px 2px rgba(45, 30, 15, 0.35),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.7) !important;
-  background: #F4ECDA !important;
+    inset 0 3px 6px rgba(45, 25, 10, 0.42),
+    inset 0 1px 2px rgba(45, 25, 10, 0.5),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.5) !important;
+  background-color: #FFFDF8 !important;
+  /* Handwriting practice guidelines: solid blue top, dashed blue mid, solid red base */
+  background-image: 
+    linear-gradient(180deg, 
+      rgba(147, 197, 253, 0.5) 0px, rgba(147, 197, 253, 0.5) 1.5px, 
+      transparent 1.5px, transparent 18px, 
+      rgba(147, 197, 253, 0.45) 18px, rgba(147, 197, 253, 0.45) 19.5px,
+      transparent 19.5px, transparent 31px, 
+      rgba(239, 68, 68, 0.45) 31px, rgba(239, 68, 68, 0.45) 32.5px,
+      transparent 32.5px) !important;
   border-radius: 0 !important;
-  clip-path: polygon(0% 0.6%, 50% 0%, 100% 0.5%, 99.6% 50%, 100% 100%, 50% 99.4%, 0% 100%, 0.4% 50%) !important;
+  clip-path: polygon(0% 0.5%, 50% 0%, 100% 0.5%, 99.6% 50%, 100% 100%, 50% 99.5%, 0% 100%, 0.4% 50%) !important;
   font-family: var(--font-sans);
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   font-weight: 600;
-  color: #26211B;
-  padding: 4px 10px !important;
+  color: #2D2A26 !important; /* Real #2 pencil graphite */
+  padding: 4px 12px !important;
   min-width: 0;
   box-sizing: border-box;
   transition: all 180ms ease;
@@ -2184,17 +2193,17 @@ body.is-home {
 
 .home-omnibar-input:focus,
 .subpage-omnibar-input:focus {
-  border-color: #FA5252 !important;
-  background: #FFFDF9 !important;
+  border-color: #E03131 !important;
   box-shadow: 
-    inset 0 2px 4px rgba(45, 30, 15, 0.2),
-    0 0 0 2px rgba(250, 82, 82, 0.3) !important;
+    inset 0 2px 4px rgba(45, 25, 10, 0.25),
+    0 0 0 2px rgba(224, 49, 49, 0.35) !important;
 }
 
 .home-omnibar-input::placeholder,
 .subpage-omnibar-input::placeholder {
-  color: #8C7E6C;
+  color: #7D7060;
   font-weight: 500;
+  font-style: italic;
 }
 
 .home-omnibar-bottom,
@@ -2233,25 +2242,6 @@ body.is-home {
   display: none !important;
 }
 
-.home-slash-btn:hover,
-.home-slash-btn[aria-expanded="true"] {
-  background: #26211B;
-  color: #FFFFFF;
-  border-color: #26211B;
-  transform: scale(1.08);
-}
-
-@keyframes slashPopoverIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 /* Yellow Sticky Note Quick Commands Popover */
 .home-slash-popover {
   position: absolute;
@@ -2274,7 +2264,6 @@ body.is-home {
   transform: rotate(-1deg);
 }
 
-/* Tape on top of the sticky note */
 .home-slash-popover::before {
   content: "";
   position: absolute;
@@ -2344,68 +2333,11 @@ body.is-home {
   color: #E03131;
 }
 
-/* Punched Square Red Paper Send Button */
-.home-omnibar-send,
-.subpage-omnibar-send {
-  background: #FA5252 !important;
-  border: 1.5px solid #E03131 !important;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.5) !important;
-  border-bottom: 2.5px solid #C92A2A !important;
-  border-radius: 0 !important;
-  clip-path: polygon(0% 0.8%, 50% 0%, 100% 0.7%, 99.4% 50%, 100% 100%, 50% 99.4%, 0% 100%, 0.6% 50%) !important;
-  color: #FFFFFF !important;
-  width: 32px !important;
-  height: 32px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  cursor: pointer !important;
-  filter: drop-shadow(0 1px 2px rgba(45, 30, 15, 0.35)) drop-shadow(1px 3px 6px rgba(250, 82, 82, 0.35)) !important;
-  transition: all 160ms ease !important;
-}
-
-.home-omnibar-send:hover,
-.subpage-omnibar-send:hover {
-  background: #E03131 !important;
-  transform: translateY(-2px) !important;
-  filter: drop-shadow(0 2px 4px rgba(45, 30, 15, 0.4)) drop-shadow(2px 5px 10px rgba(250, 82, 82, 0.45)) !important;
-}
-  transform: scale(1.1) !important;
-  box-shadow: 3px 5px 10px rgba(250, 82, 82, 0.45) !important;
-}
-  color: #1E293B;
-  cursor: pointer;
-  text-align: left;
-  transition: background-color 140ms ease;
-}
-
-.home-slash-popover button span:first-child {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  color: #C86446;
-  font-size: 0.76rem;
-}
-
-.home-slash-popover button span:last-child {
-  color: #64748B;
-  font-size: 0.76rem;
-}
-
-.home-slash-popover button:hover {
-  background: rgba(200, 100, 70, 0.07);
-}
-
-.home-omnibar-actions {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
+/* Pink Pearl Pencil Eraser Cmd+K Button */
 .home-omnibar-cmdk {
   position: static !important;
   height: 28px;
-  padding: 0 2px;
+  padding: 0;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -2415,47 +2347,64 @@ body.is-home {
 
 .home-omnibar-cmdk .ai-mini-cmdk__kbd {
   font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 600;
-  color: #6E6D68;
-  background: #F6F5F2;
-  padding: 3px 7px;
-  border-radius: 6px;
-  border: 1px solid rgba(15, 23, 42, 0.09);
-  transition: all 150ms ease;
+  font-size: 11px;
+  font-weight: 700;
+  color: #880B38 !important;
+  background: #FFA8A8 !important;
+  border: 1.5px solid #F06595 !important;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+  border-bottom: 2px solid #C2255C !important;
+  padding: 3px 8px;
+  border-radius: 0 !important;
+  clip-path: polygon(0% 0.8%, 50% 0%, 100% 0.8%, 99.4% 50%, 100% 100%, 50% 99.4%, 0% 100%, 0.6% 50%) !important;
+  box-shadow: 0 1px 2px rgba(45, 25, 10, 0.25);
+  transition: all 140ms ease;
 }
 
 .home-omnibar-cmdk:hover .ai-mini-cmdk__kbd {
-  background: #141413;
-  color: #FFFFFF;
-  border-color: #141413;
-}
-
-.home-omnibar-send {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: #141413;
-  color: #FFFFFF;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease;
-}
-
-.home-omnibar-send:hover {
-  background: #2C2C2A;
+  background: #FF8787 !important;
+  color: #55021E !important;
   transform: translateY(-1px);
 }
 
-.home-omnibar-send:active {
-  transform: scale(0.94);
-  transition: transform 60ms ease;
+/* Teacher's Red Ink Rubber Stamp Send Button */
+.home-omnibar-send,
+.subpage-omnibar-send {
+  background: #E03131 !important;
+  border: 1.5px solid #C92A2A !important;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+  border-bottom: 2.5px solid #A61E1E !important;
+  border-radius: 0 !important;
+  clip-path: polygon(0% 0.8%, 50% 0%, 100% 0.7%, 99.4% 50%, 100% 100%, 50% 99.4%, 0% 100%, 0.6% 50%) !important;
+  color: #FFFFFF !important;
+  width: 34px !important;
+  height: 34px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  box-shadow: 
+    0 1px 2px rgba(45, 25, 10, 0.35),
+    0 4px 10px rgba(224, 49, 49, 0.35) !important;
+  transition: all 160ms ease !important;
 }
 
-.home-omnibar-send:disabled {
+.home-omnibar-send:hover,
+.subpage-omnibar-send:hover {
+  background: #C92A2A !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 
+    0 2px 4px rgba(45, 25, 10, 0.4),
+    0 6px 14px rgba(224, 49, 49, 0.45) !important;
+}
+
+.home-omnibar-send:active,
+.subpage-omnibar-send:active {
+  transform: scale(0.95) !important;
+}
+
+.home-omnibar-send:disabled,
+.subpage-omnibar-send:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
