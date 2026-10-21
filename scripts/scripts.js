@@ -1,60 +1,20 @@
 // ============================================================================
-// Smooth, elegant page scrolling (Lenis)
+// Native Fast Scrolling & Hash Link Handling (Zero Scroll Hijacking)
 // ============================================================================
 (function () {
-  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReduced) return;
+  document.addEventListener("click", (e) => {
+    const anchor = e.target.closest('a[href^="#"]');
+    if (!anchor) return;
 
-  // Dynamically load Lenis from CDN
-  const lenisScript = document.createElement("script");
-  lenisScript.src = "https://unpkg.com/lenis@1.1.18/dist/lenis.min.js";
-  lenisScript.async = true;
+    const href = anchor.getAttribute("href");
+    if (href === "#") return;
 
-  lenisScript.onload = () => {
-    // Initialize Lenis
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential ease-out
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      smoothTouch: false, // Keep native touch control on mobile devices
-      touchMultiplier: 1.5,
-      infinite: false,
-    });
-
-    // Custom animation frame loop
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    requestAnimationFrame(raf);
-
-    // Bind to window for global access
-    window.lenis = lenis;
-
-    // REMOVED: No longer needed - carousel now auto-scrolls and is not a manual scroll container
-
-    // Handle hash links / scroll-to actions through Lenis
-    document.addEventListener("click", (e) => {
-      const anchor = e.target.closest('a[href^="#"]');
-      if (!anchor) return;
-
-      const href = anchor.getAttribute("href");
-      if (href === "#") return;
-
-      const target = document.querySelector(href);
-      if (target) {
-        e.preventDefault();
-
-        // Find scroll-margin-top or offset (navbar is 72px)
-        const offset = -72; // scroll margin offset to account for sticky/floating headers
-        lenis.scrollTo(target, { offset });
-      }
-    });
-  };
-
-  document.head.appendChild(lenisScript);
+  });
 })();
 
 // ============================================================================
@@ -63,8 +23,6 @@
 (function(){
   window.addEventListener('DOMContentLoaded', () => {
     try {
-      // Safety: ensure Lenis (if loaded) is running so page scroll works
-      try { if (window.lenis && typeof window.lenis.start === 'function') { window.lenis.start(); document.documentElement.classList.remove('lenis-stopped'); } } catch(e){}
       // Consolidated nav submenu toggle
       document.querySelectorAll('.menu-trigger').forEach(trigger => {
         const group = trigger.closest('.menu-item-group');

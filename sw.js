@@ -1,87 +1,20 @@
-const CACHE = 'portfolio-v29';
-const PRECACHE_URLS = [
-  '/404.html',
-  '/styles.css',
-  '/css/tokens.css',
-  '/css/base.css',
-  '/css/layout.css',
-  '/css/components.css',
-  '/css/pages.css',
-  '/css/utilities.css',
-  '/favicon.svg',
-  '/favicon.ico',
-  '/scripts/home-page.js',
-  '/scripts/cli-mode.js',
-  '/scripts/rs-chat-widget.js'
-];
-
-self.addEventListener('install', (event) => {
+// Self-destroying Service Worker to purge old caches and ensure users get fresh assets immediately
+self.addEventListener('install', () => {
   self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE).then((cache) => {
-      return cache.addAll(PRECACHE_URLS);
-    })
-  );
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
-      return Promise.all(
-        keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))
-      );
+      return Promise.all(keys.map((key) => caches.delete(key)));
+    }).then(() => {
+      return self.registration.unregister();
+    }).then(() => {
+      return self.clients.claim();
     })
   );
-  event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', (event) => {
-  const { request } = event;
-  
-  // Never intercept non-GET requests (e.g. POST /api/track-resume)
-  if (request.method !== 'GET') {
-    return;
-  }
-
-  const url = new URL(request.url);
-
-  // Never cache API routes
-  if (url.pathname.startsWith('/api/')) {
-    return;
-  }
-
-  // Ignore non-http/https schemes
-  if (!url.protocol.startsWith('http')) {
-    return;
-  }
-
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request).catch(() => caches.match('/404.html'))
-    );
-    return;
-  }
-
-  event.respondWith(
-    caches.match(request, { ignoreSearch: true }).then((cached) => {
-      const network = fetch(request).then((response) => {
-        if (response.ok && response.type === 'basic') {
-          const clone = response.clone();
-          caches.open(CACHE).then((cache) => cache.put(request, clone));
-        }
-        return response;
-      }).catch((err) => {
-        if (cached) return cached;
-        throw err;
-      });
-
-      if (cached) {
-        // Stale-while-revalidate: serve cached instantly, refresh in background.
-        network.catch(() => {});
-        return cached;
-      }
-      return network;
-    })
-  );
+  event.respondWith(fetch(event.request));
 });
-

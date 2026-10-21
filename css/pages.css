@@ -849,14 +849,13 @@ body.is-home {
   min-height: 0;
   padding: 3px 6px;
   border-radius: 0 !important;
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #4A2B11; /* Stamped wood brown */
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+  color: #2D2A26;
   text-decoration: none;
   white-space: nowrap;
   background: transparent;
@@ -874,15 +873,14 @@ body.is-home {
 
 .home-topnav__link:hover,
 .home-topnav__link:focus-visible {
-  color: #1A0D03;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+  color: #E03131;
   transform: translateY(-1px) !important;
 }
 
 .home-topnav__link.is-current {
-  color: #1A0D03;
+  color: #000000;
   font-weight: 800;
-  border-bottom: 2.5px solid #E03131 !important; /* Teacher's red pencil underline */
+  border-bottom: 2px solid #E03131 !important;
 }
 
 .home-topnav__dot {
@@ -892,7 +890,7 @@ body.is-home {
 .home-topnav__chevron {
   opacity: 0.75;
   transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-  color: #4A2B11;
+  color: #2D2A26;
 }
 
 .home-topnav__group {
@@ -917,10 +915,7 @@ body.is-home {
   max-height: none !important;
   overflow: visible !important;
   background: #FFFDF8;
-  /* Ruled lines: red vertical left margin at 24px, light blue horizontal rules every 24px */
-  background-image: 
-    linear-gradient(90deg, transparent 24px, rgba(239, 68, 68, 0.45) 24px, rgba(239, 68, 68, 0.45) 26px, transparent 26px),
-    repeating-linear-gradient(180deg, transparent 0px, transparent 24px, rgba(147, 197, 253, 0.5) 24px, rgba(147, 197, 253, 0.5) 25.5px);
+  background-image: none !important;
   border-radius: 0 !important;
   clip-path: polygon(0% 0.5%, 50% 0%, 100% 0.4%, 99.6% 50%, 100% 100%, 50% 99.6%, 0% 100%, 0.4% 50%);
   border: 1.5px solid #D8C7B2;
@@ -2229,14 +2224,14 @@ body.is-home {
   padding: 0;
 }
 
-/* CLI Omnibar Header: centered site navigation on ruler */
+/* CLI Omnibar Header: centered site navigation on construction paper */
 .home-omnibar-header {
   grid-area: header;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2px 4px 6px;
-  border-bottom: 1.5px dashed rgba(90, 50, 15, 0.25);
+  border-bottom: 1.5px dashed rgba(70, 50, 30, 0.16);
   margin-bottom: 2px;
 }
 
@@ -2273,35 +2268,24 @@ body.is-home {
   width: 100%;
 }
 
-/* Sunk Pencil Tray: Elementary school lined practice paper */
+/* Construction Paper Input Slot: Clean white paper cutout */
 .home-omnibar-input,
 .subpage-omnibar-input {
   width: 100%;
   height: 38px !important;
   max-width: none !important;
-  border: 1.5px solid #9C6622 !important;
+  border: 1.5px solid rgba(70, 50, 30, 0.22) !important;
   outline: none !important;
-  box-shadow: 
-    inset 0 3px 6px rgba(45, 25, 10, 0.42),
-    inset 0 1px 2px rgba(45, 25, 10, 0.5),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.5) !important;
-  background-color: #FFFDF8 !important;
-  /* Handwriting practice guidelines: solid blue top, dashed blue mid, solid red base */
-  background-image: 
-    linear-gradient(180deg, 
-      rgba(147, 197, 253, 0.5) 0px, rgba(147, 197, 253, 0.5) 1.5px, 
-      transparent 1.5px, transparent 18px, 
-      rgba(147, 197, 253, 0.45) 18px, rgba(147, 197, 253, 0.45) 19.5px,
-      transparent 19.5px, transparent 31px, 
-      rgba(239, 68, 68, 0.45) 31px, rgba(239, 68, 68, 0.45) 32.5px,
-      transparent 32.5px) !important;
+  box-shadow: inset 0 1px 3px rgba(45, 30, 15, 0.12) !important;
+  background-color: #FFFFFF !important;
+  background-image: none !important;
   border-radius: 0 !important;
   clip-path: polygon(0% 0.5%, 50% 0%, 100% 0.5%, 99.6% 50%, 100% 100%, 50% 99.5%, 0% 100%, 0.4% 50%) !important;
   font-family: var(--font-sans);
   font-size: 0.94rem;
-  font-weight: 600;
-  color: #2D2A26 !important; /* Real #2 pencil graphite */
-  padding: 4px 12px !important;
+  font-weight: 500;
+  color: #1A1714 !important;
+  padding: 4px 14px !important;
   min-width: 0;
   box-sizing: border-box;
   transition: all 180ms ease;
@@ -2311,15 +2295,15 @@ body.is-home {
 .subpage-omnibar-input:focus {
   border-color: #E03131 !important;
   box-shadow: 
-    inset 0 2px 4px rgba(45, 25, 10, 0.25),
-    0 0 0 2px rgba(224, 49, 49, 0.35) !important;
+    inset 0 1px 2px rgba(45, 30, 15, 0.15),
+    0 0 0 2px rgba(224, 49, 49, 0.25) !important;
 }
 
 .home-omnibar-input::placeholder,
 .subpage-omnibar-input::placeholder {
-  color: #7D7060;
-  font-weight: 500;
-  font-style: italic;
+  color: #8C8275;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .home-omnibar-bottom,
