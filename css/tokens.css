@@ -122,97 +122,92 @@
   --dur-3: 300ms;
   --dur-4: 450ms;
 
-  /* === Expensive Warm Atelier Neutrals (Homepage Canvas) === */
-  --gray-100: #FAF9F6;
-  --gray-200: #F4F2EC;
-  --gray-300: #E7E5DD;
-  --bg: #FAF9F6;
+  /* === Hyper-Realistic School Construction Paper & Craft System === */
+  --bg-desk: #F5EEDB; /* Natural Manila Craft Paper Desk */
+  --bg: #F4ECDA;
+  --gray-100: #F4ECDA;
+  --gray-200: #EADBCA;
+  --gray-300: #D8C7B2;
 
-  /* Surface levels (more distinct steps) */
-  --surface-1: rgba(15, 23, 42, 0.03);
-  /* hover states */
-  --surface-2: rgba(15, 23, 42, 0.06);
-  /* active cards */
+  /* Classic School Construction Paper Palette */
+  --paper-manila: #F6EEDC;
+  --paper-canary: #FEE440;
+  --paper-yellow-warm: #FFD166;
+  --paper-sky: #74C0FC;
+  --paper-blue-deep: #228BE6;
+  --paper-mint: #8CE99A;
+  --paper-green-deep: #40C057;
+  --paper-coral: #FF8787;
+  --paper-red-deep: #FA5252;
+  --paper-orange: #FFA94D;
+  --paper-orange-deep: #FD7E14;
+  --paper-lilac: #D0BFFF;
+  --paper-purple-deep: #7950F2;
+  --paper-white: #FFFDF9;
 
-  /* Card surfaces */
-  --card-bg-strong: #FFFFFF;
-
-  /* Elevated surface system — clean white cards on warm canvas */
-  --surface-elevated: #FFFFFF;
-  /* callouts, asides, meta cards */
-  --surface-elevated-strong: #FFFFFF;
-  /* impact callout, TLDR card */
-  --surface-code: #FAF9F6;
-  /* code blocks, pre */
+  /* Paper Surfaces */
+  --surface-1: rgba(60, 45, 30, 0.05);
+  --surface-2: rgba(60, 45, 30, 0.1);
+  --card-bg-strong: #FFFDF9;
+  --surface-elevated: #FFFDF9;
+  --surface-elevated-strong: #FFFDF9;
+  --surface-code: #F8F1E3;
 
   /* KPI system */
   --kpi-gap: 3.25rem;
   --kpi-label-size: var(--fs-xs);
   --kpi-label-ls: var(--tracking-caps);
   --kpi-label-line-height: var(--lh-2xs);
-  --kpi-label-color: var(--text-secondary);
-  --kpi-note-color: var(--text-secondary);
+  --kpi-label-color: #5C5245;
+  --kpi-note-color: #5C5245;
 
-  /* Borders (outline tone) */
-  --border-subtle: rgba(15, 23, 42, 0.065);
-  --border: rgba(15, 23, 42, 0.10);
-  --border-strong: rgba(15, 23, 42, 0.20);
-  --border-interactive: rgba(15, 23, 42, 0.35);
+  /* Paper Borders (subtle scissor-cut fiber edges) */
+  --border-subtle: rgba(70, 50, 30, 0.1);
+  --border: rgba(70, 50, 30, 0.16);
+  --border-strong: rgba(70, 50, 30, 0.28);
+  --border-interactive: rgba(70, 50, 30, 0.45);
 
   --border-w-strong: 2px;
-
   --dot-size: 14px;
   --line-thickness: 2px;
 
-  /* Backdrop blur tokens (Adding saturation for optical glass feel) */
-  --blur-sm: blur(4px) saturate(140%);
-  --blur-md: blur(18px) saturate(160%);
-  --blur-lg: blur(24px) saturate(180%);
+  /* Paper Cutout Drop Shadows (authentic layered paper depth) */
+  --paper-shadow-sm: 1px 2px 5px rgba(50, 40, 30, 0.12), 0 1px 2px rgba(50, 40, 30, 0.08);
+  --paper-shadow-md: 2px 5px 14px rgba(50, 40, 30, 0.16), 0 2px 4px rgba(50, 40, 30, 0.1);
+  --paper-shadow-lg: 4px 10px 24px rgba(50, 40, 30, 0.18), 0 3px 6px rgba(50, 40, 30, 0.12);
+  --paper-shadow-lifted: 6px 16px 32px rgba(50, 40, 30, 0.22), 0 4px 8px rgba(50, 40, 30, 0.14);
+  --paper-edge-bevel: inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -1px 0 rgba(40, 30, 20, 0.08);
 
-  /* Shadows (Rebuilt for depth, clarity, and physical realism) */
-  --shadow-1:
-    0 1px 2px rgb(15 23 42 / 0.04),
-    0 2px 4px rgb(15 23 42 / 0.08),
-    0 0 0 1px var(--border);
+  --shadow-1: var(--paper-shadow-sm);
+  --shadow-2: var(--paper-shadow-md);
+  --shadow-3: var(--paper-shadow-lg);
 
-  --shadow-2:
-    0 2px 4px rgb(15 23 42 / 0.04),
-    0 12px 24px rgb(15 23 42 / 0.12),
-    0 0 0 1px var(--border);
-
-  --shadow-3:
-    0 4px 8px rgb(15 23 42 / 0.04),
-    0 24px 48px rgb(15 23 42 / 0.16),
-    0 0 0 1px var(--border);
-
-  --accent-cool-soft: rgb(var(--rgb-cool) / 0.12);
+  --accent-cool-soft: rgba(34, 139, 230, 0.14);
   --divider-accent-width: 48px;
   
-  /* Emissive glows for interactive states */
-  --glow-accent: 0 6px 20px rgb(var(--rgb-cool) / 0.12);
-  --glow-accent-strong: 0 8px 32px rgb(var(--rgb-cool) / 0.20);
+  /* Crayon Glows */
+  --glow-accent: 0 4px 16px rgba(250, 82, 82, 0.2);
+  --glow-accent-strong: 0 6px 24px rgba(250, 82, 82, 0.32);
 
-  /* === Neutrals (slate) === */
-  --slate-600: #5D6873;
-  --slate-900: #1A2128;
+  /* === Neutrals & Inks === */
+  --slate-600: #5C5245;
+  --slate-900: #26211B;
 
-  /* Text (Optical blending for secondary text) */
-  --text: var(--slate-900);
-  --text-primary: var(--text);
-  --text-secondary: rgb(26 33 40 / 0.64);
-
-  /* Text on colored backgrounds */
+  /* Crayon Ink Typography */
+  --text: #26211B;
+  --text-primary: #26211B;
+  --text-secondary: #5C5245;
   --text-on-accent: #FFFFFF;
-
-  /* Surface subtle alias */
   --surface-subtle: var(--surface-1);
 
-  /* === Brand accent (canonical) — Atelier Terracotta === */
-  --accent: #C86446;
-  --accent-primary: var(--accent);
-  --accent-hover: #B25337;
-  --accent-text: #9E432A;
-  --accent-text-hover: #7E331E;
+  /* === Brand accent: Crayon Coral / Poppy === */
+  --accent: #FA5252;
+  --accent-primary: #FA5252;
+  --accent-hover: #E03131;
+  --accent-text: #C92A2A;
+  --accent-text-hover: #A61E4D;
+  --accent-soft: rgba(250, 82, 82, 0.12);
+  --accent-strong: rgba(250, 82, 82, 0.24);
   --accent-soft: rgba(200, 100, 70, 0.08);
   --accent-strong: rgba(200, 100, 70, 0.16);
   
