@@ -207,14 +207,14 @@
   /* Surface subtle alias */
   --surface-subtle: var(--surface-1);
 
-  /* === Brand accent (canonical) — 2027 Electric Tension === */
-  --accent: #0033FF;
+  /* === Brand accent (canonical) — Atelier Terracotta === */
+  --accent: #C86446;
   --accent-primary: var(--accent);
-  --accent-hover: #0022CC;
-  --accent-text: #0011AA;
-  --accent-text-hover: #000088;
-  --accent-soft: rgb(0 51 255 / 0.08);
-  --accent-strong: rgb(0 51 255 / 0.16);
+  --accent-hover: #B25337;
+  --accent-text: #9E432A;
+  --accent-text-hover: #7E331E;
+  --accent-soft: rgba(200, 100, 70, 0.08);
+  --accent-strong: rgba(200, 100, 70, 0.16);
   
   /* The spark - used for micro-tensions */
   --spark: #FF3366;

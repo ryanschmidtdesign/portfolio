@@ -842,7 +842,7 @@ body.is-home {
 .home-topnav__submenu a:hover,
 .home-topnav__submenu a:focus-visible {
   background: rgba(0, 51, 255, 0.06);
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
   padding-left: 15px !important;
 }
 
@@ -865,7 +865,7 @@ body.is-home {
 
 .home-topnav__submenu a:hover .home-submenu-kpi {
   background: rgba(0, 51, 255, 0.12);
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
 }
 
 /* Ambient Studio Glow */
@@ -1113,9 +1113,9 @@ body.is-home {
 }
 
 .home-kpi-badge--blue {
-  background: rgba(0, 51, 255, 0.07);
-  color: #0033FF;
-  border: 1px solid rgba(0, 51, 255, 0.16);
+  background: rgba(30, 41, 59, 0.06);
+  color: #1E293B;
+  border: 1px solid rgba(30, 41, 59, 0.14);
 }
 
 .home-kpi-badge--terracotta {
@@ -1626,7 +1626,7 @@ body.is-home {
 .home-slash-popover button span:first-child {
   font-family: var(--font-mono);
   font-weight: 700;
-  color: var(--accent, #0033FF);
+  color: #C86446;
   font-size: 0.76rem;
 }
 
@@ -1636,7 +1636,7 @@ body.is-home {
 }
 
 .home-slash-popover button:hover {
-  background: rgba(0, 51, 255, 0.06);
+  background: rgba(200, 100, 70, 0.07);
 }
 
 .home-omnibar-actions {
@@ -1911,7 +1911,7 @@ body.is-home {
 
 .home-chat-user-copy:hover {
   opacity: 1;
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
   background: rgba(0, 51, 255, 0.06);
 }
 
@@ -1955,7 +1955,7 @@ body.is-home {
 }
 
 .home-chat-bot-spark {
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
   font-size: 0.88rem;
   display: inline-block;
   animation: homeChatSparkPulse 2.4s infinite ease-in-out;
@@ -2050,7 +2050,7 @@ body.is-home {
   padding: 2px 7px;
   border-radius: 999px;
   background: rgba(0, 51, 255, 0.08);
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
   white-space: nowrap;
 }
 
@@ -2084,7 +2084,7 @@ body.is-home {
 }
 
 .home-work-card__title a:hover {
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
 }
 
 .home-work-card__summary {
@@ -2125,7 +2125,7 @@ body.is-home {
 }
 
 .home-work-btn--primary:hover {
-  background: var(--accent, #0033FF);
+  background: var(--accent, #C86446);
 }
 
 .home-work-btn--ai,
@@ -2137,8 +2137,8 @@ body.is-home {
 
 .home-work-btn--ai:hover,
 .home-work-btn--ghost:hover {
-  border-color: var(--accent, #0033FF);
-  color: var(--accent, #0033FF);
+  border-color: var(--accent, #C86446);
+  color: var(--accent, #C86446);
   background: rgba(0, 51, 255, 0.04);
 }
 
@@ -2217,7 +2217,7 @@ body.is-home {
 }
 
 .home-dossier-org {
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
   font-weight: 600;
 }
 
@@ -2339,9 +2339,9 @@ body.is-home {
 }
 
 .home-cli-btn:hover {
-  background: var(--accent, #0033FF);
+  background: var(--accent, #C86446);
   color: #FFFFFF;
-  border-color: var(--accent, #0033FF);
+  border-color: var(--accent, #C86446);
 }
 
 /* -------------------------------------------------------
@@ -2442,7 +2442,7 @@ body.is-home {
 
 .home-chat-prose blockquote,
 .home-ai-prose blockquote {
-  border-left: 3px solid var(--accent, #0033FF);
+  border-left: 3px solid var(--accent, #C86446);
   padding-left: 12px;
   margin: 8px 0;
   color: #475569;
@@ -2451,7 +2451,7 @@ body.is-home {
 
 .home-chat-prose a,
 .home-ai-prose a {
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -2497,14 +2497,14 @@ body.is-home {
   border: 1px solid rgba(0, 51, 255, 0.14);
   font-size: 0.73rem;
   font-weight: 600;
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
   text-decoration: none;
   transition: all 140ms ease;
 }
 
 .home-chat-source-chip:hover,
 .home-ai-source-chip:hover {
-  background: var(--accent, #0033FF);
+  background: var(--accent, #C86446);
   color: #FFFFFF;
 }
 
@@ -2532,8 +2532,8 @@ body.is-home {
 }
 
 .home-chat-followup-pill:hover {
-  border-color: var(--accent, #0033FF);
-  color: var(--accent, #0033FF);
+  border-color: var(--accent, #C86446);
+  color: var(--accent, #C86446);
   background: rgba(0, 51, 255, 0.03);
   transform: translateY(-1px);
 }
@@ -2543,7 +2543,7 @@ body.is-home {
   display: inline-block;
   width: 6px;
   height: 1.15em;
-  background: var(--accent, #0033FF);
+  background: var(--accent, #C86446);
   vertical-align: -2px;
   margin-left: 3px;
   border-radius: 1px;
@@ -2690,7 +2690,7 @@ body.is-home {
 
 .home-chat-action-btn:hover {
   background: rgba(0, 51, 255, 0.08);
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
   border-color: rgba(0, 51, 255, 0.22);
 }
 
@@ -2732,7 +2732,11 @@ body.is-home .site-footer-brand {
 
 /* Ensure subpages have comfortable clearance above the fixed bottom CLI dock */
 body:not(.is-home) main.site-main {
-  padding-bottom: 140px !important;
+  padding-bottom: clamp(160px, 20vh, 220px) !important;
+}
+
+body:not(.is-home) .site-footer {
+  padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px)) !important;
 }
 
 /* Responsive Breakpoints for Homepage AI Stage */

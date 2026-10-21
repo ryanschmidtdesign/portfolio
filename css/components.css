@@ -566,7 +566,7 @@
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
-  color: var(--accent, #0033FF);
+  color: var(--accent, #C86446);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -1964,7 +1964,7 @@ figure.case-study-media[data-reveal].is-revealed {
 
 .circular-progress-value {
   fill: none;
-  stroke: var(--accent, #0033FF);
+  stroke: var(--accent, #C86446);
   stroke-width: 2.5;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.1s ease-out;

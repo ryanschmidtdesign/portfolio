@@ -6,8 +6,8 @@
     'use strict';
 
     const ACCENT_THEMES = [
-        { name: 'Cobalt Tension', value: '#0033FF' },
         { name: 'Terracotta Atelier', value: '#C86446' },
+        { name: 'Slate Monolith', value: '#1A2128' },
         { name: 'Emerald Signal', value: '#10B981' }
     ];
 
@@ -31,7 +31,7 @@
                 .rs-cmd-overlay {
                     position: fixed;
                     inset: 0;
-                    background: rgba(15, 23, 42, 0.48);
+                    background: rgba(15, 23, 42, 0.32);
                     backdrop-filter: blur(20px) saturate(180%);
                     -webkit-backdrop-filter: blur(20px) saturate(180%);
                     z-index: 10000;
@@ -144,12 +144,12 @@
                 }
                 .rs-cmd-item:hover,
                 .rs-cmd-item.is-selected {
-                    background: rgba(0, 51, 255, 0.055);
-                    border-left-color: var(--accent, #0033FF);
+                    background: rgba(200, 100, 70, 0.06);
+                    border-left-color: var(--accent, #C86446);
                     border-radius: 4px 10px 10px 4px;
                 }
                 .rs-cmd-item.is-selected .rs-cmd-item__title {
-                    color: var(--accent, #0033FF);
+                    color: var(--accent, #C86446);
                 }
                 .rs-cmd-item__left {
                     display: flex;
@@ -211,9 +211,9 @@
                     white-space: nowrap;
                 }
                 .rs-cmd-kpi--cobalt {
-                    background: rgba(0, 51, 255, 0.08);
-                    color: #0033FF;
-                    border: 1px solid rgba(0, 51, 255, 0.18);
+                    background: rgba(200, 100, 70, 0.08);
+                    color: #C86446;
+                    border: 1px solid rgba(200, 100, 70, 0.22);
                 }
                 .rs-cmd-kpi--emerald {
                     background: rgba(16, 185, 129, 0.09);
@@ -244,7 +244,7 @@
                 .rs-cmd-item__return {
                     font-family: var(--font-mono, monospace);
                     font-size: 0.72rem;
-                    color: var(--accent, #0033FF);
+                    color: var(--accent, #C86446);
                     opacity: 0;
                     transform: translateX(-2px);
                     transition: all 120ms ease;
@@ -361,8 +361,8 @@
                     sub: '+71% Beta Engagement · Executive KPI system & pipeline forecasting',
                     badge: 'Case Study',
                     kpi: '+71% Beta',
-                    kpiType: 'cobalt',
-                    keywords: 'dashboard bi analytics d-tools cloud opportunity signals kpi pipeline b2b',
+                    kpiType: 'terracotta',
+                    keywords: 'dashboard bi analytics d-tools cloud opportunity signals kpi pipeline b2b data visualization metrics revenue 71%',
                     action: () => { window.location.href = `${prefix}dashboard.html`; }
                 },
                 {
@@ -374,7 +374,7 @@
                     badge: 'Case Study',
                     kpi: '+18% MRR',
                     kpiType: 'emerald',
-                    keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain',
+                    keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain warehouse enterprise 18% mrr audit',
                     action: () => { window.location.href = `${prefix}inventory.html`; }
                 },
                 {
@@ -386,7 +386,7 @@
                     badge: 'Case Study',
                     kpi: '+500% AI',
                     kpiType: 'terracotta',
-                    keywords: 'i4cp member portal ai search synthesis rag overhaul enterprise',
+                    keywords: 'i4cp member portal ai search synthesis rag overhaul enterprise research membership 500% activation',
                     action: () => { window.location.href = `${prefix}member-portal-overhaul.html`; }
                 },
                 {
@@ -394,34 +394,78 @@
                     group: 'Case Studies',
                     icon: '04',
                     title: 'Designing & Building an AI-Native Portfolio',
-                    sub: 'Zero-Build Stack · Gemini 2.5 Flash RAG · Token Architecture',
+                    sub: 'Zero-Build Stack · Vector Grounding · Design Token System',
                     badge: 'Architecture',
                     kpi: 'Zero-Build',
                     kpiType: 'slate',
-                    keywords: 'portfolio ai rag gemini coding tokens architecture vanilla',
+                    keywords: 'portfolio architecture zero-build vector search grounding coding tokens design systems vanilla web components cursor',
                     action: () => { window.location.href = `${prefix}ai-coding-portfolio.html`; }
                 },
 
                 // Pages & Navigation
                 {
+                    id: 'nav-work-overview',
+                    group: 'Navigation & Overview',
+                    icon: '★',
+                    title: 'Selected Work & Shipped Outcomes',
+                    sub: '4 featured case studies across BI, supply chain, and enterprise AI',
+                    badge: 'Index ↵',
+                    keywords: 'work selected projects case studies shipped outcomes portfolio overview index',
+                    action: () => {
+                        this.close();
+                        const target = document.getElementById('work');
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                            window.location.href = `${homeHref}#work`;
+                        }
+                    }
+                },
+                {
+                    id: 'nav-approach',
+                    group: 'Navigation & Overview',
+                    icon: '02',
+                    title: 'Design Philosophy & Approach',
+                    sub: 'Systemizer instinct, designing in code, and verifiable business outcomes',
+                    badge: 'Philosophy ↵',
+                    keywords: 'approach philosophy principles systemizer designing in code verifiable outcomes craft',
+                    action: () => {
+                        this.close();
+                        const target = document.getElementById('approach');
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                            window.location.href = `${homeHref}#approach`;
+                        }
+                    }
+                },
+                {
                     id: 'nav-about',
-                    group: 'Pages & Profile',
+                    group: 'Navigation & Overview',
                     icon: 'RS',
                     title: 'About Ryan Schmidt — Leadership & Background',
-                    sub: '6+ years leading B2B SaaS, Design Systems, and AI-accelerated teams',
-                    badge: 'Profile',
-                    keywords: 'about bio leadership experience career history philosophy background',
+                    sub: '6+ years in B2B SaaS, Design Systems, and mentoring 1,500+ designers',
+                    badge: 'Profile ↵',
+                    keywords: 'about bio leadership experience career history philosophy background ryan schmidt mentor designlab 6+ years',
                     action: () => { window.location.href = `${prefix}about.html`; }
                 },
                 {
                     id: 'nav-home',
-                    group: 'Pages & Profile',
+                    group: 'Navigation & Overview',
                     icon: '⌂',
-                    title: 'Home — Editorial Index & Studio Stage',
-                    sub: 'Return to the conversational stage and primary portfolio index',
-                    badge: 'Index',
-                    keywords: 'home index start main stage portfolio',
-                    action: () => { window.location.href = homeHref; }
+                    title: 'Home — Editorial Index',
+                    sub: 'Return to primary portfolio editorial hero and index',
+                    badge: 'Home ↵',
+                    keywords: 'home index start main portfolio top hero',
+                    action: () => {
+                        this.close();
+                        const top = document.getElementById('top') || document.body;
+                        if (path.endsWith('index.html') || path === '/' || path.endsWith('/')) {
+                            top.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                            window.location.href = homeHref;
+                        }
+                    }
                 },
 
                 // Quick Actions
@@ -432,7 +476,7 @@
                     title: 'View Resume (PDF)',
                     sub: 'Open ryan-schmidt-resume.pdf in a new tab',
                     badge: 'PDF ↗',
-                    keywords: 'resume cv pdf download hire background experience',
+                    keywords: 'resume cv pdf download hire background experience skills ryan schmidt',
                     action: () => {
                         window.open(resumePath, '_blank', 'noopener');
                         this.close();
@@ -445,36 +489,10 @@
                     title: 'Connect on LinkedIn',
                     sub: 'linkedin.com/in/ryanschmidt1989 — Message or network directly',
                     badge: 'Connect ↗',
-                    keywords: 'linkedin contact hire reach out message connect social',
+                    keywords: 'linkedin contact hire reach out message connect social network email',
                     action: () => {
                         window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
                         this.close();
-                    }
-                },
-                {
-                    id: 'act-ai-projects',
-                    group: 'Interactive Inquiries',
-                    icon: '↗',
-                    title: 'Strongest projects and verified business impact',
-                    sub: 'Outcomes across D-Tools Cloud, i4cp, and design systems',
-                    badge: 'Inquiry ↗',
-                    keywords: 'strongest projects outcomes impact metrics results case studies d-tools i4cp',
-                    action: () => {
-                        this.close();
-                        this.triggerAIChat('What are his strongest projects and measurable outcomes?');
-                    }
-                },
-                {
-                    id: 'act-ai-leadership',
-                    group: 'Interactive Inquiries',
-                    icon: '↗',
-                    title: 'Design leadership, team workflows & prototyping',
-                    sub: 'Player-coach leadership, token governance, and browser prototyping',
-                    badge: 'Inquiry ↗',
-                    keywords: 'leadership style philosophy management workflow craft team design systems',
-                    action: () => {
-                        this.close();
-                        this.triggerAIChat('What is his leadership style and design approach?');
                     }
                 }
             ];
@@ -579,31 +597,80 @@
         }
 
         renderList(query) {
-            const q = (query || '').trim().toLowerCase();
+            const raw = (query || '').trim();
+            const q = raw.toLowerCase();
             const all = this.getCommands();
+            const tokens = q.split(/\s+/).filter(Boolean);
 
-            this.filteredItems = q
-                ? all.filter((item) =>
-                    item.title.toLowerCase().includes(q) ||
-                    item.sub.toLowerCase().includes(q) ||
-                    item.group.toLowerCase().includes(q) ||
-                    item.keywords.toLowerCase().includes(q)
-                )
-                : all;
+            if (!tokens.length) {
+                this.filteredItems = all;
+            } else {
+                // First pass: match ALL tokens
+                let matches = all.filter((item) => {
+                    const text = `${item.title} ${item.sub} ${item.group} ${item.keywords || ''}`.toLowerCase();
+                    return tokens.every(t => text.includes(t));
+                });
 
-            if (q && this.filteredItems.length === 0) {
+                // Second pass: if no full match, match ANY token and score by relevance
+                if (matches.length === 0) {
+                    matches = all
+                        .map(item => {
+                            const text = `${item.title} ${item.sub} ${item.group} ${item.keywords || ''}`.toLowerCase();
+                            const score = tokens.reduce((acc, t) => acc + (text.includes(t) ? 1 : 0), 0);
+                            return { item, score };
+                        })
+                        .filter(scored => scored.score > 0)
+                        .sort((a, b) => b.score - a.score)
+                        .map(scored => scored.item);
+                }
+
+                this.filteredItems = matches;
+            }
+
+            if (tokens.length && this.filteredItems.length === 0) {
+                const path = window.location.pathname || '/';
+                const inPagesDir = path.includes('/pages/');
+                const prefix = inPagesDir ? '' : 'pages/';
+                const homeHref = inPagesDir ? '../index.html' : 'index.html';
+                const resumePath = inPagesDir ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
+
                 this.filteredItems = [
                     {
-                        id: 'ai-fallback',
-                        group: 'Ask Portfolio AI',
-                        icon: '✦',
-                        title: `Ask AI: "${query.trim()}"`,
-                        sub: 'Press Enter to submit this question directly to the AI assistant',
-                        badge: 'Enter ↵',
-                        keywords: '',
+                        id: 'fallback-work',
+                        group: 'Suggested Actions',
+                        icon: '★',
+                        title: 'Explore Selected Work & Outcomes',
+                        sub: 'View all 4 case studies across BI, supply chain, and enterprise AI',
+                        badge: 'Work ↵',
                         action: () => {
                             this.close();
-                            this.triggerAIChat(query.trim());
+                            const target = document.getElementById('work');
+                            if (target) target.scrollIntoView({ behavior: 'smooth' });
+                            else window.location.href = `${homeHref}#work`;
+                        }
+                    },
+                    {
+                        id: 'fallback-about',
+                        group: 'Suggested Actions',
+                        icon: 'RS',
+                        title: 'Read About Ryan & Background',
+                        sub: '6+ years in B2B SaaS, player-coach leadership, and 1,500+ mentored designers',
+                        badge: 'About ↵',
+                        action: () => {
+                            this.close();
+                            window.location.href = `${prefix}about.html`;
+                        }
+                    },
+                    {
+                        id: 'fallback-resume',
+                        group: 'Suggested Actions',
+                        icon: '↓',
+                        title: 'View Resume (PDF)',
+                        sub: 'Open ryan-schmidt-resume.pdf in a new tab',
+                        badge: 'PDF ↗',
+                        action: () => {
+                            this.close();
+                            window.open(resumePath, '_blank', 'noopener');
                         }
                     }
                 ];
