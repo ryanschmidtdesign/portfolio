@@ -49,10 +49,32 @@
       <path d="M 85,80 Q 128,84 170,78 M 92,94 Q 132,98 160,92" stroke="#93C5FD" stroke-width="3.5" />
     </g>
 
-    <!-- 3. Two "v" Birds in Sky -->
-    <g id="birds" stroke="#2563EB" stroke-width="3.5" fill="none">
-      <path d="M 218,60 Q 226,50 234,61 Q 242,51 250,62" />
-      <path d="M 358,50 Q 365,41 372,51 Q 379,42 386,52" />
+    <!-- 3. Austin Bats & Birds in Sky -->
+    <g id="bats-and-birds" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Kid "v" birds -->
+      <path d="M 218,60 Q 226,50 234,61 Q 242,51 250,62" stroke="#2563EB" stroke-width="3.5" fill="none" />
+      <path d="M 374,48 Q 381,39 388,49 Q 395,40 402,50" stroke="#2563EB" stroke-width="3" fill="none" />
+      
+      <!-- Iconic Austin Congress Avenue Bridge Crayon Bats -->
+      <!-- Bat 1 (flying towards the sunset) -->
+      <g id="bat-1" transform="translate(332, 54) rotate(-6)">
+        <path d="M 0,0 C -8,-10 -18,-10 -22,-3 C -18,2 -14,6 -10,3 C -7,7 -3,6 0,0 C 3,6 7,7 10,3 C 14,6 18,2 22,-3 C 18,-10 8,-10 0,0 Z"
+              fill="#27272A" stroke="#18181B" stroke-width="2.2" />
+        <polygon points="-3,-1 -5,-7 -1,-3" fill="#27272A" />
+        <polygon points="3,-1 5,-7 1,-3" fill="#27272A" />
+        <circle cx="-1.5" cy="-0.5" r="0.8" fill="#FDE047" />
+        <circle cx="1.5" cy="-0.5" r="0.8" fill="#FDE047" />
+      </g>
+      
+      <!-- Bat 2 (smaller baby bat) -->
+      <g id="bat-2" transform="translate(362, 70) rotate(8) scale(0.68)">
+        <path d="M 0,0 C -8,-10 -18,-10 -22,-3 C -18,2 -14,6 -10,3 C -7,7 -3,6 0,0 C 3,6 7,7 10,3 C 14,6 18,2 22,-3 C 18,-10 8,-10 0,0 Z"
+              fill="#3F3F46" stroke="#18181B" stroke-width="2.4" />
+        <polygon points="-3,-1 -5,-7 -1,-3" fill="#3F3F46" />
+        <polygon points="3,-1 5,-7 1,-3" fill="#3F3F46" />
+        <circle cx="-1.5" cy="-0.5" r="0.9" fill="#FDE047" />
+        <circle cx="1.5" cy="-0.5" r="0.9" fill="#FDE047" />
+      </g>
     </g>
 
     <!-- 4. Floating Pink Crayon Heart -->
@@ -75,11 +97,48 @@
       <path d="M 445,414 L 448,395 M 453,415 L 460,392 M 463,414 L 470,396" stroke="#4D7C0F" stroke-width="3.5" />
       <path d="M 545,412 L 548,394 M 553,413 L 560,390 M 563,412 L 570,395" stroke="#4D7C0F" stroke-width="3.5" />
 
-      <!-- Simple kid flowers -->
+      <!-- Simple kid flowers & Texas Bluebonnets -->
       <circle cx="145" cy="405" r="4.5" fill="#F43F5E" stroke="#BE123C" stroke-width="2" />
       <circle cx="145" cy="405" r="1.8" fill="#FDE047" />
       <circle cx="565" cy="404" r="4.5" fill="#A855F7" stroke="#7E22CE" stroke-width="2" />
       <circle cx="565" cy="404" r="1.8" fill="#FDE047" />
+
+      <!-- Texas Bluebonnets (Iconic Austin Wildflowers) -->
+      <!-- Bluebonnet 1 (near Pickles the cat) -->
+      <g id="bluebonnet-1" transform="translate(42, 386)">
+        <path d="M 0,26 Q 2,12 1,0" stroke="#4D7C0F" stroke-width="3" fill="none" />
+        <path d="M 1,18 L -6,14 M 1,22 L 8,19" stroke="#65A30D" stroke-width="2.5" />
+        <circle cx="-3" cy="14" r="3.2" fill="#2563EB" />
+        <circle cx="4" cy="13" r="3.2" fill="#1D4ED8" />
+        <circle cx="-2" cy="8" r="3.2" fill="#1D4ED8" />
+        <circle cx="3" cy="7" r="3.2" fill="#2563EB" />
+        <circle cx="0" cy="2" r="3" fill="#3B82F6" />
+        <circle cx="0" cy="-3" r="2.2" fill="#FFFFFF" stroke="#93C5FD" stroke-width="0.8" />
+      </g>
+
+      <!-- Bluebonnet 2 (between toddler son & Dad) -->
+      <g id="bluebonnet-2" transform="translate(352, 390) scale(0.9)">
+        <path d="M 0,24 Q -1,10 0,0" stroke="#4D7C0F" stroke-width="3" fill="none" />
+        <path d="M 0,16 L -5,13 M 0,20 L 6,17" stroke="#65A30D" stroke-width="2.5" />
+        <circle cx="-3" cy="13" r="3" fill="#2563EB" />
+        <circle cx="3" cy="12" r="3" fill="#1D4ED8" />
+        <circle cx="-2" cy="7" r="3" fill="#1D4ED8" />
+        <circle cx="3" cy="6" r="3" fill="#3B82F6" />
+        <circle cx="0" cy="1" r="2.8" fill="#3B82F6" />
+        <circle cx="0" cy="-3.5" r="2.2" fill="#FFFFFF" stroke="#93C5FD" stroke-width="0.8" />
+      </g>
+
+      <!-- Bluebonnet 3 (near Pesto the cat) -->
+      <g id="bluebonnet-3" transform="translate(540, 384) scale(1.05)">
+        <path d="M 0,26 Q 2,12 1,0" stroke="#4D7C0F" stroke-width="3" fill="none" />
+        <path d="M 1,18 L -6,14 M 1,22 L 8,19" stroke="#65A30D" stroke-width="2.5" />
+        <circle cx="-3.5" cy="14" r="3.2" fill="#2563EB" />
+        <circle cx="3.5" cy="13" r="3.2" fill="#1D4ED8" />
+        <circle cx="-2.5" cy="8" r="3.2" fill="#1D4ED8" />
+        <circle cx="3.5" cy="7" r="3.2" fill="#2563EB" />
+        <circle cx="0" cy="2" r="3" fill="#3B82F6" />
+        <circle cx="0" cy="-3" r="2.4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="0.8" />
+      </g>
     </g>
 
     <!-- ===================================================================== -->
@@ -338,6 +397,35 @@
       <!-- Striped upright tail -->
       <path d="M 506,390 C 520,380 518,360 510,350" stroke="#D4A373" stroke-width="4.5" fill="none" />
       <path d="M 510,382 L 514,379 M 514,372 L 518,369" stroke="#6F4525" stroke-width="2" />
+    </g>
+
+    <!-- ===================================================================== -->
+    <!-- 11. CHILD'S HAND-DRAWN CRAYON SIGN-OFF: "AUSTIN, TX ★"               -->
+    <!-- Crooked, joyful, colorful kid crayon lettering under the grass line    -->
+    <!-- ===================================================================== -->
+    <g id="austin-signoff" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <!-- 'A' (Crayon Red) -->
+      <path d="M 215,462 L 223,435 L 232,462 M 219,451 L 229,451" stroke="#EF4444" stroke-width="3.8" />
+      <!-- 'U' (Crayon Orange) -->
+      <path d="M 240,436 L 241,452 C 242,462 252,463 255,452 L 256,437" stroke="#F97316" stroke-width="3.6" />
+      <!-- 'S' (Crayon Green) -->
+      <path d="M 273,439 C 263,434 262,446 268,449 C 275,452 274,463 263,461" stroke="#10B981" stroke-width="3.6" />
+      <!-- 'T' (Crayon Blue) -->
+      <path d="M 281,437 L 297,436 M 289,437 L 290,462" stroke="#2563EB" stroke-width="3.8" />
+      <!-- 'I' (Crayon Purple) -->
+      <path d="M 304,437 L 312,437 M 308,437 L 308,462 M 304,462 L 312,462" stroke="#8B5CF6" stroke-width="3.5" />
+      <!-- 'N' (Crayon Pink) -->
+      <path d="M 320,462 L 321,436 L 333,461 L 334,435" stroke="#EC4899" stroke-width="3.8" />
+      <!-- Comma ',' (Slate) -->
+      <path d="M 340,459 C 341,463 338,467 336,469" stroke="#475569" stroke-width="3.5" />
+      <!-- 'T' (Crayon Amber) -->
+      <path d="M 349,437 L 364,436 M 356,437 L 357,462" stroke="#F59E0B" stroke-width="3.8" />
+      <!-- 'X' (Crayon Cobalt) -->
+      <path d="M 372,436 L 385,462 M 385,436 L 373,462" stroke="#1D4ED8" stroke-width="3.8" />
+      
+      <!-- Kid Crayon Texas Star (Yellow with golden stroke) -->
+      <polygon points="405,438 408,444 415,445 410,450 412,457 405,453 398,457 400,450 395,445 402,444"
+               fill="#FDE047" stroke="#EAB308" stroke-width="2.2" />
     </g>
 
   </g>
