@@ -58,7 +58,7 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
-  <link rel="stylesheet" href="./styles.css?v=22">
+  <link rel="stylesheet" href="./styles.css?v=23">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -222,51 +222,58 @@
   <!-- Top anchor -->
   <div id="top"></div>
 
-  <!-- Ambient Studio Glow -->
-  <div class="home-ambient-glow" aria-hidden="true"></div>
-
   <main id="main" class="home-main">
-    <!-- Hero Section -->
-    <header class="home-hero">
-      <h1 class="home-hero__title">
-        Hi, I’m <em class="home-hero__serif">Ryan</em>.
-      </h1>
-      <p class="home-hero__lead">
-        Senior product designer &amp; UX engineer with 6+ years designing B2B SaaS platforms and AI workflows that ship.
-      </p>
-      <div class="home-hero__tags">
-        <span class="home-tag">B2B SaaS</span>
-        <span class="home-tag">Design Systems</span>
-        <span class="home-tag">UX Engineering</span>
-        <span class="home-tag">AI Workflows</span>
-        <span class="home-tag">Austin, TX</span>
+    <!-- Hero Section: Content Left, Drawing Right -->
+    <header class="home-hero-wrap">
+      <!-- Left Column: Canary Yellow Construction Paper Sheet -->
+      <div class="home-hero">
+        <h1 class="home-hero__title">
+          Hi, I’m <em class="home-hero__serif">Ryan</em>.
+        </h1>
+        <p class="home-hero__lead">
+          Senior product designer &amp; UX engineer with 6+ years designing B2B SaaS platforms and AI workflows that ship.
+        </p>
+        <div class="home-hero__tags">
+          <span class="home-tag">B2B SaaS</span>
+          <span class="home-tag">Design Systems</span>
+          <span class="home-tag">UX Engineering</span>
+          <span class="home-tag">AI Workflows</span>
+          <span class="home-tag">Austin, TX</span>
+        </div>
+
+        <!-- Conversational AI Starters -->
+        <div class="home-chat-invitation" aria-label="Discuss Ryan’s work with his AI chatbot">
+          <div class="home-chat-invitation__header">
+            <span class="home-chat-invitation__dot" aria-hidden="true"></span>
+            <span class="home-chat-invitation__label">Ask Ryan’s portfolio AI anything, or pick a discussion topic:</span>
+          </div>
+          <div class="home-chat-invitation__pills">
+            <button type="button" class="home-chat-pill" data-ask-ai="What did Ryan ship at D-Tools Cloud to drive +71% beta engagement?">
+              <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
+              <span>What did Ryan ship at D-Tools? (+71% engagement)</span>
+            </button>
+            <button type="button" class="home-chat-pill" data-ask-ai="How did Ryan lift enterprise AI adoption by 500% on the i4cp member portal overhaul?">
+              <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
+              <span>How did he lift AI adoption by 500% at i4cp?</span>
+            </button>
+            <button type="button" class="home-chat-pill" data-ask-ai="Walk me through how the real-time inventory MVP drove +18% recurring revenue.">
+              <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
+              <span>Real-time inventory MVP (+18% MRR)</span>
+            </button>
+            <button type="button" class="home-chat-pill" data-ask-ai="Is Ryan a good fit for a Senior or Staff Product Designer seat on our team?">
+              <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
+              <span>Is Ryan a fit for a Senior / Staff role?</span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- Conversational AI Starters -->
-      <div class="home-chat-invitation" aria-label="Discuss Ryan’s work with his AI chatbot">
-        <div class="home-chat-invitation__header">
-          <span class="home-chat-invitation__dot" aria-hidden="true"></span>
-          <span class="home-chat-invitation__label">Ask Ryan’s portfolio AI anything, or pick a discussion topic:</span>
+      <!-- Right Column: Stick-Figure Crayon Drawing on White Art Paper -->
+      <aside class="home-hero-art" aria-label="Stick-figure crayon drawing of Ryan, his wife, son, and their two cats">
+        <div class="home-drawing-paper">
+          <img src="./assets/images/family-crayon-drawing.svg" alt="Child's stick-figure crayon drawing of Ryan, his wife, toddler son holding hands, and their two cats Pickles and Pesto under a smiling sun" class="home-drawing-img" width="600" height="480" />
         </div>
-        <div class="home-chat-invitation__pills">
-          <button type="button" class="home-chat-pill" data-ask-ai="What did Ryan ship at D-Tools Cloud to drive +71% beta engagement?">
-            <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
-            <span>What did Ryan ship at D-Tools? (+71% engagement)</span>
-          </button>
-          <button type="button" class="home-chat-pill" data-ask-ai="How did Ryan lift enterprise AI adoption by 500% on the i4cp member portal overhaul?">
-            <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
-            <span>How did he lift AI adoption by 500% at i4cp?</span>
-          </button>
-          <button type="button" class="home-chat-pill" data-ask-ai="Walk me through how the real-time inventory MVP drove +18% recurring revenue.">
-            <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
-            <span>Real-time inventory MVP (+18% MRR)</span>
-          </button>
-          <button type="button" class="home-chat-pill" data-ask-ai="Is Ryan a good fit for a Senior or Staff Product Designer seat on our team?">
-            <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
-            <span>Is Ryan a fit for a Senior / Staff role?</span>
-          </button>
-        </div>
-      </div>
+      </aside>
     </header>
 
     <!-- Selected Work Section -->

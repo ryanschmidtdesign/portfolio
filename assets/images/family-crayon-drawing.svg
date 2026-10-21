@@ -1,340 +1,280 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800" width="100%" height="100%">
-  <defs>
-    <!-- Crayon Waxy Displacement Filter -->
-    <filter id="crayon-texture" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox">
-      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="4" result="noise" />
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="7.5" xChannelSelector="R" yChannelSelector="G" result="displaced" />
-      <feGaussianBlur in="displaced" stdDeviation="0.4" result="waxy" />
-      <feBlend mode="multiply" in="SourceGraphic" in2="waxy" />
-    </filter>
-
-    <!-- Softer Crayon Filter for Background Elements -->
-    <filter id="crayon-soft" x="-20%" y="-20%" width="140%" height="140%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" result="noise" />
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-  </defs>
-
-  <g id="crayon-art" filter="url(#crayon-texture)" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Smiling Yellow Sun with Waxy Rays -->
-    <g id="sun" transform="translate(1260, 110)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" width="100%" height="100%">
+  <g id="crayon-art" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Smiling Yellow Sun with Waxy Rays (Top Right) -->
+    <g id="sun" transform="translate(515, 80)">
       <!-- Sun Rays -->
-      <path d="M 0,-70 L 0,-105 M 48,-48 L 76,-76 M 70,0 L 105,0 M 48,48 L 76,76 M 0,70 L 0,105 M -48,48 L -76,76 M -70,0 L -105,0 M -48,-48 L -76,-76"
-            stroke="#FFA000" stroke-width="12" fill="none" opacity="0.85" />
-      <path d="M 24,-60 L 40,-88 M 60,-24 L 88,-40 M 60,24 L 88,40 M 24,60 L 40,88 M -24,60 L -40,88 M -60,24 L -88,40 M -60,-24 L -88,-40 M -24,-60 L -40,-88"
-            stroke="#FFD54F" stroke-width="8" fill="none" opacity="0.9" />
-      <!-- Sun Body (waxy yellow with scribbled fill) -->
-      <circle cx="0" cy="0" r="48" fill="#FFEE58" stroke="#FBC02D" stroke-width="9" opacity="0.95" />
-      <path d="M -26,-18 Q 0,-30 26,-18 Q -16,0 20,8 Q -12,20 18,25" stroke="#FFF176" stroke-width="14" fill="none" opacity="0.65" />
-      <!-- Sun Smile -->
-      <circle cx="-14" cy="-8" r="4" fill="#E65100" />
-      <circle cx="14" cy="-8" r="4" fill="#E65100" />
-      <path d="M -18,7 Q 0,25 18,7" stroke="#E65100" stroke-width="5.5" fill="none" />
-      <!-- Sun Rosy Cheeks -->
-      <circle cx="-24" cy="3" r="6" fill="#FF8A65" opacity="0.55" />
-      <circle cx="24" cy="3" r="6" fill="#FF8A65" opacity="0.55" />
+      <path d="M 0,-44 L 0,-62 M 30,-30 L 44,-44 M 44,0 L 62,0 M 30,30 L 44,44 M 0,44 L 0,62 M -30,30 L -44,44 M -44,0 L -62,0 M -30,-30 L -44,-44"
+            stroke="#F59E0B" stroke-width="6.5" fill="none" opacity="0.9" />
+      <!-- Sun Body -->
+      <circle cx="0" cy="0" r="30" fill="#FDE047" stroke="#EAB308" stroke-width="5.5" />
+      <!-- Sun Smiling Face -->
+      <circle cx="-9" cy="-5" r="2.8" fill="#B45309" />
+      <circle cx="9" cy="-5" r="2.8" fill="#B45309" />
+      <path d="M -11,6 Q 0,17 11,6" stroke="#B45309" stroke-width="3.5" fill="none" />
+      <circle cx="-15" cy="4" r="4" fill="#FCA5A5" opacity="0.6" />
+      <circle cx="15" cy="4" r="4" fill="#FCA5A5" opacity="0.6" />
     </g>
 
-    <!-- Crayon Clouds -->
-    <g id="clouds" stroke="#64B5F6" stroke-width="8" fill="rgba(227, 242, 253, 0.55)" opacity="0.85">
-      <path d="M 120,95 Q 148,68 185,82 Q 220,60 258,86 Q 285,78 304,104 Q 322,130 295,152 Q 268,168 230,160 Q 192,172 155,155 Q 120,164 105,134 Q 96,112 120,95 Z" />
-      <path d="M 130,115 Q 180,95 240,110 Q 280,125 260,140 Q 210,150 160,140 Q 125,145 130,115 Z" fill="#BBDEFB" stroke="none" opacity="0.5" />
+    <!-- Fluffy Crayon Cloud (Top Left) -->
+    <g id="cloud" stroke="#93C5FD" stroke-width="5" fill="rgba(219, 234, 254, 0.55)">
+      <path d="M 75,85 Q 90,65 113,72 Q 133,58 153,74 Q 170,68 180,84 Q 190,100 175,114 Q 157,124 135,120 Q 113,126 93,116 Q 73,120 65,102 Q 60,88 75,85 Z" />
     </g>
 
-    <!-- Little flying birds (crayon V's) -->
-    <g id="birds" stroke="#1E88E5" stroke-width="5" fill="none" opacity="0.75">
-      <path d="M 360,75 Q 372,62 384,75 Q 396,62 408,75" />
-      <path d="M 425,95 Q 435,85 445,95 Q 455,85 465,95" />
-      <path d="M 1120,65 Q 1130,55 1140,65 Q 1150,55 1160,65" />
+    <!-- Flying Crayon Birds (V's) -->
+    <g id="birds" stroke="#3B82F6" stroke-width="3.5" fill="none">
+      <path d="M 195,65 Q 203,55 211,65 Q 219,55 227,65" />
+      <path d="M 370,55 Q 377,47 384,55 Q 391,47 398,55" />
     </g>
 
-    <!-- Gentle Green Grass Hill at Top Baseline (behind family feet) -->
-    <g id="ground" opacity="0.88">
-      <!-- Hill baseline -->
-      <path d="M -20,345 Q 360,320 720,335 T 1460,325 L 1460,400 L -20,400 Z" fill="rgba(165, 214, 167, 0.45)" stroke="#66BB6A" stroke-width="10" />
+    <!-- Floating Pink Crayon Heart -->
+    <g id="heart" transform="translate(295, 125) rotate(-6)">
+      <path d="M 0,-12 C 0,-24 -18,-24 -18,-10 C -18,4 0,16 0,16 C 0,16 18,4 18,-10 C 18,-24 0,-24 0,-12 Z"
+            fill="#F472B6" stroke="#DB2777" stroke-width="3.5" />
+    </g>
+
+    <!-- Ground / Grass Line -->
+    <g id="ground">
+      <!-- Wavy Green Grass Baseline -->
+      <path d="M 20,412 Q 160,404 300,410 Q 440,414 580,408" stroke="#65A30D" stroke-width="7" fill="none" />
+      
       <!-- Grass Tufts -->
-      <path d="M 280,335 L 285,310 M 292,340 L 300,305 M 302,336 L 314,312" stroke="#43A047" stroke-width="6" />
-      <path d="M 470,340 L 474,312 M 482,342 L 490,308 M 494,338 L 504,314" stroke="#43A047" stroke-width="6" />
-      <path d="M 640,342 L 644,315 M 652,345 L 660,310 M 665,342 L 675,316" stroke="#43A047" stroke-width="6" />
-      <path d="M 780,342 L 784,315 M 792,345 L 800,310 M 805,342 L 815,316" stroke="#43A047" stroke-width="6" />
-      <path d="M 940,338 L 944,310 M 952,342 L 960,308 M 965,338 L 975,312" stroke="#43A047" stroke-width="6" />
-      <path d="M 1120,335 L 1124,308 M 1132,338 L 1140,305 M 1145,335 L 1155,310" stroke="#43A047" stroke-width="6" />
+      <path d="M 70,410 L 74,392 M 78,411 L 86,390 M 87,411 L 95,394" stroke="#4D7C0F" stroke-width="4" />
+      <path d="M 160,408 L 163,390 M 168,410 L 175,388 M 177,409 L 184,392" stroke="#4D7C0F" stroke-width="4" />
+      <path d="M 245,411 L 248,393 M 253,412 L 260,390 M 262,411 L 269,394" stroke="#4D7C0F" stroke-width="4" />
+      <path d="M 345,412 L 348,393 M 353,413 L 360,390 M 362,412 L 369,394" stroke="#4D7C0F" stroke-width="4" />
+      <path d="M 435,410 L 438,391 M 443,411 L 450,388 M 452,410 L 459,393" stroke="#4D7C0F" stroke-width="4" />
+      <path d="M 530,408 L 533,390 M 538,410 L 545,387 M 547,409 L 554,392" stroke="#4D7C0F" stroke-width="4" />
 
-      <!-- Wildflowers in Grass -->
-      <circle cx="360" cy="330" r="8" fill="#FF4081" stroke="#E91E63" stroke-width="3.5" />
-      <circle cx="360" cy="330" r="3" fill="#FFEB3B" />
-      <circle cx="530" cy="336" r="7.5" fill="#AB47BC" stroke="#8E24AA" stroke-width="3.5" />
-      <circle cx="530" cy="336" r="2.5" fill="#FFEB3B" />
-      <circle cx="890" cy="334" r="8" fill="#FF7043" stroke="#F4511E" stroke-width="3.5" />
-      <circle cx="890" cy="334" r="3" fill="#FFEB3B" />
-      <circle cx="1070" cy="328" r="7.5" fill="#FFD54F" stroke="#FFA000" stroke-width="3.5" />
-      <circle cx="1070" cy="328" r="2.5" fill="#E65100" />
-    </g>
-
-    <!-- Floating Crayon Hearts & Stars -->
-    <g id="decorations" opacity="0.85">
-      <!-- Heart above Dad & Mom -->
-      <path d="M 720,70 C 720,48 692,44 692,66 C 692,88 720,110 720,110 C 720,110 748,88 748,66 C 748,44 720,48 720,70 Z"
-            fill="#FF4081" stroke="#D81B60" stroke-width="5" transform="rotate(-6 720 80)" />
-      <!-- Star above toddler -->
-      <polygon points="720,135 726,148 740,150 729,160 733,174 720,166 707,174 711,160 700,150 714,148"
-               fill="#FFEE58" stroke="#FDD835" stroke-width="3.5" />
-      <!-- Heart above Pickles -->
-      <path d="M 430,220 C 430,206 412,202 412,216 C 412,230 430,246 430,246 C 430,246 448,230 448,216 C 448,202 430,206 430,220 Z"
-            fill="#FF80AB" stroke="#EC407A" stroke-width="4" transform="rotate(10 430 225)" />
-      <!-- Heart above Pesto -->
-      <path d="M 1010,215 C 1010,201 992,197 992,211 C 992,225 1010,241 1010,241 C 1010,241 1028,225 1028,211 C 1028,197 1010,201 1010,215 Z"
-            fill="#FF80AB" stroke="#EC407A" stroke-width="4" transform="rotate(-8 1010 220)" />
+      <!-- Little Wildflowers in Grass -->
+      <circle cx="140" cy="404" r="5" fill="#EC4899" stroke="#BE185D" stroke-width="2.5" />
+      <circle cx="140" cy="404" r="1.8" fill="#FDE047" />
+      <circle cx="418" cy="406" r="5" fill="#F59E0B" stroke="#D97706" stroke-width="2.5" />
+      <circle cx="418" cy="406" r="1.8" fill="#DC2626" />
+      <circle cx="560" cy="404" r="5" fill="#8B5CF6" stroke="#6D28D9" stroke-width="2.5" />
+      <circle cx="560" cy="404" r="1.8" fill="#FDE047" />
     </g>
 
     <!-- ================================================================= -->
-    <!-- THE FAMILY: Pickles, Dad (Ryan), Toddler, Mom, and Pesto          -->
+    <!-- STICK FIGURE FAMILY: Mom, Toddler Son, Dad, and 2 Cats             -->
+    <!-- Appearances accurately matched to family-pic.jpg and polaroids    -->
     <!-- ================================================================= -->
 
-    <!-- PICKLES THE CAT (Left of Dad) -->
-    <g id="pickles" transform="translate(430, 265)">
-      <!-- Label "Pickles" -->
-      <text x="-28" y="-45" font-family="'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif" font-weight="bold" font-size="20" fill="#E65100" transform="rotate(-6)">Pickles 🐾</text>
+    <!-- 1. MOM (Left of Son) -->
+    <!-- Asian woman with dark hair in a low bun, dusty plum t-shirt, dark jogger pants -->
+    <g id="mom" transform="translate(195, 0)">
+      <!-- Head -->
+      <circle cx="0" cy="190" r="22" fill="#FFE2D1" stroke="#37271F" stroke-width="4.5" />
+      
+      <!-- Dark hair in a low neat bun -->
+      <!-- Hair bun behind head -->
+      <circle cx="-22" cy="195" r="10" fill="#1C1917" stroke="#0C0A09" stroke-width="3.5" />
+      <!-- Hair on head -->
+      <path d="M -16,182 Q 0,165 17,178 Q 20,188 18,198 Q 12,176 -4,178 Q -14,179 -16,182 Z" fill="#1C1917" />
+      
+      <!-- Face: Simple dots and curved smile -->
+      <circle cx="-6" cy="188" r="2.6" fill="#1C1917" />
+      <circle cx="6" cy="188" r="2.6" fill="#1C1917" />
+      <path d="M -7,198 Q 0,207 7,198" stroke="#BE185D" stroke-width="3" fill="none" />
+      <circle cx="-12" cy="196" r="3.5" fill="#FDA4AF" opacity="0.6" />
+      <circle cx="12" cy="196" r="3.5" fill="#FDA4AF" opacity="0.6" />
 
-      <!-- Fluffy Orange Cat Body -->
-      <ellipse cx="0" cy="25" rx="32" ry="36" fill="#FFA726" stroke="#E65100" stroke-width="6" />
-      <!-- Orange Tabby Stripes -->
-      <path d="M -16,12 L 0,16 L 16,12 M -18,26 L 0,30 L 18,26 M -14,40 L 0,44 L 14,40" stroke="#BF360C" stroke-width="4.5" fill="none" />
-      <ellipse cx="0" cy="28" rx="16" ry="20" fill="#FFE0B2" opacity="0.65" />
+      <!-- Neck -->
+      <line x1="0" y1="212" x2="0" y2="222" stroke="#FFE2D1" stroke-width="7" />
 
-      <!-- Cat Head -->
-      <circle cx="0" cy="-12" r="24" fill="#FFA726" stroke="#E65100" stroke-width="6" />
-      <!-- Tabby forehead stripes -->
-      <path d="M -6,-28 L 0,-20 L 6,-28 M 0,-28 L 0,-18" stroke="#BF360C" stroke-width="3.5" fill="none" />
+      <!-- Dusty Plum / Mauve T-Shirt (Trapezoid stick body) -->
+      <path d="M -14,222 L 14,222 L 18,290 L -18,290 Z" fill="#9C526B" stroke="#7A3950" stroke-width="4.5" />
+      <!-- Crayon scribble fill inside shirt -->
+      <path d="M -10,238 L 10,242 M -12,256 L 12,260 M -13,274 L 13,278" stroke="#833852" stroke-width="3.5" />
 
-      <!-- Ears (triangles) -->
-      <polygon points="-18,-24 -24,-45 -4,-30" fill="#FF9800" stroke="#E65100" stroke-width="5" />
-      <polygon points="-16,-26 -21,-40 -7,-30" fill="#FFAB91" />
-      <polygon points="18,-24 24,-45 4,-30" fill="#FF9800" stroke="#E65100" stroke-width="5" />
-      <polygon points="16,-26 21,-40 7,-30" fill="#FFAB91" />
+      <!-- Left Arm (resting gently down at side) -->
+      <path d="M -14,228 L -36,275" stroke="#FFE2D1" stroke-width="6.5" />
+      <circle cx="-36" cy="275" r="4" fill="#FFE2D1" />
 
-      <!-- Big Green Cat Eyes -->
-      <ellipse cx="-8" cy="-14" rx="4.5" ry="5.5" fill="#66BB6A" stroke="#2E7D32" stroke-width="2" />
-      <ellipse cx="-8" cy="-14" rx="2" ry="4.5" fill="#1B5E20" />
-      <ellipse cx="8" cy="-14" rx="4.5" ry="5.5" fill="#66BB6A" stroke="#2E7D32" stroke-width="2" />
-      <ellipse cx="8" cy="-14" rx="2" ry="4.5" fill="#1B5E20" />
-      <!-- Eye shine -->
-      <circle cx="-9" cy="-16" r="1.5" fill="#FFFFFF" />
-      <circle cx="7" cy="-16" r="1.5" fill="#FFFFFF" />
+      <!-- Right Arm (reaching to hold toddler son's hand!) -->
+      <path d="M 14,232 L 65,285" stroke="#FFE2D1" stroke-width="6.5" />
 
-      <!-- Pink Nose & Cute Mouth -->
-      <polygon points="0,-7 -3,-10 3,-10" fill="#FF4081" />
-      <path d="M -5,-3 Q 0,-6 5,-3" stroke="#BF360C" stroke-width="2.5" fill="none" />
+      <!-- Dark Charcoal Pants / Legs -->
+      <line x1="-8" y1="290" x2="-9" y2="406" stroke="#334155" stroke-width="8.5" />
+      <line x1="8" y1="290" x2="9" y2="406" stroke="#334155" stroke-width="8.5" />
+
+      <!-- Dark Shoes -->
+      <ellipse cx="-11" cy="408" rx="8" ry="4.5" fill="#1E293B" stroke="#0F172A" stroke-width="2.5" />
+      <ellipse cx="11" cy="408" rx="8" ry="4.5" fill="#1E293B" stroke="#0F172A" stroke-width="2.5" />
+    </g>
+
+    <!-- 2. TODDLER SON (Center, holding Mom & Dad's hands) -->
+    <!-- Dark hair with bangs, joyful laughing face, terracotta t-shirt, navy sweatpants, yellow sneakers! -->
+    <g id="son" transform="translate(295, 0)">
+      <!-- Head -->
+      <circle cx="0" cy="255" r="18" fill="#FFE2D1" stroke="#37271F" stroke-width="4" />
+      
+      <!-- Dark hair with toddler bangs -->
+      <path d="M -14,248 Q -6,236 6,240 Q 15,244 14,252 Q 8,242 -2,243 Q -10,243 -14,248 Z" fill="#1C1917" />
+      <path d="M -8,247 L -5,253 M 0,246 L 2,253 M 6,247 L 7,252" stroke="#1C1917" stroke-width="2" />
+
+      <!-- Big Happy Laughing Eyes & Open Smile -->
+      <circle cx="-5" cy="254" r="2.3" fill="#1C1917" />
+      <circle cx="5" cy="254" r="2.3" fill="#1C1917" />
+      <!-- Open grinning mouth -->
+      <path d="M -7,262 Q 0,273 7,262 Z" fill="#E11D48" stroke="#9F1239" stroke-width="2" />
+      <!-- Rosy cheeks -->
+      <circle cx="-10" cy="260" r="3" fill="#FB7185" opacity="0.7" />
+      <circle cx="10" cy="260" r="3" fill="#FB7185" opacity="0.7" />
+
+      <!-- Neck -->
+      <line x1="0" y1="273" x2="0" y2="280" stroke="#FFE2D1" stroke-width="6" />
+
+      <!-- Terracotta / Burnt-Orange T-Shirt -->
+      <path d="M -11,280 L 11,280 L 13,332 L -13,332 Z" fill="#C86446" stroke="#9A3B22" stroke-width="4" />
+      <path d="M -8,295 L 8,298 M -9,312 L 9,315" stroke="#B24F33" stroke-width="3" />
+
+      <!-- Left Arm UP holding Mom's hand! -->
+      <path d="M -11,286 L -35,285" stroke="#FFE2D1" stroke-width="5.5" />
+      <!-- Little hand clasping Mom's hand -->
+      <circle cx="-35" cy="285" r="4" fill="#FFE2D1" />
+
+      <!-- Right Arm UP holding Dad's hand! -->
+      <path d="M 11,286 L 35,285" stroke="#FFE2D1" stroke-width="5.5" />
+      <!-- Little hand clasping Dad's hand -->
+      <circle cx="35" cy="285" r="4" fill="#FFE2D1" />
+
+      <!-- Navy Blue Sweatpants -->
+      <line x1="-6" y1="332" x2="-7" y2="398" stroke="#1E3A8A" stroke-width="7" />
+      <line x1="6" y1="332" x2="7" y2="398" stroke="#1E3A8A" stroke-width="7" />
+
+      <!-- Bright Yellow Sneakers (from family-pic.jpg) -->
+      <ellipse cx="-8" cy="402" rx="7" ry="4" fill="#FBBF24" stroke="#D97706" stroke-width="2.5" />
+      <ellipse cx="8" cy="402" rx="7" ry="4" fill="#FBBF24" stroke="#D97706" stroke-width="2.5" />
+    </g>
+
+    <!-- 3. DAD (Ryan, Right of Son) -->
+    <!-- Taller, short light brown hair, olive green t-shirt, khaki/brown hiking pants -->
+    <g id="dad" transform="translate(390, 0)">
+      <!-- Head -->
+      <circle cx="0" cy="172" r="24" fill="#FFE2D1" stroke="#37271F" stroke-width="4.5" />
+      
+      <!-- Short light brown hair (crew cut) -->
+      <path d="M -18,162 Q 0,146 18,158 Q 20,166 16,174 Q 10,158 -2,160 Q -14,161 -18,162 Z" fill="#6B4F3B" stroke="#4A3525" stroke-width="2.5" />
+
+      <!-- Face: Simple dots and friendly smile -->
+      <circle cx="-7" cy="170" r="2.8" fill="#1C1917" />
+      <circle cx="7" cy="170" r="2.8" fill="#1C1917" />
+      <path d="M -8,180 Q 0,190 8,180" stroke="#BE185D" stroke-width="3" fill="none" />
+      <circle cx="-13" cy="178" r="4" fill="#FDA4AF" opacity="0.55" />
+      <circle cx="13" cy="178" r="4" fill="#FDA4AF" opacity="0.55" />
+
+      <!-- Neck -->
+      <line x1="0" y1="196" x2="0" y2="208" stroke="#FFE2D1" stroke-width="8" />
+
+      <!-- Olive Green Crewneck T-Shirt -->
+      <path d="M -17,208 L 17,208 L 19,285 L -19,285 Z" fill="#5F7444" stroke="#43532F" stroke-width="4.5" />
+      <!-- Crayon scribble texture -->
+      <path d="M -12,226 L 12,230 M -14,246 L 14,250 M -13,266 L 13,270" stroke="#4C5E37" stroke-width="3.5" />
+
+      <!-- Left Arm (reaching to hold toddler son's hand!) -->
+      <path d="M -17,215 L -60,285" stroke="#FFE2D1" stroke-width="7" />
+
+      <!-- Right Arm (waving high!) -->
+      <path d="M 17,215 L 48,175" stroke="#FFE2D1" stroke-width="7" />
+      <!-- Waving hand & stick fingers -->
+      <circle cx="48" cy="175" r="4.5" fill="#FFE2D1" />
+      <path d="M 46,168 L 47,161 M 51,170 L 55,164 M 53,176 L 60,172" stroke="#37271F" stroke-width="2.2" />
+
+      <!-- Khaki / Brown Hiking Pants -->
+      <line x1="-9" y1="285" x2="-10" y2="405" stroke="#785E4F" stroke-width="9" />
+      <line x1="9" y1="285" x2="10" y2="405" stroke="#785E4F" stroke-width="9" />
+
+      <!-- Trail Shoes -->
+      <ellipse cx="-13" cy="408" rx="9" ry="5" fill="#C26A3B" stroke="#873E16" stroke-width="2.5" />
+      <ellipse cx="13" cy="408" rx="9" ry="5" fill="#C26A3B" stroke="#873E16" stroke-width="2.5" />
+    </g>
+
+    <!-- 4. TUXEDO CAT (Pickles - Left, sitting near Mom) -->
+    <!-- Black and white tuxedo cat with white blaze, green eyes, white paws -->
+    <g id="tuxedo-cat" transform="translate(110, 360)">
+      <!-- Sitting Body (Black oval with white chest) -->
+      <ellipse cx="0" cy="22" rx="18" ry="24" fill="#1C1917" stroke="#0C0A09" stroke-width="3.5" />
+      <!-- White Chest/Bib -->
+      <path d="M 0,6 L -7,24 L 0,38 L 7,24 Z" fill="#FFFFFF" />
+
+      <!-- Head (Black circle with white blaze down nose) -->
+      <circle cx="0" cy="-4" r="15" fill="#1C1917" stroke="#0C0A09" stroke-width="3.5" />
+      <!-- White blaze down nose -->
+      <polygon points="0,-10 -4,4 0,7 4,4" fill="#FFFFFF" />
+
+      <!-- Pointy Ears (Triangles) -->
+      <polygon points="-12,-12 -16,-28 -2,-17" fill="#1C1917" stroke="#0C0A09" stroke-width="2.5" />
+      <polygon points="-10,-13 -14,-24 -4,-17" fill="#FDA4AF" />
+      <polygon points="12,-12 16,-28 2,-17" fill="#1C1917" stroke="#0C0A09" stroke-width="2.5" />
+      <polygon points="10,-13 14,-24 4,-17" fill="#FDA4AF" />
+
+      <!-- Green Cat Eyes -->
+      <circle cx="-5" cy="-5" r="2.5" fill="#22C55E" />
+      <circle cx="-5" cy="-5" r="1.2" fill="#052E16" />
+      <circle cx="5" cy="-5" r="2.5" fill="#22C55E" />
+      <circle cx="5" cy="-5" r="1.2" fill="#052E16" />
+
+      <!-- Pink Nose -->
+      <polygon points="0,-1 -2,-3 2,-3" fill="#FB7185" />
+
+      <!-- White Whiskers -->
+      <line x1="-6" y1="-2" x2="-20" y2="-5" stroke="#FFFFFF" stroke-width="1.8" />
+      <line x1="-6" y1="1" x2="-21" y2="2" stroke="#FFFFFF" stroke-width="1.8" />
+      <line x1="6" y1="-2" x2="20" y2="-5" stroke="#FFFFFF" stroke-width="1.8" />
+      <line x1="6" y1="1" x2="21" y2="2" stroke="#FFFFFF" stroke-width="1.8" />
+
+      <!-- White Paws -->
+      <ellipse cx="-8" cy="44" rx="5" ry="3.5" fill="#FFFFFF" stroke="#0C0A09" stroke-width="2" />
+      <ellipse cx="8" cy="44" rx="5" ry="3.5" fill="#FFFFFF" stroke="#0C0A09" stroke-width="2" />
+
+      <!-- Curled Black Tail -->
+      <path d="M -16,30 Q -32,22 -30,8 Q -28,-2 -18,4" stroke="#1C1917" stroke-width="5.5" fill="none" stroke-linecap="round" />
+    </g>
+
+    <!-- 5. TABBY CAT (Pesto - Right, sitting near Dad) -->
+    <!-- Brown/tan tabby cat with white muzzle/chest, striped ears, amber eyes -->
+    <g id="tabby-cat" transform="translate(480, 360)">
+      <!-- Sitting Body (Tan/brown with tabby stripes) -->
+      <ellipse cx="0" cy="22" rx="18" ry="24" fill="#D4A373" stroke="#8A5A36" stroke-width="3.5" />
+      <!-- Tabby stripes on body -->
+      <path d="M -11,14 L 0,18 L 11,14 M -13,26 L 0,30 L 13,26 M -10,38 L 0,41 L 10,38" stroke="#6F4525" stroke-width="2.5" fill="none" />
+      <!-- White Chest/Bib -->
+      <ellipse cx="0" cy="24" rx="9" ry="14" fill="#FFFDF8" opacity="0.9" />
+
+      <!-- Head (Tan/brown with white muzzle) -->
+      <circle cx="0" cy="-4" r="15" fill="#D4A373" stroke="#8A5A36" stroke-width="3.5" />
+      <ellipse cx="0" cy="2" rx="7" ry="5.5" fill="#FFFDF8" />
+      <!-- Forehead tabby 'M' -->
+      <path d="M -4,-14 L 0,-9 L 4,-14 M 0,-14 L 0,-8" stroke="#6F4525" stroke-width="2" fill="none" />
+
+      <!-- Pointy Ears (Triangles with big pink interior like photo!) -->
+      <polygon points="-12,-12 -16,-28 -2,-17" fill="#D4A373" stroke="#8A5A36" stroke-width="2.5" />
+      <polygon points="-10,-13 -14,-25 -4,-17" fill="#FDA4AF" />
+      <polygon points="12,-12 16,-28 2,-17" fill="#D4A373" stroke="#8A5A36" stroke-width="2.5" />
+      <polygon points="10,-13 14,-25 4,-17" fill="#FDA4AF" />
+
+      <!-- Amber Cat Eyes -->
+      <circle cx="-5" cy="-5" r="2.5" fill="#EAB308" />
+      <circle cx="-5" cy="-5" r="1.2" fill="#451A03" />
+      <circle cx="5" cy="-5" r="2.5" fill="#EAB308" />
+      <circle cx="5" cy="-5" r="1.2" fill="#451A03" />
+
+      <!-- Pink Nose -->
+      <polygon points="0,-1 -2,-3 2,-3" fill="#FB7185" />
 
       <!-- Whiskers -->
-      <line x1="-10" y1="-8" x2="-28" y2="-12" stroke="#4E342E" stroke-width="2.5" />
-      <line x1="-10" y1="-5" x2="-30" y2="-4" stroke="#4E342E" stroke-width="2.5" />
-      <line x1="-10" y1="-2" x2="-26" y2="4" stroke="#4E342E" stroke-width="2.5" />
-      <line x1="10" y1="-8" x2="28" y2="-12" stroke="#4E342E" stroke-width="2.5" />
-      <line x1="10" y1="-5" x2="30" y2="-4" stroke="#4E342E" stroke-width="2.5" />
-      <line x1="10" y1="-2" x2="26" y2="4" stroke="#4E342E" stroke-width="2.5" />
+      <line x1="-6" y1="-1" x2="-20" y2="-4" stroke="#451A03" stroke-width="1.5" />
+      <line x1="-6" y1="2" x2="-21" y2="3" stroke="#451A03" stroke-width="1.5" />
+      <line x1="6" y1="-1" x2="20" y2="-4" stroke="#451A03" stroke-width="1.5" />
+      <line x1="6" y1="2" x2="21" y2="3" stroke="#451A03" stroke-width="1.5" />
 
-      <!-- Paws -->
-      <ellipse cx="-12" cy="58" rx="8" ry="6" fill="#FFE0B2" stroke="#E65100" stroke-width="3.5" />
-      <ellipse cx="12" cy="58" rx="8" ry="6" fill="#FFE0B2" stroke="#E65100" stroke-width="3.5" />
+      <!-- White Paws -->
+      <ellipse cx="-8" cy="44" rx="5" ry="3.5" fill="#FFFDF8" stroke="#8A5A36" stroke-width="2" />
+      <ellipse cx="8" cy="44" rx="5" ry="3.5" fill="#FFFDF8" stroke="#8A5A36" stroke-width="2" />
 
-      <!-- Curled Happy Tail -->
-      <path d="M -26,38 Q -46,30 -44,12 Q -42,-4 -28,4" stroke="#FFA726" stroke-width="9" fill="none" />
-      <path d="M -26,38 Q -46,30 -44,12 Q -42,-4 -28,4" stroke="#E65100" stroke-width="4" fill="none" />
-    </g>
-
-    <!-- DAD (Ryan) -->
-    <g id="dad" transform="translate(570, 175)">
-      <!-- Scrawled Label "DAD" -->
-      <text x="-35" y="-85" font-family="'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif" font-weight="bold" font-size="24" fill="#1E88E5" transform="rotate(-6)">DAD 💙</text>
-
-      <!-- Head & Hair -->
-      <circle cx="0" cy="-42" r="34" fill="#FFE0B2" stroke="#4E342E" stroke-width="6" />
-      <!-- Brown scribble hair -->
-      <path d="M -28,-60 Q -15,-78 0,-74 Q 15,-78 28,-60 Q 12,-68 0,-66 Q -15,-68 -28,-60 Z" fill="#5D4037" stroke="#3E2723" stroke-width="6" />
-      <path d="M -24,-62 C -12,-74 8,-70 24,-65" stroke="#5D4037" stroke-width="5" fill="none" />
-      
-      <!-- Eyes (happy dots) -->
-      <circle cx="-11" cy="-46" r="3.5" fill="#3E2723" />
-      <circle cx="11" cy="-46" r="3.5" fill="#3E2723" />
-      <!-- Eyebrows -->
-      <path d="M -18,-54 Q -11,-59 -5,-54" stroke="#4E342E" stroke-width="3.5" fill="none" />
-      <path d="M 5,-54 Q 11,-59 18,-54" stroke="#4E342E" stroke-width="3.5" fill="none" />
-      <!-- Big friendly smile -->
-      <path d="M -14,-30 Q 0,-14 14,-30" stroke="#C2185B" stroke-width="5" fill="none" />
-      <!-- Rosy cheeks -->
-      <circle cx="-20" cy="-34" r="5.5" fill="#FF8A80" opacity="0.6" />
-      <circle cx="20" cy="-34" r="5.5" fill="#FF8A80" opacity="0.6" />
-
-      <!-- Neck -->
-      <line x1="0" y1="-10" x2="0" y2="4" stroke="#FFE0B2" stroke-width="11" />
-
-      <!-- Blue Shirt / Torso -->
-      <path d="M -28,4 L 28,4 L 25,105 L -25,105 Z" fill="#2196F3" stroke="#1565C0" stroke-width="6.5" />
-      <!-- Scribble shirt texture -->
-      <path d="M -18,22 L 18,30 M -20,52 L 20,60 M -16,82 L 16,90" stroke="#1976D2" stroke-width="5" opacity="0.6" />
-
-      <!-- Left Arm (waving high!) -->
-      <path d="M -26,14 Q -60,-6 -72,-45" stroke="#FFE0B2" stroke-width="10" fill="none" />
-      <circle cx="-72" cy="-45" r="8" fill="#FFE0B2" stroke="#4E342E" stroke-width="3.5" />
-      <!-- Fingers waving -->
-      <path d="M -77,-51 L -80,-60 M -72,-53 L -72,-63 M -66,-51 L -64,-59" stroke="#4E342E" stroke-width="3" />
-
-      <!-- Right Arm (holding toddler's hand!) -->
-      <path d="M 26,20 Q 55,50 82,85" stroke="#FFE0B2" stroke-width="10" fill="none" />
-
-      <!-- Denim Pants / Legs -->
-      <path d="M -22,105 L -16,180 M 22,105 L 16,180" stroke="#1A237E" stroke-width="13" />
-      <!-- Brown Shoes -->
-      <ellipse cx="-22" cy="184" rx="14" ry="8" fill="#4E342E" stroke="#3E2723" stroke-width="4" />
-      <ellipse cx="22" cy="184" rx="14" ry="8" fill="#4E342E" stroke="#3E2723" stroke-width="4" />
-    </g>
-
-    <!-- TODDLER SON (Center, jumping joyfully!) -->
-    <g id="toddler" transform="translate(710, 235)">
-      <!-- Scrawled Label "ME!" -->
-      <text x="-20" y="-85" font-family="'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif" font-weight="bold" font-size="22" fill="#FBC02D" transform="rotate(4)">ME! ⭐️</text>
-
-      <!-- Head -->
-      <circle cx="0" cy="-40" r="28" fill="#FFE0B2" stroke="#4E342E" stroke-width="5.5" />
-      <!-- Wild yellow/golden toddler hair spikes -->
-      <path d="M -24,-52 Q -12,-72 2,-62 Q 12,-72 22,-52 Q 14,-58 2,-56 Q -12,-58 -24,-52 Z" fill="#FFCA28" stroke="#F57F17" stroke-width="5" />
-      <path d="M -6,-64 L -2,-76 L 6,-66 M 8,-66 L 14,-78 L 18,-64" stroke="#F57F17" stroke-width="4" fill="none" />
-
-      <!-- Big Happy Toddler Eyes -->
-      <circle cx="-9" cy="-42" r="3.5" fill="#3E2723" />
-      <circle cx="9" cy="-42" r="3.5" fill="#3E2723" />
-      <circle cx="-8" cy="-43" r="1.2" fill="#FFFFFF" />
-      <circle cx="10" cy="-43" r="1.2" fill="#FFFFFF" />
-      <!-- Huge Laughing Open Mouth -->
-      <path d="M -12,-30 Q 0,-15 12,-30 Q 0,-20 -12,-30 Z" fill="#E91E63" stroke="#AD1457" stroke-width="3" />
-      <path d="M -6,-24 Q 0,-17 6,-24" fill="#FF80AB" />
-      <!-- Rosy Cheeks -->
-      <circle cx="-16" cy="-33" r="5" fill="#FF5252" opacity="0.65" />
-      <circle cx="16" cy="-33" r="5" fill="#FF5252" opacity="0.65" />
-
-      <!-- Yellow Striped Toddler Shirt -->
-      <path d="M -20,-8 L 20,-8 L 18,52 L -18,52 Z" fill="#FFF176" stroke="#FBC02D" stroke-width="5" />
-      <!-- Orange stripes -->
-      <path d="M -19,4 L 19,4 M -18,18 L 18,18 M -18,32 L 18,32 M -17,44 L 17,44" stroke="#FF9800" stroke-width="4.5" />
-
-      <!-- Arms raised up holding Mommy & Daddy's hands! -->
-      <!-- Left arm to Daddy -->
-      <path d="M -18,4 Q -40,-6 -58,25" stroke="#FFE0B2" stroke-width="8.5" fill="none" />
-      <!-- Right arm to Mommy -->
-      <path d="M 18,4 Q 40,-6 58,25" stroke="#FFE0B2" stroke-width="8.5" fill="none" />
-
-      <!-- Blue Shorts -->
-      <path d="M -18,52 L 18,52 L 14,80 L 2,80 L 0,65 L -2,80 L -14,80 Z" fill="#0288D1" stroke="#01579B" stroke-width="4.5" />
-
-      <!-- Little legs jumping (bent knees in mid-air!) -->
-      <path d="M -8,80 L -14,105 M 8,80 L 14,105" stroke="#FFE0B2" stroke-width="8" />
-      <!-- Red Toddler Sneakers -->
-      <ellipse cx="-16" cy="110" rx="9" ry="6" fill="#F44336" stroke="#B71C1C" stroke-width="3" />
-      <ellipse cx="16" cy="110" rx="9" ry="6" fill="#F44336" stroke="#B71C1C" stroke-width="3" />
-    </g>
-
-    <!-- MOM -->
-    <g id="mom" transform="translate(850, 185)">
-      <!-- Scrawled Label "MOM" -->
-      <text x="-25" y="-85" font-family="'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif" font-weight="bold" font-size="24" fill="#E91E63" transform="rotate(6)">MOM 💖</text>
-
-      <!-- Curly Hair Background -->
-      <path d="M -38,-65 Q -52,-38 -44,-8 Q -52,22 -32,30 M 38,-65 Q 52,-38 44,-8 Q 52,22 32,30"
-            stroke="#8D6E63" stroke-width="17" fill="none" stroke-linecap="round" />
-
-      <!-- Head -->
-      <circle cx="0" cy="-42" r="31" fill="#FFE0B2" stroke="#4E342E" stroke-width="6" />
-      <!-- Hair Bangs -->
-      <path d="M -24,-58 Q -10,-72 8,-66 Q 22,-70 26,-56" stroke="#6D4C41" stroke-width="6" fill="none" />
-
-      <!-- Big Happy Eyes with Lashes -->
-      <circle cx="-10" cy="-44" r="3.5" fill="#3E2723" />
-      <circle cx="10" cy="-44" r="3.5" fill="#3E2723" />
-      <!-- Eyelashes -->
-      <path d="M -14,-50 L -18,-55 M -10,-51 L -10,-57 M -6,-50 L -2,-55" stroke="#3E2723" stroke-width="2.5" />
-      <path d="M 14,-50 L 18,-55 M 10,-51 L 10,-57 M 6,-50 L 2,-55" stroke="#3E2723" stroke-width="2.5" />
-      <!-- Warm Smile -->
-      <path d="M -12,-26 Q 0,-12 12,-26" stroke="#E91E63" stroke-width="4.5" fill="none" />
-      <!-- Rosy Cheeks -->
-      <circle cx="-18" cy="-31" r="5" fill="#FF4081" opacity="0.6" />
-      <circle cx="18" cy="-31" r="5" fill="#FF4081" opacity="0.6" />
-
-      <!-- Neck -->
-      <line x1="0" y1="-12" x2="0" y2="4" stroke="#FFE0B2" stroke-width="9" />
-
-      <!-- Coral Polka-Dot Dress -->
-      <path d="M -16,4 L 16,4 L 38,105 L -38,105 Z" fill="#FF5252" stroke="#D32F2F" stroke-width="6" />
-      <!-- White Polka Dots -->
-      <circle cx="-12" cy="24" r="3.5" fill="#FFFFFF" opacity="0.85" />
-      <circle cx="12" cy="24" r="3.5" fill="#FFFFFF" opacity="0.85" />
-      <circle cx="0" cy="42" r="3.5" fill="#FFFFFF" opacity="0.85" />
-      <circle cx="-20" cy="62" r="3.5" fill="#FFFFFF" opacity="0.85" />
-      <circle cx="20" cy="62" r="3.5" fill="#FFFFFF" opacity="0.85" />
-      <circle cx="-6" cy="82" r="3.5" fill="#FFFFFF" opacity="0.85" />
-      <circle cx="14" cy="85" r="3.5" fill="#FFFFFF" opacity="0.85" />
-
-      <!-- Left Arm (holding toddler's hand!) -->
-      <path d="M -18,16 Q -48,46 -82,75" stroke="#FFE0B2" stroke-width="9" fill="none" />
-
-      <!-- Right Arm (resting gently / waving) -->
-      <path d="M 18,16 Q 44,40 52,70" stroke="#FFE0B2" stroke-width="9" fill="none" />
-
-      <!-- Legs -->
-      <path d="M -14,105 L -10,174 M 14,105 L 10,174" stroke="#FFE0B2" stroke-width="10" />
-      <!-- Coral/Red Flats -->
-      <ellipse cx="-12" cy="177" rx="12" ry="7" fill="#E91E63" stroke="#C2185B" stroke-width="3.5" />
-      <ellipse cx="12" cy="177" rx="12" ry="7" fill="#E91E63" stroke="#C2185B" stroke-width="3.5" />
-    </g>
-
-    <!-- PESTO THE CAT (Right of Mom) -->
-    <g id="pesto" transform="translate(1010, 265)">
-      <!-- Label "Pesto" -->
-      <text x="-24" y="-45" font-family="'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif" font-weight="bold" font-size="20" fill="#2E7D32" transform="rotate(6)">Pesto 🐾</text>
-
-      <!-- Sleek Dark Tuxedo Cat Body -->
-      <ellipse cx="0" cy="25" rx="30" ry="36" fill="#212121" stroke="#000000" stroke-width="6" />
-      <!-- White Tuxedo Bib -->
-      <path d="M 0,-4 L -12,24 L 0,44 L 12,24 Z" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2.5" />
-
-      <!-- Cat Head -->
-      <circle cx="0" cy="-12" r="23" fill="#212121" stroke="#000000" stroke-width="6" />
-
-      <!-- Ears (triangles) -->
-      <polygon points="-16,-22 -22,-44 -4,-28" fill="#212121" stroke="#000000" stroke-width="5" />
-      <polygon points="-15,-24 -20,-39 -6,-28" fill="#FF80AB" />
-      <polygon points="16,-22 22,-44 4,-28" fill="#212121" stroke="#000000" stroke-width="5" />
-      <polygon points="15,-24 20,-39 6,-28" fill="#FF80AB" />
-
-      <!-- Golden Cat Eyes -->
-      <ellipse cx="-8" cy="-14" rx="4.5" ry="5.5" fill="#FFD54F" stroke="#FFA000" stroke-width="2" />
-      <ellipse cx="-8" cy="-14" rx="2" ry="4.5" fill="#000000" />
-      <ellipse cx="8" cy="-14" rx="4.5" ry="5.5" fill="#FFD54F" stroke="#FFA000" stroke-width="2" />
-      <ellipse cx="8" cy="-14" rx="2" ry="4.5" fill="#000000" />
-      <!-- Eye shine -->
-      <circle cx="-9" cy="-16" r="1.5" fill="#FFFFFF" />
-      <circle cx="7" cy="-16" r="1.5" fill="#FFFFFF" />
-
-      <!-- Cute Pink Nose -->
-      <polygon points="0,-7 -3,-10 3,-10" fill="#FF4081" />
-      <path d="M -4,-3 Q 0,-5 4,-3" stroke="#FFFFFF" stroke-width="2" fill="none" />
-
-      <!-- White Whiskers on Dark Face! -->
-      <line x1="-10" y1="-8" x2="-28" y2="-12" stroke="#FFFFFF" stroke-width="2.5" />
-      <line x1="-10" y1="-5" x2="-30" y2="-4" stroke="#FFFFFF" stroke-width="2.5" />
-      <line x1="-10" y1="-2" x2="-26" y2="4" stroke="#FFFFFF" stroke-width="2.5" />
-      <line x1="10" y1="-8" x2="28" y2="-12" stroke="#FFFFFF" stroke-width="2.5" />
-      <line x1="10" y1="-5" x2="30" y2="-4" stroke="#FFFFFF" stroke-width="2.5" />
-      <line x1="10" y1="-2" x2="26" y2="4" stroke="#FFFFFF" stroke-width="2.5" />
-
-      <!-- White Paws ("Mittens") -->
-      <ellipse cx="-12" cy="58" rx="8" ry="6" fill="#FFFFFF" stroke="#000000" stroke-width="3" />
-      <ellipse cx="12" cy="58" rx="8" ry="6" fill="#FFFFFF" stroke="#000000" stroke-width="3" />
-
-      <!-- Sleek Cat Tail curled up -->
-      <path d="M 24,36 Q 44,28 42,10 Q 40,-6 26,2" stroke="#212121" stroke-width="9" fill="none" />
-      <path d="M 24,36 Q 44,28 42,10 Q 40,-6 26,2" stroke="#000000" stroke-width="4" fill="none" />
-      <circle cx="28" cy="2" r="4.5" fill="#FFFFFF" /> <!-- White tail tip! -->
+      <!-- Curled Striped Tail -->
+      <path d="M 16,30 Q 32,22 30,8 Q 28,-2 18,4" stroke="#D4A373" stroke-width="5.5" fill="none" stroke-linecap="round" />
+      <path d="M 22,25 L 26,22 M 28,17 L 31,14 M 26,6 L 24,3" stroke="#6F4525" stroke-width="2.5" />
     </g>
   </g>
 </svg>

@@ -1011,52 +1011,45 @@ body.is-home {
    Hyper-Realistic Construction Paper & School Project Aesthetic
    ========================================================================== */
 
-/* Homepage Background Crayon Coloring: Ryan, Wife, Toddler Son & Pickles & Pesto */
+/* Homepage Background Crayon Coloring: Removed from above hero */
 .home-ambient-glow {
-  position: absolute;
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1380px, 98vw);
-  height: clamp(340px, 46vh, 430px);
-  background: url('../assets/images/family-crayon-drawing.svg') no-repeat center top / contain;
-  opacity: 0.98;
-  pointer-events: none;
-  z-index: 0;
-  filter: drop-shadow(0 3px 10px rgba(60, 45, 30, 0.08));
-}
-
-@media (max-width: 768px) {
-  .home-ambient-glow {
-    top: 4px;
-    width: 100vw;
-    height: 250px;
-  }
-}
-
-@media (max-width: 480px) {
-  .home-ambient-glow {
-    top: 2px;
-    height: 200px;
-  }
+  display: none;
 }
 
 /* Homepage Main Layout Container */
 .home-main {
   width: 100%;
-  max-width: 980px;
+  max-width: 1160px;
   margin-inline: auto;
-  padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+  padding: 0 clamp(1.25rem, 3.5vw, 2.5rem);
   position: relative;
   z-index: 1;
+}
+
+/* Hero Section Wrapper: Content Left, Drawing Right */
+.home-hero-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(24px, 3.5vw, 44px);
+  align-items: center;
+  margin-top: clamp(2rem, 5vh, 3.75rem);
+  margin-bottom: clamp(3rem, 6vh, 4.5rem);
+}
+
+@media (max-width: 960px) {
+  .home-hero-wrap {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-top: 1.5rem;
+  }
 }
 
 /* Hero: Canary Yellow Construction Paper Sheet Held by Scotch Tape */
 .home-hero {
   position: relative;
-  margin-top: clamp(235px, 29vh, 290px);
-  margin-bottom: clamp(2.25rem, 4.5vh, 3.5rem);
-  padding: clamp(2rem, 4.5vw, 3.25rem) clamp(1.75rem, 4.5vw, 3rem);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.75rem, 4vw, 2.75rem);
   background-color: var(--paper-canary, #FEE440);
   background-image: 
     radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
@@ -1106,6 +1099,78 @@ body.is-home {
   z-index: 3;
   pointer-events: none;
   border-radius: 0 !important;
+}
+
+/* Right Column: White Art Paper Drawing Sheet with Scotch Tape */
+.home-hero-art {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.home-drawing-paper {
+  position: relative;
+  width: 100%;
+  background: #FFFDF8;
+  background-image: 
+    radial-gradient(rgba(70, 50, 30, 0.04) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+  background-size: 14px 14px, 20px 20px;
+  padding: 16px 14px 18px;
+  border-radius: 0 !important;
+  clip-path: polygon(0% 0.25%, 35% 0%, 70% 0.3%, 100% 0.1%, 99.8% 30%, 100% 70%, 99.7% 100%, 65% 99.7%, 30% 100%, 0% 99.7%, 0.25% 65%, 0.1% 30%);
+  border-top: 2px solid rgba(255, 255, 255, 0.95);
+  border-left: 1.5px solid rgba(70, 50, 30, 0.14);
+  border-right: 1.5px solid rgba(70, 50, 30, 0.16);
+  border-bottom: 3.5px solid rgba(70, 50, 30, 0.28);
+  filter: 
+    drop-shadow(0 1px 2px rgba(45, 30, 15, 0.3))
+    drop-shadow(0 8px 18px rgba(45, 30, 15, 0.2))
+    drop-shadow(0 22px 44px rgba(45, 30, 15, 0.15));
+  transform: rotate(1.2deg);
+  transition: transform 220ms ease, filter 220ms ease;
+}
+
+.home-drawing-paper:hover {
+  transform: rotate(0.6deg) translateY(-2px);
+  filter: 
+    drop-shadow(0 2px 3px rgba(45, 30, 15, 0.35))
+    drop-shadow(0 12px 24px rgba(45, 30, 15, 0.24))
+    drop-shadow(0 28px 56px rgba(45, 30, 15, 0.18));
+}
+
+/* Scotch Tape on top of the drawing */
+.home-drawing-paper::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.4deg);
+  width: 90px;
+  height: 25px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.75) 50%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  box-shadow: 0 1px 3px rgba(40, 25, 12, 0.14), inset 0 0 2px rgba(255, 255, 255, 0.6);
+  border-left: 2px dotted rgba(255, 255, 255, 0.85);
+  border-right: 2px dotted rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(1.5px);
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 0 !important;
+}
+
+.home-drawing-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 600 / 480;
+  user-select: none;
+  pointer-events: none;
 }
 
 .home-hero__title {
@@ -1893,7 +1958,7 @@ body.is-home {
     overflow-x: hidden;
   }
   .home-hero {
-    margin-top: 210px;
+    margin-top: 0;
     padding: 1.75rem 1.25rem 1.5rem;
   }
   .home-hero__title {
