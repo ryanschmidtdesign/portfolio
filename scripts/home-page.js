@@ -14,8 +14,8 @@
 
   function getDefaultPlaceholder() {
     return window.innerWidth <= 600
-      ? 'Ask about Ryan’s work or case studies...'
-      : 'Ask a question about Ryan’s work, case studies, or press ⌘K...';
+      ? 'Ask about Ryan’s work, case studies, or hobbies...'
+      : 'Ask a question about Ryan’s work, case studies, or hobbies...';
   }
 
   function updatePlaceholder() {

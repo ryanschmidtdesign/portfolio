@@ -527,10 +527,7 @@
   margin-inline: auto;
   padding: var(--space-5) var(--space-6);
   background-color: #E7F5FF;
-  background-image: 
-    radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    radial-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px);
-  background-size: 14px 14px, 20px 20px;
+  background-image: none !important;
   border-radius: 0 !important;
   clip-path: polygon(0% 0.4%, 50% 0%, 100% 0.3%, 99.6% 50%, 100% 100%, 50% 99.6%, 0% 100%, 0.4% 50%);
   border-top: 1.5px solid rgba(255, 255, 255, 0.7);
@@ -567,10 +564,7 @@
   margin-inline: auto;
   padding: 24px 28px;
   background-color: var(--paper-canary, #FEE440);
-  background-image: 
-    radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-    radial-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px);
-  background-size: 14px 14px, 20px 20px;
+  background-image: none !important;
   border-radius: 0 !important;
   clip-path: polygon(0% 0.3%, 35% 0%, 70% 0.35%, 100% 0.1%, 99.7% 40%, 100% 75%, 99.6% 100%, 65% 99.7%, 30% 100%, 0% 99.65%, 0.3% 60%, 0.1% 25%);
   border-top: 2px solid rgba(255, 255, 255, 0.7);
@@ -693,10 +687,7 @@
   margin-bottom: var(--space-6);
   padding: 24px 28px;
   background-color: #FFFDF9;
-  background-image: 
-    radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-    radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px);
-  background-size: 14px 14px, 20px 20px;
+  background-image: none !important;
   border-radius: 0 !important;
   clip-path: polygon(0% 0.3%, 35% 0%, 70% 0.35%, 100% 0.1%, 99.7% 40%, 100% 75%, 99.7% 100%, 65% 99.7%, 30% 100%, 0% 99.7%, 0.3% 60%, 0.1% 25%);
   border-top: 2px solid rgba(255, 255, 255, 0.85);

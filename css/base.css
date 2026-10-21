@@ -99,11 +99,7 @@ body {
   padding-bottom: calc(clamp(110px, 12vh, 136px) + env(safe-area-inset-bottom, 0px));
   font-weight: var(--weight-regular);
   background-color: var(--bg);
-  background-image: 
-    radial-gradient(rgba(70, 50, 30, 0.06) 1.5px, transparent 1.5px),
-    radial-gradient(rgba(255, 255, 255, 0.6) 1.5px, transparent 1.5px);
-  background-size: 16px 16px, 24px 24px;
-  background-position: 0 0, 8px 8px;
+  background-image: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
