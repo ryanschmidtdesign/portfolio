@@ -302,42 +302,7 @@
 })();
 
 
-// ============================================================================
-// Smooth Page Transitions
-// ============================================================================
-(function () {
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  document.addEventListener("click", (e) => {
-    const link = e.target.closest("a");
-    if (!link) return;
-    // Let cmd/ctrl+click pass through to browser default (open in new tab)
-    if (e.metaKey || e.ctrlKey) return;
-    const href = link.getAttribute("href");
-    if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || link.target === "_blank") return;
-
-    const url = new URL(link.href, window.location.origin);
-    if (url.origin === window.location.origin) {
-      e.preventDefault();
-      if (document.startViewTransition) {
-        document.startViewTransition(() => {
-          window.location.href = link.href;
-        });
-      } else {
-        document.body.classList.add("page-transitioning");
-        setTimeout(() => {
-          window.location.href = link.href;
-        }, 200);
-      }
-    }
-  });
-
-  window.addEventListener("pageshow", (e) => {
-    if (e.persisted || document.body.classList.contains("page-transitioning")) {
-      document.body.classList.remove("page-transitioning");
-    }
-  });
-})();
+// Native standard browser navigation (zero interception, zero scroll-lock)
 
 // (Feature 2 removed — Image Lightbox was removed)
 // (Feature 3 removed — Read Time Estimator Badge was removed)

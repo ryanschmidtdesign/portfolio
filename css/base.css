@@ -8,33 +8,14 @@
 }
 
 /* -------------------------------------------------------
-   Global
+   Global Root & Viewport Scrolling
 --------------------------------------------------------*/
 html {
+  overflow-x: clip;
+  overflow-y: scroll;
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--accent) rgba(0, 0, 0, 0.20);
-}
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis-scrolling iframe {
-  pointer-events: none;
 }
 
 /* WebKit scrollbar */
@@ -102,8 +83,6 @@ body {
   background-image: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: clip;
-  overscroll-behavior: none;
   text-rendering: optimizeLegibility;
   font-kerning: normal;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "cv02" 1, "cv03" 1, "ss01" 1;
@@ -124,7 +103,6 @@ body::after {
 body.is-home {
   min-height: 100vh;
   min-height: 100dvh;
-  overflow-x: hidden;
 }
 
 :where(h1, h2, h3, h4, h5, h6) {

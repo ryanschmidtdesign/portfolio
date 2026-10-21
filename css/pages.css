@@ -808,19 +808,10 @@
 /* -------------------------------------------------------
    Homepage: Editorial Portfolio & Persistent CLI Dock
    --------------------------------------------------------*/
-html:has(body.is-home) {
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  height: auto;
-}
-
 body.is-home {
   background-color: #F5EFE4 !important; /* Clean classroom wooden desk parchment surface */
   background-image: none !important;
   color: var(--text);
-  overflow-x: hidden;
-  overflow-y: auto;
   min-height: 100vh;
   padding-bottom: 160px !important;
   display: block;
