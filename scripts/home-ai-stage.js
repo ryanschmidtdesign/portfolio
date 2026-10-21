@@ -752,7 +752,7 @@
     const scriptsCount = document.querySelectorAll('script').length;
     const navTiming = performance.getEntriesByType('navigation')[0];
     const domInteractive = navTiming ? `${Math.round(navTiming.domInteractive)}ms` : '< 42ms';
-    const currentAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0033FF';
+    const currentAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#C86446';
 
     const userMsg = createUserMessage(`/${escapeHtml(cmd || 'perf')}`);
     stageStream.appendChild(userMsg);
