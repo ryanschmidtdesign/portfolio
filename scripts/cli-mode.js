@@ -49,20 +49,43 @@
                     pointer-events: auto;
                 }
                 .rs-cmd-modal {
+                    position: relative;
                     width: min(590px, 100%);
                     max-height: 80vh;
-                    background: #FAF9F6;
-                    border: 1px solid rgba(15, 23, 42, 0.09);
-                    border-radius: 18px;
-                    box-shadow:
-                        inset 0 1px 0 rgba(255, 255, 255, 0.95),
-                        0 32px 72px -16px rgba(15, 23, 42, 0.28),
-                        0 4px 16px rgba(15, 23, 42, 0.05);
+                    background: #FFFDF8;
+                    background-image: 
+                        radial-gradient(rgba(70, 50, 30, 0.04) 1px, transparent 1px),
+                        radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+                    background-size: 14px 14px, 20px 20px;
+                    border: 1.5px solid rgba(70, 50, 30, 0.16);
+                    border-top: 2px solid rgba(255, 255, 255, 0.95);
+                    border-bottom: 3.5px solid rgba(70, 50, 30, 0.28);
+                    border-radius: 0 !important;
+                    clip-path: polygon(0% 0.3%, 40% 0%, 75% 0.3%, 100% 0.1%, 99.8% 30%, 100% 70%, 99.7% 100%, 60% 99.7%, 25% 100%, 0% 99.7%, 0.2% 65%, 0% 30%);
+                    filter: 
+                        drop-shadow(0 1px 2px rgba(45, 30, 15, 0.14))
+                        drop-shadow(0 12px 24px rgba(45, 30, 15, 0.22))
+                        drop-shadow(0 32px 64px rgba(45, 30, 15, 0.26));
                     display: flex;
                     flex-direction: column;
-                    overflow: hidden;
+                    overflow: visible;
                     transform: translateY(-8px) scale(0.985);
                     transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                .rs-cmd-modal::before {
+                    content: '';
+                    position: absolute;
+                    top: -11px;
+                    left: 50%;
+                    transform: translateX(-50%) rotate(-0.8deg);
+                    width: 96px;
+                    height: 22px;
+                    background: rgba(255, 255, 255, 0.45);
+                    border: 1px solid rgba(220, 210, 190, 0.6);
+                    box-shadow: 0 1.5px 3px rgba(45, 30, 15, 0.14);
+                    backdrop-filter: blur(1.5px);
+                    z-index: 20;
+                    pointer-events: none;
                 }
                 .rs-cmd-overlay.is-open .rs-cmd-modal {
                     transform: translateY(0) scale(1);
@@ -72,8 +95,10 @@
                     align-items: center;
                     gap: 12px;
                     padding: 14px 18px;
-                    border-bottom: 1px solid rgba(15, 23, 42, 0.07);
-                    background: #FFFFFF;
+                    border-bottom: 2px dashed rgba(70, 50, 30, 0.2);
+                    background: #F4ECDA;
+                    box-shadow: inset 0 2px 5px rgba(45, 30, 15, 0.16), inset 0 1px 2px rgba(45, 30, 15, 0.2);
+                    border-radius: 0 !important;
                 }
                 .rs-cmd-search__icon {
                     color: #8E8D87;
@@ -90,6 +115,7 @@
                     outline: none;
                     padding: 2px 0;
                     margin: 0;
+                    border-radius: 0 !important;
                 }
                 .rs-cmd-input::placeholder {
                     color: #94A3B8;
@@ -98,15 +124,17 @@
                 .rs-cmd-esc {
                     display: inline-flex;
                     align-items: center;
-                    padding: 2px 6px;
+                    padding: 3px 7px;
                     font-family: var(--font-mono, monospace);
                     font-size: 0.65rem;
                     font-weight: 600;
-                    border-radius: 5px;
-                    background: #FFFFFF;
-                    color: #64748B;
-                    border: 1px solid rgba(15, 23, 42, 0.12);
-                    box-shadow: 0 1px 1px rgba(15, 23, 42, 0.06), inset 0 1px 0 #fff;
+                    border-radius: 0 !important;
+                    background: #FFFDF8;
+                    color: #52525B;
+                    border: 1px solid rgba(70, 50, 30, 0.2);
+                    border-top: 1.5px solid rgba(255, 255, 255, 0.9);
+                    border-bottom: 2px solid rgba(70, 50, 30, 0.3);
+                    box-shadow: 0 1.5px 3px rgba(45, 30, 15, 0.12);
                     flex-shrink: 0;
                     user-select: none;
                 }
@@ -132,21 +160,22 @@
                     align-items: center;
                     justify-content: space-between;
                     gap: 12px;
-                    padding: 9px 10px;
-                    border-radius: 10px;
+                    padding: 9px 12px;
+                    border-radius: 0 !important;
                     cursor: pointer;
                     text-decoration: none;
                     color: inherit;
                     transition: all 120ms ease;
                     user-select: none;
-                    margin-bottom: 2px;
-                    border-left: 2.5px solid transparent;
+                    margin-bottom: 3px;
+                    border-left: 3px solid transparent;
+                    background: transparent;
                 }
                 .rs-cmd-item:hover,
                 .rs-cmd-item.is-selected {
-                    background: rgba(200, 100, 70, 0.06);
+                    background: rgba(200, 100, 70, 0.08);
                     border-left-color: var(--accent, #C86446);
-                    border-radius: 4px 10px 10px 4px;
+                    border-radius: 0 !important;
                 }
                 .rs-cmd-item.is-selected .rs-cmd-item__title {
                     color: var(--accent, #C86446);
@@ -161,8 +190,8 @@
                 .rs-cmd-item__icon {
                     width: 24px;
                     height: 24px;
-                    border-radius: 6px;
-                    background: rgba(15, 23, 42, 0.05);
+                    border-radius: 0 !important;
+                    background: #F4ECDA;
                     color: #475569;
                     font-family: var(--font-mono, monospace);
                     font-size: 0.68rem;
@@ -171,6 +200,8 @@
                     align-items: center;
                     justify-content: center;
                     flex-shrink: 0;
+                    border: 1px solid rgba(70, 50, 30, 0.2);
+                    box-shadow: 0 1px 2px rgba(45, 30, 15, 0.1);
                 }
                 .rs-cmd-item__content {
                     display: flex;
@@ -206,39 +237,46 @@
                     font-size: 0.65rem;
                     font-weight: 600;
                     padding: 2px 7px;
-                    border-radius: 6px;
+                    border-radius: 0 !important;
                     letter-spacing: -0.01em;
                     white-space: nowrap;
+                    border-top: 1.5px solid rgba(255, 255, 255, 0.8);
+                    box-shadow: 0 1px 2px rgba(45, 30, 15, 0.12);
                 }
                 .rs-cmd-kpi--cobalt {
-                    background: rgba(200, 100, 70, 0.08);
-                    color: #C86446;
-                    border: 1px solid rgba(200, 100, 70, 0.22);
+                    background: #E8F0FE;
+                    color: #1A73E8;
+                    border: 1px solid #C2D7FA;
+                    border-bottom: 2px solid #8AB4F8;
                 }
                 .rs-cmd-kpi--emerald {
-                    background: rgba(16, 185, 129, 0.09);
+                    background: #D9F2E6;
                     color: #059669;
-                    border: 1px solid rgba(16, 185, 129, 0.22);
+                    border: 1px solid #A7E3C5;
+                    border-bottom: 2px solid #6EE7B7;
                 }
                 .rs-cmd-kpi--terracotta {
-                    background: rgba(200, 100, 70, 0.1);
+                    background: #FEE8E1;
                     color: #C86446;
-                    border: 1px solid rgba(200, 100, 70, 0.22);
+                    border: 1px solid #F5B8A7;
+                    border-bottom: 2px solid #F87171;
                 }
                 .rs-cmd-kpi--slate {
-                    background: rgba(15, 23, 42, 0.05);
+                    background: #F1EFEA;
                     color: #475569;
-                    border: 1px solid rgba(15, 23, 42, 0.08);
+                    border: 1px solid rgba(70, 50, 30, 0.18);
+                    border-bottom: 2px solid rgba(70, 50, 30, 0.28);
                 }
                 .rs-cmd-item__badge {
                     font-family: var(--font-mono, monospace);
                     font-size: 0.65rem;
                     font-weight: 500;
                     padding: 2px 7px;
-                    border-radius: 6px;
-                    background: rgba(15, 23, 42, 0.04);
+                    border-radius: 0 !important;
+                    background: #F4ECDA;
                     color: #64748B;
-                    border: 1px solid rgba(15, 23, 42, 0.06);
+                    border: 1px solid rgba(70, 50, 30, 0.15);
+                    box-shadow: 0 1px 2px rgba(45, 30, 15, 0.08);
                     white-space: nowrap;
                 }
                 .rs-cmd-item__return {
@@ -259,11 +297,12 @@
                     align-items: center;
                     justify-content: space-between;
                     padding: 8px 16px;
-                    border-top: 1px solid rgba(15, 23, 42, 0.07);
-                    background: #FAF9F6;
+                    border-top: 1.5px dashed rgba(70, 50, 30, 0.18);
+                    background: #FBF8F1;
                     font-size: 0.68rem;
                     color: #8E8D87;
                     font-family: var(--font-mono, monospace);
+                    border-radius: 0 !important;
                 }
                 .rs-cmd-footer__brand {
                     letter-spacing: 0.02em;
@@ -280,11 +319,13 @@
                     justify-content: center;
                     min-width: 17px;
                     padding: 1.5px 5px;
-                    border-radius: 4px;
-                    background: #FFFFFF;
+                    border-radius: 0 !important;
+                    background: #FFFDF8;
                     color: #475569;
-                    border: 1px solid rgba(15, 23, 42, 0.14);
-                    box-shadow: 0 1px 1px rgba(15, 23, 42, 0.08), inset 0 1px 0 #fff;
+                    border: 1px solid rgba(70, 50, 30, 0.2);
+                    border-top: 1.5px solid rgba(255, 255, 255, 0.9);
+                    border-bottom: 2px solid rgba(70, 50, 30, 0.3);
+                    box-shadow: 0 1.5px 2px rgba(45, 30, 15, 0.1);
                     font-size: 0.65rem;
                     font-weight: 600;
                 }

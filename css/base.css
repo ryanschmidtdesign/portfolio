@@ -275,6 +275,29 @@ code {
   }
 }
 
+/* Global Construction Paper System: Zero Corner Radius & Scissor-Cut Paper Physics */
+*, *::before, *::after {
+  border-radius: 0 !important;
+}
+
+/* Paper Lift Curled Corner Utility */
+.paper-curl-shadow {
+  position: relative;
+}
+
+.paper-curl-shadow::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  bottom: 6px;
+  width: 48%;
+  height: 20px;
+  box-shadow: 0 12px 20px rgba(40, 25, 12, 0.36);
+  transform: rotate(3deg) skew(6deg);
+  z-index: -1;
+  pointer-events: none;
+}
+
 @media print {
   .site-footer {
     display: none !important;
@@ -289,6 +312,29 @@ code {
 /* =====================================================
    PRINT MEDIA OPTIMIZATION
    ===================================================== */
+/* Global Construction Paper System: Zero Corner Radius & Scissor-Cut Paper Physics */
+*, *::before, *::after {
+  border-radius: 0 !important;
+}
+
+/* Paper Lift Curled Corner Utility */
+.paper-curl-shadow {
+  position: relative;
+}
+
+.paper-curl-shadow::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  bottom: 6px;
+  width: 48%;
+  height: 20px;
+  box-shadow: 0 12px 20px rgba(40, 25, 12, 0.36);
+  transform: rotate(3deg) skew(6deg);
+  z-index: -1;
+  pointer-events: none;
+}
+
 @media print {
 
   [data-webgl-hero],
