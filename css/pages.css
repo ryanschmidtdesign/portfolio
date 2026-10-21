@@ -1021,9 +1021,15 @@ body.is-home {
   width: 100%;
   max-width: 1160px;
   margin-inline: auto;
-  padding: 0 clamp(1.25rem, 3.5vw, 2.5rem);
+  padding: 0;
   position: relative;
   z-index: 1;
+}
+
+@media (max-width: 1199px) {
+  .home-main {
+    padding: 0 20px;
+  }
 }
 
 /* Hero Section Wrapper: Content Left, Drawing Right */
