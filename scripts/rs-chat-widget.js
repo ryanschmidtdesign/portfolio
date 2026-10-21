@@ -3,16 +3,7 @@
   const HOST_ID = 'rs-chat-widget-root';
   if (document.getElementById(HOST_ID)) return; // avoid double injection
 
-  let gsapLoaded = false;
 
-  function loadGSAP() {
-    if (gsapLoaded) return;
-    gsapLoaded = true;
-    const s = document.createElement('script');
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
-    s.async = true;
-    document.head.appendChild(s);
-  }
 
   // Session token: persists per tab (sessionStorage), generated once per session
   const SESSION_KEY = 'rs_chat_session_token';
@@ -77,11 +68,11 @@
       .panel {
         position: fixed;
         top: auto;
-        right: 18px;
-        bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-        width: min(540px, calc(100vw - 24px));
-        height: 80px;
-        max-height: min(880px, calc(100vh - 28px));
+        right: 20px;
+        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+        width: min(600px, calc(100vw - 28px));
+        height: min(900px, calc(100vh - 40px));
+        max-height: calc(100vh - 40px);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -89,17 +80,20 @@
         color: var(--text-primary);
         border-radius: 0 !important;
         clip-path: polygon(0% 0.35%, 30% 0%, 70% 0.3%, 100% 0.1%, 99.7% 35%, 100% 70%, 99.7% 100%, 65% 99.7%, 30% 100%, 0% 99.7%, 0.3% 65%, 0.1% 30%);
-        border-top: 2px solid rgba(255, 255, 255, 0.95);
-        border-left: 1.5px solid rgba(70, 50, 30, 0.16);
-        border-right: 1.5px solid rgba(70, 50, 30, 0.16);
-        border-bottom: 3.5px solid rgba(70, 50, 30, 0.28);
-        filter:
-          drop-shadow(0 1px 2px rgba(45, 30, 15, 0.35))
-          drop-shadow(0 12px 24px rgba(45, 30, 15, 0.24))
-          drop-shadow(0 28px 60px rgba(45, 30, 15, 0.2));
+        border-top: 2.5px solid rgba(255, 255, 255, 0.95);
+        border-left: 2px solid rgba(70, 50, 30, 0.18);
+        border-right: 2px solid rgba(70, 50, 30, 0.18);
+        border-bottom: 4px solid rgba(70, 50, 30, 0.32);
+        box-shadow:
+          0 4px 6px rgba(45, 30, 15, 0.2),
+          0 16px 28px rgba(45, 30, 15, 0.28),
+          0 36px 70px rgba(45, 30, 15, 0.32);
         visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(18px) scale(0.985);
+        transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease, visibility 200ms ease;
         z-index: 2147482999;
-        will-change: height;
         overflow: hidden;
       }
 
@@ -144,13 +138,19 @@
           right: 10px;
           bottom: calc(10px + env(safe-area-inset-bottom, 0px));
           width: auto;
+          height: calc(100vh - 20px);
           max-height: calc(100vh - 20px);
         }
         .panel::after {
           left: 36px;
         }
       }
-      .panel.open { visibility: visible; }
+      .panel.open {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
       .chat-body {
         display: flex;
         flex-direction: column;
@@ -179,35 +179,7 @@
         min-width: 0;
         flex: 1;
       }
-      .hdr-title-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 2px;
-      }
-      .hdr-notebook-tag {
-        font-family: var(--font-mono);
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #B45309;
-        background: rgba(254, 240, 138, 0.7);
-        padding: 2px 7px;
-        border-radius: 0 !important;
-        border: 1px solid rgba(180, 83, 9, 0.25);
-      }
-      .hdr-grade-badge {
-        font-family: var(--font-mono);
-        font-size: 11px;
-        font-weight: 800;
-        color: #DC2626;
-        background: rgba(254, 202, 202, 0.6);
-        padding: 1px 6px;
-        border-radius: 0 !important;
-        border: 1px solid rgba(220, 38, 38, 0.3);
-        transform: rotate(-3deg);
-      }
+
       .hdr-title {
         margin: 0;
         font-weight: 700;
@@ -790,10 +762,6 @@
         <div class="chat-body">
           <div class="hdr">
             <div class="hdr-title-group">
-              <div class="hdr-title-row">
-                <span class="hdr-notebook-tag">PORTFOLIO NOTEBOOK</span>
-                <span class="hdr-grade-badge">A+ ★</span>
-              </div>
               <h2 id="rs-chat-title" class="hdr-title">Ryan Schmidt · AI Discussion</h2>
               <p class="hdr-sub">Ask questions about Ryan's work, design process, or role fit.</p>
               <p id="rs-chat-desc" class="visually-hidden">
@@ -1008,25 +976,6 @@ if (savedHist.length > 0) {
       floatingPillsEl.setAttribute('aria-hidden', 'true');
     }
 
-    loadGSAP();
-
-    const targetHeight = Math.min(840, Math.round(window.innerHeight * 0.88));
-
-    if (window.gsap) {
-      gsap.fromTo(panel,
-        { height: 80 },
-        { height: targetHeight, duration: 0.55, ease: "expo.out" }
-      );
-
-      const childrenToAnimate = shadow.querySelectorAll('.hdr, .msgs, .pills, .hire-card');
-      gsap.fromTo(childrenToAnimate,
-        { y: 18, opacity: 0, filter: "blur(6px)", scale: 0.985 },
-        { y: 0, opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.45, stagger: 0.04, ease: "expo.out", delay: 0.1 }
-      );
-    } else {
-      panel.style.height = `${targetHeight}px`;
-    }
-
     (inputEl || panel)?.focus?.();
     typewriterStop();
   }
@@ -1047,43 +996,16 @@ if (savedHist.length > 0) {
       miniInput.value = inputEl.value;
     }
 
-    loadGSAP();
+    panel.classList.remove('open');
+    backdrop.classList.remove('open');
 
-    const restoreDock = () => {
-      const dockEls = getDockElements();
-      dockEls.forEach(el => {
-        el.style.visibility = '';
-        el.style.pointerEvents = '';
-        if (window.gsap) {
-          gsap.to(el, { opacity: 1, duration: 0.25, ease: "power2.out" });
-        } else {
-          el.style.opacity = '1';
-        }
-      });
-      restoreFloatingPills();
-    };
-
-    if (window.gsap) {
-      const childrenToAnimate = shadow.querySelectorAll('.hdr, .msgs, .pills, .hire-card');
-      gsap.to(childrenToAnimate, { y: 12, opacity: 0, filter: "blur(4px)", scale: 0.98, duration: 0.2, ease: "expo.in" });
-
-      gsap.to(panel, {
-        height: 80,
-        duration: 0.42,
-        ease: "expo.inOut",
-        onComplete: () => {
-          panel.classList.remove('open');
-          backdrop.classList.remove('open');
-          panel.style.height = '';
-          restoreDock();
-        }
-      });
-    } else {
-      panel.classList.remove('open');
-      backdrop.classList.remove('open');
-      panel.style.height = '';
-      restoreDock();
-    }
+    const dockEls = getDockElements();
+    dockEls.forEach(el => {
+      el.style.visibility = '';
+      el.style.pointerEvents = '';
+      el.style.opacity = '1';
+    });
+    restoreFloatingPills();
     
     try { lastFocusedEl?.focus?.(); } catch {}
     lastFocusedEl = null;
