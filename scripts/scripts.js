@@ -343,67 +343,6 @@
   metrics.forEach((el) => observer.observe(el));
 })();
 
-// ============================================================================
-// Upgraded Circular Scroll Progress Indicator & Back-to-Top Control
-// ============================================================================
-(function () {
-  const path = window.location.pathname;
-  if (path.endsWith('/about.html') || path.endsWith('/about')) return;
-  if (document.body.scrollHeight <= window.innerHeight * 1.5) return;
-
-  const wrapper = document.createElement("div");
-  wrapper.className = "circular-progress-wrapper";
-  wrapper.setAttribute("role", "button");
-  wrapper.setAttribute("tabindex", "0");
-  wrapper.setAttribute("aria-label", "Scroll back to top");
-  wrapper.setAttribute("title", "Back to top");
-  
-  wrapper.innerHTML = `
-    <svg class="circular-progress-svg" viewBox="0 0 48 48" aria-hidden="true">
-      <circle class="circular-progress-bg" cx="24" cy="24" r="20"></circle>
-      <circle class="circular-progress-value" cx="24" cy="24" r="20"></circle>
-    </svg>
-    <span class="circular-progress-arrow" aria-hidden="true">↑</span>
-  `;
-  document.body.appendChild(wrapper);
-
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  wrapper.addEventListener("click", scrollToTop);
-  wrapper.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      scrollToTop();
-    }
-  });
-
-  const circle = wrapper.querySelector('.circular-progress-value');
-  const radius = circle.r.baseVal.value;
-  const circumference = radius * 2 * Math.PI;
-  circle.style.strokeDasharray = `${circumference} ${circumference}`;
-  circle.style.strokeDashoffset = circumference;
-
-  function updateProgress() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    
-    if (scrollTop > 100) {
-      wrapper.classList.add('is-visible');
-    } else {
-      wrapper.classList.remove('is-visible');
-    }
-
-    if (height <= 0) return;
-    const scrollPercentage = scrollTop / height;
-    const offset = circumference - scrollPercentage * circumference;
-    circle.style.strokeDashoffset = offset;
-  }
-
-  window.addEventListener("scroll", updateProgress, { passive: true });
-  updateProgress();
-})();
 
 // ============================================================================
 // Smooth Page Transitions

@@ -343,7 +343,6 @@ code {
   #hamburger,
   .hamburger-menu,
   .ai-mini-wrapper,
-  .circular-progress-wrapper,
   .rs-chat-widget {
     display: none !important;
   }
