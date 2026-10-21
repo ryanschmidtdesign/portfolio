@@ -1546,12 +1546,14 @@ body.is-home {
   border-radius: 0 !important;
 }
 
-/* Card 1: Sky Blue Construction Paper */
+/* Card 1: Rich Sky Blue Construction Paper */
 .home-project-card:nth-child(1) {
-  background-color: #E7F5FF;
-  border-bottom: 2.5px solid rgba(24, 100, 171, 0.6);
-  border-right: 1.5px solid rgba(34, 139, 230, 0.5);
-  clip-path: polygon(0.2% 0%, 40% 0.35%, 75% 0.1%, 100% 0.4%, 99.7% 40%, 100% 75%, 99.8% 100%, 60% 99.6%, 25% 99.8%, 0% 99.5%, 0.3% 60%, 0% 25%);
+  background-color: #BAE6FD;
+  border-top: 2.5px solid rgba(255, 255, 255, 0.85);
+  border-left: 2px solid rgba(255, 255, 255, 0.55);
+  border-right: 2px solid rgba(2, 132, 199, 0.55);
+  border-bottom: 3.5px solid rgba(3, 105, 161, 0.75);
+  clip-path: polygon(0.3% 0%, 38% 0.5%, 72% 0.15%, 99.8% 0.6%, 99.4% 35%, 100% 68%, 99.5% 99.6%, 64% 99.3%, 28% 100%, 0.2% 99.5%, 0.5% 62%, 0% 28%);
   transform: rotate(-0.85deg);
 }
 .home-project-card:nth-child(1)::before {
@@ -1559,12 +1561,14 @@ body.is-home {
   transform: rotate(-3.5deg);
 }
 
-/* Card 2: Lilac Construction Paper */
+/* Card 2: Rich Lavender/Violet Construction Paper */
 .home-project-card:nth-child(2) {
-  background-color: #F3F0FF;
-  border-bottom: 2.5px solid rgba(103, 65, 217, 0.6);
-  border-right: 1.5px solid rgba(121, 80, 242, 0.5);
-  clip-path: polygon(0% 0.4%, 30% 0.1%, 70% 0.45%, 99.8% 0%, 100% 45%, 99.6% 80%, 99.6% 100%, 70% 99.7%, 35% 99.4%, 0.2% 100%, 0% 65%, 0.35% 30%);
+  background-color: #DDD6FE;
+  border-top: 2.5px solid rgba(255, 255, 255, 0.85);
+  border-left: 2px solid rgba(255, 255, 255, 0.55);
+  border-right: 2px solid rgba(124, 58, 237, 0.55);
+  border-bottom: 3.5px solid rgba(109, 40, 217, 0.75);
+  clip-path: polygon(0% 0.5%, 42% 0.15%, 76% 0.65%, 100% 0.25%, 99.5% 42%, 100% 74%, 99.4% 100%, 58% 99.5%, 24% 100%, 0.3% 99.4%, 0% 58%, 0.5% 24%);
   transform: rotate(0.95deg);
 }
 .home-project-card:nth-child(2)::before {
@@ -1572,12 +1576,14 @@ body.is-home {
   transform: rotate(2.5deg);
 }
 
-/* Card 3: Mint Construction Paper */
+/* Card 3: Rich Meadow Green Construction Paper */
 .home-project-card:nth-child(3) {
-  background-color: #EBFBEE;
-  border-bottom: 2.5px solid rgba(43, 138, 62, 0.6);
-  border-right: 1.5px solid rgba(64, 192, 87, 0.5);
-  clip-path: polygon(0.3% 0.2%, 45% 0%, 80% 0.3%, 100% 0.1%, 99.7% 35%, 100% 70%, 99.8% 99.6%, 55% 100%, 20% 99.7%, 0% 100%, 0.2% 55%, 0.4% 20%);
+  background-color: #BBF7D0;
+  border-top: 2.5px solid rgba(255, 255, 255, 0.85);
+  border-left: 2px solid rgba(255, 255, 255, 0.55);
+  border-right: 2px solid rgba(22, 163, 74, 0.55);
+  border-bottom: 3.5px solid rgba(21, 128, 61, 0.75);
+  clip-path: polygon(0.4% 0.25%, 32% 0%, 68% 0.45%, 99.7% 0.1%, 100% 36%, 99.5% 72%, 99.7% 99.5%, 68% 100%, 32% 99.4%, 0% 99.7%, 0.4% 56%, 0.1% 22%);
   transform: rotate(-0.7deg);
 }
 .home-project-card:nth-child(3)::before {
@@ -1585,12 +1591,14 @@ body.is-home {
   transform: rotate(-2deg);
 }
 
-/* Card 4: Canary / Apricot Construction Paper */
+/* Card 4: Rich SunWorks Canary Yellow Construction Paper */
 .home-project-card:nth-child(4) {
-  background-color: #FFF9DB;
-  border-bottom: 2.5px solid rgba(230, 119, 0, 0.6);
-  border-right: 1.5px solid rgba(245, 159, 0, 0.5);
-  clip-path: polygon(0% 0.1%, 35% 0.4%, 65% 0.2%, 100% 0.45%, 99.5% 30%, 99.8% 65%, 99.6% 100%, 65% 99.6%, 30% 100%, 0.2% 99.8%, 0% 70%, 0.3% 35%);
+  background-color: #FDE68A;
+  border-top: 2.5px solid rgba(255, 255, 255, 0.85);
+  border-left: 2px solid rgba(255, 255, 255, 0.55);
+  border-right: 2px solid rgba(217, 119, 6, 0.6);
+  border-bottom: 3.5px solid rgba(180, 83, 9, 0.75);
+  clip-path: polygon(0% 0.2%, 44% 0.6%, 78% 0.25%, 100% 0.55%, 99.4% 28%, 100% 64%, 99.5% 100%, 64% 99.4%, 26% 99.7%, 0.3% 99.5%, 0% 68%, 0.5% 32%);
   transform: rotate(0.8deg);
 }
 .home-project-card:nth-child(4)::before {
@@ -1601,27 +1609,64 @@ body.is-home {
 .home-project-card:hover {
   transform: translateY(-6px) scale(1.015) rotate(0deg);
   filter: 
-    drop-shadow(0 2px 4px rgba(45, 30, 15, 0.4))
-    drop-shadow(0 12px 24px rgba(45, 30, 15, 0.25))
-    drop-shadow(0 28px 54px rgba(45, 30, 15, 0.18));
+    drop-shadow(0 4px 6px rgba(45, 30, 15, 0.45))
+    drop-shadow(0 16px 30px rgba(40, 25, 12, 0.32))
+    drop-shadow(0 36px 68px rgba(40, 25, 12, 0.24));
   z-index: 4;
 }
 
-/* Polaroid-Style Glued Photo Mount for Case Study Images */
+/* Glued Photo Mount on Construction Paper */
 .home-project-card__media-link {
   display: block;
   width: calc(100% - 28px);
   margin: 14px 14px 0;
   aspect-ratio: 16 / 9;
   background: #FFFFFF;
-  border: 6px solid #FFFFFF;
-  border-bottom-width: 20px;
+  border: 5px solid #FFFFFF;
   border-radius: 0 !important;
-  clip-path: polygon(0% 0.4%, 50% 0%, 100% 0.3%, 99.7% 100%, 50% 99.6%, 0.2% 100%);
-  filter: drop-shadow(0 1px 2px rgba(45, 30, 15, 0.2)) drop-shadow(1px 3px 6px rgba(45, 30, 15, 0.12));
+  clip-path: polygon(0% 0.3%, 50% 0%, 100% 0.25%, 99.7% 100%, 50% 99.65%, 0.25% 100%);
+  filter: drop-shadow(0 1px 2px rgba(45, 30, 15, 0.22)) drop-shadow(1px 3px 6px rgba(45, 30, 15, 0.14));
   overflow: hidden;
   position: relative;
   text-decoration: none;
+}
+
+/* Little piece of scotch tape holding photo to construction paper */
+.home-project-card__media-link::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 18px;
+  width: 48px;
+  height: 16px;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(254, 252, 240, 0.75) 20%,
+    rgba(245, 238, 220, 0.5) 32%,
+    rgba(255, 255, 255, 0.78) 58%,
+    rgba(252, 248, 234, 0.45) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 
+    0 1px 2px rgba(45, 25, 10, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  clip-path: polygon(
+    0% 0%, 4% 15%, 0% 30%, 4% 45%, 0% 60%, 4% 75%, 0% 90%, 4% 100%,
+    96% 100%, 100% 90%, 96% 75%, 100% 60%, 96% 45%, 100% 30%, 96% 15%, 100% 0%
+  ) !important;
+  transform: rotate(2deg);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 0 !important;
+}
+
+.home-project-card:nth-child(odd) .home-project-card__media-link::after {
+  right: auto;
+  left: 18px;
+  transform: rotate(-2.5deg);
 }
 
 .home-project-card__media {
