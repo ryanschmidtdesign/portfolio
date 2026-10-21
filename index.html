@@ -58,7 +58,7 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
-  <link rel="stylesheet" href="./styles.css?v=19">
+  <link rel="stylesheet" href="./styles.css?v=20">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -241,6 +241,32 @@
         <span class="home-tag">AI Workflows</span>
         <span class="home-tag">Austin, TX</span>
       </div>
+
+      <!-- Conversational AI Starters -->
+      <div class="home-chat-invitation" aria-label="Discuss Ryan’s work with his AI chatbot">
+        <div class="home-chat-invitation__header">
+          <span class="home-chat-invitation__dot" aria-hidden="true"></span>
+          <span class="home-chat-invitation__label">Ask Ryan’s portfolio AI anything, or pick a discussion topic:</span>
+        </div>
+        <div class="home-chat-invitation__pills">
+          <button type="button" class="home-chat-pill" data-ask-ai="What did Ryan ship at D-Tools Cloud to drive +71% beta engagement?">
+            <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
+            <span>What did Ryan ship at D-Tools? (+71% engagement)</span>
+          </button>
+          <button type="button" class="home-chat-pill" data-ask-ai="How did Ryan lift enterprise AI adoption by 500% on the i4cp member portal overhaul?">
+            <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
+            <span>How did he lift AI adoption by 500% at i4cp?</span>
+          </button>
+          <button type="button" class="home-chat-pill" data-ask-ai="Walk me through how the real-time inventory MVP drove +18% recurring revenue.">
+            <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
+            <span>Real-time inventory MVP (+18% MRR)</span>
+          </button>
+          <button type="button" class="home-chat-pill" data-ask-ai="Is Ryan a good fit for a Senior or Staff Product Designer seat on our team?">
+            <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
+            <span>Is Ryan a fit for a Senior / Staff role?</span>
+          </button>
+        </div>
+      </div>
     </header>
 
     <!-- Selected Work Section -->
@@ -278,10 +304,16 @@
                 <span>AI UX</span>
                 <span>Data Vis</span>
               </div>
-              <a href="pages/dashboard.html" class="home-project-card__cta" aria-label="Read AI-Powered Dashboards case study">
-                <span>Read Case Study</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+              <div class="home-project-card__actions">
+                <button type="button" class="home-project-card__ai-cta" data-ask-ai="Walk me through how Ryan drove +71% beta engagement on the AI-Powered Dashboards project." aria-label="Discuss AI-Powered Dashboards with Ryan's AI chatbot">
+                  <span class="home-project-card__ai-sparkle" aria-hidden="true">✦</span>
+                  <span>Discuss with AI</span>
+                </button>
+                <a href="pages/dashboard.html" class="home-project-card__cta" aria-label="Read AI-Powered Dashboards case study">
+                  <span>Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
             </div>
           </div>
         </article>
@@ -310,10 +342,16 @@
                 <span>Enterprise Search</span>
                 <span>Member Portal</span>
               </div>
-              <a href="pages/member-portal-overhaul.html" class="home-project-card__cta" aria-label="Read i4cp Member Portal case study">
-                <span>Read Case Study</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+              <div class="home-project-card__actions">
+                <button type="button" class="home-project-card__ai-cta" data-ask-ai="How did Ryan lift enterprise AI adoption by 500% on the i4cp Member Portal overhaul?" aria-label="Discuss i4cp Member Portal with Ryan's AI chatbot">
+                  <span class="home-project-card__ai-sparkle" aria-hidden="true">✦</span>
+                  <span>Discuss with AI</span>
+                </button>
+                <a href="pages/member-portal-overhaul.html" class="home-project-card__cta" aria-label="Read i4cp Member Portal case study">
+                  <span>Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
             </div>
           </div>
         </article>
@@ -342,10 +380,16 @@
                 <span>Workflow Automation</span>
                 <span>Supply Chain</span>
               </div>
-              <a href="pages/inventory.html" class="home-project-card__cta" aria-label="Read Real-Time Inventory case study">
-                <span>Read Case Study</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+              <div class="home-project-card__actions">
+                <button type="button" class="home-project-card__ai-cta" data-ask-ai="Why did Ryan focus the Real-Time Inventory MVP on the PO-received loop, and how did it drive +18% MRR?" aria-label="Discuss Real-Time Inventory with Ryan's AI chatbot">
+                  <span class="home-project-card__ai-sparkle" aria-hidden="true">✦</span>
+                  <span>Discuss with AI</span>
+                </button>
+                <a href="pages/inventory.html" class="home-project-card__cta" aria-label="Read Real-Time Inventory case study">
+                  <span>Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
             </div>
           </div>
         </article>
@@ -374,74 +418,19 @@
                 <span>Prototyping in Code</span>
                 <span>Open Source</span>
               </div>
-              <a href="pages/ai-coding-portfolio.html" class="home-project-card__cta" aria-label="Read Engineering My Portfolio case study">
-                <span>Read Case Study</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+              <div class="home-project-card__actions">
+                <button type="button" class="home-project-card__ai-cta" data-ask-ai="How did Ryan architect and code this portfolio using design tokens and Gemini 2.5 Flash RAG?" aria-label="Discuss Portfolio Engineering with Ryan's AI chatbot">
+                  <span class="home-project-card__ai-sparkle" aria-hidden="true">✦</span>
+                  <span>Discuss with AI</span>
+                </button>
+                <a href="pages/ai-coding-portfolio.html" class="home-project-card__cta" aria-label="Read Engineering My Portfolio case study">
+                  <span>Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
             </div>
           </div>
         </article>
-      </div>
-    </section>
-
-    <!-- Approach Section -->
-    <section class="home-section" id="approach" aria-label="Design Philosophy">
-      <div class="home-section__header">
-        <span class="home-section__eyebrow">02 / Philosophy</span>
-        <h2 class="home-section__title">How I Approach Design &amp; Craft</h2>
-        <p class="home-section__desc">
-          Core principles developed over 6+ years shipping complex B2B SaaS, governing design systems, and writing production frontend code.
-        </p>
-      </div>
-
-      <div class="home-principles-grid">
-        <div class="home-principle-card">
-          <span class="home-principle-num">01</span>
-          <h3 class="home-principle-title">Systemizer’s Instinct</h3>
-          <p class="home-principle-text">
-            I don’t just design isolated views—I design engines. Tokenized design systems, strict typographic rhythm, and component APIs that scale across product lines without visual rot.
-          </p>
-        </div>
-        <div class="home-principle-card">
-          <span class="home-principle-num">02</span>
-          <h3 class="home-principle-title">Designing in Code</h3>
-          <p class="home-principle-text">
-            Static Figma mocks hide latency, responsive edge cases, and real kinetic weight. I build prototypes in semantic HTML, CSS, and modern JavaScript to compress discovery loops from day one.
-          </p>
-        </div>
-        <div class="home-principle-card">
-          <span class="home-principle-num">03</span>
-          <h3 class="home-principle-title">Verifiable Outcomes</h3>
-          <p class="home-principle-text">
-            Design craft is only as valuable as the behavior it shifts. Every case study anchors on measurable results: +71% beta engagement, +500% feature activation, or 60% faster customer audit loops.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Background & About Summary Section -->
-    <section class="home-section home-about-section" id="about" aria-label="Background &amp; Experience">
-      <div class="home-about-card">
-        <div class="home-about-card__content">
-          <span class="home-section__eyebrow">03 / Background</span>
-          <h2 class="home-about-card__title">Senior SaaS Product Designer &amp; UX Engineer</h2>
-          <p class="home-about-card__text">
-            I’ve spent 6+ years at the seam of product design, information architecture, and frontend engineering. Over 5 years at Designlab, I mentored 1,500+ emerging designers and facilitated 400+ critique sessions.
-          </p>
-          <p class="home-about-card__text">
-            Based in Austin, TX. Open to Senior and Staff Product Designer or Design Engineering roles at design-led teams.
-          </p>
-          <div class="home-about-card__actions">
-            <a href="pages/about.html" class="home-btn home-btn--primary">
-              <span>Read Full Story &amp; Leadership</span>
-              <span aria-hidden="true">→</span>
-            </a>
-            <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-btn home-btn--secondary">
-              <span>Download Resume (PDF)</span>
-              <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </div>
       </div>
     </section>
   </main>
@@ -482,7 +471,6 @@
                 </a>
               </div>
             </div>
-            <a href="#approach" class="home-topnav__link">Approach</a>
             <a href="pages/about.html" class="home-topnav__link">About</a>
             <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-topnav__link">Resume</a>
             <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" class="home-topnav__link">LinkedIn</a>
@@ -494,9 +482,9 @@
             type="text"
             id="home-omnibar-input"
             class="home-omnibar-input"
-            placeholder="Search case studies, ask a question, or press ⌘K..."
+            placeholder="Ask a question about Ryan’s work, case studies, or press ⌘K..."
             autocomplete="off"
-            aria-label="Search Ryan's work, ask a question, or run a command"
+            aria-label="Ask Ryan’s portfolio AI a question, or press Command+K"
           />
         </div>
 
@@ -507,9 +495,8 @@
               <div class="home-slash-popover" id="home-slash-popover" hidden>
                 <div class="home-slash-popover__title">Quick Commands</div>
                 <button type="button" data-slash-cmd="work"><span>/work</span><span>Jump to Selected Work</span></button>
-                <button type="button" data-slash-cmd="approach"><span>/approach</span><span>Design Philosophy &amp; Craft</span></button>
-                <button type="button" data-slash-cmd="resume"><span>/resume</span><span>Experience &amp; Resume PDF</span></button>
                 <button type="button" data-slash-cmd="about"><span>/about</span><span>Leadership &amp; Background</span></button>
+                <button type="button" data-slash-cmd="resume"><span>/resume</span><span>Experience &amp; Resume PDF</span></button>
                 <button type="button" data-slash-cmd="contact"><span>/contact</span><span>Connect on LinkedIn</span></button>
               </div>
             </div>
@@ -544,10 +531,11 @@
     </div>
   </footer>
 
-  <script src="./scripts/cli-mode.js?v=19" defer></script>
+  <script src="./scripts/cli-mode.js?v=20" defer></script>
   <script src="./scripts/magnetic.js" defer></script>
-  <script src="./scripts/scripts.js?v=19" defer></script>
-  <script src="./scripts/home-page.js?v=19" defer></script>
+  <script src="./scripts/scripts.js?v=20" defer></script>
+  <script src="./scripts/home-page.js?v=20" defer></script>
+  <script src="./scripts/rs-chat-widget.js?v=20" defer></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

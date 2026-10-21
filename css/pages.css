@@ -976,6 +976,87 @@ body.is-home {
   color: #475569;
 }
 
+/* Conversational AI Prompt Canvas in Hero */
+.home-chat-invitation {
+  margin-top: 1.6rem;
+  padding: 16px 18px 18px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  box-shadow:
+    0 4px 18px -2px rgba(15, 23, 42, 0.04),
+    0 1px 3px rgba(15, 23, 42, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 680px;
+}
+
+.home-chat-invitation__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-chat-invitation__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #C86446;
+  box-shadow: 0 0 0 3px rgba(200, 100, 70, 0.16);
+  flex-shrink: 0;
+}
+
+.home-chat-invitation__label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #52504B;
+}
+
+.home-chat-invitation__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.home-chat-pill {
+  appearance: none;
+  background: rgba(15, 23, 42, 0.035);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px;
+  padding: 6px 13px;
+  font-family: var(--font-sans);
+  font-size: 0.81rem;
+  font-weight: 500;
+  color: #141413;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+}
+
+.home-chat-pill:hover {
+  background: #FFFFFF;
+  border-color: rgba(200, 100, 70, 0.4);
+  color: #C86446;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200, 100, 70, 0.08);
+}
+
+.home-chat-pill:active {
+  transform: translateY(0);
+}
+
+.home-chat-pill__sparkle {
+  color: #C86446;
+  font-size: 0.75rem;
+}
+
 /* Sections */
 .home-section {
   padding-block: clamp(3.5rem, 7vh, 5.5rem);
@@ -1188,6 +1269,43 @@ body.is-home {
   background: rgba(15, 23, 42, 0.04);
   padding: 2px 7px;
   border-radius: 4px;
+}
+
+.home-project-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.home-project-card__ai-cta {
+  appearance: none;
+  background: rgba(200, 100, 70, 0.06);
+  border: 1px solid rgba(200, 100, 70, 0.2);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-family: var(--font-sans);
+  font-size: 0.77rem;
+  font-weight: 500;
+  color: #C86446;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.home-project-card__ai-cta:hover {
+  background: #C86446;
+  border-color: #C86446;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(200, 100, 70, 0.2);
+}
+
+.home-project-card__ai-sparkle {
+  font-size: 0.72rem;
 }
 
 .home-project-card__cta {

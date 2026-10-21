@@ -14,8 +14,8 @@
 
   function getDefaultPlaceholder() {
     return window.innerWidth <= 600
-      ? 'Search case studies or ask...'
-      : 'Search case studies, ask a question, or press ⌘K...';
+      ? 'Ask about Ryan’s work or case studies...'
+      : 'Ask a question about Ryan’s work, case studies, or press ⌘K...';
   }
 
   function updatePlaceholder() {
@@ -32,8 +32,7 @@
     const scrollPos = window.scrollY + 200;
     const sections = [
       { id: 'top', el: document.getElementById('top') },
-      { id: 'work', el: document.getElementById('work') },
-      { id: 'approach', el: document.getElementById('approach') }
+      { id: 'work', el: document.getElementById('work') }
     ];
 
     let currentId = 'top';
@@ -84,9 +83,6 @@
         if (cmd === 'work') {
           const workEl = document.getElementById('work');
           if (workEl) workEl.scrollIntoView({ behavior: 'smooth' });
-        } else if (cmd === 'approach') {
-          const approachEl = document.getElementById('approach');
-          if (approachEl) approachEl.scrollIntoView({ behavior: 'smooth' });
         } else if (cmd === 'resume') {
           window.open('assets/ryan-schmidt-resume.pdf', '_blank', 'noopener');
         } else if (cmd === 'about') {
@@ -105,56 +101,73 @@
     });
   }
 
-  // Omnibar Form Submission -> Open Raycast-style Command Palette modal with query
+  // Omnibar Form Submission -> Open Conversational AI Chat Panel with query
+  const omnibarSend = document.getElementById('home-omnibar-send');
+
+  function handleOmnibarSubmit(raw) {
+    const trimmed = (raw || '').trim();
+    const lower = trimmed.toLowerCase().replace(/^\//, '');
+
+    if (!trimmed) {
+      if (window.rsChatWidget) {
+        window.rsChatWidget.open();
+      } else if (window.rsCommandPalette) {
+        window.rsCommandPalette.open('');
+      }
+      return;
+    }
+
+    if (lower === 'work') {
+      const workEl = document.getElementById('work');
+      if (workEl) workEl.scrollIntoView({ behavior: 'smooth' });
+      if (omnibarInput) omnibarInput.value = '';
+      return;
+    }
+
+    if (lower === 'resume') {
+      window.open('assets/ryan-schmidt-resume.pdf', '_blank', 'noopener');
+      if (omnibarInput) omnibarInput.value = '';
+      return;
+    }
+
+    if (lower === 'about') {
+      window.location.href = 'pages/about.html';
+      return;
+    }
+
+    if (lower === 'contact' || lower === 'linkedin') {
+      window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
+      if (omnibarInput) omnibarInput.value = '';
+      return;
+    }
+
+    // Route query directly into the Conversational AI Chat Panel
+    if (window.rsChatWidget) {
+      window.rsChatWidget.send(trimmed);
+      if (omnibarInput) omnibarInput.value = '';
+    } else if (window.rsCommandPalette) {
+      window.rsCommandPalette.open(trimmed);
+      if (omnibarInput) omnibarInput.value = '';
+    }
+  }
+
   if (omnibarForm && omnibarInput) {
     omnibarForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const raw = omnibarInput.value.trim();
-      const lower = raw.toLowerCase().replace(/^\//, '');
+      handleOmnibarSubmit(omnibarInput.value);
+    });
 
-      if (!raw) {
-        if (window.rsCommandPalette) {
-          window.rsCommandPalette.open('');
-        }
-        return;
+    omnibarInput.addEventListener('click', () => {
+      if (window.rsChatWidget && !omnibarInput.value.trim()) {
+        window.rsChatWidget.open();
       }
+    });
+  }
 
-      if (lower === 'work') {
-        const workEl = document.getElementById('work');
-        if (workEl) workEl.scrollIntoView({ behavior: 'smooth' });
-        omnibarInput.value = '';
-        return;
-      }
-
-      if (lower === 'approach') {
-        const approachEl = document.getElementById('approach');
-        if (approachEl) approachEl.scrollIntoView({ behavior: 'smooth' });
-        omnibarInput.value = '';
-        return;
-      }
-
-      if (lower === 'resume') {
-        window.open('assets/ryan-schmidt-resume.pdf', '_blank', 'noopener');
-        omnibarInput.value = '';
-        return;
-      }
-
-      if (lower === 'about') {
-        window.location.href = 'pages/about.html';
-        return;
-      }
-
-      if (lower === 'contact' || lower === 'linkedin') {
-        window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
-        omnibarInput.value = '';
-        return;
-      }
-
-      // Route general query into Command Palette
-      if (window.rsCommandPalette) {
-        window.rsCommandPalette.open(raw);
-        omnibarInput.value = '';
-      }
+  if (omnibarSend && omnibarInput) {
+    omnibarSend.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleOmnibarSubmit(omnibarInput.value);
     });
   }
 })();

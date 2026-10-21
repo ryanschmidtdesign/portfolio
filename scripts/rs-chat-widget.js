@@ -1,6 +1,5 @@
 // scripts/rs-chat-widget.js
 (() => {
-  if (document.body.classList.contains('is-home')) return;
   const HOST_ID = 'rs-chat-widget-root';
   if (document.getElementById(HOST_ID)) return; // avoid double injection
 
@@ -834,6 +833,14 @@ if (savedHist.length > 0) {
 
   let lastFocusedEl = null;
 
+  function getDockElements() {
+    return document.querySelectorAll('.ai-mini-wrapper, .home-omnibar-section, .subpage-omnibar-dock');
+  }
+
+  function getActiveMiniInput() {
+    return document.getElementById('ai-mini-input') || document.getElementById('home-omnibar-input');
+  }
+
   function openPanel(){
     if (panel.classList.contains('open')) {
       (inputEl || panel)?.focus?.();
@@ -842,18 +849,18 @@ if (savedHist.length > 0) {
     lastFocusedEl = document.activeElement;
 
     // Sync typed text from mini input
-    const miniInput = document.getElementById('ai-mini-input');
+    const miniInput = getActiveMiniInput();
     if (miniInput && miniInput.value) {
       inputEl.value = miniInput.value;
     }
 
     // Immediately hide the bottom dock so it never overlaps or competes on screen
-    const miniWrapper = document.querySelector('.ai-mini-wrapper');
-    if (miniWrapper) {
-      miniWrapper.style.opacity = '0';
-      miniWrapper.style.visibility = 'hidden';
-      miniWrapper.style.pointerEvents = 'none';
-    }
+    const dockEls = getDockElements();
+    dockEls.forEach(el => {
+      el.style.opacity = '0';
+      el.style.visibility = 'hidden';
+      el.style.pointerEvents = 'none';
+    });
 
     panel.classList.add('open');
     backdrop.classList.add('open');
@@ -898,7 +905,7 @@ if (savedHist.length > 0) {
   function closePanel(){
     if (!panel.classList.contains('open')) return;
     // Sync typed text back to mini input
-    const miniInput = document.getElementById('ai-mini-input');
+    const miniInput = getActiveMiniInput();
     if (miniInput) {
       miniInput.value = inputEl.value;
     }
@@ -906,16 +913,16 @@ if (savedHist.length > 0) {
     loadGSAP();
 
     const restoreDock = () => {
-      const miniWrapper = document.querySelector('.ai-mini-wrapper');
-      if (miniWrapper) {
-        miniWrapper.style.visibility = '';
-        miniWrapper.style.pointerEvents = '';
+      const dockEls = getDockElements();
+      dockEls.forEach(el => {
+        el.style.visibility = '';
+        el.style.pointerEvents = '';
         if (window.gsap) {
-          gsap.to(miniWrapper, { opacity: 1, duration: 0.25, ease: "power2.out" });
+          gsap.to(el, { opacity: 1, duration: 0.25, ease: "power2.out" });
         } else {
-          miniWrapper.style.opacity = '1';
+          el.style.opacity = '1';
         }
-      }
+      });
       restoreFloatingPills();
     };
 
@@ -950,25 +957,42 @@ if (savedHist.length > 0) {
     triggers.forEach((ask) => {
       ask.addEventListener('click', (e) => {
         // Ignore links, Command Palette (CLI ⌘K) button, or navigation menu buttons
-        if (e.target.closest('a') || e.target.closest('[data-cmdk-trigger], .ai-mini-cmdk') || e.target.closest('button:not(.ai-mini-send)')) return;
+        if (e.target.closest('a') || e.target.closest('[data-cmdk-trigger], .ai-mini-cmdk, .home-omnibar-cmdk') || e.target.closest('button:not(.ai-mini-send):not(.home-omnibar-send)')) return;
         e.preventDefault();
         lastFocusedEl = ask;
         openPanel();
       });
     });
-    
-    const miniInput = document.getElementById('ai-mini-input');
-    const miniForm = document.getElementById('subpage-omnibar-form');
-    if (miniInput) {
-      miniInput.addEventListener('click', () => {
+
+    // 1-click conversational triggers anywhere on the page
+    document.addEventListener('click', (e) => {
+      const askBtn = e.target.closest('[data-ask-ai]');
+      if (askBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const prompt = askBtn.getAttribute('data-ask-ai') || askBtn.textContent.trim();
+        if (prompt) {
+          openPanel();
+          send(prompt);
+        }
+      }
+    });
+
+    const inputs = [
+      document.getElementById('ai-mini-input'),
+      document.getElementById('home-omnibar-input')
+    ].filter(Boolean);
+
+    inputs.forEach(input => {
+      input.addEventListener('click', () => {
         if (!panel.classList.contains('open')) openPanel();
       });
-      miniInput.addEventListener('keydown', (e) => {
+      input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          const val = miniInput.value.trim();
+          const val = input.value.trim();
           if (val) {
-            miniInput.value = '';
+            input.value = '';
             openPanel();
             send(val);
           } else {
@@ -976,21 +1000,47 @@ if (savedHist.length > 0) {
           }
         }
       });
-    }
+    });
 
-    if (miniForm) {
-      miniForm.addEventListener('submit', (e) => {
+    const forms = [
+      document.getElementById('subpage-omnibar-form'),
+      document.getElementById('home-omnibar-form')
+    ].filter(Boolean);
+
+    forms.forEach(form => {
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const val = miniInput ? miniInput.value.trim() : '';
+        const activeInput = form.querySelector('input[type="text"]');
+        const val = activeInput ? activeInput.value.trim() : '';
         if (val) {
-          if (miniInput) miniInput.value = '';
+          if (activeInput) activeInput.value = '';
           openPanel();
           send(val);
         } else {
           openPanel();
         }
       });
-    }
+    });
+
+    const sendBtns = [
+      document.getElementById('ai-mini-send'),
+      document.getElementById('home-omnibar-send')
+    ].filter(Boolean);
+
+    sendBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const activeInput = getActiveMiniInput();
+        const val = activeInput ? activeInput.value.trim() : '';
+        if (val) {
+          if (activeInput) activeInput.value = '';
+          openPanel();
+          send(val);
+        } else {
+          openPanel();
+        }
+      });
+    });
   }
   let floatingPillsEl = null;
   let floatingPillsBound = false;
@@ -1027,9 +1077,10 @@ if (savedHist.length > 0) {
       "What was the hardest tradeoff?"
     ],
     '/': [
-      "Is Ryan a fit for my role?",
-      "What are his strongest projects?",
-      "Which case study should I read first?"
+      "What did Ryan ship at D-Tools? (+71% engagement)",
+      "How did he lift AI adoption by 500% at i4cp?",
+      "Walk me through the real-time inventory MVP (+18% MRR)",
+      "Is Ryan a fit for a Senior / Staff Product Designer role?"
     ]
   };
 

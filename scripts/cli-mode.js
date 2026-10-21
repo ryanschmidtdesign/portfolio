@@ -754,12 +754,17 @@
         }
 
         triggerAIChat(query) {
+            this.close();
+            if (window.rsChatWidget && typeof window.rsChatWidget.send === 'function') {
+                window.rsChatWidget.send(query);
+                return;
+            }
             if (typeof window.rsHomeStageAsk === 'function' && document.body.classList.contains('is-home')) {
                 window.rsHomeStageAsk(query);
                 return;
             }
-            const miniInput = document.getElementById('ai-mini-input');
-            const miniSend = document.getElementById('ai-mini-send');
+            const miniInput = document.getElementById('ai-mini-input') || document.getElementById('home-omnibar-input');
+            const miniSend = document.getElementById('ai-mini-send') || document.getElementById('home-omnibar-send');
             if (miniInput && miniSend) {
                 miniInput.value = query;
                 miniSend.click();
