@@ -58,7 +58,7 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
-  <link rel="stylesheet" href="./styles.css?v=41">
+  <link rel="stylesheet" href="./styles.css?v=42">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -238,38 +238,12 @@
           <span class="home-tag">UX Engineering</span>
           <span class="home-tag">AI Workflows</span>
         </div>
-
-        <!-- Conversational AI Starters -->
-        <div class="home-chat-invitation" aria-label="Discuss Ryan’s work with his AI chatbot">
-          <div class="home-chat-invitation__header">
-            <span class="home-chat-invitation__dot" aria-hidden="true"></span>
-            <span class="home-chat-invitation__label">Ask Ryan’s portfolio AI anything, or pick a discussion topic:</span>
-          </div>
-          <div class="home-chat-invitation__pills">
-            <button type="button" class="home-chat-pill" data-ask-ai="What did Ryan ship at D-Tools Cloud to drive +71% beta engagement?">
-              <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
-              <span>What did Ryan ship at D-Tools? (+71% engagement)</span>
-            </button>
-            <button type="button" class="home-chat-pill" data-ask-ai="How did Ryan lift enterprise AI adoption by 500% on the i4cp member portal overhaul?">
-              <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
-              <span>How did he lift AI adoption by 500% at i4cp?</span>
-            </button>
-            <button type="button" class="home-chat-pill" data-ask-ai="Walk me through how the real-time inventory MVP drove +18% recurring revenue.">
-              <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
-              <span>Real-time inventory MVP (+18% MRR)</span>
-            </button>
-            <button type="button" class="home-chat-pill" data-ask-ai="Is Ryan a good fit for a Senior or Staff Product Designer seat on our team?">
-              <span class="home-chat-pill__sparkle" aria-hidden="true">✦</span>
-              <span>Is Ryan a fit for a Senior / Staff role?</span>
-            </button>
-          </div>
-        </div>
       </div>
 
       <!-- Right Column: Family Drawing Vignette -->
       <aside class="home-hero-art" aria-label="Stick-figure crayon drawing of Ryan, his wife, son, and their two cats">
         <div class="home-drawing-paper">
-          <img src="./assets/images/family-crayon-drawing.svg?v=41" alt="Stick-figure crayon drawing of Ryan, his wife, toddler son, their two cats Pickles and Pesto, Texas bluebonnets, and Austin bats under a smiling sun, labeled 'AUSTIN, TX'" class="home-drawing-img" width="600" height="480" />
+          <img src="./assets/images/family-crayon-drawing.svg?v=42" alt="Stick-figure crayon drawing of Ryan, his wife, toddler son, their two cats Pickles and Pesto, Texas bluebonnets, and Austin bats under a smiling sun, labeled 'AUSTIN, TX'" class="home-drawing-img" width="600" height="480" />
         </div>
       </aside>
     </header>
@@ -277,7 +251,6 @@
     <!-- Selected Work Section -->
     <section class="home-section" id="work" aria-label="Selected Work">
       <div class="home-section__header">
-        <span class="home-section__eyebrow">01 / Selected Work</span>
         <h2 class="home-section__title">Case Studies &amp; Shipped Outcomes</h2>
         <p class="home-section__desc">
           Complex B2B platforms and AI workflows shipped with verifiable business outcomes.
@@ -466,31 +439,16 @@
           />
         </div>
 
-        <div class="home-omnibar-bottom">
-          <div class="home-omnibar-bottom__left">
-            <div class="home-slash-wrap">
-              <button type="button" class="home-slash-btn" id="home-slash-btn" aria-label="Quick actions" aria-expanded="false" title="Quick actions">+</button>
-              <div class="home-slash-popover" id="home-slash-popover" hidden>
-                <div class="home-slash-popover__title">Quick Commands</div>
-                <button type="button" data-slash-cmd="work"><span>/work</span><span>Jump to Selected Work</span></button>
-                <button type="button" data-slash-cmd="about"><span>/about</span><span>Leadership &amp; Background</span></button>
-                <button type="button" data-slash-cmd="resume"><span>/resume</span><span>Experience &amp; Resume PDF</span></button>
-                <button type="button" data-slash-cmd="contact"><span>/contact</span><span>Connect on LinkedIn</span></button>
-              </div>
-            </div>
-          </div>
-
-          <div class="home-omnibar-actions">
-            <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette (Command+K)" title="Open Command Palette (⌘K)">
-              <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
-            </button>
-            <button type="submit" id="home-omnibar-send" class="home-omnibar-send" aria-label="Submit search or question">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="12" y1="19" x2="12" y2="5"></line>
-                <polyline points="5 12 12 5 19 12"></polyline>
-              </svg>
-            </button>
-          </div>
+        <div class="home-omnibar-actions">
+          <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette (Command+K)" title="Open Command Palette (⌘K)">
+            <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
+          </button>
+          <button type="submit" id="home-omnibar-send" class="home-omnibar-send" aria-label="Submit search or question">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+          </button>
         </div>
       </form>
     </div>
@@ -509,11 +467,11 @@
     </div>
   </footer>
 
-  <script src="./scripts/cli-mode.js?v=41" defer></script>
+  <script src="./scripts/cli-mode.js?v=42" defer></script>
   <script src="./scripts/magnetic.js" defer></script>
-  <script src="./scripts/scripts.js?v=41" defer></script>
-  <script src="./scripts/home-page.js?v=41" defer></script>
-  <script src="./scripts/rs-chat-widget.js?v=41" defer></script>
+  <script src="./scripts/scripts.js?v=42" defer></script>
+  <script src="./scripts/home-page.js?v=42" defer></script>
+  <script src="./scripts/rs-chat-widget.js?v=42" defer></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((regs) => {
