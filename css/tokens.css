@@ -106,13 +106,12 @@
   --type-caption: var(--fs-sm);
 
   /* Radii (single system) */
-  /* Corner Radii — ZERO across everything for authentic scissor-cut paper */
-  --radius-xs: 0px;
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
-  --radius-xl: 0px;
-  --radius-pill: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
 
   --focus-outline-offset: 3px;
 
@@ -124,93 +123,80 @@
   --dur-3: 300ms;
   --dur-4: 450ms;
 
-  /* === Hyper-Realistic School Construction Paper & Craft System === */
-  --bg-desk: #F5EEDB; /* Natural Manila Craft Paper Desk */
-  --bg: #F4ECDA;
-  --gray-100: #F4ECDA;
-  --gray-200: #EADBCA;
-  --gray-300: #D8C7B2;
+  /* === Expensive Warm Atelier Neutrals (Homepage Canvas) === */
+  --gray-100: #FAF9F6;
+  --gray-200: #F4F2EC;
+  --gray-300: #E7E5DD;
+  --bg: #FAF9F6;
 
-  /* Classic School Construction Paper Palette */
-  --paper-manila: #F6EEDC;
-  --paper-canary: #FEE440;
-  --paper-yellow-warm: #FFD166;
-  --paper-sky: #74C0FC;
-  --paper-blue-deep: #228BE6;
-  --paper-mint: #8CE99A;
-  --paper-green-deep: #40C057;
-  --paper-coral: #FF8787;
-  --paper-red-deep: #FA5252;
-  --paper-orange: #FFA94D;
-  --paper-orange-deep: #FD7E14;
-  --paper-lilac: #D0BFFF;
-  --paper-purple-deep: #7950F2;
-  --paper-white: #FFFDF9;
+  /* Surface levels */
+  --surface-1: rgba(26, 33, 40, 0.03);
+  --surface-2: rgba(26, 33, 40, 0.06);
 
-  /* Paper Surfaces */
-  --surface-1: rgba(60, 45, 30, 0.05);
-  --surface-2: rgba(60, 45, 30, 0.1);
-  --card-bg-strong: #FFFDF9;
-  --surface-elevated: #FFFDF9;
-  --surface-elevated-strong: #FFFDF9;
-  --surface-code: #F8F1E3;
+  /* Card surfaces — clean warm white cards on atelier canvas */
+  --card-bg-strong: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+  --surface-elevated-strong: #FFFFFF;
+  --surface-code: #F5F3EF;
 
   /* KPI system */
   --kpi-gap: 3.25rem;
   --kpi-label-size: var(--fs-xs);
   --kpi-label-ls: var(--tracking-caps);
   --kpi-label-line-height: var(--lh-2xs);
-  --kpi-label-color: #5C5245;
-  --kpi-note-color: #5C5245;
+  --kpi-label-color: var(--text-secondary);
+  --kpi-note-color: var(--text-secondary);
 
-  /* Paper Borders (subtle scissor-cut fiber edges) */
-  --border-subtle: rgba(70, 50, 30, 0.1);
-  --border: rgba(70, 50, 30, 0.16);
-  --border-strong: rgba(70, 50, 30, 0.28);
-  --border-interactive: rgba(70, 50, 30, 0.45);
+  /* Borders (warm outline tone) */
+  --border-subtle: rgba(26, 33, 40, 0.065);
+  --border: rgba(26, 33, 40, 0.10);
+  --border-strong: rgba(26, 33, 40, 0.20);
+  --border-interactive: rgba(26, 33, 40, 0.35);
 
   --border-w-strong: 2px;
   --dot-size: 14px;
   --line-thickness: 2px;
 
-  /* Paper Cutout Drop Shadows (authentic layered paper depth with ambient occlusion) */
-  --paper-shadow-sm: 0 1px 2px rgba(45, 30, 15, 0.28), 1px 3px 6px rgba(45, 30, 15, 0.12);
-  --paper-shadow-md: 0 1px 2px rgba(45, 30, 15, 0.32), 2px 5px 12px rgba(45, 30, 15, 0.18), 4px 12px 24px rgba(45, 30, 15, 0.12);
-  --paper-shadow-lg: 0 2px 3px rgba(45, 30, 15, 0.35), 4px 10px 22px rgba(45, 30, 15, 0.22), 8px 24px 44px rgba(45, 30, 15, 0.15);
-  --paper-shadow-lifted: 0 2px 4px rgba(45, 30, 15, 0.38), 6px 16px 32px rgba(45, 30, 15, 0.26), 12px 32px 56px rgba(45, 30, 15, 0.18);
-  --paper-edge-bevel: inset 0 1.5px 0 rgba(255, 255, 255, 0.7), inset 1px 0 0 rgba(255, 255, 255, 0.4), inset -1px 0 0 rgba(45, 30, 15, 0.12), inset 0 -1.5px 0 rgba(45, 30, 15, 0.25);
-  --paper-shadow-inset: inset 0 3px 6px rgba(45, 30, 15, 0.32), inset 0 1px 2px rgba(45, 30, 15, 0.4), inset 0 -1px 1px rgba(255, 255, 255, 0.7);
+  /* Shadows (Atmospheric, tactile warm elevation) */
+  --shadow-1:
+    0 1px 2px rgba(26, 33, 40, 0.04),
+    0 2px 4px rgba(26, 33, 40, 0.06),
+    0 0 0 1px var(--border-subtle);
 
-  --shadow-1: var(--paper-shadow-sm);
-  --shadow-2: var(--paper-shadow-md);
-  --shadow-3: var(--paper-shadow-lg);
+  --shadow-2:
+    0 2px 4px rgba(26, 33, 40, 0.04),
+    0 12px 24px rgba(26, 33, 40, 0.08),
+    0 0 0 1px var(--border-subtle);
 
-  --accent-cool-soft: rgba(34, 139, 230, 0.14);
+  --shadow-3:
+    0 4px 8px rgba(26, 33, 40, 0.04),
+    0 24px 48px rgba(26, 33, 40, 0.12),
+    0 0 0 1px var(--border-subtle);
+
+  --accent-cool-soft: rgba(200, 100, 70, 0.08);
   --divider-accent-width: 48px;
   
-  /* Crayon Glows */
-  --glow-accent: 0 4px 16px rgba(250, 82, 82, 0.2);
-  --glow-accent-strong: 0 6px 24px rgba(250, 82, 82, 0.32);
+  /* Emissive glows for interactive states */
+  --glow-accent: 0 4px 16px rgba(200, 100, 70, 0.16);
+  --glow-accent-strong: 0 6px 24px rgba(200, 100, 70, 0.24);
 
   /* === Neutrals & Inks === */
-  --slate-600: #5C5245;
-  --slate-900: #26211B;
+  --slate-600: #5D6873;
+  --slate-900: #1A2128;
 
-  /* Crayon Ink Typography */
-  --text: #26211B;
-  --text-primary: #26211B;
-  --text-secondary: #5C5245;
+  /* Text (Optical blending for secondary text) */
+  --text: var(--slate-900);
+  --text-primary: var(--text);
+  --text-secondary: rgb(26 33 40 / 0.64);
   --text-on-accent: #FFFFFF;
   --surface-subtle: var(--surface-1);
 
-  /* === Brand accent: Crayon Coral / Poppy === */
-  --accent: #FA5252;
-  --accent-primary: #FA5252;
-  --accent-hover: #E03131;
-  --accent-text: #C92A2A;
-  --accent-text-hover: #A61E4D;
-  --accent-soft: rgba(250, 82, 82, 0.12);
-  --accent-strong: rgba(250, 82, 82, 0.24);
+  /* === Brand accent (canonical) — Atelier Terracotta === */
+  --accent: #C86446;
+  --accent-primary: var(--accent);
+  --accent-hover: #B25337;
+  --accent-text: #9E432A;
+  --accent-text-hover: #7E331E;
   --accent-soft: rgba(200, 100, 70, 0.08);
   --accent-strong: rgba(200, 100, 70, 0.16);
   
