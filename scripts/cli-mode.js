@@ -859,8 +859,10 @@
     // Initialize when DOM is ready
     function initSubpagePlaceholder() {
         const miniInput = document.getElementById('ai-mini-input');
-        if (miniInput && window.innerWidth <= 600) {
-            miniInput.placeholder = 'Search case studies...';
+        if (miniInput) {
+            miniInput.placeholder = window.innerWidth <= 600
+                ? 'Ask about Ryan’s work, case studies, or hobbies...'
+                : 'Ask a question about Ryan’s work, case studies, or hobbies...';
         }
     }
 
