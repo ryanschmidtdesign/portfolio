@@ -970,22 +970,8 @@ if (savedHist.length > 0) {
     panel.classList.add('open');
     backdrop.classList.add('open');
 
-    // Hide floating pills when panel opens
-    if (floatingPillsEl) {
-      floatingPillsEl.classList.remove('is-visible');
-      floatingPillsEl.setAttribute('aria-hidden', 'true');
-    }
-
     (inputEl || panel)?.focus?.();
     typewriterStop();
-  }
-
-  function restoreFloatingPills() {
-    if (floatingPillsEl && isCaseStudyPage()) {
-      floatingPillsEl.removeAttribute('aria-hidden');
-      const scrolledPastHero = (window.scrollY || window.pageYOffset || 0) > 260;
-      floatingPillsEl.classList.toggle('is-visible', scrolledPastHero);
-    }
   }
 
   function closePanel(){
@@ -1005,7 +991,6 @@ if (savedHist.length > 0) {
       el.style.pointerEvents = '';
       el.style.opacity = '1';
     });
-    restoreFloatingPills();
     
     try { lastFocusedEl?.focus?.(); } catch {}
     lastFocusedEl = null;
@@ -1101,9 +1086,6 @@ if (savedHist.length > 0) {
       });
     });
   }
-  let floatingPillsEl = null;
-  let floatingPillsBound = false;
-  
   // Chat state
   const state = { history: [], kb: null, sectionContext: null };
   let inFlight = false;
@@ -1161,13 +1143,9 @@ if (savedHist.length > 0) {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       wireExternalTrigger();
-      buildFloatingCaseStudyPills();
-      wireFloatingCaseStudyPills();
     });
   } else {
     wireExternalTrigger();
-    buildFloatingCaseStudyPills();
-    wireFloatingCaseStudyPills();
   }
 
   backdrop?.addEventListener('click', closePanel);
@@ -1274,98 +1252,6 @@ if (savedHist.length > 0) {
     if (isCaseStudyPage()) {
       renderFloatingCaseStudyPills(pills);
     }
-  }
-
-  // ─── Floating Case-Study Pills (light-DOM, Contextual Reveal) ────────────
-
-  function buildFloatingCaseStudyPills() {
-    const miniWrapper = document.querySelector('.ai-mini-wrapper');
-    if (!miniWrapper) return;
-
-    if (floatingPillsEl && floatingPillsEl.isConnected) return;
-
-    floatingPillsEl = document.createElement('div');
-    floatingPillsEl.className = 'ai-mini-suggestions';
-    floatingPillsEl.setAttribute('aria-label', 'Suggested questions for this case study');
-
-    miniWrapper.parentNode.insertBefore(floatingPillsEl, miniWrapper);
-
-    const inputEl = miniWrapper.querySelector('.ai-mini-input');
-    if (inputEl) {
-      inputEl.placeholder = window.innerWidth <= 600 ? 'Search or press ⌘K...' : 'Search case studies or press ⌘K...';
-    }
-
-    renderFloatingCaseStudyPills();
-
-    // Contextually reveal floating pills when scrolling past the hero KPI cards or hovering the dock,
-    // and hide them when the Case Studies submenu is hovered so they never collide.
-    let dockHovered = false;
-    let menuHovered = false;
-    const menuGroup = miniWrapper.querySelector('.menu-item-group');
-
-    function syncFloatingPillsVisibility() {
-      if (!floatingPillsEl || !isCaseStudyPage()) return;
-      if (panel.classList.contains('open') || menuHovered) {
-        floatingPillsEl.classList.remove('is-visible');
-        return;
-      }
-      const scrolledPastHero = (window.scrollY || window.pageYOffset || 0) > 260;
-      floatingPillsEl.classList.toggle('is-visible', dockHovered || scrolledPastHero);
-    }
-
-    miniWrapper.addEventListener('mouseenter', () => { dockHovered = true; syncFloatingPillsVisibility(); });
-    miniWrapper.addEventListener('mouseleave', () => { dockHovered = false; syncFloatingPillsVisibility(); });
-    floatingPillsEl.addEventListener('mouseenter', () => { dockHovered = true; syncFloatingPillsVisibility(); });
-    floatingPillsEl.addEventListener('mouseleave', () => { dockHovered = false; syncFloatingPillsVisibility(); });
-
-    if (menuGroup) {
-      menuGroup.addEventListener('mouseenter', () => { menuHovered = true; syncFloatingPillsVisibility(); });
-      menuGroup.addEventListener('mouseleave', () => { menuHovered = false; syncFloatingPillsVisibility(); });
-    }
-
-    window.addEventListener('scroll', syncFloatingPillsVisibility, { passive: true });
-    syncFloatingPillsVisibility();
-  }
-
-  function renderFloatingCaseStudyPills(customPills) {
-    if (!floatingPillsEl) return;
-    if (canonicalPagePath(location.pathname) === '/') return;
-
-    const pills = getCurrentPagePills(customPills).slice(0, 3);
-    floatingPillsEl.innerHTML = '';
-
-    pills.forEach(function (text) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'ai-mini-suggestion-pill';
-      btn.dataset.prompt = text;
-      btn.textContent = text;
-      floatingPillsEl.appendChild(btn);
-    });
-
-    const scrolledPastHero = (window.scrollY || window.pageYOffset || 0) > 260;
-    floatingPillsEl.classList.toggle('is-visible', pills.length > 0 && scrolledPastHero && !panel.classList.contains('open'));
-  }
-
-  function wireFloatingCaseStudyPills() {
-    if (floatingPillsBound) return;
-    
-
-    document.addEventListener('click', function (e) {
-      const pill = e.target.closest('.ai-mini-suggestion-pill, .subpage-stage-pills .home-prompt-pill');
-      if (!pill) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      const prompt = pill.dataset.prompt || pill.textContent.trim();
-      if (!prompt) return;
-
-      openPanel();
-      send(prompt);
-    });
-
-    floatingPillsBound = true;
   }
 
   // Set pills on load
