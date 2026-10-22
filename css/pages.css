@@ -1413,6 +1413,7 @@ body.is-home {
 
 /* Sections */
 .home-section {
+  scroll-margin-top: 32px;
   padding-block: clamp(3.5rem, 7vh, 5.5rem);
   border-top: 2.5px dashed rgba(90, 60, 30, 0.22); /* Scissor cutting line */
   position: relative;

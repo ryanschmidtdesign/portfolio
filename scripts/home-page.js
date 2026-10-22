@@ -64,6 +64,16 @@
   window.addEventListener('scroll', updateActiveNav, { passive: true });
   updateActiveNav();
 
+  // Smooth scroll to #work if landing directly from an external page or subpage
+  if (window.location.hash === '#work') {
+    requestAnimationFrame(() => {
+      const workEl = document.getElementById('work');
+      if (workEl) {
+        workEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
   // Quick Commands Popover (+)
   if (slashBtn && slashPopover) {
     slashBtn.addEventListener('click', (e) => {
