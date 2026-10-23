@@ -47,42 +47,42 @@
     },
     {
       id: 'member-portal',
-      eyebrow: 'ENTERPRISE AI & IA · i4cp',
-      metric: '+500% AI Activation',
-      secondaryMetric: 'Unified Ask-Ahri Omnibar',
-      title: 'i4cp Member Portal & AI Search Overhaul',
+      eyebrow: 'ENTERPRISE IA & DISCOVERY · i4CP',
+      metric: '+500% Ahri Sessions',
+      secondaryMetric: '2× Daily Activity',
+      title: 'i4cp Member Portal & Research Discovery',
       summary:
-        'Restructured enterprise HR research taxonomy and introduced a unified AI discovery omnibar with verified citations.',
-      tags: ['Information Architecture', 'RAG Search', 'Member Experience'],
+        'Reworked navigation and research discovery around member priorities. After launch, Ahri sessions increased 500% and daily activity doubled.',
+      tags: ['Information Architecture', 'Research Discovery', 'Member Experience'],
       url: 'pages/member-portal-overhaul.html',
       image: 'assets/case-studies/member-portal/design-highlights/Home_new.webp',
-      aiPrompt: 'How did Ryan lift AI feature adoption by 500% on the i4cp Member Portal overhaul?'
+      aiPrompt: 'How did Ryan approach the i4cp Member Portal overhaul, and what were the outcomes?'
     },
     {
       id: 'inventory',
       eyebrow: '0→1 WORKFLOW MVP · D-TOOLS CLOUD',
-      metric: '+18% Recurring Revenue',
-      secondaryMetric: '+8% YoY Platform Adoption',
-      title: 'Real-Time Inventory, Purchasing & Receiving',
+      metric: '+18% Company-Wide MRR',
+      secondaryMetric: 'Auditable Ledger',
+      title: 'Inventory, Purchasing & Receiving',
       summary:
-        'Connected purchase orders directly to warehouse bins and active jobs, eliminating spreadsheet reconciliations.',
+        'Connected purchasing, receiving, and stock tracking in one workflow. The release contributed to an 18% increase in company-wide MRR over the following year.',
       tags: ['0→1 MVP', 'Field Research', 'Auditable Workflows'],
       url: 'pages/inventory.html',
       image: 'assets/case-studies/inventory/inventory-controls.webp',
-      aiPrompt: 'Why did Ryan focus the Real-Time Inventory MVP on the PO-received loop, and how did it drive +18% MRR?'
+      aiPrompt: 'Why did Ryan focus the Inventory MVP on purchasing and receiving, and how did it contribute to +18% company-wide MRR?'
     },
     {
       id: 'ai-portfolio',
       eyebrow: 'UX ENGINEERING · LIVE ARCHITECTURE',
-      metric: 'Zero-Build Stack',
-      secondaryMetric: 'Gemini 2.5 Flash RAG',
-      title: 'Engineering an AI-Native Portfolio in Code',
+      metric: 'Designed & Built in Code',
+      secondaryMetric: 'HTML · CSS · JS',
+      title: 'Building My Portfolio in Code',
       summary:
-        'Designed and shipped directly in semantic HTML, tokenized CSS, and vanilla ES6 with a custom RAG assistant and ⌘K inspector.',
-      tags: ['Design Tokens', 'Prototyping in Code', 'Cursor + Claude'],
+        'Built this site in HTML, CSS, and JavaScript, including reusable page patterns and an AI assistant that retrieves context from project notes.',
+      tags: ['Design Tokens', 'Prototyping in Code', 'Semantic HTML'],
       url: 'pages/ai-coding-portfolio.html',
       image: 'assets/case-studies/ai-coding-portfolio/cursor-files.webp',
-      aiPrompt: 'How did Ryan architect and code this portfolio using design tokens and Gemini 2.5 RAG?'
+      aiPrompt: 'How did Ryan build this portfolio in code with AI tools, design tokens, and retrieval?'
     }
   ];
 
@@ -531,7 +531,7 @@
     `;
 
     stageStream.appendChild(showcase);
-    attachBotToolbar(showcase, () => 'Featured Case Studies by Ryan Schmidt:\n- AI-Powered BI Dashboards (+71% Beta Engagement)\n- i4cp Member Portal Overhaul (+500% AI Activation)\n- Real-Time Inventory MVP (+18% Recurring Revenue)\n- Engineering an AI-Native Portfolio in Code');
+    attachBotToolbar(showcase, () => 'Featured Case Studies by Ryan Schmidt:\n- Custom Dashboards & AI Summaries (+71% Dashboard Engagement)\n- i4cp Member Portal & Research Discovery (+500% Ahri Sessions)\n- Inventory, Purchasing & Receiving (+18% Company-Wide MRR)\n- Building My Portfolio in Code');
     scrollToNewestCard(showcase);
   }
 
@@ -951,7 +951,7 @@
       const rawAns =
         data && data.answer
           ? String(data.answer)
-          : "Here's how Ryan approaches complex B2B SaaS & AI systems: he combines deep qualitative research with tokenized design systems and browser-native prototyping. Ask about a specific project like **AI-Powered Dashboards (+71% engagement)** or **i4cp Member Portal (+500% AI activation)**.";
+          : "Here's how Ryan approaches complex B2B SaaS & AI systems: he combines deep qualitative research with tokenized design systems and browser-native prototyping. Ask about a specific project like **Custom Dashboards (+71% engagement)** or **i4cp Member Portal (+500% Ahri sessions)**.";
 
       const cleanHtml = parseMarkdown(sanitizeAnswer(rawAns));
       proseEl.innerHTML = cleanHtml;
@@ -1000,9 +1000,9 @@
       proseEl.innerHTML = `
         <p><strong>Ryan Schmidt</strong> is a Senior SaaS Product Designer in Austin, TX who works at the seam of design and engineering.</p>
         <ul>
-          <li><strong>AI-Powered Dashboards (D-Tools):</strong> Drove <strong>+71% beta engagement</strong> and <strong>62% multi-dashboard adoption</strong> by anchoring AI opportunity summaries on verifiable KPIs. <a href="pages/dashboard.html">Read case study →</a></li>
-          <li><strong>i4cp Member Portal Overhaul:</strong> Restructured enterprise research IA and launched the Ask Ahri AI search omnibar, lifting <strong>AI feature activation by +500%</strong>. <a href="pages/member-portal-overhaul.html">Read case study →</a></li>
-          <li><strong>Real-Time Inventory MVP (D-Tools):</strong> Connected POs to warehouse bins and active jobs, driving an <strong>+18% recurring revenue lift</strong>. <a href="pages/inventory.html">Read case study →</a></li>
+          <li><strong>Custom Dashboards & AI Summaries (D-Tools):</strong> Drove <strong>+71% dashboard engagement</strong> and <strong>62% multi-dashboard adoption</strong> by providing customizable views with AI summaries based on visible widget numbers. <a href="pages/dashboard.html">Read case study →</a></li>
+          <li><strong>i4cp Member Portal & Research Discovery:</strong> Restructured enterprise research IA and brought Ahri into the main discovery experience, resulting in <strong>+500% Ahri sessions</strong> and doubled daily activity. <a href="pages/member-portal-overhaul.html">Read case study →</a></li>
+          <li><strong>Inventory, Purchasing & Receiving (D-Tools):</strong> Connected purchasing, receiving, and stock tracking, contributing to an <strong>+18% company-wide MRR increase</strong>. <a href="pages/inventory.html">Read case study →</a></li>
         </ul>
       `;
       bindCodeblockCopies(proseEl);

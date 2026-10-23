@@ -1679,19 +1679,19 @@ if (savedHist.length > 0) {
       if (!ans || ans.includes("I didn't get enough to answer that well") || ans.includes("Chat is not configured")) {
         const qLower = (text || '').toLowerCase();
         if (qLower.includes('71%') || qLower.includes('engagement') || qLower.includes('dashboard')) {
-          ans = "At D-Tools Cloud, Ryan redesigned static reporting into role-based executive dashboards with anchored AI opportunity signals. By giving integrators real-time visibility into project margins and pipeline velocity, the system drove a **+71% lift in beta engagement** and **62% multi-dashboard adoption**.";
+          ans = "At D-Tools Cloud, Ryan redesigned static reporting into role-based executive dashboards with AI summaries based on visible widget data. The redesign drove a **+71% lift in dashboard engagement** and **62% multi-dashboard adoption**.";
         } else if (qLower.includes('18%') || qLower.includes('revenue') || qLower.includes('mrr') || qLower.includes('inventory')) {
-          ans = "For D-Tools Cloud, Ryan designed an end-to-end inventory, purchasing, and receiving system featuring an auditable ledger and interactive status stepper. The workflow eliminated warehouse stockouts and generated an **+18% recurring revenue lift**.";
+          ans = "For D-Tools Cloud, Ryan connected purchasing, receiving, and stock tracking in one workflow. The release removed a recurring sales blocker and contributed to an **+18% increase in company-wide MRR** over the following year.";
         } else if (qLower.includes('500%') || qLower.includes('i4cp') || qLower.includes('member portal')) {
-          ans = "At i4cp, Ryan led the member portal overhaul, introducing conversational enterprise search grounded in benchmark research. The platform delivered a **+500% increase in AI activation** and a **+10% YoY member renewal lift**.";
+          ans = "At i4cp, Ryan reworked navigation and research discovery around member priorities, bringing Ahri into the main discovery experience. Following launch, **Ahri sessions increased 500%** and **daily activity doubled**.";
         } else if (qLower.includes('research') || qLower.includes('process')) {
-          ans = "Ryan's research approach pairs contextual customer interviews with browser prototyping. By testing working interactions directly with enterprise users, he validates data density and task completion speed before engineering commitments.";
+          ans = "Ryan's research approach pairs contextual customer interviews with browser prototyping. By testing working interactions directly with users, he validates data density and task completion speed before engineering commitments.";
         } else if (qLower.includes('tradeoff') || qLower.includes('trade-off')) {
-          ans = "In enterprise B2B tools, Ryan prioritizes progressive disclosure over simplification. Key executive metrics remain visible at a glance, while granular ledger states and batch actions expand on demand without cluttering the canvas.";
+          ans = "In enterprise B2B tools, Ryan prioritizes progressive disclosure over simplification. Key metrics remain visible at a glance, while granular detail expands on demand without cluttering the canvas.";
         } else if (qLower.includes('fit') || qLower.includes('role') || qLower.includes('staff') || qLower.includes('senior')) {
-          ans = "Ryan brings 6+ years of experience leading product design for B2B SaaS platforms, tokenized design systems, and AI workflows. As a player-coach who designs in code and has mentored 1,500+ designers, he bridges strategic product vision with production craft.";
+          ans = "Ryan brings 6+ years of experience leading product design for B2B SaaS platforms, design tokens, and AI workflows. He bridges strategic product vision with production craft in code.";
         } else {
-          ans = "Ryan Schmidt is a senior product designer & UX engineer with 6+ years designing B2B SaaS platforms and design systems. Explore his featured work above: **BI Analytics (+71% Beta)**, **Inventory (+18% MRR)**, **i4cp AI Search (+500% Activation)**, and **Architecture**.";
+          ans = "Ryan Schmidt is a senior product designer & UX engineer with 6+ years designing B2B SaaS platforms and design systems. Explore his featured work above: **Dashboards (+71% Engagement)**, **Inventory (+18% MRR)**, **i4cp Discovery (+500% Sessions)**, and **Building in Code**.";
         }
       }
 

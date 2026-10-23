@@ -32,21 +32,21 @@ metrics, and structured fit-matching. Endpoint: /api/chat (POST).
 
 ## Case studies
 
-- [AI-Powered Dashboards](https://ryanschmidt.design/dashboard.html)
-  Operational dashboard surfacing high-frequency tasks and prioritized alerts.
-  Outcomes: +71% beta engagement, 62% multi-dashboard adoption.
+- [Custom Dashboards & AI Summaries](https://ryanschmidt.design/pages/dashboard.html)
+  Operational dashboard surfacing high-frequency tasks and customizable views.
+  Outcomes: +71% dashboard engagement, 62% multi-dashboard adoption.
 
-- [Real-Time Inventory](https://ryanschmidt.design/inventory.html)
-  Single real-time view replacing spreadsheets, with clearer signals for action.
-  Outcomes: +18% recurring revenue, +8% product adoption (1-year).
+- [Inventory, Purchasing & Receiving](https://ryanschmidt.design/pages/inventory.html)
+  Connected purchasing, receiving, and stock tracking in one workflow.
+  Outcomes: Contributed to an 18% increase in company-wide MRR over the following year.
 
-- [AI-Coding my Portfolio](https://ryanschmidt.design/ai-coding-portfolio.html)
-  Portfolio rebuilt from scratch with Cursor, Gemini, and Antigravity.
-  Outcomes: fully custom site, reusable UI and code patterns, AI integrated into workflow.
+- [Building My Portfolio in Code](https://ryanschmidt.design/pages/ai-coding-portfolio.html)
+  Portfolio rebuilt from scratch in semantic HTML, modular CSS, and JavaScript with AI coding tools.
+  Outcomes: fully custom site, reusable UI and code patterns, assistant connected to project notes.
 
-- [i4cp Member Portal Overhaul](https://ryanschmidt.design/member-portal-overhaul.html)
+- [i4cp Member Portal & Research Discovery](https://ryanschmidt.design/pages/member-portal-overhaul.html)
   Research-led navigation and IA overhaul for an enterprise HR research portal.
-  Outcomes: Untangled complex IA to accelerate time-to-value, driving a 500% jump in AI discovery usage.
+  Outcomes: Shipped September 11, 2026; +500% Ahri sessions and doubled daily activity.
 
 ## Optional
 - https://ryanschmidt.design/assets/llms.txt — This file (LLMs summary)

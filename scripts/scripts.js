@@ -498,7 +498,7 @@
         location: 'Main Warehouse (Bay 1 · Shelf A-12)',
         available: '6 units in stock',
         schedule: 'Ready for immediate staging & checkout',
-        rule: '<strong>The Rule:</strong> Checking items in against a PO automatically increments central warehouse stock within 30 seconds.'
+        rule: '<strong>The Rule:</strong> Checking items in against a PO updates central warehouse stock immediately in the database.'
       },
       allocated: {
         badgeClass: 'badge--warning',
@@ -510,11 +510,11 @@
       },
       lowstock: {
         badgeClass: 'badge--alert',
-        badgeText: '● Low Stock: Threshold Reached',
+        badgeText: '● Low Stock: Threshold Warning',
         location: 'Main Warehouse Shelf A-12 (1 unit left)',
         available: '1 unit (< 3 safety minimum)',
-        schedule: 'Auto-prompts purchasing for reorder PO',
-        rule: '<strong>The Rule:</strong> Early low-stock alerts notify purchasing leads before field crews arrive at job sites empty-handed.'
+        schedule: 'Triggers purchasing alert while allocations stay active',
+        rule: '<strong>The Rule:</strong> Low stock is a threshold warning that coexists with active allocations, alerting purchasing before field crews arrive empty-handed.'
       }
     };
 
@@ -602,46 +602,56 @@
     const modePill = document.getElementById('simOmniMode');
     const iconEl = document.getElementById('simOmniIcon');
     const views = omniSim.querySelectorAll('.omnibar-view');
+    const seeAllBtn = omniSim.querySelector('[data-trigger-traditional]');
 
     const queryData = {
       ai: {
-        val: 'What are hybrid return-to-office benchmarks?',
-        mode: 'AI Synthesis Mode',
+        val: 'Executive succession planning',
+        mode: 'Ask Ahri (AI Search)',
         modeClass: 'pill--ai',
         icon: '✨'
       },
       keyword: {
-        val: 'succession planning',
-        mode: 'Keyword Lookup Mode',
+        val: 'Executive succession planning',
+        mode: 'Traditional Results',
         modeClass: 'pill--keyword',
         icon: '🔍'
       }
     };
 
+    function activateMode(type) {
+      if (!queryData[type]) return;
+
+      chips.forEach((c) => {
+        const active = c.dataset.queryType === type;
+        c.classList.toggle('is-active', active);
+        c.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      const data = queryData[type];
+      if (inputEl) inputEl.value = data.val;
+      if (modePill) {
+        modePill.textContent = data.mode;
+        modePill.className = 'omnibar-mode-pill ' + data.modeClass;
+      }
+      if (iconEl) iconEl.textContent = data.icon;
+
+      views.forEach((v) => {
+        v.classList.toggle('is-active', v.dataset.simView === type);
+      });
+    }
+
     chips.forEach((chip) => {
       chip.addEventListener('click', () => {
-        const type = chip.dataset.queryType;
-        if (!queryData[type]) return;
-
-        chips.forEach((c) => {
-          const active = c === chip;
-          c.classList.toggle('is-active', active);
-          c.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
-
-        const data = queryData[type];
-        if (inputEl) inputEl.value = data.val;
-        if (modePill) {
-          modePill.textContent = data.mode;
-          modePill.className = 'omnibar-mode-pill ' + data.modeClass;
-        }
-        if (iconEl) iconEl.textContent = data.icon;
-
-        views.forEach((v) => {
-          v.classList.toggle('is-active', v.dataset.simView === type);
-        });
+        activateMode(chip.dataset.queryType);
       });
     });
+
+    if (seeAllBtn) {
+      seeAllBtn.addEventListener('click', () => {
+        activateMode('keyword');
+      });
+    }
   }
 
   const systemInput = document.querySelector('.asd-fake-input');

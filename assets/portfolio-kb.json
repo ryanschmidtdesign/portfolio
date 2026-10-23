@@ -66,8 +66,8 @@
     "headline": "Senior SaaS Product Designer at i4cp, working at the seam of design and engineering.",
     "one_liner": "Research-driven IA, design systems, and AI-augmented product UX for enterprise audiences.",
     "elevator_30s": "Ryan Schmidt is a Senior Product Designer at i4cp focused on information architecture, member experience, and AI-augmented product UX. He turns messy research and legacy interfaces into systems that scale, with measurable outcomes like task success, component reuse, and adoption. Strengths sit at the seam of design and engineering, including token-first design systems, prototyping in code, and AI tooling like Cursor and Claude.",
-    "bio_75_words": "Ryan Schmidt is a Senior Product Designer at i4cp who works at the seam of design and engineering. His focus is research-driven information architecture, design systems, and AI-augmented product UX for enterprise audiences. Recent outcomes include +500% AI feature activation at i4cp, 92% engineer adoption on a 100+ component design system, and a 71% jump in dashboard engagement during beta. He's based in Austin, TX.",
-    "bio_150_words": "Ryan Schmidt is a Senior Product Designer at i4cp (Institute for Corporate Productivity), where he leads platform experience strategy across member portal, internal admin, and research discovery surfaces. His focus is research-driven information architecture, token-first design systems, and AI-augmented product UX for enterprise audiences. Before i4cp, he led design system work at D-Tools, where he shipped a 100+ component system with 92% engineer adoption, cutting UI defects by 38%. Ryan works at the seam of design and engineering, prototyping in code, partnering closely with engineers, and using AI tooling like Cursor and Claude to ship faster. Recent measurable outcomes include a 500% jump in AI feature activation after the i4cp portal overhaul, a 71% jump in dashboard engagement during beta, and an 18% lift in recurring revenue tied to a real-time inventory MVP. He's based in Austin, TX.",
+    "bio_75_words": "Ryan Schmidt is a Senior Product Designer at i4cp who works at the seam of design and engineering. His focus is research-driven information architecture, design systems, and AI-augmented product UX for enterprise audiences. Recent outcomes include +500% Ahri sessions and doubled daily activity at i4cp, 92% engineer adoption on a 100+ component design system, and a 71% increase in dashboard engagement. He's based in Austin, TX.",
+    "bio_150_words": "Ryan Schmidt is a Senior Product Designer at i4cp (Institute for Corporate Productivity), where he leads platform experience strategy across member portal, internal admin, and research discovery surfaces. His focus is research-driven information architecture, token-first design systems, and AI-augmented product UX for enterprise audiences. Before i4cp, he led design system work at D-Tools, where he shipped a 100+ component system with 92% engineer adoption, cutting UI defects by 38%. Ryan works at the seam of design and engineering, prototyping in code, partnering closely with engineers, and using AI tooling like Cursor and Claude to ship faster. Recent measurable outcomes include a 500% increase in Ahri sessions and doubled daily activity after the i4cp portal overhaul, a 71% increase in dashboard engagement, and an 18% lift in company-wide MRR tied to an inventory MVP. He's based in Austin, TX.",
     "specialties": [
       "Information Architecture",
       "Design Systems",
@@ -182,7 +182,7 @@
     {
       "id": "mvp_for_trust",
       "stance": "MVPs aren't about feature scope. They're about earning trust before you add complexity.",
-      "context": "The Real-Time Inventory MVP focused on the PO-received loop because trust in stock counts had to come before any automation. +18% recurring revenue followed.",
+      "context": "The inventory MVP connected purchasing and receiving with immediate database updates, helping unblock enterprise sales and contributing to +18% company-wide MRR.",
       "use_when": [
         "mvp",
         "scoping",
@@ -248,9 +248,9 @@
         "dates": "October 2021–February 2026 (Promoted January 2025)",
         "highlights": [
           "Owned Cloud UX across 5 core modules as platform scaled from 6,500 to 18,000 active users.",
-          "Architected real-time inventory MVP via field research and testing, driving an 18% recurring revenue lift and 8% YoY adoption.",
+          "Architected inventory MVP connecting purchasing and receiving, unblocking sales and contributing to an 18% company-wide MRR increase.",
           "Scaled design system to 100+ production components with 92% engineer adoption.",
-          "Designed AI dashboard suite during early-access beta (**71% engagement**, **62% multi-dashboard adoption**)."
+          "Designed dashboard suite with customizable views and AI summaries (**71% engagement**, **62% multi-dashboard adoption**)."
         ]
       },
       {
@@ -323,10 +323,10 @@
       "HTML/CSS/JS"
     ],
     "achievements_top": [
-      "Drove **+500%** AI feature activation after i4cp Member Portal overhaul.",
+      "Drove **+500%** Ahri sessions and doubled daily activity after i4cp Member Portal overhaul.",
       "Built design system of 100+ components achieving **92% engineer adoption** and cutting frontend defects by **38%**.",
-      "Increased dashboard engagement by **+71%** during beta (**62% multi-dashboard adoption**).",
-      "Drove **+18% recurring revenue** and **+8% product adoption** after Real-Time Inventory MVP (1-year outcomes)."
+      "Increased dashboard engagement by **+71%** (**62% multi-dashboard adoption**).",
+      "Contributed to **+18% company-wide MRR** after Inventory MVP."
     ]
   },
   "cases": [
@@ -380,20 +380,20 @@
         "Cards",
         "Onboarding"
       ],
-      "summary_short": "Untangled a confusing architecture to help members find what they pay for, driving a 500% jump in AI usage.",
+      "summary_short": "Reworked navigation and research discovery around member priorities. After launch, Ahri sessions increased 500% and daily activity doubled.",
       "outcomes": [
         {
-          "metric": "**AI Tool Usage**",
+          "metric": "**Ahri Sessions**",
           "value": "**+500%**",
-          "note": "AI usage jumped 500% in the first month"
+          "note": "Following launch"
         },
         {
-          "metric": "**Search Regressions**",
-          "value": "**0**",
-          "note": "Retired the legacy search input with zero support tickets or keyword fallback failures"
+          "metric": "**Daily Activity**",
+          "value": "**2×**",
+          "note": "Daily activity doubled"
         }
       ],
-      "impact_narrative": "By untangling the architecture, Ryan made it faster for members to find critical benchmarks, protecting retention and driving a 500% jump in AI usage.",
+      "impact_narrative": "The redesigned portal launched on September 11, 2026. Following launch, Ahri sessions increased 500% and daily activity doubled.",
       "sections": [
         {
           "id": "problem",
@@ -418,7 +418,7 @@
         {
           "id": "outcomes",
           "heading": "Outcomes & Impact",
-          "summary": "Shipped to production in September 2026. Drove a 500% increase in AI activation, successfully sunset the legacy keyword search bar with omnibar fallback logic, and accelerated member time-to-insight."
+          "summary": "Shipped to production on September 11, 2026. Ahri sessions increased 500% and daily activity doubled following the redesign."
         }
       ]
     },
@@ -447,9 +447,9 @@
       "problem": "Users ignored static default dashboards while leadership wanted an AI-first UX. Research revealed users needed trustworthy KPI anchors before adopting AI insights.",
       "proof_points": [
         "Designed customizable, role-based dashboards as the core anchor, layering AI summaries on top of verified metrics rather than replacing dashboards.",
-        "To prevent hallucination and maintain trust, constrained the LLM's context window exclusively to the JSON output of the user's active widgets.",
+        "To reduce unsupported answers and maintain trust, constrained the LLM's context window exclusively to the JSON output of the user's active widgets.",
         "Governed the UI closely with 4 engineering partners without a strict component library, relying on repeatable widget patterns to keep velocity high.",
-        "Turned an ignored dashboard feature into the main way teams track their work, driving a 71% jump in adoption."
+        "Turned an underused dashboard feature into the main way teams track their work, driving a 71% engagement increase."
       ],
       "constraints": [
         "No mature design system",
@@ -482,15 +482,15 @@
         {
           "metric": "**Multi-dashboard users**",
           "value": "**62%**",
-          "note": "Beta adoption"
+          "note": "Post-launch adoption"
         },
         {
           "metric": "**Interaction depth**",
           "value": "**2.0**",
-          "note": "Avg. during beta"
+          "note": "Customization depth"
         }
       ],
-      "impact_narrative": "Drove a 71% increase in navigation clicks to the dashboard, transformed static reporting into an interactive sales-demo highlight, and established a trusted foundation for AI features.",
+      "impact_narrative": "Drove a 71% increase in dashboard engagement, transformed static reporting into an interactive sales-demo highlight, and established a trusted foundation for AI features.",
       "sections": [
         {
           "id": "problem",
@@ -525,7 +525,7 @@
         {
           "id": "impact",
           "heading": "Impact",
-          "summary": "+71% dashboard engagement during beta. 62% of users created multiple dashboards with 2.0 avg interaction depth. Teams shifted toward self-serve reporting."
+          "summary": "+71% dashboard engagement following the redesign. 62% of users created multiple dashboards. Teams shifted toward self-serve reporting."
         }
       ]
     },
@@ -577,20 +577,15 @@
         "Filters",
         "Status chips"
       ],
-      "summary_short": "Replaced messy spreadsheets with a real-time inventory system that unblocked enterprise deals and drove +18% MRR.",
+      "summary_short": "Connected purchasing, receiving, and stock tracking in one workflow, contributing to +18% company-wide MRR.",
       "outcomes": [
         {
-          "metric": "**Recurring Revenue**",
+          "metric": "**Company-Wide MRR**",
           "value": "**+18%**",
-          "note": "Within the first year"
-        },
-        {
-          "metric": "**Product Adoption**",
-          "value": "**+8%**",
-          "note": "Within the first year"
+          "note": "Contributory over the following year"
         }
       ],
-      "impact_narrative": "Helped drive an 8% increase in product adoption and an 18% increase in recurring revenue within the first year, largely by unblocking enterprise deals.",
+      "impact_narrative": "The release removed a recurring blocker in enterprise sales conversations and contributed to an 18% increase in company-wide MRR over the following year.",
       "sections": [
         {
           "id": "problem",
@@ -630,7 +625,7 @@
         {
           "id": "impact",
           "heading": "Impact",
-          "summary": "+8% product adoption and +18% recurring revenue after 1 year. One customer uncovered thousands in unused equipment after switching to unified tracking."
+          "summary": "Contributed to an 18% increase in company-wide MRR over the following year. One customer uncovered thousands in unused equipment after switching to unified tracking."
         }
       ]
     },
@@ -960,7 +955,7 @@
   "deterministic_answers": {
     "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
     "looking_for": "Ryan is open to the right opportunity, specifically roles where designers build their designs in code as well as Figma — the new standard for modern product design. His strongest targets are Senior, Lead, or Staff Product Designer and UX Engineer roles.",
-    "proof_points": "Ryan's strongest proof points are +500% AI feature activation after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption (cutting UI defects by 38%), +71% dashboard engagement during beta, and +18% recurring revenue after the Real-Time Inventory MVP.",
+    "proof_points": "Ryan's strongest proof points are +500% Ahri sessions and doubled daily activity after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption (cutting UI defects by 38%), +71% dashboard engagement, and +18% company-wide MRR after the inventory MVP.",
     "ux_engineer_fit": "Yes. Ryan codes, prototypes in the browser, uses AI tooling daily, and works closely with engineers. The strongest evidence is his AI-Coding my Portfolio case, coded prototyping habits, and AI dashboard/product workflow thinking."
   },
   "evidence_by_role": {
@@ -992,9 +987,9 @@
         "Comfortable turning ambiguous product problems into scalable patterns."
       ],
       "proof": [
-        "+71% dashboard engagement during beta.",
+        "+71% dashboard engagement.",
         "92% engineer adoption across 100+ tokenized components (38% fewer defects).",
-        "+18% recurring revenue after Real-Time Inventory MVP."
+        "+18% company-wide MRR after inventory MVP."
       ]
     },
     "ai_product_designer": {
@@ -1009,7 +1004,7 @@
       "proof": [
         "Pushed back on AI-first dashboard direction after research.",
         "Layered AI summarization on familiar KPI workflows.",
-        "+71% beta engagement on AI-Powered Dashboards."
+        "+71% dashboard engagement on Custom Dashboards."
       ]
     }
   },
@@ -1066,8 +1061,7 @@
       ],
       "proof": [
         "92% engineer adoption (100+ components)",
-        "+18% recurring revenue",
-        "+8% product adoption"
+        "+18% company-wide MRR"
       ]
     }
   },
@@ -1591,7 +1585,7 @@
     {
       "intent": "company_fit_expanded",
       "prompt": "Yes, go deeper on Acme Analytics.",
-      "answer": "Ryan's strongest fit at an analytics product is making the right thing scannable and the next action obvious.\n- **Research-led IA** that untangles navigation and taxonomy so people find answers fast.\n- **Design-to-code execution**: https://ryanschmidt.design/ai-coding-portfolio.html shows he can ship custom front-end work with AI-augmented workflows.\n- **AI on verifiable data**: https://ryanschmidt.design/dashboard.html drove **+71%** beta engagement by layering AI on familiar KPIs, not replacing them.\n- **Mapping**: for Acme, that probably looks like clearer 'what matters now' views, predictable filtering, and fewer one-off patterns. If that lines up, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start a real conversation."
+      "answer": "Ryan's strongest fit at an analytics product is making the right thing scannable and the next action obvious.\n- **Research-led IA** that untangles navigation and taxonomy so people find answers fast.\n- **Design-to-code execution**: https://ryanschmidt.design/pages/ai-coding-portfolio.html shows he can ship custom front-end work with AI-augmented workflows.\n- **AI on verifiable data**: https://ryanschmidt.design/pages/dashboard.html drove a **+71%** engagement increase by layering AI on familiar KPIs, not replacing them.\n- **Mapping**: for Acme, that probably looks like clearer 'what matters now' views, predictable filtering, and fewer one-off patterns. If that lines up, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start a real conversation."
     },
     {
       "intent": "ux_engineer_fit",
@@ -1601,22 +1595,22 @@
     {
       "intent": "ai_adept_fit",
       "prompt": "Why is Ryan a good fit for an AI product design role?",
-      "answer": "Because he treats AI as a layer on workflows users already trust, not a chatbox bolted onto a product. On https://ryanschmidt.design/dashboard.html, he pushed back on an AI-first approach after research, then layered AI summarization on **verifiable metrics** and drove **+71%** beta engagement. Want the deeper version with tradeoffs?"
+      "answer": "Because he treats AI as a layer on workflows users already trust, not a chatbox bolted onto a product. On https://ryanschmidt.design/pages/dashboard.html, he pushed back on an AI-first approach after research, then layered AI summarization on **verifiable metrics** and drove a **+71%** engagement increase. Want the deeper version with tradeoffs?"
     },
     {
       "intent": "case_select",
       "prompt": "Which case study best fits a team building real-time ops tooling?",
-      "answer": "Start with https://ryanschmidt.design/inventory.html. MVP shipped Dec 2024, drove **+8% adoption** and **+18% recurring revenue** at 1 year. Want me to pull out the key decisions, or compare it to the AI dashboard work?"
+      "answer": "Start with https://ryanschmidt.design/pages/inventory.html. The release contributed to an **+18% increase in company-wide MRR** over the following year. Want me to pull out the key decisions, or compare it to the AI dashboard work?"
     },
     {
       "intent": "case_detail",
       "prompt": "Why ship an MVP first on the inventory project?",
-      "answer": "To establish trust in stock counts before adding automation complexity. The engineering timeline couldn't support real-time websockets, so he compromised on a manual refresh button to get the feature out and capture revenue faster, directly unblocking enterprise deals. Want the full set of tradeoffs?"
+      "answer": "To establish trust in stock counts before adding automation complexity. The engineering timeline couldn't support real-time streaming, so he compromised on a manual refresh trigger to get the feature out and capture revenue faster, directly unblocking enterprise deals. Want the full set of tradeoffs?"
     },
     {
       "intent": "resume_proof",
       "prompt": "What are Ryan's top 3 proof points?",
-      "answer": "**+500% jump in AI usage** after an IA overhaul at i4cp, **+18% MRR** by unblocking enterprise deals with a new real-time inventory system, and **+71% dashboard engagement** in beta on the AI dashboard work. Want context on any of them?"
+      "answer": "**+500% Ahri sessions and doubled daily activity** after an IA overhaul at i4cp, **+18% company-wide MRR** unblocking enterprise deals with the inventory system, and a **+71% increase in dashboard engagement** on Custom Dashboards. Want context on any of them?"
     },
     {
       "intent": "looking_for",
@@ -1636,7 +1630,7 @@
     {
       "intent": "biggest_lesson",
       "prompt": "What's a project where Ryan got something wrong, and what did he learn?",
-      "answer": "On the AI dashboard work, the original brief assumed an AI-first interface. Ryan pushed for that direction until research showed users needed familiar KPIs to orient before they'd trust AI insights. Lesson: even when the brief feels modern, anchor on what users already trust. The hybrid version drove **+71%** beta engagement."
+      "answer": "On the AI dashboard work, the original brief assumed an AI-first interface. Ryan pushed for that direction until research showed users needed familiar KPIs to orient before they'd trust AI insights. Lesson: even when the brief feels modern, anchor on what users already trust. The hybrid version drove a **+71%** engagement increase."
     },
     {
       "intent": "disagreement_handling",
@@ -1646,7 +1640,7 @@
     {
       "intent": "proudest_work",
       "prompt": "What project is Ryan most proud of and why?",
-      "answer": "The Member Portal Growth Overhaul, because it solved a major business bottleneck. By restructuring the IA and replacing a traditional search bar with an AI discovery engine, he drove a **+500% jump in AI usage** and protected long-term member retention. It's the case where systems thinking did the heavy lifting."
+      "answer": "The Member Portal overhaul, because it solved a major business bottleneck. By restructuring the IA and bringing Ahri into the primary discovery experience, he drove a **+500% increase in Ahri sessions** and doubled daily activity. It's the case where systems thinking did the heavy lifting."
     },
     {
       "intent": "research_under_constraints",
@@ -1706,12 +1700,12 @@
     {
       "intent": "company_fit_specific",
       "prompt": "Why is Ryan a fit at a B2B SaaS company like Stripe?",
-      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove a **500% jump in AI adoption** through a complex IA overhaul, unblocked enterprise deals to drive **+18% MRR** with a new real-time inventory system, and increased dashboard adoption by **71%**. For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
+      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove a **+500% increase in Ahri sessions** through a complex IA overhaul, unblocked enterprise deals to contribute to **+18% company-wide MRR**, and increased dashboard engagement by **71%**. For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
     },
     {
       "intent": "stakeholder_influence",
       "prompt": "How does Ryan influence decisions when he doesn't have authority?",
-      "answer": "Ryan brings evidence and stays curious about constraints. On the AI dashboard project, leadership pushed for AI-first. He ran 10 user interviews showing low trust in black-box outputs, then proposed a hybrid model that kept familiar KPIs and layered AI on top. The team bought in, and the result was **+71%** beta engagement. Want the full story on that case?"
+      "answer": "Ryan brings evidence and stays curious about constraints. On the AI dashboard project, leadership pushed for AI-first. He ran 10 user interviews showing low trust in black-box outputs, then proposed a hybrid model that kept familiar KPIs and layered AI on top. The team bought in, and the result was a **+71%** engagement increase. Want the full story on that case?"
     }
   ]
 }

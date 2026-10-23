@@ -67,44 +67,42 @@ https://ryanschmidt.design/pages/dashboard.html
 **Validation:** End-to-end Figma prototype tested with 5 target users. 4/5 said templates matched their workflow. All users customized without guidance.
 
 **Impact:**
-- Dashboard engagement: +71% (beta)
-- Multi-dashboard adoption: 62% (beta)
-- Average interaction depth: 2.0 (beta)
+- Dashboard engagement: +71%
+- Multi-dashboard adoption: 62%
 
 **Lessons:** Research is how you earn the right to push back. Users don't know what they don't know — they need data visible before they can ask good questions.
 
-### Real-Time Inventory
+### Inventory, Purchasing & Receiving
 
 https://ryanschmidt.design/pages/inventory.html
 
-**Problem:** Project managers spent 2-3 hours/day reconciling stock counts across spreadsheets. Equipment went missing because nobody trusted the numbers. Enterprise prospects expected integrated inventory before signing.
+**Problem:** Integrators spent hours reconciling stock counts across spreadsheets. Equipment went missing because nobody trusted the numbers. Enterprise prospects expected integrated inventory before signing.
 
 **Role:** Lead Product Designer (team of 3)
 
 **Research:** 6 user interviews + workflow mapping sessions. One power user maintained a 14-tab spreadsheet with 15-20% error rates. Two distinct user segments: small teams needing quick quantity confidence, larger teams needing asset-level traceability.
 
-**Key decision:** Pushed for real-time unified inventory system across projects and locations instead of a simpler periodic-update approach.
+**Key decision:** Connected purchasing, receiving, and stock tracking in one workflow. Receiving updated the inventory database immediately; open client views used a manual refresh in the MVP.
 
-**Design responses:** Receiving defines truth (inventory updates at PO receipt). Unified data model removes duplication. Low-stock alerts surface risk early.
+**Design responses:** Receiving defines truth (inventory updates at PO receipt). Unified data model removes duplication. Low-stock alerts surface risk as an independent threshold warning.
 
-**Validation:** 3 rounds of high-fidelity Figma tests. Quantity-first by default, asset-level when needed.
+**Validation:** 3 rounds of prototype tests. Quantity-first by default, asset-level when needed.
 
 **Impact:**
-- Product adoption: +8% (1 year)
-- Recurring revenue: +18% (1 year)
+- Contributed to +18% company-wide MRR (1 year)
 - MVP shipped: December 2024
 
 **Lessons:** Operational products earn trust through state clarity. Users don't just need to know how many — they need to understand why the number is trustworthy.
 
-### i4cp Member Portal Redesign
+### i4cp Member Portal & Research Discovery
 
 https://ryanschmidt.design/pages/member-portal-overhaul.html
 
-**Status:** Shipped — live in production September 2026.
+**Status:** Shipped — live in production September 11, 2026.
 
 **Problem:** Members couldn't find what they came for. The portal's navigation didn't reflect how content was actually structured. A well-validated content taxonomy existed but wasn't visible in the UI.
 
-**Role:** Lead UX Designer/PM (sole designer). Owning IA, designs, and project management.
+**Role:** Lead UX Designer/PM (sole designer). Owning IA, designs, Trello tickets, and staging QA.
 
 **Content hierarchy (4 levels):**
 1. Areas of Focus — broad practice domains (leadership, talent, culture)
@@ -112,13 +110,13 @@ https://ryanschmidt.design/pages/member-portal-overhaul.html
 3. Topics — specific subject clusters within each priority
 4. Individual content — articles, videos, webinars, benchmarks
 
-**Key decision:** Progressive disclosure over flat navigation. Areas of Focus orient at the top level; deeper levels reveal progressively as members narrow intent.
+**Key decision:** Progressive disclosure over flat navigation. Areas of Focus orient at the top level; deeper levels reveal progressively as members narrow intent. Every search starts in Ahri's AI experience, with an explicit "See all results" action to browse traditional results.
 
 **Constraints:** Parallel rebrand (third-party consultant evolving visual identity simultaneously). Abstracted UI into strict design tokens to insulate core development from identity shifts.
 
-**Outcomes:** +500% AI feature activation in month one; successfully sunset the legacy keyword search bar with omnibar fallback logic.
+**Outcomes:** +500% Ahri sessions and doubled daily activity following launch.
 
-### AI-Coding my Portfolio
+### Building My Portfolio in Code
 
 https://ryanschmidt.design/pages/ai-coding-portfolio.html
 
@@ -126,17 +124,17 @@ https://ryanschmidt.design/pages/ai-coding-portfolio.html
 
 **Role:** End-to-end — UX, UI, front-end architecture, AI-assisted engineering.
 
-**Stack:** HTML, CSS, JavaScript, Three.js (experimental). Tools: Cursor, Antigravity, OpenCode CLI, Vercel, GitHub, Supabase.
+**Stack:** HTML, CSS, JavaScript. Tools: Cursor, Vercel, GitHub, Supabase.
 
-**Approach:** Skipped Figma completely — designed through code alone. AI tools accelerated workflow but didn't replace structural thinking.
+**Approach:** Built directly in HTML, CSS, and JavaScript with AI coding tools. Working in the browser allowed testing responsive layouts and keyboard interactions under real rendering conditions.
 
 **System architecture:** Prompts → Patterns → Components → Features. Structured prompts connected to real product features.
 
-**Interactive system demo:** Visits a question → Vercel serverless function (orchestrator) → Branch: Supabase pgvector (1,400+ chunks) + Gemini 2.5 Flash → Answer. System metrics: ~1.3k tokens generated, 12 chunks retrieved, 26ms vector search.
+**Illustrative architecture walkthrough:** Shows how a question moves from input to retrieval (Supabase pgvector) and generation (Gemini), explaining the system pipeline.
 
-**Key decisions:** AI treated like a junior engineer — needs direction, constraints, review. Patterns built early for reuse. Database-driven RAG replaced a single JSON file with semantic search.
+**Key decisions:** Strict coding rules and design tokens established before writing code. Database-driven retrieval replaced a single JSON file with semantic search from project notes.
 
-**Impact:** Fully custom site — no templates, no CMS, no static site generator. Repeatable workflow: idea to working feature in a single session.
+**Impact:** Fully custom site — no templates, no CMS, no static site generator. Reusable page patterns and an assistant connected to project notes.
 
 **Lessons:** AI amplifies structure. Speed needs discipline. Iteration is the real advantage.
 
