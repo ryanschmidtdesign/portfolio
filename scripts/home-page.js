@@ -59,6 +59,18 @@
         if (dot) dot.remove();
       }
     });
+
+    const headerNavLinks = document.querySelectorAll('.site-header__link');
+    headerNavLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href === `#${currentId}`) {
+        link.classList.add('is-current');
+        link.setAttribute('aria-current', 'page');
+      } else if (href && href.startsWith('#')) {
+        link.classList.remove('is-current');
+        link.removeAttribute('aria-current');
+      }
+    });
   }
 
   window.addEventListener('scroll', updateActiveNav, { passive: true });

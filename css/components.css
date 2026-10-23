@@ -1381,17 +1381,19 @@ figure.case-study-media[data-reveal].is-revealed {
   position: relative;
   width: 100%;
   padding: var(--space-4);
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: var(--shadow-card);
-  border: none;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 14px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(28, 22, 18, 0.1);
   border-radius: var(--radius-md);
-  opacity: 0.65;
-  transition: opacity var(--dur-3) ease, box-shadow var(--dur-3) ease;
+  opacity: 1;
+  transition: opacity var(--dur-3) ease, box-shadow var(--dur-3) ease, border-color var(--dur-3) ease, transform var(--dur-3) ease;
 }
 
 .asd-node.is-active {
   opacity: 1;
-  box-shadow: var(--shadow-card-strong);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(200, 90, 50, 0.22), var(--shadow-card-strong);
+  transform: scale(1.01);
 }
 
 .asd-node h3 {
@@ -1453,8 +1455,8 @@ figure.case-study-media[data-reveal].is-revealed {
   display: block;
   width: 2px;
   min-height: 32px;
-  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.22));
-  opacity: 0.6;
+  background: linear-gradient(to bottom, rgba(200, 90, 50, 0.3), rgba(200, 90, 50, 0.5));
+  opacity: 0.85;
   position: relative;
   overflow: hidden;
   transition: opacity 0.35s ease;
@@ -1483,7 +1485,8 @@ figure.case-study-media[data-reveal].is-revealed {
   max-width: 100px;
   height: 2px;
   min-height: 2px;
-  background: linear-gradient(to right, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.22));
+  background: linear-gradient(to right, rgba(200, 90, 50, 0.3), rgba(200, 90, 50, 0.5));
+  opacity: 0.85;
   align-self: center;
 }
 
@@ -1563,19 +1566,33 @@ figure.case-study-media[data-reveal].is-revealed {
   width: 100%;
   max-width: 500px;
   padding: var(--space-4);
-  background: transparent;
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-card);
+  background: #FFFFFF;
+  border: 1px solid rgba(28, 22, 18, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 14px rgba(0, 0, 0, 0.03);
   border-radius: var(--radius-md);
-  opacity: 0.65;
-  transform: translateY(8px);
-  transition: opacity var(--dur-3) ease, transform var(--dur-3) ease, box-shadow var(--dur-3) ease;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--dur-3) ease, transform var(--dur-3) ease, box-shadow var(--dur-3) ease, border-color var(--dur-3) ease;
 }
 
 .asd-answer-card.is-active {
   opacity: 1;
-  transform: translateY(0);
-  box-shadow: var(--shadow-card-strong);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(200, 90, 50, 0.22), var(--shadow-card-strong);
+}
+
+/* Sequence running state: dim un-focused steps to emphasize active token flow */
+.asd-shell[data-state="running"] .asd-node:not(.is-active) {
+  opacity: 0.45;
+}
+
+.asd-shell[data-state="running"] .asd-answer-card:not(.is-active) {
+  opacity: 0.45;
+}
+
+.asd-shell[data-state="running"] .asd-flow-line:not(.is-active),
+.asd-shell[data-state="running"] .asd-flow-line-h:not(.is-active) {
+  opacity: 0.35;
 }
 
 .asd-answer-head {
