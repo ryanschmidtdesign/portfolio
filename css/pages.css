@@ -720,30 +720,31 @@ body.is-home {
 .home-topnav__link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 999px;
+  gap: 5px;
+  padding: 3px 6px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0.02em;
-  color: rgba(247, 245, 240, 0.68);
+  color: rgba(247, 245, 240, 0.65);
   text-decoration: none;
   white-space: nowrap;
-  transition: all 140ms ease;
+  background: transparent;
+  border: none;
+  transition: color 140ms ease;
 }
 
 .home-topnav__link:hover,
 .home-topnav__link:focus-visible {
   color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
 }
 
 .home-topnav__link.is-current {
   color: #FFA07A;
-  background: rgba(200, 90, 50, 0.22);
-  border: 1px solid rgba(200, 90, 50, 0.35);
+  background: transparent;
+  border: none;
   font-weight: 600;
 }
 
@@ -1181,8 +1182,8 @@ body.is-home {
 .home-project-card__media-link {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  background: var(--gray-200);
+  aspect-ratio: 16 / 9;
+  background: #F4F2EC;
   overflow: hidden;
   position: relative;
   border-bottom: 1px solid var(--border-subtle);
@@ -1192,19 +1193,22 @@ body.is-home {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .home-project-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: top left;
   display: block;
   transition: transform 320ms ease;
 }
 
 .home-project-card:hover .home-project-card__media img {
-  transform: scale(1.025);
+  transform: scale(1.02);
 }
 
 .home-project-card__body {
@@ -1213,6 +1217,64 @@ body.is-home {
   flex-direction: column;
   gap: 12px;
   flex: 1;
+}
+
+.home-project-card--text-focused {
+  background: #FFFFFF;
+  background-image: radial-gradient(circle at top right, rgba(200, 90, 50, 0.05) 0%, transparent 65%);
+}
+
+.home-project-card--text-focused .home-project-card__body {
+  padding: 30px 24px 24px;
+  gap: 14px;
+}
+
+.home-project-card--text-focused .home-project-card__title {
+  font-size: 1.35rem;
+}
+
+.home-project-card--text-focused .home-project-card__summary {
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.home-project-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 4px 0 8px;
+  padding: 12px 14px;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.home-project-spec-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.home-project-spec-item__label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.68rem;
+  flex-shrink: 0;
+}
+
+.home-project-spec-item__val {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .home-project-card__top {
@@ -1236,34 +1298,15 @@ body.is-home {
   font-family: var(--font-mono);
   font-size: 0.74rem;
   font-weight: 600;
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
+  padding: 3px 9px;
+  border-radius: var(--radius-xs);
   display: inline-flex;
   align-items: center;
   gap: 4px;
-}
-
-.home-kpi-badge--blue {
-  background: rgba(0, 51, 255, 0.07);
-  color: var(--accent);
-}
-
-.home-kpi-badge--terracotta {
   background: var(--accent-soft);
   color: var(--accent-text);
-  border: 1px solid rgba(200, 90, 50, 0.15);
-}
-
-.home-kpi-badge--emerald {
-  background: rgba(5, 150, 105, 0.08);
-  color: #047857;
-  border: 1px solid rgba(5, 150, 105, 0.14);
-}
-
-.home-kpi-badge--slate {
-  background: var(--surface-1);
-  color: var(--text-primary);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(200, 90, 50, 0.18);
+  letter-spacing: 0.01em;
 }
 
 .home-project-card__title {
@@ -1328,40 +1371,57 @@ body.is-home {
 
 .home-project-card__ai-cta {
   appearance: none;
-  background: var(--accent-soft);
-  border: 1px solid rgba(200, 90, 50, 0.2);
+  background: transparent;
+  border: 1px solid rgba(200, 90, 50, 0.28);
   color: var(--accent-text);
-  padding: 5px 10px;
+  padding: 6px 11px;
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 500;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   transition: all 140ms ease;
 }
 
 .home-project-card__ai-cta:hover {
-  background: var(--accent);
-  color: #FFFFFF;
+  background: var(--accent-soft);
   border-color: var(--accent);
+  color: var(--accent-text);
 }
 
 .home-project-card__cta {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #FFFFFF;
+  background: #181615;
+  border: 1px solid #181615;
+  border-radius: var(--radius-sm);
+  padding: 6px 13px;
   text-decoration: none;
-  transition: all 140ms ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .home-project-card__cta:hover {
-  color: var(--accent);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200, 90, 50, 0.35);
+}
+
+.home-project-card__cta svg {
+  transition: transform 160ms ease;
+}
+
+.home-project-card__cta:hover svg {
   transform: translateX(2px);
 }
 
@@ -1546,7 +1606,7 @@ body.is-home {
   backdrop-filter: blur(28px) saturate(220%) brightness(96%);
   -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 10px;
+  border-radius: var(--radius-sm, 6px);
   padding: 8px 12px 8px;
   box-shadow:
     0 24px 60px -12px rgba(0, 0, 0, 0.55),
@@ -2784,7 +2844,7 @@ body:not(.is-home) .site-footer {
   .home-omnibar-shell,
   .subpage-omnibar-shell {
     padding: 8px 10px 8px;
-    border-radius: 10px;
+    border-radius: var(--radius-sm, 6px);
   }
   .home-ai-stage {
     gap: 0.65rem;
