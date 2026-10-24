@@ -1372,12 +1372,12 @@ body.is-home {
 .home-project-card__ai-cta {
   appearance: none;
   background: transparent;
-  border: 1px solid rgba(200, 90, 50, 0.28);
-  color: var(--accent-text);
+  border: 1px solid rgba(28, 22, 18, 0.12);
+  color: var(--text-secondary);
   padding: 6px 11px;
   border-radius: var(--radius-sm);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
   display: inline-flex;
@@ -1387,9 +1387,14 @@ body.is-home {
 }
 
 .home-project-card__ai-cta:hover {
-  background: var(--accent-soft);
-  border-color: var(--accent);
+  background: var(--surface-2);
+  border-color: rgba(200, 90, 50, 0.35);
   color: var(--accent-text);
+}
+
+.home-project-card__ai-sparkle {
+  color: var(--accent);
+  font-size: 0.75rem;
 }
 
 .home-project-card__cta {
