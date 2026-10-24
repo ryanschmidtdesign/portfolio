@@ -33,7 +33,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=48">
+    <link rel="stylesheet" href="../styles.css?v=49">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -44,10 +44,10 @@
       "@type": "Person",
       "@id": "https://ryanschmidt.design/#person",
       "name": "Ryan Schmidt",
-      "jobTitle": "Senior SaaS Product Designer",
+      "jobTitle": "Senior B2B SaaS Product Designer",
       "url": "https://ryanschmidt.design/",
       "image": "https://ryanschmidt.design/assets/images/family-pic.jpg",
-      "description": "Senior SaaS Product Designer who turns complex B2B SaaS workflows into clear, shippable tools.",
+      "description": "Senior B2B SaaS Product Designer who turns complex B2B SaaS workflows into clear, shippable tools.",
       "sameAs": [
         "https://www.linkedin.com/in/ryanschmidt1989/"
       ],
@@ -98,7 +98,7 @@
       "@type": "WebSite",
       "@id": "https://ryanschmidt.design/#website",
       "url": "https://ryanschmidt.design/",
-      "name": "Ryan Schmidt \u2014 Senior SaaS Product Designer",
+      "name": "Ryan Schmidt — Senior B2B SaaS Product Designer",
       "publisher": {
         "@id": "https://ryanschmidt.design/#person"
       },
@@ -252,7 +252,7 @@
   
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Ryan Schmidt — Senior SaaS Product Designer">
+  <meta property="og:site_name" content="Ryan Schmidt — Senior B2B SaaS Product Designer">
   <meta property="og:title" content="Custom Dashboards &amp; AI Summaries — Ryan Schmidt">
   <meta property="og:description" content="Case study: Operational dashboard surfacing high-frequency tasks and prioritized alerts. +71% dashboard engagement, 62% multi-dashboard adoption.">
   <meta property="og:url" content="https://ryanschmidt.design/pages/dashboard.html">
@@ -444,7 +444,17 @@
           </ul>
 
           <figure class="case-study-media" data-reveal>
-            <video autoplay muted playsinline loop preload="auto" width="1440" height="754">
+            <picture>
+              <source srcset="../assets/case-studies/dashboards/dashboard-overview.webp" type="image/webp">
+              <img src="../assets/case-studies/dashboards/dashboard-overview.png" alt="Executive BI dashboard overview showing role-based sales metrics, close rate gauge, and trend analysis" width="1440" height="754" loading="lazy">
+            </picture>
+            <figcaption>
+              The modular dashboard architecture: role-based KPI tiles, sales velocity gauges, and interactive trend widgets configured for executive morning reviews.
+            </figcaption>
+          </figure>
+
+          <figure class="case-study-media" data-reveal>
+            <video autoplay muted playsinline loop preload="auto" width="1440" height="754" poster="../assets/case-studies/dashboards/new-dashboard-poster.webp" aria-label="Walkthrough of selecting a role-based template to create a new dashboard">
               <source src="../assets/case-studies/dashboards/new-dashboard.mp4" type="video/mp4">
             </video>
             <figcaption>
@@ -453,7 +463,7 @@
           </figure>
 
           <figure class="case-study-media" data-reveal>
-            <video autoplay muted playsinline loop preload="auto" width="1440" height="754">
+            <video autoplay muted playsinline loop preload="auto" width="1440" height="754" poster="../assets/case-studies/dashboards/generate-report-poster.webp" aria-label="Demonstration of generating an AI summary report based on visible dashboard widgets">
               <source src="../assets/case-studies/dashboards/generate-report.mp4" type="video/mp4">
             </video>
             <figcaption>The AI summary only pulls from active charts on the screen, making it easy to fact-check in seconds.</figcaption>
@@ -562,7 +572,7 @@
           </p>
 
           <figure class="case-study-media" data-reveal>
-            <video autoplay muted playsinline loop preload="auto" width="1440" height="754">
+            <video autoplay muted playsinline loop preload="auto" width="1440" height="754" poster="../assets/case-studies/dashboards/edit-dashboard-poster.webp" aria-label="Screen recording of customizing, dragging, and resizing dashboard widget cards">
               <source src="../assets/case-studies/dashboards/edit-dashboard.mp4" type="video/mp4">
             </video>
             <figcaption>Dragging and resizing cards directly on the canvas so managers could organize their morning scan.</figcaption>
@@ -654,14 +664,14 @@
 
     <!-- GSAP for smooth chat widget animations -->
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=48" defer></script>
-    <script src="../scripts/scripts.js?v=48" defer></script>
+    <script src="../scripts/cli-mode.js?v=49" defer></script>
+    <script src="../scripts/scripts.js?v=49" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=48" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=49" defer></script>
     <footer class="site-footer">
       <a class="site-footer-brand" href="../index.html">
         <img src="../favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">
-        Ryan Schmidt — Senior SaaS Product Designer
+        Ryan Schmidt — Senior B2B SaaS Product Designer
       </a>
       <div style="display:flex; gap:1rem; align-items:center;">
       <a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="color:var(--text-secondary); text-decoration:none; font-size:var(--font-xs);">GitHub ↗</a>
