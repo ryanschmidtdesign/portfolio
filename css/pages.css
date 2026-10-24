@@ -1607,7 +1607,7 @@ body.is-home {
   -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius-sm, 6px);
-  padding: 8px 12px 8px;
+  padding: 6px 12px;
   box-shadow:
     0 24px 60px -12px rgba(0, 0, 0, 0.55),
     0 8px 20px -4px rgba(0, 0, 0, 0.35),
@@ -1643,21 +1643,15 @@ body.is-home {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  gap: 3px 8px;
+  gap: 0 8px;
   width: 100%;
   margin: 0;
   padding: 0;
 }
 
-/* CLI Omnibar Header: centered site navigation */
+/* CLI Omnibar Header: deprecated — navigation now lives in conventional top header */
 .home-omnibar-header {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1px 4px 5px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 2px;
+  display: none !important;
 }
 
 @media (max-width: 720px) {

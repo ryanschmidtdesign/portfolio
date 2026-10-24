@@ -10,7 +10,6 @@
   const omnibarInput = document.getElementById('home-omnibar-input');
   const slashBtn = document.getElementById('home-slash-btn');
   const slashPopover = document.getElementById('home-slash-popover');
-  const navLinks = document.querySelectorAll('.home-topnav__link');
 
   function getDefaultPlaceholder() {
     return window.innerWidth <= 600
@@ -27,7 +26,7 @@
   window.addEventListener('resize', updatePlaceholder);
   updatePlaceholder();
 
-  // Scroll spy to highlight active section in the bottom dock
+  // Scroll spy to highlight active section in the top header
   function updateActiveNav() {
     const scrollPos = window.scrollY + 200;
     const sections = [
@@ -39,24 +38,6 @@
     sections.forEach(({ id, el }) => {
       if (el && el.offsetTop <= scrollPos) {
         currentId = id;
-      }
-    });
-
-    navLinks.forEach((link) => {
-      const href = link.getAttribute('href');
-      if (href === `#${currentId}`) {
-        link.classList.add('is-current');
-        let dot = link.querySelector('.home-topnav__dot');
-        if (!dot) {
-          dot = document.createElement('span');
-          dot.className = 'home-topnav__dot';
-          dot.setAttribute('aria-hidden', 'true');
-          link.prepend(dot);
-        }
-      } else if (href && href.startsWith('#')) {
-        link.classList.remove('is-current');
-        const dot = link.querySelector('.home-topnav__dot');
-        if (dot) dot.remove();
       }
     });
 
