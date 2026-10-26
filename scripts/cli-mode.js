@@ -784,19 +784,39 @@
                 }
 
                 @media (max-width: 640px) {
+                    .rs-cmd-overlay {
+                        padding-top: calc(16px + env(safe-area-inset-top, 0px));
+                        padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+                        padding-inline: 12px;
+                    }
+                    .rs-cmd-modal {
+                        max-height: calc(100vh - 32px);
+                    }
+                    .rs-cmd-telemetry {
+                        padding: 7px 12px 6px;
+                    }
                     .rs-cmd-sys-meta,
                     .rs-cmd-node-count,
                     .rs-cmd-footer__brand {
                         display: none;
                     }
+                    .rs-cmd-hud-btn {
+                        padding: 2px 5px;
+                        font-size: 0.58rem;
+                    }
+                    .rs-cmd-hud-btn span {
+                        letter-spacing: 0.02em;
+                    }
                     .rs-cmd-item__sub {
                         display: none;
                     }
-                    .rs-cmd-modal {
-                        max-height: 86vh;
-                    }
                     .rs-cmd-footer {
                         justify-content: center;
+                        padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+                    }
+                    .rs-cmd-esc {
+                        padding: 4px 8px;
+                        font-size: 0.7rem;
                     }
                 }
             `;
@@ -830,10 +850,10 @@
                         </div>
                         <div class="rs-cmd-telemetry__right">
                             <button type="button" class="rs-cmd-hud-btn${sfxActiveClass}" id="rsCmdSfxBtn" aria-pressed="${audioFX.enabled}" title="Toggle Procedural Terminal Audio (Muted by default)">
-                                <span>[SFX: ${sfxState}]</span>
+                                <span class="rs-cmd-btn-text">[SFX: ${sfxState}]</span>
                             </button>
                             <button type="button" class="rs-cmd-hud-btn" id="rsCmdThemeBtn" title="Cycle Phosphor Accent Theme">
-                                <span id="rsCmdThemeLabel">[PHOSPHOR: TERRACOTTA]</span>
+                                <span id="rsCmdThemeLabel" class="rs-cmd-btn-text">[PHOSPHOR: TERRACOTTA]</span>
                             </button>
                         </div>
                     </div>
@@ -1224,7 +1244,7 @@
                     const isOn = audioFX.toggle();
                     this.sfxBtn.classList.toggle('is-active', isOn);
                     this.sfxBtn.setAttribute('aria-pressed', isOn ? 'true' : 'false');
-                    this.sfxBtn.innerHTML = `<span>[SFX: ${isOn ? 'ON' : 'OFF'}]</span>`;
+                    this.sfxBtn.innerHTML = `<span class="rs-cmd-btn-text">[SFX: ${isOn ? 'ON' : 'OFF'}]</span>`;
                     this.inputEl.focus();
                 });
             }
