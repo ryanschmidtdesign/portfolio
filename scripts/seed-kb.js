@@ -146,12 +146,12 @@ function buildChunks() {
 }
 
 async function generateEmbedding(text) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:embedContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
   const resp = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: 'models/gemini-embedding-2',
+      model: 'models/text-embedding-004',
       content: { parts: [{ text: text.slice(0, 2000) }] },
       outputDimensionality: 768
     })

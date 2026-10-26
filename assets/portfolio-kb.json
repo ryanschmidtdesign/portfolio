@@ -335,7 +335,7 @@
       "slug": "case-member-portal-overhaul",
       "title": "i4cp Member Portal Growth Overhaul",
       "short_title": "Member Portal Overhaul",
-      "url": "https://ryanschmidt.design/member-portal-overhaul.html",
+      "url": "https://ryanschmidt.design/pages/member-portal-overhaul.html",
       "status": "live",
       "tags": [
         "IA",
@@ -427,7 +427,7 @@
       "slug": "case-dashboard",
       "title": "AI-Powered Dashboards",
       "short_title": "AI-Powered Dashboards",
-      "url": "https://ryanschmidt.design/dashboard.html",
+      "url": "https://ryanschmidt.design/pages/dashboard.html",
       "tags": [
         "Workflow",
         "Dashboards",
@@ -461,7 +461,7 @@
         "DS/Analytics",
         "Eng"
       ],
-      "timeline": "8 weeks",
+      "timeline": "5 months",
       "methods": [
         "KPI mapping",
         "Wireframes",
@@ -534,7 +534,7 @@
       "slug": "case-inventory",
       "title": "Real-Time Inventory",
       "short_title": "Real-Time Inventory",
-      "url": "https://ryanschmidt.design/inventory.html",
+      "url": "https://ryanschmidt.design/pages/inventory.html",
       "tags": [
         "Enterprise",
         "Real-time",
@@ -634,7 +634,7 @@
       "slug": "case-ai-coding-portfolio",
       "title": "AI-Coding my Portfolio",
       "short_title": "Engineering My Portfolio",
-      "url": "https://ryanschmidt.design/ai-coding-portfolio.html",
+      "url": "https://ryanschmidt.design/pages/ai-coding-portfolio.html",
       "tags": [
         "AI Coding",
         "Portfolio",
@@ -733,6 +733,7 @@
       "description": "Designing AI-enabled experiences that layer on trusted workflows and verifiable data rather than black-box outputs.",
       "cases": [
         "dashboard",
+        "member-portal-overhaul",
         "ai-coding-portfolio"
       ],
       "keywords": [
@@ -994,7 +995,8 @@
     },
     "ai_product_designer": {
       "best_cases": [
-        "dashboard"
+        "dashboard",
+        "member-portal-overhaul"
       ],
       "strengths": [
         "Treats AI as a layer on trusted workflows, not a novelty UI.",
@@ -1037,7 +1039,8 @@
       ],
       "angle": "Emphasize trustworthy AI layered on familiar workflows, verifiable data, and human-in-the-loop decision support.",
       "best_cases": [
-        "dashboard"
+        "dashboard",
+        "member-portal-overhaul"
       ],
       "proof": [
         "+71% dashboard engagement",
@@ -1359,7 +1362,17 @@
       "/inventory.html": "inventory",
       "/ai-coding-portfolio.html": "ai-coding-portfolio",
       "/member-portal-overhaul.html": "member-portal-overhaul",
-      "/about.html": null
+      "/about.html": null,
+      "/pages/dashboard.html": "dashboard",
+      "/pages/inventory.html": "inventory",
+      "/pages/ai-coding-portfolio.html": "ai-coding-portfolio",
+      "/pages/member-portal-overhaul.html": "member-portal-overhaul",
+      "/pages/about.html": null,
+      "/pages/dashboard": "dashboard",
+      "/pages/inventory": "inventory",
+      "/pages/ai-coding-portfolio": "ai-coding-portfolio",
+      "/pages/member-portal-overhaul": "member-portal-overhaul",
+      "/pages/about": null
     },
     "keyword_to_case": {
       "navigation": [
@@ -1378,6 +1391,7 @@
         "member-portal-overhaul"
       ],
       "discovery": [
+        "member-portal-overhaul",
         "dashboard"
       ],
       "filters": [

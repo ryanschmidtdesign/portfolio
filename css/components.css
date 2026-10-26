@@ -1209,6 +1209,11 @@ figure.case-study-media[data-reveal].is-revealed {
   transform: translate(-50%, -50%) scale(1.08);
 }
 
+.splitter-handle:focus-visible .splitter-handle-icon {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200, 90, 50, 0.35);
+}
+
 .splitter-handle-icon svg {
   width: 20px;
   height: 20px;
@@ -1240,10 +1245,16 @@ figure.case-study-media[data-reveal].is-revealed {
 
 .splitter-badge--after {
   right: 14px;
-  background: rgba(0, 51, 255, 0.88);
+  background: var(--accent);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 4px 14px rgba(0, 51, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(200, 90, 50, 0.25);
+}
+
+.splitter-badge.is-occluded {
+  opacity: 0;
+  transform: scale(0.92);
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2674,6 +2685,7 @@ body {
 .badge--alert { background: #fee2e2; color: #dc2626; }
 .badge--success { background: #dcfce7; color: #16a34a; }
 .badge--warning { background: #fef3c7; color: #d97706; }
+.badge--order { background: var(--accent-soft); color: var(--accent); }
 
 .mini-ai-card {
   background: #ffffff;
@@ -3173,7 +3185,7 @@ body {
   box-shadow: var(--focus-ring);
 }
 
-.ia-challenge-panel .compare-tabs {
+[data-ia-explorer] .compare-tabs {
   display: none !important;
 }
 

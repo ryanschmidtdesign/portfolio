@@ -36,6 +36,7 @@
   /* ─── Font families (Architectural Neo-Grotesque + Editorial Serifs + Telemetry Mono) ─── */
   --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont,
     "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-sans);
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
   --font-mono: "Space Mono", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
     Consolas, monospace;
@@ -73,6 +74,7 @@
   /* Long-form reading rhythm — unchanged, these are good */
   --lh-prose: 1.7;
   --lh-tight: 1.15;
+  --lh-snug: 1.35;
   --lh-relaxed: 1.8;
   --lh-prose-loose: 1.75;
 
@@ -123,6 +125,9 @@
   --dur-2: 180ms;
   --dur-3: 300ms;
   --dur-4: 450ms;
+  --transition-base: var(--dur-2) var(--ease-out);
+  --transition-fast: var(--dur-1) var(--ease-out);
+  --blur-md: blur(12px);
 
   /* === Futuristic Contemporary Terracotta & Ceramic Palette === */
   --gray-100: #F7F5F0;
@@ -220,6 +225,7 @@
   --text: var(--slate-900);
   --text-primary: var(--text);
   --text-secondary: #5C5750;
+  --text-muted: #5C5750;
   --text-on-accent: #FFFFFF;
   --surface-subtle: var(--surface-1);
 
@@ -298,8 +304,8 @@
   --rgb-black: 0 0 0;
   --rgb-blue: 0 51 255;
   --rgb-outline: 26 33 40;
-  --rgb-accent-small: 0 51 255;
-  --rgb-cool: 0 51 255;
+  --rgb-accent-small: 200 90 50;
+  --rgb-cool: 200 90 50;
 
   --img-frame: rgb(var(--rgb-white) / 0.16);
   --img-matte: rgb(var(--rgb-black) / 0.22);

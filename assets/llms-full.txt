@@ -58,9 +58,9 @@ https://ryanschmidt.design/pages/dashboard.html
 
 **Role:** Lead Product Designer & acting PM (5 months). Owned problem definition, research, design, scope, and delivery alongside 4 engineers.
 
-**Research:** 11 user interviews (7 power users, 4 stakeholders). Key insight: users needed to see data first before they could explore or ask questions.
+**Research:** 10 user interviews (6 power users, 4 stakeholders). Key insight: users needed to see data first before they could explore or ask questions.
 
-**Key decision:** Pushed for a hybrid approach — dashboards as foundation, AI layered on top for summarization — instead of the CTO's preferred AI-first direction. Research earned the right to push back.
+**Key decision:** Pushed for a hybrid approach (dashboards as foundation, AI layered on top for summarization) instead of the CTO's preferred AI-first direction. Research earned the right to push back.
 
 **Design approach:** Role-based templates with fast customization. AI limited to verifiable metrics visible on screen.
 

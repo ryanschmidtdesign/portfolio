@@ -1123,7 +1123,7 @@ function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
     }
     const fallbackCases = reconcileContextCases(kb, pickedCases, pickedCases);
     return {
-      answer: "Ryan's strongest shipped outcomes span **BI Analytics at D-Tools Cloud** (+71% beta engagement across 17 KPIs), **Inventory, Purchasing & Receiving at D-Tools** (+18% recurring revenue via an auditable mobile-to-ledger workflow), and the **i4cp AI Search & Member Portal Overhaul** (+500% AI synthesis activation and +10% YoY renewal lift).",
+      answer: "Ryan's strongest shipped outcomes span **Custom Dashboards & AI Summaries at D-Tools Cloud** (+71% beta engagement), **Inventory, Purchasing & Receiving at D-Tools** (unblocking enterprise deals and contributing to +18% annual MRR growth), and the **i4cp Member Portal Overhaul** (+500% Ahri sessions and 2× daily active usage).",
       suggested_pills: [
         "How did he drive +71% BI dashboard engagement?",
         "Tell me about the i4cp AI search overhaul",

@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "functions": {
     "api/chat.js": {
-      "includeFiles": "assets/**"
+      "includeFiles": "assets/portfolio-kb.json"
     }
   },
   "headers": [
@@ -38,19 +38,17 @@
       ]
     }
   ],
-  "rewrites": [
-    { "source": "/about", "destination": "/pages/about.html" },
-    { "source": "/dashboard", "destination": "/pages/dashboard.html" },
-    { "source": "/inventory", "destination": "/pages/inventory.html" },
-    { "source": "/ai-coding-portfolio", "destination": "/pages/ai-coding-portfolio.html" },
-    { "source": "/member-portal-overhaul", "destination": "/pages/member-portal-overhaul.html" },
-    { "source": "/about.html", "destination": "/pages/about.html" },
-    { "source": "/dashboard.html", "destination": "/pages/dashboard.html" },
-    { "source": "/inventory.html", "destination": "/pages/inventory.html" },
-    { "source": "/ai-coding-portfolio.html", "destination": "/pages/ai-coding-portfolio.html" },
-    { "source": "/member-portal-overhaul.html", "destination": "/pages/member-portal-overhaul.html" }
-  ],
   "redirects": [
+    { "source": "/about", "destination": "/pages/about", "permanent": true },
+    { "source": "/about.html", "destination": "/pages/about", "permanent": true },
+    { "source": "/dashboard", "destination": "/pages/dashboard", "permanent": true },
+    { "source": "/dashboard.html", "destination": "/pages/dashboard", "permanent": true },
+    { "source": "/inventory", "destination": "/pages/inventory", "permanent": true },
+    { "source": "/inventory.html", "destination": "/pages/inventory", "permanent": true },
+    { "source": "/ai-coding-portfolio", "destination": "/pages/ai-coding-portfolio", "permanent": true },
+    { "source": "/ai-coding-portfolio.html", "destination": "/pages/ai-coding-portfolio", "permanent": true },
+    { "source": "/member-portal-overhaul", "destination": "/pages/member-portal-overhaul", "permanent": true },
+    { "source": "/member-portal-overhaul.html", "destination": "/pages/member-portal-overhaul", "permanent": true },
     {
       "source": "/:path(.*)",
       "has": [

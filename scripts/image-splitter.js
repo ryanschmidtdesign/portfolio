@@ -92,10 +92,24 @@
     document.addEventListener('touchend', stopDrag);
 
     this.handle.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
         e.preventDefault();
-        var step = e.key === 'ArrowLeft' ? -2 : 2;
-        self.update(Math.max(0, Math.min(100, self.position + step)));
+        self.update(Math.max(0, Math.min(100, self.position - 2)));
+      } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        self.update(Math.max(0, Math.min(100, self.position + 2)));
+      } else if (e.key === 'PageDown') {
+        e.preventDefault();
+        self.update(Math.max(0, Math.min(100, self.position - 10)));
+      } else if (e.key === 'PageUp') {
+        e.preventDefault();
+        self.update(Math.max(0, Math.min(100, self.position + 10)));
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        self.update(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        self.update(100);
       }
     });
   };

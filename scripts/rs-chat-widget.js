@@ -31,7 +31,7 @@
       :host {
         all: initial;
         --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+        --font-mono: 'Space Mono', monospace;
         --accent: #C86446;
         --accent-hover: #B25337;
         --accent-soft: rgba(200, 100, 70, 0.08);
@@ -1149,7 +1149,7 @@ if (savedHist.length > 0) {
     const pills = getCurrentPagePills(customPills);
     setPillsFromArray(pills);
     requestAnimationFrame(() => pillsContainer.classList.add('show'));
-    if (isCaseStudyPage()) {
+    if (isCaseStudyPage() && typeof renderFloatingCaseStudyPills === 'function') {
       renderFloatingCaseStudyPills(pills);
     }
   }
@@ -1704,7 +1704,7 @@ if (savedHist.length > 0) {
             requestAnimationFrame(function () { pillsContainer.classList.add('show'); });
           }, 180);
         }
-        if (isCaseStudyPage()) {
+        if (isCaseStudyPage() && typeof renderFloatingCaseStudyPills === 'function') {
           renderFloatingCaseStudyPills(data.suggested_pills);
         }
       }

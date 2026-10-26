@@ -17,6 +17,7 @@
             this.themeIndex = 0;
             this.activeIndex = 0;
             this.filteredItems = [];
+            this.lastFocusedEl = null;
 
             this.injectStyles();
             this.buildDOM();
@@ -41,11 +42,13 @@
                     padding-top: clamp(48px, 12vh, 120px);
                     padding-inline: 16px;
                     opacity: 0;
+                    visibility: hidden;
                     pointer-events: none;
-                    transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1);
+                    transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1), visibility 180ms;
                 }
                 .rs-cmd-overlay.is-open {
                     opacity: 1;
+                    visibility: visible;
                     pointer-events: auto;
                 }
                 .rs-cmd-modal {
@@ -321,6 +324,11 @@
                             type="text"
                             class="rs-cmd-input"
                             id="rsCmdInput"
+                            role="combobox"
+                            aria-expanded="false"
+                            aria-autocomplete="list"
+                            aria-controls="rsCmdResults"
+                            aria-label="Search case studies, pages, or quick actions"
                             placeholder="Search case studies, pages, or quick actions..."
                             autocomplete="off"
                             spellcheck="false"
@@ -357,19 +365,19 @@
                     id: 'nav-dashboard',
                     group: 'Case Studies',
                     icon: '01',
-                    title: 'BI Analytics & Opportunity Signals — D-Tools Cloud',
+                    title: 'Custom Dashboards & AI Summaries (D-Tools Cloud)',
                     sub: '+71% Beta Engagement · Executive KPI system & pipeline forecasting',
                     badge: 'Case Study',
                     kpi: '+71% Beta',
                     kpiType: 'terracotta',
-                    keywords: 'dashboard bi analytics d-tools cloud opportunity signals kpi pipeline b2b data visualization metrics revenue 71%',
+                    keywords: 'dashboard bi analytics d-tools cloud opportunity signals custom dashboards ai summaries kpi pipeline b2b data visualization metrics revenue 71%',
                     action: () => { window.location.href = `${prefix}dashboard.html`; }
                 },
                 {
                     id: 'nav-inventory',
                     group: 'Case Studies',
                     icon: '02',
-                    title: 'Inventory, Purchasing & Receiving — D-Tools Cloud',
+                    title: 'Inventory, Purchasing & Receiving (D-Tools Cloud)',
                     sub: '+18% Company-Wide MRR · Auditable ledger & interactive stepper',
                     badge: 'Case Study',
                     kpi: '+18% MRR',
@@ -428,22 +436,17 @@
                     title: 'Design Philosophy & Approach',
                     sub: 'Systemizer instinct, designing in code, and verifiable business outcomes',
                     badge: 'Philosophy ↵',
-                    keywords: 'approach philosophy principles systemizer designing in code verifiable outcomes craft',
+                    keywords: 'approach philosophy principles systemizer designing in code verifiable outcomes craft builder',
                     action: () => {
                         this.close();
-                        const target = document.getElementById('approach');
-                        if (target) {
-                            target.scrollIntoView({ behavior: 'smooth' });
-                        } else {
-                            window.location.href = `${homeHref}#approach`;
-                        }
+                        window.location.href = `${prefix}about.html#builder`;
                     }
                 },
                 {
                     id: 'nav-about',
                     group: 'Navigation & Overview',
                     icon: 'RS',
-                    title: 'About Ryan Schmidt — Leadership & Background',
+                    title: 'About Ryan Schmidt: Leadership & Background',
                     sub: '6+ years in B2B SaaS, Design Systems, and mentoring 1,500+ designers',
                     badge: 'Profile ↵',
                     keywords: 'about bio leadership experience career history philosophy background ryan schmidt mentor designlab 6+ years',
@@ -453,7 +456,7 @@
                     id: 'nav-home',
                     group: 'Navigation & Overview',
                     icon: '⌂',
-                    title: 'Home — Editorial Index',
+                    title: 'Home: Editorial Index',
                     sub: 'Return to primary portfolio editorial hero and index',
                     badge: 'Home ↵',
                     keywords: 'home index start main portfolio top hero',
@@ -487,7 +490,7 @@
                     group: 'Quick Actions',
                     icon: '↗',
                     title: 'Connect on LinkedIn',
-                    sub: 'linkedin.com/in/ryanschmidt1989 — Message or network directly',
+                    sub: 'linkedin.com/in/ryanschmidt1989 (message or network directly)',
                     badge: 'Connect ↗',
                     keywords: 'linkedin contact hire reach out message connect social network email',
                     action: () => {
@@ -689,6 +692,7 @@
                 }
 
                 const row = document.createElement('div');
+                row.id = `rs-cmd-item-${idx}`;
                 row.className = `rs-cmd-item${idx === this.activeIndex ? ' is-selected' : ''}`;
                 row.setAttribute('role', 'option');
                 row.setAttribute('aria-selected', idx === this.activeIndex ? 'true' : 'false');
@@ -726,9 +730,11 @@
         setActiveIndex(index) {
             if (this.filteredItems.length === 0) {
                 this.activeIndex = 0;
+                this.inputEl.removeAttribute('aria-activedescendant');
                 return;
             }
             this.activeIndex = Math.max(0, Math.min(index, this.filteredItems.length - 1));
+            this.inputEl.setAttribute('aria-activedescendant', `rs-cmd-item-${this.activeIndex}`);
             const rows = this.resultsEl.querySelectorAll('.rs-cmd-item');
             rows.forEach((row, idx) => {
                 const isSelected = idx === this.activeIndex;
@@ -787,8 +793,10 @@
         }
 
         open(initialQuery = '') {
+            this.lastFocusedEl = document.activeElement;
             this.isOpen = true;
             this.overlay.classList.add('is-open');
+            this.inputEl.setAttribute('aria-expanded', 'true');
             const q = String(initialQuery || '');
             this.inputEl.value = q;
             this.renderList(q);
@@ -803,7 +811,11 @@
         close() {
             this.isOpen = false;
             this.overlay.classList.remove('is-open');
+            this.inputEl.setAttribute('aria-expanded', 'false');
             this.inputEl.blur();
+            if (this.lastFocusedEl && typeof this.lastFocusedEl.focus === 'function') {
+                this.lastFocusedEl.focus();
+            }
         }
 
         toggle() {

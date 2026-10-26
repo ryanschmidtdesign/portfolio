@@ -757,16 +757,15 @@
       video.style.cursor = 'pointer';
       video.setAttribute('title', 'Click to play or pause video');
       video.setAttribute('tabindex', '0');
-      video.setAttribute('role', 'button');
-      video.setAttribute('aria-pressed', video.paused ? 'false' : 'true');
+      video.setAttribute('aria-label', video.paused ? 'Video demonstration (paused): click to play' : 'Video demonstration (playing): click to pause');
 
       const togglePlay = () => {
         if (video.paused) {
           video.play();
-          video.setAttribute('aria-pressed', 'true');
+          video.setAttribute('aria-label', 'Video demonstration (playing): click to pause');
         } else {
           video.pause();
-          video.setAttribute('aria-pressed', 'false');
+          video.setAttribute('aria-label', 'Video demonstration (paused): click to play');
         }
       };
 

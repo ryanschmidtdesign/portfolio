@@ -28,7 +28,7 @@
     <!-- Fonts (IBM Plex Sans + Newsreader italic serif for editorial accents) -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <link rel="stylesheet" href="../styles.css?v=51">
+    <link rel="stylesheet" href="../styles.css?v=52">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -258,6 +258,7 @@
 </head>
 
   <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <!-- Conventional Top Navigation Landmark -->
     <header class="site-header" role="banner">
       <div class="site-header__inner">
@@ -685,6 +686,9 @@
           <p>
             Qualitative feedback from HR executives confirmed that bringing conversational synthesis into the main search flow solved their biggest friction point: getting verified research takeaways without digging through internal taxonomies. Daily active portal usage doubled, and Ahri sessions increased 500% in the weeks following release.
           </p>
+          <p style="font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.5; border-left: 2px solid var(--accent); padding-left: var(--space-3); margin-block: var(--space-4);">
+            <em>Attribution context:</em> Because Ahri became the primary search surface, total session volume naturally surged with overall traffic routing. However, post-launch member telemetry and qualitative interviews validated deeper genuine engagement: session duration increased, follow-up query rates rose, and members consistently reported saving 10 to 15 minutes per research inquiry compared to manual PDF downloads.
+          </p>
 
           <h3>Taking the work through release</h3>
           <p>
@@ -725,9 +729,15 @@
                     <strong>Ask Ahri Synthesis</strong>
                     <span class="ahri-latency">AI response view</span>
                   </div>
-                  <p class="ahri-bubble-body">
-                    Ahri synthesizes research findings and practical recommendations directly relevant to the submitted query, summarizing key takeaways from across i4cp's library.
-                  </p>
+                  <div class="ahri-bubble-body" style="font-size: 0.88rem; line-height: 1.55; color: var(--text-primary);">
+                    <p style="margin-bottom: 0.75rem;"><strong>High-performance organizations are 2.8× more likely</strong> to maintain transparent succession pools below the C-suite (<em>i4cp Succession Readiness Study</em>). Key benchmark takeaways:</p>
+                    <ul style="margin: 0 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; list-style-type: disc;">
+                      <li><strong>Future capabilities over current roles:</strong> Candidate readiness is scored against evolving 3-year strategic needs rather than historical job descriptions.</li>
+                      <li><strong>Talent pool visibility:</strong> 64% of top boards review succession depth two tiers down on a quarterly cadence.</li>
+                      <li><strong>Transparent development plans:</strong> Succession candidate retention increases 31% when explicit transition roadmaps are established early.</li>
+                    </ul>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0;"><em>Sources: i4cp Executive Succession Planning Report · Succession Pipeline Risk Matrix</em></p>
+                  </div>
                   <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border-subtle, rgba(0,0,0,0.08)); display: flex; justify-content: flex-end;">
                     <button type="button" class="see-all-results-btn" data-trigger-traditional style="background: none; border: none; color: var(--accent); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: var(--radius-sm);">
                       See all results →
@@ -805,16 +815,15 @@
                 </svg>
               </button>
             </div>
-      </div>
         </form>
       </div>
     </div>
 
     <!-- GSAP for smooth chat widget animations -->
-    <script src="../scripts/cli-mode.js?v=51" defer></script>
-    <script src="../scripts/scripts.js?v=51" defer></script>
+    <script src="../scripts/cli-mode.js?v=52" defer></script>
+    <script src="../scripts/scripts.js?v=52" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=51" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=52" defer></script>
     <script src="../scripts/image-splitter.js" defer></script>
     <footer class="site-footer">
       <a class="site-footer-brand" href="../index.html">
@@ -822,7 +831,7 @@
         Ryan Schmidt — Senior B2B SaaS Product Designer
       </a>
       <div style="display:flex; gap:1rem; align-items:center;">
-      <a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="color:var(--text-secondary); text-decoration:none; font-size:var(--font-xs);">GitHub ↗</a>
+      <a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="color:var(--text-secondary); text-decoration:none; font-size:var(--fs-xs);">GitHub ↗</a>
       <p>&copy; 2026 Ryan Schmidt</p>
     </div>
     </footer>
