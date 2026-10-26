@@ -118,16 +118,37 @@
 
   --focus-outline-offset: 3px;
 
-  /* Motion (elegant + consistent) */
+  /* Motion (elegant + consistent + spring physics) */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-spring-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-hud-sweep: cubic-bezier(0.19, 1, 0.22, 1);
   --dur-1: 120ms;
   --dur-2: 180ms;
   --dur-3: 300ms;
   --dur-4: 450ms;
   --transition-base: var(--dur-2) var(--ease-out);
   --transition-fast: var(--dur-1) var(--ease-out);
+  --transition-spring: 260ms var(--ease-spring-snappy);
   --blur-md: blur(12px);
+
+  /* === Obsidian Westworld / Star Wars Telemetry Surface Tier === */
+  --surface-obsidian-void: #050608;
+  --surface-obsidian-base: #08090C;
+  --surface-obsidian-panel: #0D0E12;
+  --surface-obsidian-elevated: #13151B;
+  --surface-obsidian-glass: rgba(10, 11, 15, 0.90);
+  --surface-obsidian-border: rgba(255, 255, 255, 0.08);
+  --surface-obsidian-border-strong: rgba(255, 255, 255, 0.16);
+  --surface-obsidian-glow: rgba(200, 90, 50, 0.25);
+  --surface-obsidian-phosphor: rgba(224, 107, 62, 0.42);
+  --text-obsidian-bright: #F5F5F7;
+  --text-obsidian-secondary: #A1A4B0;
+  --text-obsidian-dim: #7C7E86;
+  --text-obsidian-terracotta: #E06B3E;
+  --text-obsidian-amber: #F59E0B;
+  --text-obsidian-emerald: #10B981;
 
   /* === Futuristic Contemporary Terracotta & Ceramic Palette === */
   --gray-100: #F7F5F0;

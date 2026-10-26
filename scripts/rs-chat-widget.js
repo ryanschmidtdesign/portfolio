@@ -64,36 +64,52 @@
       }
       .ui *, .ui *::before, .ui *::after { box-sizing: inherit; }
 
-      /* Drawer — Liquid Obsidian Glass */
+      /* Drawer — Obsidian Westworld (Delos) / Star Wars Telemetry Chassis */
       .panel {
         position: fixed;
         top: auto;
         right: 20px;
         bottom: calc(20px + env(safe-area-inset-bottom, 0px));
         width: min(580px, calc(100vw - 28px));
-        height: min(880px, calc(100vh - 40px));
+        height: min(860px, calc(100vh - 40px));
         max-height: calc(100vh - 40px);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        background: linear-gradient(180deg, rgba(28, 25, 22, 0.82) 0%, rgba(12, 11, 10, 0.90) 100%);
-        backdrop-filter: blur(36px) saturate(220%) brightness(95%);
-        -webkit-backdrop-filter: blur(36px) saturate(220%) brightness(95%);
-        color: #F7F5F0;
-        border: 1px solid rgba(255, 255, 255, 0.16);
+        background:
+          radial-gradient(520px circle at 50% 0%, rgba(200, 90, 50, 0.10), transparent 65%),
+          linear-gradient(180deg, #0D0F14 0%, #08090C 100%);
+        backdrop-filter: blur(36px) saturate(200%);
+        -webkit-backdrop-filter: blur(36px) saturate(200%);
+        color: #F5F5F7;
+        border: 1px solid rgba(255, 255, 255, 0.12);
         box-shadow:
-          0 36px 90px -15px rgba(0, 0, 0, 0.72),
-          0 12px 32px -6px rgba(0, 0, 0, 0.5),
-          inset 0 1.5px 1px rgba(255, 255, 255, 0.28),
-          inset 0 -1px 1px rgba(0, 0, 0, 0.6);
+          0 0 0 1px rgba(200, 90, 50, 0.15),
+          0 36px 90px -12px rgba(0, 0, 0, 0.88),
+          0 0 42px -10px rgba(200, 90, 50, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.14);
         border-radius: 12px;
         visibility: hidden;
         opacity: 0;
         pointer-events: none;
-        transform: translateY(18px) scale(0.985);
-        transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease, visibility 200ms ease;
+        transform: translateY(18px) scale(0.98);
+        transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease, visibility 220ms ease;
         z-index: 2147482999;
         overflow: hidden;
+      }
+      .panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.01) 0px,
+          rgba(255, 255, 255, 0.01) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+        pointer-events: none;
+        z-index: 2;
       }
       @media (max-width: 640px) {
         .panel {
@@ -113,6 +129,8 @@
         transform: translateY(0) scale(1);
       }
       .chat-body {
+        position: relative;
+        z-index: 3;
         display: flex;
         flex-direction: column;
         flex: 1 1 auto;
@@ -124,16 +142,16 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 14px 18px 12px;
-        background: rgba(255, 255, 255, 0.04);
+        padding: 13px 18px 11px;
+        background: rgba(255, 255, 255, 0.025);
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        color: #F7F5F0;
+        color: #F5F5F7;
         flex-shrink: 0;
       }
       .hdr-title-group {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 3px;
       }
       .hdr-title-row {
         display: flex;
@@ -144,22 +162,23 @@
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: var(--accent);
-        box-shadow: 0 0 8px rgba(200, 90, 50, 0.8);
+        background: var(--accent, #E06B3E);
+        box-shadow: 0 0 10px rgba(224, 107, 62, 0.85);
       }
       .hdr-title {
         margin: 0;
         font-weight: 700;
-        font-size: 14px;
+        font-size: 13.5px;
         letter-spacing: -0.01em;
-        color: #F7F5F0;
+        color: #F5F5F7;
       }
       .hdr-sub {
         margin: 0;
         font-family: var(--font-mono);
         font-size: 10.5px;
-        color: rgba(247, 245, 240, 0.55);
-        letter-spacing: 0.02em;
+        color: #8E929F;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
       }
       .hdr-actions {
         display: flex;
@@ -171,8 +190,8 @@
         height: 30px;
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 6px;
-        background: rgba(255, 255, 255, 0.06);
-        color: rgba(247, 245, 240, 0.85);
+        background: rgba(255, 255, 255, 0.05);
+        color: #A1A4B0;
         font-size: 0.85rem;
         cursor: pointer;
         display: grid;
@@ -181,8 +200,8 @@
         transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .hdr-close:hover {
-        background: rgba(200, 90, 50, 0.3);
-        border-color: var(--accent);
+        background: rgba(200, 90, 50, 0.25);
+        border-color: rgba(224, 107, 62, 0.55);
         color: #FFFFFF;
       }
       .hdr-close:focus-visible {
@@ -662,8 +681,11 @@
         <div class="chat-body">
           <div class="hdr">
             <div class="hdr-title-group">
-              <h2 id="rs-chat-title" class="hdr-title">Ryan Schmidt · AI Discussion</h2>
-              <p class="hdr-sub">Ask questions about Ryan's work, design process, or role fit.</p>
+              <div class="hdr-title-row">
+                <span class="hdr-status-dot" aria-hidden="true"></span>
+                <h2 id="rs-chat-title" class="hdr-title">Ryan Schmidt · AI Telemetry Console</h2>
+              </div>
+              <p class="hdr-sub">SYS_ONLINE // GROUNDED PORTFOLIO RAG · CASE STUDIES &amp; ROLE FIT</p>
               <p id="rs-chat-desc" class="visually-hidden">
                 Ask questions about Ryan's case studies, design work, or fit for a role.
               </p>
@@ -869,6 +891,7 @@ if (savedHist.length > 0) {
 
     panel.classList.add('open');
     backdrop.classList.add('open');
+    window.rsAudioFX?.playBoot?.();
 
     (inputEl || panel)?.focus?.();
     typewriterStop();
@@ -884,6 +907,7 @@ if (savedHist.length > 0) {
 
     panel.classList.remove('open');
     backdrop.classList.remove('open');
+    window.rsAudioFX?.playClose?.();
 
     const dockEls = getDockElements();
     dockEls.forEach(el => {

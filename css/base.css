@@ -67,9 +67,9 @@ html {
 
 /* Global Selection Highlight */
 ::selection {
-  background-color: var(--spark);
+  background-color: rgba(200, 90, 50, 0.88);
   color: #FFFFFF;
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
 }
 
 /* Global Focus State Polish */
@@ -201,9 +201,9 @@ a:hover {
   background-size: 0% 1px;
   background-position: 0 100%;
   background-repeat: no-repeat;
-  border-bottom: 1px solid rgba(0, 85, 255, 0.18);
+  border-bottom: 1px solid rgba(200, 90, 50, 0.26);
   padding-bottom: 1px;
-  transition: background-size 260ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms ease;
+  transition: background-size 260ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms ease, border-color 200ms ease;
 }
 
 .case-study p a:not([class]):hover,
@@ -218,6 +218,12 @@ a,
 button,
 [role="menuitem"] {
   touch-action: manipulation;
+}
+
+button:not(:disabled):active,
+[role="button"]:not([aria-disabled="true"]):active,
+.btn:active {
+  transform: scale(0.98);
 }
 
 button,
