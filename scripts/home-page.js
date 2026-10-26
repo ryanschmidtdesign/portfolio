@@ -31,7 +31,9 @@
     const scrollPos = window.scrollY + 200;
     const sections = [
       { id: 'top', el: document.getElementById('top') },
-      { id: 'work', el: document.getElementById('work') }
+      { id: 'work', el: document.getElementById('work') },
+      { id: 'approach', el: document.getElementById('approach') },
+      { id: 'about', el: document.getElementById('about') }
     ];
 
     let currentId = 'top';

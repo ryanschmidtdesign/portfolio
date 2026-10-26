@@ -1665,16 +1665,17 @@ body.is-home {
 
 .home-omnibar-section,
 .subpage-omnibar-dock {
-  position: fixed;
-  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(692px, calc(100vw - 32px));
-  max-width: 692px;
-  z-index: 260;
-  pointer-events: auto;
-  margin: 0;
-  padding: 0;
+  position: fixed !important;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(692px, calc(100vw - 32px)) !important;
+  max-width: 692px !important;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
   transition:
     transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),

@@ -58,7 +58,7 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
-  <link rel="stylesheet" href="./styles.css?v=58">
+  <link rel="stylesheet" href="./styles.css?v=59">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -235,6 +235,7 @@
 
       <nav class="site-header__nav" aria-label="Main navigation">
         <a href="#work" class="site-header__link">Work</a>
+        <a href="#approach" class="site-header__link">Philosophy</a>
         <a href="pages/about.html" class="site-header__link">About</a>
         <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="site-header__link site-header__link--ext">
           <span>Resume</span>
@@ -448,6 +449,66 @@
         </article>
       </div>
     </section>
+
+    <!-- Design Principles / Approach -->
+    <section class="home-section" id="approach" aria-label="Design Philosophy &amp; Approach">
+      <div class="home-section__header">
+        <h2 class="home-section__title">Design principles</h2>
+        <p class="home-section__desc">
+          How I approach software design, cross-functional collaboration, and measurable business outcomes.
+        </p>
+      </div>
+
+      <div class="home-principles-grid">
+        <div class="home-principle-card">
+          <span class="home-principle-num">01</span>
+          <h3 class="home-principle-title">Systemizer Instinct</h3>
+          <p class="home-principle-text">
+            Enterprise products fail when components branch into ad-hoc one-offs. I build extensible component architectures, token hierarchies, and pattern libraries that let product teams ship fast without technical or design debt.
+          </p>
+        </div>
+        <div class="home-principle-card">
+          <span class="home-principle-num">02</span>
+          <h3 class="home-principle-title">Designing in Code</h3>
+          <p class="home-principle-text">
+            Static Figma mocks hide latency, responsive edge cases, and real kinetic weight. I build prototypes in semantic HTML, CSS, and modern JavaScript to compress discovery loops and validate interactions before engineering sprints begin.
+          </p>
+        </div>
+        <div class="home-principle-card">
+          <span class="home-principle-num">03</span>
+          <h3 class="home-principle-title">Verifiable Outcomes</h3>
+          <p class="home-principle-text">
+            Design craft is only as valuable as the behavior it shifts. Every case study anchors on measurable results: +71% beta engagement, +18% MRR, +500% feature activation, or 60% faster customer audit loops.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Background & Executive About Summary -->
+    <section class="home-section home-about-section" id="about" aria-label="Background &amp; Experience">
+      <div class="home-about-card">
+        <div class="home-about-card__content">
+          <span class="home-section__eyebrow">03 / Background</span>
+          <h2 class="home-about-card__title">Senior SaaS Product Designer &amp; UX Engineer</h2>
+          <p class="home-about-card__text">
+            I’ve spent 6+ years at the seam of product design, information architecture, and frontend engineering. Over 5 years at Designlab, I mentored 1,500+ emerging designers and facilitated 400+ critique sessions.
+          </p>
+          <p class="home-about-card__text">
+            Based in Austin, TX. Open to Senior and Staff Product Designer or Design Engineering roles at design-led teams.
+          </p>
+          <div class="home-about-card__actions">
+            <a href="pages/about.html" class="home-btn home-btn--primary">
+              <span>Read Full Background &amp; Leadership</span>
+              <span aria-hidden="true">→</span>
+            </a>
+            <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="home-btn home-btn--secondary">
+              <span>Download Resume (PDF)</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Persistent Floating CLI & Omnibar Dock -->
@@ -517,11 +578,11 @@
     </div>
   </footer>
 
-  <script src="./scripts/cli-mode.js?v=58" defer></script>
-  <script src="./scripts/magnetic.js?v=58" defer></script>
-  <script src="./scripts/scripts.js?v=58" defer></script>
-  <script src="./scripts/home-page.js?v=58" defer></script>
-  <script src="./scripts/rs-chat-widget.js?v=58" defer></script>
+  <script src="./scripts/cli-mode.js?v=59" defer></script>
+  <script src="./scripts/magnetic.js?v=59" defer></script>
+  <script src="./scripts/scripts.js?v=59" defer></script>
+  <script src="./scripts/home-page.js?v=59" defer></script>
+  <script src="./scripts/rs-chat-widget.js?v=59" defer></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((regs) => {
