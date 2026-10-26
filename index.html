@@ -58,7 +58,7 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
-  <link rel="stylesheet" href="./styles.css?v=60">
+  <link rel="stylesheet" href="./styles.css?v=61">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -403,7 +403,12 @@
         </article>
 
         <!-- Project 4: AI Coding Portfolio -->
-        <article class="home-project-card home-project-card--text-focused">
+        <article class="home-project-card">
+          <a href="pages/ai-coding-portfolio.html" class="home-project-card__media-link" aria-label="Read Building My Portfolio in Code case study">
+            <div class="home-project-card__media">
+              <img src="assets/case-studies/ai-coding-portfolio/interactive-component.webp" alt="Design token system, semantic HTML architecture, and browser testing for Ryan Schmidt portfolio" width="1440" height="751" loading="lazy">
+            </div>
+          </a>
           <div class="home-project-card__body">
             <div class="home-project-card__top">
               <span class="home-kpi-badge">Lab · Designed &amp; Built in Code</span>
@@ -523,16 +528,13 @@
       <div class="rs-dock-telemetry">
         <div class="rs-dock-telemetry__left">
           <span class="rs-dock-led" aria-hidden="true"></span>
-          <span class="rs-dock-sys-id">SYS_ONLINE // DELOS_CLI</span>
-          <span class="rs-dock-sep" aria-hidden="true">·</span>
-          <span class="rs-dock-sector" id="rsDockSector">SEC // 00_OVERVIEW</span>
+          <span class="rs-dock-sector" id="rsDockSector">00 / Overview</span>
         </div>
         <div class="rs-dock-telemetry__right">
           <canvas class="rs-dock-wave" id="rsDockWaveCanvas" width="58" height="14" aria-hidden="true"></canvas>
           <div class="rs-dock-quick-pills">
-            <button type="button" class="rs-dock-pill" data-ask-ai="Evaluate Ryan's fit for a Senior or Staff Product Designer role.">[◈ ROLE_FIT]</button>
-            <button type="button" class="rs-dock-pill" data-dock-cmd="tokens" title="Cycle Phosphor Accent Theme">[◐ PHOSPHOR]</button>
-            <button type="button" class="rs-dock-pill rs-dock-pill--accent" data-cmdk-trigger title="Open Orbital Command Console (⌘K)">[∷ HUD]</button>
+            <button type="button" class="rs-dock-pill" data-ask-ai="Evaluate Ryan's fit for a Senior or Staff Product Designer role.">Role Fit</button>
+            <button type="button" class="rs-dock-pill rs-dock-pill--accent" data-cmdk-trigger title="Open Command Palette (⌘K)">⌘K Menu</button>
           </div>
         </div>
       </div>
@@ -578,11 +580,11 @@
     </div>
   </footer>
 
-  <script src="./scripts/cli-mode.js?v=60" defer></script>
-  <script src="./scripts/magnetic.js?v=60" defer></script>
-  <script src="./scripts/scripts.js?v=60" defer></script>
-  <script src="./scripts/home-page.js?v=60" defer></script>
-  <script src="./scripts/rs-chat-widget.js?v=60" defer></script>
+  <script src="./scripts/cli-mode.js?v=61" defer></script>
+  <script src="./scripts/magnetic.js?v=61" defer></script>
+  <script src="./scripts/scripts.js?v=61" defer></script>
+  <script src="./scripts/home-page.js?v=61" defer></script>
+  <script src="./scripts/rs-chat-widget.js?v=61" defer></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((regs) => {

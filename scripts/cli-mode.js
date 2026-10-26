@@ -261,15 +261,16 @@
                     width: min(650px, 100%);
                     max-height: 82vh;
                     background:
-                        radial-gradient(550px circle at var(--modal-mx, 50%) var(--modal-my, 0%), rgba(200, 90, 50, 0.11), transparent 65%),
-                        linear-gradient(180deg, #0D0F14 0%, #08090C 100%);
-                    border: 1px solid rgba(255, 255, 255, 0.12);
+                        radial-gradient(550px circle at var(--modal-mx, 50%) var(--modal-my, 0%), rgba(200, 90, 50, 0.12), transparent 70%),
+                        linear-gradient(180deg, rgba(14, 16, 22, 0.85) 0%, rgba(6, 7, 10, 0.94) 100%);
+                    backdrop-filter: blur(28px) saturate(180%);
+                    -webkit-backdrop-filter: blur(28px) saturate(180%);
+                    border: 1px solid rgba(255, 255, 255, 0.14);
                     border-radius: 12px;
                     box-shadow:
-                        0 0 0 1px rgba(200, 90, 50, 0.16),
-                        0 36px 90px -12px rgba(0, 0, 0, 0.88),
-                        0 0 48px -10px rgba(200, 90, 50, 0.22),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+                        0 36px 90px -12px rgba(0, 0, 0, 0.82),
+                        0 0 32px -8px rgba(200, 90, 50, 0.16),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.22);
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
@@ -877,17 +878,13 @@
                     <div class="rs-cmd-telemetry">
                         <div class="rs-cmd-telemetry__left">
                             <span class="rs-cmd-led" aria-hidden="true"></span>
-                            <span class="rs-cmd-sys-tag">SYS_OK // DELOS_V58</span>
-                            <span class="rs-cmd-signal" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+                            <span class="rs-cmd-sys-tag">Command Palette</span>
                             <span class="rs-cmd-sys-divider" aria-hidden="true">·</span>
-                            <span class="rs-cmd-sys-meta" id="rsCmdTelemetryCoord">SEC: 0x04A · 08ms</span>
+                            <span class="rs-cmd-sys-meta" id="rsCmdTelemetryCoord">Navigation &amp; Actions</span>
                         </div>
                         <div class="rs-cmd-telemetry__right">
-                            <button type="button" class="rs-cmd-hud-btn${sfxActiveClass}" id="rsCmdSfxBtn" aria-pressed="${audioFX.enabled}" title="Toggle Procedural Terminal Audio (Muted by default)">
-                                <span class="rs-cmd-btn-text">[SFX: ${sfxState}]</span>
-                            </button>
-                            <button type="button" class="rs-cmd-hud-btn" id="rsCmdThemeBtn" title="Cycle Phosphor Accent Theme">
-                                <span id="rsCmdThemeLabel" class="rs-cmd-btn-text">[PHOSPHOR: TERRACOTTA]</span>
+                            <button type="button" class="rs-cmd-hud-btn${sfxActiveClass}" id="rsCmdSfxBtn" aria-pressed="${audioFX.enabled}" title="Toggle sound effects (Muted by default)">
+                                <span class="rs-cmd-btn-text">Sound: ${sfxState}</span>
                             </button>
                         </div>
                     </div>
@@ -915,14 +912,14 @@
 
                     <div class="rs-cmd-footer">
                         <div class="rs-cmd-footer__brand">
-                            <span class="rs-cmd-footer__target-prefix">TARGET //</span>
-                            <span id="rsCmdFooterTarget">RYAN_SCHMIDT · PRINCIPAL_PORTFOLIO</span>
+                            <span class="rs-cmd-footer__target-prefix">Target:</span>
+                            <span id="rsCmdFooterTarget">Ryan Schmidt · Product Design Portfolio</span>
                             <span class="rs-cmd-footer__cursor" aria-hidden="true"></span>
                         </div>
                         <div class="rs-cmd-footer__shortcuts">
-                            <span><kbd class="rs-cmd-key">↑↓</kbd>nav</span>
-                            <span><kbd class="rs-cmd-key">↵</kbd>exec</span>
-                            <span><kbd class="rs-cmd-key">esc</kbd>abort</span>
+                            <span><kbd class="rs-cmd-key">↑↓</kbd>navigate</span>
+                            <span><kbd class="rs-cmd-key">↵</kbd>open</span>
+                            <span><kbd class="rs-cmd-key">esc</kbd>close</span>
                         </div>
                     </div>
                 </div>
@@ -1108,8 +1105,8 @@
                     icon: '★',
                     title: 'Selected Work & Shipped Outcomes',
                     sub: '4 featured case studies across BI, supply chain, and enterprise AI',
-                    badge: 'SEC_01 // INDEX',
-                    targetPath: 'LOC // index.html#work',
+                    badge: 'Index',
+                    targetPath: 'index.html#work',
                     keywords: 'work selected projects case studies shipped outcomes portfolio overview index',
                     action: () => {
                         this.close();
@@ -1125,14 +1122,19 @@
                     id: 'nav-approach',
                     group: '02 // Navigation Matrix',
                     icon: '◇',
-                    title: 'Design Philosophy & Approach',
+                    title: 'Design Philosophy & Principles',
                     sub: 'Systemizer instinct, designing in code, and verifiable business outcomes',
-                    badge: 'SEC_02 // APPROACH',
-                    targetPath: 'LOC // pages/about.html#builder',
+                    badge: 'Philosophy',
+                    targetPath: 'index.html#approach',
                     keywords: 'approach philosophy principles systemizer designing in code verifiable outcomes craft builder',
                     action: () => {
                         this.close();
-                        window.location.href = `${prefix}about.html#builder`;
+                        const target = document.getElementById('approach');
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                            window.location.href = `${homeHref}#approach`;
+                        }
                     }
                 },
                 {
@@ -1141,8 +1143,8 @@
                     icon: 'RS',
                     title: 'About Ryan Schmidt: Leadership & Background',
                     sub: '6+ years in B2B SaaS, Design Systems, and mentoring 1,500+ designers',
-                    badge: 'PAGE // PROFILE',
-                    targetPath: 'LOC // pages/about.html',
+                    badge: 'About Page',
+                    targetPath: 'pages/about.html',
                     keywords: 'about bio leadership experience career history philosophy background ryan schmidt mentor designlab 6+ years',
                     action: () => { window.location.href = `${prefix}about.html`; }
                 },
@@ -1152,8 +1154,8 @@
                     icon: '⌂',
                     title: 'Home: Editorial Index',
                     sub: 'Return to primary portfolio editorial hero and index',
-                    badge: 'LOC // ROOT',
-                    targetPath: 'LOC // index.html#top',
+                    badge: 'Home',
+                    targetPath: 'index.html#top',
                     keywords: 'home index start main portfolio top hero',
                     action: () => {
                         this.close();
@@ -1174,7 +1176,7 @@
                     title: 'View Resume Dossier (PDF)',
                     sub: 'Open ryan-schmidt-resume.pdf in a new tab',
                     badge: 'PDF ↗',
-                    targetPath: 'EXEC // assets/ryan-schmidt-resume.pdf',
+                    targetPath: 'assets/ryan-schmidt-resume.pdf',
                     keywords: 'resume cv pdf download hire background experience skills ryan schmidt',
                     action: () => {
                         window.open(resumePath, '_blank', 'noopener');
@@ -1187,8 +1189,8 @@
                     icon: '@',
                     title: 'Email Ryan Schmidt',
                     sub: 'ryanschmidt1989@gmail.com (opens default email client)',
-                    badge: 'MAILTO ↗',
-                    targetPath: 'EXEC // mailto:ryanschmidt1989@gmail.com',
+                    badge: 'Email ↗',
+                    targetPath: 'mailto:ryanschmidt1989@gmail.com',
                     keywords: 'email contact hire reach out message ryanschmidt1989 gmail write direct inbox mailto',
                     action: () => {
                         window.location.href = 'mailto:ryanschmidt1989@gmail.com';
@@ -1201,25 +1203,12 @@
                     icon: '↗',
                     title: 'Connect on LinkedIn',
                     sub: 'linkedin.com/in/ryanschmidt1989 (message or network directly)',
-                    badge: 'EXT_LINK ↗',
-                    targetPath: 'EXEC // linkedin.com/in/ryanschmidt1989',
+                    badge: 'LinkedIn ↗',
+                    targetPath: 'linkedin.com/in/ryanschmidt1989',
                     keywords: 'linkedin contact hire reach out message connect social network',
                     action: () => {
                         window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
                         this.close();
-                    }
-                },
-                {
-                    id: 'act-tokens',
-                    group: '03 // Direct Protocols',
-                    icon: '◐',
-                    title: 'Cycle Phosphor Accent Telemetry (/tokens)',
-                    sub: 'Switch live interface accent between Terracotta, Imperial Amber, and Emerald',
-                    badge: 'SYS // THEME',
-                    targetPath: 'SYS // CSS_CUSTOM_PROPERTIES',
-                    keywords: 'tokens theme color accent phosphor terracotta amber emerald mode',
-                    action: () => {
-                        this.cycleTheme();
                     }
                 }
             ];
@@ -1305,9 +1294,7 @@
                     this.modalEl.style.setProperty('--modal-my', `${my.toFixed(0)}px`);
                 }
                 if (this.coordEl) {
-                    const hexX = Math.min(255, Math.max(0, Math.floor(this.pointerX * 255))).toString(16).toUpperCase().padStart(2, '0');
-                    const hexY = Math.min(255, Math.max(0, Math.floor(this.pointerY * 255))).toString(16).toUpperCase().padStart(2, '0');
-                    this.coordEl.textContent = `VEC: 0x${hexX}${hexY} · LATENCY: 08ms`;
+                    this.coordEl.textContent = 'Navigation & Actions';
                 }
             });
 
@@ -1428,14 +1415,12 @@
                 // Append direct AI query dispatch option whenever user types a custom query
                 matches.push({
                     id: 'act-ai-query',
-                    group: '04 // Neural Portfolio Synthesis',
+                    group: '04 // Ask AI Assistant',
                     icon: '✦',
-                    title: `Transmit Query to Portfolio AI: "${raw}"`,
-                    sub: 'Synthesize grounded answer from Ryan’s case studies and role-fit knowledge base',
+                    title: `Ask AI: "${raw}"`,
+                    sub: 'Search Ryan’s case studies, shipped outcomes, and role fit',
                     badge: 'Ask AI ↵',
-                    kpi: 'RAG_LIVE',
-                    kpiType: 'terracotta',
-                    targetPath: 'AI_STREAM // /api/chat',
+                    targetPath: 'AI / Assistant',
                     action: () => {
                         this.triggerAIChat(raw);
                     }
@@ -1625,12 +1610,12 @@
 
     function getPageSectorLabel() {
         const path = (window.location.pathname || '/').toLowerCase();
-        if (path.includes('dashboard')) return 'SEC // 01_DASHBOARD_BI';
-        if (path.includes('inventory')) return 'SEC // 02_INVENTORY_PO';
-        if (path.includes('member-portal')) return 'SEC // 03_I4CP_RESEARCH';
-        if (path.includes('ai-coding-portfolio')) return 'SEC // 04_AI_ARCHITECTURE';
-        if (path.includes('about')) return 'SEC // 05_OPERATOR_BIO';
-        return 'SEC // 00_OVERVIEW';
+        if (path.includes('dashboard')) return '01 / Dashboards';
+        if (path.includes('inventory')) return '02 / Inventory';
+        if (path.includes('member-portal')) return '03 / Member Portal';
+        if (path.includes('ai-coding-portfolio')) return '04 / Portfolio in Code';
+        if (path.includes('about')) return 'About / Bio';
+        return '00 / Overview';
     }
 
     function initObsidianDock() {
@@ -1652,15 +1637,14 @@
                 tel.innerHTML = `
                     <div class="rs-dock-telemetry__left">
                         <span class="rs-dock-led"></span>
-                        <span class="rs-dock-sys-id">SYS_ONLINE // DELOS_CLI</span>
-                        <span class="rs-dock-sep">·</span>
                         <span class="rs-dock-sector" id="rsDockSector">${getPageSectorLabel()}</span>
-                        <canvas class="rs-dock-wave" id="rsDockWaveCanvas" width="76" height="14"></canvas>
                     </div>
                     <div class="rs-dock-telemetry__right">
-                        <button type="button" class="rs-dock-pill" data-dock-cmd="role_fit" data-ask-ai="Why is Ryan a strong fit for Senior or Principal Product Designer roles?">◈ ROLE_FIT</button>
-                        <button type="button" class="rs-dock-pill" data-dock-cmd="tokens">◐ PHOSPHOR</button>
-                        <button type="button" class="rs-dock-pill" data-cmdk-trigger>∷ HUD</button>
+                        <canvas class="rs-dock-wave" id="rsDockWaveCanvas" width="58" height="14"></canvas>
+                        <div class="rs-dock-quick-pills">
+                            <button type="button" class="rs-dock-pill" data-dock-cmd="role_fit" data-ask-ai="Why is Ryan a strong fit for Senior or Principal Product Designer roles?">Role Fit</button>
+                            <button type="button" class="rs-dock-pill" data-cmdk-trigger title="Open Command Palette (⌘K)">⌘K Menu</button>
+                        </div>
                     </div>
                 `;
                 const form = shell.querySelector('.home-omnibar-form, .subpage-omnibar-form');
@@ -1676,7 +1660,7 @@
                 const tag = document.createElement('span');
                 tag.className = 'rs-dock-prompt-tag';
                 tag.setAttribute('aria-hidden', 'true');
-                tag.textContent = 'RS://AI';
+                tag.textContent = 'AI';
                 topRow.prepend(tag);
             }
 
@@ -1685,20 +1669,6 @@
                 const rect = shell.getBoundingClientRect();
                 shell.style.setProperty('--mouse-x', `${(e.clientX - rect.left).toFixed(0)}px`);
                 shell.style.setProperty('--mouse-y', `${(e.clientY - rect.top).toFixed(0)}px`);
-            });
-        });
-
-        // Wire [data-dock-cmd="tokens"] button
-        document.querySelectorAll('[data-dock-cmd="tokens"]').forEach((btn) => {
-            if (btn.dataset.boundTokens) return;
-            btn.dataset.boundTokens = 'true';
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (window.rsCommandPalette) {
-                    window.rsCommandPalette.cycleTheme();
-                }
-                audioFX.playTick();
             });
         });
 
@@ -1766,19 +1736,17 @@
                     const approachEl = document.getElementById('approach');
                     const workEl = document.getElementById('work');
                     if (aboutEl && y >= aboutEl.offsetTop - 260) {
-                        sectorEl.textContent = 'SEC // 03_LEADERSHIP';
+                        sectorEl.textContent = '03 / Background';
                     } else if (approachEl && y >= approachEl.offsetTop - 260) {
-                        sectorEl.textContent = 'SEC // 02_PHILOSOPHY';
+                        sectorEl.textContent = '02 / Principles';
                     } else if (workEl && y >= workEl.offsetTop - 260) {
-                        sectorEl.textContent = 'SEC // 01_CASE_STUDIES';
+                        sectorEl.textContent = '01 / Case Studies';
                     } else {
-                        sectorEl.textContent = 'SEC // 00_OVERVIEW';
+                        sectorEl.textContent = '00 / Overview';
                     }
                 } else {
                     const base = getPageSectorLabel();
-                    const docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-                    const pct = Math.min(99, Math.max(0, Math.round((y / docH) * 100)));
-                    sectorEl.textContent = `${base} · ${String(pct).padStart(2, '0')}%`;
+                    sectorEl.textContent = base;
                 }
             };
             updateSector();

@@ -64,7 +64,7 @@
       }
       .ui *, .ui *::before, .ui *::after { box-sizing: inherit; }
 
-      /* Drawer — Obsidian Westworld (Delos) / Star Wars Telemetry Chassis */
+      /* Drawer — Obsidian Liquid Glass Console */
       .panel {
         position: fixed;
         top: auto;
@@ -77,17 +77,16 @@
         flex-direction: column;
         justify-content: flex-end;
         background:
-          radial-gradient(520px circle at 50% 0%, rgba(200, 90, 50, 0.10), transparent 65%),
-          linear-gradient(180deg, #0D0F14 0%, #08090C 100%);
-        backdrop-filter: blur(36px) saturate(200%);
-        -webkit-backdrop-filter: blur(36px) saturate(200%);
+          radial-gradient(520px circle at 50% 0%, rgba(200, 90, 50, 0.12), transparent 70%),
+          linear-gradient(180deg, rgba(14, 16, 22, 0.78) 0%, rgba(6, 7, 10, 0.90) 100%);
+        backdrop-filter: blur(28px) saturate(180%);
+        -webkit-backdrop-filter: blur(28px) saturate(180%);
         color: #F5F5F7;
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.14);
         box-shadow:
-          0 0 0 1px rgba(200, 90, 50, 0.15),
-          0 36px 90px -12px rgba(0, 0, 0, 0.88),
-          0 0 42px -10px rgba(200, 90, 50, 0.2),
-          inset 0 1px 0 rgba(255, 255, 255, 0.14);
+          0 36px 90px -12px rgba(0, 0, 0, 0.82),
+          0 0 32px -8px rgba(200, 90, 50, 0.16),
+          inset 0 1px 1px rgba(255, 255, 255, 0.22);
         border-radius: 12px;
         visibility: hidden;
         opacity: 0;
@@ -268,21 +267,21 @@
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 16px rgba(200, 90, 50, 0.14);
       }
       .msg.user::before {
-        content: "OPERATOR_QUERY // ❯";
+        content: "You";
         display: block;
         font-family: var(--font-mono);
-        font-size: 9.5px;
+        font-size: 10px;
         font-weight: 700;
-        letter-spacing: 0.08em;
-        color: #FF9870;
+        letter-spacing: 0.04em;
+        color: #FFB08E;
         margin-bottom: 4px;
-        opacity: 0.9;
+        opacity: 0.95;
       }
       .msg.bot {
         align-self: flex-start;
         width: 100%;
         max-width: 100%;
-        background: linear-gradient(180deg, rgba(22, 25, 34, 0.88) 0%, rgba(12, 14, 20, 0.94) 100%);
+        background: linear-gradient(180deg, rgba(22, 25, 34, 0.72) 0%, rgba(12, 14, 20, 0.86) 100%);
         border: 1px solid rgba(255, 255, 255, 0.11);
         border-left: 2.5px solid #E06B3E;
         color: #F2F3F7;
@@ -292,13 +291,13 @@
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09), 0 8px 24px rgba(0, 0, 0, 0.35);
       }
       .msg.bot:not([data-seeded="true"])::before {
-        content: "SYNTHESIS // RAG_GROUNDED · 08ms";
+        content: "Portfolio Assistant";
         display: block;
         font-family: var(--font-mono);
-        font-size: 9.5px;
+        font-size: 10px;
         font-weight: 700;
-        letter-spacing: 0.08em;
-        color: #8E93A4;
+        letter-spacing: 0.04em;
+        color: #A5A9B8;
         margin-bottom: 6px;
         padding-bottom: 5px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -755,15 +754,15 @@
             <div class="hdr-title-group">
               <div class="hdr-title-row">
                 <span class="hdr-status-dot" aria-hidden="true"></span>
-                <h2 id="rs-chat-title" class="hdr-title">Ryan Schmidt · AI Telemetry Console</h2>
+                <h2 id="rs-chat-title" class="hdr-title">Ryan Schmidt · Portfolio Assistant</h2>
               </div>
-              <p class="hdr-sub">SYS_ONLINE // GROUNDED PORTFOLIO RAG · CASE STUDIES &amp; ROLE FIT</p>
+              <p class="hdr-sub">Ask questions about case studies, design process, or role fit</p>
               <p id="rs-chat-desc" class="visually-hidden">
                 Ask questions about Ryan's case studies, design work, or fit for a role.
               </p>
             </div>
             <div class="hdr-actions">
-              <button class="hdr-close" id="hdrClose" aria-label="Close chat" type="button">[ESC ✕]</button>
+              <button class="hdr-close" id="hdrClose" aria-label="Close chat" type="button">Esc ✕</button>
             </div>
           </div>
 
