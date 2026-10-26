@@ -28,7 +28,7 @@
     <!-- Fonts (IBM Plex Sans + Newsreader italic serif for editorial accents) -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <link rel="stylesheet" href="../styles.css?v=50">
+    <link rel="stylesheet" href="../styles.css?v=51">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -432,21 +432,19 @@
               </p>
             </div>
 
-            <div class="ia-breadcrumb-trail" aria-label="Progressive drilldown trail">
-              <span class="crumb-segment is-active" data-crumb="areas">1. Areas of Focus</span>
+            <div class="ia-breadcrumb-trail" role="tablist" aria-label="Progressive drilldown trail">
+              <button type="button" class="crumb-segment is-active" id="crumb-areas" data-crumb="areas" role="tab" aria-selected="true" aria-controls="panel-ia-areas" tabindex="0">1. Areas of Focus</button>
               <span class="crumb-separator" aria-hidden="true">/</span>
-              <span class="crumb-segment" data-crumb="priorities">2. Priorities</span>
+              <button type="button" class="crumb-segment" id="crumb-priorities" data-crumb="priorities" role="tab" aria-selected="false" aria-controls="panel-ia-priorities" tabindex="-1">2. Priorities</button>
               <span class="crumb-separator" aria-hidden="true">/</span>
-              <span class="crumb-segment" data-crumb="topics">3. Topics</span>
+              <button type="button" class="crumb-segment" id="crumb-topics" data-crumb="topics" role="tab" aria-selected="false" aria-controls="panel-ia-topics" tabindex="-1">3. Topics</button>
               <span class="crumb-separator" aria-hidden="true">/</span>
-              <span class="crumb-segment" data-crumb="content">4. Content Assets</span>
+              <button type="button" class="crumb-segment" id="crumb-content" data-crumb="content" role="tab" aria-selected="false" aria-controls="panel-ia-content" tabindex="-1">4. Content Assets</button>
             </div>
 
             <div data-compare data-compare-default="areas">
-              <div class="compare-tabs">
-              </div>
               <div class="compare-panels">
-                <div class="compare-panel" data-compare-state="areas">
+                <div class="compare-panel" id="panel-ia-areas" data-compare-state="areas" role="tabpanel" aria-labelledby="crumb-areas" tabindex="0">
                   <div class="ia-tier-preview">
                     <span class="ia-tier-label">Level 1: Broadest Practice Domains</span>
                     <div class="ia-cards-grid">
@@ -469,7 +467,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="compare-panel" data-compare-state="priorities">
+                <div class="compare-panel" id="panel-ia-priorities" data-compare-state="priorities" role="tabpanel" aria-labelledby="crumb-priorities" tabindex="0">
                   <div class="ia-tier-preview">
                     <span class="ia-tier-label">Level 2: Strategic Business Priorities (under Leadership)</span>
                     <div class="ia-cards-grid">
@@ -488,7 +486,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="compare-panel" data-compare-state="topics">
+                <div class="compare-panel" id="panel-ia-topics" data-compare-state="topics" role="tabpanel" aria-labelledby="crumb-topics" tabindex="0">
                   <div class="ia-tier-preview">
                     <span class="ia-tier-label">Level 3: Specific Subject Clusters (under Succession)</span>
                     <div class="ia-cards-grid">
@@ -507,7 +505,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="compare-panel" data-compare-state="content">
+                <div class="compare-panel" id="panel-ia-content" data-compare-state="content" role="tabpanel" aria-labelledby="crumb-content" tabindex="0">
                   <div class="ia-tier-preview">
                     <span class="ia-tier-label">Level 4: Delivered Content Assets</span>
                     <div class="ia-cards-grid">
@@ -661,7 +659,7 @@
             <h2>Outcomes &amp; Impact</h2>
           </div>
           <p>
-            The redesigned portal launched on September 11, 2026. Following launch, Ahri sessions increased 500% and daily activity doubled.
+            The redesigned portal launched on September 11, 2026, delivering immediate gains across member engagement and executive research discovery.
           </p>
           <div class="impact-metrics" data-cascade style="margin-block: var(--space-6); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6);">
             <div class="impact-metric">
@@ -674,12 +672,12 @@
             </div>
           </div>
 
-          <aside class="callout" style="margin-block: var(--space-5); border-left: 3px solid var(--accent, #6BA3FF); padding: var(--space-4) var(--space-5); background: var(--surface-card, rgba(255, 255, 255, 0.03)); border-radius: var(--radius-sm, 6px);">
-            <h3 style="font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent, #6BA3FF); margin-bottom: 8px;">Qualitative Member Feedback</h3>
-            <p style="font-style: italic; font-size: 1.02rem; line-height: 1.5; color: var(--text);">
+          <aside class="callout callout--quote">
+            <span class="callout-label">Qualitative Member Feedback</span>
+            <blockquote>
               "Before the redesign, finding specific benchmark studies meant guessing which research committee owned the topic. Having Ahri right on the homepage lets me pull verified executive takeaways in seconds."
-            </p>
-            <p style="margin-top: 8px; font-size: 0.82rem; color: var(--text-secondary); font-weight: 500;">
+            </blockquote>
+            <p class="callout-attribution">
               — Enterprise Member &amp; VP of Talent Acquisition (Post-launch member interviews)
             </p>
           </aside>
@@ -705,10 +703,10 @@
             </div>
 
             <div class="omnibar-chip-triggers" role="tablist" aria-label="Discovery flow steps">
-              <button type="button" class="query-chip is-active" data-query-type="ai" role="tab" aria-selected="true">
+              <button type="button" class="query-chip is-active" id="tab-omni-ai" data-query-type="ai" role="tab" aria-selected="true" aria-controls="panel-omni-ai" tabindex="0">
                 <span class="chip-sparkle" aria-hidden="true">✨</span> Step 1: Ask Ahri
               </button>
-              <button type="button" class="query-chip" data-query-type="keyword" role="tab" aria-selected="false">
+              <button type="button" class="query-chip" id="tab-omni-keyword" data-query-type="keyword" role="tab" aria-selected="false" aria-controls="panel-omni-keyword" tabindex="-1">
                 <span class="chip-search" aria-hidden="true">🔍</span> Step 2: See all results
               </button>
             </div>
@@ -721,7 +719,7 @@
 
             <div class="omnibar-result-canvas">
               <!-- AI Synthesis View -->
-              <div class="omnibar-view is-active" data-sim-view="ai">
+              <div class="omnibar-view is-active" id="panel-omni-ai" data-sim-view="ai" role="tabpanel" aria-labelledby="tab-omni-ai" tabindex="0">
                 <div class="ahri-answer-bubble">
                   <div class="ahri-bubble-header">
                     <strong>Ask Ahri Synthesis</strong>
@@ -739,7 +737,7 @@
               </div>
 
               <!-- Traditional Results View -->
-              <div class="omnibar-view" data-sim-view="keyword">
+              <div class="omnibar-view" id="panel-omni-keyword" data-sim-view="keyword" role="tabpanel" aria-labelledby="tab-omni-keyword" tabindex="0">
                 <div class="keyword-results-head">
                   <span class="keyword-count" id="simKeywordCount">Traditional Search Results</span>
                 </div>
@@ -772,6 +770,20 @@
           </p>
         </section>
 
+        <a href="ai-coding-portfolio.html" class="case-study-next" aria-label="Next Case Study: Building My Portfolio in Code">
+          <div class="case-study-next__eyebrow">
+            <span>Next Project</span>
+            <span class="case-study-next__badge">Systems Craft · AI-Assisted Front-End</span>
+          </div>
+          <h3 class="case-study-next__title">
+            Building My Portfolio in Code
+            <span class="case-study-next__arrow" aria-hidden="true">→</span>
+          </h3>
+          <p class="case-study-next__desc">
+            How I used AI coding tools, strict system prompts, and CSS tokens to design and ship a fast, production portfolio without component frameworks.
+          </p>
+        </a>
+
       </article>
     </main>
 
@@ -799,10 +811,10 @@
     </div>
 
     <!-- GSAP for smooth chat widget animations -->
-    <script src="../scripts/cli-mode.js?v=50" defer></script>
-    <script src="../scripts/scripts.js?v=50" defer></script>
+    <script src="../scripts/cli-mode.js?v=51" defer></script>
+    <script src="../scripts/scripts.js?v=51" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=50" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=51" defer></script>
     <script src="../scripts/image-splitter.js" defer></script>
     <footer class="site-footer">
       <a class="site-footer-brand" href="../index.html">

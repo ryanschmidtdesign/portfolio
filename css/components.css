@@ -605,6 +605,41 @@
   box-shadow: var(--shadow-card-strong);
 }
 
+.case-study .callout--quote,
+.case-study aside.callout--quote {
+  border-left: 3px solid var(--accent);
+  background: var(--surface-1);
+}
+
+.callout--quote .callout-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.callout--quote blockquote {
+  font-style: italic;
+  font-size: var(--fs-md);
+  line-height: var(--lh-snug);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.callout--quote .callout-attribution {
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
 
 .callout+.callout {
   margin-top: var(--space-8);
@@ -3110,13 +3145,18 @@ body {
 }
 
 .crumb-segment {
+  appearance: none;
+  background: transparent;
+  border: none;
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   color: var(--text-secondary);
   cursor: pointer;
-  padding: 2px 6px;
+  padding: 4px 8px;
   border-radius: var(--radius-sm);
   transition: all 160ms ease;
+  line-height: inherit;
+  text-decoration: none;
 }
 
 .crumb-segment:hover,
@@ -3125,6 +3165,16 @@ body {
   color: var(--accent);
   font-weight: 600;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.crumb-segment:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+  box-shadow: var(--focus-ring);
+}
+
+.ia-challenge-panel .compare-tabs {
+  display: none !important;
 }
 
 .crumb-separator {
@@ -3461,4 +3511,86 @@ body {
   background: rgba(0, 0, 0, 0.02);
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   margin: 0;
+}
+
+/* -------------------------------------------------------
+   Case Study Next Project Footer Card
+   --------------------------------------------------------*/
+.case-study-next {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-6);
+  max-width: var(--prose);
+  margin-inline: auto;
+  padding: var(--space-6);
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.case-study-next:hover {
+  transform: translateY(-2px);
+  border-color: var(--border);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.case-study-next:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+  box-shadow: var(--focus-ring);
+}
+
+.case-study-next__eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.case-study-next__badge {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.case-study-next__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  font-weight: 600;
+  color: var(--text);
+  line-height: var(--lh-tight);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.case-study-next__arrow {
+  color: var(--accent);
+  transition: transform var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+}
+
+.case-study-next:hover .case-study-next__arrow {
+  transform: translateX(4px);
+}
+
+.case-study-next__desc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-snug);
+  max-width: 60ch;
 }

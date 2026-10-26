@@ -186,6 +186,11 @@
     0 0 0 1px rgba(200, 90, 50, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 1);
 
+  --shadow-card-strong:
+    0 2px 4px rgba(28, 20, 15, 0.04),
+    0 16px 36px -10px rgba(28, 20, 15, 0.08),
+    0 0 0 1px var(--border-subtle);
+
   /* Machined Dock Specular Elevation */
   --shadow-dock:
     0 20px 48px -12px rgba(28, 20, 15, 0.12),
@@ -281,14 +286,6 @@
   /* 12px */
   --case-h3-top: var(--space-6);
   /* 32px above sub-heading */
-
-  /* Elevation shadows tuned for warm Atelier canvas */
-  --shadow-card:
-    0 1px 3px rgba(15, 23, 42, 0.02),
-    0 8px 22px -8px rgba(15, 23, 42, 0.05);
-  --shadow-card-strong:
-    0 2px 6px rgba(15, 23, 42, 0.03),
-    0 14px 32px -10px rgba(15, 23, 42, 0.08);
 
   /* Nav ink */
   --ink-on-glass: #0f172a;

@@ -33,7 +33,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=50">
+    <link rel="stylesheet" href="../styles.css?v=51">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -425,32 +425,32 @@
             </div>
 
             <div class="stepper-track" role="tablist" aria-label="Inventory lifecycle states">
-              <button type="button" class="stepper-node is-active" data-step="order" role="tab" aria-selected="true">
+              <button type="button" class="stepper-node is-active" id="tab-step-order" data-step="order" role="tab" aria-selected="true" aria-controls="simCardPanel" tabindex="0">
                 <span class="node-dot"></span>
                 <span class="node-label">1. On Order</span>
                 <span class="node-sub">Committed on PO</span>
               </button>
               <div class="stepper-connector" aria-hidden="true"></div>
-              <button type="button" class="stepper-node" data-step="available" role="tab" aria-selected="false">
+              <button type="button" class="stepper-node" id="tab-step-available" data-step="available" role="tab" aria-selected="false" aria-controls="simCardPanel" tabindex="-1">
                 <span class="node-dot"></span>
                 <span class="node-label">2. Available</span>
                 <span class="node-sub">Warehouse shelf</span>
               </button>
               <div class="stepper-connector" aria-hidden="true"></div>
-              <button type="button" class="stepper-node" data-step="allocated" role="tab" aria-selected="false">
+              <button type="button" class="stepper-node" id="tab-step-allocated" data-step="allocated" role="tab" aria-selected="false" aria-controls="simCardPanel" tabindex="-1">
                 <span class="node-dot"></span>
                 <span class="node-label">3. Allocated</span>
                 <span class="node-sub">Locked for project</span>
               </button>
               <div class="stepper-connector" aria-hidden="true"></div>
-              <button type="button" class="stepper-node" data-step="lowstock" role="tab" aria-selected="false">
+              <button type="button" class="stepper-node" id="tab-step-lowstock" data-step="lowstock" role="tab" aria-selected="false" aria-controls="simCardPanel" tabindex="-1">
                 <span class="node-dot"></span>
                 <span class="node-label">Threshold Warning</span>
                 <span class="node-sub">Low stock alert</span>
               </button>
             </div>
 
-            <div class="stepper-sim-card">
+            <div class="stepper-sim-card" id="simCardPanel" role="tabpanel" tabindex="0" aria-label="Inventory lifecycle state details">
               <div class="sim-card-header">
                 <div class="sim-item-info">
                   <span class="sim-sku">SKU: CR-DM-16X16</span>
@@ -490,7 +490,7 @@
             I originally advocated for full WebSocket-driven, bi-directional live sync across all client sessions. If an installer checks out equipment in the warehouse, every PM's screen should reflect it instantly.
           </p>
           <p>
-            However, our engineering team evaluated the backend requirements and found a true real-time streaming infrastructure would push our MVP launch back by several months. To hit our December deadline and unblock pending enterprise sales, the PM and I compromised: the database updated immediately on receiving, but client views used a prominent manual refresh/sync trigger paired with contextual state badges. It wasn't the instantaneous sync I originally drew up, but it protected our launch date, kept the database reliable, and solved the actual customer problem without dragging the project out for months.
+            However, our engineering team evaluated the backend requirements and found a true real-time streaming infrastructure would push our MVP launch back by several months. To hit our December deadline and unblock pending enterprise sales, the PM and I compromised: the database updated immediately on receiving, but client views used a prominent manual refresh/sync trigger paired with contextual state badges. To prevent allocation race conditions when two project managers staged the same physical stock before refreshing, we implemented optimistic concurrency validation at the API layer. The UI validated available quantities upon submission, displaying an immediate conflict resolution toast if another user claimed the units seconds prior. It wasn't the instantaneous sync I originally drew up, but it protected our launch date, kept the database reliable, and solved the actual customer problem without dragging the project out for months.
           </p>
 
           <h3>Balancing Fast Receiving with Serialization Audits</h3>
@@ -505,10 +505,10 @@
             <div class="dual-track-header">
               <span class="dual-track-title">Illustrative receiving flow</span>
               <div class="dual-track-tabs" role="tablist" aria-label="Receiving flow comparison">
-                <button type="button" class="dual-tab-btn is-active" data-track="small" role="tab" aria-selected="true">
+                <button type="button" class="dual-tab-btn is-active" id="tab-dual-small" data-track="small" role="tab" aria-selected="true" aria-controls="panel-dual-small" tabindex="0">
                   ⚡ Small AV Shop (Fast Receiving)
                 </button>
-                <button type="button" class="dual-tab-btn" data-track="enterprise" role="tab" aria-selected="false">
+                <button type="button" class="dual-tab-btn" id="tab-dual-enterprise" data-track="enterprise" role="tab" aria-selected="false" aria-controls="panel-dual-enterprise" tabindex="-1">
                   🏢 Commercial Enterprise (Serialized)
                 </button>
               </div>
@@ -516,7 +516,7 @@
 
             <div class="dual-track-canvas">
               <!-- Small Shop Mode -->
-              <div class="dual-panel is-active" data-panel="small">
+              <div class="dual-panel is-active" id="panel-dual-small" data-panel="small" role="tabpanel" aria-labelledby="tab-dual-small" tabindex="0">
                 <div class="mock-receiving-row">
                   <div class="mock-item-meta">
                     <strong>Cat6 Plenum 1000ft Bulk Cable (Blue)</strong>
@@ -538,7 +538,7 @@
               </div>
 
               <!-- Enterprise Serialized Mode -->
-              <div class="dual-panel" data-panel="enterprise">
+              <div class="dual-panel" id="panel-dual-enterprise" data-panel="enterprise" role="tabpanel" aria-labelledby="tab-dual-enterprise" tabindex="0">
                 <div class="mock-receiving-row">
                   <div class="mock-item-meta">
                     <strong>Sony VPL-XW5000 4K Laser Cinema Projector</strong>
@@ -633,6 +633,20 @@
             <li><strong>What comes next:</strong> Once teams trusted the baseline counts, the next logical steps were mobile barcode scanning in the warehouse and auto-generating reorder POs when stock hits minimums. We held those back from the MVP on purpose to make sure the foundation was rock-solid first.</li>
           </ul>
         </section>
+
+        <a href="member-portal-overhaul.html" class="case-study-next" aria-label="Next Case Study: i4cp Member Portal & Research Discovery">
+          <div class="case-study-next__eyebrow">
+            <span>Next Project</span>
+            <span class="case-study-next__badge">Enterprise UX · Information Architecture &amp; AI</span>
+          </div>
+          <h3 class="case-study-next__title">
+            i4cp Member Portal &amp; Research Discovery
+            <span class="case-study-next__arrow" aria-hidden="true">→</span>
+          </h3>
+          <p class="case-study-next__desc">
+            Redesigning enterprise HR research discovery across a four-level content taxonomy, elevating Ahri AI, and doubling daily member engagement.
+          </p>
+        </a>
       </article>
 
     </main>
@@ -662,10 +676,10 @@
 
     <!-- GSAP for smooth chat widget animations -->
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=50" defer></script>
-    <script src="../scripts/scripts.js?v=50" defer></script>
+    <script src="../scripts/cli-mode.js?v=51" defer></script>
+    <script src="../scripts/scripts.js?v=51" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=50" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=51" defer></script>
     <footer class="site-footer">
       <a class="site-footer-brand" href="../index.html">
         <img src="../favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">

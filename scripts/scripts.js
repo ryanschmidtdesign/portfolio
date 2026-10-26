@@ -450,25 +450,78 @@
   }
 
   // ==========================================================================
+  // WAI-ARIA Tablist Keyboard Navigation & Roving Focus Helper
+  // ==========================================================================
+  function setupAriaTabs({ tablist, tabs, panels }) {
+    if (!tablist || !tabs || !tabs.length) return;
+
+    tablist.setAttribute('role', 'tablist');
+
+    tabs.forEach((tab, index) => {
+      const panel = panels ? (panels[index] || (panels.length === 1 ? panels[0] : null)) : null;
+
+      tab.setAttribute('role', 'tab');
+      if (panel && panel.id) {
+        tab.setAttribute('aria-controls', panel.id);
+      }
+      if (panel && tab.id && panels.length > 1) {
+        panel.setAttribute('aria-labelledby', tab.id);
+      }
+      if (panel) {
+        panel.setAttribute('role', 'tabpanel');
+        if (!panel.hasAttribute('tabindex')) {
+          panel.setAttribute('tabindex', '0');
+        }
+      }
+
+      tab.addEventListener('keydown', (e) => {
+        let targetIndex = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          targetIndex = (index + 1) % tabs.length;
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          targetIndex = (index - 1 + tabs.length) % tabs.length;
+        } else if (e.key === 'Home') {
+          targetIndex = 0;
+        } else if (e.key === 'End') {
+          targetIndex = tabs.length - 1;
+        }
+
+        if (targetIndex !== null) {
+          e.preventDefault();
+          tabs[targetIndex].focus();
+          tabs[targetIndex].click();
+        }
+      });
+    });
+  }
+
+  // ==========================================================================
   // Interactive Split Demo: Operator vs AI Brief (pages/dashboard.html)
   // ==========================================================================
   const splitDemo = document.querySelector('[data-split-preview]');
   if (splitDemo) {
-    const buttons = splitDemo.querySelectorAll('.split-toggle-btn');
-    const panels = splitDemo.querySelectorAll('.split-view-panel');
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const mode = btn.dataset.splitMode;
-        buttons.forEach((b) => {
-          const active = b === btn;
-          b.classList.toggle('is-active', active);
-          b.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
-        panels.forEach((p) => {
-          p.classList.toggle('is-active', p.dataset.view === mode);
-        });
+    const tablist = splitDemo.querySelector('.split-demo-controls');
+    const buttons = Array.from(splitDemo.querySelectorAll('.split-toggle-btn'));
+    const panels = Array.from(splitDemo.querySelectorAll('.split-view-panel'));
+
+    const activateTab = (btn) => {
+      const mode = btn.dataset.splitMode;
+      buttons.forEach((b) => {
+        const active = b === btn;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+        b.setAttribute('tabindex', active ? '0' : '-1');
       });
+      panels.forEach((p) => {
+        p.classList.toggle('is-active', p.dataset.view === mode);
+      });
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => activateTab(btn));
     });
+
+    setupAriaTabs({ tablist, tabs: buttons, panels });
   }
 
   // ==========================================================================
@@ -476,7 +529,9 @@
   // ==========================================================================
   const inventoryStepper = document.querySelector('[data-inventory-stepper]');
   if (inventoryStepper) {
-    const nodes = inventoryStepper.querySelectorAll('.stepper-node');
+    const tablist = inventoryStepper.querySelector('.stepper-track');
+    const nodes = Array.from(inventoryStepper.querySelectorAll('.stepper-node'));
+    const simCard = inventoryStepper.querySelector('.stepper-sim-card');
     const statusBadge = document.getElementById('simStatusBadge');
     const locationEl = document.getElementById('simLocation');
     const availableEl = document.getElementById('simAvailableCount');
@@ -518,27 +573,33 @@
       }
     };
 
-    nodes.forEach((node) => {
-      node.addEventListener('click', () => {
-        const step = node.dataset.step;
-        if (!stateData[step]) return;
-        nodes.forEach((n) => {
-          const active = n === node;
-          n.classList.toggle('is-active', active);
-          n.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
+    const activateStep = (node) => {
+      const step = node.dataset.step;
+      if (!stateData[step]) return;
 
-        const data = stateData[step];
-        if (statusBadge) {
-          statusBadge.className = 'sim-status-badge ' + data.badgeClass;
-          statusBadge.textContent = data.badgeText;
-        }
-        if (locationEl) locationEl.textContent = data.location;
-        if (availableEl) availableEl.textContent = data.available;
-        if (scheduleEl) scheduleEl.textContent = data.schedule;
-        if (ruleTextEl) ruleTextEl.innerHTML = data.rule;
+      nodes.forEach((n) => {
+        const active = n === node;
+        n.classList.toggle('is-active', active);
+        n.setAttribute('aria-selected', active ? 'true' : 'false');
+        n.setAttribute('tabindex', active ? '0' : '-1');
       });
+
+      const data = stateData[step];
+      if (statusBadge) {
+        statusBadge.className = 'sim-status-badge ' + data.badgeClass;
+        statusBadge.textContent = data.badgeText;
+      }
+      if (locationEl) locationEl.textContent = data.location;
+      if (availableEl) availableEl.textContent = data.available;
+      if (scheduleEl) scheduleEl.textContent = data.schedule;
+      if (ruleTextEl) ruleTextEl.innerHTML = data.rule;
+    };
+
+    nodes.forEach((node) => {
+      node.addEventListener('click', () => activateStep(node));
     });
+
+    setupAriaTabs({ tablist, tabs: nodes, panels: [simCard] });
   }
 
   // ==========================================================================
@@ -546,21 +607,28 @@
   // ==========================================================================
   const dualTrackDemo = document.querySelector('[data-dual-track]');
   if (dualTrackDemo) {
-    const tabs = dualTrackDemo.querySelectorAll('.dual-tab-btn');
-    const panels = dualTrackDemo.querySelectorAll('.dual-panel');
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        const track = tab.dataset.track;
-        tabs.forEach((t) => {
-          const active = t === tab;
-          t.classList.toggle('is-active', active);
-          t.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
-        panels.forEach((p) => {
-          p.classList.toggle('is-active', p.dataset.panel === track);
-        });
+    const tablist = dualTrackDemo.querySelector('.dual-track-tabs');
+    const tabs = Array.from(dualTrackDemo.querySelectorAll('.dual-tab-btn'));
+    const panels = Array.from(dualTrackDemo.querySelectorAll('.dual-panel'));
+
+    const activateTrack = (tab) => {
+      const track = tab.dataset.track;
+      tabs.forEach((t) => {
+        const active = t === tab;
+        t.classList.toggle('is-active', active);
+        t.setAttribute('aria-selected', active ? 'true' : 'false');
+        t.setAttribute('tabindex', active ? '0' : '-1');
       });
+      panels.forEach((p) => {
+        p.classList.toggle('is-active', p.dataset.panel === track);
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activateTrack(tab));
     });
+
+    setupAriaTabs({ tablist, tabs, panels });
   }
 
   // ==========================================================================
@@ -568,28 +636,33 @@
   // ==========================================================================
   const iaExplorer = document.querySelector('[data-ia-explorer]');
   if (iaExplorer) {
-    const crumbs = iaExplorer.querySelectorAll('.crumb-segment');
+    const tablist = iaExplorer.querySelector('.ia-breadcrumb-trail');
+    const crumbs = Array.from(iaExplorer.querySelectorAll('.crumb-segment'));
     const compareWrapper = iaExplorer.querySelector('[data-compare]');
-    if (compareWrapper) {
-      crumbs.forEach((crumb) => {
-        crumb.addEventListener('click', () => {
-          const target = crumb.dataset.crumb;
-          const matchingBtn = compareWrapper.querySelector(`[data-compare-button="${target}"]`);
-          if (matchingBtn) matchingBtn.click();
-        });
+    const panels = Array.from(iaExplorer.querySelectorAll('.compare-panel'));
+
+    const activateCrumb = (targetCrumb) => {
+      const targetState = targetCrumb.dataset.crumb;
+      crumbs.forEach((c) => {
+        const active = c === targetCrumb;
+        c.classList.toggle('is-active', active);
+        c.setAttribute('aria-selected', active ? 'true' : 'false');
+        c.setAttribute('tabindex', active ? '0' : '-1');
       });
 
-      const syncCrumbs = () => {
-        const activeState = compareWrapper.dataset.compareActive || 'areas';
-        crumbs.forEach((c) => {
-          c.classList.toggle('is-active', c.dataset.crumb === activeState);
-        });
-      };
+      if (compareWrapper) {
+        compareWrapper.dataset.compareActive = targetState;
+      }
+      panels.forEach((p) => {
+        p.classList.toggle('is-active', p.dataset.compareState === targetState);
+      });
+    };
 
-      const observer = new MutationObserver(syncCrumbs);
-      observer.observe(compareWrapper, { attributes: true, attributeFilter: ['data-compare-active'] });
-      syncCrumbs();
-    }
+    crumbs.forEach((crumb) => {
+      crumb.addEventListener('click', () => activateCrumb(crumb));
+    });
+
+    setupAriaTabs({ tablist, tabs: crumbs, panels });
   }
 
   // ==========================================================================
@@ -597,11 +670,12 @@
   // ==========================================================================
   const omniSim = document.querySelector('[data-omnibar-sim]');
   if (omniSim) {
-    const chips = omniSim.querySelectorAll('.query-chip');
+    const tablist = omniSim.querySelector('.omnibar-chip-triggers');
+    const chips = Array.from(omniSim.querySelectorAll('.query-chip'));
     const inputEl = document.getElementById('simOmniInput');
     const modePill = document.getElementById('simOmniMode');
     const iconEl = document.getElementById('simOmniIcon');
-    const views = omniSim.querySelectorAll('.omnibar-view');
+    const views = Array.from(omniSim.querySelectorAll('.omnibar-view'));
     const seeAllBtn = omniSim.querySelector('[data-trigger-traditional]');
 
     const queryData = {
@@ -619,13 +693,14 @@
       }
     };
 
-    function activateMode(type) {
+    function activateMode(type, triggerChip) {
       if (!queryData[type]) return;
 
       chips.forEach((c) => {
         const active = c.dataset.queryType === type;
         c.classList.toggle('is-active', active);
         c.setAttribute('aria-selected', active ? 'true' : 'false');
+        c.setAttribute('tabindex', active ? '0' : '-1');
       });
 
       const data = queryData[type];
@@ -639,19 +714,70 @@
       views.forEach((v) => {
         v.classList.toggle('is-active', v.dataset.simView === type);
       });
+
+      if (triggerChip) triggerChip.focus();
     }
 
     chips.forEach((chip) => {
       chip.addEventListener('click', () => {
-        activateMode(chip.dataset.queryType);
+        activateMode(chip.dataset.queryType, chip);
       });
     });
 
     if (seeAllBtn) {
       seeAllBtn.addEventListener('click', () => {
-        activateMode('keyword');
+        const keywordChip = omniSim.querySelector('.query-chip[data-query-type="keyword"]');
+        activateMode('keyword', keywordChip);
       });
     }
+
+    setupAriaTabs({ tablist, tabs: chips, panels: views });
+  }
+
+  // ==========================================================================
+  // Looping Video Accessibility Controls (prefers-reduced-motion & click-to-pause)
+  // ==========================================================================
+  const loopingVideos = document.querySelectorAll('.case-study-figure video, .case-study-media video');
+  if (loopingVideos.length) {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleMotion = (mq) => {
+      if (mq.matches) {
+        loopingVideos.forEach((v) => {
+          v.pause();
+          v.removeAttribute('autoplay');
+        });
+      }
+    };
+    handleMotion(motionQuery);
+    if (typeof motionQuery.addEventListener === 'function') {
+      motionQuery.addEventListener('change', handleMotion);
+    }
+
+    loopingVideos.forEach((video) => {
+      video.style.cursor = 'pointer';
+      video.setAttribute('title', 'Click to play or pause video');
+      video.setAttribute('tabindex', '0');
+      video.setAttribute('role', 'button');
+      video.setAttribute('aria-pressed', video.paused ? 'false' : 'true');
+
+      const togglePlay = () => {
+        if (video.paused) {
+          video.play();
+          video.setAttribute('aria-pressed', 'true');
+        } else {
+          video.pause();
+          video.setAttribute('aria-pressed', 'false');
+        }
+      };
+
+      video.addEventListener('click', togglePlay);
+      video.addEventListener('keydown', (e) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          togglePlay();
+        }
+      });
+    });
   }
 
   const systemInput = document.querySelector('.asd-fake-input');

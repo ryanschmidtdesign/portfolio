@@ -33,7 +33,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=50">
+    <link rel="stylesheet" href="../styles.css?v=51">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -306,7 +306,7 @@
           <h1 id="title" data-parallax="0.06">Custom Dashboards &amp; <em class="serif-accent">AI Summaries</em></h1>
           <p class="lead">
             The default dashboard saw little use because a generic one-size-fits-all view didn't answer anyone's morning questions.
-            I rebuilt the feature around role-based starter templates with grounded AI summaries, driving a 71% increase in dashboard engagement.
+            I rebuilt the feature around role-based starter templates with grounded AI summaries, driving 62% multi-dashboard adoption and a 71% increase in sustained views.
           </p>
 
           <div class="tldr-meta">
@@ -490,10 +490,10 @@
             <div class="split-demo-header">
               <span class="split-demo-title">Illustrative Interaction Model</span>
               <div class="split-demo-controls" role="tablist" aria-label="Dashboard vs AI split view">
-                <button type="button" class="split-toggle-btn is-active" data-split-mode="dash" role="tab" aria-selected="true">
+                <button type="button" class="split-toggle-btn is-active" id="tab-split-dash" data-split-mode="dash" role="tab" aria-selected="true" aria-controls="panel-split-dash" tabindex="0">
                   <span class="split-icon" aria-hidden="true">📊</span> Operator Mode: Dashboards
                 </button>
-                <button type="button" class="split-toggle-btn" data-split-mode="ai" role="tab" aria-selected="false">
+                <button type="button" class="split-toggle-btn" id="tab-split-ai" data-split-mode="ai" role="tab" aria-selected="false" aria-controls="panel-split-ai" tabindex="-1">
                   <span class="split-icon" aria-hidden="true">✨</span> Executive Mode: AI Brief
                 </button>
               </div>
@@ -501,7 +501,7 @@
 
             <div class="split-preview-canvas">
               <!-- Operator Dashboard View -->
-              <div class="split-view-panel is-active" data-view="dash">
+              <div class="split-view-panel is-active" id="panel-split-dash" data-view="dash" role="tabpanel" aria-labelledby="tab-split-dash" tabindex="0">
                 <div class="mini-kpi-grid">
                   <div class="mini-kpi-card">
                     <span class="mini-kpi-label">Open Tickets</span>
@@ -525,7 +525,7 @@
               </div>
 
               <!-- AI Summary View -->
-              <div class="split-view-panel" data-view="ai">
+              <div class="split-view-panel" id="panel-split-ai" data-view="ai" role="tabpanel" aria-labelledby="tab-split-ai" tabindex="0">
                 <div class="mini-ai-card">
                   <div class="mini-ai-head">
                     <span class="mini-ai-badge">✨ Generated Brief</span>
@@ -556,6 +556,9 @@
           </p>
           <p>
             Back then, we were working with basic UI kit variants and loose guidelines. That meant I had to sit closely with our front-end engineers every week. Instead of inventing unique card styles or fancy animations, I stuck to a few consistent widget wrappers and standard grid increments. It kept code clean and prevented the dashboard from breaking when users resized their screens.
+          </p>
+          <p>
+            Beyond UI consistency, our primary systems challenge was role-based access control (RBAC) across four backend engineers. Field technicians and project managers required immediate operational visibility into active jobs, but executive widgets exposing company-wide gross margins and pipeline valuations could not leak across unauthorized roles. I mapped widget permissions directly to existing workspace roles, while engineering cached aggregated card payloads in JSON to keep multi-widget dashboards rendering under 400 milliseconds.
           </p>
         </section>
         <section id="prototyping" aria-label="Prototyping & validation">
@@ -636,7 +639,21 @@
           <p>The dashboards are now a released product feature. The main lesson was to give people useful dashboards first, then add AI where it helped them interpret the numbers. I would carry that approach into future reporting work rather than start with an open-ended prompt box.</p>
         </section>
 
-          </article>
+        <a href="inventory.html" class="case-study-next" aria-label="Next Case Study: Inventory, Purchasing & Receiving">
+          <div class="case-study-next__eyebrow">
+            <span>Next Project</span>
+            <span class="case-study-next__badge">B2B SaaS · ERP &amp; Operations</span>
+          </div>
+          <h3 class="case-study-next__title">
+            Inventory, Purchasing &amp; Receiving
+            <span class="case-study-next__arrow" aria-hidden="true">→</span>
+          </h3>
+          <p class="case-study-next__desc">
+            Redesigning end-to-end stock tracking and receiving workflows to unblock enterprise pilot contracts and scale warehouse operations.
+          </p>
+        </a>
+
+      </article>
     </main>
 
     <!-- Floating AI & CLI Omnibar Dock (unified with homepage) -->
@@ -664,10 +681,10 @@
 
     <!-- GSAP for smooth chat widget animations -->
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=50" defer></script>
-    <script src="../scripts/scripts.js?v=50" defer></script>
+    <script src="../scripts/cli-mode.js?v=51" defer></script>
+    <script src="../scripts/scripts.js?v=51" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=50" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=51" defer></script>
     <footer class="site-footer">
       <a class="site-footer-brand" href="../index.html">
         <img src="../favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">
