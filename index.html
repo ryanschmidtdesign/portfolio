@@ -57,13 +57,13 @@
     .subpage-omnibar-shell {
       position: relative !important;
       width: 100% !important;
-      background: radial-gradient(380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(224, 107, 62, 0.12), transparent 75%), linear-gradient(180deg, rgba(14, 16, 22, 0.68) 0%, rgba(6, 7, 10, 0.82) 100%) !important;
-      backdrop-filter: blur(28px) saturate(180%) !important;
-      -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-      border: 1px solid rgba(255, 255, 255, 0.14) !important;
-      border-radius: 12px !important;
-      padding: 6px 8px 8px !important;
-      box-shadow: 0 24px 60px -8px rgba(0, 0, 0, 0.65), 0 8px 22px -4px rgba(0, 0, 0, 0.45), 0 0 28px -6px rgba(200, 90, 50, 0.14), inset 0 1px 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5) !important;
+      background: radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(224, 107, 62, 0.09), transparent 70%), linear-gradient(180deg, rgba(16, 18, 24, 0.74) 0%, rgba(6, 7, 11, 0.88) 100%) !important;
+      backdrop-filter: blur(28px) saturate(190%) contrast(105%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.16) !important;
+      border-radius: 8px !important;
+      padding: 5px 6px !important;
+      box-shadow: 0 24px 64px -10px rgba(0, 0, 0, 0.75), 0 8px 24px -4px rgba(0, 0, 0, 0.5), 0 0 24px -4px rgba(200, 90, 50, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.32), inset 0 -1px 0 0 rgba(0, 0, 0, 0.85) !important;
       overflow: hidden !important;
       display: block !important;
     }
@@ -78,6 +78,11 @@
       .subpage-omnibar-dock {
         bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
         width: calc(100% - 20px) !important;
+      }
+      .home-omnibar-shell,
+      .subpage-omnibar-shell {
+        border-radius: 8px !important;
+        padding: 4px 5px !important;
       }
     }
   </style>
@@ -134,7 +139,7 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
-  <link rel="stylesheet" href="./styles.css?v=62">
+  <link rel="stylesheet" href="./styles.css?v=63">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -595,34 +600,13 @@
   <!-- Persistent Floating CLI & Omnibar Dock -->
   <section class="home-omnibar-section" aria-label="Quick navigation and command palette" style="position: fixed !important; bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important; left: 50% !important; transform: translateX(-50%) !important; width: min(692px, calc(100vw - 32px)) !important; max-width: 692px !important; z-index: 999999 !important; display: block !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;">
     <div class="home-omnibar-shell">
-      <span class="rs-dock-reticle rs-dock-reticle--tl" aria-hidden="true"></span>
-      <span class="rs-dock-reticle rs-dock-reticle--tr" aria-hidden="true"></span>
-      <span class="rs-dock-reticle rs-dock-reticle--bl" aria-hidden="true"></span>
-      <span class="rs-dock-reticle rs-dock-reticle--br" aria-hidden="true"></span>
-
-      <!-- Top Hardware Telemetry & Quick-Action Strip -->
-      <div class="rs-dock-telemetry">
-        <div class="rs-dock-telemetry__left">
-          <span class="rs-dock-led" aria-hidden="true"></span>
-          <span class="rs-dock-sector" id="rsDockSector">00 / Overview</span>
-        </div>
-        <div class="rs-dock-telemetry__right">
-          <canvas class="rs-dock-wave" id="rsDockWaveCanvas" width="58" height="14" aria-hidden="true"></canvas>
-          <div class="rs-dock-quick-pills">
-            <button type="button" class="rs-dock-pill" data-ask-ai="Evaluate Ryan's fit for a Senior or Staff Product Designer role.">Role Fit</button>
-            <button type="button" class="rs-dock-pill rs-dock-pill--accent" data-cmdk-trigger title="Open Command Palette (⌘K)">⌘K Menu</button>
-          </div>
-        </div>
-      </div>
-
       <form class="home-omnibar-form" id="home-omnibar-form" autocomplete="off">
         <div class="home-omnibar-top">
-          <span class="rs-dock-prompt-tag" aria-hidden="true">RS://AI</span>
           <input
             type="text"
             id="home-omnibar-input"
             class="home-omnibar-input"
-            placeholder="Ask AI, execute /command, or press ⌘K..."
+            placeholder="Ask AI about Ryan’s work, execute /command, or press ⌘K..."
             autocomplete="off"
             aria-label="Ask Ryan’s portfolio AI a question, or press Command+K"
           />
@@ -656,11 +640,11 @@
     </div>
   </footer>
 
-  <script src="./scripts/cli-mode.js?v=62" defer></script>
-  <script src="./scripts/magnetic.js?v=62" defer></script>
-  <script src="./scripts/scripts.js?v=62" defer></script>
-  <script src="./scripts/home-page.js?v=62" defer></script>
-  <script src="./scripts/rs-chat-widget.js?v=62" defer></script>
+  <script src="./scripts/cli-mode.js?v=63" defer></script>
+  <script src="./scripts/magnetic.js?v=63" defer></script>
+  <script src="./scripts/scripts.js?v=63" defer></script>
+  <script src="./scripts/home-page.js?v=63" defer></script>
+  <script src="./scripts/rs-chat-widget.js?v=63" defer></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((regs) => {

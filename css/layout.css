@@ -12,7 +12,8 @@ body:not(.is-home) {
 /* -------------------------------------------------------
    Site Header — Top-Level Navigation Landmark
    Conventional orientation for hiring managers (83% expectation)
-   Atelier linen glassmorphism, subtle terracotta indicator
+   Obsidian Glass Site Header (Matching Floating CLI Dock Material)
+   Smoked volcanic liquid glass, razor conchoidal specular rim, refractive depth
    --------------------------------------------------------*/
 .site-header {
   position: sticky;
@@ -20,11 +21,18 @@ body:not(.is-home) {
   left: 0;
   width: 100%;
   z-index: 90;
-  background: rgba(247, 245, 240, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(28, 22, 18, 0.08);
-  transition: background var(--dur-2) ease, border-color var(--dur-2) ease;
+  background:
+    radial-gradient(460px circle at var(--header-mouse-x, 50%) var(--header-mouse-y, 50%), rgba(224, 107, 62, 0.08), transparent 75%),
+    linear-gradient(180deg, rgba(14, 16, 22, 0.82) 0%, rgba(6, 7, 11, 0.92) 100%);
+  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 16px 40px -8px rgba(0, 0, 0, 0.55),
+    0 4px 12px -2px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.75);
+  transition: background 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
 }
 
 .site-header__inner {
@@ -44,16 +52,16 @@ body:not(.is-home) {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--text, #1A1A1A);
+  color: #FFFFFF;
   font-family: var(--font-sans);
   font-size: var(--fs-sm, 0.9375rem);
   font-weight: 500;
   letter-spacing: -0.01em;
-  transition: opacity var(--dur-1) ease;
+  transition: opacity 180ms ease;
 }
 
 .site-header__brand:hover {
-  opacity: 0.82;
+  opacity: 0.9;
 }
 
 .site-header__logo {
@@ -62,22 +70,24 @@ body:not(.is-home) {
   border-radius: 4px;
   display: block;
   flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(224, 107, 62, 0.35));
 }
 
 .site-header__name {
   font-weight: 600;
-  color: var(--text, #1A1A1A);
+  color: #FFFFFF;
   letter-spacing: -0.015em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .site-header__sep {
-  color: var(--border-strong, rgba(28, 22, 18, 0.25));
+  color: rgba(255, 255, 255, 0.22);
   font-weight: 300;
   font-size: 0.85rem;
 }
 
 .site-header__role {
-  color: var(--text-secondary, #666666);
+  color: rgba(255, 255, 255, 0.62);
   font-size: var(--fs-xs, 0.85rem);
   font-weight: 400;
   letter-spacing: 0.005em;
@@ -97,19 +107,20 @@ body:not(.is-home) {
   font-family: var(--font-sans);
   font-size: var(--fs-xs, 0.85rem);
   font-weight: 500;
-  color: var(--text-secondary, #555555);
+  color: rgba(255, 255, 255, 0.72);
   text-decoration: none;
   padding: 8px 2px;
-  transition: color var(--dur-1) ease;
+  transition: color 180ms ease, text-shadow 180ms ease;
 }
 
 .site-header__link:hover,
 .site-header__link:focus-visible {
-  color: var(--text, #1A1A1A);
+  color: #FFFFFF;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
 }
 
 .site-header__link.is-current {
-  color: var(--text, #1A1A1A);
+  color: #FFFFFF;
   font-weight: 600;
 }
 
@@ -120,18 +131,19 @@ body:not(.is-home) {
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--accent, #C86446);
+  background: var(--accent, #E06B3E);
   border-radius: 1px;
+  box-shadow: 0 0 8px rgba(224, 107, 62, 0.55);
 }
 
 .site-header__arrow {
   font-size: 0.72rem;
-  opacity: 0.65;
-  transition: transform var(--dur-1) ease, opacity var(--dur-1) ease;
+  opacity: 0.55;
+  transition: transform 180ms ease, opacity 180ms ease;
 }
 
 .site-header__link:hover .site-header__arrow {
-  opacity: 1;
+  opacity: 0.95;
   transform: translate(1px, -1px);
 }
 

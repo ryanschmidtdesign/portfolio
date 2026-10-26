@@ -258,75 +258,34 @@
                 .rs-cmd-modal {
                     position: relative;
                     z-index: 1;
-                    width: min(650px, 100%);
+                    width: min(640px, 100%);
                     max-height: 82vh;
                     background:
-                        radial-gradient(550px circle at var(--modal-mx, 50%) var(--modal-my, 0%), rgba(200, 90, 50, 0.12), transparent 70%),
-                        linear-gradient(180deg, rgba(14, 16, 22, 0.85) 0%, rgba(6, 7, 10, 0.94) 100%);
-                    backdrop-filter: blur(28px) saturate(180%);
-                    -webkit-backdrop-filter: blur(28px) saturate(180%);
-                    border: 1px solid rgba(255, 255, 255, 0.14);
-                    border-radius: 12px;
+                        radial-gradient(550px circle at var(--modal-mx, 50%) var(--modal-my, 0%), rgba(224, 107, 62, 0.08), transparent 70%),
+                        linear-gradient(180deg, rgba(16, 18, 24, 0.88) 0%, rgba(6, 7, 11, 0.96) 100%);
+                    backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+                    -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+                    border: 1px solid rgba(255, 255, 255, 0.16);
+                    border-radius: 8px;
                     box-shadow:
-                        0 36px 90px -12px rgba(0, 0, 0, 0.82),
-                        0 0 32px -8px rgba(200, 90, 50, 0.16),
-                        inset 0 1px 1px rgba(255, 255, 255, 0.22);
+                        0 36px 90px -12px rgba(0, 0, 0, 0.85),
+                        0 0 32px -8px rgba(200, 90, 50, 0.1),
+                        inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+                        inset 0 -1px 0 0 rgba(0, 0, 0, 0.85);
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
-                    transform: translateY(-10px) scale(0.975);
-                    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease, box-shadow 200ms ease;
+                    transform: translateY(-8px) scale(0.98);
+                    transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease, box-shadow 200ms ease;
                     color: #F5F5F7;
-                }
-
-                /* Subtle CRT / Delos diagnostic micro-scanlines */
-                .rs-cmd-modal::before {
-                    content: "";
-                    position: absolute;
-                    inset: 0;
-                    background: repeating-linear-gradient(
-                        0deg,
-                        rgba(255, 255, 255, 0.012) 0px,
-                        rgba(255, 255, 255, 0.012) 1px,
-                        transparent 1px,
-                        transparent 3px
-                    );
-                    pointer-events: none;
-                    z-index: 4;
-                }
-
-                /* Boot laser sweep line */
-                .rs-cmd-modal::after {
-                    content: "";
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    top: -10%;
-                    height: 2px;
-                    background: linear-gradient(90deg, transparent 0%, rgba(224, 107, 62, 0.85) 50%, transparent 100%);
-                    box-shadow: 0 0 18px 2px rgba(224, 107, 62, 0.55);
-                    opacity: 0;
-                    pointer-events: none;
-                    z-index: 5;
                 }
 
                 .rs-cmd-overlay.is-open .rs-cmd-modal {
                     transform: translateY(0) scale(1);
                 }
 
-                .rs-cmd-overlay.is-open .rs-cmd-modal::after {
-                    animation: rsHudBootScan 520ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-                }
-
-                /* Precision corner reticle brackets */
                 .rs-cmd-reticle {
-                    position: absolute;
-                    width: 10px;
-                    height: 10px;
-                    border-color: rgba(224, 107, 62, 0.65);
-                    border-style: solid;
-                    pointer-events: none;
-                    z-index: 6;
+                    display: none !important;
                 }
                 .rs-cmd-reticle--tl { top: 5px; left: 5px; border-width: 1.5px 0 0 1.5px; border-top-left-radius: 3px; }
                 .rs-cmd-reticle--tr { top: 5px; right: 5px; border-width: 1.5px 1.5px 0 0; border-top-right-radius: 3px; }
@@ -868,16 +827,9 @@
             const sfxActiveClass = audioFX.enabled ? ' is-active' : '';
 
             this.overlay.innerHTML = `
-                <canvas class="rs-cmd-hud-canvas" id="rsCmdHudCanvas" aria-hidden="true"></canvas>
                 <div class="rs-cmd-modal" id="rsCmdModal">
-                    <span class="rs-cmd-reticle rs-cmd-reticle--tl" aria-hidden="true"></span>
-                    <span class="rs-cmd-reticle rs-cmd-reticle--tr" aria-hidden="true"></span>
-                    <span class="rs-cmd-reticle rs-cmd-reticle--bl" aria-hidden="true"></span>
-                    <span class="rs-cmd-reticle rs-cmd-reticle--br" aria-hidden="true"></span>
-
                     <div class="rs-cmd-telemetry">
                         <div class="rs-cmd-telemetry__left">
-                            <span class="rs-cmd-led" aria-hidden="true"></span>
                             <span class="rs-cmd-sys-tag">Command Palette</span>
                             <span class="rs-cmd-sys-divider" aria-hidden="true">·</span>
                             <span class="rs-cmd-sys-meta" id="rsCmdTelemetryCoord">Navigation &amp; Actions</span>
@@ -1621,137 +1573,16 @@
     function initObsidianDock() {
         const shells = document.querySelectorAll('.home-omnibar-shell, .subpage-omnibar-shell');
         shells.forEach((shell) => {
-            if (!shell.querySelector('.rs-dock-reticle')) {
-                ['tl', 'tr', 'bl', 'br'].forEach((pos) => {
-                    const r = document.createElement('span');
-                    r.className = `rs-dock-reticle rs-dock-reticle--${pos}`;
-                    r.setAttribute('aria-hidden', 'true');
-                    shell.prepend(r);
-                });
-            }
+            // Remove legacy sci-fi elements
+            shell.querySelectorAll('.rs-dock-reticle, .rs-dock-telemetry, .rs-dock-prompt-tag').forEach((el) => el.remove());
 
-            if (!shell.querySelector('.rs-dock-telemetry')) {
-                const tel = document.createElement('div');
-                tel.className = 'rs-dock-telemetry';
-                tel.setAttribute('aria-hidden', 'true');
-                tel.innerHTML = `
-                    <div class="rs-dock-telemetry__left">
-                        <span class="rs-dock-led"></span>
-                        <span class="rs-dock-sector" id="rsDockSector">${getPageSectorLabel()}</span>
-                    </div>
-                    <div class="rs-dock-telemetry__right">
-                        <canvas class="rs-dock-wave" id="rsDockWaveCanvas" width="58" height="14"></canvas>
-                        <div class="rs-dock-quick-pills">
-                            <button type="button" class="rs-dock-pill" data-dock-cmd="role_fit" data-ask-ai="Why is Ryan a strong fit for Senior or Principal Product Designer roles?">Role Fit</button>
-                            <button type="button" class="rs-dock-pill" data-cmdk-trigger title="Open Command Palette (⌘K)">⌘K Menu</button>
-                        </div>
-                    </div>
-                `;
-                const form = shell.querySelector('.home-omnibar-form, .subpage-omnibar-form');
-                if (form) {
-                    shell.insertBefore(tel, form);
-                } else {
-                    shell.prepend(tel);
-                }
-            }
-
-            const topRow = shell.querySelector('.home-omnibar-top, .subpage-omnibar-top');
-            if (topRow && !topRow.querySelector('.rs-dock-prompt-tag')) {
-                const tag = document.createElement('span');
-                tag.className = 'rs-dock-prompt-tag';
-                tag.setAttribute('aria-hidden', 'true');
-                tag.textContent = 'AI';
-                topRow.prepend(tag);
-            }
-
-            // Track pointer over shell for dynamic specular radial highlight
+            // Track pointer over shell for dynamic vitreous specular radial highlight
             shell.addEventListener('pointermove', (e) => {
                 const rect = shell.getBoundingClientRect();
                 shell.style.setProperty('--mouse-x', `${(e.clientX - rect.left).toFixed(0)}px`);
                 shell.style.setProperty('--mouse-y', `${(e.clientY - rect.top).toFixed(0)}px`);
             });
         });
-
-        // Live 60fps Oscilloscope Waveform inside the CLI Dock
-        const waveCanvas = document.getElementById('rsDockWaveCanvas');
-        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (waveCanvas && !prefersReduced && !waveCanvas.dataset.waveRunning) {
-            waveCanvas.dataset.waveRunning = 'true';
-            const ctx = waveCanvas.getContext('2d');
-            let phase = 0;
-            let energy = 0.25;
-
-            const boostEnergy = (amt = 0.85) => {
-                energy = Math.min(1.4, Math.max(energy, amt));
-            };
-            window.addEventListener('scroll', () => boostEnergy(0.75), { passive: true });
-            window.addEventListener('keydown', () => boostEnergy(1.15), { passive: true });
-            window.addEventListener('pointermove', () => boostEnergy(0.48), { passive: true });
-
-            const drawWave = () => {
-                const w = waveCanvas.width;
-                const h = waveCanvas.height;
-                ctx.clearRect(0, 0, w, h);
-
-                phase += 0.09 + energy * 0.14;
-                energy = Math.max(0.22, energy * 0.96);
-
-                const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#E06B3E';
-
-                // Baseline hairline
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.09)';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(0, h / 2);
-                ctx.lineTo(w, h / 2);
-                ctx.stroke();
-
-                // Active phosphor telemetry wave
-                ctx.strokeStyle = accent;
-                ctx.lineWidth = 1.4;
-                ctx.beginPath();
-                for (let x = 0; x < w; x++) {
-                    const norm = x / w;
-                    const env = Math.sin(norm * Math.PI);
-                    const y = (h / 2)
-                        + Math.sin(norm * 14 - phase) * (h * 0.36) * env * energy
-                        + Math.cos(norm * 27 + phase * 1.3) * (h * 0.14) * env * energy;
-                    if (x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-                requestAnimationFrame(drawWave);
-            };
-            requestAnimationFrame(drawWave);
-        }
-
-        // Dynamic Scroll Sector Telemetry Updater
-        const sectorEl = document.getElementById('rsDockSector');
-        if (sectorEl) {
-            const updateSector = () => {
-                const y = window.scrollY;
-                const isHome = document.body.classList.contains('is-home');
-                if (isHome) {
-                    const aboutEl = document.getElementById('about');
-                    const approachEl = document.getElementById('approach');
-                    const workEl = document.getElementById('work');
-                    if (aboutEl && y >= aboutEl.offsetTop - 260) {
-                        sectorEl.textContent = '03 / Background';
-                    } else if (approachEl && y >= approachEl.offsetTop - 260) {
-                        sectorEl.textContent = '02 / Principles';
-                    } else if (workEl && y >= workEl.offsetTop - 260) {
-                        sectorEl.textContent = '01 / Case Studies';
-                    } else {
-                        sectorEl.textContent = '00 / Overview';
-                    }
-                } else {
-                    const base = getPageSectorLabel();
-                    sectorEl.textContent = base;
-                }
-            };
-            updateSector();
-            window.addEventListener('scroll', updateSector, { passive: true });
-        }
     }
 
     function initSubpagePlaceholder() {

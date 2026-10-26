@@ -77,17 +77,18 @@
         flex-direction: column;
         justify-content: flex-end;
         background:
-          radial-gradient(520px circle at 50% 0%, rgba(200, 90, 50, 0.12), transparent 70%),
-          linear-gradient(180deg, rgba(14, 16, 22, 0.78) 0%, rgba(6, 7, 10, 0.90) 100%);
-        backdrop-filter: blur(28px) saturate(180%);
-        -webkit-backdrop-filter: blur(28px) saturate(180%);
+          radial-gradient(520px circle at 50% 0%, rgba(224, 107, 62, 0.08), transparent 70%),
+          linear-gradient(180deg, rgba(16, 18, 24, 0.88) 0%, rgba(6, 7, 11, 0.96) 100%);
+        backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+        -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
         color: #F5F5F7;
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.16);
         box-shadow:
-          0 36px 90px -12px rgba(0, 0, 0, 0.82),
-          0 0 32px -8px rgba(200, 90, 50, 0.16),
-          inset 0 1px 1px rgba(255, 255, 255, 0.22);
-        border-radius: 12px;
+          0 36px 90px -12px rgba(0, 0, 0, 0.85),
+          0 0 32px -8px rgba(200, 90, 50, 0.1),
+          inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+          inset 0 -1px 0 0 rgba(0, 0, 0, 0.85);
+        border-radius: 8px;
         visibility: hidden;
         opacity: 0;
         pointer-events: none;
@@ -96,34 +97,7 @@
         z-index: 2147482999;
         overflow: hidden;
       }
-      .panel::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: repeating-linear-gradient(
-          0deg,
-          rgba(255, 255, 255, 0.01) 0px,
-          rgba(255, 255, 255, 0.01) 1px,
-          transparent 1px,
-          transparent 3px
-        );
-        pointer-events: none;
-        z-index: 2;
-      }
-      /* Corner reticles inside drawer */
-      .panel-reticle {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        border-color: rgba(224, 107, 62, 0.65);
-        border-style: solid;
-        pointer-events: none;
-        z-index: 5;
-      }
-      .panel-reticle--tl { top: 5px; left: 5px; border-width: 1.5px 0 0 1.5px; border-top-left-radius: 3px; }
-      .panel-reticle--tr { top: 5px; right: 5px; border-width: 1.5px 1.5px 0 0; border-top-right-radius: 3px; }
-      .panel-reticle--bl { bottom: 5px; left: 5px; border-width: 0 0 1.5px 1.5px; border-bottom-left-radius: 3px; }
-      .panel-reticle--br { bottom: 5px; right: 5px; border-width: 0 1.5px 1.5px 0; border-bottom-right-radius: 3px; }
+      .panel-reticle { display: none !important; }
       @media (max-width: 640px) {
         .panel {
           left: 10px;
@@ -132,7 +106,7 @@
           width: auto;
           height: calc(100vh - 20px);
           max-height: calc(100vh - 20px);
-          border-radius: 12px;
+          border-radius: 8px;
         }
       }
       .panel.open {
@@ -745,10 +719,6 @@
 
     <div class="ui">
       <div class="panel" role="dialog" aria-modal="true" aria-label="Ryan’s Portfolio Guide" aria-labelledby="rs-chat-title" aria-describedby="rs-chat-desc" tabindex="-1">
-        <span class="panel-reticle panel-reticle--tl" aria-hidden="true"></span>
-        <span class="panel-reticle panel-reticle--tr" aria-hidden="true"></span>
-        <span class="panel-reticle panel-reticle--bl" aria-hidden="true"></span>
-        <span class="panel-reticle panel-reticle--br" aria-hidden="true"></span>
         <div class="chat-body">
           <div class="hdr">
             <div class="hdr-title-group">

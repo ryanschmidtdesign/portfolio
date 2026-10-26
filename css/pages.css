@@ -1718,19 +1718,19 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   position: relative;
   width: 100%;
   background:
-    radial-gradient(380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(224, 107, 62, 0.12), transparent 75%),
-    linear-gradient(180deg, rgba(14, 16, 22, 0.68) 0%, rgba(6, 7, 10, 0.82) 100%);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 12px;
-  padding: 6px 8px 8px;
+    radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(224, 107, 62, 0.09), transparent 70%),
+    linear-gradient(180deg, rgba(16, 18, 24, 0.74) 0%, rgba(6, 7, 11, 0.88) 100%);
+  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  padding: 5px 6px;
   box-shadow:
-    0 24px 60px -8px rgba(0, 0, 0, 0.65),
-    0 8px 22px -4px rgba(0, 0, 0, 0.45),
-    0 0 28px -6px rgba(200, 90, 50, 0.14),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5);
+    0 24px 64px -10px rgba(0, 0, 0, 0.75),
+    0 8px 24px -4px rgba(0, 0, 0, 0.5),
+    0 0 24px -4px rgba(200, 90, 50, 0.08),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.32),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.85);
   transition:
     border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -1738,183 +1738,30 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   overflow: hidden;
 }
 
-/* Precision Machined Corner Reticles on CLI Dock */
-.rs-dock-reticle {
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  border-color: rgba(224, 107, 62, 0.65);
-  border-style: solid;
-  pointer-events: none;
-  z-index: 4;
-  transition: border-color 200ms ease, width 200ms ease, height 200ms ease;
-}
-.rs-dock-reticle--tl { top: 4px; left: 4px; border-width: 1.5px 0 0 1.5px; border-top-left-radius: 3px; }
-.rs-dock-reticle--tr { top: 4px; right: 4px; border-width: 1.5px 1.5px 0 0; border-top-right-radius: 3px; }
-.rs-dock-reticle--bl { bottom: 4px; left: 4px; border-width: 0 0 1.5px 1.5px; border-bottom-left-radius: 3px; }
-.rs-dock-reticle--br { bottom: 4px; right: 4px; border-width: 0 1.5px 1.5px 0; border-bottom-right-radius: 3px; }
-
-.home-omnibar-shell:hover .rs-dock-reticle,
-.subpage-omnibar-shell:hover .rs-dock-reticle,
-.home-omnibar-shell:focus-within .rs-dock-reticle,
-.subpage-omnibar-shell:focus-within .rs-dock-reticle {
-  border-color: #FF8A5B;
-}
-
-/* Top Telemetry Rail inside CLI Dock */
-.rs-dock-telemetry {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 2px 6px 5px;
-  font-family: var(--font-mono, "Space Mono", monospace);
-  font-size: 9.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #8E93A4;
-  user-select: none;
-}
-
-.rs-dock-telemetry__left {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.rs-dock-led {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #E06B3E;
-  box-shadow: 0 0 8px #E06B3E;
-  flex-shrink: 0;
-  animation: rsDockPulse 2.4s ease-in-out infinite;
-}
-
-.rs-dock-sys-id {
-  color: #D5D8E2;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.rs-dock-sep {
-  color: rgba(224, 107, 62, 0.55);
-  flex-shrink: 0;
-}
-
-.rs-dock-sector {
-  color: #FF8A5B;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.rs-dock-wave {
-  width: 56px;
-  height: 12px;
-  flex-shrink: 0;
-  opacity: 0.92;
-  margin-left: 2px;
-}
-
-.rs-dock-telemetry__right {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex-shrink: 0;
-}
-
-.rs-dock-pill {
-  appearance: none;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 4px;
-  padding: 1.5px 6px;
-  font-family: var(--font-mono, "Space Mono", monospace);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: #9EA3B4;
-  cursor: pointer;
-  transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-}
-
-.rs-dock-pill:hover {
-  background: rgba(224, 107, 62, 0.18);
-  border-color: rgba(224, 107, 62, 0.55);
-  color: #FFF;
-  box-shadow: 0 0 10px rgba(200, 90, 50, 0.28);
-  transform: translateY(-0.5px);
-}
-
-/* Top holographic laser hairline */
-.home-omnibar-shell::before,
-.subpage-omnibar-shell::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 138, 91, 0.85) 50%, transparent 100%);
-  opacity: 0.78;
-  pointer-events: none;
-  transition: opacity 220ms ease, left 260ms cubic-bezier(0.16, 1, 0.3, 1), right 260ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Subtle CRT scanline texture inside dock */
-.home-omnibar-shell::after,
-.subpage-omnibar-shell::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.012) 0px,
-    rgba(255, 255, 255, 0.012) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  pointer-events: none;
-}
-
 .home-omnibar-shell:hover,
 .subpage-omnibar-shell:hover {
-  border-color: rgba(224, 107, 62, 0.42);
-  transform: translateY(-1.5px);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
   box-shadow:
-    0 0 0 1px rgba(224, 107, 62, 0.28),
-    0 30px 72px -8px rgba(0, 0, 0, 0.85),
-    0 0 36px -4px rgba(200, 90, 50, 0.32),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
-}
-
-.home-omnibar-shell:hover::before,
-.subpage-omnibar-shell:hover::before {
-  opacity: 1;
-  left: 4%;
-  right: 4%;
+    0 30px 76px -10px rgba(0, 0, 0, 0.85),
+    0 10px 28px -4px rgba(0, 0, 0, 0.55),
+    0 0 28px -2px rgba(224, 107, 62, 0.16),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.9);
 }
 
 .home-omnibar-shell:focus-within,
 .subpage-omnibar-shell:focus-within {
-  border-color: var(--accent, #E06B3E);
-  transform: translateY(-2px);
+  border-color: rgba(224, 107, 62, 0.65);
+  transform: translateY(-1.5px);
   box-shadow:
-    0 32px 78px -8px rgba(0, 0, 0, 0.9),
-    0 0 0 1.5px var(--accent, #E06B3E),
-    0 0 42px -2px rgba(224, 107, 62, 0.44),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.26);
+    0 32px 80px -8px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(224, 107, 62, 0.45),
+    0 0 36px -2px rgba(224, 107, 62, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
 }
 
-/* Recessed Optical Input Trench */
+/* Recessed Obsidian Input Trench */
 .home-omnibar-form,
 .subpage-omnibar-form {
   position: relative;
@@ -1926,9 +1773,9 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   width: 100%;
   margin: 0;
   padding: 4px 6px 4px 10px;
-  background: rgba(4, 5, 8, 0.45);
+  background: rgba(4, 5, 8, 0.48);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  border-radius: 6px;
   box-shadow:
     inset 0 1px 3px rgba(0, 0, 0, 0.6),
     0 1px 0 rgba(255, 255, 255, 0.05);
@@ -1937,8 +1784,8 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-shell:focus-within .home-omnibar-form,
 .subpage-omnibar-shell:focus-within .subpage-omnibar-form {
-  background: rgba(4, 5, 8, 0.65);
-  border-color: rgba(224, 107, 62, 0.45);
+  background: rgba(4, 5, 8, 0.68);
+  border-color: rgba(224, 107, 62, 0.42);
   box-shadow:
     inset 0 1px 4px rgba(0, 0, 0, 0.7),
     0 0 12px rgba(224, 107, 62, 0.12);
@@ -1983,44 +1830,30 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   width: 100%;
 }
 
-.rs-dock-prompt-tag {
-  font-family: var(--font-mono, "Space Mono", monospace);
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #FF8A5B;
-  background: rgba(224, 107, 62, 0.14);
-  border: 1px solid rgba(224, 107, 62, 0.35);
-  border-radius: 4px;
-  padding: 2px 5px;
+.home-omnibar-top::before,
+.subpage-omnibar-top::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.45)' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
   flex-shrink: 0;
-  user-select: none;
-  line-height: 1.1;
+  opacity: 0.65;
+  transition: opacity 180ms ease;
+  order: 1;
 }
 
-/* Obsidian Terminal Chevron Prompt */
+.home-omnibar-shell:focus-within .home-omnibar-top::before,
+.subpage-omnibar-shell:focus-within .subpage-omnibar-top::before {
+  opacity: 0.95;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E06B3E' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+}
+
 .home-omnibar-top::after,
 .subpage-omnibar-top::after {
   content: none;
-}
-
-.home-omnibar-top::before,
-.subpage-omnibar-top::before {
-  content: "❯";
-  font-family: var(--font-mono, "Space Mono", monospace);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--accent, #E06B3E);
-  text-shadow: 0 0 10px rgba(224, 107, 62, 0.8);
-  flex-shrink: 0;
-  user-select: none;
-  line-height: 1;
-  order: 1;
-  transition: transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1), color 180ms ease;
-}
-
-.rs-dock-prompt-tag {
-  order: 0;
 }
 
 .home-omnibar-input,
@@ -3170,20 +3003,8 @@ body:not(.is-home) main.site-main {
   }
   .home-omnibar-shell,
   .subpage-omnibar-shell {
-    padding: 5px 7px 7px;
-    border-radius: 10px;
-  }
-  .rs-dock-pill[data-dock-cmd="role_fit"],
-  .rs-dock-pill[data-dock-cmd="tokens"],
-  .rs-dock-prompt-tag {
-    display: none;
-  }
-  .rs-dock-wave {
-    width: 40px;
-  }
-  .rs-dock-telemetry {
-    font-size: 8.5px;
-    padding: 1px 4px 4px;
+    padding: 4px 5px;
+    border-radius: 8px;
   }
   .home-ai-stage {
     gap: 0.65rem;

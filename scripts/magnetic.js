@@ -9,6 +9,7 @@
 
   // 1. Dynamic Cursor-Following Ambient Illumination across Cards & Docks
   const spotlightSelector = [
+    '.site-header',
     '.home-project-card',
     '.evidence-card',
     '.leadership-metric',
@@ -40,6 +41,8 @@
 
           card.style.setProperty('--mouse-x', `${x.toFixed(0)}px`);
           card.style.setProperty('--mouse-y', `${y.toFixed(0)}px`);
+          card.style.setProperty('--header-mouse-x', `${x.toFixed(0)}px`);
+          card.style.setProperty('--header-mouse-y', `${y.toFixed(0)}px`);
           card.style.setProperty('--x', `${x.toFixed(0)}px`);
           card.style.setProperty('--y', `${y.toFixed(0)}px`);
 
