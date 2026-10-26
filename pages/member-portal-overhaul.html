@@ -28,7 +28,7 @@
     <!-- Fonts (IBM Plex Sans + Newsreader italic serif for editorial accents) -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <link rel="stylesheet" href="../styles.css?v=54">
+    <link rel="stylesheet" href="../styles.css?v=55">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -394,6 +394,29 @@
             To evaluate navigation models, I conducted moderated usability testing sessions with 5 enterprise HR executives. Testing quickly revealed the design boundaries: dumping all four tiers into a dense megamenu paralyzed members with dozens of competing links, while burying topics inside nested drill-downs meant related research studies were rarely discovered. Those sessions confirmed that progressive disclosure was the right model, exposing deeper topics only after a member selected a primary practice area.
           </p>
 
+          <div class="taxonomy-flow" aria-label="Four-tier content taxonomy architecture">
+            <div class="taxonomy-flow__step">
+              <span class="taxonomy-flow__tier">Tier 1: Domain</span>
+              <strong class="taxonomy-flow__title">Areas of Focus</strong>
+              <span class="taxonomy-flow__desc">Broad executive practice domains (Leadership, Talent, Culture, Total Rewards).</span>
+            </div>
+            <div class="taxonomy-flow__step">
+              <span class="taxonomy-flow__tier">Tier 2: Intent</span>
+              <strong class="taxonomy-flow__title">Strategic Priorities</strong>
+              <span class="taxonomy-flow__desc">Key business questions within each area (e.g. Executive Succession Planning).</span>
+            </div>
+            <div class="taxonomy-flow__step">
+              <span class="taxonomy-flow__tier">Tier 3: Depth</span>
+              <strong class="taxonomy-flow__title">Subject Topics</strong>
+              <span class="taxonomy-flow__desc">Specific subject clusters (e.g. C-Suite Turnover Benchmarks).</span>
+            </div>
+            <div class="taxonomy-flow__step">
+              <span class="taxonomy-flow__tier">Tier 4: Output</span>
+              <strong class="taxonomy-flow__title">Content Assets</strong>
+              <span class="taxonomy-flow__desc">Actionable research reports, risk assessment tools, and roundtable recordings.</span>
+            </div>
+          </div>
+
           <figure class="case-study-media">
             <div class="image-splitter" data-splitter data-splitter-initial="50" aria-label="Before and after comparison of the content taxonomy">
               <div class="splitter-viewport">
@@ -405,7 +428,7 @@
                 </div>
                 <div class="splitter-after" style="clip-path: inset(0 0 0 50%);">
                   <picture>
-                    <source srcset="../assets/case-studies/member-portal/design-highlights/Expert Network - Reading a Post.webp" type="image/webp">
+                    <source srcset="../assets/case-studies/member-portal/design-highlights/Expert%20Network%20-%20Reading%20a%20Post.webp" type="image/webp">
                     <img src="../assets/case-studies/member-portal/design-highlights/Expert Network - Reading a Post.webp" alt="Redesigned expert network view mapped to member language" class="no-reveal" width="1440" height="900" loading="lazy">
                   </picture>
                 </div>
@@ -601,7 +624,7 @@
                 </div>
                 <div class="splitter-after" style="clip-path: inset(0 0 0 50%);">
                   <picture>
-                    <source srcset="../assets/case-studies/member-portal/design-highlights/Ahri Full Page Redesign - Main.webp" type="image/webp">
+                    <source srcset="../assets/case-studies/member-portal/design-highlights/Ahri%20Full%20Page%20Redesign%20-%20Main.webp" type="image/webp">
                     <img src="../assets/case-studies/member-portal/design-highlights/Ahri Full Page Redesign - Main.webp" alt="Ask Ahri conversational AI discovery omnibar interface" class="no-reveal" width="1440" height="900" draggable="false" loading="lazy">
                   </picture>
                 </div>
@@ -824,10 +847,10 @@
     </div>
 
     <!-- GSAP for smooth chat widget animations -->
-    <script src="../scripts/cli-mode.js?v=54" defer></script>
-    <script src="../scripts/scripts.js?v=54" defer></script>
+    <script src="../scripts/cli-mode.js?v=55" defer></script>
+    <script src="../scripts/scripts.js?v=55" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=54" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=55" defer></script>
     <script src="../scripts/image-splitter.js" defer></script>
     <!-- SEO Landmark Footer (visually hidden) -->
     <footer class="site-footer" aria-hidden="true">

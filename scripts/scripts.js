@@ -98,7 +98,14 @@
             return;
           }
           if (lower === '/resume' || lower === 'resume') {
-            window.open('../assets/ryan-schmidt-resume.pdf', '_blank');
+            const path = window.location.pathname || '/';
+            const resumePath = path.includes('/pages/') ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
+            window.open(resumePath, '_blank');
+            aiInput.value = '';
+            return;
+          }
+          if (lower === '/email' || lower === 'email' || lower === '/contact' || lower === 'contact') {
+            window.location.href = 'mailto:ryanschmidt1989@gmail.com';
             aiInput.value = '';
             return;
           }

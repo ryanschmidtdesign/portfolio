@@ -33,7 +33,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=54">
+    <link rel="stylesheet" href="../styles.css?v=55">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -433,6 +433,55 @@
           <p>
             Early in wireframing, I pitched three static department layouts: Sales, Service, and Operations. But during user walkthroughs, the approach broke down immediately. A 12-person residential integrator runs completely differently than a 60-person commercial shop; their morning priorities had almost zero overlap. Hardcoded department views would have recreated the exact problem we were trying to fix. That pushed us toward modular templates that managers could reorganize and rename in under two minutes.
           </p>
+
+          <div class="synthesis-matrix" aria-label="Research synthesis: comparison of operational cohorts">
+            <div class="synthesis-matrix__header">
+              <span class="synthesis-matrix__tag">Discovery Synthesis Artefact</span>
+              <span class="synthesis-matrix__meta">10 User &amp; Stakeholder Interviews</span>
+            </div>
+            <div style="overflow-x: auto;">
+              <table class="synthesis-matrix__table">
+                <thead>
+                  <tr>
+                    <th style="width: 25%;">Integrator Cohort</th>
+                    <th style="width: 37%;">First Morning Question</th>
+                    <th style="width: 38%;">Failure Mode of Hardcoded Views</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Residential Integrator</strong><br>
+                      <span style="color: var(--text-secondary); font-size: 0.8rem;">10–15 staff</span>
+                    </td>
+                    <td>
+                      <em>"Which vans need hardware loaded before dispatch at 7:30 AM?"</em><br>
+                      Needs immediate technician schedule and job-stage counts.
+                    </td>
+                    <td>
+                      Executive gross margin and multi-month pipeline gauges pushed daily technician dispatch below the fold.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Commercial Integrator</strong><br>
+                      <span style="color: var(--text-secondary); font-size: 0.8rem;">50+ staff</span>
+                    </td>
+                    <td>
+                      <em>"Where are active change orders eroding our project margins?"</em><br>
+                      Needs multi-stage milestone tracking and billing status.
+                    </td>
+                    <td>
+                      Standard service queues cluttered the screen with noise, forcing accounting leads back into manual Monday Excel exports.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="synthesis-matrix__footer">
+              <strong>Synthesis takeaway:</strong> Rather than forcing different operational rhythms into rigid department silos, we designed role-based starter templates with drag-and-drop customization so both profiles could tailor their morning views in seconds.
+            </p>
+          </div>
         </aside>
 
         <section id="design-approach" data-reveal aria-label="Design approach & decisions">
@@ -691,10 +740,10 @@
 
     <!-- GSAP for smooth chat widget animations -->
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=54" defer></script>
-    <script src="../scripts/scripts.js?v=54" defer></script>
+    <script src="../scripts/cli-mode.js?v=55" defer></script>
+    <script src="../scripts/scripts.js?v=55" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=54" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=55" defer></script>
     <!-- SEO Landmark Footer (visually hidden) -->
     <footer class="site-footer" aria-hidden="true">
       <a class="site-footer-brand" href="../index.html" tabindex="-1">

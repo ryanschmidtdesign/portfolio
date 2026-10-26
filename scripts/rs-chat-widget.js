@@ -922,6 +922,34 @@ if (savedHist.length > 0) {
       }
     });
 
+    function handleOmnibarCommand(val) {
+      if (!val) return false;
+      const lower = val.trim().toLowerCase();
+      if (lower === '/tokens' || lower === 'tokens') {
+        window.rsCommandPalette?.cycleTheme();
+        return true;
+      }
+      if (lower === '/work' || lower === 'work') {
+        window.rsCommandPalette?.open();
+        return true;
+      }
+      if (lower === '/resume' || lower === 'resume') {
+        const path = window.location.pathname || '/';
+        const resumePath = path.includes('/pages/') ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
+        window.open(resumePath, '_blank');
+        return true;
+      }
+      if (lower === '/email' || lower === 'email' || lower === '/contact' || lower === 'contact') {
+        window.location.href = 'mailto:ryanschmidt1989@gmail.com';
+        return true;
+      }
+      if (lower === '/cmdk' || lower === 'cmdk' || lower === '/help' || lower === 'help') {
+        window.rsCommandPalette?.open();
+        return true;
+      }
+      return false;
+    }
+
     const inputs = [
       document.getElementById('ai-mini-input'),
       document.getElementById('home-omnibar-input')
@@ -937,6 +965,7 @@ if (savedHist.length > 0) {
           const val = input.value.trim();
           if (val) {
             input.value = '';
+            if (handleOmnibarCommand(val)) return;
             openPanel();
             send(val);
           } else {
@@ -958,6 +987,7 @@ if (savedHist.length > 0) {
         const val = activeInput ? activeInput.value.trim() : '';
         if (val) {
           if (activeInput) activeInput.value = '';
+          if (handleOmnibarCommand(val)) return;
           openPanel();
           send(val);
         } else {
@@ -978,6 +1008,7 @@ if (savedHist.length > 0) {
         const val = activeInput ? activeInput.value.trim() : '';
         if (val) {
           if (activeInput) activeInput.value = '';
+          if (handleOmnibarCommand(val)) return;
           openPanel();
           send(val);
         } else {

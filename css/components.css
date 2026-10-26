@@ -3606,3 +3606,124 @@ body {
   line-height: var(--lh-snug);
   max-width: 60ch;
 }
+
+/* --------------------------------------------------------------------------
+   Research Synthesis Artifacts: Discovery Matrices & Taxonomy Flows
+   -------------------------------------------------------------------------- */
+.synthesis-matrix {
+  margin-block: var(--space-5);
+  background: var(--card-bg-strong, #ffffff);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  box-shadow: var(--shadow-1);
+}
+
+.synthesis-matrix__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: var(--space-2);
+}
+
+.synthesis-matrix__tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.synthesis-matrix__meta {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+.synthesis-matrix__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+}
+
+.synthesis-matrix__table th {
+  padding: 8px 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 1.5px solid var(--border-strong);
+  text-align: left;
+}
+
+.synthesis-matrix__table td {
+  padding: 10px 12px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.synthesis-matrix__table tr:last-child td {
+  border-bottom: none;
+}
+
+.synthesis-matrix__footer {
+  margin-top: var(--space-3);
+  font-size: var(--fs-2xs);
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.taxonomy-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin-block: var(--space-5);
+  background: var(--card-bg-strong, #ffffff);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  box-shadow: var(--shadow-1);
+}
+
+.taxonomy-flow__step {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+}
+
+.taxonomy-flow__tier {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.taxonomy-flow__title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.taxonomy-flow__desc {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .taxonomy-flow {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+}
