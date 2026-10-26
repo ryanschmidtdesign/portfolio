@@ -33,7 +33,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=52">
+    <link rel="stylesheet" href="../styles.css?v=53">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -724,21 +724,12 @@
             Figma is great for team alignment, but jumping straight into HTML and CSS cut out an entire layer of translation lag. I could resize my browser window, test keyboard navigation, and check contrast under real rendering conditions instead of pretending static mockups told the whole story.
           </p>
 
-          <figure class="case-study-media file-chat-pair">
-            <div>
-              <picture>
-                <source srcset="../assets/case-studies/ai-coding-portfolio/cursor-files.webp" type="image/webp">
-                <img src="../assets/case-studies/ai-coding-portfolio/cursor-files.webp" alt="Project file structure in the Cursor editor" width="508" height="1420" loading="lazy" class="no-reveal">
-              </picture>
-              <figcaption>Project file structure in Cursor, built and tested directly in the editor.</figcaption>
-            </div>
-            <div>
-              <picture>
-                <source srcset="../assets/case-studies/ai-coding-portfolio/old-chat.webp" type="image/webp">
-                <img src="../assets/case-studies/ai-coding-portfolio/old-chat.webp" alt="Chat widget in the previous version of the portfolio" width="1200" height="800" loading="lazy" class="no-reveal">
-              </picture>
-              <figcaption>The original chat widget from the previous portfolio before moving to vector search.</figcaption>
-            </div>
+          <figure class="case-study-media editor-tree-media">
+            <picture>
+              <source srcset="../assets/case-studies/ai-coding-portfolio/cursor-files.webp" type="image/webp">
+              <img src="../assets/case-studies/ai-coding-portfolio/cursor-files.webp" alt="Project file structure in the Cursor editor" width="508" height="1420" loading="lazy" class="no-reveal">
+            </picture>
+            <figcaption>Project file structure in Cursor, built and tested directly in the editor.</figcaption>
           </figure>
 
           <h3>Setting ground rules before writing code</h3>
@@ -806,6 +797,14 @@
           <p>
             The first version of my portfolio assistant shoved an entire 40KB JSON file into every single API call. It was simple to set up, but it was inefficient and blew through token limits the second someone asked a nuanced question.
           </p>
+
+          <figure class="case-study-media assistant-legacy-media">
+            <picture>
+              <source srcset="../assets/case-studies/ai-coding-portfolio/old-chat.webp" type="image/webp">
+              <img src="../assets/case-studies/ai-coding-portfolio/old-chat.webp" alt="Chat widget in the previous version of the portfolio" width="964" height="1498" loading="lazy" class="no-reveal">
+            </picture>
+            <figcaption>The original chat widget from the previous portfolio before moving to vector search.</figcaption>
+          </figure>
           <p>
             I rebuilt the backend around Supabase and pgvector. Now, every case study and project note is broken into small chunks and indexed using Gemini embeddings. When a recruiter or visitor asks a question, the backend retrieves only the three or four most relevant paragraphs before generating an answer.
           </p>
@@ -912,19 +911,20 @@
 
     <!-- GSAP for smooth chat widget animations -->
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=52" defer></script>
-    <script src="../scripts/scripts.js?v=52" defer></script>
+    <script src="../scripts/cli-mode.js?v=53" defer></script>
+    <script src="../scripts/scripts.js?v=53" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=52" defer></script>
-    <footer class="site-footer">
-      <a class="site-footer-brand" href="../index.html">
+    <script src="../scripts/rs-chat-widget.js?v=53" defer></script>
+    <!-- SEO Landmark Footer (visually hidden) -->
+    <footer class="site-footer" aria-hidden="true">
+      <a class="site-footer-brand" href="../index.html" tabindex="-1">
         <img src="../favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">
-        Ryan Schmidt — Senior B2B SaaS Product Designer
+        Ryan Schmidt: Senior B2B SaaS Product Designer
       </a>
-      <div style="display:flex; gap:1rem; align-items:center;">
-      <a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="color:var(--text-secondary); text-decoration:none; font-size:var(--fs-xs);">GitHub ↗</a>
-      <p>&copy; 2026 Ryan Schmidt</p>
-    </div>
+      <div>
+        <a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" tabindex="-1">GitHub</a>
+        <p>&copy; 2026 Ryan Schmidt</p>
+      </div>
     </footer>
   <script>
     if ('serviceWorker' in navigator) {

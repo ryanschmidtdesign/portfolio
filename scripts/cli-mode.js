@@ -492,9 +492,22 @@
                     title: 'Connect on LinkedIn',
                     sub: 'linkedin.com/in/ryanschmidt1989 (message or network directly)',
                     badge: 'Connect ↗',
-                    keywords: 'linkedin contact hire reach out message connect social network email',
+                    keywords: 'linkedin contact hire reach out message connect social network',
                     action: () => {
                         window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
+                        this.close();
+                    }
+                },
+                {
+                    id: 'act-email',
+                    group: 'Quick Actions',
+                    icon: '@',
+                    title: 'Email Ryan Schmidt',
+                    sub: 'ryanschmidt1989@gmail.com (opens default email client)',
+                    badge: 'Email ↗',
+                    keywords: 'email contact hire reach out message ryanschmidt1989 gmail write direct inbox mailto',
+                    action: () => {
+                        window.location.href = 'mailto:ryanschmidt1989@gmail.com';
                         this.close();
                     }
                 }

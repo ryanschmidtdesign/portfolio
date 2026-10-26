@@ -33,7 +33,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=52">
+    <link rel="stylesheet" href="../styles.css?v=53">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -176,7 +176,7 @@
           "name": "What was Ryan Schmidt's role on the dashboard project?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Lead Product Designer and acting PM for five months. Owned problem definition, research, and IA while partnering with 4 engineers."
+            "text": "Lead Product Designer leading product and delivery triad alongside 4 engineers for five months. Owned problem definition, research, and IA while partnering with engineering leadership."
           }
         },
         {
@@ -314,7 +314,7 @@
             <div class="tldr-role">
               <p class="tldr-label" data-reveal>My role</p>
               <p>
-                <strong>Lead Product Designer & acting PM (5 months)</strong>
+                <strong>Lead Product Designer (leading PM and delivery triad)</strong>
               </p>
               <ul>
                 <li>Owned problem definition, research, and design</li>
@@ -556,7 +556,7 @@
             <h2>Execution Constraints: Managing Without a Design System</h2>
           </div>
           <p>
-            Because I was splitting my time as lead designer and acting PM, keeping scope under control was non-negotiable. We also didn't have a shared design system yet. That came directly after this project, when I built and rolled out our 100+ component library across D-Tools Cloud.
+            Because I was leading both product definition and design delivery, keeping scope under control was non-negotiable. We also didn't have a shared design system yet. That came directly after this project, when I built and rolled out our 100+ component library across D-Tools Cloud.
           </p>
           <p>
             Back then, we were working with basic UI kit variants and loose guidelines. That meant I had to sit closely with our front-end engineers every week. Instead of inventing unique card styles or fancy animations, I stuck to a few consistent widget wrappers and standard grid increments. It kept code clean and prevented the dashboard from breaking when users resized their screens.
@@ -616,6 +616,9 @@
           </p>
           <p>
             Users reached an average of two customizations per chart, showing they were actively tailoring widgets to answer specific questions about their projects.
+          </p>
+          <p>
+            Feature telemetry also revealed a clear rhythm in how teams used the AI: deterministic charts and widget filters served as the daily operational anchor for dispatch and pipeline checks, whereas 1-click AI summaries found their strongest rhythm during monthly executive reporting cycles, with a marked surge at the end of each fiscal quarter when department leads compiled board decks and revenue reviews.
           </p>
 
           <figure class="case-study-media" data-reveal>
@@ -684,19 +687,20 @@
 
     <!-- GSAP for smooth chat widget animations -->
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=52" defer></script>
-    <script src="../scripts/scripts.js?v=52" defer></script>
+    <script src="../scripts/cli-mode.js?v=53" defer></script>
+    <script src="../scripts/scripts.js?v=53" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=52" defer></script>
-    <footer class="site-footer">
-      <a class="site-footer-brand" href="../index.html">
+    <script src="../scripts/rs-chat-widget.js?v=53" defer></script>
+    <!-- SEO Landmark Footer (visually hidden) -->
+    <footer class="site-footer" aria-hidden="true">
+      <a class="site-footer-brand" href="../index.html" tabindex="-1">
         <img src="../favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">
-        Ryan Schmidt — Senior B2B SaaS Product Designer
+        Ryan Schmidt: Senior B2B SaaS Product Designer
       </a>
-      <div style="display:flex; gap:1rem; align-items:center;">
-      <a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="color:var(--text-secondary); text-decoration:none; font-size:var(--fs-xs);">GitHub ↗</a>
-      <p>&copy; 2026 Ryan Schmidt</p>
-    </div>
+      <div>
+        <a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" tabindex="-1">GitHub</a>
+        <p>&copy; 2026 Ryan Schmidt</p>
+      </div>
     </footer>
   <script>
     if ('serviceWorker' in navigator) {

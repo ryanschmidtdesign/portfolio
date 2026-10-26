@@ -28,7 +28,7 @@
     <!-- Fonts (IBM Plex Sans + Newsreader italic serif for editorial accents) -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <link rel="stylesheet" href="../styles.css?v=52">
+    <link rel="stylesheet" href="../styles.css?v=53">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -384,10 +384,10 @@
             <h2>Research</h2>
           </div>
           <p>
-            I didn't have to invent a new taxonomy from scratch. Our research team had already drafted a four-level hierarchy based on interviews with member companies.
+            The four-tier taxonomy framework had already been established by i4cp's research leadership before I joined the project. My challenge was translating that conceptual taxonomy into an intuitive digital experience without overwhelming members.
           </p>
           <p>
-            Putting all four tiers into a giant megamenu overwhelmed users with dozens of competing links. Hiding them inside nested drill-downs meant members rarely discovered related research. I spent research sessions testing how to progressively reveal deeper topics only after a member selected a primary focus area.
+            To evaluate navigation models, I conducted moderated usability testing sessions with 5 enterprise HR executives. Testing quickly revealed the design boundaries: dumping all four tiers into a dense megamenu paralyzed members with dozens of competing links, while burying topics inside nested drill-downs meant related research studies were rarely discovered. Those sessions confirmed that progressive disclosure was the right model, exposing deeper topics only after a member selected a primary practice area.
           </p>
 
           <figure class="case-study-media">
@@ -820,20 +820,21 @@
     </div>
 
     <!-- GSAP for smooth chat widget animations -->
-    <script src="../scripts/cli-mode.js?v=52" defer></script>
-    <script src="../scripts/scripts.js?v=52" defer></script>
+    <script src="../scripts/cli-mode.js?v=53" defer></script>
+    <script src="../scripts/scripts.js?v=53" defer></script>
     <script src="../scripts/magnetic.js" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=52" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=53" defer></script>
     <script src="../scripts/image-splitter.js" defer></script>
-    <footer class="site-footer">
-      <a class="site-footer-brand" href="../index.html">
+    <!-- SEO Landmark Footer (visually hidden) -->
+    <footer class="site-footer" aria-hidden="true">
+      <a class="site-footer-brand" href="../index.html" tabindex="-1">
         <img src="../favicon.svg?v=2" width="16" height="16" alt="" aria-hidden="true">
-        Ryan Schmidt — Senior B2B SaaS Product Designer
+        Ryan Schmidt: Senior B2B SaaS Product Designer
       </a>
-      <div style="display:flex; gap:1rem; align-items:center;">
-      <a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="color:var(--text-secondary); text-decoration:none; font-size:var(--fs-xs);">GitHub ↗</a>
-      <p>&copy; 2026 Ryan Schmidt</p>
-    </div>
+      <div>
+        <a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" tabindex="-1">GitHub</a>
+        <p>&copy; 2026 Ryan Schmidt</p>
+      </div>
     </footer>
   <script>
     if ('serviceWorker' in navigator) {

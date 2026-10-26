@@ -621,26 +621,21 @@
   margin-top: 0;
 }
 
-/* File + chat 2-up pairing — tall screenshot + landscape screenshot side by side */
-.case-study--ai-coding-portfolio .file-chat-pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 160px;
-  align-items: start;
+/* Single column media styling for vertical IDE and legacy chat screenshots */
+.case-study--ai-coding-portfolio .editor-tree-media,
+.case-study--ai-coding-portfolio .assistant-legacy-media {
+  max-width: 480px;
+  margin-inline: auto;
+  text-align: center;
 }
 
-.case-study--ai-coding-portfolio .file-chat-pair img {
+.case-study--ai-coding-portfolio .editor-tree-media img,
+.case-study--ai-coding-portfolio .assistant-legacy-media img {
   width: 100%;
   height: auto;
-  object-fit: contain;
-}
-
-@media (max-width: 900px) {
-  .case-study--ai-coding-portfolio .file-chat-pair {
-    grid-template-columns: 1fr;
-    column-gap: 0;
-    row-gap: var(--space-5);
-  }
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
 }
 
 /* Member Portal: IA challenge — align compare panel padding with card content */
@@ -2780,36 +2775,9 @@ body.is-home {
   letter-spacing: 0.02em;
 }
 
-body.is-home .site-footer {
-  display: flex !important;
-  max-width: 980px;
-  margin: 3.5rem auto 0;
-  padding: 2rem clamp(1.25rem, 4vw, 2.5rem) 4rem;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-  color: #64748B;
-  font-size: 0.82rem;
-}
-
-body.is-home .site-footer-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #141413;
-  font-weight: 500;
-  text-decoration: none;
-}
-
 /* Ensure subpages have comfortable clearance above the fixed bottom CLI dock */
 body:not(.is-home) main.site-main {
   padding-bottom: clamp(160px, 20vh, 220px) !important;
-}
-
-body:not(.is-home) .site-footer {
-  padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px)) !important;
 }
 
 /* Responsive Breakpoints for Homepage AI Stage */
