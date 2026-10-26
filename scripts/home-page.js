@@ -13,8 +13,8 @@
 
   function getDefaultPlaceholder() {
     return window.innerWidth <= 600
-      ? 'Ask about Ryan’s work, case studies, or hobbies...'
-      : 'Ask a question about Ryan’s work, case studies, or hobbies...';
+      ? 'Ask AI about Ryan’s work...'
+      : 'Ask AI, execute /command, or press ⌘K...';
   }
 
   function updatePlaceholder() {

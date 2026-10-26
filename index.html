@@ -58,7 +58,7 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
-  <link rel="stylesheet" href="./styles.css?v=57">
+  <link rel="stylesheet" href="./styles.css?v=58">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -317,8 +317,9 @@
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
                 <button type="button" class="home-project-card__ai-cta" data-ask-ai="How did Ryan design custom dashboards and AI summaries to achieve 62% multi-dashboard adoption?" aria-label="Discuss Custom Dashboards &amp; AI Summaries with Ryan's AI chatbot">
+                  <span class="home-project-card__ai-led" aria-hidden="true"></span>
                   <span class="home-project-card__ai-sparkle" aria-hidden="true">✦</span>
-                  <span>Ask AI</span>
+                  <span>ASK_AI</span>
                 </button>
               </div>
             </div>
@@ -353,8 +354,9 @@
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
                 <button type="button" class="home-project-card__ai-cta" data-ask-ai="How did Ryan rework the member portal and research discovery to increase Ahri sessions by 500%?" aria-label="Discuss i4cp Member Portal &amp; Research Discovery with Ryan's AI chatbot">
+                  <span class="home-project-card__ai-led" aria-hidden="true"></span>
                   <span class="home-project-card__ai-sparkle" aria-hidden="true">✦</span>
-                  <span>Ask AI</span>
+                  <span>ASK_AI</span>
                 </button>
               </div>
             </div>
@@ -390,8 +392,9 @@
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
                 <button type="button" class="home-project-card__ai-cta" data-ask-ai="How did connecting purchasing, receiving, and stock tracking unblock stalled enterprise deals?" aria-label="Discuss Inventory, Purchasing &amp; Receiving with Ryan's AI chatbot">
+                  <span class="home-project-card__ai-led" aria-hidden="true"></span>
                   <span class="home-project-card__ai-sparkle" aria-hidden="true">✦</span>
-                  <span>Ask AI</span>
+                  <span>ASK_AI</span>
                 </button>
               </div>
             </div>
@@ -435,8 +438,9 @@
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
                 <button type="button" class="home-project-card__ai-cta" data-ask-ai="How did Ryan build this portfolio in HTML, CSS, and JavaScript with an AI assistant?" aria-label="Discuss Building My Portfolio in Code with Ryan's AI chatbot">
+                  <span class="home-project-card__ai-led" aria-hidden="true"></span>
                   <span class="home-project-card__ai-sparkle" aria-hidden="true">✦</span>
-                  <span>Ask AI</span>
+                  <span>ASK_AI</span>
                 </button>
               </div>
             </div>
@@ -449,13 +453,37 @@
   <!-- Persistent Floating CLI & Omnibar Dock -->
   <section class="home-omnibar-section" aria-label="Quick navigation and command palette">
     <div class="home-omnibar-shell">
+      <span class="rs-dock-reticle rs-dock-reticle--tl" aria-hidden="true"></span>
+      <span class="rs-dock-reticle rs-dock-reticle--tr" aria-hidden="true"></span>
+      <span class="rs-dock-reticle rs-dock-reticle--bl" aria-hidden="true"></span>
+      <span class="rs-dock-reticle rs-dock-reticle--br" aria-hidden="true"></span>
+
+      <!-- Top Hardware Telemetry & Quick-Action Strip -->
+      <div class="rs-dock-telemetry">
+        <div class="rs-dock-telemetry__left">
+          <span class="rs-dock-led" aria-hidden="true"></span>
+          <span class="rs-dock-sys-id">SYS_ONLINE // DELOS_CLI</span>
+          <span class="rs-dock-sep" aria-hidden="true">·</span>
+          <span class="rs-dock-sector" id="rsDockSector">SEC // 00_OVERVIEW</span>
+        </div>
+        <div class="rs-dock-telemetry__right">
+          <canvas class="rs-dock-wave" id="rsDockWaveCanvas" width="58" height="14" aria-hidden="true"></canvas>
+          <div class="rs-dock-quick-pills">
+            <button type="button" class="rs-dock-pill" data-ask-ai="Evaluate Ryan's fit for a Senior or Staff Product Designer role.">[◈ ROLE_FIT]</button>
+            <button type="button" class="rs-dock-pill" data-dock-cmd="tokens" title="Cycle Phosphor Accent Theme">[◐ PHOSPHOR]</button>
+            <button type="button" class="rs-dock-pill rs-dock-pill--accent" data-cmdk-trigger title="Open Orbital Command Console (⌘K)">[∷ HUD]</button>
+          </div>
+        </div>
+      </div>
+
       <form class="home-omnibar-form" id="home-omnibar-form" autocomplete="off">
         <div class="home-omnibar-top">
+          <span class="rs-dock-prompt-tag" aria-hidden="true">RS://AI</span>
           <input
             type="text"
             id="home-omnibar-input"
             class="home-omnibar-input"
-            placeholder="Ask a question about Ryan’s work, case studies, or hobbies..."
+            placeholder="Ask AI, execute /command, or press ⌘K..."
             autocomplete="off"
             aria-label="Ask Ryan’s portfolio AI a question, or press Command+K"
           />
@@ -466,9 +494,9 @@
             <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
           </button>
           <button type="submit" id="home-omnibar-send" class="home-omnibar-send" aria-label="Submit search or question">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="12" y1="19" x2="12" y2="5"></line>
-              <polyline points="5 12 12 5 19 12"></polyline>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </button>
         </div>
@@ -489,11 +517,11 @@
     </div>
   </footer>
 
-  <script src="./scripts/cli-mode.js?v=57" defer></script>
-  <script src="./scripts/magnetic.js?v=57" defer></script>
-  <script src="./scripts/scripts.js?v=57" defer></script>
-  <script src="./scripts/home-page.js?v=57" defer></script>
-  <script src="./scripts/rs-chat-widget.js?v=57" defer></script>
+  <script src="./scripts/cli-mode.js?v=58" defer></script>
+  <script src="./scripts/magnetic.js?v=58" defer></script>
+  <script src="./scripts/scripts.js?v=58" defer></script>
+  <script src="./scripts/home-page.js?v=58" defer></script>
+  <script src="./scripts/rs-chat-widget.js?v=58" defer></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((regs) => {

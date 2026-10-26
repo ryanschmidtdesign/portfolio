@@ -377,9 +377,32 @@
                 }
 
                 .rs-cmd-sys-meta {
-                    color: #7C7E86;
+                    color: #8E93A4;
                     white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    min-width: 0;
                 }
+
+                .rs-cmd-signal {
+                    display: inline-flex;
+                    align-items: flex-end;
+                    gap: 1.5px;
+                    height: 9px;
+                    margin-left: 2px;
+                    flex-shrink: 0;
+                }
+
+                .rs-cmd-signal span {
+                    width: 2px;
+                    background: var(--accent, #E06B3E);
+                    border-radius: 1px;
+                    opacity: 0.85;
+                }
+                .rs-cmd-signal span:nth-child(1) { height: 3px; }
+                .rs-cmd-signal span:nth-child(2) { height: 5px; }
+                .rs-cmd-signal span:nth-child(3) { height: 7px; }
+                .rs-cmd-signal span:nth-child(4) { height: 9px; box-shadow: 0 0 6px rgba(224, 107, 62, 0.8); }
 
                 .rs-cmd-telemetry__right {
                     display: inline-flex;
@@ -452,16 +475,24 @@
 
                 .rs-cmd-input {
                     flex: 1;
-                    border: none;
-                    background: transparent;
+                    border: none !important;
+                    background: transparent !important;
+                    box-shadow: none !important;
                     font-family: var(--font-sans, 'IBM Plex Sans', -apple-system, sans-serif);
                     font-size: 0.96rem;
                     font-weight: 500;
                     color: #F5F5F7;
-                    outline: none;
+                    outline: none !important;
                     padding: 2px 0;
                     margin: 0;
                     caret-color: #E06B3E;
+                }
+
+                .rs-cmd-input:focus,
+                .rs-cmd-input:focus-visible {
+                    outline: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
                 }
 
                 .rs-cmd-input::placeholder {
@@ -513,11 +544,13 @@
                 .rs-cmd-results {
                     flex: 1;
                     overflow-y: auto;
-                    padding: 8px 10px 10px;
-                    max-height: 400px;
+                    padding: 10px 10px 18px;
+                    max-height: 410px;
                     overscroll-behavior: contain;
                     scrollbar-width: thin;
                     scrollbar-color: rgba(224, 107, 62, 0.35) rgba(255, 255, 255, 0.03);
+                    -webkit-mask-image: linear-gradient(to bottom, transparent 0px, #000 10px, #000 calc(100% - 22px), transparent 100%);
+                    mask-image: linear-gradient(to bottom, transparent 0px, #000 10px, #000 calc(100% - 22px), transparent 100%);
                 }
 
                 .rs-cmd-group-title {
@@ -844,9 +877,10 @@
                     <div class="rs-cmd-telemetry">
                         <div class="rs-cmd-telemetry__left">
                             <span class="rs-cmd-led" aria-hidden="true"></span>
-                            <span class="rs-cmd-sys-tag">SYS_OK // DELOS_HUD_V56</span>
+                            <span class="rs-cmd-sys-tag">SYS_OK // DELOS_V58</span>
+                            <span class="rs-cmd-signal" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
                             <span class="rs-cmd-sys-divider" aria-hidden="true">·</span>
-                            <span class="rs-cmd-sys-meta" id="rsCmdTelemetryCoord">SEC: 0x04A · LATENCY: 08ms</span>
+                            <span class="rs-cmd-sys-meta" id="rsCmdTelemetryCoord">SEC: 0x04A · 08ms</span>
                         </div>
                         <div class="rs-cmd-telemetry__right">
                             <button type="button" class="rs-cmd-hud-btn${sfxActiveClass}" id="rsCmdSfxBtn" aria-pressed="${audioFX.enabled}" title="Toggle Procedural Terminal Audio (Muted by default)">
@@ -1074,7 +1108,7 @@
                     icon: '★',
                     title: 'Selected Work & Shipped Outcomes',
                     sub: '4 featured case studies across BI, supply chain, and enterprise AI',
-                    badge: 'Index ↵',
+                    badge: 'SEC_01 // INDEX',
                     targetPath: 'LOC // index.html#work',
                     keywords: 'work selected projects case studies shipped outcomes portfolio overview index',
                     action: () => {
@@ -1093,7 +1127,7 @@
                     icon: '◇',
                     title: 'Design Philosophy & Approach',
                     sub: 'Systemizer instinct, designing in code, and verifiable business outcomes',
-                    badge: 'Philosophy ↵',
+                    badge: 'SEC_02 // APPROACH',
                     targetPath: 'LOC // pages/about.html#builder',
                     keywords: 'approach philosophy principles systemizer designing in code verifiable outcomes craft builder',
                     action: () => {
@@ -1107,7 +1141,7 @@
                     icon: 'RS',
                     title: 'About Ryan Schmidt: Leadership & Background',
                     sub: '6+ years in B2B SaaS, Design Systems, and mentoring 1,500+ designers',
-                    badge: 'Profile ↵',
+                    badge: 'PAGE // PROFILE',
                     targetPath: 'LOC // pages/about.html',
                     keywords: 'about bio leadership experience career history philosophy background ryan schmidt mentor designlab 6+ years',
                     action: () => { window.location.href = `${prefix}about.html`; }
@@ -1118,7 +1152,7 @@
                     icon: '⌂',
                     title: 'Home: Editorial Index',
                     sub: 'Return to primary portfolio editorial hero and index',
-                    badge: 'Home ↵',
+                    badge: 'LOC // ROOT',
                     targetPath: 'LOC // index.html#top',
                     keywords: 'home index start main portfolio top hero',
                     action: () => {
@@ -1153,7 +1187,7 @@
                     icon: '@',
                     title: 'Email Ryan Schmidt',
                     sub: 'ryanschmidt1989@gmail.com (opens default email client)',
-                    badge: 'Email ↗',
+                    badge: 'MAILTO ↗',
                     targetPath: 'EXEC // mailto:ryanschmidt1989@gmail.com',
                     keywords: 'email contact hire reach out message ryanschmidt1989 gmail write direct inbox mailto',
                     action: () => {
@@ -1167,7 +1201,7 @@
                     icon: '↗',
                     title: 'Connect on LinkedIn',
                     sub: 'linkedin.com/in/ryanschmidt1989 (message or network directly)',
-                    badge: 'Connect ↗',
+                    badge: 'EXT_LINK ↗',
                     targetPath: 'EXEC // linkedin.com/in/ryanschmidt1989',
                     keywords: 'linkedin contact hire reach out message connect social network',
                     action: () => {
@@ -1181,7 +1215,7 @@
                     icon: '◐',
                     title: 'Cycle Phosphor Accent Telemetry (/tokens)',
                     sub: 'Switch live interface accent between Terracotta, Imperial Amber, and Emerald',
-                    badge: 'Theme ↵',
+                    badge: 'SYS // THEME',
                     targetPath: 'SYS // CSS_CUSTOM_PROPERTIES',
                     keywords: 'tokens theme color accent phosphor terracotta amber emerald mode',
                     action: () => {
@@ -1589,22 +1623,187 @@
         }
     }
 
+    function getPageSectorLabel() {
+        const path = (window.location.pathname || '/').toLowerCase();
+        if (path.includes('dashboard')) return 'SEC // 01_DASHBOARD_BI';
+        if (path.includes('inventory')) return 'SEC // 02_INVENTORY_PO';
+        if (path.includes('member-portal')) return 'SEC // 03_I4CP_RESEARCH';
+        if (path.includes('ai-coding-portfolio')) return 'SEC // 04_AI_ARCHITECTURE';
+        if (path.includes('about')) return 'SEC // 05_OPERATOR_BIO';
+        return 'SEC // 00_OVERVIEW';
+    }
+
+    function initObsidianDock() {
+        const shells = document.querySelectorAll('.home-omnibar-shell, .subpage-omnibar-shell');
+        shells.forEach((shell) => {
+            if (!shell.querySelector('.rs-dock-reticle')) {
+                ['tl', 'tr', 'bl', 'br'].forEach((pos) => {
+                    const r = document.createElement('span');
+                    r.className = `rs-dock-reticle rs-dock-reticle--${pos}`;
+                    r.setAttribute('aria-hidden', 'true');
+                    shell.prepend(r);
+                });
+            }
+
+            if (!shell.querySelector('.rs-dock-telemetry')) {
+                const tel = document.createElement('div');
+                tel.className = 'rs-dock-telemetry';
+                tel.setAttribute('aria-hidden', 'true');
+                tel.innerHTML = `
+                    <div class="rs-dock-telemetry__left">
+                        <span class="rs-dock-led"></span>
+                        <span class="rs-dock-sys-id">SYS_ONLINE // DELOS_CLI</span>
+                        <span class="rs-dock-sep">·</span>
+                        <span class="rs-dock-sector" id="rsDockSector">${getPageSectorLabel()}</span>
+                        <canvas class="rs-dock-wave" id="rsDockWaveCanvas" width="76" height="14"></canvas>
+                    </div>
+                    <div class="rs-dock-telemetry__right">
+                        <button type="button" class="rs-dock-pill" data-dock-cmd="role_fit" data-ask-ai="Why is Ryan a strong fit for Senior or Principal Product Designer roles?">◈ ROLE_FIT</button>
+                        <button type="button" class="rs-dock-pill" data-dock-cmd="tokens">◐ PHOSPHOR</button>
+                        <button type="button" class="rs-dock-pill" data-cmdk-trigger>∷ HUD</button>
+                    </div>
+                `;
+                const form = shell.querySelector('.home-omnibar-form, .subpage-omnibar-form');
+                if (form) {
+                    shell.insertBefore(tel, form);
+                } else {
+                    shell.prepend(tel);
+                }
+            }
+
+            const topRow = shell.querySelector('.home-omnibar-top, .subpage-omnibar-top');
+            if (topRow && !topRow.querySelector('.rs-dock-prompt-tag')) {
+                const tag = document.createElement('span');
+                tag.className = 'rs-dock-prompt-tag';
+                tag.setAttribute('aria-hidden', 'true');
+                tag.textContent = 'RS://AI';
+                topRow.prepend(tag);
+            }
+
+            // Track pointer over shell for dynamic specular radial highlight
+            shell.addEventListener('pointermove', (e) => {
+                const rect = shell.getBoundingClientRect();
+                shell.style.setProperty('--mouse-x', `${(e.clientX - rect.left).toFixed(0)}px`);
+                shell.style.setProperty('--mouse-y', `${(e.clientY - rect.top).toFixed(0)}px`);
+            });
+        });
+
+        // Wire [data-dock-cmd="tokens"] button
+        document.querySelectorAll('[data-dock-cmd="tokens"]').forEach((btn) => {
+            if (btn.dataset.boundTokens) return;
+            btn.dataset.boundTokens = 'true';
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (window.rsCommandPalette) {
+                    window.rsCommandPalette.cycleTheme();
+                }
+                audioFX.playTick();
+            });
+        });
+
+        // Live 60fps Oscilloscope Waveform inside the CLI Dock
+        const waveCanvas = document.getElementById('rsDockWaveCanvas');
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (waveCanvas && !prefersReduced && !waveCanvas.dataset.waveRunning) {
+            waveCanvas.dataset.waveRunning = 'true';
+            const ctx = waveCanvas.getContext('2d');
+            let phase = 0;
+            let energy = 0.25;
+
+            const boostEnergy = (amt = 0.85) => {
+                energy = Math.min(1.4, Math.max(energy, amt));
+            };
+            window.addEventListener('scroll', () => boostEnergy(0.75), { passive: true });
+            window.addEventListener('keydown', () => boostEnergy(1.15), { passive: true });
+            window.addEventListener('pointermove', () => boostEnergy(0.48), { passive: true });
+
+            const drawWave = () => {
+                const w = waveCanvas.width;
+                const h = waveCanvas.height;
+                ctx.clearRect(0, 0, w, h);
+
+                phase += 0.09 + energy * 0.14;
+                energy = Math.max(0.22, energy * 0.96);
+
+                const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#E06B3E';
+
+                // Baseline hairline
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.09)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(0, h / 2);
+                ctx.lineTo(w, h / 2);
+                ctx.stroke();
+
+                // Active phosphor telemetry wave
+                ctx.strokeStyle = accent;
+                ctx.lineWidth = 1.4;
+                ctx.beginPath();
+                for (let x = 0; x < w; x++) {
+                    const norm = x / w;
+                    const env = Math.sin(norm * Math.PI);
+                    const y = (h / 2)
+                        + Math.sin(norm * 14 - phase) * (h * 0.36) * env * energy
+                        + Math.cos(norm * 27 + phase * 1.3) * (h * 0.14) * env * energy;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+                requestAnimationFrame(drawWave);
+            };
+            requestAnimationFrame(drawWave);
+        }
+
+        // Dynamic Scroll Sector Telemetry Updater
+        const sectorEl = document.getElementById('rsDockSector');
+        if (sectorEl) {
+            const updateSector = () => {
+                const y = window.scrollY;
+                const isHome = document.body.classList.contains('is-home');
+                if (isHome) {
+                    const aboutEl = document.getElementById('about');
+                    const approachEl = document.getElementById('approach');
+                    const workEl = document.getElementById('work');
+                    if (aboutEl && y >= aboutEl.offsetTop - 260) {
+                        sectorEl.textContent = 'SEC // 03_LEADERSHIP';
+                    } else if (approachEl && y >= approachEl.offsetTop - 260) {
+                        sectorEl.textContent = 'SEC // 02_PHILOSOPHY';
+                    } else if (workEl && y >= workEl.offsetTop - 260) {
+                        sectorEl.textContent = 'SEC // 01_CASE_STUDIES';
+                    } else {
+                        sectorEl.textContent = 'SEC // 00_OVERVIEW';
+                    }
+                } else {
+                    const base = getPageSectorLabel();
+                    const docH = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                    const pct = Math.min(99, Math.max(0, Math.round((y / docH) * 100)));
+                    sectorEl.textContent = `${base} · ${String(pct).padStart(2, '0')}%`;
+                }
+            };
+            updateSector();
+            window.addEventListener('scroll', updateSector, { passive: true });
+        }
+    }
+
     function initSubpagePlaceholder() {
         const miniInput = document.getElementById('ai-mini-input');
         if (miniInput) {
             miniInput.placeholder = window.innerWidth <= 600
-                ? 'Ask AI or press ⌘K for telemetry...'
-                : 'Ask Ryan’s portfolio AI a question, or press ⌘K for command console...';
+                ? 'Ask AI about Ryan’s work...'
+                : 'Ask AI, execute /command, or press ⌘K...';
         }
     }
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             window.rsCommandPalette = new AtelierCommandPalette();
+            initObsidianDock();
             initSubpagePlaceholder();
         });
     } else {
         window.rsCommandPalette = new AtelierCommandPalette();
+        initObsidianDock();
         initSubpagePlaceholder();
     }
     window.addEventListener('resize', initSubpagePlaceholder);
