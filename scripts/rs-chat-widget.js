@@ -881,13 +881,15 @@ if (savedHist.length > 0) {
       inputEl.value = miniInput.value;
     }
 
-    // Immediately hide the bottom dock so it never overlaps or competes on screen
-    const dockEls = getDockElements();
-    dockEls.forEach(el => {
-      el.style.opacity = '0';
-      el.style.visibility = 'hidden';
-      el.style.pointerEvents = 'none';
-    });
+    // On mobile viewports where the drawer spans the full screen, hide the bottom dock
+    if (window.innerWidth <= 720) {
+      const dockEls = getDockElements();
+      dockEls.forEach(el => {
+        el.style.opacity = '0';
+        el.style.visibility = 'hidden';
+        el.style.pointerEvents = 'none';
+      });
+    }
 
     panel.classList.add('open');
     backdrop.classList.add('open');
@@ -980,9 +982,6 @@ if (savedHist.length > 0) {
     ].filter(Boolean);
 
     inputs.forEach(input => {
-      input.addEventListener('click', () => {
-        if (!panel.classList.contains('open')) openPanel();
-      });
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();

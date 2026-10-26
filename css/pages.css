@@ -1733,7 +1733,6 @@ body.is-home {
     inset 0 1px 0 0 rgba(255, 255, 255, 0.24);
 }
 
-.home-omnibar- form,
 .home-omnibar-form,
 .subpage-omnibar-form {
   position: relative;
@@ -2996,7 +2995,12 @@ body:not(.is-home) main.site-main {
   }
   .home-omnibar-cmdk,
   .subpage-omnibar-cmdk {
-    display: none !important;
+    display: inline-flex !important;
+  }
+  .home-omnibar-cmdk .ai-mini-cmdk__kbd,
+  .subpage-omnibar-cmdk .ai-mini-cmdk__kbd {
+    padding: 2.5px 5.5px;
+    font-size: 10px;
   }
   .home-work-grid {
     grid-template-columns: 1fr;

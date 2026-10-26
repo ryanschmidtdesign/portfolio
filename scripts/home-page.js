@@ -159,12 +159,6 @@
       e.preventDefault();
       handleOmnibarSubmit(omnibarInput.value);
     });
-
-    omnibarInput.addEventListener('click', () => {
-      if (window.rsChatWidget && !omnibarInput.value.trim()) {
-        window.rsChatWidget.open();
-      }
-    });
   }
 
   if (omnibarSend && omnibarInput) {
