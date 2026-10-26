@@ -1672,15 +1672,25 @@ body.is-home {
   transform: translateX(-50%) !important;
   width: min(692px, calc(100vw - 32px)) !important;
   max-width: 692px !important;
-  z-index: 9999 !important;
+  z-index: 999999 !important;
   pointer-events: auto !important;
   display: block !important;
+  opacity: 1;
+  visibility: visible;
   margin: 0 !important;
   padding: 0 !important;
   transition:
     transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
     visibility 220ms ease;
+}
+
+body.rs-chat-drawer-open .home-omnibar-section,
+body.rs-chat-drawer-open .subpage-omnibar-dock {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(-50%) translateY(14px) scale(0.96) !important;
 }
 
 /* Subtle bottom viewport grounding gradient veil under floating console */

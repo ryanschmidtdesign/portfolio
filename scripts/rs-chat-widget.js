@@ -955,6 +955,7 @@ if (savedHist.length > 0) {
 
     // Smoothly morph/hide the bottom floating CLI dock when the Telemetry Console Drawer is open
     // so the dock never sticks out awkwardly behind the blurred backdrop on desktop or mobile
+    document.body.classList.add('rs-chat-drawer-open');
     const dockEls = getDockElements();
     dockEls.forEach(el => {
       el.style.opacity = '0';
@@ -981,13 +982,14 @@ if (savedHist.length > 0) {
 
     panel.classList.remove('open');
     backdrop.classList.remove('open');
+    document.body.classList.remove('rs-chat-drawer-open');
     window.rsAudioFX?.playClose?.();
 
     const dockEls = getDockElements();
     dockEls.forEach(el => {
       el.style.visibility = '';
       el.style.pointerEvents = '';
-      el.style.opacity = '1';
+      el.style.opacity = '';
       el.style.transform = '';
     });
     
@@ -996,6 +998,15 @@ if (savedHist.length > 0) {
   }
   
   function wireExternalTrigger() {
+    // Guarantee bottom dock visibility on boot
+    const dockEls = getDockElements();
+    dockEls.forEach(el => {
+      el.style.visibility = '';
+      el.style.pointerEvents = '';
+      el.style.opacity = '';
+      el.style.transform = '';
+    });
+
     const triggers = document.querySelectorAll('[data-assistant-trigger]');
     triggers.forEach((ask) => {
       ask.addEventListener('click', (e) => {
