@@ -153,6 +153,18 @@ body:not(.is-home) {
   }
 }
 
+@media (max-width: 440px) {
+  .site-header__nav {
+    gap: 8px;
+  }
+  .site-header__link {
+    font-size: 0.76rem;
+  }
+  .site-header__arrow {
+    display: none;
+  }
+}
+
 /* Site footer landmark (SEO & crawler indexing only, visually hidden) */
 .site-footer {
   position: absolute !important;
