@@ -20,8 +20,7 @@
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
         { "key": "Pragma", "value": "no-cache" },
-        { "key": "Expires", "value": "0" },
-        { "key": "Clear-Site-Data", "value": "\"cache\", \"storage\"" }
+        { "key": "Expires", "value": "0" }
       ]
     },
     {
@@ -29,8 +28,7 @@
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
         { "key": "Pragma", "value": "no-cache" },
-        { "key": "Expires", "value": "0" },
-        { "key": "Clear-Site-Data", "value": "\"cache\", \"storage\"" }
+        { "key": "Expires", "value": "0" }
       ]
     },
     {
@@ -85,8 +83,13 @@
       "permanent": true
     },
     {
+      "source": "/design-system",
+      "destination": "/pages/ai-coding-portfolio",
+      "permanent": true
+    },
+    {
       "source": "/design-system.html",
-      "destination": "/ai-coding-portfolio.html",
+      "destination": "/pages/ai-coding-portfolio",
       "permanent": true
     },
     {

@@ -41,7 +41,7 @@ Key timeline:
 
 Makes the shift from designing interfaces to building them. Uses Cursor and Claude Code to take product from concept through to staging without an engineering handoff. This portfolio is entirely hand-coded — no templates, no CMS, no static site generator.
 
-Built a custom AI chat assistant powered by Gemini + Supabase pgvector (1,400+ embedded chunks, 768-dimension vector index) that answers questions about Ryan's work, case studies, and role fit.
+Built a custom AI chat assistant powered by Gemini + Supabase pgvector (34 curated knowledge chunks, 768-dimension vector index) that answers questions about Ryan's work, case studies, and role fit.
 
 ### Mentorship
 

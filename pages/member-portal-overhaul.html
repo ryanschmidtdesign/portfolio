@@ -109,7 +109,7 @@
     <!-- Fonts (IBM Plex Sans + Newsreader italic serif for editorial accents) -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <link rel="stylesheet" href="../styles.css?v=65">
+    <link rel="stylesheet" href="../styles.css?v=66">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -720,6 +720,86 @@
             </div>
             <figcaption>Search experience before and after: turning a basic keyword box into the Ask Ahri discovery omnibar.</figcaption>
           </figure>
+
+          <h3>Discovery &amp; Search Entry Points</h3>
+          <p>
+            Every search starts in Ahri's AI experience. Members can then choose See all results to open a traditional search results page. That keeps one clear starting point while preserving a way to browse the full results.
+          </p>
+
+          <div class="omnibar-sim-widget" data-omnibar-sim>
+            <div class="omnibar-sim-header">
+              <span class="omnibar-sim-title">Illustrative discovery flow</span>
+              <p class="omnibar-sim-desc">Two-step search: queries open in Ahri first, with an explicit action to browse traditional results.</p>
+            </div>
+
+            <div class="omnibar-chip-triggers" role="tablist" aria-label="Discovery flow steps">
+              <button type="button" class="query-chip is-active" id="tab-omni-ai" data-query-type="ai" role="tab" aria-selected="true" aria-controls="panel-omni-ai" tabindex="0">
+                <span class="chip-sparkle" aria-hidden="true">✨</span> Step 1: Ask Ahri
+              </button>
+              <button type="button" class="query-chip" id="tab-omni-keyword" data-query-type="keyword" role="tab" aria-selected="false" aria-controls="panel-omni-keyword" tabindex="-1">
+                <span class="chip-search" aria-hidden="true">🔍</span> Step 2: See all results
+              </button>
+            </div>
+
+            <div class="mock-omnibar-input-shell">
+              <span class="omnibar-icon" id="simOmniIcon" aria-hidden="true">✨</span>
+              <input type="text" class="mock-omnibar-input" id="simOmniInput" value="Executive succession planning" readonly aria-label="Simulated search query">
+              <span class="omnibar-mode-pill" id="simOmniMode">Ask Ahri (AI Search)</span>
+            </div>
+
+            <div class="omnibar-result-canvas">
+              <!-- AI Synthesis View -->
+              <div class="omnibar-view is-active" id="panel-omni-ai" data-sim-view="ai" role="tabpanel" aria-labelledby="tab-omni-ai" tabindex="0">
+                <div class="ahri-answer-bubble">
+                  <div class="ahri-bubble-header">
+                    <strong>Ask Ahri Synthesis</strong>
+                    <span class="ahri-latency">AI response view</span>
+                  </div>
+                  <div class="ahri-bubble-body" style="font-size: 0.88rem; line-height: 1.55; color: var(--text-primary);">
+                    <p style="margin-bottom: 0.75rem;"><strong>High-performance organizations are 2.8× more likely</strong> to maintain transparent succession pools below the C-suite (<em>i4cp Succession Readiness Study</em>). Key benchmark takeaways:</p>
+                    <ul style="margin: 0 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; list-style-type: disc;">
+                      <li><strong>Future capabilities over current roles:</strong> Candidate readiness is scored against evolving 3-year strategic needs rather than historical job descriptions.</li>
+                      <li><strong>Talent pool visibility:</strong> 64% of top boards review succession depth two tiers down on a quarterly cadence.</li>
+                      <li><strong>Transparent development plans:</strong> Succession candidate retention increases 31% when explicit transition roadmaps are established early.</li>
+                    </ul>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0;"><em>Sources: i4cp Executive Succession Planning Report · Succession Pipeline Risk Matrix</em></p>
+                  </div>
+                  <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border-subtle, rgba(0,0,0,0.08)); display: flex; justify-content: flex-end;">
+                    <button type="button" class="see-all-results-btn" data-trigger-traditional style="background: none; border: none; color: var(--accent); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: var(--radius-sm);">
+                      See all results →
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Traditional Results View -->
+              <div class="omnibar-view" id="panel-omni-keyword" data-sim-view="keyword" role="tabpanel" aria-labelledby="tab-omni-keyword" tabindex="0">
+                <div class="keyword-results-head">
+                  <span class="keyword-count" id="simKeywordCount">Traditional Search Results</span>
+                </div>
+                <ul class="keyword-results-list">
+                  <li>
+                    <span class="res-type">Research Report</span>
+                    <strong>Executive Succession Planning</strong>
+                    <span class="res-meta">Member research report and peer benchmarks</span>
+                  </li>
+                  <li>
+                    <span class="res-type">Interactive Tool</span>
+                    <strong>Succession Pipeline Risk Matrix</strong>
+                    <span class="res-meta">Assessment worksheet</span>
+                  </li>
+                  <li>
+                    <span class="res-type">Roundtable Recording</span>
+                    <strong>Board Succession Best Practices</strong>
+                    <span class="res-meta">CHRO panel discussion</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p class="omnibar-sim-footer">
+              <strong>Illustrative discovery flow:</strong> Every submitted query opens in Ahri first. Members can click <strong>See all results</strong> to open a traditional search results page.
+            </p>
+          </div>
         </section>
 
         <section id="constraints" aria-label="Constraints" class="section--alt">
@@ -803,86 +883,6 @@
             My role extended beyond the design files. I wrote Trello tickets and tested the implementation in staging, helping turn design decisions into work the team could build and check before release.
           </p>
 
-          <h3>Discovery &amp; Search Entry Points</h3>
-          <p>
-            Every search starts in Ahri's AI experience. Members can then choose See all results to open a traditional search results page. That keeps one clear starting point while preserving a way to browse the full results.
-          </p>
-
-          <div class="omnibar-sim-widget" data-omnibar-sim>
-            <div class="omnibar-sim-header">
-              <span class="omnibar-sim-title">Illustrative discovery flow</span>
-              <p class="omnibar-sim-desc">Two-step search: queries open in Ahri first, with an explicit action to browse traditional results.</p>
-            </div>
-
-            <div class="omnibar-chip-triggers" role="tablist" aria-label="Discovery flow steps">
-              <button type="button" class="query-chip is-active" id="tab-omni-ai" data-query-type="ai" role="tab" aria-selected="true" aria-controls="panel-omni-ai" tabindex="0">
-                <span class="chip-sparkle" aria-hidden="true">✨</span> Step 1: Ask Ahri
-              </button>
-              <button type="button" class="query-chip" id="tab-omni-keyword" data-query-type="keyword" role="tab" aria-selected="false" aria-controls="panel-omni-keyword" tabindex="-1">
-                <span class="chip-search" aria-hidden="true">🔍</span> Step 2: See all results
-              </button>
-            </div>
-
-            <div class="mock-omnibar-input-shell">
-              <span class="omnibar-icon" id="simOmniIcon" aria-hidden="true">✨</span>
-              <input type="text" class="mock-omnibar-input" id="simOmniInput" value="Executive succession planning" readonly aria-label="Simulated search query">
-              <span class="omnibar-mode-pill" id="simOmniMode">Ask Ahri (AI Search)</span>
-            </div>
-
-            <div class="omnibar-result-canvas">
-              <!-- AI Synthesis View -->
-              <div class="omnibar-view is-active" id="panel-omni-ai" data-sim-view="ai" role="tabpanel" aria-labelledby="tab-omni-ai" tabindex="0">
-                <div class="ahri-answer-bubble">
-                  <div class="ahri-bubble-header">
-                    <strong>Ask Ahri Synthesis</strong>
-                    <span class="ahri-latency">AI response view</span>
-                  </div>
-                  <div class="ahri-bubble-body" style="font-size: 0.88rem; line-height: 1.55; color: var(--text-primary);">
-                    <p style="margin-bottom: 0.75rem;"><strong>High-performance organizations are 2.8× more likely</strong> to maintain transparent succession pools below the C-suite (<em>i4cp Succession Readiness Study</em>). Key benchmark takeaways:</p>
-                    <ul style="margin: 0 0 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; list-style-type: disc;">
-                      <li><strong>Future capabilities over current roles:</strong> Candidate readiness is scored against evolving 3-year strategic needs rather than historical job descriptions.</li>
-                      <li><strong>Talent pool visibility:</strong> 64% of top boards review succession depth two tiers down on a quarterly cadence.</li>
-                      <li><strong>Transparent development plans:</strong> Succession candidate retention increases 31% when explicit transition roadmaps are established early.</li>
-                    </ul>
-                    <p style="font-size: 0.78rem; color: var(--text-secondary); margin: 0;"><em>Sources: i4cp Executive Succession Planning Report · Succession Pipeline Risk Matrix</em></p>
-                  </div>
-                  <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border-subtle, rgba(0,0,0,0.08)); display: flex; justify-content: flex-end;">
-                    <button type="button" class="see-all-results-btn" data-trigger-traditional style="background: none; border: none; color: var(--accent); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: var(--radius-sm);">
-                      See all results →
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Traditional Results View -->
-              <div class="omnibar-view" id="panel-omni-keyword" data-sim-view="keyword" role="tabpanel" aria-labelledby="tab-omni-keyword" tabindex="0">
-                <div class="keyword-results-head">
-                  <span class="keyword-count" id="simKeywordCount">Traditional Search Results</span>
-                </div>
-                <ul class="keyword-results-list">
-                  <li>
-                    <span class="res-type">Research Report</span>
-                    <strong>Executive Succession Planning</strong>
-                    <span class="res-meta">Member research report and peer benchmarks</span>
-                  </li>
-                  <li>
-                    <span class="res-type">Interactive Tool</span>
-                    <strong>Succession Pipeline Risk Matrix</strong>
-                    <span class="res-meta">Assessment worksheet</span>
-                  </li>
-                  <li>
-                    <span class="res-type">Roundtable Recording</span>
-                    <strong>Board Succession Best Practices</strong>
-                    <span class="res-meta">CHRO panel discussion</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <p class="omnibar-sim-footer">
-              <strong>Illustrative discovery flow:</strong> Every submitted query opens in Ahri first. Members can click <strong>See all results</strong> to open a traditional search results page.
-            </p>
-          </div>
-
           <p>
             By designing clear pathways through our four-tier taxonomy and backing it up with a reliable search entry point, we helped members get straight to the answers they were looking for.
           </p>
@@ -928,10 +928,10 @@
     </div>
 
     <!-- GSAP for smooth chat widget animations -->
-    <script src="../scripts/cli-mode.js?v=65" defer></script>
-    <script src="../scripts/scripts.js?v=65" defer></script>
-    <script src="../scripts/magnetic.js?v=65" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=65" defer></script>
+    <script src="../scripts/cli-mode.js?v=66" defer></script>
+    <script src="../scripts/scripts.js?v=66" defer></script>
+    <script src="../scripts/magnetic.js?v=66" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=66" defer></script>
     <script src="../scripts/image-splitter.js" defer></script>
     <!-- SEO Landmark Footer (visually hidden) -->
     <footer class="site-footer" aria-hidden="true">
