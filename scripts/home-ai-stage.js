@@ -35,15 +35,15 @@
     {
       id: 'dashboards',
       eyebrow: 'FEATURED CASE STUDY · D-TOOLS CLOUD',
-      metric: '+71% Beta Engagement',
-      secondaryMetric: '62% Multi-View Adoption',
-      title: 'AI-Powered BI Dashboards & Opportunity Signals',
+      metric: '+71% Dashboard Views',
+      secondaryMetric: '62% Multi-Dashboard Adoption',
+      title: 'Custom Dashboards & AI Summaries',
       summary:
         'Redesigned static reporting into role-based executive views with anchored AI summaries grounded in verifiable KPIs.',
       tags: ['B2B SaaS', 'AI UX', 'Data Visualization', 'Design Systems'],
       url: 'pages/dashboard.html',
-      image: 'assets/case-studies/dashboards/rename-dashboard.webp',
-      aiPrompt: 'Walk me through how Ryan drove +71% engagement on the AI-Powered Dashboards project.'
+      image: 'assets/case-studies/dashboards/dashboard-overview.webp',
+      aiPrompt: 'Walk me through how Ryan designed custom dashboards and AI summaries to drive +71% sustained views.'
     },
     {
       id: 'member-portal',
@@ -55,21 +55,21 @@
         'Reworked navigation and research discovery around member priorities. After launch, Ahri sessions increased 500% and daily activity doubled.',
       tags: ['Information Architecture', 'Research Discovery', 'Member Experience'],
       url: 'pages/member-portal-overhaul.html',
-      image: 'assets/case-studies/member-portal/design-highlights/Home_new.webp',
+      image: 'assets/case-studies/member-portal/design-highlights/Ahri Full Page Redesign - Main.webp',
       aiPrompt: 'How did Ryan approach the i4cp Member Portal overhaul, and what were the outcomes?'
     },
     {
       id: 'inventory',
       eyebrow: '0→1 WORKFLOW MVP · D-TOOLS CLOUD',
-      metric: '+18% Company-Wide MRR',
-      secondaryMetric: 'Auditable Ledger',
+      metric: '+18% Recurring Revenue',
+      secondaryMetric: '8% YoY Adoption Growth',
       title: 'Inventory, Purchasing & Receiving',
       summary:
         'Connected purchasing, receiving, and stock tracking in one workflow. The release contributed to an 18% increase in company-wide MRR over the following year.',
       tags: ['0→1 MVP', 'Field Research', 'Auditable Workflows'],
       url: 'pages/inventory.html',
-      image: 'assets/case-studies/inventory/inventory-controls.webp',
-      aiPrompt: 'Why did Ryan focus the Inventory MVP on purchasing and receiving, and how did it contribute to +18% company-wide MRR?'
+      image: 'assets/case-studies/inventory/inventory-assets-thumb.webp',
+      aiPrompt: 'Why did Ryan focus the Inventory MVP on purchasing and receiving, and how did it contribute to +18% recurring revenue?'
     },
     {
       id: 'ai-portfolio',
@@ -81,7 +81,7 @@
         'Built this site in HTML, CSS, and JavaScript, including reusable page patterns and an AI assistant that retrieves context from project notes.',
       tags: ['Design Tokens', 'Prototyping in Code', 'Semantic HTML'],
       url: 'pages/ai-coding-portfolio.html',
-      image: 'assets/case-studies/ai-coding-portfolio/cursor-files.webp',
+      image: 'assets/case-studies/ai-coding-portfolio/interactive-component.webp',
       aiPrompt: 'How did Ryan build this portfolio in code with AI tools, design tokens, and retrieval?'
     }
   ];
@@ -618,7 +618,7 @@
     `;
 
     stageStream.appendChild(card);
-    attachBotToolbar(card, () => 'Ryan Schmidt — Senior SaaS Product Designer\nAustin, TX\nHighlights: +500% AI Activation at i4cp, +71% BI Engagement at D-Tools, 92% Design System Adoption.\nResume: assets/ryan-schmidt-resume.pdf');
+    attachBotToolbar(card, () => 'Ryan Schmidt: Senior SaaS Product Designer\nAustin, TX\nHighlights: +500% Ahri Sessions at i4cp, +71% Sustained Views at D-Tools, 92% Design System Adoption.\nResume: assets/ryan-schmidt-resume.pdf');
     scrollToNewestCard(card);
   }
 
@@ -711,7 +711,7 @@
     `;
 
     stageStream.appendChild(card);
-    attachBotToolbar(card, () => 'Ryan Schmidt — Leadership & Role Fit:\n- Senior / Staff Product Designer & UX Engineer\n- Austin, TX (Open to Remote / Hybrid)\n- Portfolio: ryanschmidt.design\n- Resume: assets/ryan-schmidt-resume.pdf');
+    attachBotToolbar(card, () => 'Ryan Schmidt: Leadership & Role Fit:\n- Senior / Staff Product Designer & UX Engineer\n- Austin, TX (Open to Remote / Hybrid)\n- Portfolio: ryanschmidt.design\n- Resume: assets/ryan-schmidt-resume.pdf');
     scrollToNewestCard(card);
   }
 

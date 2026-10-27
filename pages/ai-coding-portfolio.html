@@ -20,11 +20,6 @@
             for (var i = 0; i < keys.length; i++) caches.delete(keys[i]);
           });
         }
-        try {
-          sessionStorage.clear();
-          localStorage.removeItem('rs_chat_history');
-          localStorage.removeItem('ai.hasAsked');
-        } catch (_) {}
         if (hadController && !sessionStorage.getItem('__sw_nuked_v62')) {
           try { sessionStorage.setItem('__sw_nuked_v62', '1'); } catch (_) {}
           setTimeout(function () {
@@ -94,7 +89,7 @@
     <meta name="author" content="Ryan Schmidt">
 
     <!-- SEO hygiene -->
-    <link rel="canonical" href="https://ryanschmidt.design/pages/ai-coding-portfolio.html">
+    <link rel="canonical" href="https://ryanschmidt.design/pages/ai-coding-portfolio">
     <meta name="robots" content="index,follow,max-image-preview:large">
 
     <!-- Browser behavior / UX -->
@@ -114,7 +109,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=66">
+    <link rel="stylesheet" href="../styles.css?v=67">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -159,27 +154,27 @@
       "workExample": [
         {
           "@type": "Article",
-          "@id": "https://ryanschmidt.design/dashboard.html#work",
-          "name": "AI-Powered Dashboards",
-          "url": "https://ryanschmidt.design/dashboard.html"
+          "@id": "https://ryanschmidt.design/pages/dashboard#work",
+          "name": "Custom Dashboards & AI Summaries",
+          "url": "https://ryanschmidt.design/pages/dashboard"
         },
         {
           "@type": "Article",
-          "@id": "https://ryanschmidt.design/inventory.html#work",
-          "name": "Real-Time Inventory",
-          "url": "https://ryanschmidt.design/inventory.html"
+          "@id": "https://ryanschmidt.design/pages/inventory#work",
+          "name": "Inventory, Purchasing & Receiving",
+          "url": "https://ryanschmidt.design/pages/inventory"
         },
         {
           "@type": "Article",
-          "@id": "https://ryanschmidt.design/ai-coding-portfolio.html#work",
-          "name": "AI-Coding my Portfolio",
-          "url": "https://ryanschmidt.design/ai-coding-portfolio.html"
+          "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio#work",
+          "name": "Building My Portfolio in Code",
+          "url": "https://ryanschmidt.design/pages/ai-coding-portfolio"
         },
         {
           "@type": "Article",
-          "@id": "https://ryanschmidt.design/member-portal-overhaul.html#work",
-          "name": "i4cp Member Portal Overhaul",
-          "url": "https://ryanschmidt.design/member-portal-overhaul.html"
+          "@id": "https://ryanschmidt.design/pages/member-portal-overhaul#work",
+          "name": "i4cp Member Portal & Research Discovery",
+          "url": "https://ryanschmidt.design/pages/member-portal-overhaul"
         }
       ]
     },
@@ -196,8 +191,8 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio.html#webpage",
-      "url": "https://ryanschmidt.design/pages/ai-coding-portfolio.html",
+      "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio#webpage",
+      "url": "https://ryanschmidt.design/pages/ai-coding-portfolio",
       "name": "Building My Portfolio in Code — Ryan Schmidt",
       "isPartOf": {
         "@id": "https://ryanschmidt.design/#website"
@@ -207,15 +202,15 @@
       },
       "description": "Case study: Building a portfolio from scratch with semantic HTML, modular CSS, vanilla JavaScript, and an integrated AI assistant.",
       "primaryImageOfPage": "https://ryanschmidt.design/assets/logo/og-image.png",
-      "dateModified": "2026-10-22",
+      "dateModified": "2026-10-27",
       "inLanguage": "en-US"
     },
     {
       "@type": "Article",
-      "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio.html#work",
+      "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio#work",
       "name": "Building My Portfolio in Code",
       "description": "Built this site in HTML, CSS, and JavaScript, including reusable page patterns and an AI assistant that retrieves context from my project notes.",
-      "url": "https://ryanschmidt.design/pages/ai-coding-portfolio.html",
+      "url": "https://ryanschmidt.design/pages/ai-coding-portfolio",
       "author": {
         "@id": "https://ryanschmidt.design/#person"
       },
@@ -288,7 +283,7 @@
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio.html#breadcrumb",
+      "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -306,7 +301,7 @@
           "@type": "ListItem",
           "position": 3,
           "name": "Building My Portfolio in Code",
-          "item": "https://ryanschmidt.design/pages/ai-coding-portfolio.html"
+          "item": "https://ryanschmidt.design/pages/ai-coding-portfolio"
         }
       ]
     }
@@ -336,7 +331,7 @@
   <meta property="og:site_name" content="Ryan Schmidt — Senior B2B SaaS Product Designer">
   <meta property="og:title" content="Building My Portfolio in Code — Ryan Schmidt">
   <meta property="og:description" content="Case study: Building a portfolio from scratch with semantic HTML, modular CSS, vanilla JavaScript, and an integrated AI assistant.">
-  <meta property="og:url" content="https://ryanschmidt.design/pages/ai-coding-portfolio.html">
+  <meta property="og:url" content="https://ryanschmidt.design/pages/ai-coding-portfolio">
   <meta property="og:image" content="https://ryanschmidt.design/assets/logo/og-image.png">
   <meta property="og:image:alt" content="Building My Portfolio in Code — Ryan Schmidt">
   <meta property="og:image:width" content="1200">
@@ -996,10 +991,10 @@
 
     <!-- GSAP for smooth chat widget animations -->
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=66" defer></script>
-    <script src="../scripts/scripts.js?v=66" defer></script>
-    <script src="../scripts/magnetic.js?v=66" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=66" defer></script>
+    <script src="../scripts/cli-mode.js?v=67" defer></script>
+    <script src="../scripts/scripts.js?v=67" defer></script>
+    <script src="../scripts/magnetic.js?v=67" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=67" defer></script>
     <!-- SEO Landmark Footer (visually hidden) -->
     <footer class="site-footer" aria-hidden="true">
       <a class="site-footer-brand" href="../index.html" tabindex="-1">

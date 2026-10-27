@@ -21,11 +21,6 @@
           for (var i = 0; i < keys.length; i++) caches.delete(keys[i]);
         });
       }
-      try {
-        sessionStorage.clear();
-        localStorage.removeItem('rs_chat_history');
-        localStorage.removeItem('ai.hasAsked');
-      } catch (_) {}
       if (hadController && !sessionStorage.getItem('__sw_nuked_v62')) {
         try { sessionStorage.setItem('__sw_nuked_v62', '1'); } catch (_) {}
         setTimeout(function () {
@@ -93,7 +88,7 @@
   <meta name="author" content="Ryan Schmidt">
 
   <!-- SEO hygiene -->
-  <link rel="canonical" href="https://ryanschmidt.design/about.html">
+  <link rel="canonical" href="https://ryanschmidt.design/pages/about">
   <meta name="robots" content="index,follow,max-image-preview:large">
 
   <!-- Browser behavior / UX -->
@@ -112,7 +107,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../styles.css?v=66">
+  <link rel="stylesheet" href="../styles.css?v=67">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -152,27 +147,27 @@
         "workExample": [
           {
             "@type": "Article",
-            "@id": "https://ryanschmidt.design/dashboard.html#work",
-            "name": "AI-Powered Dashboards",
-            "url": "https://ryanschmidt.design/dashboard.html"
+            "@id": "https://ryanschmidt.design/pages/dashboard#work",
+            "name": "Custom Dashboards & AI Summaries",
+            "url": "https://ryanschmidt.design/pages/dashboard"
           },
           {
             "@type": "Article",
-            "@id": "https://ryanschmidt.design/inventory.html#work",
-            "name": "Real-Time Inventory",
-            "url": "https://ryanschmidt.design/inventory.html"
+            "@id": "https://ryanschmidt.design/pages/inventory#work",
+            "name": "Inventory, Purchasing & Receiving",
+            "url": "https://ryanschmidt.design/pages/inventory"
           },
           {
             "@type": "Article",
-            "@id": "https://ryanschmidt.design/ai-coding-portfolio.html#work",
-            "name": "AI-Coding my Portfolio",
-            "url": "https://ryanschmidt.design/ai-coding-portfolio.html"
+            "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio#work",
+            "name": "Building My Portfolio in Code",
+            "url": "https://ryanschmidt.design/pages/ai-coding-portfolio"
           },
           {
             "@type": "Article",
-            "@id": "https://ryanschmidt.design/member-portal-overhaul.html#work",
-            "name": "i4cp Member Portal Overhaul",
-            "url": "https://ryanschmidt.design/member-portal-overhaul.html"
+            "@id": "https://ryanschmidt.design/pages/member-portal-overhaul#work",
+            "name": "i4cp Member Portal & Research Discovery",
+            "url": "https://ryanschmidt.design/pages/member-portal-overhaul"
           }
         ]
       },
@@ -187,19 +182,19 @@
       },
       {
         "@type": "WebPage",
-        "@id": "https://ryanschmidt.design/about.html#webpage",
-        "url": "https://ryanschmidt.design/about.html",
+        "@id": "https://ryanschmidt.design/pages/about#webpage",
+        "url": "https://ryanschmidt.design/pages/about",
         "name": "About — Ryan Schmidt | Senior B2B SaaS Product Designer",
         "isPartOf": { "@id": "https://ryanschmidt.design/#website" },
         "about": { "@id": "https://ryanschmidt.design/#person" },
         "description": "About Ryan Schmidt, a Senior B2B SaaS Product Designer at i4cp focused on research-heavy IA, member experience, and design systems.",
         "primaryImageOfPage": "https://ryanschmidt.design/assets/images/family-pic.jpg",
-        "dateModified": "2026-06-24",
+        "dateModified": "2026-10-27",
         "inLanguage": "en-US"
       },
       {
         "@type": "FAQPage",
-        "@id": "https://ryanschmidt.design/about.html#faq",
+        "@id": "https://ryanschmidt.design/pages/about#faq",
         "mainEntity": [
           {
             "@type": "Question",
@@ -261,7 +256,7 @@
       },
       {
         "@type": "BreadcrumbList",
-        "@id": "https://ryanschmidt.design/about.html#breadcrumb",
+        "@id": "https://ryanschmidt.design/pages/about#breadcrumb",
         "itemListElement": [
           {
             "@type": "ListItem",
@@ -285,7 +280,7 @@
   <meta property="og:site_name" content="Ryan Schmidt — Senior B2B SaaS Product Designer">
   <meta property="og:title" content="About — Ryan Schmidt | Senior B2B SaaS Product Designer">
   <meta property="og:description" content="About Ryan Schmidt: Senior B2B SaaS Product Designer who prototypes in code, leads design systems, and builds tools for complex enterprise domains.">
-  <meta property="og:url" content="https://ryanschmidt.design/about.html">
+  <meta property="og:url" content="https://ryanschmidt.design/pages/about">
   <meta property="og:image" content="https://ryanschmidt.design/assets/logo/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -504,7 +499,7 @@
               <time class="timeline-date" datetime="2021-10">Oct 2021 – Feb 2026</time>
               <div class="timeline-content">
                 <strong>Senior Product Designer · D-Tools, Inc.</strong>
-                <p>Promoted from Product Designer (Jan 2025). Owned end-to-end UX across 5 B2B Cloud modules as active users grew from 6,500 to 18,000. Designed real-time inventory MVP (+18% recurring revenue, 8% YoY adoption growth), custom dashboards (+71% beta engagement, 62% multi-dashboard adoption), and 100+ component design system (92% engineering adoption).</p>
+                <p>Promoted from Product Designer (Jan 2025). Owned end-to-end UX across 5 B2B Cloud modules as active users grew from 6,500 to 18,000. Designed real-time inventory MVP (+18% recurring revenue, 8% YoY adoption growth), custom dashboards (+71% sustained dashboard views, 62% multi-dashboard adoption), and 100+ component design system (92% engineering adoption).</p>
               </div>
             </li>
             <li class="timeline-item">
@@ -621,14 +616,14 @@
   <!-- GSAP for smooth chat widget animations -->
   
   <!-- Consolidated JavaScript -->
-  <script src="../scripts/cli-mode.js?v=66" defer></script>
-  <script src="../scripts/scripts.js?v=66" defer></script>
-  <script src="../scripts/magnetic.js?v=66" defer></script>
+  <script src="../scripts/cli-mode.js?v=67" defer></script>
+  <script src="../scripts/scripts.js?v=67" defer></script>
+  <script src="../scripts/magnetic.js?v=67" defer></script>
 
   <!-- Interactive enhancements -->
   <script src="../scripts/about/about-particles.js" defer></script>
 
-  <script src="../scripts/rs-chat-widget.js?v=66" defer></script>
+  <script src="../scripts/rs-chat-widget.js?v=67" defer></script>
 
   <!-- SEO Landmark Footer (visually hidden) -->
   <footer class="site-footer" aria-hidden="true">

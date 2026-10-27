@@ -21,11 +21,6 @@
           for (var i = 0; i < keys.length; i++) caches.delete(keys[i]);
         });
       }
-      try {
-        sessionStorage.clear();
-        localStorage.removeItem('rs_chat_history');
-        localStorage.removeItem('ai.hasAsked');
-      } catch (_) {}
       if (hadController && !sessionStorage.getItem('__sw_nuked_v62')) {
         try { sessionStorage.setItem('__sw_nuked_v62', '1'); } catch (_) {}
         setTimeout(function () {
@@ -139,7 +134,7 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS (preload + apply) -->
-  <link rel="stylesheet" href="./styles.css?v=66">
+  <link rel="stylesheet" href="./styles.css?v=67">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -198,27 +193,27 @@
             "workExample": [
               {
                 "@type": "Article",
-                "@id": "https://ryanschmidt.design/pages/dashboard.html#work",
+                "@id": "https://ryanschmidt.design/pages/dashboard#work",
                 "name": "Custom Dashboards & AI Summaries",
-                "url": "https://ryanschmidt.design/pages/dashboard.html"
+                "url": "https://ryanschmidt.design/pages/dashboard"
               },
               {
                 "@type": "Article",
-                "@id": "https://ryanschmidt.design/pages/inventory.html#work",
+                "@id": "https://ryanschmidt.design/pages/inventory#work",
                 "name": "Inventory, Purchasing & Receiving",
-                "url": "https://ryanschmidt.design/pages/inventory.html"
+                "url": "https://ryanschmidt.design/pages/inventory"
               },
               {
                 "@type": "Article",
-                "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio.html#work",
+                "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio#work",
                 "name": "Building My Portfolio in Code",
-                "url": "https://ryanschmidt.design/pages/ai-coding-portfolio.html"
+                "url": "https://ryanschmidt.design/pages/ai-coding-portfolio"
               },
               {
                 "@type": "Article",
-                "@id": "https://ryanschmidt.design/pages/member-portal-overhaul.html#work",
+                "@id": "https://ryanschmidt.design/pages/member-portal-overhaul#work",
                 "name": "i4cp Member Portal & Research Discovery",
-                "url": "https://ryanschmidt.design/pages/member-portal-overhaul.html"
+                "url": "https://ryanschmidt.design/pages/member-portal-overhaul"
               }
             ]
           },
@@ -564,7 +559,7 @@
           <span class="home-principle-num">03</span>
           <h3 class="home-principle-title">Verifiable Outcomes</h3>
           <p class="home-principle-text">
-            Design craft is only as valuable as the behavior it shifts. Every case study anchors on measurable results: +71% beta engagement, +18% recurring revenue, +500% Ahri sessions, or 92% design system adoption.
+            Design craft is only as valuable as the behavior it shifts. Every case study anchors on measurable results: +71% sustained dashboard views, +18% recurring revenue, +500% Ahri sessions, or 92% design system adoption.
           </p>
         </div>
       </div>
@@ -640,11 +635,11 @@
     </div>
   </footer>
 
-  <script src="./scripts/cli-mode.js?v=66" defer></script>
-  <script src="./scripts/magnetic.js?v=66" defer></script>
-  <script src="./scripts/scripts.js?v=66" defer></script>
-  <script src="./scripts/home-page.js?v=66" defer></script>
-  <script src="./scripts/rs-chat-widget.js?v=66" defer></script>
+  <script src="./scripts/cli-mode.js?v=67" defer></script>
+  <script src="./scripts/magnetic.js?v=67" defer></script>
+  <script src="./scripts/scripts.js?v=67" defer></script>
+  <script src="./scripts/home-page.js?v=67" defer></script>
+  <script src="./scripts/rs-chat-widget.js?v=67" defer></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((regs) => {

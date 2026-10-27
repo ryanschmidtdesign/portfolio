@@ -1,4 +1,4 @@
-# robots.txt — ryanschmidt.design
+# robots.txt: ryanschmidt.design
 
 User-agent: *
 Allow: /

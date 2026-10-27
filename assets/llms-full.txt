@@ -1,18 +1,18 @@
-# Ryan Schmidt — Senior SaaS Product Designer
+# Ryan Schmidt: Senior SaaS Product Designer
 
 > Ryan Schmidt is a CX/UX designer at i4cp focused on information architecture, member experience, and AI-augmented product UX. He turns messy research and legacy interfaces into systems that scale, with measurable outcomes like task success, component reuse, and adoption. Strengths sit at the seam of design and engineering: token-first design systems, prototyping in code, and AI tooling like Cursor and Claude. Based in Austin, TX.
 
 ## Site map
 
-- https://ryanschmidt.design/ — Homepage
-- https://ryanschmidt.design/pages/about.html — About Ryan
-- https://ryanschmidt.design/pages/dashboard.html — AI-Powered Dashboards (case study)
-- https://ryanschmidt.design/pages/inventory.html — Real-Time Inventory (case study)
-- https://ryanschmidt.design/pages/member-portal-overhaul.html — i4cp Member Portal Redesign (case study)
-- https://ryanschmidt.design/pages/ai-coding-portfolio.html — AI-Coding my Portfolio (case study)
-- https://ryanschmidt.design/sitemap.xml — XML sitemap
-- https://ryanschmidt.design/robots.txt — Robots exclusion
-- https://ryanschmidt.design/404.html — 404 page
+- https://ryanschmidt.design/ : Homepage
+- https://ryanschmidt.design/pages/about : About Ryan
+- https://ryanschmidt.design/pages/dashboard : AI-Powered Dashboards (case study)
+- https://ryanschmidt.design/pages/inventory : Real-Time Inventory (case study)
+- https://ryanschmidt.design/pages/member-portal-overhaul : i4cp Member Portal Redesign (case study)
+- https://ryanschmidt.design/pages/ai-coding-portfolio : AI-Coding my Portfolio (case study)
+- https://ryanschmidt.design/sitemap.xml : XML sitemap
+- https://ryanschmidt.design/robots.txt : Robots exclusion
+- https://ryanschmidt.design/404 : 404 page
 
 ## Contact & profiles
 
@@ -30,16 +30,16 @@ Sole designer at i4cp. Owns the design system, UX standards, and shapes product 
 At D-Tools, led twice-weekly design reviews with 5 designers and 6 PMs. Scaled the design system to 100+ production components with 92% engineer adoption across 5 B2B Cloud modules as active users grew from 6,500 to 18,000. Built a design review system that surfaced disagreements early enough to change direction.
 
 Key timeline:
-- Feb 2026 – Present — CX/UX Designer at i4cp (Sole Designer)
-- Oct 2021 – Feb 2026 — Senior Product Designer at D-Tools (Promoted Jan 2025; Product Designer Oct 2021 – Dec 2024)
-- May 2021 – Apr 2026 — Senior Critique Group Facilitator at Designlab (Mentored 1,500+ designers across 400+ sessions)
-- 2021 — Product Designer at Bytemark (Mobile transit ticketing)
-- 2014 – 2021 — UI/UX Designer & Facility Specialist at TASB
-- 2011 – 2014 — US Navy Reserve Aircrewman (AWF3, Secret Clearance)
+- Feb 2026 – Present: CX/UX Designer at i4cp (Sole Designer)
+- Oct 2021 – Feb 2026: Senior Product Designer at D-Tools (Promoted Jan 2025; Product Designer Oct 2021 – Dec 2024)
+- May 2021 – Apr 2026: Senior Critique Group Facilitator at Designlab (Mentored 1,500+ designers across 400+ sessions)
+- 2021: Product Designer at Bytemark (Mobile transit ticketing)
+- 2014 – 2021: UI/UX Designer & Facility Specialist at TASB
+- 2011 – 2014: US Navy Reserve Aircrewman (AWF3, Secret Clearance)
 
 ### Builder
 
-Makes the shift from designing interfaces to building them. Uses Cursor and Claude Code to take product from concept through to staging without an engineering handoff. This portfolio is entirely hand-coded — no templates, no CMS, no static site generator.
+Makes the shift from designing interfaces to building them. Uses Cursor and Claude Code to take product from concept through to staging without an engineering handoff. This portfolio is entirely hand-coded: no templates, no CMS, no static site generator.
 
 Built a custom AI chat assistant powered by Gemini + Supabase pgvector (34 curated knowledge chunks, 768-dimension vector index) that answers questions about Ryan's work, case studies, and role fit.
 
@@ -55,7 +55,7 @@ Lives in Austin, TX with wife, toddler, and two cats (Pickles and Pesto). Hobbie
 
 ### AI-Powered Dashboards
 
-https://ryanschmidt.design/pages/dashboard.html
+https://ryanschmidt.design/pages/dashboard
 
 **Problem:** Users ignored default dashboards. Teams needed customizable views tailored to their specific business needs.
 
@@ -70,14 +70,14 @@ https://ryanschmidt.design/pages/dashboard.html
 **Validation:** End-to-end Figma prototype tested with 5 target users. 4/5 said templates matched their workflow. All users customized without guidance.
 
 **Impact:**
-- Dashboard engagement: +71%
+- Sustained dashboard views: +71%
 - Multi-dashboard adoption: 62%
 
-**Lessons:** Research is how you earn the right to push back. Users don't know what they don't know — they need data visible before they can ask good questions.
+**Lessons:** Research is how you earn the right to push back. Users don't know what they don't know: they need data visible before they can ask good questions.
 
 ### Inventory, Purchasing & Receiving
 
-https://ryanschmidt.design/pages/inventory.html
+https://ryanschmidt.design/pages/inventory
 
 **Problem:** Integrators spent hours reconciling stock counts across spreadsheets. Equipment went missing because nobody trusted the numbers. Enterprise prospects expected integrated inventory before signing.
 
@@ -95,13 +95,13 @@ https://ryanschmidt.design/pages/inventory.html
 - Contributed to an 18% increase in recurring revenue and 8% year-over-year adoption growth
 - MVP shipped: December 2024
 
-**Lessons:** Operational products earn trust through state clarity. Users don't just need to know how many — they need to understand why the number is trustworthy.
+**Lessons:** Operational products earn trust through state clarity. Users don't just need to know how many: they need to understand why the number is trustworthy.
 
 ### i4cp Member Portal & Research Discovery
 
-https://ryanschmidt.design/pages/member-portal-overhaul.html
+https://ryanschmidt.design/pages/member-portal-overhaul
 
-**Status:** Shipped — live in production September 11, 2026.
+**Status:** Shipped, live in production September 11, 2026.
 
 **Problem:** Members couldn't find what they came for. The portal's navigation didn't reflect how content was actually structured. A well-validated content taxonomy existed but wasn't visible in the UI.
 
@@ -110,10 +110,10 @@ https://ryanschmidt.design/pages/member-portal-overhaul.html
 **Research:** Validated the existing 4-tier taxonomy through moderated usability testing with 5 enterprise HR executives, finding flat navigation overwhelmed users while progressive disclosure kept entry calm.
 
 **Content hierarchy (4 levels):**
-1. Areas of Focus — broad practice domains (leadership, talent, culture)
-2. Priorities — strategic questions within each area
-3. Topics — specific subject clusters within each priority
-4. Individual content — articles, videos, webinars, benchmarks
+1. Areas of Focus: broad practice domains (leadership, talent, culture)
+2. Priorities: strategic questions within each area
+3. Topics: specific subject clusters within each priority
+4. Individual content: articles, videos, webinars, benchmarks
 
 **Key decision:** Progressive disclosure over flat navigation. Areas of Focus orient at the top level; deeper levels reveal progressively as members narrow intent. Every search starts in Ahri's AI experience, with an explicit "See all results" action to browse traditional results.
 
@@ -123,11 +123,11 @@ https://ryanschmidt.design/pages/member-portal-overhaul.html
 
 ### Building My Portfolio in Code
 
-https://ryanschmidt.design/pages/ai-coding-portfolio.html
+https://ryanschmidt.design/pages/ai-coding-portfolio
 
 **Problem:** Design leaders who can execute make better decisions earlier. Needed a portfolio that proved ability to build, not just design.
 
-**Role:** End-to-end — UX, UI, front-end architecture, AI-assisted engineering.
+**Role:** End-to-end: UX, UI, front-end architecture, AI-assisted engineering.
 
 **Stack:** HTML, CSS, JavaScript. Tools: Cursor, Vercel, GitHub, Supabase.
 
@@ -139,7 +139,7 @@ https://ryanschmidt.design/pages/ai-coding-portfolio.html
 
 **Key decisions:** Strict coding rules and design tokens established before writing code. Database-driven retrieval replaced a single JSON file with semantic search from project notes.
 
-**Impact:** Fully custom site — no templates, no CMS, no static site generator. Reusable page patterns and an assistant connected to project notes.
+**Impact:** Fully custom site: no templates, no CMS, no static site generator. Reusable page patterns and an assistant connected to project notes.
 
 **Lessons:** AI amplifies structure. Speed needs discipline. Iteration is the real advantage.
 

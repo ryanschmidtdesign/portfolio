@@ -803,11 +803,11 @@
 // --- EASTER EGG: Console Message for Tech Recruiters / EMs ---
 setTimeout(() => {
   console.log("%c👋 Ah, an Engineering Manager or DevTools snooper!", "font-size: 18px; font-weight: bold; color: #fff; background: #111; padding: 8px 12px; border-radius: 6px;");
-  console.log("%cSince you're looking under the hood: I built this entire site custom without a CMS, using semantic HTML, vanilla CSS/JS, and AI tooling. I don't just design systems—I can help your team ship them. Let's talk: ryanschmidt1989@gmail.com", "font-size: 14px; color: #444; padding-top: 8px; line-height: 1.5;");
+  console.log("%cSince you're looking under the hood: I built this entire site custom without a CMS, using semantic HTML, vanilla CSS/JS, and AI tooling. I don't just design systems: I can help your team ship them. Let's talk: ryanschmidt1989@gmail.com", "font-size: 14px; color: #444; padding-top: 8px; line-height: 1.5;");
 }, 1000);
 
 // ============================================================================
-// Interactive Case Study Microinteractions (Stepper, Keyword Filters, Spotlight)
+// Interactive Case Study Microinteractions (Stepper, Spotlight)
 // ============================================================================
 (function () {
   // 1. Inventory Receiving Quantity Stepper (pages/inventory.html)
@@ -843,28 +843,7 @@ setTimeout(() => {
     });
   }
 
-  // 2. Member Portal Keyword Filter Pills (pages/member-portal-overhaul.html)
-  const kFilters = document.querySelectorAll('.k-filter[data-kfilter]');
-  const kCount = document.getElementById('simKeywordCount');
-  const kItems = document.querySelectorAll('.keyword-results-list li[data-kcat]');
-  if (kFilters.length && kItems.length) {
-    kFilters.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const cat = btn.getAttribute('data-kfilter');
-        const countText = btn.getAttribute('data-kcount');
-        kFilters.forEach((b) => b.classList.toggle('active', b === btn));
-        if (kCount && countText) kCount.textContent = countText;
-
-        kItems.forEach((li) => {
-          const itemCat = li.getAttribute('data-kcat');
-          const match = cat === 'all' || itemCat === cat;
-          li.style.display = match ? '' : 'none';
-        });
-      });
-    });
-  }
-
-  // 3. Radial Cursor Spotlight on Constraint & Evidence Cards
+  // 2. Radial Cursor Spotlight on Constraint & Evidence Cards
   const spotlightCards = document.querySelectorAll('.constraint-card, .evidence-card');
   spotlightCards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {

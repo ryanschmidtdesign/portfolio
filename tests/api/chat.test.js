@@ -11,6 +11,8 @@ import {
   fitQuestionHasContext,
   cleanHint,
   sanitizeSources,
+  buildMetricAllowlist,
+  validateAnswerMetrics,
   KB_FALLBACK
 } from '../../api/chat.js';
 
@@ -372,6 +374,21 @@ describe('api/chat serverless helpers', () => {
     expect(sanitized[0].url).toBe('https://ryanschmidt.design/pages/dashboard.html');
     expect(sanitized[1].url).toBe('https://ryanschmidt.design/pages/inventory.html');
     expect(sanitized[2].title).toBe('Member Portal');
+  });
+
+  it('validateAnswerMetrics preserves documented metrics and rejects hallucinated numbers', () => {
+    const allowlist = buildMetricAllowlist(kb);
+    expect(allowlist.size).toBeGreaterThan(10);
+
+    // Documented metrics pass through
+    expect(validateAnswerMetrics('He achieved **+18%** recurring revenue.', allowlist)).toBe('He achieved **+18%** recurring revenue.');
+    expect(validateAnswerMetrics('He drove **+500%** Ahri sessions.', allowlist)).toBe('He drove **+500%** Ahri sessions.');
+    expect(validateAnswerMetrics('He led **10 interviews** with power users.', allowlist)).toBe('He led **10 interviews** with power users.');
+
+    // Hallucinations containing single digits are blocked from substring bypass
+    expect(validateAnswerMetrics('Conversions jumped **995%**.', allowlist)).toBe('Conversions jumped a documented portfolio outcome.');
+    expect(validateAnswerMetrics('Revenue surged **$2,000,000**.', allowlist)).toBe('Revenue surged a documented portfolio outcome.');
+    expect(validateAnswerMetrics('User engagement rose **250%**.', allowlist)).toBe('User engagement rose a documented portfolio outcome.');
   });
 });
 

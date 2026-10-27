@@ -827,10 +827,13 @@ function validateAnswerMetrics(answer = "", allowlist) {
     }
     const norm = normalizeMetricToken(inner);
     const metricOnly = norm.replace(/[^\d.%+-]/g, "");
-    const ok = [...allowlist].some((a) =>
-      norm.includes(a) ||
-      a.includes(metricOnly)
-    );
+    const ok = [...allowlist].some((a) => {
+      if (a === norm || a === metricOnly) return true;
+      if (a.length >= 2 && !/^\d+$/.test(a)) {
+        return norm.includes(a);
+      }
+      return false;
+    });
     return ok ? full : "a documented portfolio outcome";
   });
 }
@@ -1123,9 +1126,9 @@ function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
     }
     const fallbackCases = reconcileContextCases(kb, pickedCases, pickedCases);
     return {
-      answer: "Ryan's strongest shipped outcomes span **Custom Dashboards & AI Summaries at D-Tools Cloud** (+71% beta engagement), **Inventory, Purchasing & Receiving at D-Tools** (unblocking enterprise deals and contributing to +18% annual MRR growth), and the **i4cp Member Portal Overhaul** (+500% Ahri sessions and 2× daily active usage).",
+      answer: "Ryan's strongest shipped outcomes span **Custom Dashboards & AI Summaries at D-Tools Cloud** (+71% sustained dashboard views, 62% multi-dashboard adoption), **Inventory, Purchasing & Receiving at D-Tools** (unblocking enterprise deals, +18% recurring revenue, 8% YoY adoption), and the **i4cp Member Portal Overhaul** (+500% Ahri sessions and 2× daily active usage).",
       suggested_pills: [
-        "How did he drive +71% BI dashboard engagement?",
+        "How did he drive +71% dashboard views?",
         "Tell me about the i4cp AI search overhaul",
         "Is Ryan a fit for a Staff/Lead Product Designer role?"
       ],
@@ -2161,7 +2164,7 @@ export default async function handler(req, res) {
 
     const clientIp = getClientIp(req);
     if (!checkRateLimit(clientIp)) {
-      const rateLimitMsg = "You're asking a lot of questions at once — please slow down so I can give each one the attention it deserves.";
+      const rateLimitMsg = "You're asking a lot of questions at once: please slow down so I can give each one the attention it deserves.";
       return wantsStream
         ? (res.writeHead(200, { "Content-Type": "text/event-stream" }),
           res.write(`data: ${JSON.stringify({ type: "done", data: { answer: rateLimitMsg, suggested_pills: ["Tell me about Ryan's UX process", "Show me a case study"], hire_intent: false, context_cases: [], sources: [] } })}\n\n`),
@@ -2205,7 +2208,7 @@ export default async function handler(req, res) {
       // A fit question with no role/company context (e.g. "Is Ryan a fit for my role?")
       // would force Gemini to guess. Ask for the missing context instead.
       if (!externalJd && !fitQuestionHasContext(lastUser)) {
-        const askForRole = "I can help with that — which role are you hiring for? Paste the job description (or share a link to it), and I'll map Ryan's experience to the specific requirements. If you'd rather just name the role and company, that works too.";
+        const askForRole = "I can help with that: which role are you hiring for? Paste the job description (or share a link to it), and I'll map Ryan's experience to the specific requirements. If you'd rather just name the role and company, that works too.";
         return res.json(assistantPayload({
           answer: askForRole,
           suggested_pills: [
@@ -2485,5 +2488,7 @@ export {
   fitQuestionHasContext,
   cleanHint,
   sanitizeSources,
+  buildMetricAllowlist,
+  validateAnswerMetrics,
   KB_FALLBACK
 };

@@ -176,10 +176,6 @@
             this.activeIndex = 0;
             this.filteredItems = [];
             this.lastFocusedEl = null;
-            this.hudCanvas = null;
-            this.hudCtx = null;
-            this.hudRaf = null;
-            this.hudPulse = 0;
             this.pointerX = 0.5;
             this.pointerY = 0.5;
 
@@ -194,17 +190,6 @@
             const style = document.createElement('style');
             style.id = 'rs-cmdk-styles';
             style.textContent = `
-                @keyframes rsHudBootScan {
-                    0% {
-                        top: -10%;
-                        opacity: 0.95;
-                    }
-                    100% {
-                        top: 110%;
-                        opacity: 0;
-                    }
-                }
-
                 @keyframes rsLedPulse {
                     0%, 100% {
                         opacity: 1;
@@ -243,16 +228,6 @@
                     opacity: 1;
                     visibility: visible;
                     pointer-events: auto;
-                }
-
-                .rs-cmd-hud-canvas {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    pointer-events: none;
-                    z-index: 0;
-                    opacity: 0.85;
                 }
 
                 .rs-cmd-modal {
@@ -885,107 +860,7 @@
             this.footerTargetEl = this.overlay.querySelector('#rsCmdFooterTarget');
             this.coordEl = this.overlay.querySelector('#rsCmdTelemetryCoord');
             this.sfxBtn = this.overlay.querySelector('#rsCmdSfxBtn');
-            this.themeBtn = this.overlay.querySelector('#rsCmdThemeBtn');
-            this.themeLabelEl = this.overlay.querySelector('#rsCmdThemeLabel');
             this.escBtn = this.overlay.querySelector('#rsCmdEscBtn');
-            this.hudCanvas = this.overlay.querySelector('#rsCmdHudCanvas');
-        }
-
-        /**
-         * On-Demand Vector HUD Canvas (Westworld / Star Wars Orbital Telemetry)
-         * Runs strictly while the modal is open; zero background CPU/GPU overhead when closed.
-         */
-        startHudCanvas() {
-            if (!this.hudCanvas) return;
-            const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (prefersReduced) return;
-
-            const canvas = this.hudCanvas;
-            const ctx = canvas.getContext('2d');
-            if (!ctx) return;
-            this.hudCtx = ctx;
-
-            const resize = () => {
-                const dpr = Math.min(window.devicePixelRatio || 1, 2);
-                canvas.width = window.innerWidth * dpr;
-                canvas.height = window.innerHeight * dpr;
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            };
-            resize();
-            this._hudResizeHandler = resize;
-            window.addEventListener('resize', resize);
-
-            let angle = 0;
-            const renderFrame = () => {
-                if (!this.isOpen) return;
-                const w = window.innerWidth;
-                const h = window.innerHeight;
-                ctx.clearRect(0, 0, w, h);
-
-                const cx = w * 0.5 + (this.pointerX - 0.5) * 28;
-                const cy = h * 0.42 + (this.pointerY - 0.5) * 28;
-                angle += 0.0025;
-                this.hudPulse *= 0.92;
-
-                // 1. Subtle Orbital Telemetry Rings (Westworld Delos Diagnostic Loop)
-                const baseRadius = Math.min(w, h) * 0.38;
-                ctx.save();
-                ctx.translate(cx, cy);
-
-                // Outer dashed orbital ring
-                ctx.strokeStyle = `rgba(224, 107, 62, ${0.11 + this.hudPulse * 0.14})`;
-                ctx.lineWidth = 1;
-                ctx.setLineDash([4, 10]);
-                ctx.beginPath();
-                ctx.arc(0, 0, baseRadius, angle, angle + Math.PI * 2);
-                ctx.stroke();
-
-                // Secondary counter-rotating sector ring
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-                ctx.setLineDash([24, 16, 4, 16]);
-                ctx.beginPath();
-                ctx.arc(0, 0, baseRadius * 0.78, -angle * 1.4, -angle * 1.4 + Math.PI * 2);
-                ctx.stroke();
-
-                // Outer radar degree ticks
-                ctx.setLineDash([]);
-                const tickCount = 36;
-                for (let i = 0; i < tickCount; i++) {
-                    const a = (i / tickCount) * Math.PI * 2 + angle * 0.4;
-                    const r1 = baseRadius * 1.04;
-                    const r2 = i % 3 === 0 ? baseRadius * 1.085 : baseRadius * 1.055;
-                    ctx.strokeStyle = i % 9 === 0 ? 'rgba(224, 107, 62, 0.28)' : 'rgba(255, 255, 255, 0.06)';
-                    ctx.beginPath();
-                    ctx.moveTo(Math.cos(a) * r1, Math.sin(a) * r1);
-                    ctx.lineTo(Math.cos(a) * r2, Math.sin(a) * r2);
-                    ctx.stroke();
-                }
-
-                // Horizon axis hairlines
-                ctx.strokeStyle = 'rgba(224, 107, 62, 0.07)';
-                ctx.beginPath();
-                ctx.moveTo(-w * 0.45, 0);
-                ctx.lineTo(-baseRadius * 0.85, 0);
-                ctx.moveTo(baseRadius * 0.85, 0);
-                ctx.lineTo(w * 0.45, 0);
-                ctx.stroke();
-
-                ctx.restore();
-                this.hudRaf = requestAnimationFrame(renderFrame);
-            };
-
-            this.hudRaf = requestAnimationFrame(renderFrame);
-        }
-
-        stopHudCanvas() {
-            if (this.hudRaf) {
-                cancelAnimationFrame(this.hudRaf);
-                this.hudRaf = null;
-            }
-            if (this._hudResizeHandler) {
-                window.removeEventListener('resize', this._hudResizeHandler);
-                this._hudResizeHandler = null;
-            }
         }
 
         getCommands() {
@@ -1002,12 +877,12 @@
                     group: '01 // Case Studies',
                     icon: '01',
                     title: 'Custom Dashboards & AI Summaries (D-Tools Cloud)',
-                    sub: '+71% Beta Engagement · Executive KPI system & pipeline forecasting',
+                    sub: '+71% Sustained Views · 62% Multi-dashboard adoption',
                     badge: 'Case Study',
-                    kpi: '+71% Beta',
+                    kpi: '+71% Views',
                     kpiType: 'terracotta',
                     targetPath: 'SECTOR // pages/dashboard.html',
-                    keywords: 'dashboard bi analytics d-tools cloud opportunity signals custom dashboards ai summaries kpi pipeline b2b data visualization metrics revenue 71%',
+                    keywords: 'dashboard bi analytics d-tools cloud opportunity signals custom dashboards ai summaries kpi pipeline b2b data visualization metrics revenue 71% sustained views',
                     action: () => { window.location.href = `${prefix}dashboard.html`; }
                 },
                 {
@@ -1015,12 +890,12 @@
                     group: '01 // Case Studies',
                     icon: '02',
                     title: 'Inventory, Purchasing & Receiving (D-Tools Cloud)',
-                    sub: '+18% Company-Wide MRR · Auditable ledger & interactive stepper',
+                    sub: '+18% Recurring Revenue · 8% YoY adoption growth',
                     badge: 'Case Study',
                     kpi: '+18% MRR',
                     kpiType: 'emerald',
                     targetPath: 'SECTOR // pages/inventory.html',
-                    keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain warehouse enterprise 18% mrr company-wide',
+                    keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain warehouse enterprise 18% mrr recurring revenue',
                     action: () => { window.location.href = `${prefix}inventory.html`; }
                 },
                 {
@@ -1204,8 +1079,26 @@
 
             // Click outside modal closes
             this.overlay.addEventListener('click', (e) => {
-                if (e.target === this.overlay || e.target === this.hudCanvas) {
+                if (e.target === this.overlay) {
                     this.close();
+                }
+            });
+
+            // Modal focus trap for keyboard accessibility
+            this.overlay.addEventListener('keydown', (e) => {
+                if (e.key !== 'Tab' || !this.isOpen) return;
+                const focusables = Array.from(
+                    this.overlay.querySelectorAll('button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')
+                ).filter(el => el.offsetParent !== null);
+                if (!focusables.length) return;
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
                 }
             });
 
@@ -1220,15 +1113,6 @@
                     this.sfxBtn.classList.toggle('is-active', isOn);
                     this.sfxBtn.setAttribute('aria-pressed', isOn ? 'true' : 'false');
                     this.sfxBtn.innerHTML = `<span class="rs-cmd-btn-text">[SFX: ${isOn ? 'ON' : 'OFF'}]</span>`;
-                    this.inputEl.focus();
-                });
-            }
-
-            if (this.themeBtn) {
-                this.themeBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.cycleTheme();
-                    audioFX.playTick();
                     this.inputEl.focus();
                 });
             }
@@ -1529,7 +1413,6 @@
             this.inputEl.value = q;
             this.renderList(q);
             audioFX.playBoot();
-            this.startHudCanvas();
             setTimeout(() => {
                 this.inputEl.focus();
                 if (q) {
@@ -1544,7 +1427,6 @@
             this.overlay.classList.remove('is-open');
             this.inputEl.setAttribute('aria-expanded', 'false');
             this.inputEl.blur();
-            this.stopHudCanvas();
             audioFX.playClose();
             if (this.lastFocusedEl && typeof this.lastFocusedEl.focus === 'function') {
                 this.lastFocusedEl.focus();

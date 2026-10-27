@@ -57,7 +57,7 @@
   },
   "links": {
     "site": "https://ryanschmidt.design",
-    "about": "https://ryanschmidt.design/about.html",
+    "about": "https://ryanschmidt.design/pages/about",
     "resume_pdf": "https://ryanschmidt.design/assets/ryan-schmidt-resume.pdf",
     "linkedin_public": "https://www.linkedin.com/in/ryanschmidt1989/",
     "primary_contact": "https://www.linkedin.com/in/ryanschmidt1989/"
@@ -201,7 +201,7 @@
       "AI Product Designer"
     ],
     "what_matters": [
-      "Roles where designers build their designs in code as well as Figma — the new standard for product design.",
+      "Roles where designers build their designs in code as well as Figma (the new standard for product design).",
       "Building, not just specifying. Prototyping and shipping in code alongside engineers.",
       "Real users, real outcomes, and a team that ships.",
       "AI-augmented workflows treated as a product surface, not a demo."
@@ -336,7 +336,7 @@
       "slug": "case-member-portal-overhaul",
       "title": "i4cp Member Portal Growth Overhaul",
       "short_title": "Member Portal Overhaul",
-      "url": "https://ryanschmidt.design/pages/member-portal-overhaul.html",
+      "url": "https://ryanschmidt.design/pages/member-portal-overhaul",
       "status": "live",
       "tags": [
         "IA",
@@ -428,7 +428,7 @@
       "slug": "case-dashboard",
       "title": "AI-Powered Dashboards",
       "short_title": "AI-Powered Dashboards",
-      "url": "https://ryanschmidt.design/pages/dashboard.html",
+      "url": "https://ryanschmidt.design/pages/dashboard",
       "tags": [
         "Workflow",
         "Dashboards",
@@ -535,7 +535,7 @@
       "slug": "case-inventory",
       "title": "Real-Time Inventory",
       "short_title": "Real-Time Inventory",
-      "url": "https://ryanschmidt.design/pages/inventory.html",
+      "url": "https://ryanschmidt.design/pages/inventory",
       "tags": [
         "Enterprise",
         "Real-time",
@@ -640,7 +640,7 @@
       "slug": "case-ai-coding-portfolio",
       "title": "AI-Coding my Portfolio",
       "short_title": "Engineering My Portfolio",
-      "url": "https://ryanschmidt.design/pages/ai-coding-portfolio.html",
+      "url": "https://ryanschmidt.design/pages/ai-coding-portfolio",
       "tags": [
         "AI Coding",
         "Portfolio",
@@ -713,7 +713,7 @@
         {
           "id": "system-architecture",
           "heading": "System architecture",
-          "summary": "Structured funnel from prompts to patterns, components, and full features — connecting clear instructions to real product output."
+          "summary": "Structured funnel from prompts to patterns, components, and full features: connecting clear instructions to real product output."
         },
         {
           "id": "building-the-system",
@@ -894,7 +894,7 @@
     },
     {
       "q": "How does Ryan approach AI in product design?",
-      "a": "Ryan treats AI as a **layer on trusted workflows**, not a replacement for orientation. On https://ryanschmidt.design/dashboard.html, he pushed back on AI-first after research showed users needed familiar KPIs first, then added AI summarization on **verifiable metrics**. He prototypes end-to-end (template, customize, AI report) and tests for trust before expanding scope."
+      "a": "Ryan treats AI as a **layer on trusted workflows**, not a replacement for orientation. On https://ryanschmidt.design/pages/dashboard, he pushed back on AI-first after research showed users needed familiar KPIs first, then added AI summarization on **verifiable metrics**. He prototypes end-to-end (template, customize, AI report) and tests for trust before expanding scope."
     },
     {
       "q": "Is Ryan open to new roles?",
@@ -930,7 +930,7 @@
     },
     {
       "q": "What would Ryan bring to a design team beyond his skills?",
-      "a": "A bias toward shipping, a systemizer's instinct, and a track record of making the people around him better — through design mentorship (5 years at Designlab), paired engineering partnership, and leaving things more structured than he found them."
+      "a": "A bias toward shipping, a systemizer's instinct, and a track record of making the people around him better through design mentorship (5 years at Designlab), paired engineering partnership, and leaving things more structured than he found them."
     }
   ],
   "meta_qa": [
@@ -961,8 +961,8 @@
   ],
   "deterministic_answers": {
     "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
-    "looking_for": "Ryan is open to the right opportunity, specifically roles where designers build their designs in code as well as Figma — the new standard for modern product design. His strongest targets are Senior, Lead, or Staff Product Designer and UX Engineer roles.",
-    "proof_points": "Ryan's strongest proof points are +500% Ahri sessions and doubled daily activity after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption across five Cloud modules, +71% dashboard engagement, and +18% company-wide MRR after the inventory MVP.",
+    "looking_for": "Ryan is open to the right opportunity, specifically roles where designers build their designs in code as well as Figma: the new standard for modern product design. His strongest targets are Senior, Lead, or Staff Product Designer and UX Engineer roles.",
+    "proof_points": "Ryan's strongest proof points are +500% Ahri sessions and doubled daily activity after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption across five Cloud modules, +71% sustained dashboard views, and +18% company-wide MRR after the inventory MVP.",
     "ux_engineer_fit": "Yes. Ryan codes, prototypes in the browser, uses AI tooling daily, and works closely with engineers. The strongest evidence is his AI-Coding my Portfolio case, coded prototyping habits, and AI dashboard/product workflow thinking."
   },
   "evidence_by_role": {
@@ -1540,7 +1540,7 @@
     "max_bullets": 5,
     "linking": "When linking, use standard markdown links like url. Use kb.cases[i].url and kb.links.about/resume_pdf/linkedin_public.",
     "banned": [
-      "em dashes (—)",
+      "em dashes",
       "leverage",
       "utilize",
       "passionate about",
@@ -1605,7 +1605,7 @@
     {
       "intent": "company_fit_expanded",
       "prompt": "Yes, go deeper on Acme Analytics.",
-      "answer": "Ryan's strongest fit at an analytics product is making the right thing scannable and the next action obvious.\n- **Research-led IA** that untangles navigation and taxonomy so people find answers fast.\n- **Design-to-code execution**: https://ryanschmidt.design/pages/ai-coding-portfolio.html shows he can ship custom front-end work with AI-augmented workflows.\n- **AI on verifiable data**: https://ryanschmidt.design/pages/dashboard.html drove a **+71%** engagement increase by layering AI on familiar KPIs, not replacing them.\n- **Mapping**: for Acme, that probably looks like clearer 'what matters now' views, predictable filtering, and fewer one-off patterns. If that lines up, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start a real conversation."
+      "answer": "Ryan's strongest fit at an analytics product is making the right thing scannable and the next action obvious.\n- **Research-led IA** that untangles navigation and taxonomy so people find answers fast.\n- **Design-to-code execution**: https://ryanschmidt.design/pages/ai-coding-portfolio shows he can ship custom front-end work with AI-augmented workflows.\n- **AI on verifiable data**: https://ryanschmidt.design/pages/dashboard drove a **+71%** sustained view increase by layering AI on familiar KPIs, not replacing them.\n- **Mapping**: for Acme, that probably looks like clearer 'what matters now' views, predictable filtering, and fewer one-off patterns. If that lines up, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start a real conversation."
     },
     {
       "intent": "ux_engineer_fit",
@@ -1615,12 +1615,12 @@
     {
       "intent": "ai_adept_fit",
       "prompt": "Why is Ryan a good fit for an AI product design role?",
-      "answer": "Because he treats AI as a layer on workflows users already trust, not a chatbox bolted onto a product. On https://ryanschmidt.design/pages/dashboard.html, he pushed back on an AI-first approach after research, then layered AI summarization on **verifiable metrics** and drove a **+71%** engagement increase. Want the deeper version with tradeoffs?"
+      "answer": "Because he treats AI as a layer on workflows users already trust, not a chatbox bolted onto a product. On https://ryanschmidt.design/pages/dashboard, he pushed back on an AI-first approach after research, then layered AI summarization on **verifiable metrics** and drove a **+71%** sustained view increase. Want the deeper version with tradeoffs?"
     },
     {
       "intent": "case_select",
       "prompt": "Which case study best fits a team building real-time ops tooling?",
-      "answer": "Start with https://ryanschmidt.design/pages/inventory.html. The release contributed to an **+18% increase in company-wide MRR** over the following year. Want me to pull out the key decisions, or compare it to the AI dashboard work?"
+      "answer": "Start with https://ryanschmidt.design/pages/inventory. The release contributed to an **+18% increase in company-wide MRR** over the following year. Want me to pull out the key decisions, or compare it to the AI dashboard work?"
     },
     {
       "intent": "case_detail",
@@ -1630,12 +1630,12 @@
     {
       "intent": "resume_proof",
       "prompt": "What are Ryan's top 3 proof points?",
-      "answer": "**+500% Ahri sessions and doubled daily activity** after an IA overhaul at i4cp, **+18% company-wide MRR** unblocking enterprise deals with the inventory system, and a **+71% increase in dashboard engagement** on Custom Dashboards. Want context on any of them?"
+      "answer": "**+500% Ahri sessions and doubled daily activity** after an IA overhaul at i4cp, **+18% company-wide MRR** unblocking enterprise deals with the inventory system, and a **+71% increase in sustained dashboard views** on Custom Dashboards. Want context on any of them?"
     },
     {
       "intent": "looking_for",
       "prompt": "Is Ryan looking for a new role?",
-      "answer": "Yes, for the right opportunity. He's looking for teams where designers build their designs in code as well as Figma — whether that's titled **Senior or Staff Product Designer**, **Lead Product Designer**, or **UX Engineer**. If you have something close, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start the conversation."
+      "answer": "Yes, for the right opportunity. He's looking for teams where designers build their designs in code as well as Figma (whether that's titled **Senior or Staff Product Designer**, **Lead Product Designer**, or **UX Engineer**). If you have something close, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start the conversation."
     },
     {
       "intent": "tools_and_stack",
@@ -1680,7 +1680,7 @@
     {
       "intent": "off_topic_design",
       "prompt": "What makes good UX?",
-      "answer": "Ryan's short answer is 'clarity beats cleverness, evidence over opinion.' His https://ryanschmidt.design/dashboard.html case is a good example: research said users wanted familiar KPIs first, so the AI got layered on after, not before. Want a deeper version through one of his cases?"
+      "answer": "Ryan's short answer is 'clarity beats cleverness, evidence over opinion.' His https://ryanschmidt.design/pages/dashboard case is a good example: research said users wanted familiar KPIs first, so the AI got layered on after, not before. Want a deeper version through one of his cases?"
     },
     {
       "intent": "off_topic_unrelated",
@@ -1705,7 +1705,7 @@
     {
       "intent": "differentiator",
       "prompt": "What sets Ryan apart from other product designers?",
-      "answer": "Ryan works at the seam of design and engineering. He prototypes in code, ships real front-end, and uses AI tooling to compress cycles, not skip thinking. Most designers hand off specs; Ryan pairs with engineers on feasibility, writes token specs they actually use, and can build end-to-end features himself. The https://ryanschmidt.design/ai-coding-portfolio.html case is the best example of that in practice."
+      "answer": "Ryan works at the seam of design and engineering. He prototypes in code, ships real front-end, and uses AI tooling to compress cycles, not skip thinking. Most designers hand off specs; Ryan pairs with engineers on feasibility, writes token specs they actually use, and can build end-to-end features himself. The https://ryanschmidt.design/pages/ai-coding-portfolio case is the best example of that in practice."
     },
     {
       "intent": "compensation",

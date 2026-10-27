@@ -19,7 +19,7 @@
 ## Contact & profiles
 
 - Portfolio: https://ryanschmidt.design/
-- About: https://ryanschmidt.design/about.html
+- About: https://ryanschmidt.design/pages/about
 - Resume (PDF): https://ryanschmidt.design/assets/ryan-schmidt-resume.pdf
 - LinkedIn: https://www.linkedin.com/in/ryanschmidt1989/
 
@@ -32,24 +32,24 @@ metrics, and structured fit-matching. Endpoint: /api/chat (POST).
 
 ## Case studies
 
-- [Custom Dashboards & AI Summaries](https://ryanschmidt.design/pages/dashboard.html)
+- [Custom Dashboards & AI Summaries](https://ryanschmidt.design/pages/dashboard)
   Operational dashboard surfacing high-frequency tasks and customizable views.
-  Outcomes: +71% dashboard engagement, 62% multi-dashboard adoption.
+  Outcomes: +71% sustained dashboard views, 62% multi-dashboard adoption.
 
-- [Inventory, Purchasing & Receiving](https://ryanschmidt.design/pages/inventory.html)
+- [Inventory, Purchasing & Receiving](https://ryanschmidt.design/pages/inventory)
   Connected purchasing, receiving, and stock tracking in one workflow.
   Outcomes: Contributed to an 18% increase in recurring revenue and 8% year-over-year adoption growth.
 
-- [Building My Portfolio in Code](https://ryanschmidt.design/pages/ai-coding-portfolio.html)
+- [Building My Portfolio in Code](https://ryanschmidt.design/pages/ai-coding-portfolio)
   Portfolio rebuilt from scratch in semantic HTML, modular CSS, and JavaScript with AI coding tools.
   Outcomes: fully custom site, reusable UI and code patterns, assistant connected to project notes.
 
-- [i4cp Member Portal & Research Discovery](https://ryanschmidt.design/pages/member-portal-overhaul.html)
+- [i4cp Member Portal & Research Discovery](https://ryanschmidt.design/pages/member-portal-overhaul)
   Research-led navigation and IA overhaul for an enterprise HR research portal.
   Outcomes: Shipped September 11, 2026; +500% Ahri sessions and doubled daily activity.
 
 ## Optional
-- https://ryanschmidt.design/assets/llms.txt — This file (LLMs summary)
-- https://ryanschmidt.design/assets/llms-full.txt — Full LLMs.txt with detailed case study synopses
-- https://ryanschmidt.design/assets/portfolio-kb.json — Full KB used by the on-site AI assistant.
+- https://ryanschmidt.design/assets/llms.txt: This file (LLMs summary)
+- https://ryanschmidt.design/assets/llms-full.txt: Full LLMs.txt with detailed case study synopses
+- https://ryanschmidt.design/assets/portfolio-kb.json: Full KB used by the on-site AI assistant.
 - https://ryanschmidt.design/assets/ryan-schmidt-resume.pdf
