@@ -1551,7 +1551,7 @@ async function callGemini(systemPrompt, messages, webSnippets, kb, answerStyle, 
 
   if (shouldIncludePortfolioIndex && kb && kb.cases?.length) {
     const ctx = kb.cases
-      .map(c => `- ${c.title} (URL: ${c.url || "none"}) \u2014 ${c.summary_short || c.summary || c.summaryShort || ""} [${(c.tags||[]).join(", ")}]`.trim())
+      .map(c => `- ${c.title} (Company: ${c.company || "Independent"}, URL: ${c.url || "none"}): ${c.summary_short || c.summary || c.summaryShort || ""} [${(c.tags||[]).join(", ")}]`.trim())
       .join("\n");
     contents.push({ role:"user", parts:[{ text: `### PORTFOLIO INDEX (high-level)\n${ctx}` }]});
   }

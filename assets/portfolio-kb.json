@@ -333,6 +333,7 @@
   "cases": [
     {
       "id": "member-portal-overhaul",
+      "company": "i4cp",
       "slug": "case-member-portal-overhaul",
       "title": "i4cp Member Portal Growth Overhaul",
       "short_title": "Member Portal Overhaul",
@@ -425,6 +426,7 @@
     },
     {
       "id": "dashboard",
+      "company": "D-Tools",
       "slug": "case-dashboard",
       "title": "AI-Powered Dashboards",
       "short_title": "AI-Powered Dashboards",
@@ -532,6 +534,7 @@
     },
     {
       "id": "inventory",
+      "company": "D-Tools",
       "slug": "case-inventory",
       "title": "Real-Time Inventory",
       "short_title": "Real-Time Inventory",
@@ -637,6 +640,7 @@
     },
     {
       "id": "ai-coding-portfolio",
+      "company": "Independent",
       "slug": "case-ai-coding-portfolio",
       "title": "AI-Coding my Portfolio",
       "short_title": "Engineering My Portfolio",
