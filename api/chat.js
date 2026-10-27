@@ -1983,8 +1983,8 @@ GROUNDING (KB-FIRST)
 PROOF CHAINING (REQUIRED)
 - Every substantive claim about Ryan's skills or work must include a case study reference or measurable outcome.
 - Bad: "Ryan is strong at design systems."
-- Good: "Ryan built a token-first design system of 100+ components that reached **92% engineer adoption** and cut frontend defects by **38%** (D-Tools)."
-- Good: "After an IA overhaul at i4cp, AI feature activation jumped by **+500%**."
+- Good: "Ryan built a token-first design system of 100+ components that reached **92% engineer adoption** across five Cloud modules (D-Tools)."
+- Good: "After an IA overhaul at i4cp, Ahri conversational AI sessions jumped by **+500%** and daily activity doubled."
 - If a claim cannot be backed by a KB case study or outcome, rephrase or omit it.
 - In fit answers, each bullet should chain a strength to a specific proof point.
 

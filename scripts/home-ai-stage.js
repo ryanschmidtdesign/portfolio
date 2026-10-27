@@ -649,7 +649,7 @@
           <div class="home-pillar-card">
             <div class="home-pillar-card__num">03 // TOKENS OVER PATCHES</div>
             <h4>Systemize What Works</h4>
-            <p>Most legacy UI debt is a systems problem. Scaling a 100+ component tokenized design system at D-Tools achieved 92% engineering adoption and cut interface defects by 38% across five product teams.</p>
+            <p>Most legacy UI debt is a systems problem. Scaling a 100+ component tokenized design system at D-Tools achieved 92% engineering adoption across five Cloud modules.</p>
           </div>
         </div>
         ${createAssistantToolbar('Systems Thinking · Prototyping in Code')}

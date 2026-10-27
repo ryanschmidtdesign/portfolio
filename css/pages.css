@@ -89,8 +89,8 @@
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  column-gap: clamp(var(--space-6), 7vw, var(--space-10));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  column-gap: clamp(var(--space-4), 3vw, var(--space-6));
   row-gap: var(--space-6);
   position: relative;
   align-items: flex-start;

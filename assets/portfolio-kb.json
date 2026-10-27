@@ -63,11 +63,11 @@
     "primary_contact": "https://www.linkedin.com/in/ryanschmidt1989/"
   },
   "about": {
-    "headline": "Senior SaaS Product Designer at i4cp, working at the seam of design and engineering.",
-    "one_liner": "Research-driven IA, design systems, and AI-augmented product UX for enterprise audiences.",
-    "elevator_30s": "Ryan Schmidt is a Senior Product Designer at i4cp focused on information architecture, member experience, and AI-augmented product UX. He turns messy research and legacy interfaces into systems that scale, with measurable outcomes like task success, component reuse, and adoption. Strengths sit at the seam of design and engineering, including token-first design systems, prototyping in code, and AI tooling like Cursor and Claude.",
-    "bio_75_words": "Ryan Schmidt is a Senior Product Designer at i4cp who works at the seam of design and engineering. His focus is research-driven information architecture, design systems, and AI-augmented product UX for enterprise audiences. Recent outcomes include +500% Ahri sessions and doubled daily activity at i4cp, 92% engineer adoption on a 100+ component design system, and a 71% increase in dashboard engagement. He's based in Austin, TX.",
-    "bio_150_words": "Ryan Schmidt is a Senior Product Designer at i4cp (Institute for Corporate Productivity), where he leads platform experience strategy across member portal, internal admin, and research discovery surfaces. His focus is research-driven information architecture, token-first design systems, and AI-augmented product UX for enterprise audiences. Before i4cp, he led design system work at D-Tools, where he shipped a 100+ component system with 92% engineer adoption, cutting UI defects by 38%. Ryan works at the seam of design and engineering, prototyping in code, partnering closely with engineers, and using AI tooling like Cursor and Claude to ship faster. Recent measurable outcomes include a 500% increase in Ahri sessions and doubled daily activity after the i4cp portal overhaul, a 71% increase in dashboard engagement, and an 18% lift in company-wide MRR tied to an inventory MVP. He's based in Austin, TX.",
+    "headline": "Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems.",
+    "one_liner": "Senior Product Designer who builds and tests coded prototypes in Cursor to resolve design questions before engineering starts.",
+    "elevator_30s": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. He builds and tests coded prototypes in Cursor to resolve design questions before engineering starts. Sole designer at i4cp; previously owned UX across five D-Tools Cloud modules as the platform grew from 6,500 to 18,000 active users.",
+    "bio_75_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. He builds and tests coded prototypes in Cursor to resolve design questions before engineering starts. Sole designer at i4cp; previously owned UX across five D-Tools Cloud modules as active users grew from 6,500 to 18,000. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
+    "bio_150_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. As the sole designer at i4cp (Institute for Corporate Productivity), he owns platform experience across the member portal and internal admin tools, standardizing UI across 3 core platforms for 4 developers, shipping coded prototypes in Cursor saving ~4 hours QA weekly, and designing Ahri conversational AI (+500% adoption increase). Previously, he owned UX across five D-Tools Cloud modules as the platform scaled from 6,500 to 18,000 active users, designing a real-time inventory MVP (+18% recurring revenue, 8% YoY adoption growth) and a 100+ component design system with 92% engineering adoption. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
     "specialties": [
       "Information Architecture",
       "Design Systems",
@@ -159,7 +159,7 @@
     {
       "id": "tokens_over_patches",
       "stance": "Most legacy UI problems aren't a redesign problem. They're a token problem.",
-      "context": "On an 8-year-old B2B platform, a tokenized design system of 100+ components achieved 92% engineer adoption and cut defects by 38%, without a big-bang rewrite.",
+      "context": "On an 8-year-old B2B platform, a tokenized design system of 100+ components achieved 92% engineer adoption across five Cloud modules, without a big-bang rewrite.",
       "use_when": [
         "design system",
         "legacy ui",
@@ -232,13 +232,13 @@
   "resume": {
     "current_role": {
       "title": "CX/UX Designer",
-      "org": "i4cp (Institute for Corporate Productivity)",
+      "org": "Institute for Corporate Productivity (i4cp)",
       "dates": "February 2026–Present",
       "highlights": [
-        "Sole designer across member portal, analytics, and admin tools; own the design system, UX standards, and roadmap prioritization.",
-        "Ship interactive HTML/CSS/JS prototypes to staging via Cursor, eliminating spec ambiguity before engineering starts.",
-        "Designed the Ask Ahri AI search experience, helping members query research through natural language with verified citations.",
-        "Run user interviews with enterprise HR executives to validate navigation models and guide product priorities."
+        "Replaced legacy Bootstrap UI with a custom design system across 3 core web platforms to standardize interfaces for 4 developers.",
+        "Shipped HTML/CSS/JS prototypes to staging through Cursor so developers could work from functioning examples, saving approximately 4 hours of engineering QA per week.",
+        "Designed the conversational AI experience for Ahri, replacing legacy search with prompt-driven access to HR research and driving a 500% adoption increase.",
+        "Established the organization’s first user research practice and used findings to shape product priorities with executive stakeholders."
       ]
     },
     "prior": [
@@ -247,10 +247,10 @@
         "org": "D-Tools, Inc.",
         "dates": "October 2021–February 2026 (Promoted January 2025)",
         "highlights": [
-          "Owned Cloud UX across 5 core modules as platform scaled from 6,500 to 18,000 active users.",
-          "Architected inventory MVP connecting purchasing and receiving, unblocking sales and contributing to an 18% company-wide MRR increase.",
-          "Scaled design system to 100+ production components with 92% engineer adoption.",
-          "Designed dashboard suite with customizable views and AI summaries (**71% engagement**, **62% multi-dashboard adoption**)."
+          "Owned end-to-end UX across 5 B2B Cloud modules as the platform grew from 6,500 to 18,000 active users.",
+          "Designed a desktop-first, real-time inventory MVP through field research and usability testing, contributing to an 18% increase in recurring revenue and 8% year-over-year adoption growth.",
+          "Grew the design system to 100+ production components with 92% adoption across engineering.",
+          "Designed dashboard suite with customizable views and AI summaries (**71% engagement during beta**, **62% multi-dashboard adoption**)."
         ]
       },
       {
@@ -259,32 +259,32 @@
         "dates": "May 2021–April 2026",
         "role_type": "part-time mentorship",
         "highlights": [
-          "Facilitated 400+ structured critique sessions and mentored 1,500+ designers, coaching on problem framing, UX research methods, and design rationale."
+          "Led 400+ structured critique sessions and mentored 1,500+ designers on problem framing, UX research, and design rationale."
         ],
         "disclose_only_if_asked": false
       },
       {
         "title": "Product Designer",
         "org": "Bytemark, Inc.",
-        "dates": "2021",
+        "dates": "March 2021–October 2021",
         "highlights": [
-          "Designed white-label transit ticketing applications and mobile interfaces."
+          "Designed white-label mobile transit ticketing SaaS across iOS and Android for municipal transit agencies, creating reusable component patterns and meeting WCAG AA accessibility standards."
         ],
         "disclose_only_if_asked": false
       },
       {
-        "title": "UI/UX Designer & Operations Specialist",
+        "title": "UI/UX Designer & Facility Specialist",
         "org": "Texas Association of School Boards (TASB)",
-        "dates": "2014–2021",
+        "dates": "September 2014–March 2021",
         "highlights": [
-          "Designed enterprise web tools and conducted statewide facility research and demographic analysis."
+          "Redesigned Member Services and user profile workflows for TASB’s legacy environmental management software (UI/UX Designer Dec 2020–Mar 2021); led operations consulting projects managing delivery and client relationships (Facility Specialist 2014–2021)."
         ],
         "disclose_only_if_asked": false
       },
       {
         "title": "Aircrewman (AWF3)",
         "org": "US Navy Reserve",
-        "dates": "2011–2014",
+        "dates": "July 2011–December 2014",
         "highlights": [
           "Naval aircrew operations with Secret Clearance."
         ],
@@ -324,9 +324,10 @@
     ],
     "achievements_top": [
       "Drove **+500%** Ahri sessions and doubled daily activity after i4cp Member Portal overhaul.",
-      "Built design system of 100+ components achieving **92% engineer adoption** and cutting frontend defects by **38%**.",
-      "Increased dashboard engagement by **+71%** (**62% multi-dashboard adoption**).",
-      "Contributed to **+18% company-wide MRR** after Inventory MVP."
+      "Grew design system to 100+ production components with **92% engineer adoption** across five Cloud modules.",
+      "Increased dashboard engagement by **+71%** during beta (**62% multi-dashboard adoption**).",
+      "Contributed to an **18% increase in recurring revenue** and **8% YoY adoption growth** after Inventory MVP.",
+      "Shipped coded prototypes to staging via Cursor, saving **~4 hours of engineering QA per week**."
     ]
   },
   "cases": [
@@ -956,7 +957,7 @@
   "deterministic_answers": {
     "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
     "looking_for": "Ryan is open to the right opportunity, specifically roles where designers build their designs in code as well as Figma — the new standard for modern product design. His strongest targets are Senior, Lead, or Staff Product Designer and UX Engineer roles.",
-    "proof_points": "Ryan's strongest proof points are +500% Ahri sessions and doubled daily activity after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption (cutting UI defects by 38%), +71% dashboard engagement, and +18% company-wide MRR after the inventory MVP.",
+    "proof_points": "Ryan's strongest proof points are +500% Ahri sessions and doubled daily activity after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption across five Cloud modules, +71% dashboard engagement, and +18% company-wide MRR after the inventory MVP.",
     "ux_engineer_fit": "Yes. Ryan codes, prototypes in the browser, uses AI tooling daily, and works closely with engineers. The strongest evidence is his AI-Coding my Portfolio case, coded prototyping habits, and AI dashboard/product workflow thinking."
   },
   "evidence_by_role": {
@@ -989,7 +990,7 @@
       ],
       "proof": [
         "+71% dashboard engagement.",
-        "92% engineer adoption across 100+ tokenized components (38% fewer defects).",
+        "92% engineer adoption across 100+ tokenized components.",
         "+18% company-wide MRR after inventory MVP."
       ]
     },
@@ -1024,7 +1025,7 @@
       ],
       "proof": [
         "92% engineer adoption (100+ components)",
-        "38% fewer defects",
+        "scaled across 5 Cloud modules",
         "partnered with 10+ engineers"
       ]
     },
@@ -1569,7 +1570,7 @@
     {
       "intent": "company_fit_specific",
       "prompt": "Why is Ryan a fit at Figma?",
-      "answer": "Ryan's strongest fit for a design-tool company is his ability to connect design systems, implementation constraints, and designer workflow. His D-Tools design system of 100+ components achieved **92% engineer adoption** and cut frontend defects by **38%**, which maps well to teams building tools for consistency, collaboration, and scale. Want the deeper version?"
+      "answer": "Ryan's strongest fit for a design-tool company is his ability to connect design systems, implementation constraints, and designer workflow. His D-Tools design system of 100+ components achieved **92% engineer adoption** across five Cloud modules, which maps well to teams building tools for consistency, collaboration, and scale."
     },
     {
       "intent": "ux_engineer_proof",

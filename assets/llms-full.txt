@@ -30,19 +30,22 @@ Sole designer at i4cp. Owns the design system, UX standards, and shapes product 
 At D-Tools, led twice-weekly design reviews with 5 designers and 6 PMs. Built a design review system that surfaced disagreements early enough to change direction.
 
 Key timeline:
-- Oct 2021 — Built design review system at D-Tools
-- Jan 2025 — Promoted to Senior Product Designer
-- Present — Leading UX at i4cp
+- Feb 2026 – Present — CX/UX Designer at i4cp (Sole Designer)
+- Oct 2021 – Feb 2026 — Senior Product Designer at D-Tools (Promoted Jan 2025; Product Designer Oct 2021 – Dec 2024)
+- May 2021 – Apr 2026 — Senior Critique Group Facilitator at Designlab (Mentored 1,500+ designers across 400+ sessions)
+- 2021 — Product Designer at Bytemark (Mobile transit ticketing)
+- 2014 – 2021 — UI/UX Designer & Facility Specialist at TASB
+- 2011 – 2014 — US Navy Reserve Aircrewman (AWF3, Secret Clearance)
 
 ### Builder
 
-Makes the shift from designing interfaces to building them. Uses Cursor + OpenCode to take product from concept through to staging without an engineering handoff. This portfolio is entirely hand-coded — no templates, no CMS, no static site generator.
+Makes the shift from designing interfaces to building them. Uses Cursor and Claude Code to take product from concept through to staging without an engineering handoff. This portfolio is entirely hand-coded — no templates, no CMS, no static site generator.
 
 Built a custom AI chat assistant powered by Gemini + Supabase pgvector (1,400+ embedded chunks, 768-dimension vector index) that answers questions about Ryan's work, case studies, and role fit.
 
 ### Mentorship
 
-UX mentor at Designlab from 2021 to 2026. Promoted to Senior Facilitator in 2023. Led 400+ group critique sessions and mentored 1,500 designers. Wrapped up after 5 years to focus on family and day job.
+Senior Design Critique Group Facilitator at Designlab from 2021 to 2026. Promoted to Senior Facilitator in 2023. Led 400+ group critique sessions and mentored 1,500+ designers on problem framing, UX research, and design rationale. Wrapped up after 5 years to focus on family and day job.
 
 ### Personal
 
@@ -56,7 +59,7 @@ https://ryanschmidt.design/pages/dashboard.html
 
 **Problem:** Users ignored default dashboards. Teams needed customizable views tailored to their specific business needs.
 
-**Role:** Lead Product Designer (leading PM and delivery triad, 5 months). Owned problem definition, research, design, scope, and delivery alongside 4 engineers.
+**Role:** Senior Product Designer (Design Lead alongside PM and delivery triad, 5 months). Owned problem definition, research, design, scope, and delivery alongside 4 engineers.
 
 **Research:** 10 user interviews (6 power users, 4 stakeholders). Key insight: users needed to see data first before they could explore or ask questions.
 
@@ -78,7 +81,7 @@ https://ryanschmidt.design/pages/inventory.html
 
 **Problem:** Integrators spent hours reconciling stock counts across spreadsheets. Equipment went missing because nobody trusted the numbers. Enterprise prospects expected integrated inventory before signing.
 
-**Role:** Lead Product Designer (team of 3)
+**Role:** Product Designer (Design Lead in squad of 3)
 
 **Research:** 6 user interviews + workflow mapping sessions. One power user maintained a 14-tab spreadsheet with 15-20% error rates. Two distinct user segments: small teams needing quick quantity confidence, larger teams needing asset-level traceability.
 
@@ -102,7 +105,7 @@ https://ryanschmidt.design/pages/member-portal-overhaul.html
 
 **Problem:** Members couldn't find what they came for. The portal's navigation didn't reflect how content was actually structured. A well-validated content taxonomy existed but wasn't visible in the UI.
 
-**Role:** Lead UX Designer/PM (sole designer). Owning IA, designs, Trello tickets, and staging QA.
+**Role:** CX/UX Designer (Sole Designer). Owning IA, design system tokens, Trello tickets, and staging QA.
 
 **Research:** Validated the existing 4-tier taxonomy through moderated usability testing with 5 enterprise HR executives, finding flat navigation overwhelmed users while progressive disclosure kept entry calm.
 
