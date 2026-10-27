@@ -362,7 +362,7 @@
         "Stakeholder fear of removing traditional search",
         "Complex legacy taxonomy"
       ],
-      "role": "Lead UX Designer / PM",
+      "role": "CX/UX Designer (Sole Designer)",
       "team": [
         "PM",
         "Eng",
@@ -456,7 +456,7 @@
         "No mature design system",
         "Executive push for AI vs User need for trust"
       ],
-      "role": "Lead Product Designer (leading PM and delivery triad)",
+      "role": "Senior Product Designer (Design Lead alongside PM and delivery triad)",
       "team": [
         "PM",
         "DS/Analytics",
@@ -562,7 +562,7 @@
         "Engineering timeline prevented real-time websockets",
         "Conflicting needs of small vs enterprise users"
       ],
-      "role": "Product Designer",
+      "role": "Product Designer (Design Lead in squad of 3)",
       "team": [
         "PM",
         "3 Engineers"
@@ -578,12 +578,17 @@
         "Filters",
         "Status chips"
       ],
-      "summary_short": "Connected purchasing, receiving, and stock tracking in one workflow, contributing to +18% company-wide MRR.",
+      "summary_short": "Connected purchasing, receiving, and stock tracking in one workflow, contributing to an 18% increase in recurring revenue and 8% YoY adoption growth.",
       "outcomes": [
         {
-          "metric": "**Company-Wide MRR**",
+          "metric": "**Recurring Revenue**",
           "value": "**+18%**",
-          "note": "Contributory over the following year"
+          "note": "Company-wide MRR increase over the following year"
+        },
+        {
+          "metric": "**YoY Adoption**",
+          "value": "**+8%**",
+          "note": "Year-over-year adoption lift across active accounts"
         }
       ],
       "impact_narrative": "The release removed a recurring blocker in enterprise sales conversations and contributed to an 18% increase in company-wide MRR over the following year.",

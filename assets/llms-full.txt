@@ -27,7 +27,7 @@
 
 Sole designer at i4cp. Owns the design system, UX standards, and shapes product decisions early. Writes PRDs, influences the roadmap, and plays a big role in product and UX strategy.
 
-At D-Tools, led twice-weekly design reviews with 5 designers and 6 PMs. Built a design review system that surfaced disagreements early enough to change direction.
+At D-Tools, led twice-weekly design reviews with 5 designers and 6 PMs. Scaled the design system to 100+ production components with 92% engineer adoption across 5 B2B Cloud modules as active users grew from 6,500 to 18,000. Built a design review system that surfaced disagreements early enough to change direction.
 
 Key timeline:
 - Feb 2026 – Present — CX/UX Designer at i4cp (Sole Designer)
@@ -92,7 +92,7 @@ https://ryanschmidt.design/pages/inventory.html
 **Validation:** 3 rounds of prototype tests. Quantity-first by default, asset-level when needed.
 
 **Impact:**
-- Contributed to +18% company-wide MRR (1 year)
+- Contributed to an 18% increase in recurring revenue and 8% year-over-year adoption growth
 - MVP shipped: December 2024
 
 **Lessons:** Operational products earn trust through state clarity. Users don't just need to know how many — they need to understand why the number is trustworthy.
