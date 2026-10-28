@@ -37,25 +37,25 @@
       top: calc(16px + env(safe-area-inset-top, 0px)) !important;
       left: 50% !important;
       transform: translateX(-50%) !important;
-      width: min(692px, calc(100vw - 32px)) !important;
+      width: min(692px, calc(100vw - 24px)) !important;
       max-width: 692px !important;
       z-index: 999990 !important;
       background:
         radial-gradient(460px circle at var(--header-mouse-x, var(--mouse-x, 50%)) var(--header-mouse-y, var(--mouse-y, 50%)), rgba(255, 255, 255, 0.08), transparent 60%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 60%),
-        linear-gradient(180deg, rgba(20, 22, 28, 0.70) 0%, rgba(10, 11, 15, 0.74) 50%, rgba(5, 5, 8, 0.78) 100%) !important;
-      backdrop-filter: blur(20px) saturate(220%) brightness(96%) contrast(106%) !important;
-      -webkit-backdrop-filter: blur(20px) saturate(220%) brightness(96%) contrast(106%) !important;
-      backdrop-filter: blur(8px) url(#rs-liquid-refraction) saturate(220%) contrast(110%) !important;
-      -webkit-backdrop-filter: blur(8px) url(#rs-liquid-refraction) saturate(220%) contrast(110%) !important;
+        linear-gradient(180deg, rgba(10, 11, 14, 0.55) 0%, rgba(6, 7, 10, 0.62) 50%, rgba(4, 4, 6, 0.68) 100%) !important;
+      backdrop-filter: blur(20px) saturate(120%) brightness(55%) contrast(115%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(120%) brightness(55%) contrast(115%) !important;
+      backdrop-filter: blur(12px) url(#rs-liquid-refraction) saturate(120%) brightness(55%) contrast(115%) !important;
+      -webkit-backdrop-filter: blur(12px) url(#rs-liquid-refraction) saturate(120%) brightness(55%) contrast(115%) !important;
       border: none !important;
       border-radius: 2px !important;
       box-shadow:
-        0 24px 60px -12px rgba(0, 0, 0, 0.65),
-        0 10px 24px -5px rgba(0, 0, 0, 0.44),
-        0 2px 6px 0 rgba(0, 0, 0, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.22),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.6) !important;
+        0 18px 40px -14px rgba(20, 14, 8, 0.35),
+        0 4px 10px -4px rgba(20, 14, 8, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05) !important;
       overflow: hidden !important;
       display: block !important;
       margin: 0 !important;
@@ -69,9 +69,11 @@
     .site-header:hover {
       transform: translateX(-50%) translateY(-1px) !important;
       box-shadow:
-        0 30px 72px -12px rgba(0, 0, 0, 0.74),
-        0 14px 28px -5px rgba(0, 0, 0, 0.50),
-        0 3px 8px 0 rgba(0, 0, 0, 0.32) !important;
+        0 24px 50px -12px rgba(20, 14, 8, 0.45),
+        0 8px 18px -4px rgba(20, 14, 8, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.08) !important;
     }
     .site-header__inner {
       display: flex !important;
@@ -116,7 +118,7 @@
       bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
       left: 50% !important;
       transform: translateX(-50%) !important;
-      width: min(692px, calc(100vw - 32px)) !important;
+      width: min(692px, calc(100vw - 24px)) !important;
       max-width: 692px !important;
       z-index: 999999 !important;
       pointer-events: auto !important;
@@ -137,23 +139,23 @@
       background:
         radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 60%),
         linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 60%),
-        linear-gradient(180deg, rgba(14, 16, 20, 0.80) 0%, rgba(8, 9, 12, 0.84) 50%, rgba(4, 4, 6, 0.88) 100%) !important;
-      backdrop-filter: blur(20px) saturate(220%) brightness(96%) contrast(106%) !important;
-      -webkit-backdrop-filter: blur(20px) saturate(220%) brightness(96%) contrast(106%) !important;
-      backdrop-filter: blur(8px) url(#rs-liquid-refraction) saturate(220%) contrast(110%) !important;
-      -webkit-backdrop-filter: blur(8px) url(#rs-liquid-refraction) saturate(220%) contrast(110%) !important;
+        linear-gradient(180deg, rgba(10, 11, 14, 0.55) 0%, rgba(6, 7, 10, 0.62) 50%, rgba(4, 4, 6, 0.68) 100%) !important;
+      backdrop-filter: blur(20px) saturate(120%) brightness(55%) contrast(115%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(120%) brightness(55%) contrast(115%) !important;
+      backdrop-filter: blur(12px) url(#rs-liquid-refraction) saturate(120%) brightness(55%) contrast(115%) !important;
+      -webkit-backdrop-filter: blur(12px) url(#rs-liquid-refraction) saturate(120%) brightness(55%) contrast(115%) !important;
       border: none !important;
       border-radius: 2px !important;
-      padding: 4px 6px !important;
+      padding: 4px 0 !important;
       box-shadow:
-        0 24px 60px -12px rgba(0, 0, 0, 0.65),
-        0 10px 24px -5px rgba(0, 0, 0, 0.44),
-        0 2px 6px 0 rgba(0, 0, 0, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.22),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.6) !important;
+        0 18px 40px -14px rgba(20, 14, 8, 0.35),
+        0 4px 10px -4px rgba(20, 14, 8, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05) !important;
       overflow: hidden !important;
       display: block !important;
-      transition: box-shadow 240ms ease, transform 240ms ease !important;
+      transition: box-shadow 240ms ease, transform 240ms ease, background 240ms ease !important;
     }
     .home-omnibar-shell::before,
     .subpage-omnibar-shell::before {
@@ -163,22 +165,32 @@
     .subpage-omnibar-shell:hover {
       transform: translateY(-1px) !important;
       box-shadow:
-        0 30px 72px -12px rgba(0, 0, 0, 0.74),
-        0 14px 28px -5px rgba(0, 0, 0, 0.50),
-        0 3px 8px 0 rgba(0, 0, 0, 0.32) !important;
+        0 24px 50px -12px rgba(20, 14, 8, 0.45),
+        0 8px 18px -4px rgba(20, 14, 8, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.08) !important;
     }
     .home-omnibar-shell:focus-within,
     .subpage-omnibar-shell:focus-within {
       transform: translateY(-1px) !important;
+      background:
+        radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.10), transparent 60%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 30%, transparent 60%),
+        linear-gradient(180deg, rgba(16, 18, 22, 0.60) 0%, rgba(10, 12, 16, 0.66) 50%, rgba(6, 7, 10, 0.72) 100%) !important;
       box-shadow:
-        0 32px 80px -10px rgba(0, 0, 0, 0.82),
-        0 16px 32px -6px rgba(0, 0, 0, 0.56),
-        0 0 20px -2px rgba(224, 107, 62, 0.35) !important;
+        0 18px 40px -14px rgba(20, 14, 8, 0.35),
+        0 4px 10px -4px rgba(20, 14, 8, 0.25),
+        0 0 0 1px rgba(232, 110, 60, 0.45),
+        0 0 24px -4px rgba(232, 110, 60, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.08) !important;
     }
     .home-omnibar-form,
     .subpage-omnibar-form {
       min-height: 48px !important;
-      padding: 4px 8px 4px 14px !important;
+      padding: 4px 16px 4px 20px !important;
       border-radius: 2px !important;
       background: transparent !important;
       border: none !important;
@@ -199,7 +211,7 @@
     @media (max-width: 600px) {
       .site-header {
         top: calc(12px + env(safe-area-inset-top, 0px)) !important;
-        width: min(692px, calc(100vw - 20px)) !important;
+        width: min(692px, calc(100vw - 24px)) !important;
         border-radius: 2px !important;
       }
       .site-header__inner {
@@ -216,17 +228,17 @@
       .home-omnibar-section,
       .subpage-omnibar-dock {
         bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
-        width: calc(100% - 20px) !important;
+        width: min(692px, calc(100vw - 24px)) !important;
       }
       .home-omnibar-shell,
       .subpage-omnibar-shell {
         border-radius: 2px !important;
-        padding: 4px 5px !important;
+        padding: 4px 0 !important;
       }
       .home-omnibar-form,
       .subpage-omnibar-form {
         min-height: 44px !important;
-        padding: 4px 6px 4px 10px !important;
+        padding: 4px 12px 4px 14px !important;
         border-radius: 2px !important;
       }
       .home-omnibar-input,
@@ -234,6 +246,11 @@
         height: 42px !important;
         font-size: 0.88rem !important;
       }
+    }
+    @media (hover: none) {
+      .ai-mini-cmdk,
+      .home-omnibar-cmdk,
+      .subpage-omnibar-cmdk { display: none !important; }
     }
     @media (max-width: 520px) {
       .site-header__link[href*="approach"] {
@@ -251,6 +268,9 @@
       .site-header__arrow {
         display: none !important;
       }
+    }
+    main {
+      padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)) !important;
     }
   </style>
 
@@ -471,8 +491,8 @@
   <svg style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;" aria-hidden="true">
     <defs>
       <filter id="rs-liquid-refraction" color-interpolation-filters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.024 0.024" numOctaves="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.02 0.02" numOctaves="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="36" xChannelSelector="R" yChannelSelector="G" />
       </filter>
     </defs>
   </svg>
@@ -747,7 +767,7 @@
   </main>
 
   <!-- Persistent Floating CLI & Omnibar Dock -->
-  <section class="home-omnibar-section" aria-label="Quick navigation and command palette" style="position: fixed !important; bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important; left: 50% !important; transform: translateX(-50%) !important; width: min(692px, calc(100vw - 32px)) !important; max-width: 692px !important; z-index: 999999 !important; display: block !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;">
+  <section class="home-omnibar-section" aria-label="Quick navigation and command palette" style="position: fixed !important; bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important; left: 50% !important; transform: translateX(-50%) !important; width: min(692px, calc(100vw - 24px)) !important; max-width: 692px !important; z-index: 999999 !important; display: block !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;">
     <div class="home-omnibar-shell">
       <form class="home-omnibar-form" id="home-omnibar-form" autocomplete="off">
         <div class="home-omnibar-top">

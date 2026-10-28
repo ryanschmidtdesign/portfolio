@@ -26,7 +26,7 @@
       // Ensure SVG liquid refraction filter exists in DOM for optical glass warping
       if (!document.getElementById('rs-liquid-refraction')) {
         const svgContainer = document.createElement('div');
-        svgContainer.innerHTML = '<svg style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;" aria-hidden="true"><defs><filter id="rs-liquid-refraction" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.024 0.024" numOctaves="2" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G" /></filter></defs></svg>';
+        svgContainer.innerHTML = '<svg style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;" aria-hidden="true"><defs><filter id="rs-liquid-refraction" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.02" numOctaves="2" result="noise" /><feDisplacementMap in="SourceGraphic" in2="noise" scale="36" xChannelSelector="R" yChannelSelector="G" /></filter></defs></svg>';
         document.body.appendChild(svgContainer.firstElementChild);
       }
 

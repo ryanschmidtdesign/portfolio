@@ -1670,7 +1670,7 @@ body.is-home {
   bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  width: min(692px, calc(100vw - 32px)) !important;
+  width: min(692px, calc(100vw - 24px)) !important;
   max-width: 692px !important;
   z-index: 999999 !important;
   pointer-events: auto !important;
@@ -1706,23 +1706,24 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   background:
     radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 60%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 60%),
-    linear-gradient(180deg, rgba(14, 16, 20, 0.80) 0%, rgba(8, 9, 12, 0.84) 50%, rgba(4, 4, 6, 0.88) 100%) !important;
-  backdrop-filter: blur(20px) saturate(220%) brightness(96%) contrast(106%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(220%) brightness(96%) contrast(106%) !important;
-  backdrop-filter: blur(8px) url(#rs-liquid-refraction) saturate(220%) contrast(110%) !important;
-  -webkit-backdrop-filter: blur(8px) url(#rs-liquid-refraction) saturate(220%) contrast(110%) !important;
+    linear-gradient(180deg, rgba(10, 11, 14, 0.55) 0%, rgba(6, 7, 10, 0.62) 50%, rgba(4, 4, 6, 0.68) 100%) !important;
+  backdrop-filter: blur(20px) saturate(120%) brightness(55%) contrast(115%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(120%) brightness(55%) contrast(115%) !important;
+  backdrop-filter: blur(12px) url(#rs-liquid-refraction) saturate(120%) brightness(55%) contrast(115%) !important;
+  -webkit-backdrop-filter: blur(12px) url(#rs-liquid-refraction) saturate(120%) brightness(55%) contrast(115%) !important;
   border: none !important;
   border-radius: 2px !important;
-  padding: 4px 6px;
+  padding: 4px 0 !important;
   box-shadow:
-    0 24px 60px -12px rgba(0, 0, 0, 0.65),
-    0 10px 24px -5px rgba(0, 0, 0, 0.44),
-    0 2px 6px 0 rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.6) !important;
+    0 18px 40px -14px rgba(20, 14, 8, 0.35),
+    0 4px 10px -4px rgba(20, 14, 8, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05) !important;
   transition:
     box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    background 240ms cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
@@ -1735,18 +1736,28 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 .subpage-omnibar-shell:hover {
   transform: translateY(-1px);
   box-shadow:
-    0 30px 72px -12px rgba(0, 0, 0, 0.74),
-    0 14px 28px -5px rgba(0, 0, 0, 0.50),
-    0 3px 8px 0 rgba(0, 0, 0, 0.32) !important;
+    0 24px 50px -12px rgba(20, 14, 8, 0.45),
+    0 8px 18px -4px rgba(20, 14, 8, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08) !important;
 }
 
 .home-omnibar-shell:focus-within,
 .subpage-omnibar-shell:focus-within {
   transform: translateY(-1px);
+  background:
+    radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.10), transparent 60%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 30%, transparent 60%),
+    linear-gradient(180deg, rgba(16, 18, 22, 0.60) 0%, rgba(10, 12, 16, 0.66) 50%, rgba(6, 7, 10, 0.72) 100%) !important;
   box-shadow:
-    0 32px 80px -10px rgba(0, 0, 0, 0.82),
-    0 16px 32px -6px rgba(0, 0, 0, 0.56),
-    0 0 20px -2px rgba(224, 107, 62, 0.35) !important;
+    0 18px 40px -14px rgba(20, 14, 8, 0.35),
+    0 4px 10px -4px rgba(20, 14, 8, 0.25),
+    0 0 0 1px rgba(232, 110, 60, 0.45),
+    0 0 24px -4px rgba(232, 110, 60, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Recessed Obsidian Input Trench */
@@ -1761,7 +1772,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   width: 100%;
   margin: 0;
   min-height: 48px;
-  padding: 4px 8px 4px 14px;
+  padding: 4px 16px 4px 20px !important;
   background: transparent !important;
   border: none !important;
   border-radius: 2px !important;
@@ -3169,4 +3180,12 @@ body:not(.is-home) main.site-main {
   .ai-mini-cmdk,
   .home-omnibar-cmdk,
   .subpage-omnibar-cmdk { display: none !important; }
+}
+
+/* Generous bottom clearance across pages so floating CLI console never occludes content */
+body.is-home main,
+main.case-study,
+.about-main,
+main {
+  padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)) !important;
 }
