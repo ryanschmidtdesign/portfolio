@@ -43,14 +43,18 @@
           radial-gradient(460px circle at var(--header-mouse-x, var(--mouse-x, 50%)) var(--header-mouse-y, var(--mouse-y, 50%)), rgba(255, 255, 255, 0.08), transparent 60%),
           linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 60%),
           linear-gradient(180deg, rgba(20, 22, 28, 0.70) 0%, rgba(10, 11, 15, 0.74) 50%, rgba(5, 5, 8, 0.78) 100%) !important;
-        backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(106%) !important;
-        -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(106%) !important;
+        backdrop-filter: blur(20px) saturate(220%) brightness(96%) contrast(106%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(220%) brightness(96%) contrast(106%) !important;
+        backdrop-filter: blur(8px) url(#rs-liquid-refraction) saturate(220%) contrast(110%) !important;
+        -webkit-backdrop-filter: blur(8px) url(#rs-liquid-refraction) saturate(220%) contrast(110%) !important;
         border: none !important;
         border-radius: 2px !important;
         box-shadow:
           0 24px 60px -12px rgba(0, 0, 0, 0.65),
           0 10px 24px -5px rgba(0, 0, 0, 0.44),
-          0 2px 6px 0 rgba(0, 0, 0, 0.28) !important;
+          0 2px 6px 0 rgba(0, 0, 0, 0.28),
+          inset 0 1px 0 rgba(255, 255, 255, 0.22),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.6) !important;
         overflow: hidden !important;
         display: block !important;
         margin: 0 !important;
@@ -121,6 +125,10 @@
         margin: 0 !important;
         padding: 0 !important;
       }
+      .home-omnibar-section::before,
+      .subpage-omnibar-dock::before {
+        display: none !important;
+      }
       .home-omnibar-shell,
       .subpage-omnibar-shell {
         position: relative !important;
@@ -128,16 +136,20 @@
         background:
           radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 60%),
           linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 60%),
-          linear-gradient(180deg, rgba(20, 22, 28, 0.70) 0%, rgba(10, 11, 15, 0.74) 50%, rgba(5, 5, 8, 0.78) 100%) !important;
-        backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(106%) !important;
-        -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(106%) !important;
+          linear-gradient(180deg, rgba(14, 16, 20, 0.80) 0%, rgba(8, 9, 12, 0.84) 50%, rgba(4, 4, 6, 0.88) 100%) !important;
+        backdrop-filter: blur(20px) saturate(220%) brightness(96%) contrast(106%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(220%) brightness(96%) contrast(106%) !important;
+        backdrop-filter: blur(8px) url(#rs-liquid-refraction) saturate(220%) contrast(110%) !important;
+        -webkit-backdrop-filter: blur(8px) url(#rs-liquid-refraction) saturate(220%) contrast(110%) !important;
         border: none !important;
         border-radius: 2px !important;
         padding: 4px 6px !important;
         box-shadow:
           0 24px 60px -12px rgba(0, 0, 0, 0.65),
           0 10px 24px -5px rgba(0, 0, 0, 0.44),
-          0 2px 6px 0 rgba(0, 0, 0, 0.28) !important;
+          0 2px 6px 0 rgba(0, 0, 0, 0.28),
+          inset 0 1px 0 rgba(255, 255, 255, 0.22),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.6) !important;
         overflow: hidden !important;
         display: block !important;
         transition: box-shadow 240ms ease, transform 240ms ease !important;
@@ -508,6 +520,15 @@
 </head>
 
   <body>
+    <!-- Hidden Global SVG Liquid Refraction Filter -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;" aria-hidden="true">
+      <defs>
+        <filter id="rs-liquid-refraction" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.024 0.024" numOctaves="2" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
     <a href="#main" class="skip-link">Skip to main content</a>
     <!-- Conventional Top Navigation Landmark -->
     <header class="site-header" role="banner">
