@@ -1719,22 +1719,18 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   width: 100%;
   background:
     radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 60%),
-    radial-gradient(120% 120% at 50% -20%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.03) 40%, transparent 65%),
-    linear-gradient(180deg, rgba(20, 22, 28, 0.70) 0%, rgba(7, 8, 12, 0.84) 100%);
-  backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%);
-  -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 12px;
-  padding: 6px 7px;
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 60%),
+    linear-gradient(180deg, rgba(22, 23, 28, 0.76) 0%, rgba(10, 11, 15, 0.84) 50%, rgba(5, 5, 8, 0.90) 100%) !important;
+  backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(106%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(106%) !important;
+  border: none !important;
+  border-radius: 2px !important;
+  padding: 4px 6px;
   box-shadow:
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.65),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.09),
-    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.9),
-    0 24px 64px -10px rgba(0, 0, 0, 0.78),
-    0 8px 24px -4px rgba(0, 0, 0, 0.55),
-    0 2px 6px 0 rgba(0, 0, 0, 0.35);
+    0 24px 60px -12px rgba(0, 0, 0, 0.70),
+    0 10px 24px -5px rgba(0, 0, 0, 0.48),
+    0 2px 6px 0 rgba(0, 0, 0, 0.32) !important;
   transition:
-    border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1),
     transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
@@ -1742,39 +1738,25 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-shell::before,
 .subpage-omnibar-shell::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 4%;
-  right: 4%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 12%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.3) 88%, transparent 100%);
-  pointer-events: none;
-  z-index: 4;
+  display: none !important;
 }
 
 .home-omnibar-shell:hover,
 .subpage-omnibar-shell:hover {
-  border-color: rgba(255, 255, 255, 0.35);
   transform: translateY(-1px);
   box-shadow:
-    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.75),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
-    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.95),
-    0 30px 72px -10px rgba(0, 0, 0, 0.85),
-    0 12px 28px -4px rgba(0, 0, 0, 0.6),
-    0 2px 8px 0 rgba(0, 0, 0, 0.4);
+    0 30px 72px -12px rgba(0, 0, 0, 0.78),
+    0 14px 28px -5px rgba(0, 0, 0, 0.54),
+    0 3px 8px 0 rgba(0, 0, 0, 0.36) !important;
 }
 
 .home-omnibar-shell:focus-within,
 .subpage-omnibar-shell:focus-within {
-  border-color: rgba(224, 107, 62, 0.65);
-  transform: translateY(-1.5px);
+  transform: translateY(-1px);
   box-shadow:
-    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.8),
-    inset 0 0 0 1px rgba(224, 107, 62, 0.3),
-    0 32px 80px -8px rgba(0, 0, 0, 0.9),
-    0 0 24px -2px rgba(224, 107, 62, 0.25);
+    0 32px 80px -10px rgba(0, 0, 0, 0.85),
+    0 16px 32px -6px rgba(0, 0, 0, 0.60),
+    0 0 20px -2px rgba(224, 107, 62, 0.35) !important;
 }
 
 /* Recessed Obsidian Input Trench */
@@ -1789,23 +1771,19 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   width: 100%;
   margin: 0;
   min-height: 48px;
-  padding: 6px 8px 6px 14px;
-  background: rgba(3, 4, 7, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 9px;
-  box-shadow:
-    inset 0 1.5px 3px rgba(0, 0, 0, 0.75),
-    0 1px 0 rgba(255, 255, 255, 0.10);
-  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  padding: 4px 8px 4px 14px;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  transition: background 180ms ease;
 }
 
 .home-omnibar-shell:focus-within .home-omnibar-form,
 .subpage-omnibar-shell:focus-within .subpage-omnibar-form {
-  background: rgba(3, 4, 7, 0.75);
-  border-color: rgba(224, 107, 62, 0.5);
-  box-shadow:
-    inset 0 1.5px 4px rgba(0, 0, 0, 0.8),
-    0 0 14px rgba(224, 107, 62, 0.15);
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* CLI Omnibar Header: deprecated — navigation now lives in conventional top header */
@@ -1940,12 +1918,12 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   font-weight: 600;
   letter-spacing: 0.04em;
   color: #A1A4B0;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.4);
-  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  border-radius: 2px !important;
   height: 28px;
-  line-height: 26px;
+  line-height: 28px;
   padding: 0 8px;
   display: inline-flex;
   align-items: center;
@@ -1954,10 +1932,9 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 }
 
 .home-omnibar-cmdk:hover .ai-mini-cmdk__kbd {
-  background: rgba(200, 90, 50, 0.2);
-  border-color: rgba(224, 107, 62, 0.55);
+  background: rgba(200, 90, 50, 0.25);
   color: #FF8A5B;
-  box-shadow: 0 0 12px rgba(200, 90, 50, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 12px rgba(200, 90, 50, 0.35);
   transform: translateY(-1px);
 }
 
@@ -1965,8 +1942,8 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 .subpage-omnibar-send {
   background: linear-gradient(180deg, #DC6237 0%, #B84D27 100%);
   color: #FFFFFF;
-  border: 1px solid rgba(255, 160, 122, 0.35);
-  border-radius: 7px;
+  border: none !important;
+  border-radius: 2px !important;
   width: 36px;
   height: 36px;
   display: inline-flex;
@@ -1974,19 +1951,16 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   justify-content: center;
   cursor: pointer;
   box-shadow:
-    0 2px 10px rgba(200, 90, 50, 0.42),
-    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    0 2px 10px rgba(200, 90, 50, 0.42);
   transition: all 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .home-omnibar-send:hover,
 .subpage-omnibar-send:hover {
   background: linear-gradient(180deg, #E86D42 0%, #C85A32 100%);
-  border-color: rgba(255, 180, 145, 0.6);
-  transform: translateY(-1.5px) scale(1.03);
+  transform: translateY(-1px);
   box-shadow:
-    0 4px 18px rgba(224, 107, 62, 0.65),
-    inset 0 1px 0 rgba(255, 255, 255, 0.38);
+    0 4px 18px rgba(224, 107, 62, 0.65);
 }
 
 .home-omnibar-send:active,
@@ -3027,13 +3001,14 @@ body:not(.is-home) main.site-main {
   }
   .home-omnibar-shell,
   .subpage-omnibar-shell {
-    padding: 5px 6px;
-    border-radius: 10px;
+    padding: 4px 5px;
+    border-radius: 2px !important;
   }
   .home-omnibar-form,
   .subpage-omnibar-form {
     min-height: 44px;
     padding: 4px 6px 4px 10px;
+    border-radius: 2px !important;
   }
   .home-ai-stage {
     gap: 0.65rem;

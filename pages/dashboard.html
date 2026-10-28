@@ -41,47 +41,32 @@
         z-index: 999990 !important;
         background:
           radial-gradient(460px circle at var(--header-mouse-x, var(--mouse-x, 50%)) var(--header-mouse-y, var(--mouse-y, 50%)), rgba(255, 255, 255, 0.08), transparent 60%),
-          radial-gradient(120% 120% at 50% -20%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.03) 40%, transparent 65%),
-          linear-gradient(180deg, rgba(20, 22, 28, 0.70) 0%, rgba(7, 8, 12, 0.84) 100%) !important;
-        backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%) !important;
-        -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.24) !important;
-        border-radius: 12px !important;
+          linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 60%),
+          linear-gradient(180deg, rgba(22, 23, 28, 0.76) 0%, rgba(10, 11, 15, 0.84) 50%, rgba(5, 5, 8, 0.90) 100%) !important;
+        backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(106%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(106%) !important;
+        border: none !important;
+        border-radius: 2px !important;
         box-shadow:
-          inset 0 1px 1px 0 rgba(255, 255, 255, 0.65),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.09),
-          inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.9),
-          0 24px 64px -10px rgba(0, 0, 0, 0.78),
-          0 8px 24px -4px rgba(0, 0, 0, 0.55),
-          0 2px 6px 0 rgba(0, 0, 0, 0.35) !important;
+          0 24px 60px -12px rgba(0, 0, 0, 0.70),
+          0 10px 24px -5px rgba(0, 0, 0, 0.48),
+          0 2px 6px 0 rgba(0, 0, 0, 0.32) !important;
         overflow: hidden !important;
         display: block !important;
         margin: 0 !important;
         padding: 0 !important;
         box-sizing: border-box !important;
-        transition: border-color 220ms ease, box-shadow 240ms ease, transform 240ms ease !important;
+        transition: box-shadow 240ms ease, transform 240ms ease !important;
       }
       .site-header::before {
-        content: "" !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 4% !important;
-        right: 4% !important;
-        height: 1px !important;
-        background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 12%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.3) 88%, transparent 100%) !important;
-        pointer-events: none !important;
-        z-index: 4 !important;
+        display: none !important;
       }
       .site-header:hover {
-        border-color: rgba(255, 255, 255, 0.35) !important;
         transform: translateX(-50%) translateY(-1px) !important;
         box-shadow:
-          inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.75),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.12),
-          inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.95),
-          0 30px 72px -10px rgba(0, 0, 0, 0.85),
-          0 12px 28px -4px rgba(0, 0, 0, 0.6),
-          0 2px 8px 0 rgba(0, 0, 0, 0.4) !important;
+          0 30px 72px -12px rgba(0, 0, 0, 0.78),
+          0 14px 28px -5px rgba(0, 0, 0, 0.54),
+          0 3px 8px 0 rgba(0, 0, 0, 0.36) !important;
       }
       .site-header__inner {
         display: flex !important;
@@ -115,44 +100,49 @@
         width: 100% !important;
         background:
           radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 60%),
-          radial-gradient(120% 120% at 50% -20%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.03) 40%, transparent 65%),
-          linear-gradient(180deg, rgba(20, 22, 28, 0.70) 0%, rgba(7, 8, 12, 0.84) 100%) !important;
-        backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%) !important;
-        -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.24) !important;
-        border-radius: 12px !important;
-        padding: 6px 7px !important;
+          linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 60%),
+          linear-gradient(180deg, rgba(22, 23, 28, 0.76) 0%, rgba(10, 11, 15, 0.84) 50%, rgba(5, 5, 8, 0.90) 100%) !important;
+        backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(106%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(106%) !important;
+        border: none !important;
+        border-radius: 2px !important;
+        padding: 4px 6px !important;
         box-shadow:
-          inset 0 1px 1px 0 rgba(255, 255, 255, 0.65),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.09),
-          inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.9),
-          0 24px 64px -10px rgba(0, 0, 0, 0.78),
-          0 8px 24px -4px rgba(0, 0, 0, 0.55),
-          0 2px 6px 0 rgba(0, 0, 0, 0.35) !important;
+          0 24px 60px -12px rgba(0, 0, 0, 0.70),
+          0 10px 24px -5px rgba(0, 0, 0, 0.48),
+          0 2px 6px 0 rgba(0, 0, 0, 0.32) !important;
         overflow: hidden !important;
         display: block !important;
-        transition: border-color 220ms ease, box-shadow 240ms ease !important;
+        transition: box-shadow 240ms ease, transform 240ms ease !important;
       }
       .home-omnibar-shell::before,
       .subpage-omnibar-shell::before {
-        content: "" !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 4% !important;
-        right: 4% !important;
-        height: 1px !important;
-        background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 12%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.3) 88%, transparent 100%) !important;
-        pointer-events: none !important;
-        z-index: 4 !important;
+        display: none !important;
+      }
+      .home-omnibar-shell:hover,
+      .subpage-omnibar-shell:hover {
+        transform: translateY(-1px) !important;
+        box-shadow:
+          0 30px 72px -12px rgba(0, 0, 0, 0.78),
+          0 14px 28px -5px rgba(0, 0, 0, 0.54),
+          0 3px 8px 0 rgba(0, 0, 0, 0.36) !important;
+      }
+      .home-omnibar-shell:focus-within,
+      .subpage-omnibar-shell:focus-within {
+        transform: translateY(-1px) !important;
+        box-shadow:
+          0 32px 80px -10px rgba(0, 0, 0, 0.85),
+          0 16px 32px -6px rgba(0, 0, 0, 0.60),
+          0 0 20px -2px rgba(224, 107, 62, 0.35) !important;
       }
       .home-omnibar-form,
       .subpage-omnibar-form {
         min-height: 48px !important;
-        padding: 6px 8px 6px 14px !important;
-        border-radius: 9px !important;
-        background: rgba(3, 4, 7, 0.55) !important;
-        border: 1px solid rgba(255, 255, 255, 0.12) !important;
-        box-shadow: inset 0 1.5px 3px rgba(0, 0, 0, 0.75), 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+        padding: 4px 8px 4px 14px !important;
+        border-radius: 2px !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
       }
       .home-omnibar-input,
       .subpage-omnibar-input {
@@ -170,7 +160,7 @@
         .site-header {
           top: calc(12px + env(safe-area-inset-top, 0px)) !important;
           width: calc(100% - 20px) !important;
-          border-radius: 10px !important;
+          border-radius: 2px !important;
         }
         .site-header__inner {
           height: 46px !important;
@@ -183,13 +173,14 @@
         }
         .home-omnibar-shell,
         .subpage-omnibar-shell {
-          border-radius: 10px !important;
-          padding: 5px 6px !important;
+          border-radius: 2px !important;
+          padding: 4px 5px !important;
         }
         .home-omnibar-form,
         .subpage-omnibar-form {
           min-height: 44px !important;
           padding: 4px 6px 4px 10px !important;
+          border-radius: 2px !important;
         }
         .home-omnibar-input,
         .subpage-omnibar-input {
