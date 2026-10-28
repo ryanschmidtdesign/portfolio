@@ -879,14 +879,14 @@ body.is-home {
   width: 100%;
   max-width: 1160px;
   margin-inline: auto;
-  padding: 0;
+  padding: clamp(72px, 10vh, 96px) 0 0;
   position: relative;
   z-index: 1;
 }
 
 @media (max-width: 1199px) {
   .home-main {
-    padding: 0 20px;
+    padding: clamp(72px, 10vh, 96px) 20px 0;
   }
 }
 
@@ -896,7 +896,7 @@ body.is-home {
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: clamp(24px, 3.5vw, 44px);
   align-items: center;
-  margin-top: clamp(2rem, 5vh, 3.75rem);
+  margin-top: clamp(0.75rem, 2vh, 1.75rem);
   margin-bottom: clamp(3rem, 6vh, 4.5rem);
   position: relative;
 }
@@ -1718,19 +1718,21 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   position: relative;
   width: 100%;
   background:
-    radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(224, 107, 62, 0.09), transparent 70%),
-    linear-gradient(180deg, rgba(16, 18, 24, 0.74) 0%, rgba(6, 7, 11, 0.88) 100%);
-  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 8px;
-  padding: 5px 6px;
+    radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 60%),
+    radial-gradient(120% 120% at 50% -20%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.03) 40%, transparent 65%),
+    linear-gradient(180deg, rgba(20, 22, 28, 0.70) 0%, rgba(7, 8, 12, 0.84) 100%);
+  backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%);
+  -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 12px;
+  padding: 6px 7px;
   box-shadow:
-    0 24px 64px -10px rgba(0, 0, 0, 0.75),
-    0 8px 24px -4px rgba(0, 0, 0, 0.5),
-    0 0 24px -4px rgba(200, 90, 50, 0.08),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.32),
-    inset 0 -1px 0 0 rgba(0, 0, 0, 0.85);
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.09),
+    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.9),
+    0 24px 64px -10px rgba(0, 0, 0, 0.78),
+    0 8px 24px -4px rgba(0, 0, 0, 0.55),
+    0 2px 6px 0 rgba(0, 0, 0, 0.35);
   transition:
     border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -1738,16 +1740,30 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   overflow: hidden;
 }
 
+.home-omnibar-shell::before,
+.subpage-omnibar-shell::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 4%;
+  right: 4%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 12%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.3) 88%, transparent 100%);
+  pointer-events: none;
+  z-index: 4;
+}
+
 .home-omnibar-shell:hover,
 .subpage-omnibar-shell:hover {
-  border-color: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.35);
   transform: translateY(-1px);
   box-shadow:
-    0 30px 76px -10px rgba(0, 0, 0, 0.85),
-    0 10px 28px -4px rgba(0, 0, 0, 0.55),
-    0 0 28px -2px rgba(224, 107, 62, 0.16),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
-    inset 0 -1px 0 0 rgba(0, 0, 0, 0.9);
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.75),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.95),
+    0 30px 72px -10px rgba(0, 0, 0, 0.85),
+    0 12px 28px -4px rgba(0, 0, 0, 0.6),
+    0 2px 8px 0 rgba(0, 0, 0, 0.4);
 }
 
 .home-omnibar-shell:focus-within,
@@ -1755,10 +1771,10 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   border-color: rgba(224, 107, 62, 0.65);
   transform: translateY(-1.5px);
   box-shadow:
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.8),
+    inset 0 0 0 1px rgba(224, 107, 62, 0.3),
     0 32px 80px -8px rgba(0, 0, 0, 0.9),
-    0 0 0 1px rgba(224, 107, 62, 0.45),
-    0 0 36px -2px rgba(224, 107, 62, 0.3),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+    0 0 24px -2px rgba(224, 107, 62, 0.25);
 }
 
 /* Recessed Obsidian Input Trench */
@@ -1772,23 +1788,24 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   gap: 0 10px;
   width: 100%;
   margin: 0;
-  padding: 4px 6px 4px 10px;
-  background: rgba(4, 5, 8, 0.48);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
+  min-height: 48px;
+  padding: 6px 8px 6px 14px;
+  background: rgba(3, 4, 7, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9px;
   box-shadow:
-    inset 0 1px 3px rgba(0, 0, 0, 0.6),
-    0 1px 0 rgba(255, 255, 255, 0.05);
+    inset 0 1.5px 3px rgba(0, 0, 0, 0.75),
+    0 1px 0 rgba(255, 255, 255, 0.10);
   transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
 .home-omnibar-shell:focus-within .home-omnibar-form,
 .subpage-omnibar-shell:focus-within .subpage-omnibar-form {
-  background: rgba(4, 5, 8, 0.68);
-  border-color: rgba(224, 107, 62, 0.42);
+  background: rgba(3, 4, 7, 0.75);
+  border-color: rgba(224, 107, 62, 0.5);
   box-shadow:
-    inset 0 1px 4px rgba(0, 0, 0, 0.7),
-    0 0 12px rgba(224, 107, 62, 0.12);
+    inset 0 1.5px 4px rgba(0, 0, 0, 0.8),
+    0 0 14px rgba(224, 107, 62, 0.15);
 }
 
 /* CLI Omnibar Header: deprecated — navigation now lives in conventional top header */
@@ -1825,7 +1842,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   grid-column: 1;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   min-width: 0;
   width: 100%;
 }
@@ -1834,8 +1851,8 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 .subpage-omnibar-top::before {
   content: "";
   display: inline-block;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.45)' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
@@ -1860,19 +1877,20 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 .subpage-omnibar-input {
   order: 2;
   width: 100%;
-  height: 32px;
+  height: 46px;
   border: none !important;
   background: transparent !important;
   outline: none !important;
   box-shadow: none !important;
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 450;
   letter-spacing: -0.005em;
   color: #F5F5F7;
   padding: 0 4px;
   min-width: 0;
   caret-color: #E06B3E;
+  line-height: 46px;
 }
 
 .home-omnibar-input:focus,
@@ -1901,13 +1919,13 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   grid-column: 2;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
 .home-omnibar-cmdk {
   position: static !important;
-  height: 28px;
+  height: 36px;
   padding: 0;
   background: transparent;
   border: none;
@@ -1918,15 +1936,20 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-cmdk .ai-mini-cmdk__kbd {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.04em;
   color: #A1A4B0;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
-  padding: 3.5px 7px;
+  border-radius: 6px;
+  height: 28px;
+  line-height: 26px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
   transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1943,9 +1966,9 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   background: linear-gradient(180deg, #DC6237 0%, #B84D27 100%);
   color: #FFFFFF;
   border: 1px solid rgba(255, 160, 122, 0.35);
-  border-radius: 6px;
-  width: 31px;
-  height: 31px;
+  border-radius: 7px;
+  width: 36px;
+  height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3004,8 +3027,13 @@ body:not(.is-home) main.site-main {
   }
   .home-omnibar-shell,
   .subpage-omnibar-shell {
-    padding: 4px 5px;
-    border-radius: 8px;
+    padding: 5px 6px;
+    border-radius: 10px;
+  }
+  .home-omnibar-form,
+  .subpage-omnibar-form {
+    min-height: 44px;
+    padding: 4px 6px 4px 10px;
   }
   .home-ai-stage {
     gap: 0.65rem;

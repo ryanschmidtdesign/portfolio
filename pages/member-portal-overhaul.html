@@ -28,8 +28,70 @@
       })();
     </script>
 
-    <!-- Critical CLI Dock Inline CSS Guarantee -->
+    <!-- Critical Dock & Floating Header Inline CSS Guarantee -->
     <style id="rs-dock-critical-styles">
+      .site-header {
+        position: fixed !important;
+        top: calc(16px + env(safe-area-inset-top, 0px)) !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: min(692px, calc(100vw - 32px)) !important;
+        max-width: 692px !important;
+        z-index: 999990 !important;
+        background:
+          radial-gradient(460px circle at var(--header-mouse-x, var(--mouse-x, 50%)) var(--header-mouse-y, var(--mouse-y, 50%)), rgba(255, 255, 255, 0.08), transparent 60%),
+          radial-gradient(120% 120% at 50% -20%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.03) 40%, transparent 65%),
+          linear-gradient(180deg, rgba(20, 22, 28, 0.70) 0%, rgba(7, 8, 12, 0.84) 100%) !important;
+        backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.24) !important;
+        border-radius: 12px !important;
+        box-shadow:
+          inset 0 1px 1px 0 rgba(255, 255, 255, 0.65),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.09),
+          inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.9),
+          0 24px 64px -10px rgba(0, 0, 0, 0.78),
+          0 8px 24px -4px rgba(0, 0, 0, 0.55),
+          0 2px 6px 0 rgba(0, 0, 0, 0.35) !important;
+        overflow: hidden !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        transition: border-color 220ms ease, box-shadow 240ms ease, transform 240ms ease !important;
+      }
+      .site-header::before {
+        content: "" !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 4% !important;
+        right: 4% !important;
+        height: 1px !important;
+        background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 12%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.3) 88%, transparent 100%) !important;
+        pointer-events: none !important;
+        z-index: 4 !important;
+      }
+      .site-header:hover {
+        border-color: rgba(255, 255, 255, 0.35) !important;
+        transform: translateX(-50%) translateY(-1px) !important;
+        box-shadow:
+          inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.75),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+          inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.95),
+          0 30px 72px -10px rgba(0, 0, 0, 0.85),
+          0 12px 28px -4px rgba(0, 0, 0, 0.6),
+          0 2px 8px 0 rgba(0, 0, 0, 0.4) !important;
+      }
+      .site-header__inner {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 50px !important;
+        padding: 0 16px !important;
+        box-sizing: border-box !important;
+      }
       .home-omnibar-section,
       .subpage-omnibar-dock {
         position: fixed !important;
@@ -50,15 +112,52 @@
       .subpage-omnibar-shell {
         position: relative !important;
         width: 100% !important;
-        background: radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(224, 107, 62, 0.09), transparent 70%), linear-gradient(180deg, rgba(16, 18, 24, 0.74) 0%, rgba(6, 7, 11, 0.88) 100%) !important;
-        backdrop-filter: blur(28px) saturate(190%) contrast(105%) !important;
-        -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.16) !important;
-        border-radius: 8px !important;
-        padding: 5px 6px !important;
-        box-shadow: 0 24px 64px -10px rgba(0, 0, 0, 0.75), 0 8px 24px -4px rgba(0, 0, 0, 0.5), 0 0 24px -4px rgba(200, 90, 50, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.32), inset 0 -1px 0 0 rgba(0, 0, 0, 0.85) !important;
+        background:
+          radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 60%),
+          radial-gradient(120% 120% at 50% -20%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.03) 40%, transparent 65%),
+          linear-gradient(180deg, rgba(20, 22, 28, 0.70) 0%, rgba(7, 8, 12, 0.84) 100%) !important;
+        backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(96%) contrast(108%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.24) !important;
+        border-radius: 12px !important;
+        padding: 6px 7px !important;
+        box-shadow:
+          inset 0 1px 1px 0 rgba(255, 255, 255, 0.65),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.09),
+          inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.9),
+          0 24px 64px -10px rgba(0, 0, 0, 0.78),
+          0 8px 24px -4px rgba(0, 0, 0, 0.55),
+          0 2px 6px 0 rgba(0, 0, 0, 0.35) !important;
         overflow: hidden !important;
         display: block !important;
+        transition: border-color 220ms ease, box-shadow 240ms ease !important;
+      }
+      .home-omnibar-shell::before,
+      .subpage-omnibar-shell::before {
+        content: "" !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 4% !important;
+        right: 4% !important;
+        height: 1px !important;
+        background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 12%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.3) 88%, transparent 100%) !important;
+        pointer-events: none !important;
+        z-index: 4 !important;
+      }
+      .home-omnibar-form,
+      .subpage-omnibar-form {
+        min-height: 48px !important;
+        padding: 6px 8px 6px 14px !important;
+        border-radius: 9px !important;
+        background: rgba(3, 4, 7, 0.55) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        box-shadow: inset 0 1.5px 3px rgba(0, 0, 0, 0.75), 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+      }
+      .home-omnibar-input,
+      .subpage-omnibar-input {
+        height: 46px !important;
+        font-size: 0.95rem !important;
+        line-height: 46px !important;
       }
       body.rs-chat-drawer-open .home-omnibar-section,
       body.rs-chat-drawer-open .subpage-omnibar-dock {
@@ -67,6 +166,15 @@
         pointer-events: none !important;
       }
       @media (max-width: 600px) {
+        .site-header {
+          top: calc(12px + env(safe-area-inset-top, 0px)) !important;
+          width: calc(100% - 20px) !important;
+          border-radius: 10px !important;
+        }
+        .site-header__inner {
+          height: 46px !important;
+          padding: 0 12px !important;
+        }
         .home-omnibar-section,
         .subpage-omnibar-dock {
           bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
@@ -74,8 +182,18 @@
         }
         .home-omnibar-shell,
         .subpage-omnibar-shell {
-          border-radius: 8px !important;
-          padding: 4px 5px !important;
+          border-radius: 10px !important;
+          padding: 5px 6px !important;
+        }
+        .home-omnibar-form,
+        .subpage-omnibar-form {
+          min-height: 44px !important;
+          padding: 4px 6px 4px 10px !important;
+        }
+        .home-omnibar-input,
+        .subpage-omnibar-input {
+          height: 42px !important;
+          font-size: 0.88rem !important;
         }
       }
     </style>
@@ -339,7 +457,6 @@
     <header class="site-header" role="banner">
       <div class="site-header__inner">
         <a href="../index.html" class="site-header__brand" aria-label="Ryan Schmidt — Home">
-          <img src="../favicon.svg?v=2" width="20" height="20" alt="" class="site-header__logo" aria-hidden="true">
           <span class="site-header__name">Ryan Schmidt</span>
           <span class="site-header__sep" aria-hidden="true">/</span>
           <span class="site-header__role">Senior B2B SaaS Product Designer</span>
