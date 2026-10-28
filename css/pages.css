@@ -3163,3 +3163,10 @@ body:not(.is-home) main.site-main {
   margin-bottom: var(--space-2);
   letter-spacing: -0.015em;
 }
+
+/* Hide ⌘K hint on touch devices */
+@media (hover: none) {
+  .ai-mini-cmdk,
+  .home-omnibar-cmdk,
+  .subpage-omnibar-cmdk { display: none !important; }
+}
