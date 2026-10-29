@@ -1,172 +1,24 @@
 /**
- * Obsidian Telemetry Command Palette (⌘K) — Westworld Delos / Star Wars HUD Edition
- * High-craft diagnostic console with on-demand vector HUD canvas, procedural Web Audio
- * micro-cues (muted by default), query phosphor highlighting, and zero-latency navigation.
+ * Command Palette (⌘K) — Atelier Editorial & Clean Navigation
+ * High-craft command palette matching the warm paper & ceramic aesthetic.
+ * Instant search, clean keyboard shortcuts, zero noise, zero latency.
  */
 (function () {
     'use strict';
 
-    const ACCENT_THEMES = [
-        { name: 'TERRACOTTA', label: 'Terracotta Ember', value: '#C85A32' },
-        { name: 'AMBER_HUD', label: 'Imperial Amber', value: '#D97706' },
-        { name: 'EMERALD_SYS', label: 'Emerald Signal', value: '#10B981' }
-    ];
-
     /**
-     * Procedural Web Audio API Synthesizer (Zero External Assets)
-     * Strictly muted by default to respect recruiter & open-office environments.
+     * Silent audio interface (no audio synthesis / no audio context)
      */
-    class ObsidianAudioEngine {
-        constructor() {
-            this.storageKey = 'rs_sfx_enabled';
-            this.ctx = null;
-            this.enabled = false;
-            try {
-                this.enabled = localStorage.getItem(this.storageKey) === 'true';
-            } catch {
-                this.enabled = false;
-            }
-        }
-
-        ensureContext() {
-            if (!this.enabled) return null;
-            if (!this.ctx) {
-                const AudioCtx = window.AudioContext || window.webkitAudioContext;
-                if (AudioCtx) {
-                    this.ctx = new AudioCtx();
-                }
-            }
-            if (this.ctx && this.ctx.state === 'suspended') {
-                this.ctx.resume().catch(() => {});
-            }
-            return this.ctx;
-        }
-
-        toggle() {
-            this.enabled = !this.enabled;
-            try {
-                localStorage.setItem(this.storageKey, this.enabled ? 'true' : 'false');
-            } catch {}
-            if (this.enabled) {
-                this.playToggleOn();
-            }
-            return this.enabled;
-        }
-
-        playToggleOn() {
-            const ctx = this.ensureContext();
-            if (!ctx) return;
-            const now = ctx.currentTime;
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(520, now);
-            osc.frequency.exponentialRampToValueAtTime(1040, now + 0.065);
-            gain.gain.setValueAtTime(0.03, now);
-            gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.075);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.08);
-        }
-
-        playBoot() {
-            const ctx = this.ensureContext();
-            if (!ctx) return;
-            const now = ctx.currentTime;
-            // Subtle Westworld Delos console power-up harmonic sweep
-            const osc1 = ctx.createOscillator();
-            const osc2 = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc1.type = 'sine';
-            osc2.type = 'triangle';
-            osc1.frequency.setValueAtTime(190, now);
-            osc1.frequency.exponentialRampToValueAtTime(580, now + 0.085);
-            osc2.frequency.setValueAtTime(380, now);
-            osc2.frequency.exponentialRampToValueAtTime(870, now + 0.085);
-            gain.gain.setValueAtTime(0.001, now);
-            gain.gain.linearRampToValueAtTime(0.028, now + 0.015);
-            gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.095);
-            osc1.connect(gain);
-            osc2.connect(gain);
-            gain.connect(ctx.destination);
-            osc1.start(now);
-            osc2.start(now);
-            osc1.stop(now + 0.1);
-            osc2.stop(now + 0.1);
-        }
-
-        playTick() {
-            const ctx = this.ensureContext();
-            if (!ctx) return;
-            const now = ctx.currentTime;
-            // Crisp 12ms high-frequency mechanical relay tick
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(1380, now);
-            osc.frequency.exponentialRampToValueAtTime(420, now + 0.014);
-            gain.gain.setValueAtTime(0.022, now);
-            gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.016);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.018);
-        }
-
-        playKey() {
-            const ctx = this.ensureContext();
-            if (!ctx) return;
-            const now = ctx.currentTime;
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(920 + Math.random() * 160, now);
-            osc.frequency.exponentialRampToValueAtTime(310, now + 0.01);
-            gain.gain.setValueAtTime(0.015, now);
-            gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.012);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.014);
-        }
-
-        playExec() {
-            const ctx = this.ensureContext();
-            if (!ctx) return;
-            const now = ctx.currentTime;
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(540, now);
-            osc.frequency.setValueAtTime(810, now + 0.032);
-            gain.gain.setValueAtTime(0.03, now);
-            gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.085);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.09);
-        }
-
-        playClose() {
-            const ctx = this.ensureContext();
-            if (!ctx) return;
-            const now = ctx.currentTime;
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(360, now);
-            osc.frequency.exponentialRampToValueAtTime(120, now + 0.055);
-            gain.gain.setValueAtTime(0.022, now);
-            gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.06);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.065);
-        }
+    class SilentAudioEngine {
+        playBoot() {}
+        playKey() {}
+        playTick() {}
+        playExec() {}
+        playClose() {}
+        toggle() { return false; }
     }
 
-    const audioFX = new ObsidianAudioEngine();
+    const audioFX = new SilentAudioEngine();
     window.rsAudioFX = audioFX;
 
     class AtelierCommandPalette {
@@ -190,38 +42,22 @@
             const style = document.createElement('style');
             style.id = 'rs-cmdk-styles';
             style.textContent = `
-                @keyframes rsLedPulse {
-                    0%, 100% {
-                        opacity: 1;
-                        box-shadow: 0 0 8px var(--accent, #C85A32), 0 0 16px rgba(224, 107, 62, 0.5);
-                    }
-                    50% {
-                        opacity: 0.45;
-                        box-shadow: 0 0 3px var(--accent, #C85A32);
-                    }
-                }
-
-                @keyframes rsCursorBlink {
-                    0%, 49% { opacity: 1; }
-                    50%, 100% { opacity: 0; }
-                }
-
                 .rs-cmd-overlay {
                     position: fixed;
                     inset: 0;
-                    background: radial-gradient(circle at 50% 28%, rgba(18, 20, 28, 0.82) 0%, rgba(5, 6, 8, 0.92) 100%);
-                    backdrop-filter: blur(22px) saturate(190%);
-                    -webkit-backdrop-filter: blur(22px) saturate(190%);
+                    background: rgba(28, 22, 18, 0.42);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
                     z-index: 10000;
                     display: flex;
                     align-items: flex-start;
                     justify-content: center;
-                    padding-top: clamp(36px, 10vh, 104px);
+                    padding-top: clamp(40px, 11vh, 100px);
                     padding-inline: 16px;
                     opacity: 0;
                     visibility: hidden;
                     pointer-events: none;
-                    transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1), visibility 220ms;
+                    transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1), visibility 200ms;
                 }
 
                 .rs-cmd-overlay.is-open {
@@ -233,54 +69,42 @@
                 .rs-cmd-modal {
                     position: relative;
                     z-index: 1;
-                    width: min(640px, 100%);
-                    max-height: 82vh;
-                    background:
-                        radial-gradient(550px circle at var(--modal-mx, 50%) var(--modal-my, 0%), rgba(224, 107, 62, 0.08), transparent 70%),
-                        linear-gradient(180deg, rgba(16, 18, 24, 0.88) 0%, rgba(6, 7, 11, 0.96) 100%);
-                    backdrop-filter: blur(28px) saturate(190%) contrast(105%);
-                    -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
-                    border: 1px solid rgba(255, 255, 255, 0.16);
-                    border-radius: 8px;
+                    width: min(620px, 100%);
+                    max-height: 80vh;
+                    background: rgba(255, 255, 255, 0.98);
+                    backdrop-filter: blur(20px) saturate(180%);
+                    -webkit-backdrop-filter: blur(20px) saturate(180%);
+                    border: 1px solid rgba(28, 22, 18, 0.12);
+                    border-radius: 12px;
                     box-shadow:
-                        0 36px 90px -12px rgba(0, 0, 0, 0.85),
-                        0 0 32px -8px rgba(200, 90, 50, 0.1),
-                        inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
-                        inset 0 -1px 0 0 rgba(0, 0, 0, 0.85);
+                        0 24px 64px -12px rgba(28, 20, 15, 0.22),
+                        0 4px 16px rgba(28, 20, 15, 0.06),
+                        inset 0 1px 0 rgba(255, 255, 255, 1);
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
-                    transform: translateY(-8px) scale(0.98);
-                    transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease, box-shadow 200ms ease;
-                    color: #F5F5F7;
+                    transform: translateY(-8px) scale(0.985);
+                    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+                    color: var(--text, #131211);
                 }
 
                 .rs-cmd-overlay.is-open .rs-cmd-modal {
                     transform: translateY(0) scale(1);
                 }
 
-                .rs-cmd-reticle {
-                    display: none !important;
-                }
-                .rs-cmd-reticle--tl { top: 5px; left: 5px; border-width: 1.5px 0 0 1.5px; border-top-left-radius: 3px; }
-                .rs-cmd-reticle--tr { top: 5px; right: 5px; border-width: 1.5px 1.5px 0 0; border-top-right-radius: 3px; }
-                .rs-cmd-reticle--bl { bottom: 5px; left: 5px; border-width: 0 0 1.5px 1.5px; border-bottom-left-radius: 3px; }
-                .rs-cmd-reticle--br { bottom: 5px; right: 5px; border-width: 0 1.5px 1.5px 0; border-bottom-right-radius: 3px; }
-
-                /* Top Telemetry Bar */
+                /* Header bar */
                 .rs-cmd-telemetry {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     gap: 10px;
-                    padding: 9px 16px 8px;
-                    background: rgba(255, 255, 255, 0.025);
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-                    font-family: var(--font-mono, 'Space Mono', monospace);
-                    font-size: 0.64rem;
-                    letter-spacing: 0.08em;
-                    text-transform: uppercase;
-                    color: #8E929F;
+                    padding: 8px 16px;
+                    background: rgba(28, 22, 18, 0.02);
+                    border-bottom: 1px solid rgba(28, 22, 18, 0.06);
+                    font-family: var(--font-sans);
+                    font-size: 0.72rem;
+                    font-weight: 500;
+                    color: var(--text-secondary, #5C5750);
                     user-select: none;
                 }
 
@@ -288,163 +112,69 @@
                     display: inline-flex;
                     align-items: center;
                     gap: 8px;
-                    min-width: 0;
-                    overflow: hidden;
-                }
-
-                .rs-cmd-led {
-                    width: 6px;
-                    height: 6px;
-                    border-radius: 50%;
-                    background: var(--accent, #C85A32);
-                    animation: rsLedPulse 2.4s infinite ease-in-out;
-                    flex-shrink: 0;
                 }
 
                 .rs-cmd-sys-tag {
-                    color: #E2E4EB;
-                    font-weight: 700;
-                    white-space: nowrap;
+                    font-weight: 600;
+                    color: var(--text, #131211);
                 }
 
                 .rs-cmd-sys-divider {
-                    color: rgba(255, 255, 255, 0.18);
+                    color: rgba(28, 22, 18, 0.25);
                 }
 
                 .rs-cmd-sys-meta {
-                    color: #8E93A4;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    min-width: 0;
+                    color: var(--text-muted, #7C7A75);
                 }
 
-                .rs-cmd-signal {
-                    display: inline-flex;
-                    align-items: flex-end;
-                    gap: 1.5px;
-                    height: 9px;
-                    margin-left: 2px;
-                    flex-shrink: 0;
-                }
-
-                .rs-cmd-signal span {
-                    width: 2px;
-                    background: var(--accent, #E06B3E);
-                    border-radius: 1px;
-                    opacity: 0.85;
-                }
-                .rs-cmd-signal span:nth-child(1) { height: 3px; }
-                .rs-cmd-signal span:nth-child(2) { height: 5px; }
-                .rs-cmd-signal span:nth-child(3) { height: 7px; }
-                .rs-cmd-signal span:nth-child(4) { height: 9px; box-shadow: 0 0 6px rgba(224, 107, 62, 0.8); }
-
-                .rs-cmd-telemetry__right {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 6px;
-                    flex-shrink: 0;
-                }
-
-                .rs-cmd-hud-btn {
-                    appearance: none;
-                    background: rgba(255, 255, 255, 0.04);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: 4px;
-                    padding: 2px 7px;
-                    font-family: var(--font-mono, 'Space Mono', monospace);
-                    font-size: 0.62rem;
-                    font-weight: 600;
-                    letter-spacing: 0.06em;
-                    color: #9BA0AE;
-                    cursor: pointer;
-                    transition: all 140ms cubic-bezier(0.16, 1, 0.3, 1);
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 4px;
-                }
-
-                .rs-cmd-hud-btn:hover {
-                    background: rgba(200, 90, 50, 0.16);
-                    border-color: rgba(224, 107, 62, 0.45);
-                    color: #F5F5F7;
-                }
-
-                .rs-cmd-hud-btn.is-active {
-                    background: rgba(200, 90, 50, 0.22);
-                    border-color: rgba(224, 107, 62, 0.6);
-                    color: #FF8A5B;
-                    box-shadow: 0 0 10px rgba(200, 90, 50, 0.25);
-                }
-
-                /* Search Input Bar */
+                /* Search bar */
                 .rs-cmd-search {
                     display: flex;
                     align-items: center;
-                    gap: 11px;
-                    padding: 13px 16px;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-                    background: rgba(5, 6, 8, 0.55);
-                    position: relative;
+                    gap: 12px;
+                    padding: 12px 16px;
+                    border-bottom: 1px solid rgba(28, 22, 18, 0.08);
+                    background: #FFFFFF;
                 }
 
                 .rs-cmd-prompt-glyph {
-                    font-family: var(--font-mono, 'Space Mono', monospace);
+                    font-family: var(--font-mono);
                     font-size: 0.95rem;
                     font-weight: 700;
-                    color: var(--accent, #E06B3E);
-                    text-shadow: 0 0 10px rgba(224, 107, 62, 0.65);
+                    color: var(--accent, #C85A32);
                     flex-shrink: 0;
                     user-select: none;
                 }
 
-                .rs-cmd-search__icon {
-                    color: #7C7E86;
-                    flex-shrink: 0;
-                    transition: color 150ms ease;
-                }
-
-                .rs-cmd-search:focus-within .rs-cmd-search__icon {
-                    color: #E06B3E;
-                }
-
                 .rs-cmd-input {
                     flex: 1;
-                    border: none !important;
-                    background: transparent !important;
-                    box-shadow: none !important;
-                    font-family: var(--font-sans, 'IBM Plex Sans', -apple-system, sans-serif);
-                    font-size: 0.96rem;
-                    font-weight: 500;
-                    color: #F5F5F7;
-                    outline: none !important;
-                    padding: 2px 0;
+                    border: none;
+                    background: transparent;
+                    font-family: var(--font-sans);
+                    font-size: 0.98rem;
+                    font-weight: 450;
+                    color: var(--text, #131211);
+                    outline: none;
+                    padding: 0;
                     margin: 0;
-                    caret-color: #E06B3E;
-                }
-
-                .rs-cmd-input:focus,
-                .rs-cmd-input:focus-visible {
-                    outline: none !important;
-                    box-shadow: none !important;
-                    border: none !important;
+                    caret-color: var(--accent, #C85A32);
                 }
 
                 .rs-cmd-input::placeholder {
-                    color: #636672;
+                    color: var(--text-muted, #8B8780);
                     font-weight: 400;
                 }
 
                 .rs-cmd-node-count {
-                    font-family: var(--font-mono, 'Space Mono', monospace);
-                    font-size: 0.62rem;
+                    font-family: var(--font-mono);
+                    font-size: 0.64rem;
                     font-weight: 600;
-                    letter-spacing: 0.06em;
-                    padding: 2px 6px;
+                    letter-spacing: 0.04em;
+                    padding: 2px 7px;
                     border-radius: 4px;
-                    background: rgba(255, 255, 255, 0.04);
-                    color: #7C7E86;
-                    border: 1px solid rgba(255, 255, 255, 0.07);
+                    background: rgba(28, 22, 18, 0.04);
+                    color: var(--text-secondary, #5C5750);
+                    border: 1px solid rgba(28, 22, 18, 0.08);
                     flex-shrink: 0;
                     user-select: none;
                 }
@@ -453,16 +183,15 @@
                     display: inline-flex;
                     align-items: center;
                     padding: 2px 7px;
-                    font-family: var(--font-mono, 'Space Mono', monospace);
-                    font-size: 0.62rem;
+                    font-family: var(--font-mono);
+                    font-size: 0.64rem;
                     font-weight: 600;
-                    letter-spacing: 0.05em;
+                    letter-spacing: 0.04em;
                     text-transform: uppercase;
                     border-radius: 4px;
-                    background: rgba(255, 255, 255, 0.05);
-                    color: #9BA0AE;
-                    border: 1px solid rgba(255, 255, 255, 0.12);
-                    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+                    background: rgba(28, 22, 18, 0.05);
+                    color: var(--text-secondary, #5C5750);
+                    border: 1px solid rgba(28, 22, 18, 0.10);
                     flex-shrink: 0;
                     user-select: none;
                     cursor: pointer;
@@ -470,35 +199,33 @@
                 }
 
                 .rs-cmd-esc:hover {
-                    background: rgba(200, 90, 50, 0.2);
-                    border-color: rgba(224, 107, 62, 0.5);
-                    color: #FFFFFF;
+                    background: rgba(200, 90, 50, 0.12);
+                    border-color: rgba(200, 90, 50, 0.25);
+                    color: var(--accent-text, #B44A24);
                 }
 
-                /* Results Matrix */
+                /* Results */
                 .rs-cmd-results {
                     flex: 1;
                     overflow-y: auto;
-                    padding: 10px 10px 18px;
-                    max-height: 410px;
+                    padding: 8px 10px 14px;
+                    max-height: 400px;
                     overscroll-behavior: contain;
                     scrollbar-width: thin;
-                    scrollbar-color: rgba(224, 107, 62, 0.35) rgba(255, 255, 255, 0.03);
-                    -webkit-mask-image: linear-gradient(to bottom, transparent 0px, #000 10px, #000 calc(100% - 22px), transparent 100%);
-                    mask-image: linear-gradient(to bottom, transparent 0px, #000 10px, #000 calc(100% - 22px), transparent 100%);
+                    scrollbar-color: rgba(28, 22, 18, 0.15) transparent;
                 }
 
                 .rs-cmd-group-title {
                     display: flex;
                     align-items: center;
                     gap: 8px;
-                    font-family: var(--font-mono, 'Space Mono', monospace);
-                    font-size: 0.62rem;
-                    font-weight: 700;
+                    font-family: var(--font-sans);
+                    font-size: 0.70rem;
+                    font-weight: 600;
                     text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: #7C7E86;
-                    padding: 10px 8px 5px;
+                    letter-spacing: 0.06em;
+                    color: var(--text-muted, #7C7A75);
+                    padding: 10px 8px 4px;
                     user-select: none;
                 }
 
@@ -506,12 +233,7 @@
                     content: "";
                     flex: 1;
                     height: 1px;
-                    background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
-                }
-
-                .rs-cmd-group-prefix {
-                    color: var(--accent, #E06B3E);
-                    opacity: 0.85;
+                    background: rgba(28, 22, 18, 0.07);
                 }
 
                 .rs-cmd-item {
@@ -520,14 +242,14 @@
                     align-items: center;
                     justify-content: space-between;
                     gap: 12px;
-                    padding: 10px 11px;
+                    padding: 9px 12px;
                     border-radius: 8px;
                     cursor: pointer;
                     text-decoration: none;
                     color: inherit;
-                    transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1), background 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+                    transition: background 120ms ease, border-color 120ms ease;
                     user-select: none;
-                    margin-bottom: 3px;
+                    margin-bottom: 2px;
                     border: 1px solid transparent;
                     border-left: 2.5px solid transparent;
                     background: transparent;
@@ -535,19 +257,9 @@
 
                 .rs-cmd-item:hover,
                 .rs-cmd-item.is-selected {
-                    background: linear-gradient(90deg, rgba(200, 90, 50, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
-                    border-color: rgba(255, 255, 255, 0.08);
-                    border-left-color: var(--accent, #E06B3E);
-                    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 16px rgba(0, 0, 0, 0.35);
-                }
-
-                .rs-cmd-item:active {
-                    transform: scale(0.99);
-                }
-
-                .rs-cmd-item.is-selected .rs-cmd-item__title {
-                    color: #FFFFFF;
-                    text-shadow: 0 0 14px rgba(224, 107, 62, 0.35);
+                    background: rgba(200, 90, 50, 0.06);
+                    border-color: rgba(200, 90, 50, 0.12);
+                    border-left-color: var(--accent, #C85A32);
                 }
 
                 .rs-cmd-item__left {
@@ -559,41 +271,40 @@
                 }
 
                 .rs-cmd-item__icon {
-                    width: 26px;
-                    height: 26px;
+                    width: 24px;
+                    height: 24px;
                     border-radius: 6px;
-                    background: rgba(255, 255, 255, 0.04);
-                    border: 1px solid rgba(255, 255, 255, 0.09);
-                    color: #9BA0AE;
-                    font-family: var(--font-mono, 'Space Mono', monospace);
-                    font-size: 0.66rem;
-                    font-weight: 700;
+                    background: rgba(28, 22, 18, 0.04);
+                    border: 1px solid rgba(28, 22, 18, 0.08);
+                    color: var(--text-secondary, #5C5750);
+                    font-family: var(--font-mono);
+                    font-size: 0.68rem;
+                    font-weight: 600;
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
                     flex-shrink: 0;
-                    transition: all 140ms ease;
+                    transition: all 120ms ease;
                 }
 
                 .rs-cmd-item.is-selected .rs-cmd-item__icon,
                 .rs-cmd-item:hover .rs-cmd-item__icon {
-                    background: rgba(200, 90, 50, 0.22);
-                    border-color: rgba(224, 107, 62, 0.55);
-                    color: #FF8A5B;
-                    box-shadow: 0 0 10px rgba(200, 90, 50, 0.3);
+                    background: rgba(200, 90, 50, 0.12);
+                    border-color: rgba(200, 90, 50, 0.3);
+                    color: var(--accent-text, #B44A24);
                 }
 
                 .rs-cmd-item__content {
                     display: flex;
                     flex-direction: column;
                     min-width: 0;
-                    gap: 2px;
+                    gap: 1px;
                 }
 
                 .rs-cmd-item__title {
-                    font-size: 0.875rem;
+                    font-size: 0.88rem;
                     font-weight: 600;
-                    color: #E4E6EE;
+                    color: var(--text, #131211);
                     line-height: 1.25;
                     white-space: nowrap;
                     overflow: hidden;
@@ -602,38 +313,33 @@
                 }
 
                 .rs-cmd-item__sub {
-                    font-size: 0.73rem;
-                    color: #7C7E86;
+                    font-size: 0.74rem;
+                    color: var(--text-secondary, #5C5750);
                     line-height: 1.3;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
 
-                .rs-cmd-item.is-selected .rs-cmd-item__sub {
-                    color: #A1A4B0;
-                }
-
                 .rs-cmd-mark {
-                    background: rgba(224, 107, 62, 0.24);
-                    color: #FF9870;
+                    background: rgba(200, 90, 50, 0.15);
+                    color: var(--accent-text, #B44A24);
                     border-radius: 2px;
                     padding: 0 2px;
-                    font-weight: 700;
-                    box-shadow: 0 0 8px rgba(224, 107, 62, 0.2);
+                    font-weight: 600;
                 }
 
                 .rs-cmd-item__right {
                     display: inline-flex;
                     align-items: center;
-                    gap: 7px;
+                    gap: 6px;
                     flex-shrink: 0;
                 }
 
                 .rs-cmd-item__kpi {
-                    font-family: var(--font-mono, 'Space Mono', monospace);
-                    font-size: 0.64rem;
-                    font-weight: 700;
+                    font-family: var(--font-mono);
+                    font-size: 0.65rem;
+                    font-weight: 600;
                     padding: 2px 7px;
                     border-radius: 4px;
                     letter-spacing: 0.02em;
@@ -642,43 +348,43 @@
 
                 .rs-cmd-kpi--cobalt,
                 .rs-cmd-kpi--terracotta {
-                    background: rgba(200, 90, 50, 0.16);
-                    color: #FF8A5B;
-                    border: 1px solid rgba(224, 107, 62, 0.35);
+                    background: rgba(200, 90, 50, 0.09);
+                    color: var(--accent-text, #B44A24);
+                    border: 1px solid rgba(200, 90, 50, 0.20);
                 }
 
                 .rs-cmd-kpi--emerald {
-                    background: rgba(16, 185, 129, 0.14);
-                    color: #34D399;
-                    border: 1px solid rgba(16, 185, 129, 0.32);
+                    background: rgba(5, 150, 105, 0.08);
+                    color: #047857;
+                    border: 1px solid rgba(5, 150, 105, 0.22);
                 }
 
                 .rs-cmd-kpi--slate {
-                    background: rgba(255, 255, 255, 0.06);
-                    color: #C4C7D4;
-                    border: 1px solid rgba(255, 255, 255, 0.14);
+                    background: rgba(28, 22, 18, 0.04);
+                    color: var(--text-secondary, #5C5750);
+                    border: 1px solid rgba(28, 22, 18, 0.08);
                 }
 
                 .rs-cmd-item__badge {
-                    font-family: var(--font-mono, 'Space Mono', monospace);
-                    font-size: 0.63rem;
+                    font-family: var(--font-mono);
+                    font-size: 0.64rem;
                     font-weight: 500;
                     padding: 2px 7px;
                     border-radius: 4px;
-                    background: rgba(255, 255, 255, 0.04);
-                    color: #8E929F;
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    background: rgba(28, 22, 18, 0.04);
+                    color: var(--text-muted, #7C7A75);
+                    border: 1px solid rgba(28, 22, 18, 0.08);
                     white-space: nowrap;
                 }
 
                 .rs-cmd-item__return {
-                    font-family: var(--font-mono, 'Space Mono', monospace);
+                    font-family: var(--font-mono);
                     font-size: 0.72rem;
                     font-weight: 700;
-                    color: #FF8A5B;
+                    color: var(--accent, #C85A32);
                     opacity: 0;
                     transform: translateX(-3px);
-                    transition: all 140ms cubic-bezier(0.16, 1, 0.3, 1);
+                    transition: all 120ms ease;
                 }
 
                 .rs-cmd-item.is-selected .rs-cmd-item__return,
@@ -687,18 +393,18 @@
                     transform: translateX(0);
                 }
 
-                /* Diagnostic Telemetry Footer */
+                /* Footer */
                 .rs-cmd-footer {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     gap: 12px;
-                    padding: 9px 16px;
-                    border-top: 1px solid rgba(255, 255, 255, 0.08);
-                    background: rgba(5, 6, 8, 0.78);
-                    font-size: 0.65rem;
-                    color: #7C7E86;
-                    font-family: var(--font-mono, 'Space Mono', monospace);
+                    padding: 8px 16px;
+                    border-top: 1px solid rgba(28, 22, 18, 0.06);
+                    background: rgba(28, 22, 18, 0.02);
+                    font-size: 0.68rem;
+                    color: var(--text-muted, #7C7A75);
+                    font-family: var(--font-sans);
                     user-select: none;
                 }
 
@@ -706,26 +412,10 @@
                     display: inline-flex;
                     align-items: center;
                     gap: 6px;
-                    letter-spacing: 0.04em;
-                    color: #9BA0AE;
-                    min-width: 0;
+                    color: var(--text-secondary, #5C5750);
+                    white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-
-                .rs-cmd-footer__target-prefix {
-                    color: var(--accent, #E06B3E);
-                    font-weight: 700;
-                }
-
-                .rs-cmd-footer__cursor {
-                    display: inline-block;
-                    width: 5px;
-                    height: 10px;
-                    background: var(--accent, #E06B3E);
-                    vertical-align: middle;
-                    animation: rsCursorBlink 1s infinite;
                 }
 
                 .rs-cmd-footer__shortcuts {
@@ -740,13 +430,13 @@
                     align-items: center;
                     justify-content: center;
                     min-width: 18px;
-                    padding: 1.5px 5px;
+                    padding: 1px 5px;
                     border-radius: 4px;
-                    background: rgba(255, 255, 255, 0.06);
-                    color: #D0D3DF;
-                    border: 1px solid rgba(255, 255, 255, 0.14);
-                    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+                    background: rgba(28, 22, 18, 0.05);
+                    color: var(--text-secondary, #5C5750);
+                    border: 1px solid rgba(28, 22, 18, 0.10);
                     font-size: 0.62rem;
+                    font-family: var(--font-mono);
                     font-weight: 600;
                     margin-right: 3px;
                 }
@@ -768,13 +458,6 @@
                     .rs-cmd-footer__brand {
                         display: none;
                     }
-                    .rs-cmd-hud-btn {
-                        padding: 2px 5px;
-                        font-size: 0.58rem;
-                    }
-                    .rs-cmd-hud-btn span {
-                        letter-spacing: 0.02em;
-                    }
                     .rs-cmd-item__sub {
                         display: none;
                     }
@@ -783,8 +466,8 @@
                         padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
                     }
                     .rs-cmd-esc {
-                        padding: 4px 8px;
-                        font-size: 0.7rem;
+                        padding: 3px 6px;
+                        font-size: 0.68rem;
                     }
                 }
             `;
@@ -796,10 +479,7 @@
             this.overlay.className = 'rs-cmd-overlay';
             this.overlay.setAttribute('role', 'dialog');
             this.overlay.setAttribute('aria-modal', 'true');
-            this.overlay.setAttribute('aria-label', 'Obsidian Command & Telemetry Console');
-
-            const sfxState = audioFX.enabled ? 'ON' : 'OFF';
-            const sfxActiveClass = audioFX.enabled ? ' is-active' : '';
+            this.overlay.setAttribute('aria-label', 'Command Palette');
 
             this.overlay.innerHTML = `
                 <div class="rs-cmd-modal" id="rsCmdModal">
@@ -808,11 +488,6 @@
                             <span class="rs-cmd-sys-tag">Command Palette</span>
                             <span class="rs-cmd-sys-divider" aria-hidden="true">·</span>
                             <span class="rs-cmd-sys-meta" id="rsCmdTelemetryCoord">Navigation &amp; Actions</span>
-                        </div>
-                        <div class="rs-cmd-telemetry__right">
-                            <button type="button" class="rs-cmd-hud-btn${sfxActiveClass}" id="rsCmdSfxBtn" aria-pressed="${audioFX.enabled}" title="Toggle sound effects (Muted by default)">
-                                <span class="rs-cmd-btn-text">Sound: ${sfxState}</span>
-                            </button>
                         </div>
                     </div>
 
@@ -826,22 +501,20 @@
                             aria-expanded="false"
                             aria-autocomplete="list"
                             aria-controls="rsCmdResults"
-                            aria-label="Search case studies, pages, or execute diagnostic commands"
-                            placeholder="Filter case studies, execute protocol, or ask portfolio AI..."
+                            aria-label="Search case studies, pages, or execute commands"
+                            placeholder="Search case studies, pages, or ask portfolio AI..."
                             autocomplete="off"
                             spellcheck="false"
                         />
-                        <span class="rs-cmd-node-count" id="rsCmdNodeCount">11 NODES</span>
-                        <kbd class="rs-cmd-esc" id="rsCmdEscBtn" title="Close Console (Esc)">esc</kbd>
+                        <span class="rs-cmd-node-count" id="rsCmdNodeCount">11 ITEMS</span>
+                        <kbd class="rs-cmd-esc" id="rsCmdEscBtn" title="Close (Esc)">esc</kbd>
                     </div>
 
                     <div class="rs-cmd-results" id="rsCmdResults" role="listbox"></div>
 
                     <div class="rs-cmd-footer">
                         <div class="rs-cmd-footer__brand">
-                            <span class="rs-cmd-footer__target-prefix">Target:</span>
                             <span id="rsCmdFooterTarget">Ryan Schmidt · Product Design Portfolio</span>
-                            <span class="rs-cmd-footer__cursor" aria-hidden="true"></span>
                         </div>
                         <div class="rs-cmd-footer__shortcuts">
                             <span><kbd class="rs-cmd-key">↑↓</kbd>navigate</span>
@@ -859,7 +532,6 @@
             this.nodeCountEl = this.overlay.querySelector('#rsCmdNodeCount');
             this.footerTargetEl = this.overlay.querySelector('#rsCmdFooterTarget');
             this.coordEl = this.overlay.querySelector('#rsCmdTelemetryCoord');
-            this.sfxBtn = this.overlay.querySelector('#rsCmdSfxBtn');
             this.escBtn = this.overlay.querySelector('#rsCmdEscBtn');
         }
 
@@ -874,53 +546,53 @@
                 // Case Studies
                 {
                     id: 'nav-dashboard',
-                    group: '01 // Case Studies',
+                    group: 'Case Studies',
                     icon: '01',
                     title: 'Custom Dashboards & AI Summaries (D-Tools Cloud)',
                     sub: '+71% Sustained Views · 62% Multi-dashboard adoption',
                     badge: 'Case Study',
                     kpi: '+71% Views',
                     kpiType: 'terracotta',
-                    targetPath: 'SECTOR // pages/dashboard.html',
+                    targetPath: 'pages/dashboard.html',
                     keywords: 'dashboard bi analytics d-tools cloud opportunity signals custom dashboards ai summaries kpi pipeline b2b data visualization metrics revenue 71% sustained views',
                     action: () => { window.location.href = `${prefix}dashboard.html`; }
                 },
                 {
                     id: 'nav-inventory',
-                    group: '01 // Case Studies',
+                    group: 'Case Studies',
                     icon: '02',
                     title: 'Inventory, Purchasing & Receiving (D-Tools Cloud)',
                     sub: '+18% Recurring Revenue · 8% YoY adoption growth',
                     badge: 'Case Study',
                     kpi: '+18% MRR',
                     kpiType: 'emerald',
-                    targetPath: 'SECTOR // pages/inventory.html',
+                    targetPath: 'pages/inventory.html',
                     keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain warehouse enterprise 18% mrr recurring revenue',
                     action: () => { window.location.href = `${prefix}inventory.html`; }
                 },
                 {
                     id: 'nav-member-portal',
-                    group: '01 // Case Studies',
+                    group: 'Case Studies',
                     icon: '03',
                     title: 'i4cp Member Portal & Research Discovery',
                     sub: '+500% Ahri Sessions · Research IA & conversational AI discovery',
                     badge: 'Case Study',
                     kpi: '+500% Sessions',
                     kpiType: 'terracotta',
-                    targetPath: 'SECTOR // pages/member-portal-overhaul.html',
+                    targetPath: 'pages/member-portal-overhaul.html',
                     keywords: 'i4cp member portal ai search synthesis rag overhaul enterprise research membership 500% sessions daily activity',
                     action: () => { window.location.href = `${prefix}member-portal-overhaul.html`; }
                 },
                 {
                     id: 'nav-ai-portfolio',
-                    group: '01 // Case Studies',
+                    group: 'Case Studies',
                     icon: '04',
                     title: 'Designing & Building an AI-Native Portfolio',
                     sub: 'Zero-Build Stack · Vector Grounding · Design Token System',
                     badge: 'Architecture',
                     kpi: 'Zero-Build',
                     kpiType: 'slate',
-                    targetPath: 'SECTOR // pages/ai-coding-portfolio.html',
+                    targetPath: 'pages/ai-coding-portfolio.html',
                     keywords: 'portfolio architecture zero-build vector search grounding coding tokens design systems vanilla web components cursor',
                     action: () => { window.location.href = `${prefix}ai-coding-portfolio.html`; }
                 },
@@ -928,7 +600,7 @@
                 // Pages & Navigation
                 {
                     id: 'nav-work-overview',
-                    group: '02 // Navigation Matrix',
+                    group: 'Navigation',
                     icon: '★',
                     title: 'Selected Work & Shipped Outcomes',
                     sub: '4 featured case studies across BI, supply chain, and enterprise AI',
@@ -947,7 +619,7 @@
                 },
                 {
                     id: 'nav-approach',
-                    group: '02 // Navigation Matrix',
+                    group: 'Navigation',
                     icon: '◇',
                     title: 'Design Philosophy & Principles',
                     sub: 'Systemizer instinct, designing in code, and verifiable business outcomes',
@@ -966,7 +638,7 @@
                 },
                 {
                     id: 'nav-about',
-                    group: '02 // Navigation Matrix',
+                    group: 'Navigation',
                     icon: 'RS',
                     title: 'About Ryan Schmidt: Leadership & Background',
                     sub: '6+ years in B2B SaaS, Design Systems, and mentoring 1,500+ designers',
@@ -977,7 +649,7 @@
                 },
                 {
                     id: 'nav-home',
-                    group: '02 // Navigation Matrix',
+                    group: 'Navigation',
                     icon: '⌂',
                     title: 'Home: Editorial Index',
                     sub: 'Return to primary portfolio editorial hero and index',
@@ -995,10 +667,10 @@
                     }
                 },
 
-                // Quick Actions & Telemetry
+                // Quick Actions & Direct Links
                 {
                     id: 'act-resume',
-                    group: '03 // Direct Protocols',
+                    group: 'Direct Links',
                     icon: '↓',
                     title: 'View Resume Dossier (PDF)',
                     sub: 'Open ryan-schmidt-resume.pdf in a new tab',
@@ -1012,7 +684,7 @@
                 },
                 {
                     id: 'act-email',
-                    group: '03 // Direct Protocols',
+                    group: 'Direct Links',
                     icon: '@',
                     title: 'Email Ryan Schmidt',
                     sub: 'ryanschmidt1989@gmail.com (opens default email client)',
@@ -1026,7 +698,7 @@
                 },
                 {
                     id: 'act-linkedin',
-                    group: '03 // Direct Protocols',
+                    group: 'Direct Links',
                     icon: '↗',
                     title: 'Connect on LinkedIn',
                     sub: 'linkedin.com/in/ryanschmidt1989 (message or network directly)',
@@ -1251,12 +923,12 @@
                 // Append direct AI query dispatch option whenever user types a custom query
                 matches.push({
                     id: 'act-ai-query',
-                    group: '04 // Ask AI Assistant',
+                    group: 'Ask AI Assistant',
                     icon: '✦',
                     title: `Ask AI: "${raw}"`,
                     sub: 'Search Ryan’s case studies, shipped outcomes, and role fit',
                     badge: 'Ask AI ↵',
-                    targetPath: 'AI / Assistant',
+                    targetPath: 'AI Assistant',
                     action: () => {
                         this.triggerAIChat(raw);
                     }
@@ -1267,7 +939,7 @@
 
             if (this.nodeCountEl) {
                 const count = this.filteredItems.length;
-                this.nodeCountEl.textContent = `${String(count).padStart(2, '0')} ${count === 1 ? 'NODE' : 'NODES'}`;
+                this.nodeCountEl.textContent = `${count} ${count === 1 ? 'ITEM' : 'ITEMS'}`;
             }
 
             this.resultsEl.innerHTML = '';
@@ -1278,12 +950,7 @@
                     currentGroup = item.group;
                     const groupHeader = document.createElement('div');
                     groupHeader.className = 'rs-cmd-group-title';
-                    const parts = currentGroup.split('//');
-                    if (parts.length > 1) {
-                        groupHeader.innerHTML = `<span class="rs-cmd-group-prefix">${this.escapeHtml(parts[0].trim())} //</span><span>${this.escapeHtml(parts[1].trim())}</span>`;
-                    } else {
-                        groupHeader.textContent = currentGroup;
-                    }
+                    groupHeader.textContent = currentGroup;
                     this.resultsEl.appendChild(groupHeader);
                 }
 

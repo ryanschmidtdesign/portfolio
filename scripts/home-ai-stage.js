@@ -81,7 +81,7 @@
         'Built this site in HTML, CSS, and JavaScript, including reusable page patterns and an AI assistant that retrieves context from project notes.',
       tags: ['Design Tokens', 'Prototyping in Code', 'Semantic HTML'],
       url: 'pages/ai-coding-portfolio.html',
-      image: 'assets/case-studies/ai-coding-portfolio/interactive-component.webp',
+      image: 'assets/case-studies/ai-coding-portfolio/portfolio-code-architecture.webp',
       aiPrompt: 'How did Ryan build this portfolio in code with AI tools, design tokens, and retrieval?'
     }
   ];

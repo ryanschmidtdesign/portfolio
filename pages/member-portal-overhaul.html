@@ -28,250 +28,6 @@
       })();
     </script>
 
-    <!-- Critical Dock & Floating Header Inline CSS Guarantee -->
-    <style id="rs-dock-critical-styles">
-      .site-header {
-        position: fixed !important;
-        top: calc(16px + env(safe-area-inset-top, 0px)) !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: min(692px, calc(100vw - 24px)) !important;
-        max-width: 692px !important;
-        z-index: 999990 !important;
-        background:
-          radial-gradient(460px circle at var(--header-mouse-x, var(--mouse-x, 50%)) var(--header-mouse-y, var(--mouse-y, 50%)), rgba(255, 255, 255, 0.08), transparent 60%),
-          linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 60%),
-          linear-gradient(180deg, rgba(10, 11, 14, 0.55) 0%, rgba(6, 7, 10, 0.62) 50%, rgba(4, 4, 6, 0.68) 100%) !important;
-        backdrop-filter: blur(20px) saturate(120%) brightness(55%) contrast(115%) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(120%) brightness(55%) contrast(115%) !important;
-        backdrop-filter: blur(12px) url(#rs-liquid-refraction) saturate(120%) brightness(55%) contrast(115%) !important;
-        -webkit-backdrop-filter: blur(12px) url(#rs-liquid-refraction) saturate(120%) brightness(55%) contrast(115%) !important;
-        border: none !important;
-        border-radius: 2px !important;
-        box-shadow:
-          0 18px 40px -14px rgba(20, 14, 8, 0.35),
-          0 4px 10px -4px rgba(20, 14, 8, 0.25),
-          inset 0 1px 0 rgba(255, 255, 255, 0.18),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.04),
-          inset 0 -1px 0 rgba(255, 255, 255, 0.05) !important;
-        overflow: hidden !important;
-        display: block !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        box-sizing: border-box !important;
-        transition: box-shadow 240ms ease, transform 240ms ease !important;
-      }
-      .site-header::before {
-        display: none !important;
-      }
-      .site-header:hover {
-        transform: translateX(-50%) translateY(-1px) !important;
-        box-shadow:
-          0 24px 50px -12px rgba(20, 14, 8, 0.45),
-          0 8px 18px -4px rgba(20, 14, 8, 0.30),
-          inset 0 1px 0 rgba(255, 255, 255, 0.24),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-          inset 0 -1px 0 rgba(255, 255, 255, 0.08) !important;
-      }
-      .site-header__inner {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 50px !important;
-        padding: 0 20px !important;
-        box-sizing: border-box !important;
-      }
-      .site-header__brand {
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 8px !important;
-        text-decoration: none !important;
-        color: #FFFFFF !important;
-        font-size: 0.9375rem !important;
-        font-weight: 600 !important;
-        letter-spacing: -0.015em !important;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
-      }
-      .site-header__sep,
-      .site-header__role {
-        display: none !important;
-      }
-      .site-header__nav {
-        display: flex !important;
-        align-items: center !important;
-        gap: 16px !important;
-        flex-shrink: 0 !important;
-      }
-      .site-header__link {
-        font-size: 0.84rem !important;
-        padding: 6px 3px !important;
-        white-space: nowrap !important;
-      }
-      .home-omnibar-section,
-      .subpage-omnibar-dock {
-        position: fixed !important;
-        bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: min(692px, calc(100vw - 24px)) !important;
-        max-width: 692px !important;
-        z-index: 999999 !important;
-        pointer-events: auto !important;
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-      .home-omnibar-section::before,
-      .subpage-omnibar-dock::before {
-        display: none !important;
-      }
-      .home-omnibar-shell,
-      .subpage-omnibar-shell {
-        position: relative !important;
-        width: 100% !important;
-        background:
-          radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 60%),
-          linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 30%, transparent 60%),
-          linear-gradient(180deg, rgba(10, 11, 14, 0.55) 0%, rgba(6, 7, 10, 0.62) 50%, rgba(4, 4, 6, 0.68) 100%) !important;
-        backdrop-filter: blur(20px) saturate(120%) brightness(55%) contrast(115%) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(120%) brightness(55%) contrast(115%) !important;
-        backdrop-filter: blur(12px) url(#rs-liquid-refraction) saturate(120%) brightness(55%) contrast(115%) !important;
-        -webkit-backdrop-filter: blur(12px) url(#rs-liquid-refraction) saturate(120%) brightness(55%) contrast(115%) !important;
-        border: none !important;
-        border-radius: 2px !important;
-        padding: 4px 0 !important;
-        box-shadow:
-          0 18px 40px -14px rgba(20, 14, 8, 0.35),
-          0 4px 10px -4px rgba(20, 14, 8, 0.25),
-          inset 0 1px 0 rgba(255, 255, 255, 0.18),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.04),
-          inset 0 -1px 0 rgba(255, 255, 255, 0.05) !important;
-        overflow: hidden !important;
-        display: block !important;
-        transition: box-shadow 240ms ease, transform 240ms ease, background 240ms ease !important;
-      }
-      .home-omnibar-shell::before,
-      .subpage-omnibar-shell::before {
-        display: none !important;
-      }
-      .home-omnibar-shell:hover,
-      .subpage-omnibar-shell:hover {
-        transform: translateY(-1px) !important;
-        box-shadow:
-          0 24px 50px -12px rgba(20, 14, 8, 0.45),
-          0 8px 18px -4px rgba(20, 14, 8, 0.30),
-          inset 0 1px 0 rgba(255, 255, 255, 0.24),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-          inset 0 -1px 0 rgba(255, 255, 255, 0.08) !important;
-      }
-      .home-omnibar-shell:focus-within,
-      .subpage-omnibar-shell:focus-within {
-        transform: translateY(-1px) !important;
-        background:
-          radial-gradient(460px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.10), transparent 60%),
-          linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 30%, transparent 60%),
-          linear-gradient(180deg, rgba(16, 18, 22, 0.60) 0%, rgba(10, 12, 16, 0.66) 50%, rgba(6, 7, 10, 0.72) 100%) !important;
-        box-shadow:
-          0 18px 40px -14px rgba(20, 14, 8, 0.35),
-          0 4px 10px -4px rgba(20, 14, 8, 0.25),
-          0 0 0 1px rgba(232, 110, 60, 0.45),
-          0 0 24px -4px rgba(232, 110, 60, 0.35),
-          inset 0 1px 0 rgba(255, 255, 255, 0.22),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-          inset 0 -1px 0 rgba(255, 255, 255, 0.08) !important;
-      }
-      .home-omnibar-form,
-      .subpage-omnibar-form {
-        min-height: 48px !important;
-        padding: 4px 16px 4px 20px !important;
-        border-radius: 2px !important;
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-      .home-omnibar-input,
-      .subpage-omnibar-input {
-        height: 46px !important;
-        font-size: 0.95rem !important;
-        line-height: 46px !important;
-      }
-      body.rs-chat-drawer-open .home-omnibar-section,
-      body.rs-chat-drawer-open .subpage-omnibar-dock {
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-      }
-      @media (max-width: 600px) {
-        .site-header {
-          top: calc(12px + env(safe-area-inset-top, 0px)) !important;
-          width: min(692px, calc(100vw - 24px)) !important;
-          border-radius: 2px !important;
-        }
-        .site-header__inner {
-          height: 46px !important;
-          padding: 0 14px !important;
-        }
-        .site-header__nav {
-          gap: 12px !important;
-        }
-        .site-header__link {
-          font-size: 0.80rem !important;
-          padding: 4px 1px !important;
-        }
-        .home-omnibar-section,
-        .subpage-omnibar-dock {
-          bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
-          width: min(692px, calc(100vw - 24px)) !important;
-        }
-        .home-omnibar-shell,
-        .subpage-omnibar-shell {
-          border-radius: 2px !important;
-          padding: 4px 0 !important;
-        }
-        .home-omnibar-form,
-        .subpage-omnibar-form {
-          min-height: 44px !important;
-          padding: 4px 12px 4px 14px !important;
-          border-radius: 2px !important;
-        }
-        .home-omnibar-input,
-        .subpage-omnibar-input {
-          height: 42px !important;
-          font-size: 0.88rem !important;
-        }
-      }
-      @media (hover: none) {
-        .ai-mini-cmdk,
-        .home-omnibar-cmdk,
-        .subpage-omnibar-cmdk { display: none !important; }
-      }
-      @media (max-width: 520px) {
-        .site-header__link[href*="approach"] {
-          display: none !important;
-        }
-      }
-      @media (max-width: 440px) {
-        .site-header__link[href*="mailto"],
-        .site-header__link[href*="linkedin"] {
-          display: none !important;
-        }
-        .site-header__nav {
-          gap: 12px !important;
-        }
-        .site-header__arrow {
-          display: none !important;
-        }
-      }
-      main {
-        padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)) !important;
-      }
-    </style>
-
     <link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://ryanschmidt.design">
 
@@ -296,7 +52,7 @@
     <!-- Fonts (IBM Plex Sans + Newsreader italic serif for editorial accents) -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <link rel="stylesheet" href="../styles.css?v=68">
+    <link rel="stylesheet" href="../styles.css?v=69">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -487,10 +243,25 @@
 }
 </script>
 
-    <!-- Vercel Analytics -->
-    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
-    <script defer src="/_vercel/insights/script.js"></script>
-    <script defer src="/_vercel/speed-insights/script.js"></script>
+  <!-- Vercel Analytics & Speed Insights (with ?exclude_me self-exclusion) -->
+  <script>
+    (function () {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        if (p.has("exclude_me") || p.get("admin") === "1" || p.get("analytics") === "off") {
+          localStorage.setItem("va_exclude", "1");
+        } else if (p.get("analytics") === "on" || p.get("track_me") === "1") {
+          localStorage.removeItem("va_exclude");
+        }
+      } catch (e) {}
+      if (typeof localStorage !== "undefined" && localStorage.getItem("va_exclude") === "1") {
+        return;
+      }
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+      var s1 = document.createElement("script"); s1.defer = true; s1.src = "/_vercel/insights/script.js"; document.head.appendChild(s1);
+      var s2 = document.createElement("script"); s2.defer = true; s2.src = "/_vercel/speed-insights/script.js"; document.head.appendChild(s2);
+    })();
+  </script>
 
 <!-- Sitemap reference -->
 <link rel="sitemap" type="application/xml" href="../sitemap.xml">
@@ -526,15 +297,6 @@
 </head>
 
   <body>
-    <!-- Hidden Global SVG Liquid Refraction Filter -->
-    <svg style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;" aria-hidden="true">
-      <defs>
-        <filter id="rs-liquid-refraction" color-interpolation-filters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.02 0.02" numOctaves="2" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="36" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-      </defs>
-    </svg>
     <a href="#main" class="skip-link">Skip to main content</a>
     <!-- Conventional Top Navigation Landmark -->
     <header class="site-header" role="banner">
@@ -1101,7 +863,7 @@
     </main>
 
     <!-- Floating AI & CLI Omnibar Dock (unified with homepage) -->
-    <div class="ai-mini-wrapper subpage-omnibar-dock" style="position: fixed !important; bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important; left: 50% !important; transform: translateX(-50%) !important; width: min(692px, calc(100vw - 24px)) !important; max-width: 692px !important; z-index: 999999 !important; display: block !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;">
+    <div class="ai-mini-wrapper subpage-omnibar-dock">
       <div class="subpage-omnibar-shell">
         <form class="subpage-omnibar-form" id="subpage-omnibar-form" onsubmit="return false;">
           <div class="subpage-omnibar-top">
@@ -1123,8 +885,8 @@
     </div>
 
     <!-- GSAP for smooth chat widget animations -->
-    <script src="../scripts/cli-mode.js?v=67" defer></script>
-    <script src="../scripts/scripts.js?v=67" defer></script>
+    <script src="../scripts/cli-mode.js?v=68" defer></script>
+    <script src="../scripts/scripts.js?v=68" defer></script>
     <script src="../scripts/magnetic.js?v=67" defer></script>
     <script src="../scripts/rs-chat-widget.js?v=67" defer></script>
     <script src="../scripts/image-splitter.js" defer></script>
