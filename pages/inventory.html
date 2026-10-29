@@ -57,7 +57,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=69">
+    <link rel="stylesheet" href="../styles.css?v=70">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -374,6 +374,7 @@
                   <span class="metric-label">YoY adoption</span>
                 </li>
               </ul>
+              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">Connecting receiving to project staging resolved a key procurement objection in enterprise demos, unblocking stalled pilot accounts and contributing to an 18% lift in platform ARR alongside 8% YoY adoption growth.</p>
             </div>
           </div>
         </header>
@@ -536,7 +537,14 @@
             I originally advocated for full WebSocket-driven, bi-directional live sync across all client sessions. If an installer checks out equipment in the warehouse, every PM's screen should reflect it instantly.
           </p>
           <p>
-            However, our engineering team evaluated the backend requirements and found a true real-time streaming infrastructure would push our MVP launch back by several months. To hit our December deadline and unblock pending enterprise sales, the PM and I compromised: the database updated immediately on receiving, but client views used a prominent manual refresh/sync trigger paired with contextual state badges. To prevent allocation race conditions when two project managers staged the same physical stock before refreshing, we implemented optimistic concurrency validation at the API layer. The UI validated available quantities upon submission, displaying an immediate conflict resolution toast if another user claimed the units seconds prior. It wasn't the instantaneous sync I originally drew up, but it protected our launch date, kept the database reliable, and solved the actual customer problem without dragging the project out for months.
+            However, our engineering team found that full WebSocket streaming would push our MVP launch back by several months. To protect our December release and unblock pending enterprise sales, the PM and I compromised on a pragmatic two-part model:
+          </p>
+          <ul>
+            <li><strong>Immediate database updates on check-in:</strong> Receiving updated the database instantly, paired with a clear manual sync trigger and contextual state badges on client screens.</li>
+            <li><strong>Optimistic concurrency at the API layer:</strong> To prevent race conditions when two PMs staged the same stock before refreshing, the UI validated available quantities on submission, triggering an instant resolution toast if units were claimed seconds prior.</li>
+          </ul>
+          <p>
+            It was not the instantaneous streaming sync I originally drew up, but it protected our launch date, kept inventory counts 100% reliable, and solved the customer problem without multi-month delays.
           </p>
 
           <h3>Balancing Fast Receiving with Serialization Audits</h3>

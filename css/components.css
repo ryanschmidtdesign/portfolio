@@ -3193,14 +3193,18 @@ body {
   background: transparent;
   border: none;
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: 0.8125rem;
   color: var(--text-secondary);
   cursor: pointer;
-  padding: 4px 8px;
+  min-height: 36px;
+  padding: 6px 12px;
   border-radius: var(--radius-sm);
   transition: all 160ms ease;
   line-height: inherit;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .crumb-segment:hover,
@@ -3234,11 +3238,11 @@ body {
 
 .ia-tier-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
   color: var(--text-secondary);
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
 .ia-cards-grid {
@@ -3248,25 +3252,27 @@ body {
 }
 
 .ia-card {
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-4) var(--space-4);
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: var(--radius-md);
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 6px;
   transition: all 180ms ease;
 }
 
 .ia-card strong {
-  font-size: var(--fs-sm);
+  font-size: 0.9375rem;
+  font-weight: 600;
   color: var(--text);
+  line-height: 1.35;
 }
 
 .ia-card span {
-  font-size: var(--fs-xs);
+  font-size: 0.84rem;
   color: var(--text-secondary);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .ia-card--active {

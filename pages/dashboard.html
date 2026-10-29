@@ -57,7 +57,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=69">
+    <link rel="stylesheet" href="../styles.css?v=70">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -649,9 +649,11 @@
           <p>
             Because I was leading both product definition and design delivery, keeping scope under control was non-negotiable. We also didn't have a shared design system yet. That came directly after this project, when I built and rolled out our 100+ component library across D-Tools Cloud.
           </p>
+          <h3>Front-end alignment: Standardized widget constraints</h3>
           <p>
             Back then, we were working with basic UI kit variants and loose guidelines. That meant I had to sit closely with our front-end engineers every week. Instead of inventing unique card styles or fancy animations, I stuck to a few consistent widget wrappers and standard grid increments. It kept code clean and prevented the dashboard from breaking when users resized their screens.
           </p>
+          <h3>Systems architecture: Role-based access (RBAC) &amp; 400ms cached payloads</h3>
           <p>
             Beyond UI consistency, our primary systems challenge was role-based access control (RBAC) across four backend engineers. Field technicians and project managers required immediate operational visibility into active jobs, but executive widgets exposing company-wide gross margins and pipeline valuations could not leak across unauthorized roles. I mapped widget permissions directly to existing workspace roles, while engineering cached aggregated card payloads in JSON to keep multi-widget dashboards rendering under 400 milliseconds.
           </p>
@@ -661,6 +663,7 @@
           <h2>Prototyping & Validation</h2>
           </div>
 
+          <h3>Usability testing: 5-user workflow validation</h3>
           <p>
             I prototyped the full flow in Figma and tested it with five target users, walking them through picking a template, rearranging cards, and generating a report.
           </p>
