@@ -208,7 +208,7 @@
           "name": "What was Ryan Schmidt's role on the inventory project?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Lead Product Designer on a team of three. Drove problem framing, research, and system design while partnering with PM and engineering on a unified data model."
+            "text": "Product Designer (Design Lead in squad of three). Drove problem framing, research, and system design while partnering with PM and engineering on a unified data model."
           }
         },
         {
@@ -418,7 +418,7 @@
           <ul>
             <li><strong>Time sink:</strong> 2–3 hours/day reconciling stock; user-reported roughly 15–20% error rates</li>
             <li><strong>User split:</strong> Small AV shops needed fast confidence in quantities, while larger teams needed asset‑level traceability for accountability</li>
-            <li><strong>Market signal:</strong> Integrated inventory was table stakes in enterprise deals</li>
+            <li><strong>Customer feedback:</strong> Large integration firms refused to buy without built-in inventory tracking</li>
           </ul>
 
           <h3>Defining Decision</h3>
@@ -433,7 +433,7 @@
             <h3>How we structured it</h3>
             <ol>
               <li><strong>Receiving is the source of truth:</strong> Stock updates the moment someone checks in items against a purchase order, supporting split shipments, partial receipts, and backorders without manual spreadsheets.</li>
-              <li><strong>One connected ledger:</strong> An immutable movement log tracks equipment flow from purchase order to central warehouse, staged job site, service van, and final customer invoice.</li>
+              <li><strong>One connected ledger:</strong> A permanent audit log tracks equipment flow from purchase order to central warehouse, staged job site, service van, and final customer invoice.</li>
               <li><strong>Early low-stock warnings:</strong> Visual threshold badges flag parts before field technicians run short of critical hardware during installation.</li>
             </ol>
           </aside>
@@ -444,7 +444,7 @@
             <div class="compare-panels">
               <div class="compare-panel" data-compare-state="spreadsheet" data-tone="bad">
                 <h3>Legacy spreadsheet workflow</h3>
-                <p>Teams spent 2–3 hours daily reconciling counts across 14+ tabs, making costly project purchasing decisions from stale data.</p>
+                <p>Teams spent 2 to 3 hours daily cross-referencing 14 spreadsheets. Stale stock counts caused expensive purchasing mistakes before morning crews ever reached the job site.</p>
               </div>
               <div class="compare-panel" data-compare-state="software" data-tone="bad">
                 <h3>Third-party tool tax</h3>
@@ -452,7 +452,7 @@
               </div>
               <div class="compare-panel" data-compare-state="system" data-tone="good">
                 <h3>Unified inventory platform</h3>
-                <p>A single source of truth connecting POs directly to job allocations, cutting manual reconciliation and surfacing stock risk early.</p>
+                <p>A unified system tying POs directly to job schedules. Warehouse teams catch stock shortages early and eliminate manual count reconciliation.</p>
               </div>
             </div>
           </div>
@@ -545,7 +545,7 @@
 
           <h3>Balancing Fast Receiving with Serialization Audits</h3>
           <p>
-            During discovery, we hit a clear split: small residential shops wanted fast, friction-free quantity counts, while commercial enterprise clients demanded rigorous, asset-level serialization for high-value equipment. Forcing serial numbers on small shops would kill adoption; omitting them would lose six-figure enterprise contracts.
+            During discovery, we hit a clear split: small residential shops just wanted quick bulk counts without extra steps, while commercial enterprise teams needed exact serial numbers for warranties and audits. Forcing serial numbers on small shops would kill adoption; omitting them would lose six-figure enterprise contracts.
           </p>
           <p>
             I designed a dual-track UX: <strong>Quantity-first by default</strong> for everyday rapid receiving, with an optional <strong>asset-level tracking layer</strong> for serialized items and warranty audits. That choice kept check-ins fast for small operators while giving enterprise procurement the serialization audit trail they needed to sign contracts.
@@ -644,7 +644,7 @@
             <h2>Prototyping &amp; Validation</h2>
           </div>
           <p>
-            I led three rounds of prototype testing with six active customers across both shop profiles. In Round 1, our combined receiving flow forced users through serial-number modals, causing small operators to abandon the flow in frustration.
+            I led three rounds of prototype testing with six active customers across both shop profiles. In Round 1, our combined receiving flow forced users through serial-number modals. Small operators abandoned the test flow in frustration because it took far too long.
           </p>
           <p>
             By Round 3, separating fast bulk check-ins from deep serialization paid off: small shops could receive a delivery in thirty seconds, while commercial teams still had the audit trail they needed for warranty tracking.
@@ -655,8 +655,8 @@
           <div class="section-divider">
             <h2>Impact</h2>
           </div>
-          <p class="impact-lede">The system replaced scattered notes and spreadsheets with one verified count across the company, saving managers hours of weekly reconciliations.
-            <br><br>One customer uncovered thousands of dollars in unused equipment sitting in forgotten corners of their shop, proving how much hardware gets lost in disconnected workflows.</p>
+          <p class="impact-lede">The system replaced scattered notes and spreadsheets with one verified count across the company. Operations managers reclaimed hours every week that used to be lost to manual inventory audits.
+            <br><br>During the pilot, one shop discovered thousands of dollars in unused equipment tucked away in back storage rooms that had been marked missing for months.</p>
           <div class="impact-callout">
             <div class="impact-metric">
               <strong class="metric" style="font-size: clamp(1.8rem, 3.5vw, 2.2rem); line-height: 1.15;">Unblocked</strong>
@@ -672,7 +672,7 @@
             </div>
           </div>
           <p>
-            Before this release, larger integration firms were walking away during sales demos because we couldn't answer a basic question: "Where do we track warehouse stock?" Delivering verified inventory tracking directly unblocked stalled enterprise accounts during pilot walkthroughs, drove an 8% year-over-year adoption growth across active customer accounts, and delivered an 8% ARR lift across the customer base over the following year.
+            Before this release, larger integration firms walked away during sales demos because we could not answer a basic question: "Where do we track warehouse stock?" Delivering verified inventory tracking directly unblocked stalled enterprise pilot accounts. Over the following year, customer accounts grew by 8% year-over-year, delivering an 8% lift in platform ARR.
           </p>
         </section>
 
@@ -698,7 +698,7 @@
             <span class="case-study-next__arrow" aria-hidden="true">→</span>
           </h3>
           <p class="case-study-next__desc">
-            Redesigning enterprise HR research discovery across a four-level content taxonomy, elevating Ahri AI, and doubling daily member engagement.
+            Rebuilding a cluttered research portal around real executive questions and putting our Ahri AI assistant directly on the homepage.
           </p>
         </a>
       </article>

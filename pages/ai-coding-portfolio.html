@@ -346,7 +346,7 @@
     <article class="case-study case-study--ai-coding-portfolio" aria-labelledby="title">
       <!-- TL;DR -->
       <header class="tldr" aria-label="Executive summary">
-        <div class="about-hero__badge" style="margin-bottom: 14px;">✦ UX ENGINEERING · LIVE ARCHITECTURE</div>
+        <div class="about-hero__badge" style="margin-bottom: 14px;">✦ FRONT-END ARCHITECTURE · DESIGN SYSTEMS</div>
         <h1 id="title" data-parallax="0.06">Building My Portfolio in <em class="serif-accent" style="white-space: nowrap;">Code</em></h1>
 
           <p class="lead">
@@ -393,7 +393,7 @@
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
             <li><strong>The Goal:</strong> I wanted to build the entire site in code to sharpen my UX engineering workflow, test layout behavior and keyboard navigation under real rendering conditions, and ship without a frontend bottleneck.</li>
-            <li><strong>How I Built It:</strong> Wrote custom semantic HTML and modular CSS with Cursor, avoiding bloated templates or heavy frontend frameworks. I built a serverless backend with Supabase and pgvector so the assistant could use relevant project notes rather than sending a full content file.</li>
+            <li><strong>How I Built It:</strong> Wrote custom semantic HTML and modular CSS with Cursor, avoiding bloated templates and heavy frontend frameworks. I built a serverless backend with Supabase and pgvector so the assistant retrieves targeted project notes on demand.</li>
             <li><strong>The Result:</strong> The result is a custom portfolio with shared design tokens, reusable page patterns, and an assistant connected to my project notes. Building it also gave me a practical workflow for testing interface ideas in code.</li>
           </ul>
         </section>
@@ -408,7 +408,7 @@
           </p>
 
           <p>
-            Rather than putting static screenshots in a CMS template, I built this portfolio from scratch to test modern AI-assisted engineering tools on a real project.
+            I wanted to test modern AI-assisted engineering tools on a real project, so I built this portfolio from scratch in code instead of using an off-the-shelf template.
           </p>
 
           <h3>What I set out to do</h3>
@@ -435,7 +435,7 @@
           </ul>
 
           <p>
-            The biggest takeaway was that AI tools are only as good as the guardrails you give them. When you establish clear tokens and layout rules upfront, AI acts as a reliable accelerator for boilerplate code rather than generating messy overrides.
+            The biggest takeaway was that AI tools are only as good as the guardrails you give them. When you establish clear tokens and layout rules upfront, AI accelerates boilerplate markup and produces clean, maintainable styles.
           </p>
         </section>
 
@@ -486,7 +486,7 @@
             <p class="asd-eyebrow">Illustrative architecture walkthrough</p>
             <h2>See how the assistant works</h2>
             <p>
-              This walkthrough illustrates how a visitor question travels through the assistant pipeline, from input to retrieval and generation, rather than displaying real-time backend execution traces.
+              This diagram traces how a visitor question moves through the assistant pipeline, from prompt input to vector retrieval and streaming response.
             </p>
           </div>
 
@@ -523,7 +523,7 @@
                 <span class="asd-kicker">Vercel serverless function</span>
                 <div class="asd-dot"></div>
               </div>
-              <h3>Orchestrator</h3>
+              <h3>API Route</h3>
               <p>Receives question, checks tools needed, routes to RAG</p>
 
               <button class="asd-peek-btn" id="asdPeek" type="button" aria-expanded="false">
@@ -763,7 +763,7 @@
 
           <h3>Designing directly in the browser</h3>
           <p>
-            Figma is great for team alignment, but jumping straight into HTML and CSS cut out an entire layer of translation lag. I could resize my browser window, test keyboard navigation, and check contrast under real rendering conditions instead of pretending static mockups told the whole story.
+            Figma is great for team alignment, but jumping straight into HTML and CSS cut out an entire layer of translation lag. I could resize my browser window, test keyboard navigation, and check contrast under real rendering conditions, catching layout quirks before they reached production.
           </p>
 
           <figure class="case-study-media editor-tree-media">
@@ -800,7 +800,7 @@
 
 
           <p>
-            The result was a fast, accessible portfolio that behaves like a real product surface rather than a static brochure.
+            The result was a fast, accessible portfolio that behaves like a real, resilient product surface.
           </p>
 
           <p>
@@ -837,7 +837,7 @@
             <h2>Making the AI Assistant Useful</h2>
           </div>
           <p>
-            The first version of my portfolio assistant shoved an entire 40KB JSON file into every single API call. It was simple to set up, but it was inefficient and blew through token limits the second someone asked a nuanced question.
+            The first version of my portfolio assistant passed an entire 40KB JSON file on every API call. It was quick to build, but wildly inefficient. It blew past token limits whenever someone asked a detailed question about past project metrics.
           </p>
 
           <figure class="case-study-media assistant-legacy-media">
@@ -848,10 +848,7 @@
             <figcaption>The original chat widget from the previous portfolio before moving to vector search.</figcaption>
           </figure>
           <p>
-            The original prototype dumped my entire resume and project notes into one massive prompt. It worked for simple questions, but it was slow, expensive, and frequently mixed up details from different projects.
-          </p>
-          <p>
-            To fix it, I broke my case study notes into structured chunks and stored them in Supabase using vector search. Now, when a recruiter or hiring manager asks a specific question (like how I approached design tokens or why we pushed back on an AI-first dashboard), the endpoint retrieves only the relevant project notes before generating a response with Gemini in under 200 milliseconds.
+            To fix that token limit problem, I broke my case study notes into structured chunks and stored them in Supabase using vector search. Now, when a recruiter or hiring manager asks a specific question (like how I approached design tokens or why we pushed back on an AI-first dashboard), the endpoint retrieves only the relevant excerpts before streaming a grounded response with Gemini without stalling the UI.
           </p>
           <p>
             To keep the bot honest, I wrote 61 automated Vitest tests covering edge cases, role fit, and metric accuracy. If someone asks something outside my background, the assistant politely declines instead of making up answers. Building this gave me firsthand appreciation for the latency and prompt guardrails our engineering teams deal with every day.
@@ -870,11 +867,11 @@
           </div>
 
           <p>
-            Building the portfolio in production code compressed the feedback loop between design intent and engineering reality. Prototyping directly in the browser revealed edge-case layout breaks, font-rendering quirks, and accessibility barriers that static Figma canvases conceal.
+            Building the portfolio in production code shortened the back-and-forth between designing an interaction and seeing how it actually behaves. Prototyping directly in the browser exposed edge-case layout breaks, font-rendering quirks, and accessibility barriers that static Figma canvases conceal.
           </p>
 
           <p>
-            The biggest advantage is rapid validation. When I want to test a layout idea or micro-interaction, I can build a working prototype in an afternoon, run it on a phone, and verify that keyboard navigation and responsive ergonomics work reliably before handing specifications to developers.
+            The biggest advantage is speed. When I want to test an interaction idea, I can build a working prototype in an afternoon, test it on a phone, and make sure keyboard navigation and responsive layouts feel solid before handing specifications to developers.
           </p>
 
           <!-- Impact section does not have a dedicated analytics screenshot yet -->
@@ -924,7 +921,7 @@
             <span class="case-study-next__arrow" aria-hidden="true">→</span>
           </h3>
           <p class="case-study-next__desc">
-            Rebuilding a legacy BI tool around role-based templates and grounded AI summaries, driving 62% multi-dashboard adoption.
+            Replacing Monday morning spreadsheet exports with customizable dashboard templates and one-click AI summaries.
           </p>
         </a>
 

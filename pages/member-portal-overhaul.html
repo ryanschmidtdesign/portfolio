@@ -341,7 +341,7 @@
             <div class="tldr-role">
               <p class="tldr-label label" data-reveal>My role</p>
               <p>
-                <strong>Lead Product Designer (Solo Design across Product and Engineering)</strong> <br>
+                <strong>Senior Product Designer (Solo Design Lead partnering with VP of Product and 4 developers)</strong> <br>
                 Owned information architecture, search flows, and UI specs from kickoff to release. Created CSS tokens for four developers and built working browser prototypes to speed up delivery.
               </p>
             </div>
@@ -376,7 +376,7 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            i4cp publishes extensive workforce research and benchmarks, but members were struggling to find relevant studies. The portal's navigation had grown organically over years, ending up organized like an internal org chart rather than a member resource. If a VP of Talent wanted a compensation benchmark, they had to click through three arbitrary categories and hope for the best.
+            i4cp publishes extensive workforce research and benchmarks, but members struggled to find relevant studies. The portal navigation had grown organically over years, reflecting internal team structures. If a VP of Talent wanted a compensation benchmark, they had to click through three arbitrary categories and hope for the best.
           </p>
           <p>
             Usage logs showed the disconnect. Members would log in, navigate through cluttered categories, type keywords into legacy search, and get a wall of scattered links. While Ahri existed as a dedicated AI research tool, it was disconnected from the primary discovery flow. My job was to rebuild the navigation model around member intent, bringing Ahri and conversational synthesis directly into the front door of research discovery.
@@ -384,13 +384,13 @@
 
           <h3>Goals</h3>
           <ul>
-            <li><strong>Organize by member intent:</strong> Map categories to how HR executives describe their business priorities rather than internal research groups.</li>
+            <li><strong>Organize by member intent:</strong> Map categories directly to how HR executives describe their strategic workplace priorities.</li>
             <li><strong>Bring AI into discovery:</strong> Make Ahri the central entry point for research discovery, with a direct way to see traditional results when needed.</li>
             <li><strong>Ship a clean MVP first:</strong> Redesign the primary navigation, homepage, and search entry points without trying to rebuild the entire portal in one giant sprint.</li>
           </ul>
 
           <!-- Design Highlights: before/after slider component using data-splitter / image-splitter.js.
-               More pairs planned (home, events, etc. — TBD). Reuse the markup pattern above and
+               More pairs planned (home, events, etc. (TBD)). Reuse the markup pattern above and
                the image-splitter component for each new pair; do not build one-off comparison markup. -->
           <figure class="case-study-media">
             <div class="image-splitter" data-splitter data-splitter-initial="50" aria-label="Before and after comparison of the homepage entry">
@@ -612,7 +612,7 @@
               </div>
               <div class="compare-panels">
                 <div class="compare-panel" data-compare-state="flat">
-                  <p>Exposes too much structure at once, creating a noisy entry point for members who need a clear next step.</p>
+                  <p>Exposes too much structure upfront. It overwhelms members who need a quick answer to a specific question.</p>
                 </div>
                 <div class="compare-panel" data-compare-state="progressive">
                   <p>Reveals deeper levels only as members commit to a practice area or priority.</p>
@@ -620,7 +620,7 @@
               </div>
             </div>
             <p>
-              I explored flatter navigation patterns, including an expandable tree menu, but user testing showed it felt like browsing a dense Windows file system. Progressive disclosure won because it gives members a calm, clear starting point, revealing sub-topics only as they click deeper into an area of interest.
+              I explored flatter navigation patterns, including an expandable tree menu, but user testing showed it felt like browsing a dense Windows file system. Progressive disclosure won because it gives members a calm, clear starting point. Sub-topics only appear when someone actively explores a specific practice area.
             </p>
           </div>
 
@@ -768,7 +768,7 @@
               <div class="constraint-content">
                 <span class="constraint-label">Constraint</span>
                 <h3 class="constraint-title">Designing During a Rebrand</h3>
-                <p class="constraint-body">An external agency was overhauling i4cp's brand guidelines at the same time, meaning colors, fonts, and styling rules were in constant flux.</p>
+                <p class="constraint-body">An external agency was overhauling i4cp's brand guidelines at the same time. Colors, fonts, and styling rules changed almost weekly.</p>
               </div>
               
               <div class="constraint-solution">
@@ -805,7 +805,7 @@
             <h2>Outcomes &amp; Impact</h2>
           </div>
           <p>
-            The redesigned portal launched on September 11, 2026, delivering immediate gains across member engagement and executive research discovery.
+            The redesigned portal launched on September 11, 2026. Member engagement and executive research discovery climbed immediately across key accounts.
           </p>
           <div class="impact-metrics" data-cascade style="margin-block: var(--space-6); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6);">
             <div class="impact-metric">
@@ -821,7 +821,7 @@
           <aside class="callout callout--quote">
             <span class="callout-label">Qualitative Member Feedback</span>
             <blockquote>
-              "Before the redesign, finding specific benchmark studies meant guessing which research committee owned the topic. Having Ahri right on the homepage lets me pull verified executive takeaways in seconds."
+              "Before the redesign, finding a specific benchmark meant guessing which internal committee owned the topic. Now I can just search what I need on the homepage and get the exact stat without clicking through ten folders."
             </blockquote>
             <p class="callout-attribution">
               Enterprise Member &amp; VP of Talent Acquisition (Post-launch member interviews)
@@ -829,10 +829,10 @@
           </aside>
 
           <p>
-            Qualitative feedback from HR executives confirmed that bringing conversational synthesis into the main search flow solved their biggest friction point: getting verified research takeaways without digging through internal taxonomies. Daily active portal usage doubled, and Ahri research sessions grew 500% measured over the first 60 days post-launch versus the 60 days prior.
+            Feedback from enterprise HR executives confirmed that placing Ahri front and centre solved their primary bottleneck: getting fast answers to specific questions without digging through nested categories. Daily active portal usage doubled, and Ahri research sessions grew 500% measured over the first 60 days post-launch versus the 60 days prior.
           </p>
           <p style="font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.5; border-left: 2px solid var(--accent); padding-left: var(--space-3); margin-block: var(--space-4);">
-            <em>Attribution context:</em> Because Ahri became the primary search surface, total session volume naturally surged with overall traffic routing. However, post-launch member telemetry and qualitative interviews validated deeper genuine engagement: session duration increased, follow-up query rates rose, and members consistently reported saving 10 to 15 minutes per research inquiry compared to manual PDF downloads.
+            <em>A note on those numbers:</em> Because Ahri was now the primary search box, session counts were naturally going to jump. But our analytics and follow-up interviews confirmed people were actually reading the output. Session lengths grew, follow-up queries increased, and members reported saving 10 to 15 minutes per search compared to opening raw PDFs.
           </p>
 
           <h3>Shipping and Staging QA</h3>
@@ -851,7 +851,7 @@
             <span class="case-study-next__arrow" aria-hidden="true">→</span>
           </h3>
           <p class="case-study-next__desc">
-            How I used AI coding tools, strict system prompts, and CSS tokens to design and ship a fast, production portfolio without component frameworks.
+            How I built this entire portfolio in HTML, CSS, and vanilla JavaScript using AI coding tools to test layout ideas directly in the browser.
           </p>
         </a>
 

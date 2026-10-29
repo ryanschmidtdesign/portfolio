@@ -200,7 +200,7 @@
           "name": "What was Ryan Schmidt's role on the dashboard project?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Lead Product Designer leading product and delivery triad alongside 4 engineers for five months. Owned problem definition, research, and IA while partnering with engineering leadership."
+            "text": "Senior Product Designer leading design alongside product and engineering leads for five months. Owned problem definition, research, and IA while partnering with engineering leadership."
           }
         },
         {
@@ -355,7 +355,7 @@
             <div class="tldr-role">
               <p class="tldr-label" data-reveal>My role</p>
               <p>
-                <strong>Senior Product Designer (Design Lead alongside PM and delivery triad)</strong>
+                <strong>Senior Product Designer (Design Lead alongside PM and four developers)</strong>
               </p>
               <ul>
                 <li>Owned problem definition, research, and design</li>
@@ -376,7 +376,7 @@
                   <span class="metric-label">sustained dashboard views</span>
                 </li>
               </ul>
-              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">Adoption depth: active integrators configured distinct morning dispatch and monthly margin dashboards, eliminating manual Monday morning spreadsheets.</p>
+              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">Adoption depth: active integrators set up separate views for morning dispatch and monthly margins. That finally retired their messy Monday morning spreadsheets.</p>
             </div>
           </div>
         </header>
@@ -385,8 +385,8 @@
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
             <li><strong>The Problem:</strong> The default dashboard saw little use. Sales, service, and operations all dumped raw data into their own Monday morning spreadsheets instead. Meanwhile, leadership was pushing for a conversational AI interface that users weren't ready to trust.</li>
-            <li><strong>What I Built:</strong> Role-based starter templates that teams could customize, rearrange, and save. We kept AI tightly scoped to summarizing visible numbers on the screen rather than trying to replace dashboards with open-ended chat.</li>
-            <li><strong>The Result:</strong> 62% of active users built and saved multiple custom dashboards for distinct workflows, replacing manual spreadsheet exports and driving a 71% increase in sustained dashboard views.</li>
+            <li><strong>What I Built:</strong> Role-based starter templates that teams could customize, rearrange, and save. We kept AI tightly focused on summarizing visible numbers on the screen instead of pushing people into an open chat box.</li>
+            <li><strong>The Result:</strong> 62% of active users built and saved multiple custom dashboards for their daily routines. They stopped exporting raw numbers to spreadsheets, and sustained platform views jumped 71%.</li>
           </ul>
         </section>
 
@@ -473,7 +473,7 @@
 
           <div class="synthesis-matrix" aria-label="Research synthesis: comparison of operational cohorts">
             <div class="synthesis-matrix__header">
-              <span class="synthesis-matrix__tag">Discovery Synthesis Artefact</span>
+              <span class="synthesis-matrix__tag">User Research Findings</span>
               <span class="synthesis-matrix__meta">10 User &amp; Stakeholder Interviews</span>
             </div>
             <div style="overflow-x: auto;">
@@ -509,14 +509,14 @@
                       Needs multi-stage milestone tracking and billing status.
                     </td>
                     <td>
-                      Standard service queues cluttered the screen with noise, forcing accounting leads back into manual Monday Excel exports.
+                      Standard service queues cluttered the screen with noise. Overwhelmed accounting leads retreated straight back to manual Monday Excel exports.
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p class="synthesis-matrix__footer">
-              <strong>Synthesis takeaway:</strong> Rather than forcing different operational rhythms into rigid department silos, we designed role-based starter templates with drag-and-drop customization so both profiles could tailor their morning views in seconds.
+              <strong>Synthesis takeaway:</strong> Field dispatch and accounting follow fundamentally different daily rhythms. We built role-based starter templates with drag-and-drop cards so both roles could assemble an actionable morning view in seconds.
             </p>
           </div>
         </aside>
@@ -533,7 +533,7 @@
             </li>
             <li data-story-step>
               <span class="step-label">Build trust with data</span>
-              <p class="step-copy">We kept AI strictly tied to verifiable numbers on the screen. The model wasn't allowed to draw speculative conclusions; it could only summarize the visible data on the active dashboard. To reduce unsupported answers and keep users confident in the numbers, I worked with engineering to constrain the LLM context window exclusively to the JSON payload of the user's active widgets.</p>
+              <p class="step-copy">We kept AI strictly tied to verifiable numbers on the screen. The model wasn't allowed to draw speculative conclusions; it could only summarize the visible data on the active dashboard. To keep users confident in the numbers, I worked with engineering so the AI could only read data from the charts currently visible on the user's screen.</p>
             </li>
           </ul>
 
@@ -560,7 +560,7 @@
             <video autoplay muted playsinline loop preload="auto" width="1440" height="754" poster="../assets/case-studies/dashboards/generate-report-poster.webp" aria-label="Demonstration of generating an AI summary report based on visible dashboard widgets">
               <source src="../assets/case-studies/dashboards/generate-report.mp4" type="video/mp4">
             </video>
-            <figcaption>The AI summary only pulls from active charts on the screen, making it easy to fact-check in seconds.</figcaption>
+            <figcaption>The AI summary pulls strictly from charts active on the canvas. Operators can verify every claim in seconds.</figcaption>
           </figure>
         </section>
 
@@ -614,7 +614,7 @@
                   </div>
                 </div>
                 <p class="split-preview-caption">
-                  <strong>The Operational Anchor:</strong> Field managers glance at verified numbers at 7:00 AM without having to formulate an open prompt.
+                  <strong>The Morning Dashboard:</strong> Field managers glance at verified numbers at 7:00 AM without having to formulate an open prompt.
                 </p>
               </div>
 
@@ -634,7 +634,7 @@
                   </div>
                 </div>
                 <p class="split-preview-caption">
-                  <strong>The Synthesis Layer:</strong> Summaries are limited to the active dashboard data so users can compare them with the source numbers.
+                  <strong>The AI Summary:</strong> Highlights are tied strictly to the active charts on screen, so users can compare them directly with the source numbers.
                 </p>
               </div>
             </div>
@@ -705,10 +705,10 @@
             </div>
           </div>
           <p class="impact-note" style="margin-top: 14px; font-size: 0.9rem; color: var(--text-secondary);">
-            Rather than relying on short-term launch spikes, we measured adoption depth: 62% of users actively configured multiple saved dashboards (such as a morning dispatch view alongside a monthly margin tracker), sustaining high engagement over time.
+            We looked past initial launch curiosity to track true adoption depth. 62% of users actively configured and saved multiple dashboards (such as a morning dispatch view alongside a monthly margin tracker). Sustained platform views held steady week over week.
           </p>
           <p>
-            Users reached an average of two customizations per chart, showing they were actively tailoring widgets to answer specific questions about their projects.
+            Users reached an average of two customizations per chart. Operators adapted widgets to answer specific daily questions about their own jobs.
           </p>
           <p>
             Product metrics showed an interesting split in daily habits. Managers used the regular charts every single morning to plan truck routes and check tickets. The AI summary button sat quiet during the week, then spiked at the end of every month and quarter when department heads had to compile executive updates for leadership.
@@ -728,15 +728,15 @@
             <h2>Lesson</h2>
           </div>
           <p>
-            It’s easy to get swept up in technology trends, especially when executive teams are excited to ship something with "AI" on the landing page. But our user research gave us clear cover to push back. Integrators didn't want a chatbot; they wanted to know if their morning deliveries were late and whether their service jobs were profitable. By treating AI as a tool that summarizes visible chart data rather than an all-knowing chat assistant, we built something operators could actually trust and use every day.
+            It’s easy to get swept up in technology trends, especially when executive teams are excited to ship something with "AI" on the landing page. But our user research gave us clear cover to push back. Integrators didn't want a chatbot; they wanted to know if their morning deliveries were late and whether their service jobs were profitable. We treated AI as an on-demand summary tool for visible charts, not an ungrounded conversational agent. Anchoring outputs to real operational metrics gave managers data they could verify and trust every morning.
           </p>
         </section>
 
         <section id="next-steps" aria-label="Roadmap/Next" class="section--alt">
           <div class="section-divider">
-            <h2>Next Steps</h2>
+            <h2>What's Next</h2>
           </div>
-          <p>The dashboards are now a released product feature. The main lesson was to give people useful dashboards first, then add AI where it helped them interpret the numbers. I would carry that approach into future reporting work rather than start with an open-ended prompt box.</p>
+          <p>Now that the core dashboards and summaries are in production, the next priorities are scheduled email digests for weekly executive reviews and letting users share custom dashboard templates across different regional branches.</p>
         </section>
 
         <a href="inventory.html" class="case-study-next" aria-label="Next Case Study: Inventory, Purchasing & Receiving">
@@ -749,7 +749,7 @@
             <span class="case-study-next__arrow" aria-hidden="true">→</span>
           </h3>
           <p class="case-study-next__desc">
-            Redesigning end-to-end stock tracking and receiving workflows to unblock enterprise pilot contracts and scale warehouse operations.
+            How connecting warehouse receiving to active project schedules unblocked six-figure enterprise pilot deals.
           </p>
         </a>
 
