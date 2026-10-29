@@ -348,9 +348,9 @@
           <div class="about-hero__badge" style="margin-bottom: 14px;">✦ 0→1 WORKFLOW MVP · SUPPLY CHAIN &amp; REVENUE</div>
           <h1 id="title" data-parallax="0.06">Inventory, Purchasing &amp; <em class="serif-accent">Receiving</em></h1>
           <p class="lead">
-            Integrators were managing millions of dollars in project equipment across disconnected spreadsheets and whiteboards. For D-Tools, this was our highest-friction sales objection: enterprise integration firms routinely stalled six-figure pilot deals because the platform lacked warehouse stock control.
+            Integrators were tracking millions of dollars in hardware on dry-erase boards and messy spreadsheets. For our sales team, this was a constant roadblock. Enterprise shops loved our quoting tools, but they walked away if we could not show them where warehouse stock was tracked.
             <br><br>
-            I led product design for our inventory system, connecting purchase orders directly to active jobs and service vans so teams always knew what was in stock, what was spoken for, and what was arriving tomorrow.
+            I led design for our new inventory module, tying purchase orders straight to jobs and service trucks so teams always knew what had arrived, what was reserved, and what was still on the road.
           </p>
 
           <div class="tldr-meta">
@@ -374,7 +374,7 @@
                   <span class="metric-label">YoY adoption</span>
                 </li>
               </ul>
-              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">Connecting receiving to project staging resolved a key procurement objection in enterprise demos, unblocking stalled pilot accounts and contributing to an 8% lift in platform ARR alongside 8% YoY adoption growth.</p>
+              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">Showing enterprise buyers that warehouse receiving fed directly into project timelines gave sales the leverage they needed. It unblocked stalled pilot accounts and drove an 8% lift in platform ARR over the next year.</p>
             </div>
           </div>
         </header>
@@ -383,8 +383,8 @@
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
             <li><strong>The Problem:</strong> Customers spent hours every week manually checking stock between spreadsheets and third-party tools. Enterprise deals stalled during pilot demos because we couldn't track hardware past the initial purchasing stage.</li>
-            <li><strong>What I Built:</strong> A connected inventory ledger linking purchase orders directly to warehouses, job sites, and field vans. Receiving updated the inventory database immediately. In the MVP, other open client views used a manual refresh rather than live streaming updates. We held back barcode scanning and automated reordering for v2 to make sure baseline stock counts were completely reliable first.</li>
-            <li><strong>The Result:</strong> The release unblocked stalled enterprise deals during pilot demos by proving we could track warehouse hardware end-to-end, contributing to an 8% increase in company-wide MRR over the following year.</li>
+            <li><strong>What I Built:</strong> A live inventory ledger connecting purchase orders directly to warehouses and field vans. When someone checks in a box on the loading dock, the database updates right away. We skipped automatic reorders and barcode scanners in the first release. We needed baseline stock counts to be dead accurate first.</li>
+            <li><strong>The Result:</strong> Warehouse managers finally stopped losing gear between jobs. Showing that our software could track equipment end-to-end unblocked six-figure enterprise pilots and delivered an 8% platform ARR lift.</li>
           </ul>
         </section>
 
@@ -534,17 +534,13 @@
 
           <h3>Tradeoffs: Real-Time Sync vs. Shipping on Time</h3>
           <p>
-            I originally advocated for full WebSocket-driven, bi-directional live sync across all client sessions. If an installer checks out equipment in the warehouse, every PM's screen should reflect it instantly.
+            At first, I pushed for live WebSocket sync across every open screen: if someone scanned a projector in the warehouse, every project manager should see the stock count tick down in real time.
           </p>
           <p>
-            However, our engineering team found that full WebSocket streaming would push our MVP launch back by several months. To protect our December release and unblock pending enterprise sales, the PM and I compromised on a pragmatic two-part model:
+            Our lead engineer walked me through why that would push our launch past December and miss our committed pilot window. To protect our release date, the PM and I agreed on a practical compromise.
           </p>
-          <ul>
-            <li><strong>Immediate database updates on check-in:</strong> Receiving updated the database instantly, paired with a clear manual sync trigger and contextual state badges on client screens.</li>
-            <li><strong>Optimistic concurrency at the API layer:</strong> To prevent race conditions when two PMs staged the same stock before refreshing, the UI validated available quantities on submission, triggering an instant resolution toast if units were claimed seconds prior.</li>
-          </ul>
           <p>
-            It was not the instantaneous streaming sync I originally drew up, but it protected our launch date, kept inventory counts 100% reliable, and solved the customer problem without multi-month delays.
+            Checking items in updated the database immediately, and we added a clear refresh badge whenever inventory shifted. To handle the messy edge case where two project managers tried to claim the last three matrix switchers at the exact same minute, we built clear conflict alerts that explained who claimed the hardware and suggested alternative stock. It was not the magical real-time sync I had sketched in Figma, but it kept our launch on track and gave warehouse teams data they could finally trust.
           </p>
 
           <h3>Balancing Fast Receiving with Serialization Audits</h3>

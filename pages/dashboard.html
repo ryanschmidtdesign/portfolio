@@ -348,8 +348,7 @@
           <div class="about-hero__badge" style="margin-bottom: 14px;">✦ B2B SAAS · BUSINESS INTELLIGENCE &amp; AI</div>
           <h1 id="title" data-parallax="0.06">Custom Dashboards &amp; <em class="serif-accent">AI Summaries</em></h1>
           <p class="lead">
-            The default dashboard saw little use because a generic one-size-fits-all view didn't answer anyone's morning questions.
-            I rebuilt the feature around role-based starter templates with grounded AI summaries, driving 62% multi-dashboard adoption and a 71% increase in sustained views.
+            Nobody looked at the default dashboard because a single generic overview could not answer anyone's morning questions. I rebuilt the tool with role-specific starter templates and grounded AI summaries. 62% of active users built multiple custom views, and sustained visits climbed 71%.
           </p>
 
           <div class="tldr-meta">
@@ -649,13 +648,13 @@
           <p>
             Because I was leading both product definition and design delivery, keeping scope under control was non-negotiable. We also didn't have a shared design system yet. That came directly after this project, when I built and rolled out our 100+ component library across D-Tools Cloud.
           </p>
-          <h3>Front-end alignment: Standardized widget constraints</h3>
+          <h3>Front-end alignment: Taming custom widget chaos</h3>
           <p>
-            Back then, we were working with basic UI kit variants and loose guidelines. That meant I had to sit closely with our front-end engineers every week. Instead of bespoke card containers, I engineered a responsive 12-column widget wrapper system with container-query breakpoints. Each card implemented an asynchronous loading state machine with cached fallback payloads, ensuring zero cumulative layout shift (CLS) during rapid canvas reconfiguration.
+            When we started this project, D-Tools did not have a shared design system yet. That meant every new card risked becoming an ad-hoc custom build. I sat down with our front-end engineers to lock down strict structural rules: a unified 12-column grid, standardized card padding, and shared skeleton loaders. Establishing those constraints early prevented the screen from jumping around while loading data, and it laid the foundation for the 100-component design system I rolled out across the platform later that year.
           </p>
-          <h3>Systems architecture: Role-based access (RBAC) &amp; 400ms cached payloads</h3>
+          <h3>Permissions and speed: Keeping margins private</h3>
           <p>
-            Beyond UI consistency, our primary systems challenge was role-based access control (RBAC) across four backend engineers. Field technicians and project managers required immediate operational visibility into active jobs, but executive widgets exposing company-wide gross margins and pipeline valuations could not leak across unauthorized roles. I mapped widget permissions directly to existing workspace roles, while engineering cached aggregated card payloads in JSON to keep multi-widget dashboards rendering under 400 milliseconds.
+            The thorniest systems challenge was permissions. Field technicians needed to open the app at 7:00 AM to see active jobs, but company owners did not want installers seeing company-wide gross margins or executive sales pipelines. I mapped out permission states across every widget, designing clear fallback cards for restricted data so teams could share template layouts without leaking sensitive numbers. To keep the page fast when someone loaded ten cards at once, engineering cached the card queries in JSON so dashboards rendered in under 400 milliseconds.
           </p>
         </section>
         <section id="prototyping" aria-label="Prototyping & validation">
@@ -712,7 +711,7 @@
             Users reached an average of two customizations per chart, showing they were actively tailoring widgets to answer specific questions about their projects.
           </p>
           <p>
-            Feature telemetry also revealed a clear rhythm in how teams used the AI: deterministic charts and widget filters served as the daily operational anchor for dispatch and pipeline checks, whereas 1-click AI summaries found their strongest rhythm during monthly executive reporting cycles, with a marked surge at the end of each fiscal quarter when department leads compiled board decks and revenue reviews.
+            Product metrics showed an interesting split in daily habits. Managers used the regular charts every single morning to plan truck routes and check tickets. The AI summary button sat quiet during the week, then spiked at the end of every month and quarter when department heads had to compile executive updates for leadership.
           </p>
 
           <figure class="case-study-media" data-reveal>

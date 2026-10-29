@@ -426,7 +426,7 @@
           </div>
 
           <p>
-            I organized the project around clear technical guardrails: defining tokens first, standardizing layout grids, and testing interactions directly in the browser.
+            I treated the code like a production design system. I set up design tokens for spacing and type first, locked in modular layout grids, and tested components directly in Chrome.
           </p>
 
           <ul>
@@ -445,7 +445,7 @@
           </div>
 
           <p>
-            I treated the codebase like a design system from day one: defining tokens first, standardizing layout grids, and reusing markup patterns across all four case studies so every new section snapped into place cleanly.
+            Every case study shares a single architectural template. By keeping markup patterns consistent across all four projects, adding a new section was like snapping Lego bricks together.
           </p>
 
           <div class="sa-funnel">
@@ -848,15 +848,18 @@
             <figcaption>The original chat widget from the previous portfolio before moving to vector search.</figcaption>
           </figure>
           <p>
-            I architected a custom serverless API gateway (<code>api/chat.js</code>) using Supabase and pgvector. Project notes and case studies are chunked and embedded via Gemini embeddings. The endpoint implements an in-memory TTL query cache, IP sliding-window rate limiting, and an RPC cosine similarity search (<code>match_portfolio_chunks</code>) to retrieve targeted context vectors in under 200ms before streaming answers via Server-Sent Events.
+            The original prototype dumped my entire resume and project notes into one massive prompt. It worked for simple questions, but it was slow, expensive, and frequently mixed up details from different projects.
           </p>
           <p>
-            Getting the tone and accuracy right took extensive test-driven development. I authored 61 automated Vitest tests covering intent classification guardrails, role-fit mapping heuristics, SSRF private IP blocks, and numerical metric preservation so the bot declines out-of-scope queries and never hallucinates numbers.
+            To fix it, I broke my case study notes into structured chunks and stored them in Supabase using vector search. Now, when a recruiter or hiring manager asks a specific question (like how I approached design tokens or why we pushed back on an AI-first dashboard), the endpoint retrieves only the relevant project notes before generating a response with Gemini in under 200 milliseconds.
+          </p>
+          <p>
+            To keep the bot honest, I wrote 61 automated Vitest tests covering edge cases, role fit, and metric accuracy. If someone asks something outside my background, the assistant politely declines instead of making up answers. Building this gave me firsthand appreciation for the latency and prompt guardrails our engineering teams deal with every day.
           </p>
           <aside class="callout callout--accent">
             <h3>Tradeoff</h3>
             <p>
-              Retrieval and security plumbing added setup overhead, but it transformed the assistant from an unpredictable toy into a hardened, context-grounded interface that mirrors enterprise production standards.
+              Setting up vector search and test guardrails took extra time upfront. But it turned a generic chatbot into a grounded tool that actually reflects how I work.
             </p>
           </aside>
         </section>
