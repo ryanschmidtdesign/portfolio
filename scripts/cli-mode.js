@@ -152,7 +152,7 @@
                     background: transparent;
                     font-family: var(--font-sans);
                     font-size: 0.98rem;
-                    font-weight: 450;
+                    font-weight: var(--weight-medium);
                     color: var(--text, #131211);
                     outline: none;
                     padding: 0;
@@ -161,7 +161,7 @@
                 }
 
                 .rs-cmd-input::placeholder {
-                    color: var(--text-muted, #8B8780);
+                    color: #68635B;
                     font-weight: 400;
                 }
 

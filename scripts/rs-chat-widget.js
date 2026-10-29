@@ -68,9 +68,10 @@
       .panel {
         position: fixed;
         top: auto;
-        right: 20px;
+        left: 50%;
+        right: auto;
         bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-        width: min(580px, calc(100vw - 28px));
+        width: min(692px, calc(100vw - 28px));
         height: min(860px, calc(100vh - 40px));
         max-height: calc(100vh - 40px);
         display: flex;
@@ -89,7 +90,7 @@
         visibility: hidden;
         opacity: 0;
         pointer-events: none;
-        transform: translateY(18px) scale(0.98);
+        transform: translateX(-50%) translateY(18px) scale(0.98);
         transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease, visibility 220ms ease;
         z-index: 2147482999;
         overflow: hidden;
@@ -104,13 +105,24 @@
           height: calc(100vh - 20px);
           max-height: calc(100vh - 20px);
           border-radius: 10px;
+          transform: translateY(18px) scale(0.98);
+        }
+        .panel.open {
+          transform: translateY(0) scale(1);
         }
       }
       .panel.open {
         visibility: visible;
         opacity: 1;
         pointer-events: auto;
-        transform: translateY(0) scale(1);
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .panel, .panel.open, * {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
       }
       .chat-body {
         position: relative;

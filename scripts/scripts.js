@@ -843,13 +843,22 @@ setTimeout(() => {
     });
   }
 
-  // 2. Radial Cursor Spotlight on Constraint & Evidence Cards
+  // 2. Radial Cursor Spotlight on Constraint & Evidence Cards (throttled with rAF)
   const spotlightCards = document.querySelectorAll('.constraint-card, .evidence-card');
   spotlightCards.forEach((card) => {
+    let rafId = null;
     card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-      card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-    });
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        const x = `${e.clientX - rect.left}px`;
+        const y = `${e.clientY - rect.top}px`;
+        card.style.setProperty('--mouse-x', x);
+        card.style.setProperty('--mouse-y', y);
+        card.style.setProperty('--x', x);
+        card.style.setProperty('--y', y);
+        rafId = null;
+      });
+    }, { passive: true });
   });
 })();
