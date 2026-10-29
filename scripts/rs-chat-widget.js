@@ -64,7 +64,7 @@
       }
       .ui *, .ui *::before, .ui *::after { box-sizing: inherit; }
 
-      /* Drawer — Obsidian Liquid Glass Console */
+      /* Drawer — Warm Ceramic & Paper Frosted Glass Console */
       .panel {
         position: fixed;
         top: auto;
@@ -76,19 +76,16 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        background:
-          radial-gradient(520px circle at 50% 0%, rgba(224, 107, 62, 0.08), transparent 70%),
-          linear-gradient(180deg, rgba(16, 18, 24, 0.88) 0%, rgba(6, 7, 11, 0.96) 100%);
-        backdrop-filter: blur(28px) saturate(190%) contrast(105%);
-        -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
-        color: #F5F5F7;
-        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        color: var(--text, #131211);
+        border: 1px solid rgba(28, 22, 18, 0.12);
         box-shadow:
-          0 36px 90px -12px rgba(0, 0, 0, 0.85),
-          0 0 32px -8px rgba(200, 90, 50, 0.1),
-          inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
-          inset 0 -1px 0 0 rgba(0, 0, 0, 0.85);
-        border-radius: 8px;
+          0 24px 64px -12px rgba(28, 20, 15, 0.22),
+          0 4px 16px rgba(28, 20, 15, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 1);
+        border-radius: 12px;
         visibility: hidden;
         opacity: 0;
         pointer-events: none;
@@ -106,7 +103,7 @@
           width: auto;
           height: calc(100vh - 20px);
           max-height: calc(100vh - 20px);
-          border-radius: 8px;
+          border-radius: 10px;
         }
       }
       .panel.open {
@@ -130,9 +127,9 @@
         align-items: center;
         justify-content: space-between;
         padding: 13px 18px 11px;
-        background: rgba(255, 255, 255, 0.025);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        color: #F5F5F7;
+        background: rgba(28, 22, 18, 0.02);
+        border-bottom: 1px solid rgba(28, 22, 18, 0.08);
+        color: var(--text, #131211);
         flex-shrink: 0;
       }
       .hdr-title-group {
@@ -149,21 +146,21 @@
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: var(--accent, #E06B3E);
-        box-shadow: 0 0 10px rgba(224, 107, 62, 0.85);
+        background: var(--accent, #C85A32);
+        box-shadow: 0 0 6px rgba(200, 90, 50, 0.4);
       }
       .hdr-title {
         margin: 0;
-        font-weight: 700;
+        font-weight: 600;
         font-size: 13.5px;
         letter-spacing: -0.01em;
-        color: #F5F5F7;
+        color: var(--text, #131211);
       }
       .hdr-sub {
         margin: 0;
         font-family: var(--font-mono);
         font-size: 10px;
-        color: #8E929F;
+        color: var(--text-secondary, #5C5750);
         letter-spacing: 0.05em;
         text-transform: uppercase;
       }
@@ -175,10 +172,10 @@
       .hdr-close {
         height: 28px;
         padding: 0 9px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.05);
-        color: #B4B8C5;
+        border: 1px solid rgba(28, 22, 18, 0.12);
+        border-radius: 6px;
+        background: #FFFFFF;
+        color: var(--text-secondary, #5C5750);
         font-family: var(--font-mono);
         font-size: 10.5px;
         font-weight: 600;
@@ -188,16 +185,17 @@
         align-items: center;
         gap: 4px;
         flex-shrink: 0;
+        box-shadow: 0 1px 3px rgba(28, 20, 15, 0.04);
         transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .hdr-close:hover {
-        background: rgba(200, 90, 50, 0.25);
-        border-color: rgba(224, 107, 62, 0.55);
-        color: #FFFFFF;
+        background: rgba(200, 90, 50, 0.1);
+        border-color: rgba(200, 90, 50, 0.35);
+        color: var(--accent, #C85A32);
       }
       .hdr-close:focus-visible {
         outline: none;
-        box-shadow: 0 0 0 3px rgba(200, 90, 50, 0.35);
+        box-shadow: 0 0 0 2px var(--accent);
       }
 
       /* Messages */
@@ -208,13 +206,11 @@
         flex-direction: column;
         gap: 12px;
         padding: 16px 18px 14px;
-        background: transparent;
+        background: #FAF8F5;
         flex: 1 1 auto;
         min-height: 0;
         overflow-y: auto;
         overflow-x: hidden;
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14px, #000 calc(100% - 14px), transparent 100%);
-        mask-image: linear-gradient(to bottom, transparent 0%, #000 14px, #000 calc(100% - 14px), transparent 100%);
       }
       .msg {
         margin: 0;
@@ -224,21 +220,19 @@
         overflow-wrap: anywhere;
         padding: 11px 14px;
         border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
         font-size: 14px;
         line-height: 1.56;
       }
       .msg.user {
         white-space: pre-wrap;
         align-self: flex-end;
-        background: linear-gradient(180deg, rgba(200, 90, 50, 0.24) 0%, rgba(160, 64, 30, 0.18) 100%);
-        border: 1px solid rgba(224, 107, 62, 0.45);
-        border-right: 3px solid #FF8A5B;
-        color: #FFFFFF;
+        background: #FFFFFF;
+        border: 1px solid rgba(28, 22, 18, 0.12);
+        border-right: 3px solid var(--accent, #C85A32);
+        color: var(--text, #131211);
         border-bottom-right-radius: 3px;
         font-weight: 500;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 16px rgba(200, 90, 50, 0.14);
+        box-shadow: 0 2px 8px rgba(28, 20, 15, 0.05);
       }
       .msg.user::before {
         content: "You";
@@ -247,7 +241,7 @@
         font-size: 10px;
         font-weight: 700;
         letter-spacing: 0.04em;
-        color: #FFB08E;
+        color: var(--accent, #C85A32);
         margin-bottom: 4px;
         opacity: 0.95;
       }
@@ -255,14 +249,14 @@
         align-self: flex-start;
         width: 100%;
         max-width: 100%;
-        background: linear-gradient(180deg, rgba(22, 25, 34, 0.72) 0%, rgba(12, 14, 20, 0.86) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.11);
-        border-left: 2.5px solid #E06B3E;
-        color: #F2F3F7;
+        background: #FFFFFF;
+        border: 1px solid rgba(28, 22, 18, 0.1);
+        border-left: 3px solid var(--accent, #C85A32);
+        color: var(--text, #131211);
         position: relative;
         line-height: 1.6;
         border-bottom-left-radius: 3px;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09), 0 8px 24px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 2px 8px rgba(28, 20, 15, 0.04);
       }
       .msg.bot:not([data-seeded="true"])::before {
         content: "Portfolio Assistant";
@@ -271,26 +265,26 @@
         font-size: 10px;
         font-weight: 700;
         letter-spacing: 0.04em;
-        color: #A5A9B8;
+        color: var(--text-secondary, #5C5750);
         margin-bottom: 6px;
         padding-bottom: 5px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        border-bottom: 1px solid rgba(28, 22, 18, 0.06);
       }
       .msg.bot strong {
-        color: #FFFFFF;
+        color: var(--text, #131211);
         font-weight: 700;
       }
       .msg.bot a {
-        color: #FFA07A;
+        color: var(--accent, #C85A32);
         text-decoration: underline;
-        text-decoration-color: rgba(255, 160, 122, 0.4);
+        text-decoration-color: rgba(200, 90, 50, 0.4);
         text-underline-offset: 2px;
         font-weight: 600;
         transition: color 150ms ease, text-decoration-color 150ms ease;
       }
       .msg.bot a:hover {
-        color: #FFFFFF;
-        text-decoration-color: #FFA07A;
+        color: var(--accent-hover, #B54E28);
+        text-decoration-color: var(--accent, #C85A32);
       }
       .chat-action-bar {
         display: flex;
@@ -300,10 +294,10 @@
         gap: 8px;
         margin-top: 10px;
         padding-top: 8px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid rgba(28, 22, 18, 0.06);
         font-family: var(--font-mono);
         font-size: 10.5px;
-        color: rgba(247, 245, 240, 0.55);
+        color: var(--text-secondary, #5C5750);
       }
       .chat-copy-btn {
         display: inline-flex;
@@ -311,12 +305,12 @@
         gap: 4px;
         padding: 3px 8px;
         border-radius: 4px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: #F7F5F0;
+        border: 1px solid rgba(28, 22, 18, 0.12);
         font-family: var(--font-mono);
         font-size: 10.5px;
         font-weight: 600;
-        color: #C4C8D6;
+        color: var(--text-secondary, #5C5750);
         cursor: pointer;
         transition: all 140ms ease;
       }
@@ -332,7 +326,7 @@
       }
       .chat-telemetry-tag {
         font-size: 10px;
-        color: #8E93A4;
+        color: var(--text-muted, #7C7A75);
         letter-spacing: 0.05em;
         text-transform: uppercase;
       }
@@ -343,9 +337,9 @@
         font-size: 0.88em;
         font-weight: 700;
         letter-spacing: -0.01em;
-        color: #FFA07A;
-        background: rgba(200, 90, 50, 0.25);
-        border: 1px solid rgba(200, 90, 50, 0.4);
+        color: var(--accent, #C85A32);
+        background: rgba(200, 90, 50, 0.09);
+        border: 1px solid rgba(200, 90, 50, 0.22);
         padding: 1px 5px;
         border-radius: 4px;
         margin: 0 1px;
@@ -357,9 +351,9 @@
       .msg li:last-child { margin-bottom: 0; }
 
       .msg.bot[data-seeded="true"] {
-        background: linear-gradient(180deg, rgba(24, 27, 38, 0.92) 0%, rgba(12, 14, 20, 0.96) 100%);
-        border: 1px solid rgba(224, 107, 62, 0.32);
-        border-left: 3px solid #E06B3E;
+        background: #FFFFFF;
+        border: 1px solid rgba(28, 22, 18, 0.12);
+        border-left: 3px solid var(--accent, #C85A32);
         padding: 14px 16px;
       }
       .seed-eyebrow {
@@ -371,7 +365,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: #FF8A5B;
+        color: var(--accent, #C85A32);
         margin-bottom: 6px;
       }
       .seed-badges {
@@ -387,42 +381,42 @@
         letter-spacing: 0.04em;
         padding: 3px 8px;
         border-radius: 4px;
-        background: rgba(255, 255, 255, 0.05);
-        color: #D0D4E0;
-        border: 1px solid rgba(255, 255, 255, 0.11);
+        background: rgba(28, 22, 18, 0.04);
+        color: var(--text-secondary, #5C5750);
+        border: 1px solid rgba(28, 22, 18, 0.1);
       }
 
-      /* Pills — Machined Protocol Quick-Chips */
+      /* Pills — Quick-Chips */
       .pills {
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
         padding: 9px 18px 8px;
         flex: 0 0 auto;
-        background: rgba(5, 6, 9, 0.5);
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        background: #FAF8F5;
+        border-top: 1px solid rgba(28, 22, 18, 0.07);
       }
       .pill {
         font-family: var(--font-sans);
         font-size: 11.5px;
         font-weight: 500;
-        color: #D5D8E4;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.11);
+        color: var(--text-secondary, #5C5750);
+        background: #FFFFFF;
+        border: 1px solid rgba(28, 22, 18, 0.12);
         border-radius: 6px;
         padding: 5px 10px;
         cursor: pointer;
         white-space: nowrap;
         opacity: 0;
         transform: translateY(8px) scale(0.98);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 2px 5px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 1px 3px rgba(28, 20, 15, 0.04);
         transition: opacity 200ms ease, transform 200ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
       }
       .pill::before {
         content: "❯ ";
         font-family: var(--font-mono);
         font-size: 10px;
-        color: #E06B3E;
+        color: var(--accent, #C85A32);
         opacity: 0.85;
       }
       .pills.show .pill {
@@ -434,25 +428,25 @@
       .pills.show .pill:nth-child(3) { transition-delay: 100ms; }
       .pill:hover,
       .pill:focus-visible {
-        background: rgba(200, 90, 50, 0.22);
-        border-color: rgba(224, 107, 62, 0.65);
-        color: #FFFFFF;
+        background: rgba(200, 90, 50, 0.08);
+        border-color: rgba(200, 90, 50, 0.4);
+        color: var(--accent, #C85A32);
         transform: translateY(-1px);
       }
       .pill:active {
         transform: scale(0.97);
       }
 
-      /* Input & Send — Recessed Terminal Trench */
+      /* Input & Send */
       .inp {
         display: flex;
         align-items: center;
         gap: 0;
         padding: 10px 16px 14px;
-        background: rgba(5, 6, 9, 0.78);
+        background: #FFFFFF;
         box-sizing: border-box;
         position: relative;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid rgba(28, 22, 18, 0.08);
       }
       .inp-prompt {
         position: absolute;
@@ -460,8 +454,7 @@
         font-family: var(--font-mono);
         font-size: 13px;
         font-weight: 700;
-        color: #E06B3E;
-        text-shadow: 0 0 8px rgba(224, 107, 62, 0.7);
+        color: var(--accent, #C85A32);
         pointer-events: none;
         z-index: 2;
       }
@@ -469,9 +462,9 @@
         flex: 1;
         font: inherit;
         font-size: 13.5px;
-        background: #040508;
-        border: 1px solid rgba(255, 255, 255, 0.13);
-        color: #F7F5F0;
+        background: #FAF8F5;
+        border: 1px solid rgba(28, 22, 18, 0.12);
+        color: var(--text, #131211);
         border-radius: 8px;
         white-space: nowrap;
         overflow: hidden;
@@ -480,17 +473,16 @@
         height: 42px;
         box-sizing: border-box;
         -webkit-appearance: none;
-        box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.85);
+        box-shadow: inset 0 1px 2px rgba(28, 20, 15, 0.04);
         transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
       }
       .text:focus {
         outline: none;
-        border-color: var(--accent);
-        background: rgba(0, 0, 0, 0.45);
+        border-color: var(--accent, #C85A32);
+        background: #FFFFFF;
         box-shadow:
-          inset 0 1px 3px rgba(0, 0, 0, 0.5),
-          0 0 0 2px var(--accent),
-          0 0 12px rgba(200, 90, 50, 0.3);
+          0 0 0 2px var(--accent, #C85A32),
+          0 0 8px rgba(200, 90, 50, 0.15);
       }
       .text.shake {
         animation: shake 0.4s ease;
@@ -503,7 +495,7 @@
         80% { transform: translateX(6px); }
       }
       .text::placeholder {
-        color: rgba(247, 245, 240, 0.42);
+        color: var(--text-muted, #8B8780);
         font-weight: 400;
       }
       .send {
@@ -512,7 +504,7 @@
         border-radius: 6px;
         width: 30px;
         height: 30px;
-        background: var(--accent);
+        background: var(--accent, #C85A32);
         color: #FFFFFF;
         border: none;
         font-size: 1rem;
@@ -521,13 +513,13 @@
         place-items: center;
         flex-shrink: 0;
         box-sizing: border-box;
-        box-shadow: 0 2px 8px rgba(200, 90, 50, 0.4);
+        box-shadow: 0 2px 6px rgba(200, 90, 50, 0.3);
         transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background 160ms ease, box-shadow 160ms ease;
       }
       .send:hover {
         transform: translateY(-1px);
-        background: var(--accent-hover);
-        box-shadow: 0 4px 14px rgba(200, 90, 50, 0.6);
+        background: var(--accent-hover, #B54E28);
+        box-shadow: 0 4px 10px rgba(200, 90, 50, 0.45);
       }
       .send:active {
         transform: scale(0.96);
@@ -542,9 +534,9 @@
         position: fixed;
         inset: 0;
         z-index: 2147482998;
-        background: rgba(10, 8, 7, 0.55);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
+        background: rgba(28, 22, 18, 0.42);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -564,8 +556,8 @@
         gap: 6px;
         margin: 12px 0 4px;
         padding: 14px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: #FAF8F5;
+        border: 1px solid rgba(28, 22, 18, 0.1);
         border-radius: 10px;
         position: relative;
         overflow: hidden;
@@ -573,7 +565,7 @@
       .hire-card-title {
         font-weight: 700;
         font-size: 14px;
-        color: #F7F5F0;
+        color: var(--text, #131211);
       }
       .hire-card-actions {
         display: flex;
@@ -600,23 +592,23 @@
         transform: translateY(-1px);
       }
       .hire-card-actions a:last-child {
-        background: rgba(255, 255, 255, 0.1);
-        color: #F7F5F0;
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(28, 22, 18, 0.05);
+        color: var(--text, #131211);
+        border: 1px solid rgba(28, 22, 18, 0.12);
       }
 
       /* Sources footnote */
       .chat-sources {
         margin-top: 10px;
         padding-top: 8px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid rgba(28, 22, 18, 0.08);
       }
       .chat-sources-label {
         font-family: var(--font-mono);
         font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: rgba(247, 245, 240, 0.55);
+        color: var(--text-secondary, #5C5750);
         font-weight: 600;
         margin-bottom: 4px;
       }
@@ -638,8 +630,8 @@
         font-weight: 500;
         padding: 2px 8px;
         border-radius: 5px;
-        background: rgba(200, 90, 50, 0.22);
-        color: #FFA07A;
+        background: rgba(200, 90, 50, 0.1);
+        color: var(--accent, #C85A32);
         text-decoration: none;
       }
       .chat-sources-list a:hover {
@@ -660,7 +652,7 @@
         gap: 8px;
       }
       .loading-text {
-        color: rgba(247, 245, 240, 0.65);
+        color: var(--text-secondary, #5C5750);
         font-size: 13px;
         font-weight: 500;
       }
@@ -689,16 +681,16 @@
         font-weight: 600;
         padding: 3px 9px;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        color: rgba(247, 245, 240, 0.7);
+        background: rgba(28, 22, 18, 0.05);
+        border: 1px solid rgba(28, 22, 18, 0.12);
+        color: var(--text-secondary, #5C5750);
         cursor: pointer;
         transition: all 0.15s ease;
       }
       .stop-btn:hover {
-        background: rgba(220, 38, 38, 0.2);
-        border-color: rgba(220, 38, 38, 0.4);
-        color: #F87171;
+        background: rgba(220, 38, 38, 0.1);
+        border-color: rgba(220, 38, 38, 0.3);
+        color: #DC2626;
       }
 
       /* Blinking cursor */
@@ -1134,7 +1126,7 @@ if (savedHist.length > 0) {
     '/': [
       "What did Ryan ship at D-Tools? (+71% engagement)",
       "How did he lift AI adoption by 500% at i4cp?",
-      "Walk me through the real-time inventory MVP (+18% MRR)",
+      "Walk me through the real-time inventory MVP (+8% MRR)",
       "Is Ryan a fit for a Senior / Staff Product Designer role?"
     ]
   };
@@ -1794,8 +1786,8 @@ if (savedHist.length > 0) {
         const qLower = (text || '').toLowerCase();
         if (qLower.includes('71%') || qLower.includes('engagement') || qLower.includes('dashboard')) {
           ans = "At D-Tools Cloud, Ryan redesigned static reporting into role-based executive dashboards with AI summaries based on visible widget data. The redesign drove a **+71% lift in dashboard engagement** and **62% multi-dashboard adoption**.";
-        } else if (qLower.includes('18%') || qLower.includes('revenue') || qLower.includes('mrr') || qLower.includes('inventory')) {
-          ans = "For D-Tools Cloud, Ryan connected purchasing, receiving, and stock tracking in one workflow. The release removed a recurring sales blocker and contributed to an **+18% increase in company-wide MRR** over the following year.";
+        } else if (qLower.includes('8%') || qLower.includes('18%') || qLower.includes('revenue') || qLower.includes('mrr') || qLower.includes('inventory')) {
+          ans = "For D-Tools Cloud, Ryan connected purchasing, receiving, and stock tracking in one workflow. The release removed a recurring sales blocker and contributed to an **+8% increase in company-wide MRR** over the following year.";
         } else if (qLower.includes('500%') || qLower.includes('i4cp') || qLower.includes('member portal')) {
           ans = "At i4cp, Ryan reworked navigation and research discovery around member priorities, bringing Ahri into the main discovery experience. Following launch, **Ahri sessions increased 500%** and **daily activity doubled**.";
         } else if (qLower.includes('research') || qLower.includes('process')) {
@@ -1805,7 +1797,7 @@ if (savedHist.length > 0) {
         } else if (qLower.includes('fit') || qLower.includes('role') || qLower.includes('staff') || qLower.includes('senior')) {
           ans = "Ryan brings 6+ years of experience leading product design for B2B SaaS platforms, design tokens, and AI workflows. He bridges strategic product vision with production craft in code.";
         } else {
-          ans = "Ryan Schmidt is a senior product designer & UX engineer with 6+ years designing B2B SaaS platforms and design systems. Explore his featured work above: **Dashboards (+71% Engagement)**, **Inventory (+18% MRR)**, **i4cp Discovery (+500% Sessions)**, and **Building in Code**.";
+          ans = "Ryan Schmidt is a senior product designer & UX engineer with 6+ years designing B2B SaaS platforms and design systems. Explore his featured work above: **Dashboards (+71% Engagement)**, **Inventory (+8% MRR)**, **i4cp Discovery (+500% Sessions)**, and **Building in Code**.";
         }
       }
 

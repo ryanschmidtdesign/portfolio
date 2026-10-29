@@ -381,7 +381,7 @@ describe('api/chat serverless helpers', () => {
     expect(allowlist.size).toBeGreaterThan(10);
 
     // Documented metrics pass through
-    expect(validateAnswerMetrics('He achieved **+18%** recurring revenue.', allowlist)).toBe('He achieved **+18%** recurring revenue.');
+    expect(validateAnswerMetrics('He achieved **+8%** recurring revenue.', allowlist)).toBe('He achieved **+8%** recurring revenue.');
     expect(validateAnswerMetrics('He drove **+500%** Ahri sessions.', allowlist)).toBe('He drove **+500%** Ahri sessions.');
     expect(validateAnswerMetrics('He led **10 interviews** with power users.', allowlist)).toBe('He led **10 interviews** with power users.');
 

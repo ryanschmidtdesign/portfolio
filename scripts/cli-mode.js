@@ -562,12 +562,12 @@
                     group: 'Case Studies',
                     icon: '02',
                     title: 'Inventory, Purchasing & Receiving (D-Tools Cloud)',
-                    sub: '+18% Recurring Revenue · 8% YoY adoption growth',
+                    sub: '+8% Recurring Revenue · 8% YoY adoption growth',
                     badge: 'Case Study',
-                    kpi: '+18% MRR',
+                    kpi: '+8% MRR',
                     kpiType: 'emerald',
                     targetPath: 'pages/inventory.html',
-                    keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain warehouse enterprise 18% mrr recurring revenue',
+                    keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain warehouse enterprise 8% mrr recurring revenue',
                     action: () => { window.location.href = `${prefix}inventory.html`; }
                 },
                 {

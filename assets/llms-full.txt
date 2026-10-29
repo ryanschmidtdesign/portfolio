@@ -92,7 +92,7 @@ https://ryanschmidt.design/pages/inventory
 **Validation:** 3 rounds of prototype tests. Quantity-first by default, asset-level when needed.
 
 **Impact:**
-- Contributed to an 18% increase in recurring revenue and 8% year-over-year adoption growth
+- Contributed to an 8% increase in recurring revenue and 8% year-over-year adoption growth
 - MVP shipped: December 2024
 
 **Lessons:** Operational products earn trust through state clarity. Users don't just need to know how many: they need to understand why the number is trustworthy.

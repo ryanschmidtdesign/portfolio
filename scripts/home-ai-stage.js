@@ -61,15 +61,15 @@
     {
       id: 'inventory',
       eyebrow: '0→1 WORKFLOW MVP · D-TOOLS CLOUD',
-      metric: '+18% Recurring Revenue',
+      metric: '+8% Recurring Revenue',
       secondaryMetric: '8% YoY Adoption Growth',
       title: 'Inventory, Purchasing & Receiving',
       summary:
-        'Connected purchasing, receiving, and stock tracking in one workflow. The release contributed to an 18% increase in company-wide MRR over the following year.',
+        'Connected purchasing, receiving, and stock tracking in one workflow. The release contributed to an 8% increase in company-wide MRR over the following year.',
       tags: ['0→1 MVP', 'Field Research', 'Auditable Workflows'],
       url: 'pages/inventory.html',
       image: 'assets/case-studies/inventory/inventory-assets-thumb.webp',
-      aiPrompt: 'Why did Ryan focus the Inventory MVP on purchasing and receiving, and how did it contribute to +18% recurring revenue?'
+      aiPrompt: 'Why did Ryan focus the Inventory MVP on purchasing and receiving, and how did it contribute to +8% recurring revenue?'
     },
     {
       id: 'ai-portfolio',
@@ -165,7 +165,7 @@
     html = html.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
     html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-    // KPI & Metric Telemetry Badges (e.g., +71%, +500%, +18%, 62%, 92%, +38%)
+    // KPI & Metric Telemetry Badges (e.g., +71%, +500%, +8%, 62%, 92%, +38%)
     html = html.replace(/(\+?\d+(?:\.\d+)?%)/g, '<span class="home-chat-kpi-badge">$1</span>');
 
     html = html.replace(/\u0000LINK(\d+)\u0000/g, (match, idx) => {
@@ -531,7 +531,7 @@
     `;
 
     stageStream.appendChild(showcase);
-    attachBotToolbar(showcase, () => 'Featured Case Studies by Ryan Schmidt:\n- Custom Dashboards & AI Summaries (+71% Dashboard Engagement)\n- i4cp Member Portal & Research Discovery (+500% Ahri Sessions)\n- Inventory, Purchasing & Receiving (+18% Company-Wide MRR)\n- Building My Portfolio in Code');
+    attachBotToolbar(showcase, () => 'Featured Case Studies by Ryan Schmidt:\n- Custom Dashboards & AI Summaries (+71% Dashboard Engagement)\n- i4cp Member Portal & Research Discovery (+500% Ahri Sessions)\n- Inventory, Purchasing & Receiving (+8% Company-Wide MRR)\n- Building My Portfolio in Code');
     scrollToNewestCard(showcase);
   }
 
@@ -562,7 +562,7 @@
             <span class="home-dossier-stat__lbl">Eng Adoption (100+ Components)</span>
           </div>
           <div class="home-dossier-stat">
-            <span class="home-dossier-stat__val">+18%</span>
+            <span class="home-dossier-stat__val">+8%</span>
             <span class="home-dossier-stat__lbl">Recurring Revenue Lift (Inventory)</span>
           </div>
         </div>
@@ -585,7 +585,7 @@
               </div>
               <span class="home-dossier-date">Oct 2021 – Feb 2026</span>
             </div>
-            <p>Owned Cloud UX across 5 core B2B SaaS modules as platform scaled from 6,500 to 18,000+ active users. Architected the 0→1 real-time inventory MVP (+18% MRR), AI BI dashboard suite (+71% engagement), and 100+ component tokenized design system.</p>
+            <p>Owned Cloud UX across 5 core B2B SaaS modules as platform scaled from 6,500 to 18,000+ active users. Architected the 0→1 real-time inventory MVP (+8% MRR), AI BI dashboard suite (+71% engagement), and 100+ component tokenized design system.</p>
           </div>
 
           <div class="home-dossier-role">
@@ -1002,7 +1002,7 @@
         <ul>
           <li><strong>Custom Dashboards & AI Summaries (D-Tools):</strong> Drove <strong>+71% dashboard engagement</strong> and <strong>62% multi-dashboard adoption</strong> by providing customizable views with AI summaries based on visible widget numbers. <a href="pages/dashboard.html">Read case study →</a></li>
           <li><strong>i4cp Member Portal & Research Discovery:</strong> Restructured enterprise research IA and brought Ahri into the main discovery experience, resulting in <strong>+500% Ahri sessions</strong> and doubled daily activity. <a href="pages/member-portal-overhaul.html">Read case study →</a></li>
-          <li><strong>Inventory, Purchasing & Receiving (D-Tools):</strong> Connected purchasing, receiving, and stock tracking, contributing to an <strong>+18% company-wide MRR increase</strong>. <a href="pages/inventory.html">Read case study →</a></li>
+          <li><strong>Inventory, Purchasing & Receiving (D-Tools):</strong> Connected purchasing, receiving, and stock tracking, contributing to an <strong>+8% company-wide MRR increase</strong>. <a href="pages/inventory.html">Read case study →</a></li>
         </ul>
       `;
       bindCodeblockCopies(proseEl);

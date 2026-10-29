@@ -67,7 +67,7 @@
     "one_liner": "Senior Product Designer who builds and tests coded prototypes in Cursor to resolve design questions before engineering starts.",
     "elevator_30s": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. He builds and tests coded prototypes in Cursor to resolve design questions before engineering starts. Sole designer at i4cp; previously owned UX across five D-Tools Cloud modules as the platform grew from 6,500 to 18,000 active users.",
     "bio_75_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. He builds and tests coded prototypes in Cursor to resolve design questions before engineering starts. Sole designer at i4cp; previously owned UX across five D-Tools Cloud modules as active users grew from 6,500 to 18,000. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
-    "bio_150_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. As the sole designer at i4cp (Institute for Corporate Productivity), he owns platform experience across the member portal and internal admin tools, standardizing UI across 3 core platforms for 4 developers, shipping coded prototypes in Cursor saving ~4 hours QA weekly, and designing Ahri conversational AI (+500% adoption increase). Previously, he owned UX across five D-Tools Cloud modules as the platform scaled from 6,500 to 18,000 active users, designing a real-time inventory MVP (+18% recurring revenue, 8% YoY adoption growth) and a 100+ component design system with 92% engineering adoption. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
+    "bio_150_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. As the sole designer at i4cp (Institute for Corporate Productivity), he owns platform experience across the member portal and internal admin tools, standardizing UI across 3 core platforms for 4 developers, shipping coded prototypes in Cursor saving ~4 hours QA weekly, and designing Ahri conversational AI (+500% adoption increase). Previously, he owned UX across five D-Tools Cloud modules as the platform scaled from 6,500 to 18,000 active users, designing a real-time inventory MVP (+8% recurring revenue, 8% YoY adoption growth) and a 100+ component design system with 92% engineering adoption. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
     "specialties": [
       "Information Architecture",
       "Design Systems",
@@ -182,7 +182,7 @@
     {
       "id": "mvp_for_trust",
       "stance": "MVPs aren't about feature scope. They're about earning trust before you add complexity.",
-      "context": "The inventory MVP connected purchasing and receiving with immediate database updates, helping unblock enterprise sales and contributing to +18% company-wide MRR.",
+      "context": "The inventory MVP connected purchasing and receiving with immediate database updates, helping unblock enterprise sales and contributing to +8% company-wide MRR.",
       "use_when": [
         "mvp",
         "scoping",
@@ -248,7 +248,7 @@
         "dates": "October 2021–February 2026 (Promoted January 2025)",
         "highlights": [
           "Owned end-to-end UX across 5 B2B Cloud modules as the platform grew from 6,500 to 18,000 active users.",
-          "Designed a desktop-first, real-time inventory MVP through field research and usability testing, contributing to an 18% increase in recurring revenue and 8% year-over-year adoption growth.",
+          "Designed a desktop-first, real-time inventory MVP through field research and usability testing, contributing to an 8% increase in recurring revenue and 8% year-over-year adoption growth.",
           "Grew the design system to 100+ production components with 92% adoption across engineering.",
           "Designed dashboard suite with customizable views and AI summaries (**71% engagement during beta**, **62% multi-dashboard adoption**)."
         ]
@@ -326,7 +326,7 @@
       "Drove **+500%** Ahri sessions and doubled daily activity after i4cp Member Portal overhaul.",
       "Grew design system to 100+ production components with **92% engineer adoption** across five Cloud modules.",
       "Increased dashboard engagement by **+71%** during beta (**62% multi-dashboard adoption**).",
-      "Contributed to an **18% increase in recurring revenue** and **8% YoY adoption growth** after Inventory MVP.",
+      "Contributed to an **8% increase in recurring revenue** and **8% YoY adoption growth** after Inventory MVP.",
       "Shipped coded prototypes to staging via Cursor, saving **~4 hours of engineering QA per week**."
     ]
   },
@@ -581,11 +581,11 @@
         "Filters",
         "Status chips"
       ],
-      "summary_short": "Connected purchasing, receiving, and stock tracking in one workflow, contributing to an 18% increase in recurring revenue and 8% YoY adoption growth.",
+      "summary_short": "Connected purchasing, receiving, and stock tracking in one workflow, contributing to an 8% increase in recurring revenue and 8% YoY adoption growth.",
       "outcomes": [
         {
           "metric": "**Recurring Revenue**",
-          "value": "**+18%**",
+          "value": "**+8%**",
           "note": "Company-wide MRR increase over the following year"
         },
         {
@@ -594,7 +594,7 @@
           "note": "Year-over-year adoption lift across active accounts"
         }
       ],
-      "impact_narrative": "The release removed a recurring blocker in enterprise sales conversations and contributed to an 18% increase in company-wide MRR over the following year.",
+      "impact_narrative": "The release removed a recurring blocker in enterprise sales conversations and contributed to an 8% increase in company-wide MRR over the following year.",
       "sections": [
         {
           "id": "problem",
@@ -634,7 +634,7 @@
         {
           "id": "impact",
           "heading": "Impact",
-          "summary": "Contributed to an 18% increase in company-wide MRR over the following year. One customer uncovered thousands in unused equipment after switching to unified tracking."
+          "summary": "Contributed to an 8% increase in company-wide MRR over the following year. One customer uncovered thousands in unused equipment after switching to unified tracking."
         }
       ]
     },
@@ -966,7 +966,7 @@
   "deterministic_answers": {
     "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
     "looking_for": "Ryan is open to the right opportunity, specifically roles where designers build their designs in code as well as Figma: the new standard for modern product design. His strongest targets are Senior, Lead, or Staff Product Designer and UX Engineer roles.",
-    "proof_points": "Ryan's strongest proof points are +500% Ahri sessions and doubled daily activity after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption across five Cloud modules, +71% sustained dashboard views, and +18% company-wide MRR after the inventory MVP.",
+    "proof_points": "Ryan's strongest proof points are +500% Ahri sessions and doubled daily activity after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption across five Cloud modules, +71% sustained dashboard views, and +8% company-wide MRR after the inventory MVP.",
     "ux_engineer_fit": "Yes. Ryan codes, prototypes in the browser, uses AI tooling daily, and works closely with engineers. The strongest evidence is his AI-Coding my Portfolio case, coded prototyping habits, and AI dashboard/product workflow thinking."
   },
   "evidence_by_role": {
@@ -1000,7 +1000,7 @@
       "proof": [
         "+71% dashboard engagement.",
         "92% engineer adoption across 100+ tokenized components.",
-        "+18% company-wide MRR after inventory MVP."
+        "+8% company-wide MRR after inventory MVP."
       ]
     },
     "ai_product_designer": {
@@ -1074,7 +1074,7 @@
       ],
       "proof": [
         "92% engineer adoption (100+ components)",
-        "+18% company-wide MRR"
+        "+8% company-wide MRR"
       ]
     }
   },
@@ -1624,7 +1624,7 @@
     {
       "intent": "case_select",
       "prompt": "Which case study best fits a team building real-time ops tooling?",
-      "answer": "Start with https://ryanschmidt.design/pages/inventory. The release contributed to an **+18% increase in company-wide MRR** over the following year. Want me to pull out the key decisions, or compare it to the AI dashboard work?"
+      "answer": "Start with https://ryanschmidt.design/pages/inventory. The release contributed to an **+8% increase in company-wide MRR** over the following year. Want me to pull out the key decisions, or compare it to the AI dashboard work?"
     },
     {
       "intent": "case_detail",
@@ -1634,7 +1634,7 @@
     {
       "intent": "resume_proof",
       "prompt": "What are Ryan's top 3 proof points?",
-      "answer": "**+500% Ahri sessions and doubled daily activity** after an IA overhaul at i4cp, **+18% company-wide MRR** unblocking enterprise deals with the inventory system, and a **+71% increase in sustained dashboard views** on Custom Dashboards. Want context on any of them?"
+      "answer": "**+500% Ahri sessions and doubled daily activity** after an IA overhaul at i4cp, **+8% company-wide MRR** unblocking enterprise deals with the inventory system, and a **+71% increase in sustained dashboard views** on Custom Dashboards. Want context on any of them?"
     },
     {
       "intent": "looking_for",
@@ -1724,7 +1724,7 @@
     {
       "intent": "company_fit_specific",
       "prompt": "Why is Ryan a fit at a B2B SaaS company like Stripe?",
-      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove a **+500% increase in Ahri sessions** through a complex IA overhaul, unblocked enterprise deals to contribute to **+18% company-wide MRR**, and increased dashboard engagement by **71%**. For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
+      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove a **+500% increase in Ahri sessions** through a complex IA overhaul, unblocked enterprise deals to contribute to **+8% company-wide MRR**, and increased dashboard engagement by **71%**. For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
     },
     {
       "intent": "stakeholder_influence",

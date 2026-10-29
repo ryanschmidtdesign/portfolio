@@ -19,8 +19,8 @@ body:not(.is-home) {
   top: calc(16px + env(safe-area-inset-top, 0px));
   left: 50%;
   transform: translateX(-50%);
-  width: min(692px, calc(100vw - 24px));
-  max-width: 692px;
+  width: min(1038px, calc(100vw - 32px));
+  max-width: 1038px;
   z-index: 999990;
   background: rgba(255, 255, 255, 0.84);
   backdrop-filter: blur(16px) saturate(180%);
@@ -149,7 +149,7 @@ body:not(.is-home) {
 @media (max-width: 600px) {
   .site-header {
     top: calc(12px + env(safe-area-inset-top, 0px));
-    width: min(692px, calc(100vw - 20px));
+    width: min(1038px, calc(100vw - 20px));
     border-radius: var(--radius-md, 10px);
   }
   .site-header__inner {

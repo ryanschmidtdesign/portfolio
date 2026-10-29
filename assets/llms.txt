@@ -38,7 +38,7 @@ metrics, and structured fit-matching. Endpoint: /api/chat (POST).
 
 - [Inventory, Purchasing & Receiving](https://ryanschmidt.design/pages/inventory)
   Connected purchasing, receiving, and stock tracking in one workflow.
-  Outcomes: Contributed to an 18% increase in recurring revenue and 8% year-over-year adoption growth.
+  Outcomes: Contributed to an 8% increase in recurring revenue and 8% year-over-year adoption growth.
 
 - [Building My Portfolio in Code](https://ryanschmidt.design/pages/ai-coding-portfolio)
   Portfolio rebuilt from scratch in semantic HTML, modular CSS, and JavaScript with AI coding tools.

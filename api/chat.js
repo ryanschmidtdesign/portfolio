@@ -1126,7 +1126,7 @@ function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
     }
     const fallbackCases = reconcileContextCases(kb, pickedCases, pickedCases);
     return {
-      answer: "Ryan's strongest shipped outcomes span **Custom Dashboards & AI Summaries at D-Tools Cloud** (+71% sustained dashboard views, 62% multi-dashboard adoption), **Inventory, Purchasing & Receiving at D-Tools** (unblocking enterprise deals, +18% recurring revenue, 8% YoY adoption), and the **i4cp Member Portal Overhaul** (+500% Ahri sessions and 2× daily active usage).",
+      answer: "Ryan's strongest shipped outcomes span **Custom Dashboards & AI Summaries at D-Tools Cloud** (+71% sustained dashboard views, 62% multi-dashboard adoption), **Inventory, Purchasing & Receiving at D-Tools** (unblocking enterprise deals, +8% recurring revenue, 8% YoY adoption), and the **i4cp Member Portal Overhaul** (+500% Ahri sessions and 2× daily active usage).",
       suggested_pills: [
         "How did he drive +71% dashboard views?",
         "Tell me about the i4cp AI search overhaul",
