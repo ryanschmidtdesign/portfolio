@@ -177,7 +177,10 @@
 // ============================================================================
 (function () {
   const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReduced) return;
+  if (prefersReduced) {
+    document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-revealed'));
+    return;
+  }
 
   const revealSelector = '[data-reveal]';
   const els = document.querySelectorAll(revealSelector);

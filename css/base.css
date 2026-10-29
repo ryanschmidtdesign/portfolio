@@ -74,9 +74,9 @@ html {
 
 /* Global Focus State Polish */
 :focus-visible {
-  outline: 1.5px solid var(--accent);
-  outline-offset: 3px;
-  box-shadow: 0 0 0 4px var(--accent-soft);
+  outline: 2px solid var(--accent-text, #8C3B1E) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(200, 90, 50, 0.22) !important;
 }
 
 /* Fallbacks for experimental `text-wrap` usages: ensure sensible wrapping in
@@ -211,7 +211,7 @@ a:hover {
 .leadership-prose p a:not([class]):hover,
 .career-desc a:not([class]):hover {
   background-size: 100% 1px;
-  color: var(--accent);
+  color: var(--accent-text-hover, #732F16);
 }
 
 a,
@@ -265,6 +265,14 @@ code {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  /* Fix critical [data-reveal] invisibility bug */
+  [data-reveal],
+  figure.case-study-media[data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 
   *,

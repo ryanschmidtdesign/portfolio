@@ -344,6 +344,8 @@
 
   function scrollToNewestCard(el) {
     if (!stageStream) return;
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const scrollBehavior = prefersReduced ? 'auto' : 'smooth';
     requestAnimationFrame(() => {
       if (stageStream.children.length <= 1) {
         stageStream.scrollTop = 0;
@@ -355,12 +357,12 @@
         const targetTop = stageStream.scrollTop + (elRect.top - streamRect.top) - 12;
         stageStream.scrollTo({
           top: Math.max(0, targetTop),
-          behavior: 'smooth'
+          behavior: scrollBehavior
         });
       } else {
         stageStream.scrollTo({
           top: stageStream.scrollHeight,
-          behavior: 'smooth'
+          behavior: scrollBehavior
         });
       }
     });
@@ -752,7 +754,7 @@
     const scriptsCount = document.querySelectorAll('script').length;
     const navTiming = performance.getEntriesByType('navigation')[0];
     const domInteractive = navTiming ? `${Math.round(navTiming.domInteractive)}ms` : '< 42ms';
-    const currentAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#C86446';
+    const currentAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#C85A32';
 
     const userMsg = createUserMessage(`/${escapeHtml(cmd || 'perf')}`);
     stageStream.appendChild(userMsg);

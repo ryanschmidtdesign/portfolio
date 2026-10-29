@@ -695,175 +695,14 @@
    Homepage: Editorial Portfolio & Persistent CLI Dock
    --------------------------------------------------------*/
 body.is-home {
-  background-color: #F5EFE4 !important; /* Clean classroom wooden desk parchment surface */
+  background-color: var(--bg) !important;
   background-image: none !important;
   color: var(--text);
   min-height: 100vh;
-  padding-bottom: 160px !important;
+  padding-bottom: clamp(140px, 18vh, 180px) !important;
   display: block;
 }
 
-/* -------------------------------------------------------
-   CLI Omnibar Navigation (Home · Work · About · Resume · LinkedIn)
-   Lives inside .home-omnibar-header on every page, beside the identity.
-   --------------------------------------------------------*/
-.home-topnav {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(14px, 2.8vw, 24px);
-  flex-shrink: 0;
-  margin: 0 auto;
-}
-
-.home-topnav__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 3px 6px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
-  color: rgba(247, 245, 240, 0.65);
-  text-decoration: none;
-  white-space: nowrap;
-  background: transparent;
-  border: none;
-  transition: color 140ms ease;
-}
-
-.home-topnav__link:hover,
-.home-topnav__link:focus-visible {
-  color: #FFFFFF;
-  background: transparent;
-}
-
-.home-topnav__link.is-current {
-  color: #FFA07A;
-  background: transparent;
-  border: none;
-  font-weight: 600;
-}
-
-.home-topnav__dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 999px;
-  background: var(--accent);
-  box-shadow: 0 0 6px rgba(200, 90, 50, 0.75);
-  display: inline-block;
-}
-
-.home-topnav__chevron {
-  opacity: 0.7;
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.home-topnav__group {
-  position: relative;
-}
-
-.home-topnav__group:hover .home-topnav__chevron,
-.home-topnav__group.is-open .home-topnav__chevron {
-  transform: rotate(180deg);
-}
-
-/* Work Submenu — Smoked Obsidian Palette */
-.home-topnav__submenu {
-  position: absolute;
-  top: auto;
-  bottom: calc(100% + 12px);
-  right: -10px;
-  left: auto;
-  transform: translateY(6px) scale(0.97);
-  transform-origin: bottom right;
-  min-width: 270px;
-  background: rgba(18, 17, 16, 0.96);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 14px;
-  padding: 6px;
-  box-shadow:
-    0 20px 48px -8px rgba(0, 0, 0, 0.55),
-    0 4px 16px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 180ms cubic-bezier(0.16, 1, 0.3, 1), visibility 180ms;
-  z-index: 280;
-}
-
-/* Invisible hover bridge between trigger and submenu */
-.home-topnav__submenu::before {
-  content: "";
-  position: absolute;
-  bottom: -14px;
-  left: 0;
-  right: 0;
-  height: 14px;
-}
-
-.home-topnav__group:hover .home-topnav__submenu,
-.home-topnav__group:focus-within .home-topnav__submenu,
-.home-topnav__group.is-open .home-topnav__submenu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
-
-.home-topnav__submenu a {
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 8px 10px !important;
-  border-radius: 8px !important;
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  font-weight: 500;
-  line-height: 1.25;
-  color: rgba(247, 245, 240, 0.85);
-  text-decoration: none;
-  transition: background-color 140ms ease, color 140ms ease;
-}
-
-.home-topnav__submenu a:hover,
-.home-topnav__submenu a:focus-visible {
-  background: rgba(200, 90, 50, 0.22);
-  color: #FFFFFF;
-}
-
-.home-topnav__submenu a[aria-current="page"] {
-  color: #FFA07A;
-  font-weight: 700;
-  background: rgba(200, 90, 50, 0.18);
-}
-
-.home-submenu-kpi {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 999px;
-  background: rgba(200, 90, 50, 0.22);
-  color: #FFA07A;
-  border: 1px solid rgba(200, 90, 50, 0.35);
-  flex-shrink: 0;
-}
-
-.home-topnav__submenu a:hover .home-submenu-kpi {
-  background: var(--accent);
-  color: #FFFFFF;
-  border-color: var(--accent);
-}
 
 /* ==========================================================================
    Hyper-Realistic Construction Paper & School Project Aesthetic
@@ -1200,7 +1039,13 @@ body.is-home {
   box-shadow: var(--shadow-card-hover);
 }
 
-.home-project-card:hover::before {
+.home-project-card:focus-within {
+  border-color: var(--accent-text, #8C3B1E);
+  box-shadow: 0 12px 32px -4px rgba(200, 90, 50, 0.18), 0 0 0 1px var(--accent-text, #8C3B1E);
+}
+
+.home-project-card:hover::before,
+.home-project-card:focus-within::before {
   opacity: 1;
   transform: scaleX(1);
 }
@@ -1462,21 +1307,21 @@ body.is-home {
   font-size: 0.8rem;
   font-weight: 600;
   color: #FFFFFF;
-  background: linear-gradient(180deg, #C85A32 0%, #AC4925 100%);
-  border: 1px solid rgba(160, 64, 30, 0.75);
+  background: linear-gradient(180deg, #AC4925 0%, #8C3B1E 100%);
+  border: 1px solid rgba(140, 59, 30, 0.85);
   border-radius: var(--radius-sm);
   padding: 6px 13px;
   text-decoration: none;
-  box-shadow: 0 2px 6px rgba(200, 90, 50, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  box-shadow: 0 2px 6px rgba(172, 73, 37, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.22);
   transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .home-project-card__cta:hover {
-  background: linear-gradient(180deg, #D9653B 0%, #B84D27 100%);
-  border-color: #9E3E1C;
+  background: linear-gradient(180deg, #983C1A 0%, #732F16 100%);
+  border-color: #732F16;
   color: #FFFFFF;
   transform: translateY(-1.5px);
-  box-shadow: 0 5px 16px rgba(200, 90, 50, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 5px 16px rgba(172, 73, 37, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .home-project-card__cta:active {
@@ -1616,7 +1461,7 @@ body.is-home {
 
 @media (max-width: 600px) {
   .home-main {
-    padding: 0 16px;
+    padding: clamp(72px, 10vh, 88px) 16px 0;
     overflow-x: hidden;
   }
   .home-hero {
@@ -1669,7 +1514,7 @@ body.is-home {
   transform: translateX(-50%);
   width: min(692px, calc(100vw - 24px));
   max-width: 692px;
-  z-index: 999999;
+  z-index: var(--z-dock, 9995);
   pointer-events: auto;
   display: block;
   opacity: 1;
@@ -1702,13 +1547,10 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(18px) saturate(180%);
   -webkit-backdrop-filter: blur(18px) saturate(180%);
-  border: 1px solid rgba(28, 22, 18, 0.10);
+  border: 1.5px solid var(--border-accessible, rgba(28, 22, 18, 0.46));
   border-radius: var(--radius-md, 10px);
   padding: 3px 0;
-  box-shadow:
-    0 8px 28px -4px rgba(28, 20, 15, 0.08),
-    0 2px 6px rgba(28, 20, 15, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-dock);
   overflow: hidden;
   display: block;
   transition:
@@ -1724,21 +1566,17 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-shell:hover,
 .subpage-omnibar-shell:hover {
-  border-color: rgba(28, 22, 18, 0.16);
-  box-shadow:
-    0 10px 32px -4px rgba(28, 20, 15, 0.11),
-    0 2px 8px rgba(28, 20, 15, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(28, 22, 18, 0.65);
+  box-shadow: var(--shadow-dock);
 }
 
 .home-omnibar-shell:focus-within,
 .subpage-omnibar-shell:focus-within {
   background: #FFFFFF;
-  border-color: var(--accent, #C85A32);
-  box-shadow:
-    0 10px 36px -4px rgba(200, 90, 50, 0.18),
-    0 0 0 1px var(--accent, #C85A32),
-    inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: var(--accent-text, #8C3B1E);
+  outline: 2px solid var(--accent-text, #8C3B1E);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-dock-focus);
 }
 
 /* Recessed Input Form */
@@ -1766,34 +1604,6 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   box-shadow: none;
 }
 
-/* CLI Omnibar Header: deprecated — navigation now lives in conventional top header */
-.home-omnibar-header {
-  display: none;
-}
-
-@media (max-width: 720px) {
-  .home-omnibar-header {
-    flex-direction: row;
-    justify-content: center;
-    padding: 0 2px 4px;
-  }
-  .home-topnav {
-    margin: 0 auto;
-    justify-content: space-between;
-    gap: clamp(8px, 2.5vw, 14px);
-    width: 100%;
-  }
-  .home-topnav__group {
-    position: static;
-  }
-  .home-topnav__submenu {
-    right: auto;
-    left: 10px;
-    bottom: calc(100% + 12px);
-    transform-origin: bottom left;
-    min-width: min(260px, calc(100vw - 28px));
-  }
-}
 
 .home-omnibar-top,
 .subpage-omnibar-top {
@@ -2156,7 +1966,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-chat-user-copy:hover {
   opacity: 1;
-  color: var(--accent, #C86446);
+  color: var(--accent);
   background: rgba(200, 90, 50, 0.08);
 }
 
@@ -2200,7 +2010,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 }
 
 .home-chat-bot-spark {
-  color: var(--accent, #C86446);
+  color: var(--accent);
   font-size: 0.88rem;
   display: inline-block;
   animation: homeChatSparkPulse 2.4s infinite ease-in-out;
@@ -2290,7 +2100,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   padding: 2px 7px;
   border-radius: 999px;
   background: rgba(200, 90, 50, 0.12);
-  color: var(--accent, #C86446);
+  color: var(--accent);
   white-space: nowrap;
 }
 
@@ -2324,7 +2134,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 }
 
 .home-work-card__title a:hover {
-  color: var(--accent, #C86446);
+  color: var(--accent);
 }
 
 .home-work-card__summary {
@@ -2365,7 +2175,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 }
 
 .home-work-btn--primary:hover {
-  background: var(--accent, #C86446);
+  background: var(--accent);
 }
 
 .home-work-btn--ai,
@@ -2377,8 +2187,8 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-work-btn--ai:hover,
 .home-work-btn--ghost:hover {
-  border-color: var(--accent, #C86446);
-  color: var(--accent, #C86446);
+  border-color: var(--accent);
+  color: var(--accent);
   background: rgba(200, 90, 50, 0.06);
 }
 
@@ -2457,7 +2267,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 }
 
 .home-dossier-org {
-  color: var(--accent, #C86446);
+  color: var(--accent);
   font-weight: 600;
 }
 
@@ -2505,14 +2315,14 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   font-size: 0.64rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #C86446;
+  color: var(--accent);
 }
 
 .home-pillar-card h4 {
   margin: 0;
   font-size: 0.86rem;
   font-weight: 700;
-  color: #0F172A;
+  color: var(--text);
 }
 
 .home-pillar-card p {
@@ -2579,9 +2389,9 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 }
 
 .home-cli-btn:hover {
-  background: var(--accent, #C86446);
+  background: var(--accent);
   color: #FFFFFF;
-  border-color: var(--accent, #C86446);
+  border-color: var(--accent);
 }
 
 /* -------------------------------------------------------
@@ -2682,7 +2492,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-chat-prose blockquote,
 .home-ai-prose blockquote {
-  border-left: 3px solid var(--accent, #C86446);
+  border-left: 3px solid var(--accent);
   padding-left: 12px;
   margin: 8px 0;
   color: #475569;
@@ -2691,7 +2501,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-chat-prose a,
 .home-ai-prose a {
-  color: var(--accent, #C86446);
+  color: var(--accent);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -2737,14 +2547,14 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   border: 1px solid rgba(200, 90, 50, 0.2);
   font-size: 0.73rem;
   font-weight: 600;
-  color: var(--accent, #C86446);
+  color: var(--accent);
   text-decoration: none;
   transition: all 140ms ease;
 }
 
 .home-chat-source-chip:hover,
 .home-ai-source-chip:hover {
-  background: var(--accent, #C86446);
+  background: var(--accent);
   color: #FFFFFF;
 }
 
@@ -2772,8 +2582,8 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 }
 
 .home-chat-followup-pill:hover {
-  border-color: var(--accent, #C86446);
-  color: var(--accent, #C86446);
+  border-color: var(--accent);
+  color: var(--accent);
   background: rgba(200, 90, 50, 0.05);
   transform: translateY(-1px);
 }
@@ -2783,7 +2593,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   display: inline-block;
   width: 6px;
   height: 1.15em;
-  background: var(--accent, #C86446);
+  background: var(--accent);
   vertical-align: -2px;
   margin-left: 3px;
   border-radius: 1px;
@@ -2930,7 +2740,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-chat-action-btn:hover {
   background: rgba(200, 90, 50, 0.08);
-  color: var(--accent, #C86446);
+  color: var(--accent);
   border-color: rgba(200, 90, 50, 0.28);
 }
 
@@ -3078,7 +2888,7 @@ body:not(.is-home) main.site-main {
   font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
   font-style: italic;
   font-weight: 400;
-  color: #C86446;
+  color: var(--accent-text);
   letter-spacing: -0.015em;
   padding-right: 0.04em;
 }
@@ -3105,8 +2915,8 @@ body:not(.is-home) main.site-main {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #C86446;
-  background: #FDF0EC;
+  color: var(--accent-text);
+  background: var(--accent-soft);
   padding: 3px 9px;
   border-radius: 6px;
 }

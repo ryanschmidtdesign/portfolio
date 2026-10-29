@@ -32,10 +32,10 @@
         all: initial;
         --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         --font-mono: 'Space Mono', monospace;
-        --accent: #C86446;
-        --accent-hover: #B25337;
-        --accent-soft: rgba(200, 100, 70, 0.08);
-        --accent-strong: rgba(200, 100, 70, 0.16);
+        --accent: #C85A32;
+        --accent-hover: #AC4925;
+        --accent-soft: rgba(200, 90, 50, 0.08);
+        --accent-strong: rgba(200, 90, 50, 0.16);
         --text-primary: #111111;
         --text-secondary: #52525B;
         --text-on-accent: #FFFFFF;
@@ -206,8 +206,9 @@
         color: var(--accent, #C85A32);
       }
       .hdr-close:focus-visible {
-        outline: none;
-        box-shadow: 0 0 0 2px var(--accent);
+        outline: 2px solid #8C3B1E;
+        outline-offset: 2px;
+        box-shadow: 0 0 0 4px rgba(200, 90, 50, 0.2);
       }
 
       /* Messages */
@@ -287,16 +288,16 @@
         font-weight: 700;
       }
       .msg.bot a {
-        color: var(--accent, #C85A32);
+        color: #8C3B1E;
         text-decoration: underline;
-        text-decoration-color: rgba(200, 90, 50, 0.4);
+        text-decoration-color: rgba(140, 59, 30, 0.4);
         text-underline-offset: 2px;
         font-weight: 600;
         transition: color 150ms ease, text-decoration-color 150ms ease;
       }
       .msg.bot a:hover {
-        color: var(--accent-hover, #B54E28);
-        text-decoration-color: var(--accent, #C85A32);
+        color: #732F16;
+        text-decoration-color: #8C3B1E;
       }
       .chat-action-bar {
         display: flex;
@@ -349,7 +350,7 @@
         font-size: 0.88em;
         font-weight: 700;
         letter-spacing: -0.01em;
-        color: var(--accent, #C85A32);
+        color: #8C3B1E;
         background: rgba(200, 90, 50, 0.09);
         border: 1px solid rgba(200, 90, 50, 0.22);
         padding: 1px 5px;
@@ -475,7 +476,7 @@
         font: inherit;
         font-size: 13.5px;
         background: #FAF8F5;
-        border: 1px solid rgba(28, 22, 18, 0.12);
+        border: 1.5px solid rgba(28, 22, 18, 0.46);
         color: var(--text, #131211);
         border-radius: 8px;
         white-space: nowrap;
@@ -489,11 +490,12 @@
         transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
       }
       .text:focus {
-        outline: none;
-        border-color: var(--accent, #C85A32);
+        outline: 2px solid #8C3B1E;
+        outline-offset: 1px;
+        border-color: #8C3B1E;
         background: #FFFFFF;
         box-shadow:
-          0 0 0 2px var(--accent, #C85A32),
+          0 0 0 2px rgba(200, 90, 50, 0.2),
           0 0 8px rgba(200, 90, 50, 0.15);
       }
       .text.shake {
@@ -507,8 +509,14 @@
         80% { transform: translateX(6px); }
       }
       .text::placeholder {
-        color: var(--text-muted, #8B8780);
+        color: #68635B;
         font-weight: 400;
+      }
+      .send:focus-visible,
+      .chat-copy-btn:focus-visible,
+      .stop-btn:focus-visible {
+        outline: 2px solid #8C3B1E;
+        outline-offset: 2px;
       }
       .send {
         position: absolute;
@@ -834,7 +842,8 @@
 
   function scrollToBottom(smooth = true) {
     if (!msgsEl) return;
-    if (smooth) {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (smooth && !prefersReduced) {
       msgsEl.scrollTo({
         top: msgsEl.scrollHeight,
         behavior: 'smooth'

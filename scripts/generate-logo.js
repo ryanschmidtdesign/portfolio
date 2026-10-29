@@ -70,11 +70,11 @@ function filledHex(cx, cy, r, color, opacity = 1) {
   );
 }
 
-const BLUE = "#4F8CFF";
-const BLUE_SECONDARY = "#6BA3FF";
-const HIGHLIGHT = "#D9ECFF";
-const BG = "#081423";
-const BG_DARK = "#0F1E33";
+const BLUE = "#C85A32";
+const BLUE_SECONDARY = "#E07844";
+const HIGHLIGHT = "#F5E6DF";
+const BG = "#131211";
+const BG_DARK = "#0A0908";
 
 /* ------------------------------------------------------------------ */
 /* Mark compositions                                                   */
@@ -185,9 +185,9 @@ files.push(["favicon.svg", tileMark(64, BG)]);
     `<rect width="1200" height="630" fill="url(#bg)"/>` +
     `<rect width="1200" height="630" fill="url(#halo)"/>` +
     strokedMark(270, 315, 150, { color: HIGHLIGHT, alpha: 0.18, r: 230 }) +
-    `<text x="510" y="300" font-family="Helvetica Neue, Arial, sans-serif" font-size="76" font-weight="700" fill="#FFFFFF" letter-spacing="-1">Ryan Schmidt</text>` +
-    `<text x="512" y="355" font-family="Helvetica Neue, Arial, sans-serif" font-size="34" font-weight="500" fill="#9FB4D9" letter-spacing="0.5">Senior SaaS Product Designer</text>` +
-    `<text x="512" y="410" font-family="Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" fill="${BLUE_SECONDARY}" letter-spacing="4">ryanschmidt.design</text>` +
+    `<text x="510" y="300" font-family="'IBM Plex Sans', -apple-system, sans-serif" font-size="76" font-weight="700" fill="#FFFFFF" letter-spacing="-1">Ryan Schmidt</text>` +
+    `<text x="512" y="355" font-family="'IBM Plex Sans', sans-serif" font-size="34" font-weight="500" fill="#DDD7CD" letter-spacing="0.5">Senior SaaS Product Designer</text>` +
+    `<text x="512" y="410" font-family="'Space Mono', monospace" font-size="22" font-weight="600" fill="${BLUE_SECONDARY}" letter-spacing="3">ryanschmidt.design</text>` +
     `</svg>`;
   files.push(["assets/logo/og-image.svg", defs(svg)]);
   files.push([
