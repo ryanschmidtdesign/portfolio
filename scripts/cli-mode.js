@@ -839,57 +839,6 @@
                     this.open();
                 }
             });
-
-            // Wire subpage slash popover if present
-            const subSlashBtn = document.getElementById('subpage-slash-btn');
-            const subSlashPopover = document.getElementById('subpage-slash-popover');
-            if (subSlashBtn && subSlashPopover) {
-                subSlashBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const isHidden = subSlashPopover.hidden;
-                    subSlashPopover.hidden = !isHidden;
-                    subSlashBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-                });
-
-                subSlashPopover.querySelectorAll('[data-slash-cmd]').forEach((btn) => {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const cmd = btn.getAttribute('data-slash-cmd');
-                        subSlashPopover.hidden = true;
-                        subSlashBtn.setAttribute('aria-expanded', 'false');
-                        const path = window.location.pathname || '/';
-                        const inPagesDir = path.includes('/pages/');
-                        const resumePath = inPagesDir ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
-                        const aboutPath = inPagesDir ? 'about.html' : 'pages/about.html';
-
-                        if (cmd === 'work') {
-                            this.open();
-                        } else if (cmd === 'resume') {
-                            window.open(resumePath, '_blank', 'noopener');
-                        } else if (cmd === 'about') {
-                            window.location.href = aboutPath;
-                        } else if (cmd === 'contact') {
-                            window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
-                        } else if (cmd === 'approach') {
-                            document.dispatchEvent(new CustomEvent('rs:ask-section', {
-                                detail: {
-                                    prompt: "What is Ryan's design philosophy and approach to AI?",
-                                    sectionContext: { heading: "Design Philosophy" }
-                                }
-                            }));
-                        } else if (cmd === 'tokens') {
-                            this.cycleTheme();
-                        }
-                    });
-                });
-
-                document.addEventListener('click', (e) => {
-                    if (!subSlashPopover.hidden && !subSlashPopover.contains(e.target) && e.target !== subSlashBtn) {
-                        subSlashPopover.hidden = true;
-                        subSlashBtn.setAttribute('aria-expanded', 'false');
-                    }
-                });
-            }
         }
 
         renderList(query) {
@@ -1107,16 +1056,6 @@
                 this.open();
             }
         }
-    }
-
-    function getPageSectorLabel() {
-        const path = (window.location.pathname || '/').toLowerCase();
-        if (path.includes('dashboard')) return '01 / Dashboards';
-        if (path.includes('inventory')) return '02 / Inventory';
-        if (path.includes('member-portal')) return '03 / Member Portal';
-        if (path.includes('ai-coding-portfolio')) return '04 / Portfolio in Code';
-        if (path.includes('about')) return 'About / Bio';
-        return '00 / Overview';
     }
 
     function initObsidianDock() {

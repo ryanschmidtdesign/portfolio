@@ -801,16 +801,6 @@
     'asking about cross-functional leadership...',
     'checking role fit for Staff Designer...',
   ];
-  
-
-  
-
-  function typewriterStop() {}
-
-  // Restart typewriter when mini input is cleared manually
-  
-  // Will be called after wireExternalTrigger runs
-  function initTypewriter() {}
 
   // Small helper: escape HTML when interpolating untrusted strings
   function escapeHtml(value = '') {
@@ -963,7 +953,6 @@ if (savedHist.length > 0) {
     window.rsAudioFX?.playBoot?.();
 
     (inputEl || panel)?.focus?.();
-    typewriterStop();
   }
 
   function closePanel(){

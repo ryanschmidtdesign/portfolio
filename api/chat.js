@@ -560,19 +560,6 @@ function detectIntent(text = "") {
   return "general";
 }
 
-function isSimpleDirectQuestion(text = "") {
-  const t = String(text || "").trim();
-  if (!t) return false;
-  if (t.length > 180) return false;
-  if (/\b(why|how|compare|comparison|versus|vs|go deeper|expand|tell me more|for this role|job description|requirements)\b/i.test(t)) {
-    return false;
-  }
-  if (/\bat\s+[A-Z][A-Za-z0-9&._ -]{2,}/.test(t)) {
-    return false;
-  }
-  return true;
-}
-
 // -----------------------------------------------------------------------------
 // Conversion behavior
 // -----------------------------------------------------------------------------

@@ -18,55 +18,11 @@
 })();
 
 // ============================================================================
-// Floating hamburger + AI mini behaviors (shared across pages)
+// Floating AI mini behaviors (shared across pages)
 // ============================================================================
 (function(){
   window.addEventListener('DOMContentLoaded', () => {
     try {
-      // Consolidated nav submenu toggle
-      document.querySelectorAll('.menu-trigger').forEach(trigger => {
-        const group = trigger.closest('.menu-item-group');
-        if (!group) return;
-        
-        const toggleSubmenu = (open) => {
-          const shouldOpen = open !== undefined ? open : !group.classList.contains('is-open');
-          group.classList.toggle('is-open', shouldOpen);
-          trigger.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
-        };
-
-        trigger.addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggleSubmenu();
-        });
-
-        trigger.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') {
-            toggleSubmenu(false);
-          }
-        });
-      });
-
-      // Close submenu on click outside or Escape
-      document.addEventListener('click', (e) => {
-        document.querySelectorAll('.menu-item-group.is-open').forEach(group => {
-          if (!group.contains(e.target)) {
-            group.classList.remove('is-open');
-            const trigger = group.querySelector('.menu-trigger');
-            if (trigger) trigger.setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          document.querySelectorAll('.menu-item-group.is-open').forEach(group => {
-            group.classList.remove('is-open');
-            const trigger = group.querySelector('.menu-trigger');
-            if (trigger) trigger.setAttribute('aria-expanded', 'false');
-          });
-        }
-      });
-
       const aiSend = document.getElementById('ai-mini-send');
       const aiInput = document.getElementById('ai-mini-input');
       if (aiInput) {
@@ -846,8 +802,8 @@ setTimeout(() => {
     });
   }
 
-  // 2. Radial Cursor Spotlight on Constraint & Evidence Cards (throttled with rAF)
-  const spotlightCards = document.querySelectorAll('.constraint-card, .evidence-card');
+  // 2. Radial Cursor Spotlight on Constraint Cards (throttled with rAF)
+  const spotlightCards = document.querySelectorAll('.constraint-card');
   spotlightCards.forEach((card) => {
     let rafId = null;
     card.addEventListener('mousemove', (e) => {

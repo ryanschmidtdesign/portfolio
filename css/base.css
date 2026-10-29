@@ -194,8 +194,7 @@ a:hover {
 /* Editorial expanding hairline underline for prose links */
 .case-study p a:not([class]),
 .about-text p a:not([class]),
-.leadership-prose p a:not([class]),
-.career-desc a:not([class]) {
+.leadership-prose p a:not([class]) {
   text-decoration: none;
   background-image: linear-gradient(var(--accent), var(--accent));
   background-size: 0% 1px;
@@ -208,8 +207,7 @@ a:hover {
 
 .case-study p a:not([class]):hover,
 .about-text p a:not([class]):hover,
-.leadership-prose p a:not([class]):hover,
-.career-desc a:not([class]):hover {
+.leadership-prose p a:not([class]):hover {
   background-size: 100% 1px;
   color: var(--accent-text-hover, #732F16);
 }
@@ -240,7 +238,7 @@ pre code {
 }
 
 /* Focus styles */
-:where(a, button, [role="button"], .btn, .dh-nav, .dh-dots button):focus-visible {
+:where(a, button, [role="button"], .btn):focus-visible {
   outline: var(--focus-outline);
   outline-offset: var(--focus-outline-offset);
   box-shadow: var(--focus-ring);

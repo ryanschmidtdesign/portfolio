@@ -8,8 +8,6 @@
 
   const omnibarForm = document.getElementById('home-omnibar-form');
   const omnibarInput = document.getElementById('home-omnibar-input');
-  const slashBtn = document.getElementById('home-slash-btn');
-  const slashPopover = document.getElementById('home-slash-popover');
 
   function getDefaultPlaceholder() {
     return window.innerWidth <= 600
@@ -64,43 +62,6 @@
       const workEl = document.getElementById('work');
       if (workEl) {
         workEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  }
-
-  // Quick Commands Popover (+)
-  if (slashBtn && slashPopover) {
-    slashBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isHidden = slashPopover.hidden;
-      slashPopover.hidden = !isHidden;
-      slashBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-    });
-
-    slashPopover.querySelectorAll('[data-slash-cmd]').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const cmd = btn.getAttribute('data-slash-cmd');
-        slashPopover.hidden = true;
-        slashBtn.setAttribute('aria-expanded', 'false');
-
-        if (cmd === 'work') {
-          const workEl = document.getElementById('work');
-          if (workEl) workEl.scrollIntoView({ behavior: 'smooth' });
-        } else if (cmd === 'resume') {
-          window.open('assets/ryan-schmidt-resume.pdf', '_blank', 'noopener');
-        } else if (cmd === 'about') {
-          window.location.href = 'pages/about.html';
-        } else if (cmd === 'contact') {
-          window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
-        }
-      });
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!slashPopover.hidden && !slashPopover.contains(e.target) && e.target !== slashBtn) {
-        slashPopover.hidden = true;
-        slashBtn.setAttribute('aria-expanded', 'false');
       }
     });
   }

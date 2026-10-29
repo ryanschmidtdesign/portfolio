@@ -11,9 +11,7 @@
   const spotlightSelector = [
     '.site-header',
     '.home-project-card',
-    '.evidence-card',
     '.leadership-metric',
-    '.about-connection',
     '.sa-step',
     '.home-omnibar-shell',
     '.subpage-omnibar-shell',
@@ -25,7 +23,6 @@
     cards.forEach((card) => {
       let isHovered = false;
       let rafId = null;
-      const isEvidenceCard = card.classList.contains('evidence-card');
 
       card.addEventListener('pointerenter', () => {
         isHovered = true;
@@ -45,23 +42,12 @@
           card.style.setProperty('--header-mouse-y', `${y.toFixed(0)}px`);
           card.style.setProperty('--x', `${x.toFixed(0)}px`);
           card.style.setProperty('--y', `${y.toFixed(0)}px`);
-
-          if (isEvidenceCard) {
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const tiltX = ((y - centerY) / centerY) * -1.2;
-            const tiltY = ((x - centerX) / centerX) * 1.2;
-            card.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-2px)`;
-          }
         });
       });
 
       card.addEventListener('pointerleave', () => {
         isHovered = false;
         if (rafId) cancelAnimationFrame(rafId);
-        if (isEvidenceCard) {
-          card.style.transform = '';
-        }
       });
     });
   }
