@@ -7,8 +7,8 @@
   /* 1200px / 16 */
   --impact-callout-max: 48.75rem;
   /* 780px / 16 */
-  --prose: 66ch;
-  --prose-tight: 60ch;
+  --prose: 720px;
+  --prose-tight: 660px;
 
   /* Spacing scale (8px micro, 1.5x geometric macro) */
   --space-1: 0.25rem; /* 4px */

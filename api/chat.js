@@ -87,8 +87,9 @@ function setCachedResponse(message, intent, isFit, output) {
 }
 
 function getClientIp(req) {
-  return req.headers["x-forwarded-for"]?.split(",")[0]?.trim()
-    || req.headers["x-real-ip"]
+  const headers = req.headers || {};
+  return headers["x-forwarded-for"]?.split(",")[0]?.trim()
+    || headers["x-real-ip"]
     || req.socket?.remoteAddress
     || "unknown";
 }
@@ -495,6 +496,8 @@ function normalizeText(s = "") {
 function detectIntent(text = "") {
   const t = normalizeText(text).toLowerCase();
   if (!t) return "general";
+  const greeting = /^(hello|hi|hey|howdy|greetings|good\s+(morning|afternoon|evening)|hi\s+there|hello\s+there|yo|hey\s+there)\b[!?.,\s]*$/i.test(t);
+  if (greeting) return "greeting";
   const contact = /\b(contact|email|hire|interview|schedule|reach out|availability|talk to|connect|call)\b/.test(t);
   const roleFit = detectFitIntent(t);
   const caseCompare = /\b(compare|best case|which case|match(es|ing)?|versus|vs|choose|recommend)\b/.test(t);
@@ -935,6 +938,11 @@ function defaultSuggestedPills(intent, lastUser) {
     "Show the strongest proof points."
   ];
   switch (intent) {
+    case 'greeting':
+      return [
+        "Tell me about Ryan's recent work",
+        "Is Ryan a fit for my open role?"
+      ];
     case 'contact':
       return [
         "How can I contact Ryan about a role?",
@@ -2005,6 +2013,7 @@ CORE PHILOSOPHY & POSITIONING
 - Target roles: Senior Product Designer, Lead Product Designer, Staff Product Designer, and UX Engineer.
 
 LENGTH & SUBSTANCE
+- For simple greetings and hellos (e.g. "Hello", "Hi", "Hey there"), reply warmly, naturally, and conversationally in 1-2 sentences. Acknowledge the greeting and ask what they would like to explore about Ryan's work, case studies, or background. Example: "Hi! Would you like to discuss Ryan's case studies, his background in UX design and front-end code, or how his experience might fit an open role on your team?" Do NOT dump a full career essay on a simple greeting.
 - Deliver 2 to 4 crisp, high-signal sentences for general questions. Lead directly with substantive insights, architectural decisions, and measurable outcomes.
 - For deep questions, case breakdowns, or fit-for-company queries: provide a structured answer with 3-4 tight bullets.
 - Detailed mode: up to ~200 words.
@@ -2178,6 +2187,24 @@ export default async function handler(req, res) {
       return res.json(assistantPayload({
         answer: refusal,
         suggested_pills: defaultSuggestedPills(intent, lastUser)
+      }));
+    }
+
+    if (intent === "greeting") {
+      const greetingAnswer = getDeterministicAnswer("greeting", kb) || "Hi! Would you like to discuss Ryan's case studies, his background in UX design and front-end code, or how his experience might fit an open role on your team?";
+      const greetingPills = defaultSuggestedPills("greeting", lastUser);
+      if (wantsStream) {
+        res.writeHead(200, { "Content-Type": "text/event-stream", "Cache-Control": "no-cache", "Connection": "keep-alive" });
+        res.write(`data: ${JSON.stringify({ type: "chunk", text: greetingAnswer })}\n\n`);
+        res.write(`data: ${JSON.stringify({ type: "done", data: { answer: greetingAnswer, suggested_pills: greetingPills, hire_intent: false, context_cases: [], sources: [] } })}\n\n`);
+        return res.end();
+      }
+      return res.json(assistantPayload({
+        answer: greetingAnswer,
+        suggested_pills: greetingPills,
+        hire_intent: false,
+        context_cases: [],
+        sources: []
       }));
     }
 

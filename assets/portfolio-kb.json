@@ -964,6 +964,7 @@
     }
   ],
   "deterministic_answers": {
+    "greeting": "Hi! Would you like to discuss Ryan's case studies, his background in UX design and front-end code, or how his experience might fit an open role on your team?",
     "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
     "looking_for": "Ryan is open to the right opportunity, specifically roles where designers build their designs in code as well as Figma: the new standard for modern product design. His strongest targets are Senior, Lead, or Staff Product Designer and UX Engineer roles.",
     "proof_points": "Ryan's strongest proof points are +500% Ahri sessions and doubled daily activity after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption across five Cloud modules, +71% sustained dashboard views, and +8% company-wide MRR after the inventory MVP.",

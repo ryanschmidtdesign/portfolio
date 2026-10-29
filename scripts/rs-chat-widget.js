@@ -64,58 +64,62 @@
       }
       .ui *, .ui *::before, .ui *::after { box-sizing: inherit; }
 
-      /* Drawer — Warm Ceramic & Paper Frosted Glass Console */
+      /* Drawer: Stuck to right edge (Antigravity-style side pane) */
       .panel {
         position: fixed;
-        top: auto;
-        left: 50%;
-        right: auto;
-        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-        width: min(692px, calc(100vw - 28px));
-        height: min(860px, calc(100vh - 40px));
-        max-height: calc(100vh - 40px);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: auto;
+        width: min(440px, 100vw);
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100dvh;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        background: rgba(255, 255, 255, 0.96);
+        background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(24px) saturate(180%);
         -webkit-backdrop-filter: blur(24px) saturate(180%);
         color: var(--text, #131211);
-        border: 1px solid rgba(28, 22, 18, 0.12);
+        border: none;
+        border-left: 1px solid rgba(28, 22, 18, 0.12);
         box-shadow:
-          0 24px 64px -12px rgba(28, 20, 15, 0.22),
-          0 4px 16px rgba(28, 20, 15, 0.06),
-          inset 0 1px 0 rgba(255, 255, 255, 1);
-        border-radius: 12px;
+          -8px 0 32px rgba(28, 20, 15, 0.08),
+          -1px 0 0 rgba(28, 20, 15, 0.06);
+        border-radius: 0;
         visibility: hidden;
         opacity: 0;
         pointer-events: none;
-        transform: translateX(-50%) translateY(18px) scale(0.98);
-        transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease, visibility 220ms ease;
+        transform: translateX(100%);
+        transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease, visibility 200ms ease;
         z-index: 2147482999;
         overflow: hidden;
       }
       .panel-reticle { display: none !important; }
-      @media (max-width: 640px) {
+      @media (max-width: 768px) {
         .panel {
-          left: 10px;
-          right: 10px;
-          bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-          width: auto;
-          height: calc(100vh - 20px);
-          max-height: calc(100vh - 20px);
-          border-radius: 10px;
-          transform: translateY(18px) scale(0.98);
+          top: auto;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: min(85vh, 720px);
+          max-height: 85vh;
+          border-left: none;
+          border-top: 1px solid rgba(28, 22, 18, 0.12);
+          border-radius: 16px 16px 0 0;
+          transform: translateY(100%);
         }
         .panel.open {
-          transform: translateY(0) scale(1);
+          transform: translateY(0);
         }
       }
       .panel.open {
         visibility: visible;
         opacity: 1;
         pointer-events: auto;
-        transform: translateX(-50%) translateY(0) scale(1);
+        transform: translateX(0);
       }
       @media (prefers-reduced-motion: reduce) {
         .panel, .panel.open, * {
@@ -554,18 +558,25 @@
         position: fixed;
         inset: 0;
         z-index: 2147482998;
-        background: rgba(28, 22, 18, 0.42);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        background: rgba(28, 22, 18, 0.32);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
         transition: opacity 0.26s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.26s;
       }
-      .panel-backdrop.open {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
+      @media (min-width: 769px) {
+        .panel-backdrop {
+          display: none !important;
+        }
+      }
+      @media (max-width: 768px) {
+        .panel-backdrop.open {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+        }
       }
 
       /* Hire Intent CTA Card */

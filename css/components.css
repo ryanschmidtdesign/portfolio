@@ -229,6 +229,8 @@
 }
 
 .case-study {
+  --prose: 720px;
+  --prose-tight: 660px;
   margin: 0 auto;
   padding-top: var(--space-8);
   color: var(--text);
@@ -432,7 +434,7 @@
   letter-spacing: var(--tracking-tighter);
   margin: 0 0 var(--case-h2-to-body) 0;
   color: var(--text);
-  text-wrap: balance;
+  text-wrap: pretty;
 }
 
 /* Scoped override for the IA challenge heading to avoid awkward balanced wrapping */
@@ -447,6 +449,7 @@
   letter-spacing: var(--tracking-snug);
   margin: var(--case-h3-top) 0 var(--case-h3-to-body) 0;
   color: var(--text);
+  text-wrap: pretty;
 }
 
 /* Eyebrow/meta labels */
@@ -463,7 +466,11 @@
 .case-study section p,
 .case-study .impact-lede,
 .case-study dl.meta dd,
-.tldr-role p {
+.tldr-role p,
+.case-study section li,
+.case-study blockquote p,
+.case-study .case-study-summary__list li,
+.case-study-next__desc {
   font-size: var(--fs-body);
   line-height: var(--lh-prose);
   font-weight: var(--weight-regular);
@@ -657,8 +664,8 @@
   letter-spacing: -0.035em;
   margin-bottom: var(--space-5);
   color: var(--text);
-  max-width: 22ch;
-  text-wrap: balance;
+  max-width: 24ch;
+  text-wrap: pretty;
 }
 
 .case-study .tldr .lead {

@@ -128,6 +128,13 @@ describe('extractCompanyHint', () => {
 });
 
 describe('detectIntent', () => {
+  it('detects greeting intent', () => {
+    expect(detectIntent('Hello!')).toBe('greeting');
+    expect(detectIntent('Hi')).toBe('greeting');
+    expect(detectIntent('Hey there')).toBe('greeting');
+    expect(detectIntent('Good morning')).toBe('greeting');
+  });
+
   it('detects contact intent', () => {
     expect(detectIntent('How can I contact Ryan?')).toBe('contact');
   });
