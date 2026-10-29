@@ -426,10 +426,11 @@ body:not(.is-home) .site-main {
 
 /* -------------------------------------------------------
    Antigravity-Style Side Pane Readjustment
-   When the AI chat console opens on desktop (>=769px),
+   When the AI chat console opens on desktop (>=1100px),
    readjust the page content to its left smoothly.
+   Below 1100px, the console operates as a right overlay.
 --------------------------------------------------------*/
-@media (min-width: 769px) {
+@media (min-width: 1100px) {
   body {
     --chat-panel-width: 440px;
     transition: margin-right 280ms cubic-bezier(0.16, 1, 0.3, 1);

@@ -55,7 +55,7 @@
         'Reworked navigation and research discovery around member priorities. After launch, Ahri sessions increased 500% and daily activity doubled.',
       tags: ['Information Architecture', 'Research Discovery', 'Member Experience'],
       url: 'pages/member-portal-overhaul.html',
-      image: 'assets/case-studies/member-portal/design-highlights/Ahri Full Page Redesign - Main.webp',
+      image: 'assets/case-studies/member-portal/design-highlights/Ahri%20Full%20Page%20Redesign%20-%20Main.webp',
       aiPrompt: 'How did Ryan approach the i4cp Member Portal overhaul, and what were the outcomes?'
     },
     {

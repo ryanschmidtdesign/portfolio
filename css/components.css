@@ -128,6 +128,7 @@
   line-height: var(--lh-xs);
   font-weight: var(--weight-regular);
   color: var(--text);
+  text-wrap: balance;
 }
 
 /* Accent usage */
@@ -231,8 +232,11 @@
 .case-study {
   --prose: 720px;
   --prose-tight: 660px;
+  max-width: calc(var(--prose) + (var(--page-gutter) * 2));
   margin: 0 auto;
+  padding-inline: var(--page-gutter);
   padding-top: var(--space-8);
+  box-sizing: border-box;
   color: var(--text);
   background: transparent;
   border: none;
@@ -418,7 +422,12 @@
   scroll-margin-top: 5rem;
 }
 
-.case-study section+section {
+.case-study section+section,
+.case-study aside+section,
+.case-study .callout+section,
+.case-study figure+section,
+.case-study>aside,
+.case-study>.callout {
   margin-top: var(--case-section-gap);
 }
 
@@ -434,11 +443,6 @@
   letter-spacing: var(--tracking-tighter);
   margin: 0 0 var(--case-h2-to-body) 0;
   color: var(--text);
-  text-wrap: pretty;
-}
-
-/* Scoped override for the IA challenge heading to avoid awkward balanced wrapping */
-#ia-challenge .section-divider h2 {
   text-wrap: pretty;
 }
 
@@ -629,11 +633,17 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.15rem;
-  line-height: var(--lh-snug);
+  line-height: var(--lh-prose);
   color: var(--text);
   margin: 0;
   padding: 0;
   border: none;
+  text-wrap: pretty;
+}
+
+.callout--quote blockquote p {
+  text-wrap: pretty;
+  margin: 0;
 }
 
 .callout--quote .callout-attribution {
@@ -664,8 +674,8 @@
   letter-spacing: -0.035em;
   margin-bottom: var(--space-5);
   color: var(--text);
-  max-width: 24ch;
-  text-wrap: pretty;
+  max-width: var(--prose);
+  text-wrap: balance;
 }
 
 .case-study .tldr .lead {
@@ -797,6 +807,7 @@
   text-transform: uppercase;
   max-width: 32ch;
   color: var(--kpi-label-color);
+  text-wrap: balance;
 }
 
 .kpis--hero li .metric:not([data-animate]) {
@@ -863,6 +874,7 @@
   margin-top: 2px;
   max-width: 32ch;
   margin-inline: auto;
+  text-wrap: balance;
 }
 
 .case-study dl.meta {
@@ -1117,6 +1129,12 @@ figure.case-study-media {
   text-align: center;
 }
 
+@media (min-width: 1100px) {
+  body.rs-chat-drawer-open figure.case-study-media {
+    max-width: min(960px, calc(100vw - var(--chat-panel-width, 440px) - (var(--page-gutter) * 2)));
+  }
+}
+
 figure.case-study-media[data-reveal] {
   transform: translateX(-50%);
   transition: opacity .45s var(--ease-out);
@@ -1134,6 +1152,7 @@ figure.case-study-media[data-reveal].is-revealed {
   margin: var(--space-3) auto var(--space-2);
   padding-inline: var(--page-gutter);
   text-align: center;
+  text-wrap: balance;
 }
 
 @media (max-width: 768px) {
@@ -1924,10 +1943,12 @@ figure.case-study-media[data-reveal].is-revealed {
   font-size: var(--fs-article-h3);
 }
 
-/* Make the compare panel body read like an emphasized answer */
+/* Make the compare panel body read with comfortable editorial measure */
 [data-compare] .compare-panel p {
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-regular);
   text-align: left;
+  line-height: var(--lh-prose);
+  text-wrap: pretty;
 }
 
 [data-compare] .compare-panel[data-tone="bad"]::before {

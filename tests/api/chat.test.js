@@ -218,6 +218,10 @@ describe('extractRoleHint', () => {
     expect(extractRoleHint('How does Ryan fit the role as Staff UX Engineer?')).toBe('Staff UX Engineer');
   });
 
+  it('extracts role with suffix pattern', () => {
+    expect(extractRoleHint('Why is Ryan suited for a Staff Product Designer role?')).toBe('Staff Product Designer');
+  });
+
   it('returns empty for no role', () => {
     expect(extractRoleHint('Is Ryan a fit for this role?')).toBe('');
   });

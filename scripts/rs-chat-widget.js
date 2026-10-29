@@ -97,6 +97,12 @@
         overflow: hidden;
       }
       .panel-reticle { display: none !important; }
+      .panel.open {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+      }
       @media (max-width: 768px) {
         .panel {
           top: auto;
@@ -114,12 +120,6 @@
         .panel.open {
           transform: translateY(0);
         }
-      }
-      .panel.open {
-        visibility: visible;
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateX(0);
       }
       @media (prefers-reduced-motion: reduce) {
         .panel, .panel.open, * {
@@ -566,12 +566,12 @@
         pointer-events: none;
         transition: opacity 0.26s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.26s;
       }
-      @media (min-width: 769px) {
+      @media (min-width: 1100px) {
         .panel-backdrop {
           display: none !important;
         }
       }
-      @media (max-width: 768px) {
+      @media (max-width: 1099px) {
         .panel-backdrop.open {
           opacity: 1;
           visibility: visible;

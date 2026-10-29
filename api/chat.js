@@ -10,8 +10,8 @@ import path from "node:path";
 // -----------------------------------------------------------------------------
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
-const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
-const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-2.5-pro";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.0-flash";
+const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-2.0-flash";
 const GEMINI_FALLBACK_MODEL = process.env.GEMINI_FALLBACK_MODEL || "gemini-1.5-flash";
 const CSE_API_KEY = process.env.CSE_API_KEY || "";
 const CSE_ID = process.env.CSE_ID || "";
@@ -124,11 +124,12 @@ try {
 // -----------------------------------------------------------------------------
 
 function isBadHint(h = "") {
-  const t = h.toLowerCase();
+  const t = h.toLowerCase().trim();
   return (
     t.length < 2 ||
     t.length > 80 ||
     [
+      "my", "our", "any", "all", "the", "fit", "role", "position", "job", "opening",
       "this", "that", "here", "my company", "the company", "your company", "portfolio",
       "my role", "this role", "that role", "the role", "a role", "your role", "any role",
       "an open role", "this position", "the position", "a position", "that position", "my position",
@@ -189,7 +190,9 @@ function polishAnswerText(text = "") {
     [/\bdelve into\b/gi, "look at"],
     [/\bsynergy\b/gi, "fit"],
     [/\brobust\b/gi, "strong"],
-    [/\bseamless\b/gi, "smooth"]
+    [/\bseamless\b/gi, "smooth"],
+    [/\btestament\b/gi, "evidence"],
+    [/\bspearheaded\b/gi, "led"]
   ];
   for (const [re, replacement] of bannedReplacements) {
     s = s.replace(re, replacement);
@@ -473,12 +476,39 @@ function extractCompanyHint(text = "") {
 function extractRoleHint(text = "") {
   const s = String(text || "").trim();
   if (!s) return "";
-  const m =
-    s.match(/\bfit\s+(?:as|for)\s+(?:a|an|the)?\s*([^?.!,\n]{2,80})\s+\bat\b/i) ||
-    s.match(/\b(?:role|position)\s+(?:as|for)\s+(?:a|an|the)?\s*([^?.!,\n]{2,80})/i);
-  if (!m || !m[1]) return "";
-  let candidate = m[1].split(/\s+(?:at|for|in)\s+/i)[0];
-  return cleanHint(candidate);
+
+  // 1) Explicit fit with company: "fit for Senior Product Designer at Google"
+  const withCompany = s.match(/\bfit\s+(?:as|for)\s+(?:a|an|the)?\s*([^?.!,\n]{2,80})\s+\bat\b/i);
+  if (withCompany && withCompany[1]) {
+    const cand = cleanHint(withCompany[1].split(/\s+(?:at|for|in)\s+/i)[0]);
+    if (cand && !isBadHint(cand)) return cand;
+  }
+
+  // 2) Role-prefixed pattern: "role as Staff UX Engineer" or "position of Lead Designer"
+  const rolePrefix = s.match(/\b(?:role|position)\s+(?:as|for|of)\s+(?:a|an|the)?\s*([^?.!,\n]{2,80})/i);
+  if (rolePrefix && rolePrefix[1]) {
+    const cand = cleanHint(rolePrefix[1].split(/\s+(?:at|for|in)\s+/i)[0]);
+    if (cand && !isBadHint(cand)) return cand;
+  }
+
+  // 3) Suffix pattern: "...suited for a Staff Product Designer role" or "fit for a Design Technologist"
+  const suited = s.match(/\b(?:suited|fit|good|qualified)\s+(?:as|for|to\s+be)\s+(?:a|an|the|our)?\s*([^?.!,\n]{2,80})/i);
+  if (suited && suited[1]) {
+    let cand = suited[1].split(/\s+(?:at|for|in|on|with)\s+/i)[0];
+    cand = cand.replace(/\s+(?:role|position|job|opening)[s]?$/i, "").trim();
+    const cleaned = cleanHint(cand);
+    if (cleaned && !isBadHint(cleaned)) return cleaned;
+  }
+
+  // 4) Direct role with suffix: "open Senior Product Designer role" or "our Staff Designer position"
+  const suffix = s.match(/\b(?:open|the|a|an|our)\s+([A-Z][A-Za-z0-9/\s-]{2,50})\s+(?:role|position|job|opening)\b/);
+  if (suffix && suffix[1]) {
+    let cand = suffix[1].replace(/\s+(?:role|position|job|opening)[s]?$/i, "").trim();
+    const cleaned = cleanHint(cand);
+    if (cleaned && !isBadHint(cleaned)) return cleaned;
+  }
+
+  return "";
 }
 
 // True when a fit question names a company or role worth evaluating against.
@@ -570,7 +600,7 @@ function getDeterministicAnswer(intent, kb) {
   const intentAliases = {
     proof_points: 'proof_points',
     resume: 'proof_points',
-    role_fit: 'ux_engineer_fit',
+    role_fit: 'role_fit',
     ux_engineer_fit: 'ux_engineer_fit'
   };
   const aliasKey = intentAliases[intent];
@@ -1845,9 +1875,13 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
 
         return result;
       }
-      // Retry 5xx (server errors) — 429 (rate limit) drops out of loop to try fallback model
+      // Retry 5xx (server errors); 429 (rate limit) and 404 (model missing) drop out of loop to try fallback model
       if (resp.status === 429) {
         lastErr = new Error(`Gemini 429: quota exhausted on ${model}`);
+        break;
+      }
+      if (resp.status === 404) {
+        lastErr = new Error(`Gemini 404: model ${model} not found`);
         break;
       }
       if (resp.status >= 500 && attempt < MAX_RETRIES) {
@@ -1866,6 +1900,10 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
         console.warn(`Gemini network error (attempt ${attempt + 1}), retrying in ${delay}ms: ${err.message}`);
         await new Promise(r => setTimeout(r, delay));
         continue;
+      }
+      // If error indicates 404 or 429, break to allow fallback model attempt
+      if (err.message?.includes("404") || err.message?.includes("429") || err.message?.includes("not found")) {
+        break;
       }
       // Non-retryable: throw immediately
       throw err;
@@ -2005,7 +2043,7 @@ VOICE & CRAFT
 - Contractions (he's, it's, that's). Vary sentence length and rhythm.
 - Specific, active verbs (shipped, rebuilt, cut, replaced, scaled, drove).
 - Never use em dashes (use periods, commas, or colons).
-- Never use AI clichés: leverage, utilize, passionate about, I'm thrilled, I'm excited to, delve into, in today's fast-paced world, synergy, robust, seamless, As an AI, I'd be happy to.
+- Never use AI clichés: leverage, utilize, passionate about, I'm thrilled, I'm excited to, delve into, in today's fast-paced world, synergy, robust, seamless, testament, spearheaded, As an AI, I'd be happy to.
 - Never use formulaic, repetitive closing questions like "Want the longer version?", "Want me to go deeper?", or "Should I expand?". Avoid rhetorical question endings.
 
 CORE PHILOSOPHY & POSITIONING

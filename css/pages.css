@@ -2881,6 +2881,7 @@ body:not(.is-home) main.site-main {
   filter: blur(48px);
   pointer-events: none;
   z-index: -1;
+  transition: left 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .serif-accent,
