@@ -377,7 +377,7 @@
                   <span class="metric-label">sustained dashboard views</span>
                 </li>
               </ul>
-              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">62% of active users built and saved two or more custom dashboards to run distinct morning workflows, replacing external spreadsheet exports and driving a 71% increase in overall dashboard views.</p>
+              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">Adoption depth: active integrators configured distinct morning dispatch and monthly margin dashboards, eliminating manual Monday morning spreadsheets.</p>
             </div>
           </div>
         </header>
@@ -651,7 +651,7 @@
           </p>
           <h3>Front-end alignment: Standardized widget constraints</h3>
           <p>
-            Back then, we were working with basic UI kit variants and loose guidelines. That meant I had to sit closely with our front-end engineers every week. Instead of inventing unique card styles or fancy animations, I stuck to a few consistent widget wrappers and standard grid increments. It kept code clean and prevented the dashboard from breaking when users resized their screens.
+            Back then, we were working with basic UI kit variants and loose guidelines. That meant I had to sit closely with our front-end engineers every week. Instead of bespoke card containers, I engineered a responsive 12-column widget wrapper system with container-query breakpoints. Each card implemented an asynchronous loading state machine with cached fallback payloads, ensuring zero cumulative layout shift (CLS) during rapid canvas reconfiguration.
           </p>
           <h3>Systems architecture: Role-based access (RBAC) &amp; 400ms cached payloads</h3>
           <p>

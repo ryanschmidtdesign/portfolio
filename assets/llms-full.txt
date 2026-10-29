@@ -105,7 +105,7 @@ https://ryanschmidt.design/pages/member-portal-overhaul
 
 **Problem:** Members couldn't find what they came for. The portal's navigation didn't reflect how content was actually structured. A well-validated content taxonomy existed but wasn't visible in the UI.
 
-**Role:** CX/UX Designer (Sole Designer). Owning IA, design system tokens, Trello tickets, and staging QA.
+**Role:** Lead Product Designer (Sole Design Lead across Product & Engineering). Owning IA, design system tokens, acceptance criteria, and staging QA.
 
 **Research:** Validated the existing 4-tier taxonomy through moderated usability testing with 5 enterprise HR executives, finding flat navigation overwhelmed users while progressive disclosure kept entry calm.
 

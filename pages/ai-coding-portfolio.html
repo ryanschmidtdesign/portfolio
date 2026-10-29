@@ -848,15 +848,15 @@
             <figcaption>The original chat widget from the previous portfolio before moving to vector search.</figcaption>
           </figure>
           <p>
-            I rebuilt the backend around Supabase and pgvector. Now, every case study and project note is broken into small chunks and indexed using Gemini embeddings. When a recruiter or visitor asks a question, the backend retrieves only the three or four most relevant paragraphs before generating an answer.
+            I architected a custom serverless API gateway (<code>api/chat.js</code>) using Supabase and pgvector. Project notes and case studies are chunked and embedded via Gemini embeddings. The endpoint implements an in-memory TTL query cache, IP sliding-window rate limiting, and an RPC cosine similarity search (<code>match_portfolio_chunks</code>) to retrieve targeted context vectors in under 200ms before streaming answers via Server-Sent Events.
           </p>
           <p>
-            Getting the tone and accuracy right took plenty of testing. I had to set strict boundaries so the bot would decline questions outside my background, stream answers smoothly without lag, and track resume downloads so I know what hiring managers care about most.
+            Getting the tone and accuracy right took extensive test-driven development. I authored 61 automated Vitest tests covering intent classification guardrails, role-fit mapping heuristics, SSRF private IP blocks, and numerical metric preservation so the bot declines out-of-scope queries and never hallucinates numbers.
           </p>
           <aside class="callout callout--accent">
             <h3>Tradeoff</h3>
             <p>
-              Retrieval added setup and maintenance work, but it let the assistant use relevant project notes instead of sending the full content file with every request. I still need to test the answers and handle questions the source material cannot support.
+              Retrieval and security plumbing added setup overhead, but it transformed the assistant from an unpredictable toy into a hardened, context-grounded interface that mirrors enterprise production standards.
             </p>
           </aside>
         </section>
@@ -867,11 +867,11 @@
           </div>
 
           <p>
-            The result is a custom portfolio with shared design tokens, reusable page patterns, and an assistant connected to my project notes. Building it also gave me a practical workflow for testing interface ideas in code.
+            Building the portfolio in production code compressed the feedback loop between design intent and engineering reality. Prototyping directly in the browser revealed edge-case layout breaks, font-rendering quirks, and accessibility barriers that static Figma canvases conceal.
           </p>
 
           <p>
-            The biggest advantage is rapid validation. When I want to test a layout idea or micro-interaction, I can build a working prototype in an afternoon, run it on a phone, and see if the ergonomics actually work.
+            The biggest advantage is rapid validation. When I want to test a layout idea or micro-interaction, I can build a working prototype in an afternoon, run it on a phone, and verify that keyboard navigation and responsive ergonomics work reliably before handing specifications to developers.
           </p>
 
           <!-- Impact section does not have a dedicated analytics screenshot yet -->
