@@ -303,11 +303,6 @@ code {
 
 @media print {
 
-  [data-webgl-hero],
-  [data-webgl-models],
-  [data-about-overlay],
-  #hamburger,
-  .hamburger-menu,
   .ai-mini-wrapper,
   .rs-chat-widget {
     display: none !important;

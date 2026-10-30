@@ -33,7 +33,6 @@
 }
 
 /* Meta / eyebrow labels */
-.text-meta,
 .case-study .tldr-label {
   font-size: var(--fs-xs);
   line-height: var(--lh-2xs);
@@ -1844,17 +1843,6 @@ figure.case-study-media[data-reveal].is-revealed {
   overflow: hidden;
   opacity: 0;
   transition: max-height var(--dur-3) ease, opacity var(--dur-3) ease;
-}
-
-.ink-reveal-wrapper {
-  margin-top: var(--space-6);
-}
-
-.ink-reveal-wrapper p {
-  font-size: var(--fs-md);
-  line-height: var(--lh-md);
-  color: var(--text);
-  margin-top: var(--space-4);
 }
 
 [data-section-summary].is-open {
