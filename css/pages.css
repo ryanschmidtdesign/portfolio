@@ -343,6 +343,25 @@
   }
 }
 
+/* Subpage eyebrow telemetry badges */
+.about-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--accent-text, #E07A5F);
+  background: rgba(200, 90, 50, 0.12);
+  border: 1px solid rgba(200, 90, 50, 0.28);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  width: fit-content;
+}
+
 @media (max-width: 968px) {
   .about-content,
   .about-section .about-content {
@@ -415,8 +434,9 @@
   overflow: hidden;
   padding: var(--space-3);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0.44));
-  border: 1px solid var(--border-subtle);
+    radial-gradient(320px circle at 50% 0%, rgba(200, 90, 50, 0.08), transparent 70%),
+    #1A1614;
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   display: flex;
@@ -782,21 +802,28 @@ body.is-home {
 .home-drawing-paper {
   position: relative;
   width: 100%;
-  background: transparent;
-  padding: 0;
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
+  max-width: 540px;
+  background: #FAF8F5;
+  padding: clamp(14px, 2.5vw, 20px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 24px 56px -12px rgba(0, 0, 0, 0.75),
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), filter 240ms ease;
-  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.45));
+  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 240ms ease, border-color 200ms ease;
 }
 
 .home-drawing-paper:hover {
-  transform: translateY(-2px) scale(1.015);
-  filter: drop-shadow(0 14px 32px rgba(200, 90, 50, 0.22));
+  transform: translateY(-3px) scale(1.01);
+  border-color: rgba(200, 90, 50, 0.4);
+  box-shadow:
+    0 28px 64px -10px rgba(0, 0, 0, 0.85),
+    0 0 28px rgba(200, 90, 50, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .home-drawing-img {

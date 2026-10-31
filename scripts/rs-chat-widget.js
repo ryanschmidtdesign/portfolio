@@ -113,7 +113,7 @@
           height: min(85vh, 720px);
           max-height: 85vh;
           border-left: none;
-          border-top: 1px solid rgba(28, 22, 18, 0.12);
+          border-top: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 16px 16px 0 0;
           transform: translateY(100%);
         }
@@ -311,7 +311,7 @@
         gap: 8px;
         margin-top: 10px;
         padding-top: 8px;
-        border-top: 1px solid rgba(28, 22, 18, 0.06);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
         font-family: var(--font-mono);
         font-size: 10.5px;
         color: var(--text-secondary, #A8A29E);
@@ -558,9 +558,9 @@
         position: fixed;
         inset: 0;
         z-index: 2147482998;
-        background: rgba(28, 22, 18, 0.32);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        background: rgba(12, 10, 9, 0.65);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -632,14 +632,14 @@
       .chat-sources {
         margin-top: 10px;
         padding-top: 8px;
-        border-top: 1px solid rgba(28, 22, 18, 0.08);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
       .chat-sources-label {
         font-family: var(--font-mono);
         font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--text-secondary, #5C5750);
+        color: var(--text-secondary, #A8A29E);
         font-weight: 600;
         margin-bottom: 4px;
       }
@@ -661,8 +661,9 @@
         font-weight: 500;
         padding: 2px 8px;
         border-radius: 5px;
-        background: rgba(200, 90, 50, 0.1);
-        color: var(--accent, #C85A32);
+        background: rgba(200, 90, 50, 0.15);
+        color: #E07A5F;
+        border: 1px solid rgba(200, 90, 50, 0.3);
         text-decoration: none;
       }
       .chat-sources-list a:hover {
@@ -683,7 +684,7 @@
         gap: 8px;
       }
       .loading-text {
-        color: var(--text-secondary, #5C5750);
+        color: var(--text-secondary, #A8A29E);
         font-size: 13px;
         font-weight: 500;
       }
@@ -712,9 +713,9 @@
         font-weight: 600;
         padding: 3px 9px;
         border-radius: 999px;
-        background: rgba(28, 22, 18, 0.05);
-        border: 1px solid rgba(28, 22, 18, 0.12);
-        color: var(--text-secondary, #5C5750);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: var(--text-secondary, #A8A29E);
         cursor: pointer;
         transition: all 0.15s ease;
       }
