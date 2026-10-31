@@ -1327,11 +1327,11 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 .subpage-omnibar-shell {
   position: relative;
   width: 100%;
-  background: rgba(10, 10, 14, 0.94);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1.5px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-sm, 6px);
+  background: rgba(12, 11, 15, 0.68);
+  backdrop-filter: blur(16px) saturate(190%);
+  -webkit-backdrop-filter: blur(16px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
   padding: 3px 0;
   box-shadow: var(--shadow-dock);
   overflow: hidden;
@@ -1349,13 +1349,14 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-shell:hover,
 .subpage-omnibar-shell:hover {
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(16, 15, 20, 0.78);
+  border-color: rgba(255, 255, 255, 0.30);
   box-shadow: var(--shadow-dock);
 }
 
 .home-omnibar-shell:focus-within,
 .subpage-omnibar-shell:focus-within {
-  background: rgba(14, 14, 18, 0.98);
+  background: rgba(18, 16, 22, 0.84);
   border-color: var(--accent, #C85A32);
   outline: 2px solid var(--accent, #C85A32);
   outline-offset: 2px;
@@ -1377,6 +1378,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   padding: 4px 14px 4px 18px;
   background: transparent;
   border: none;
+  border-radius: 2px;
   box-shadow: none;
 }
 
@@ -1493,7 +1495,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   color: #D4CFCA;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 5px;
+  border-radius: 2px;
   height: 26px;
   line-height: 26px;
   padding: 0 7px;
@@ -1514,7 +1516,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   background: var(--accent, #C85A32);
   color: #FFFFFF;
   border: none;
-  border-radius: 6px;
+  border-radius: 2px;
   width: 32px;
   height: 32px;
   display: inline-flex;
@@ -1563,13 +1565,13 @@ body:not(.is-home) main.site-main {
   .home-omnibar-shell,
   .subpage-omnibar-shell {
     padding: 3px 4px;
-    border-radius: var(--radius-sm, 6px);
+    border-radius: 2px;
   }
   .home-omnibar-form,
   .subpage-omnibar-form {
     min-height: 44px;
     padding: 3px 6px 3px 10px;
-    border-radius: var(--radius-sm, 6px);
+    border-radius: 2px;
   }
   .home-omnibar-input,
   .subpage-omnibar-input {
@@ -1584,6 +1586,7 @@ body:not(.is-home) main.site-main {
   .subpage-omnibar-cmdk .ai-mini-cmdk__kbd {
     padding: 2.5px 5.5px;
     font-size: 10px;
+    border-radius: 2px;
   }
   .home-work-grid {
     grid-template-columns: 1fr;

@@ -107,8 +107,8 @@ body {
   font-weight: var(--weight-regular);
   background-color: var(--bg);
   background-image:
-    radial-gradient(ellipse 90% 60% at 88% -5%, rgba(235, 150, 95, 0.16) 0%, transparent 70%),
-    radial-gradient(ellipse 70% 50% at 15% 100%, rgba(215, 160, 110, 0.10) 0%, transparent 65%);
+    radial-gradient(ellipse 90% 60% at 88% -5%, rgba(220, 110, 65, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 50% at 15% 100%, rgba(200, 95, 55, 0.12) 0%, transparent 65%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

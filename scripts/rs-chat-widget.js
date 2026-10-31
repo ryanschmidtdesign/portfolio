@@ -78,15 +78,15 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        background: rgba(20, 17, 16, 0.95);
-        backdrop-filter: blur(24px) saturate(180%);
-        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        background: rgba(12, 11, 15, 0.78);
+        backdrop-filter: blur(24px) saturate(190%);
+        -webkit-backdrop-filter: blur(24px) saturate(190%);
         color: #F7F5F2;
         border: none;
-        border-left: 1px solid rgba(255, 255, 255, 0.10);
+        border-left: 1px solid rgba(255, 255, 255, 0.16);
         box-shadow:
-          -12px 0 40px rgba(0, 0, 0, 0.70),
-          -1px 0 0 rgba(255, 255, 255, 0.06);
+          -16px 0 44px rgba(0, 0, 0, 0.72),
+          -1px 0 0 rgba(255, 255, 255, 0.12);
         border-radius: 0;
         visibility: hidden;
         opacity: 0;
@@ -113,8 +113,8 @@
           height: min(85vh, 720px);
           max-height: 85vh;
           border-left: none;
-          border-top: 1px solid rgba(255, 255, 255, 0.12);
-          border-radius: 16px 16px 0 0;
+          border-top: 1px solid rgba(255, 255, 255, 0.16);
+          border-radius: 2px 2px 0 0;
           transform: translateY(100%);
         }
         .panel.open {
@@ -189,7 +189,7 @@
         height: 28px;
         padding: 0 9px;
         border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 6px;
+        border-radius: 2px;
         background: #1A1614;
         color: #A8A29E;
         font-family: var(--font-mono);
@@ -223,7 +223,7 @@
         flex-direction: column;
         gap: 12px;
         padding: 16px 18px 14px;
-        background: #141110;
+        background: rgba(16, 14, 18, 0.70);
         flex: 1 1 auto;
         min-height: 0;
         overflow-y: auto;
@@ -236,7 +236,7 @@
         word-break: break-word;
         overflow-wrap: anywhere;
         padding: 11px 14px;
-        border-radius: 8px;
+        border-radius: 2px;
         font-size: 14px;
         line-height: 1.56;
       }
@@ -247,7 +247,7 @@
         border: 1px solid rgba(255, 255, 255, 0.10);
         border-right: 3px solid var(--accent, #C85A32);
         color: #F7F5F2;
-        border-bottom-right-radius: 3px;
+        border-bottom-right-radius: 2px;
         font-weight: 500;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
       }
@@ -272,7 +272,7 @@
         color: #F7F5F2;
         position: relative;
         line-height: 1.6;
-        border-bottom-left-radius: 3px;
+        border-bottom-left-radius: 2px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
       }
       .msg.bot:not([data-seeded="true"])::before {
@@ -410,7 +410,7 @@
         gap: 6px;
         padding: 9px 18px 8px;
         flex: 0 0 auto;
-        background: #141110;
+        background: rgba(16, 14, 18, 0.75);
         border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
       .pill {
@@ -420,7 +420,7 @@
         color: #A8A29E;
         background: #1A1614;
         border: 1px solid rgba(255, 255, 255, 0.10);
-        border-radius: 6px;
+        border-radius: 2px;
         padding: 5px 10px;
         cursor: pointer;
         white-space: nowrap;
@@ -460,7 +460,7 @@
         align-items: center;
         gap: 0;
         padding: 10px 16px 14px;
-        background: #141110;
+        background: rgba(16, 14, 18, 0.75);
         box-sizing: border-box;
         position: relative;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -479,10 +479,10 @@
         flex: 1;
         font: inherit;
         font-size: 13.5px;
-        background: #1A1614;
+        background: rgba(26, 22, 28, 0.75);
         border: 1.5px solid rgba(255, 255, 255, 0.14);
         color: #F7F5F2;
-        border-radius: 8px;
+        border-radius: 2px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -525,7 +525,7 @@
       .send {
         position: absolute;
         right: 20px;
-        border-radius: 6px;
+        border-radius: 2px;
         width: 30px;
         height: 30px;
         background: var(--accent, #C85A32);

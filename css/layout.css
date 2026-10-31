@@ -23,17 +23,17 @@ body:not(.is-home) {
   width: min(1038px, calc(100vw - 32px));
   max-width: 1038px;
   z-index: var(--z-header, 9990);
-  background: rgba(10, 10, 14, 0.92);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-sm, 6px);
+  background: rgba(12, 11, 15, 0.65);
+  backdrop-filter: blur(16px) saturate(190%);
+  -webkit-backdrop-filter: blur(16px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 2px;
   box-shadow: var(--shadow-header);
   overflow: hidden;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: border-color 200ms ease, box-shadow 200ms ease, left 280ms cubic-bezier(0.16, 1, 0.3, 1), max-width 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease, left 280ms cubic-bezier(0.16, 1, 0.3, 1), max-width 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .site-header::before {
@@ -41,11 +41,12 @@ body:not(.is-home) {
 }
 
 .site-header:hover {
-  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(16, 15, 20, 0.75);
+  border-color: rgba(255, 255, 255, 0.28);
   box-shadow:
     0 20px 48px -4px rgba(28, 20, 15, 0.38),
     0 4px 12px rgba(28, 20, 15, 0.20),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .site-header__inner {
@@ -108,7 +109,7 @@ body:not(.is-home) {
   color: #A8A29E;
   text-decoration: none;
   padding: 8px 10px;
-  border-radius: 6px;
+  border-radius: 2px;
   transition: color 160ms ease;
   white-space: nowrap;
 }
@@ -154,7 +155,7 @@ body:not(.is-home) {
   .site-header {
     top: calc(12px + env(safe-area-inset-top, 0px));
     width: min(1038px, calc(100vw - 20px));
-    border-radius: var(--radius-sm, 6px);
+    border-radius: 2px;
   }
   .site-header__inner {
     height: 44px;

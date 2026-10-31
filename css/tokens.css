@@ -108,9 +108,9 @@
   --type-heading-4: var(--fs-md);
   --type-caption: var(--fs-sm);
 
-  /* Radii (Engineered Hardware Squircle) */
-  --radius-xs: 4px;
-  --radius-sm: 6px;
+  /* Radii (Engineered Hardware Knife-Edge) */
+  --radius-xs: 2px;
+  --radius-sm: 2px;
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 18px;
@@ -138,7 +138,7 @@
   --surface-obsidian-base: #08090C;
   --surface-obsidian-panel: #0D0E12;
   --surface-obsidian-elevated: #13151B;
-  --surface-obsidian-glass: rgba(10, 11, 15, 0.90);
+  --surface-obsidian-glass: rgba(12, 11, 15, 0.65);
   --surface-obsidian-border: rgba(255, 255, 255, 0.08);
   --surface-obsidian-border-strong: rgba(255, 255, 255, 0.16);
   --surface-obsidian-glow: rgba(200, 90, 50, 0.25);
@@ -151,12 +151,12 @@
   --text-obsidian-emerald: #10B981;
 
   /* === The Daytime Desert Canvas & Obsidian Hotel System === */
-  --bg-sandstone-day: #F6F1EA;
-  --bg-sandstone-deep: #ECE5DC;
-  --gray-100: #F6F1EA;
-  --gray-200: #EFE8DF;
-  --gray-300: #E4DCD0;
-  --bg: #F6F1EA;
+  --bg-sandstone-day: #F3E8DF;
+  --bg-sandstone-deep: #ECE0D6;
+  --gray-100: #F3E8DF;
+  --gray-200: #ECE0D6;
+  --gray-300: #E0D1C5;
+  --bg: #F3E8DF;
 
   /* Surface levels */
   --surface-1: rgba(28, 22, 18, 0.035);
@@ -166,7 +166,7 @@
   --card-bg-strong: #FFFFFF;
   --surface-elevated: #FFFFFF;
   --surface-elevated-strong: #FFFFFF;
-  --surface-code: #EFE8DF;
+  --surface-code: #ECE0D6;
 
   /* KPI system */
   --kpi-gap: 3.25rem;
@@ -191,12 +191,12 @@
   --shadow-header:
     0 16px 36px -4px rgba(28, 20, 15, 0.28),
     0 2px 8px rgba(28, 20, 15, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
 
   --shadow-dock:
     0 24px 60px -8px rgba(28, 20, 15, 0.42),
     0 4px 16px rgba(28, 20, 15, 0.20),
-    0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.22);
 
   --shadow-dock-focus:
@@ -274,8 +274,8 @@
   --accent: #C85A32;
   --accent-primary: var(--accent);
   --accent-hover: #DC6237;
-  --accent-text: #8C3B1E;       /* 7.2:1 AAA on #F6F1EA */
-  --accent-text-hover: #732F16; /* 8.8:1 AAA on #F6F1EA */
+  --accent-text: #8C3B1E;       /* 7.2:1 AAA on #F3E8DF */
+  --accent-text-hover: #732F16; /* 8.8:1 AAA on #F3E8DF */
   --accent-btn-fill: #AC4925;   /* 5.6:1 contrast with white text */
   --accent-btn-hover: #8C3B1E;  /* 7.6:1 contrast with white text */
   --accent-soft: rgba(200, 90, 50, 0.08);
@@ -332,7 +332,7 @@
   --ink-on-glass: #F7F5F2;
 
   /* Body gradient endpoint */
-  --bg-gradient-end: #EFE8DF;
+  --bg-gradient-end: #ECE0D6;
 
   /* Raw channels */
   --rgb-white: 255 255 255;

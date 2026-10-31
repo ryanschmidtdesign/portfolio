@@ -71,15 +71,15 @@
                     z-index: 1;
                     width: min(620px, 100%);
                     max-height: 80vh;
-                    background: rgba(20, 17, 16, 0.96);
-                    backdrop-filter: blur(20px) saturate(180%);
-                    -webkit-backdrop-filter: blur(20px) saturate(180%);
-                    border: 1px solid rgba(255, 255, 255, 0.12);
-                    border-radius: 6px;
+                    background: rgba(12, 11, 15, 0.78);
+                    backdrop-filter: blur(20px) saturate(190%);
+                    -webkit-backdrop-filter: blur(20px) saturate(190%);
+                    border: 1px solid rgba(255, 255, 255, 0.18);
+                    border-radius: 2px;
                     box-shadow:
                         0 24px 64px -12px rgba(0, 0, 0, 0.8),
                         0 4px 16px rgba(0, 0, 0, 0.4),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+                        inset 0 1px 0 rgba(255, 255, 255, 0.22);
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
@@ -134,7 +134,7 @@
                     gap: 12px;
                     padding: 12px 16px;
                     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-                    background: #141110;
+                    background: rgba(16, 14, 18, 0.70);
                 }
 
                 .rs-cmd-prompt-glyph {
@@ -171,7 +171,7 @@
                     font-weight: 600;
                     letter-spacing: 0.04em;
                     padding: 2px 7px;
-                    border-radius: 4px;
+                    border-radius: 2px;
                     background: rgba(255, 255, 255, 0.05);
                     color: #A8A29E;
                     border: 1px solid rgba(255, 255, 255, 0.09);
@@ -188,7 +188,7 @@
                     font-weight: 600;
                     letter-spacing: 0.04em;
                     text-transform: uppercase;
-                    border-radius: 4px;
+                    border-radius: 2px;
                     background: rgba(255, 255, 255, 0.06);
                     color: #A8A29E;
                     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -243,7 +243,7 @@
                     justify-content: space-between;
                     gap: 12px;
                     padding: 9px 12px;
-                    border-radius: 6px;
+                    border-radius: 2px;
                     cursor: pointer;
                     text-decoration: none;
                     color: inherit;
@@ -273,7 +273,7 @@
                 .rs-cmd-item__icon {
                     width: 24px;
                     height: 24px;
-                    border-radius: 6px;
+                    border-radius: 2px;
                     background: rgba(255, 255, 255, 0.05);
                     border: 1px solid rgba(255, 255, 255, 0.08);
                     color: #A8A29E;
