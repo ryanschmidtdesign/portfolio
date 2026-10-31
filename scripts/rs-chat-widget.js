@@ -81,7 +81,7 @@
         background: rgba(20, 17, 16, 0.95);
         backdrop-filter: blur(24px) saturate(180%);
         -webkit-backdrop-filter: blur(24px) saturate(180%);
-        color: var(--text, #F7F5F2);
+        color: #F7F5F2;
         border: none;
         border-left: 1px solid rgba(255, 255, 255, 0.10);
         box-shadow:
@@ -145,7 +145,7 @@
         padding: 13px 18px 11px;
         background: rgba(255, 255, 255, 0.02);
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        color: var(--text, #F7F5F2);
+        color: #F7F5F2;
         flex-shrink: 0;
       }
       .hdr-title-group {
@@ -170,13 +170,13 @@
         font-weight: 600;
         font-size: 13.5px;
         letter-spacing: -0.01em;
-        color: var(--text, #F7F5F2);
+        color: #F7F5F2;
       }
       .hdr-sub {
         margin: 0;
         font-family: var(--font-mono);
         font-size: 10px;
-        color: var(--text-secondary, #A8A29E);
+        color: #A8A29E;
         letter-spacing: 0.05em;
         text-transform: uppercase;
       }
@@ -191,7 +191,7 @@
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 6px;
         background: #1A1614;
-        color: var(--text-secondary, #A8A29E);
+        color: #A8A29E;
         font-family: var(--font-mono);
         font-size: 10.5px;
         font-weight: 600;
@@ -246,7 +246,7 @@
         background: #1A1614;
         border: 1px solid rgba(255, 255, 255, 0.10);
         border-right: 3px solid var(--accent, #C85A32);
-        color: var(--text, #F7F5F2);
+        color: #F7F5F2;
         border-bottom-right-radius: 3px;
         font-weight: 500;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
@@ -269,7 +269,7 @@
         background: #1A1614;
         border: 1px solid rgba(255, 255, 255, 0.09);
         border-left: 3px solid var(--accent, #C85A32);
-        color: var(--text, #F7F5F2);
+        color: #F7F5F2;
         position: relative;
         line-height: 1.6;
         border-bottom-left-radius: 3px;
@@ -282,13 +282,13 @@
         font-size: 10px;
         font-weight: 700;
         letter-spacing: 0.04em;
-        color: var(--text-secondary, #A8A29E);
+        color: #A8A29E;
         margin-bottom: 6px;
         padding-bottom: 5px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
       .msg.bot strong {
-        color: var(--text, #F7F5F2);
+        color: #F7F5F2;
         font-weight: 700;
       }
       .msg.bot a {
@@ -314,7 +314,7 @@
         border-top: 1px solid rgba(255, 255, 255, 0.08);
         font-family: var(--font-mono);
         font-size: 10.5px;
-        color: var(--text-secondary, #A8A29E);
+        color: #A8A29E;
       }
       .chat-copy-btn {
         display: inline-flex;
@@ -327,7 +327,7 @@
         font-family: var(--font-mono);
         font-size: 10.5px;
         font-weight: 600;
-        color: var(--text-secondary, #A8A29E);
+        color: #A8A29E;
         cursor: pointer;
         transition: all 140ms ease;
       }
@@ -343,7 +343,7 @@
       }
       .chat-telemetry-tag {
         font-size: 10px;
-        color: var(--text-muted, #78716C);
+        color: #78716C;
         letter-spacing: 0.05em;
         text-transform: uppercase;
       }
@@ -399,7 +399,7 @@
         padding: 3px 8px;
         border-radius: 4px;
         background: rgba(255, 255, 255, 0.05);
-        color: var(--text-secondary, #A8A29E);
+        color: #A8A29E;
         border: 1px solid rgba(255, 255, 255, 0.10);
       }
 
@@ -417,7 +417,7 @@
         font-family: var(--font-sans);
         font-size: 11.5px;
         font-weight: 500;
-        color: var(--text-secondary, #A8A29E);
+        color: #A8A29E;
         background: #1A1614;
         border: 1px solid rgba(255, 255, 255, 0.10);
         border-radius: 6px;
@@ -481,7 +481,7 @@
         font-size: 13.5px;
         background: #1A1614;
         border: 1.5px solid rgba(255, 255, 255, 0.14);
-        color: var(--text, #F7F5F2);
+        color: #F7F5F2;
         border-radius: 8px;
         white-space: nowrap;
         overflow: hidden;
@@ -596,7 +596,7 @@
       .hire-card-title {
         font-weight: 700;
         font-size: 14px;
-        color: var(--text, #F7F5F2);
+        color: #F7F5F2;
       }
       .hire-card-actions {
         display: flex;
@@ -624,7 +624,7 @@
       }
       .hire-card-actions a:last-child {
         background: rgba(255, 255, 255, 0.06);
-        color: var(--text, #F7F5F2);
+        color: #F7F5F2;
         border: 1px solid rgba(255, 255, 255, 0.14);
       }
 
@@ -639,7 +639,7 @@
         font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--text-secondary, #A8A29E);
+        color: #A8A29E;
         font-weight: 600;
         margin-bottom: 4px;
       }
@@ -684,7 +684,7 @@
         gap: 8px;
       }
       .loading-text {
-        color: var(--text-secondary, #A8A29E);
+        color: #A8A29E;
         font-size: 13px;
         font-weight: 500;
       }
@@ -715,7 +715,7 @@
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.06);
         border: 1px solid rgba(255, 255, 255, 0.12);
-        color: var(--text-secondary, #A8A29E);
+        color: #A8A29E;
         cursor: pointer;
         transition: all 0.15s ease;
       }

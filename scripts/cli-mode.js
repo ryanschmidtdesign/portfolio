@@ -85,7 +85,7 @@
                     overflow: hidden;
                     transform: translateY(-8px) scale(0.985);
                     transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
-                    color: var(--text, #F7F5F2);
+                    color: #F7F5F2;
                 }
 
                 .rs-cmd-overlay.is-open .rs-cmd-modal {
@@ -104,7 +104,7 @@
                     font-family: var(--font-sans);
                     font-size: 0.72rem;
                     font-weight: 500;
-                    color: var(--text-secondary, #A8A29E);
+                    color: #A8A29E;
                     user-select: none;
                 }
 
@@ -116,7 +116,7 @@
 
                 .rs-cmd-sys-tag {
                     font-weight: 600;
-                    color: var(--text, #F7F5F2);
+                    color: #F7F5F2;
                 }
 
                 .rs-cmd-sys-divider {
@@ -124,7 +124,7 @@
                 }
 
                 .rs-cmd-sys-meta {
-                    color: var(--text-muted, #78716C);
+                    color: #78716C;
                 }
 
                 /* Search bar */
@@ -153,7 +153,7 @@
                     font-family: var(--font-sans);
                     font-size: 0.98rem;
                     font-weight: var(--weight-medium);
-                    color: var(--text, #F7F5F2);
+                    color: #F7F5F2;
                     outline: none;
                     padding: 0;
                     margin: 0;
@@ -173,7 +173,7 @@
                     padding: 2px 7px;
                     border-radius: 4px;
                     background: rgba(255, 255, 255, 0.05);
-                    color: var(--text-secondary, #A8A29E);
+                    color: #A8A29E;
                     border: 1px solid rgba(255, 255, 255, 0.09);
                     flex-shrink: 0;
                     user-select: none;
@@ -190,7 +190,7 @@
                     text-transform: uppercase;
                     border-radius: 4px;
                     background: rgba(255, 255, 255, 0.06);
-                    color: var(--text-secondary, #A8A29E);
+                    color: #A8A29E;
                     border: 1px solid rgba(255, 255, 255, 0.12);
                     flex-shrink: 0;
                     user-select: none;
@@ -224,7 +224,7 @@
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.06em;
-                    color: var(--text-muted, #78716C);
+                    color: #78716C;
                     padding: 10px 8px 4px;
                     user-select: none;
                 }
@@ -276,7 +276,7 @@
                     border-radius: 6px;
                     background: rgba(255, 255, 255, 0.05);
                     border: 1px solid rgba(255, 255, 255, 0.08);
-                    color: var(--text-secondary, #A8A29E);
+                    color: #A8A29E;
                     font-family: var(--font-mono);
                     font-size: 0.68rem;
                     font-weight: 600;
@@ -304,7 +304,7 @@
                 .rs-cmd-item__title {
                     font-size: 0.88rem;
                     font-weight: 600;
-                    color: var(--text, #F7F5F2);
+                    color: #F7F5F2;
                     line-height: 1.25;
                     white-space: nowrap;
                     overflow: hidden;
@@ -314,7 +314,7 @@
 
                 .rs-cmd-item__sub {
                     font-size: 0.74rem;
-                    color: var(--text-secondary, #A8A29E);
+                    color: #A8A29E;
                     line-height: 1.3;
                     white-space: nowrap;
                     overflow: hidden;
@@ -361,7 +361,7 @@
 
                 .rs-cmd-kpi--slate {
                     background: rgba(255, 255, 255, 0.05);
-                    color: var(--text-secondary, #A8A29E);
+                    color: #A8A29E;
                     border: 1px solid rgba(255, 255, 255, 0.09);
                 }
 
@@ -372,7 +372,7 @@
                     padding: 2px 7px;
                     border-radius: 4px;
                     background: rgba(255, 255, 255, 0.05);
-                    color: var(--text-muted, #78716C);
+                    color: #78716C;
                     border: 1px solid rgba(255, 255, 255, 0.08);
                     white-space: nowrap;
                 }
@@ -403,7 +403,7 @@
                     border-top: 1px solid rgba(255, 255, 255, 0.06);
                     background: rgba(255, 255, 255, 0.02);
                     font-size: 0.68rem;
-                    color: var(--text-muted, #78716C);
+                    color: #78716C;
                     font-family: var(--font-sans);
                     user-select: none;
                 }
@@ -412,7 +412,7 @@
                     display: inline-flex;
                     align-items: center;
                     gap: 6px;
-                    color: var(--text-secondary, #A8A29E);
+                    color: #A8A29E;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -433,7 +433,7 @@
                     padding: 1px 5px;
                     border-radius: 4px;
                     background: rgba(255, 255, 255, 0.06);
-                    color: var(--text-secondary, #A8A29E);
+                    color: #A8A29E;
                     border: 1px solid rgba(255, 255, 255, 0.12);
                     font-size: 0.62rem;
                     font-family: var(--font-mono);

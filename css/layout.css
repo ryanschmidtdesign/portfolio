@@ -10,10 +10,10 @@ body:not(.is-home) {
 }
 
 /* -------------------------------------------------------
-   Site Header - Floating Smoked Obsidian Glass Nav
-   Option 1 aesthetic on Sandstone Dusk: Smoked obsidian glass,
-   10px squircle corners, razor-sharp hairline border,
-   bone-white text, clean responsive layout.
+   Site Header - Monolithic Obsidian Black Glass Sky-Bridge
+   Contemporary all-black glass hotel architecture hovering over
+   the sunlit daytime desert: 6px small radius, razor titanium
+   hairlines, crisp bone-white typography.
    --------------------------------------------------------*/
 .site-header {
   position: fixed;
@@ -23,10 +23,10 @@ body:not(.is-home) {
   width: min(1038px, calc(100vw - 32px));
   max-width: 1038px;
   z-index: var(--z-header, 9990);
-  background: rgba(20, 17, 16, 0.88);
+  background: rgba(10, 10, 14, 0.92);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm, 6px);
   box-shadow: var(--shadow-header);
   overflow: hidden;
@@ -41,11 +41,11 @@ body:not(.is-home) {
 }
 
 .site-header:hover {
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.22);
   box-shadow:
-    0 10px 28px -2px rgba(0, 0, 0, 0.70),
-    0 1px 4px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    0 20px 48px -4px rgba(28, 20, 15, 0.38),
+    0 4px 12px rgba(28, 20, 15, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
 .site-header__inner {
@@ -65,7 +65,7 @@ body:not(.is-home) {
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: var(--text, #F7F5F2);
+  color: #F7F5F2;
   font-family: var(--font-sans);
   font-size: var(--fs-sm, 0.9375rem);
   font-weight: 600;
@@ -81,7 +81,7 @@ body:not(.is-home) {
 
 .site-header__name {
   font-weight: 600;
-  color: var(--text, #F7F5F2);
+  color: #F7F5F2;
   letter-spacing: -0.015em;
 }
 
@@ -105,7 +105,7 @@ body:not(.is-home) {
   font-family: var(--font-sans);
   font-size: var(--fs-xs, 0.84rem);
   font-weight: 500;
-  color: var(--text-secondary, #A8A29E);
+  color: #A8A29E;
   text-decoration: none;
   padding: 8px 10px;
   border-radius: 6px;
@@ -114,17 +114,17 @@ body:not(.is-home) {
 }
 
 .site-header__link:hover {
-  color: var(--text, #F7F5F2);
+  color: #F7F5F2;
 }
 
 .site-header__link:focus-visible {
-  color: var(--text, #F7F5F2);
+  color: #F7F5F2;
   outline: 2px solid var(--accent, #C85A32) !important;
   outline-offset: -2px !important;
 }
 
 .site-header__link.is-current {
-  color: var(--text, #F7F5F2);
+  color: #F7F5F2;
   font-weight: 600;
 }
 

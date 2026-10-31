@@ -530,7 +530,7 @@
   max-width: var(--prose);
   margin-inline: auto;
   padding: var(--space-5) var(--space-6);
-  background: var(--surface-elevated, #1A1614);
+  background: var(--surface-elevated, #FFFFFF);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
@@ -558,7 +558,7 @@
   max-width: var(--prose);
   margin-inline: auto;
   padding: 24px 28px;
-  background: var(--surface-elevated, #1A1614);
+  background: var(--surface-elevated, #FFFFFF);
   border: 1px solid var(--border);
   border-radius: 18px;
   box-shadow: var(--shadow-card);
@@ -690,7 +690,7 @@
   margin-top: var(--space-6);
   margin-bottom: var(--space-6);
   padding: 24px 28px;
-  background: var(--surface-elevated, #1A1614);
+  background: var(--surface-elevated, #FFFFFF);
   border: 1px solid var(--border);
   border-radius: 18px;
   box-shadow: var(--shadow-card);
@@ -1380,7 +1380,7 @@ figure.case-study-media[data-reveal].is-revealed {
   position: relative;
   width: 100%;
   padding: var(--space-4);
-  background: var(--surface-elevated, #1A1614);
+  background: var(--surface-elevated, #FFFFFF);
   box-shadow: var(--shadow-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -1565,7 +1565,7 @@ figure.case-study-media[data-reveal].is-revealed {
   width: 100%;
   max-width: 500px;
   padding: var(--space-4);
-  background: var(--surface-elevated, #1A1614);
+  background: var(--surface-elevated, #FFFFFF);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-card);
   border-radius: var(--radius-md);
@@ -1739,7 +1739,7 @@ figure.case-study-media[data-reveal].is-revealed {
 }
 
 [data-compare] button[data-compare-button] {
-  background: #1A1614;
+  background: var(--surface-elevated, #FFFFFF);
   border: 1.5px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-md);
   color: var(--text-secondary);
@@ -2159,14 +2159,14 @@ body {
 }
 
 .btn-outline {
-  background: #1A1614;
-  color: var(--text, #F7F5F2);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: var(--surface-elevated, #FFFFFF);
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 .btn-outline:hover {
-  background: #241E1B;
+  background: var(--gray-200);
   border-color: var(--accent);
-  color: var(--accent-text, #E07A5F);
+  color: var(--accent);
 }
 
 /* ==========================================================================
@@ -3060,7 +3060,7 @@ body {
 
 .ia-card {
   padding: var(--space-4) var(--space-4);
-  background: var(--surface-elevated, #1A1614);
+  background: var(--surface-elevated, #FFFFFF);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-md);
   display: flex;
@@ -3145,7 +3145,7 @@ body {
 
 .query-chip {
   border: 1px solid var(--border-subtle);
-  background: var(--surface-elevated, #1A1614);
+  background: var(--surface-elevated, #FFFFFF);
   padding: 6px 12px;
   border-radius: var(--radius-pill);
   font-size: var(--fs-xs);
@@ -3218,7 +3218,7 @@ body {
 }
 
 .ahri-answer-bubble {
-  background: var(--surface-elevated, #1A1614);
+  background: var(--surface-elevated, #FFFFFF);
   border: 1px solid rgba(200, 90, 50, 0.3);
   border-left: 3px solid var(--accent);
   border-radius: var(--radius-md);
@@ -3437,7 +3437,7 @@ body {
    -------------------------------------------------------------------------- */
 .synthesis-matrix {
   margin-block: var(--space-5);
-  background: var(--card-bg-strong, #15100E);
+  background: var(--card-bg-strong, #FFFFFF);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: clamp(1rem, 2.5vw, 1.5rem);
@@ -3507,7 +3507,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-3);
   margin-block: var(--space-5);
-  background: var(--card-bg-strong, #15100E);
+  background: var(--card-bg-strong, #FFFFFF);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: clamp(1rem, 2.5vw, 1.5rem);
