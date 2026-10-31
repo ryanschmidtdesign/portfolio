@@ -3437,7 +3437,7 @@ body {
    -------------------------------------------------------------------------- */
 .synthesis-matrix {
   margin-block: var(--space-5);
-  background: var(--card-bg-strong, #1A1614);
+  background: var(--card-bg-strong, #15100E);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: clamp(1rem, 2.5vw, 1.5rem);
@@ -3507,7 +3507,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-3);
   margin-block: var(--space-5);
-  background: var(--card-bg-strong, #1A1614);
+  background: var(--card-bg-strong, #15100E);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: clamp(1rem, 2.5vw, 1.5rem);

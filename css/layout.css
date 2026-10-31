@@ -27,7 +27,7 @@ body:not(.is-home) {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: var(--radius-md, 10px);
+  border-radius: var(--radius-sm, 6px);
   box-shadow: var(--shadow-header);
   overflow: hidden;
   margin: 0;
@@ -154,7 +154,7 @@ body:not(.is-home) {
   .site-header {
     top: calc(12px + env(safe-area-inset-top, 0px));
     width: min(1038px, calc(100vw - 20px));
-    border-radius: var(--radius-md, 10px);
+    border-radius: var(--radius-sm, 6px);
   }
   .site-header__inner {
     height: 44px;

@@ -151,22 +151,22 @@
   --text-obsidian-emerald: #10B981;
 
   /* === The Obsidian Monolith on Sandstone Dusk System === */
-  --bg-sandstone-dusk: #141110;
-  --bg-sandstone-deep: #0C0A09;
-  --gray-100: #141110;
-  --gray-200: #1A1614;
-  --gray-300: #241E1B;
-  --bg: #141110;
+  --bg-sandstone-dusk: #201916;
+  --bg-sandstone-deep: #140F0D;
+  --gray-100: #201916;
+  --gray-200: #171210;
+  --gray-300: #2B211D;
+  --bg: #201916;
 
   /* Surface levels */
   --surface-1: rgba(255, 255, 255, 0.04);
   --surface-2: rgba(255, 255, 255, 0.07);
 
   /* Card surfaces - smoked obsidian plinths on sandstone canvas */
-  --card-bg-strong: #1A1614;
-  --surface-elevated: #1A1614;
-  --surface-elevated-strong: #221D1A;
-  --surface-code: #120F0E;
+  --card-bg-strong: #15100E;
+  --surface-elevated: #16110F;
+  --surface-elevated-strong: #1D1513;
+  --surface-code: #100C0B;
 
   /* KPI system */
   --kpi-gap: 3.25rem;
@@ -294,7 +294,7 @@
   --brand-primary: #C85A32;
   --brand-secondary: #E07844;
   --brand-highlight: #F5E6DF;
-  --brand-bg: #141110;
+  --brand-bg: #201916;
   --brand-bg-dark: #0A0908;
 
   /* === Status colors (WCAG 2.2 AA compliant contrast) === */
@@ -334,7 +334,7 @@
   --ink-on-glass: #F7F5F2;
 
   /* Body gradient endpoint */
-  --bg-gradient-end: #1A1614;
+  --bg-gradient-end: #140F0D;
 
   /* Raw channels */
   --rgb-white: 255 255 255;
@@ -349,7 +349,7 @@
 
   /* Dark surfaces */
   --surface-dark: #0C0A09;
-  --surface-dark-edge: #141110;
+  --surface-dark-edge: #140F0D;
   --surface-dark-glass: rgb(20 17 16 / 0.88);
   --surface-dark-solid: rgb(20 17 16 / 1);
   --surface-dark-border: rgb(255 255 255 / 0.10);

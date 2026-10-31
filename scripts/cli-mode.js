@@ -75,7 +75,7 @@
                     backdrop-filter: blur(20px) saturate(180%);
                     -webkit-backdrop-filter: blur(20px) saturate(180%);
                     border: 1px solid rgba(255, 255, 255, 0.12);
-                    border-radius: 12px;
+                    border-radius: 6px;
                     box-shadow:
                         0 24px 64px -12px rgba(0, 0, 0, 0.8),
                         0 4px 16px rgba(0, 0, 0, 0.4),
@@ -243,7 +243,7 @@
                     justify-content: space-between;
                     gap: 12px;
                     padding: 9px 12px;
-                    border-radius: 8px;
+                    border-radius: 6px;
                     cursor: pointer;
                     text-decoration: none;
                     color: inherit;

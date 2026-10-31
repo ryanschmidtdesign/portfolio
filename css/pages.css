@@ -708,10 +708,10 @@ body.is-home {
   right: -8%;
   width: 65%;
   height: 130%;
-  background: radial-gradient(ellipse at center, rgba(200, 90, 50, 0.08) 0%, rgba(200, 90, 50, 0.02) 50%, transparent 72%);
+  background: radial-gradient(ellipse at center, rgba(200, 90, 50, 0.14) 0%, rgba(245, 158, 11, 0.06) 45%, transparent 72%);
   pointer-events: none;
   z-index: -1;
-  filter: blur(28px);
+  filter: blur(32px);
 }
 
 @media (max-width: 960px) {
@@ -888,7 +888,7 @@ body.is-home {
   flex-direction: column;
   background:
     radial-gradient(480px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(200, 90, 50, 0.08), transparent 65%),
-    #1A1614;
+    var(--card-bg-strong, #15100E);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -937,7 +937,7 @@ body.is-home {
   display: block;
   width: 100%;
   aspect-ratio: 1.91 / 1;
-  background: #141110;
+  background: var(--surface-code, #100C0B);
   overflow: hidden;
   position: relative;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -1205,7 +1205,7 @@ body.is-home {
 }
 
 .home-principle-card {
-  background: #1A1614;
+  background: var(--card-bg-strong, #15100E);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-lg);
   padding: 24px;
@@ -1334,7 +1334,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1.5px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-md, 10px);
+  border-radius: var(--radius-sm, 6px);
   padding: 3px 0;
   box-shadow: var(--shadow-dock);
   overflow: hidden;
@@ -1566,13 +1566,13 @@ body:not(.is-home) main.site-main {
   .home-omnibar-shell,
   .subpage-omnibar-shell {
     padding: 3px 4px;
-    border-radius: var(--radius-md, 10px);
+    border-radius: var(--radius-sm, 6px);
   }
   .home-omnibar-form,
   .subpage-omnibar-form {
     min-height: 44px;
     padding: 3px 6px 3px 10px;
-    border-radius: var(--radius-md, 10px);
+    border-radius: var(--radius-sm, 6px);
   }
   .home-omnibar-input,
   .subpage-omnibar-input {
@@ -1625,7 +1625,7 @@ body:not(.is-home) main.site-main {
 .about-callout {
   margin-block: var(--space-4) var(--space-5);
   padding: 20px 24px;
-  background: #1A1614;
+  background: var(--card-bg-strong, #15100E);
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-md);
   font-size: var(--fs-body);
