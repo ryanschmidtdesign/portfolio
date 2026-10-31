@@ -207,9 +207,9 @@
   gap: var(--space-2);
   max-width: none;
   background:
-    radial-gradient(360px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(200, 90, 50, 0.055), transparent 65%),
-    #FFFFFF;
-  border: 1px solid rgba(28, 22, 18, 0.08);
+    radial-gradient(360px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(200, 90, 50, 0.08), transparent 65%),
+    #1A1614;
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 16px;
   padding: 20px 22px;
   box-shadow: var(--shadow-card);
@@ -218,7 +218,7 @@
 
 .leadership-metric:hover {
   transform: translateY(-2.5px);
-  border-color: rgba(200, 90, 50, 0.28);
+  border-color: rgba(200, 90, 50, 0.35);
   box-shadow: var(--shadow-card-hover);
 }
 
@@ -759,19 +759,19 @@ body.is-home {
   letter-spacing: 0.02em;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(28, 22, 18, 0.04);
-  border: 1px solid rgba(28, 22, 18, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   color: var(--text-secondary);
   transition: all 160ms ease;
 }
 
 .home-tag:hover {
-  background: #FFFFFF;
+  background: #241E1B;
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
-/* Right Column: Family Drawing Studio Vignette (Floating Seamlessly Without White Background) */
+/* Right Column: Family Drawing Studio Vignette (Floating Seamlessly on Sandstone Canvas) */
 .home-hero-art {
   position: relative;
   display: flex;
@@ -791,11 +791,12 @@ body.is-home {
   align-items: center;
   justify-content: center;
   transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), filter 240ms ease;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.45));
 }
 
 .home-drawing-paper:hover {
   transform: translateY(-2px) scale(1.015);
-  filter: drop-shadow(0 14px 30px rgba(200, 90, 50, 0.16));
+  filter: drop-shadow(0 14px 32px rgba(200, 90, 50, 0.22));
 }
 
 .home-drawing-img {
@@ -811,7 +812,7 @@ body.is-home {
 .home-section {
   scroll-margin-top: 72px;
   padding-block: clamp(3.5rem, 7vh, 5.5rem);
-  border-top: 1px solid rgba(28, 22, 18, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .home-section#work,
@@ -859,9 +860,9 @@ body.is-home {
   display: flex;
   flex-direction: column;
   background:
-    radial-gradient(480px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(200, 90, 50, 0.055), transparent 65%),
-    #FFFFFF;
-  border: 1px solid var(--border);
+    radial-gradient(480px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(200, 90, 50, 0.08), transparent 65%),
+    #1A1614;
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-card);
@@ -879,7 +880,7 @@ body.is-home {
   left: 0;
   right: 0;
   height: 1.5px;
-  background: linear-gradient(90deg, transparent 0%, rgba(200, 90, 50, 0.55) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(200, 90, 50, 0.65) 50%, transparent 100%);
   opacity: 0;
   transform: scaleX(0.65);
   transform-origin: center;
@@ -890,13 +891,13 @@ body.is-home {
 
 .home-project-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(200, 90, 50, 0.35);
+  border-color: rgba(200, 90, 50, 0.45);
   box-shadow: var(--shadow-card-hover);
 }
 
 .home-project-card:focus-within {
-  border-color: var(--accent-text, #8C3B1E);
-  box-shadow: 0 12px 32px -4px rgba(200, 90, 50, 0.18), 0 0 0 1px var(--accent-text, #8C3B1E);
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px -4px rgba(200, 90, 50, 0.28), 0 0 0 1px var(--accent);
 }
 
 .home-project-card:hover::before,
@@ -909,10 +910,10 @@ body.is-home {
   display: block;
   width: 100%;
   aspect-ratio: 1.91 / 1;
-  background: #FFFFFF;
+  background: #141110;
   overflow: hidden;
   position: relative;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .home-project-card__media {
@@ -946,20 +947,20 @@ body.is-home {
   flex: 1;
 }
 
-/* Architectural Blueprint Spec Callout inside Editorial Card (Warm Parchment Layer) */
+/* Architectural Blueprint Spec Callout inside Obsidian Card */
 .home-project-specs {
   display: flex;
   flex-direction: column;
   gap: 7px;
   margin: 4px 0 8px;
   padding: 13px 15px;
-  background: linear-gradient(180deg, #FBF9F4 0%, #F5F0E6 100%);
-  border: 1px solid rgba(200, 90, 50, 0.22);
+  background: linear-gradient(180deg, #120F0E 0%, #0E0C0B 100%);
+  border: 1px solid rgba(200, 90, 50, 0.25);
   border-left: 3px solid var(--accent, #C85A32);
   border-radius: 8px;
   box-shadow:
-    0 2px 6px rgba(28, 22, 18, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .home-project-spec-item {
@@ -973,7 +974,7 @@ body.is-home {
 }
 
 .home-project-spec-item__label {
-  color: #B24A24;
+  color: #E07A5F;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -982,7 +983,7 @@ body.is-home {
 }
 
 .home-project-spec-item__val {
-  color: #231D19;
+  color: #F7F5F2;
   font-weight: 500;
   text-align: right;
   white-space: nowrap;
@@ -1061,8 +1062,8 @@ body.is-home {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: var(--text-secondary);
-  background: var(--surface-1);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   padding: 3px 8px;
   border-radius: var(--radius-xs);
 }
@@ -1075,9 +1076,9 @@ body.is-home {
 
 .home-project-card__ai-cta {
   appearance: none;
-  background: rgba(247, 245, 240, 0.85);
-  border: 1px solid rgba(200, 90, 50, 0.28);
-  color: #8C3B1E;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(200, 90, 50, 0.35);
+  color: #E07A5F;
   padding: 6px 11px;
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
@@ -1089,16 +1090,16 @@ body.is-home {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 1px 2px rgba(28, 22, 18, 0.04);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .home-project-card__ai-cta:hover {
-  background: #FFFFFF;
+  background: rgba(200, 90, 50, 0.16);
   border-color: rgba(200, 90, 50, 0.6);
-  color: #6C2B14;
+  color: #F7F5F2;
   transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(200, 90, 50, 0.12);
+  box-shadow: 0 3px 8px rgba(200, 90, 50, 0.25);
 }
 
 .home-project-card__ai-cta:active {
@@ -1110,7 +1111,7 @@ body.is-home {
   height: 6px;
   border-radius: 50%;
   background: #C85A32;
-  box-shadow: 0 0 4px rgba(200, 90, 50, 0.4);
+  box-shadow: 0 0 6px rgba(200, 90, 50, 0.6);
   flex-shrink: 0;
 }
 
@@ -1121,7 +1122,7 @@ body.is-home {
 }
 
 .home-project-card__ai-cta:hover .home-project-card__ai-sparkle {
-  color: #A64420;
+  color: #F09A80;
   transform: scale(1.15) rotate(10deg);
 }
 
@@ -1177,8 +1178,8 @@ body.is-home {
 }
 
 .home-principle-card {
-  background: #FFFFFF;
-  border: 1px solid var(--border);
+  background: #1A1614;
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-lg);
   padding: 24px;
   box-shadow: var(--shadow-card);
@@ -1187,7 +1188,7 @@ body.is-home {
 
 .home-principle-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(200, 90, 50, 0.25);
+  border-color: rgba(200, 90, 50, 0.35);
   box-shadow: var(--shadow-card-hover);
 }
 
@@ -1302,10 +1303,10 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 .subpage-omnibar-shell {
   position: relative;
   width: 100%;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  border: 1.5px solid var(--border-accessible, rgba(28, 22, 18, 0.46));
+  background: rgba(20, 17, 16, 0.90);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-md, 10px);
   padding: 3px 0;
   box-shadow: var(--shadow-dock);
@@ -1324,15 +1325,15 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-shell:hover,
 .subpage-omnibar-shell:hover {
-  border-color: rgba(28, 22, 18, 0.65);
+  border-color: rgba(255, 255, 255, 0.25);
   box-shadow: var(--shadow-dock);
 }
 
 .home-omnibar-shell:focus-within,
 .subpage-omnibar-shell:focus-within {
-  background: #FFFFFF;
-  border-color: var(--accent-text, #8C3B1E);
-  outline: 2px solid var(--accent-text, #8C3B1E);
+  background: rgba(24, 20, 18, 0.98);
+  border-color: var(--accent, #C85A32);
+  outline: 2px solid var(--accent, #C85A32);
   outline-offset: 2px;
   box-shadow: var(--shadow-dock-focus);
 }
@@ -1379,11 +1380,11 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   display: inline-block;
   width: 16px;
   height: 16px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B8780' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A8A29E' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
   flex-shrink: 0;
-  opacity: 0.75;
+  opacity: 0.85;
   transition: opacity 160ms ease, background-image 160ms ease;
   order: 1;
 }
@@ -1412,7 +1413,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   font-size: 0.94rem;
   font-weight: var(--weight-medium);
   letter-spacing: -0.005em;
-  color: var(--text, #131211);
+  color: var(--text, #F7F5F2);
   padding: 0 4px;
   min-width: 0;
   caret-color: var(--accent, #C85A32);
@@ -1430,14 +1431,14 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-input::placeholder,
 .subpage-omnibar-input::placeholder {
-  color: #68635B;
+  color: #78716C;
   font-weight: 400;
   transition: color 160ms ease;
 }
 
 .home-omnibar-shell:hover .home-omnibar-input::placeholder,
 .subpage-omnibar-shell:hover .subpage-omnibar-input::placeholder {
-  color: var(--text-secondary, #5C5750);
+  color: var(--text-secondary, #A8A29E);
 }
 
 .home-omnibar-actions,
@@ -1465,9 +1466,9 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--text-secondary, #5C5750);
-  background: rgba(28, 22, 18, 0.05);
-  border: 1px solid rgba(28, 22, 18, 0.08);
+  color: var(--text-secondary, #A8A29E);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 5px;
   height: 26px;
   line-height: 26px;
@@ -1479,9 +1480,9 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 }
 
 .home-omnibar-cmdk:hover .ai-mini-cmdk__kbd {
-  background: rgba(200, 90, 50, 0.12);
-  border-color: rgba(200, 90, 50, 0.3);
-  color: var(--accent-text, #B44A24);
+  background: rgba(200, 90, 50, 0.20);
+  border-color: rgba(200, 90, 50, 0.45);
+  color: #F7F5F2;
 }
 
 .home-omnibar-send,
@@ -1496,14 +1497,14 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(200, 90, 50, 0.3);
+  box-shadow: 0 2px 10px rgba(200, 90, 50, 0.35);
   transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .home-omnibar-send:hover,
 .subpage-omnibar-send:hover {
   background: var(--accent-hover, #DC6237);
-  box-shadow: 0 3px 12px rgba(200, 90, 50, 0.4);
+  box-shadow: 0 3px 14px rgba(200, 90, 50, 0.5);
 }
 
 .home-omnibar-send:active,
@@ -1597,8 +1598,8 @@ body:not(.is-home) main.site-main {
 .about-callout {
   margin-block: var(--space-4) var(--space-5);
   padding: 20px 24px;
-  background: var(--surface-1);
-  border: 1px solid var(--border-subtle);
+  background: #1A1614;
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-md);
   font-size: var(--fs-body);
   line-height: var(--lh-prose);
@@ -1610,7 +1611,7 @@ body:not(.is-home) main.site-main {
   display: block;
   font-size: 1.15rem;
   font-weight: 700;
-  color: #0F172A;
+  color: #F7F5F2;
   margin-bottom: var(--space-2);
   letter-spacing: -0.015em;
 }

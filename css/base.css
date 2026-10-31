@@ -5,12 +5,13 @@
   left: 1rem;
   z-index: 9999;
   padding: 0.625rem 1.25rem;
-  background: var(--text-primary);
-  color: #ffffff;
+  background: #1A1614;
+  color: #F7F5F2;
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   font-weight: 600;
   border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   text-decoration: none;
   box-shadow: var(--shadow-2);
   transition: top 150ms ease-in-out;
@@ -74,9 +75,9 @@ html {
 
 /* Global Focus State Polish */
 :focus-visible {
-  outline: 2px solid var(--accent-text, #8C3B1E) !important;
+  outline: 2px solid var(--accent, #C85A32) !important;
   outline-offset: 2px !important;
-  box-shadow: 0 0 0 4px rgba(200, 90, 50, 0.22) !important;
+  box-shadow: 0 0 0 4px rgba(200, 90, 50, 0.28) !important;
 }
 
 /* Fallbacks for experimental `text-wrap` usages: ensure sensible wrapping in
@@ -121,8 +122,8 @@ body::after {
   z-index: 9999;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.035;
-  mix-blend-mode: multiply;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
 }
 
 body.is-home {
@@ -180,7 +181,7 @@ b {
 /* Default link styling */
 a {
   color: inherit;
-  text-decoration-color: rgba(17, 17, 17, 0.30);
+  text-decoration-color: rgba(255, 255, 255, 0.28);
   text-decoration-skip-ink: auto;
   text-decoration-thickness: max(1px, 0.06em);
   text-underline-offset: 0.20em;
@@ -200,7 +201,7 @@ a:hover {
   background-size: 0% 1px;
   background-position: 0 100%;
   background-repeat: no-repeat;
-  border-bottom: 1px solid rgba(200, 90, 50, 0.26);
+  border-bottom: 1px solid rgba(200, 90, 50, 0.35);
   padding-bottom: 1px;
   transition: background-size 260ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms ease, border-color 200ms ease;
 }
@@ -209,7 +210,7 @@ a:hover {
 .about-text p a:not([class]):hover,
 .leadership-prose p a:not([class]):hover {
   background-size: 100% 1px;
-  color: var(--accent-text-hover, #732F16);
+  color: var(--accent-text-hover, #F09A80);
 }
 
 a,
@@ -249,7 +250,7 @@ code {
   font-size: 0.88em;
   padding: 0.15em 0.4em;
   border-radius: var(--radius-xs);
-  background: var(--surface-2);
+  background: var(--surface-code, #120F0E);
   border: 1px solid var(--border-subtle);
   color: var(--text);
 }

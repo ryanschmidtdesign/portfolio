@@ -45,9 +45,9 @@
                 .rs-cmd-overlay {
                     position: fixed;
                     inset: 0;
-                    background: rgba(28, 22, 18, 0.42);
-                    backdrop-filter: blur(12px);
-                    -webkit-backdrop-filter: blur(12px);
+                    background: rgba(12, 10, 9, 0.65);
+                    backdrop-filter: blur(14px);
+                    -webkit-backdrop-filter: blur(14px);
                     z-index: 2147483000;
                     display: flex;
                     align-items: flex-start;
@@ -71,21 +71,21 @@
                     z-index: 1;
                     width: min(620px, 100%);
                     max-height: 80vh;
-                    background: rgba(255, 255, 255, 0.98);
+                    background: rgba(20, 17, 16, 0.96);
                     backdrop-filter: blur(20px) saturate(180%);
                     -webkit-backdrop-filter: blur(20px) saturate(180%);
-                    border: 1px solid rgba(28, 22, 18, 0.12);
+                    border: 1px solid rgba(255, 255, 255, 0.12);
                     border-radius: 12px;
                     box-shadow:
-                        0 24px 64px -12px rgba(28, 20, 15, 0.22),
-                        0 4px 16px rgba(28, 20, 15, 0.06),
-                        inset 0 1px 0 rgba(255, 255, 255, 1);
+                        0 24px 64px -12px rgba(0, 0, 0, 0.8),
+                        0 4px 16px rgba(0, 0, 0, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.16);
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
                     transform: translateY(-8px) scale(0.985);
                     transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
-                    color: var(--text, #131211);
+                    color: var(--text, #F7F5F2);
                 }
 
                 .rs-cmd-overlay.is-open .rs-cmd-modal {
@@ -99,12 +99,12 @@
                     justify-content: space-between;
                     gap: 10px;
                     padding: 8px 16px;
-                    background: rgba(28, 22, 18, 0.02);
-                    border-bottom: 1px solid rgba(28, 22, 18, 0.06);
+                    background: rgba(255, 255, 255, 0.02);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
                     font-family: var(--font-sans);
                     font-size: 0.72rem;
                     font-weight: 500;
-                    color: var(--text-secondary, #5C5750);
+                    color: var(--text-secondary, #A8A29E);
                     user-select: none;
                 }
 
@@ -116,15 +116,15 @@
 
                 .rs-cmd-sys-tag {
                     font-weight: 600;
-                    color: var(--text, #131211);
+                    color: var(--text, #F7F5F2);
                 }
 
                 .rs-cmd-sys-divider {
-                    color: rgba(28, 22, 18, 0.25);
+                    color: rgba(255, 255, 255, 0.20);
                 }
 
                 .rs-cmd-sys-meta {
-                    color: var(--text-muted, #7C7A75);
+                    color: var(--text-muted, #78716C);
                 }
 
                 /* Search bar */
@@ -133,8 +133,8 @@
                     align-items: center;
                     gap: 12px;
                     padding: 12px 16px;
-                    border-bottom: 1px solid rgba(28, 22, 18, 0.08);
-                    background: #FFFFFF;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                    background: #141110;
                 }
 
                 .rs-cmd-prompt-glyph {
@@ -153,7 +153,7 @@
                     font-family: var(--font-sans);
                     font-size: 0.98rem;
                     font-weight: var(--weight-medium);
-                    color: var(--text, #131211);
+                    color: var(--text, #F7F5F2);
                     outline: none;
                     padding: 0;
                     margin: 0;
@@ -161,7 +161,7 @@
                 }
 
                 .rs-cmd-input::placeholder {
-                    color: #68635B;
+                    color: #78716C;
                     font-weight: 400;
                 }
 
@@ -172,9 +172,9 @@
                     letter-spacing: 0.04em;
                     padding: 2px 7px;
                     border-radius: 4px;
-                    background: rgba(28, 22, 18, 0.04);
-                    color: var(--text-secondary, #5C5750);
-                    border: 1px solid rgba(28, 22, 18, 0.08);
+                    background: rgba(255, 255, 255, 0.05);
+                    color: var(--text-secondary, #A8A29E);
+                    border: 1px solid rgba(255, 255, 255, 0.09);
                     flex-shrink: 0;
                     user-select: none;
                 }
@@ -189,9 +189,9 @@
                     letter-spacing: 0.04em;
                     text-transform: uppercase;
                     border-radius: 4px;
-                    background: rgba(28, 22, 18, 0.05);
-                    color: var(--text-secondary, #5C5750);
-                    border: 1px solid rgba(28, 22, 18, 0.10);
+                    background: rgba(255, 255, 255, 0.06);
+                    color: var(--text-secondary, #A8A29E);
+                    border: 1px solid rgba(255, 255, 255, 0.12);
                     flex-shrink: 0;
                     user-select: none;
                     cursor: pointer;
@@ -199,9 +199,9 @@
                 }
 
                 .rs-cmd-esc:hover {
-                    background: rgba(200, 90, 50, 0.12);
-                    border-color: rgba(200, 90, 50, 0.25);
-                    color: var(--accent-text, #B44A24);
+                    background: rgba(200, 90, 50, 0.20);
+                    border-color: rgba(200, 90, 50, 0.45);
+                    color: #F7F5F2;
                 }
 
                 /* Results */
@@ -212,7 +212,7 @@
                     max-height: 400px;
                     overscroll-behavior: contain;
                     scrollbar-width: thin;
-                    scrollbar-color: rgba(28, 22, 18, 0.15) transparent;
+                    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
                 }
 
                 .rs-cmd-group-title {
@@ -224,7 +224,7 @@
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.06em;
-                    color: var(--text-muted, #7C7A75);
+                    color: var(--text-muted, #78716C);
                     padding: 10px 8px 4px;
                     user-select: none;
                 }
@@ -233,7 +233,7 @@
                     content: "";
                     flex: 1;
                     height: 1px;
-                    background: rgba(28, 22, 18, 0.07);
+                    background: rgba(255, 255, 255, 0.07);
                 }
 
                 .rs-cmd-item {
@@ -257,8 +257,8 @@
 
                 .rs-cmd-item:hover,
                 .rs-cmd-item.is-selected {
-                    background: rgba(200, 90, 50, 0.06);
-                    border-color: rgba(200, 90, 50, 0.12);
+                    background: rgba(200, 90, 50, 0.10);
+                    border-color: rgba(200, 90, 50, 0.25);
                     border-left-color: var(--accent, #C85A32);
                 }
 
@@ -274,9 +274,9 @@
                     width: 24px;
                     height: 24px;
                     border-radius: 6px;
-                    background: rgba(28, 22, 18, 0.04);
-                    border: 1px solid rgba(28, 22, 18, 0.08);
-                    color: var(--text-secondary, #5C5750);
+                    background: rgba(255, 255, 255, 0.05);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    color: var(--text-secondary, #A8A29E);
                     font-family: var(--font-mono);
                     font-size: 0.68rem;
                     font-weight: 600;
@@ -289,9 +289,9 @@
 
                 .rs-cmd-item.is-selected .rs-cmd-item__icon,
                 .rs-cmd-item:hover .rs-cmd-item__icon {
-                    background: rgba(200, 90, 50, 0.12);
-                    border-color: rgba(200, 90, 50, 0.3);
-                    color: var(--accent-text, #B44A24);
+                    background: rgba(200, 90, 50, 0.20);
+                    border-color: rgba(200, 90, 50, 0.45);
+                    color: #F7F5F2;
                 }
 
                 .rs-cmd-item__content {
@@ -304,7 +304,7 @@
                 .rs-cmd-item__title {
                     font-size: 0.88rem;
                     font-weight: 600;
-                    color: var(--text, #131211);
+                    color: var(--text, #F7F5F2);
                     line-height: 1.25;
                     white-space: nowrap;
                     overflow: hidden;
@@ -314,7 +314,7 @@
 
                 .rs-cmd-item__sub {
                     font-size: 0.74rem;
-                    color: var(--text-secondary, #5C5750);
+                    color: var(--text-secondary, #A8A29E);
                     line-height: 1.3;
                     white-space: nowrap;
                     overflow: hidden;
@@ -322,8 +322,8 @@
                 }
 
                 .rs-cmd-mark {
-                    background: rgba(200, 90, 50, 0.15);
-                    color: var(--accent-text, #B44A24);
+                    background: rgba(200, 90, 50, 0.25);
+                    color: #F7F5F2;
                     border-radius: 2px;
                     padding: 0 2px;
                     font-weight: 600;
@@ -348,21 +348,21 @@
 
                 .rs-cmd-kpi--cobalt,
                 .rs-cmd-kpi--terracotta {
-                    background: rgba(200, 90, 50, 0.09);
-                    color: var(--accent-text, #B44A24);
-                    border: 1px solid rgba(200, 90, 50, 0.20);
+                    background: rgba(200, 90, 50, 0.15);
+                    color: #E07A5F;
+                    border: 1px solid rgba(200, 90, 50, 0.35);
                 }
 
                 .rs-cmd-kpi--emerald {
-                    background: rgba(5, 150, 105, 0.08);
-                    color: #047857;
-                    border: 1px solid rgba(5, 150, 105, 0.22);
+                    background: rgba(34, 197, 94, 0.12);
+                    color: #4ADE80;
+                    border: 1px solid rgba(34, 197, 94, 0.25);
                 }
 
                 .rs-cmd-kpi--slate {
-                    background: rgba(28, 22, 18, 0.04);
-                    color: var(--text-secondary, #5C5750);
-                    border: 1px solid rgba(28, 22, 18, 0.08);
+                    background: rgba(255, 255, 255, 0.05);
+                    color: var(--text-secondary, #A8A29E);
+                    border: 1px solid rgba(255, 255, 255, 0.09);
                 }
 
                 .rs-cmd-item__badge {
@@ -371,9 +371,9 @@
                     font-weight: 500;
                     padding: 2px 7px;
                     border-radius: 4px;
-                    background: rgba(28, 22, 18, 0.04);
-                    color: var(--text-muted, #7C7A75);
-                    border: 1px solid rgba(28, 22, 18, 0.08);
+                    background: rgba(255, 255, 255, 0.05);
+                    color: var(--text-muted, #78716C);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
                     white-space: nowrap;
                 }
 
@@ -400,10 +400,10 @@
                     justify-content: space-between;
                     gap: 12px;
                     padding: 8px 16px;
-                    border-top: 1px solid rgba(28, 22, 18, 0.06);
-                    background: rgba(28, 22, 18, 0.02);
+                    border-top: 1px solid rgba(255, 255, 255, 0.06);
+                    background: rgba(255, 255, 255, 0.02);
                     font-size: 0.68rem;
-                    color: var(--text-muted, #7C7A75);
+                    color: var(--text-muted, #78716C);
                     font-family: var(--font-sans);
                     user-select: none;
                 }
@@ -412,7 +412,7 @@
                     display: inline-flex;
                     align-items: center;
                     gap: 6px;
-                    color: var(--text-secondary, #5C5750);
+                    color: var(--text-secondary, #A8A29E);
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -432,9 +432,9 @@
                     min-width: 18px;
                     padding: 1px 5px;
                     border-radius: 4px;
-                    background: rgba(28, 22, 18, 0.05);
-                    color: var(--text-secondary, #5C5750);
-                    border: 1px solid rgba(28, 22, 18, 0.10);
+                    background: rgba(255, 255, 255, 0.06);
+                    color: var(--text-secondary, #A8A29E);
+                    border: 1px solid rgba(255, 255, 255, 0.12);
                     font-size: 0.62rem;
                     font-family: var(--font-mono);
                     font-weight: 600;
