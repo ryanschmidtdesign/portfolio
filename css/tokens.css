@@ -190,21 +190,17 @@
   /* Obsidian Hotel Cantilever Drop Shadows (Deep, Crisp Architectural Shadows over Sunlit Desert) */
   --shadow-header:
     0 16px 36px -4px rgba(28, 20, 15, 0.28),
-    0 2px 8px rgba(28, 20, 15, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    0 2px 8px rgba(28, 20, 15, 0.14);
 
   --shadow-dock:
     0 24px 60px -8px rgba(28, 20, 15, 0.42),
     0 4px 16px rgba(28, 20, 15, 0.20),
-    0 0 0 1px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    0 0 0 1px rgba(0, 0, 0, 0.35);
 
   --shadow-dock-focus:
-    0 28px 68px -8px rgba(28, 20, 15, 0.55),
-    0 0 28px rgba(200, 90, 50, 0.35),
-    0 0 0 2px var(--accent),
-    0 0 0 5px rgba(200, 90, 50, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    0 26px 64px -8px rgba(28, 20, 15, 0.48),
+    0 4px 16px rgba(28, 20, 15, 0.22),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
 
   --shadow-modal:
     0 32px 80px -16px rgba(0, 0, 0, 0.75),

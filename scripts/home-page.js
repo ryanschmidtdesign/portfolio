@@ -1,5 +1,5 @@
 /**
- * Ryan Schmidt Portfolio — Homepage Controller
+ * Ryan Schmidt Portfolio: Homepage Controller
  * Clean, lightweight interaction controller for the editorial homepage and CLI dock.
  */
 
@@ -8,21 +8,6 @@
 
   const omnibarForm = document.getElementById('home-omnibar-form');
   const omnibarInput = document.getElementById('home-omnibar-input');
-
-  function getDefaultPlaceholder() {
-    return window.innerWidth <= 600
-      ? 'Ask AI about Ryan’s work...'
-      : 'Ask AI, execute /command, or press ⌘K...';
-  }
-
-  function updatePlaceholder() {
-    if (omnibarInput) {
-      omnibarInput.placeholder = getDefaultPlaceholder();
-    }
-  }
-
-  window.addEventListener('resize', updatePlaceholder);
-  updatePlaceholder();
 
   // Scroll spy to highlight active section in the top header
   function updateActiveNav() {

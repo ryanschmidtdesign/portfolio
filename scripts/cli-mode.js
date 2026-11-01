@@ -1073,25 +1073,90 @@
         });
     }
 
-    function initSubpagePlaceholder() {
-        const miniInput = document.getElementById('ai-mini-input');
-        if (miniInput) {
-            miniInput.placeholder = window.innerWidth <= 600
-                ? 'Ask AI about Ryan’s work...'
-                : 'Ask AI, execute /command, or press ⌘K...';
+    function initRotatingPlaceholder() {
+        const inputs = [
+            document.getElementById('home-omnibar-input'),
+            document.getElementById('ai-mini-input')
+        ].filter(Boolean);
+
+        if (inputs.length === 0) return;
+
+        const SUGGESTIONS = [
+            "Ask AI about Ryan's work...",
+            "Ask about the Member Portal overhaul...",
+            "Ask about the AI coding portfolio...",
+            "Ask about warehouse inventory systems...",
+            "Ask about design systems and UX architecture...",
+            "Ask about product strategy and leadership...",
+            "Ask 'What is Ryan's design philosophy?'...",
+            "Ask 'How does Ryan engineer UX?'..."
+        ];
+
+        let currentIndex = 0;
+        let timerId = null;
+
+        function rotate() {
+            if (document.hidden) return;
+
+            currentIndex = (currentIndex + 1) % SUGGESTIONS.length;
+            const nextSuggestion = SUGGESTIONS[currentIndex];
+
+            inputs.forEach(input => {
+                if (input.value && input.value.trim().length > 0) return;
+                if (document.activeElement === input) return;
+
+                input.classList.add('is-placeholder-fading');
+                setTimeout(() => {
+                    input.placeholder = nextSuggestion;
+                    input.classList.remove('is-placeholder-fading');
+                }, 260);
+            });
         }
+
+        inputs.forEach(input => {
+            if (!input.value || input.value.trim().length === 0) {
+                input.placeholder = SUGGESTIONS[0];
+            }
+
+            input.addEventListener('focus', () => {
+                if (timerId) {
+                    clearInterval(timerId);
+                    timerId = null;
+                }
+            });
+
+            input.addEventListener('blur', () => {
+                if (!timerId && (!input.value || input.value.trim().length === 0)) {
+                    timerId = setInterval(rotate, 3800);
+                }
+            });
+        });
+
+        timerId = setInterval(rotate, 3800);
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                if (timerId) {
+                    clearInterval(timerId);
+                    timerId = null;
+                }
+            } else {
+                if (!timerId) {
+                    timerId = setInterval(rotate, 3800);
+                }
+            }
+        });
     }
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             window.rsCommandPalette = new AtelierCommandPalette();
             initObsidianDock();
-            initSubpagePlaceholder();
+            initRotatingPlaceholder();
         });
     } else {
         window.rsCommandPalette = new AtelierCommandPalette();
         initObsidianDock();
-        initSubpagePlaceholder();
+        initRotatingPlaceholder();
     }
-    window.addEventListener('resize', initSubpagePlaceholder);
 })();

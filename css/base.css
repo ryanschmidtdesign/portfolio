@@ -74,7 +74,7 @@ html {
 }
 
 /* Global Focus State Polish */
-:focus-visible {
+:focus-visible:not(.home-omnibar-input):not(.subpage-omnibar-input):not(.home-omnibar-send):not(.subpage-omnibar-send) {
   outline: 2px solid var(--accent, #C85A32) !important;
   outline-offset: 2px !important;
   box-shadow: 0 0 0 4px rgba(200, 90, 50, 0.28) !important;
