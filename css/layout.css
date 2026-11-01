@@ -20,8 +20,8 @@ body:not(.is-home) {
   top: calc(16px + env(safe-area-inset-top, 0px));
   left: 50%;
   transform: translateX(-50%);
-  width: min(1038px, calc(100vw - 32px));
-  max-width: 1038px;
+  width: min(1160px, calc(100vw - 32px));
+  max-width: 1160px;
   z-index: var(--z-header, 9990);
   background: rgba(12, 11, 15, 0.72);
   backdrop-filter: blur(16px) saturate(190%);
@@ -179,7 +179,7 @@ body:not(.is-home) {
 @media (max-width: 600px) {
   .site-header {
     top: calc(12px + env(safe-area-inset-top, 0px));
-    width: min(1038px, calc(100vw - 20px));
+    width: min(1160px, calc(100vw - 20px));
     border-radius: 2px;
   }
   .site-header__inner {
@@ -385,7 +385,7 @@ body:not(.is-home) .site-main {
 
   body.rs-chat-drawer-open .site-header {
     left: calc((100vw - var(--chat-panel-width)) / 2);
-    max-width: min(1038px, calc(100vw - var(--chat-panel-width) - 32px));
+    max-width: min(1160px, calc(100vw - var(--chat-panel-width) - 32px));
   }
 
   body.rs-chat-drawer-open .subpage-ambient-glow {
