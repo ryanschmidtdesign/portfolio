@@ -108,9 +108,9 @@
   /* Radii (Engineered Hardware Knife-Edge) */
   --radius-xs: 2px;
   --radius-sm: 2px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 18px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
   --radius-pill: 999px;
 
   --focus-outline-offset: 3px;
@@ -214,7 +214,6 @@
   --shadow-card:
     0 1px 3px rgba(28, 20, 15, 0.04),
     0 8px 24px -4px rgba(28, 20, 15, 0.08),
-    0 0 0 1px var(--border-subtle),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
 
   --shadow-card-hover:
