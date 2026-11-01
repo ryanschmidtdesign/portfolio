@@ -3,12 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Page not found · Ryan Schmidt</title>
+  <title>Page not found: Ryan Schmidt</title>
   <meta name="description" content="The requested page could not be found on Ryan Schmidt's portfolio. Explore featured SaaS case studies, systems architecture, and UX engineering work.">
-  <meta name="robots" content="noindex,follow">
+  <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#F3E8DF">
   <meta name="prerender-status" content="404">
-  <link rel="canonical" href="https://ryanschmidt.design/404">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -17,8 +16,8 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Ryan Schmidt · Senior B2B SaaS Product Designer">
-  <meta property="og:title" content="Page not found · Ryan Schmidt">
+  <meta property="og:site_name" content="Ryan Schmidt: Senior B2B SaaS Product Designer">
+  <meta property="og:title" content="Page not found: Ryan Schmidt">
   <meta property="og:description" content="The requested page could not be found on Ryan Schmidt's portfolio. Explore featured SaaS case studies, systems architecture, and UX engineering work.">
   <meta property="og:url" content="https://ryanschmidt.design/404">
   <meta property="og:image" content="https://ryanschmidt.design/assets/logo/og-image.png">
@@ -26,24 +25,9 @@
   <meta property="og:image:height" content="630">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Page not found · Ryan Schmidt">
+  <meta name="twitter:title" content="Page not found: Ryan Schmidt">
   <meta name="twitter:description" content="The requested page could not be found on Ryan Schmidt's portfolio. Explore featured SaaS case studies, systems architecture, and UX engineering work.">
   <meta name="twitter:image" content="https://ryanschmidt.design/assets/logo/og-image.png">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Page not found · Ryan Schmidt",
-    "description": "The page you are looking for does not exist.",
-    "url": "https://ryanschmidt.design/404",
-    "author": {
-      "@type": "Person",
-      "name": "Ryan Schmidt",
-      "url": "https://ryanschmidt.design"
-    }
-  }
-  </script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,6 +56,7 @@
     .links a:last-child { border: 1.5px solid rgba(255, 255, 255, 0.16); background: #1A1614; color: #F7F5F2; }
     .links a:last-child:hover { border-color: #C85A32; color: #E07A5F; transform: translateY(-2px); }
     @media (prefers-reduced-motion: reduce) { .links a { transition: none; } .links a:hover { transform: none; } }
+    .page-footer { position: fixed; bottom: 1rem; font-size: 0.75rem; color: #78716C; }
   </style>
 </head>
 <body>
@@ -86,18 +71,6 @@
       </nav>
     </div>
   </main>
-  <footer style="position:fixed;bottom:1rem;font-size:0.75rem;color:#78716C">&copy; 2026 Ryan Schmidt</footer>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then((regs) => {
-        for (const reg of regs) reg.unregister();
-      });
-    }
-    if ('caches' in window) {
-      caches.keys().then((keys) => {
-        for (const key of keys) caches.delete(key);
-      });
-    }
-  </script>
+  <footer class="page-footer">&copy; 2026 Ryan Schmidt</footer>
 </body>
 </html>

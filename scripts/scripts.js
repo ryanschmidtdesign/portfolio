@@ -18,84 +18,6 @@
 })();
 
 // ============================================================================
-// Floating AI mini behaviors (shared across pages)
-// ============================================================================
-(function(){
-  window.addEventListener('DOMContentLoaded', () => {
-    try {
-      const aiSend = document.getElementById('ai-mini-send');
-      const aiInput = document.getElementById('ai-mini-input');
-      if (aiInput) {
-        const handleSend = function() {
-          const q = aiInput.value.trim();
-          if (!q) return;
-
-          // Direct CLI command interception
-          const lower = q.toLowerCase();
-          if (lower === '/xray' || lower === 'xray') {
-            window.rsCommandPalette?.toggleInspector();
-            aiInput.value = '';
-            return;
-          }
-          if (lower === '/tokens' || lower === 'tokens') {
-            window.rsCommandPalette?.cycleTheme();
-            aiInput.value = '';
-            return;
-          }
-          if (lower === '/perf' || lower === 'perf' || lower === '/skills' || lower === 'skills') {
-            window.rsCommandPalette?.open();
-            window.rsCommandPalette?.runCLICommand(lower.replace('/', ''));
-            aiInput.value = '';
-            return;
-          }
-          if (lower === '/work' || lower === 'work') {
-            window.rsCommandPalette?.open();
-            aiInput.value = '';
-            return;
-          }
-          if (lower === '/resume' || lower === 'resume') {
-            const path = window.location.pathname || '/';
-            const resumePath = path.includes('/pages/') ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
-            window.open(resumePath, '_blank');
-            aiInput.value = '';
-            return;
-          }
-          if (lower === '/email' || lower === 'email' || lower === '/contact' || lower === 'contact') {
-            window.location.href = 'mailto:ryanschmidt1989@gmail.com';
-            aiInput.value = '';
-            return;
-          }
-
-          const isCaseStudy = document.body.classList.contains('case-study') || !!document.querySelector('.case-study');
-          const pageTitle = document.title || 'Page';
-          document.dispatchEvent(new CustomEvent('rs:ask-section', {
-            detail: {
-              prompt: q,
-              sectionContext: { heading: isCaseStudy ? pageTitle : 'Mini AI' }
-            }
-          }));
-          aiInput.value = '';
-        };
-
-        if (aiSend) {
-          aiSend.addEventListener('click', handleSend);
-        }
-
-        aiInput.addEventListener('keypress', function(e) {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            if (aiSend) aiSend.click();
-            else handleSend();
-          }
-        });
-      }
-    } catch (e) { console.error('Floating nav init error', e); }
-  });
-})();
-
-
-
-// ============================================================================
 // Parallax functionality
 // ============================================================================
 (function () {
@@ -270,16 +192,16 @@
 
 // Native standard browser navigation (zero interception, zero scroll-lock)
 
-// (Feature 2 removed — Image Lightbox was removed)
-// (Feature 3 removed — Read Time Estimator Badge was removed)
-// (Feature 8 removed — "Ask About This Section" chips no longer used)
+// (Feature 2 removed - Image Lightbox was removed)
+// (Feature 3 removed - Read Time Estimator Badge was removed)
+// (Feature 8 removed - "Ask About This Section" chips no longer used)
 
 // ============================================================================
 // Feature 9: Subtle Grain / Noise Overlay (Phase 2)
 // ============================================================================
-// (Feature 11 removed — Progressive clip-path image wipe caused slow-loading appearance)
+// (Feature 11 removed - Progressive clip-path image wipe caused slow-loading appearance)
 
-// (Feature removed — Sticky Section Navigation Rail was removed)
+// (Feature removed - Sticky Section Navigation Rail was removed)
 
 // ============================================================================
 // Shared interactive modules
@@ -801,23 +723,4 @@ setTimeout(() => {
       });
     });
   }
-
-  // 2. Radial Cursor Spotlight on Constraint Cards (throttled with rAF)
-  const spotlightCards = document.querySelectorAll('.constraint-card');
-  spotlightCards.forEach((card) => {
-    let rafId = null;
-    card.addEventListener('mousemove', (e) => {
-      if (rafId) return;
-      rafId = requestAnimationFrame(() => {
-        const rect = card.getBoundingClientRect();
-        const x = `${e.clientX - rect.left}px`;
-        const y = `${e.clientY - rect.top}px`;
-        card.style.setProperty('--mouse-x', x);
-        card.style.setProperty('--mouse-y', y);
-        card.style.setProperty('--x', x);
-        card.style.setProperty('--y', y);
-        rafId = null;
-      });
-    }, { passive: true });
-  });
 })();

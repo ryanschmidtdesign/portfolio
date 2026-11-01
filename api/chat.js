@@ -1,6 +1,6 @@
-// Vercel serverless function — /api/chat.js
+// Vercel serverless function: /api/chat.js
 // Ported from netlify/functions/portfolio-chat.js
-// Gemini only. Grok/xAI code removed — kept in git history if needed.
+// Gemini only. Grok/xAI code removed: kept in git history if needed.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -1526,7 +1526,7 @@ function buildRetrievedKbContext(chunks = []) {
 }
 
 // -----------------------------------------------------------------------------
-// (Grok/xAI handler removed — superseded by Gemini)
+// (Grok/xAI handler removed: superseded by Gemini)
 // -----------------------------------------------------------------------------
 
 // Grok removed → see git history
@@ -1798,12 +1798,16 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
   const RETRY_DELAY_MS = [1000, 2000];
   let lastErr = null;
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8500);
     try {
       const resp = await fetch(endpoint, {
+        signal: controller.signal,
         method: "POST", headers: { "Content-Type":"application/json" }, body: JSON.stringify(body)
       });
+      clearTimeout(timeout);
       if (resp.ok) {
-        // Streaming path — read SSE events, emit answer text deltas via streamChunk
+        // Streaming path: read SSE events, emit answer text deltas via streamChunk
         if (streamChunk) {
           const fullText = await readGeminiStream(resp, streamChunk);
           const result = parseGeminiOutput(fullText, pickedCases, kb, isFit);
@@ -1826,7 +1830,7 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
           return result;
         }
 
-        // Non-streaming path — single response
+        // Non-streaming path: single response
         const data = await resp.json();
         const candidate = data?.candidates?.[0]?.content;
         const parts = candidate?.parts;
@@ -1953,13 +1957,13 @@ async function readGeminiStream(resp, streamChunk) {
 
       buf += decoder.decode(value, { stream: true });
 
-      // SSE format: data: {...}\n\n — split on double newline
+      // SSE format: data: {...}\n\n: split on double newline
       const parts = buf.split("\n\n");
       // Keep the last (potentially incomplete) chunk in buf
       buf = parts.pop() || "";
 
       for (const part of parts) {
-        // Each part is "data: {json}\n..." — extract the JSON line
+        // Each part is "data: {json}\n...": extract the JSON line
         for (const line of part.split("\n")) {
           if (!line.startsWith("data: ")) continue;
           const jsonStr = line.slice(6).trim();
@@ -1985,7 +1989,7 @@ async function readGeminiStream(resp, streamChunk) {
               if (delta) streamChunk(delta);
             }
           } catch {
-            // Partial JSON chunk — skip, next frame will fill it
+            // Partial JSON chunk: skip, next frame will fill it
           }
         }
       }
@@ -2139,6 +2143,7 @@ function setCorsHeaders(req, res) {
   const origin = req.headers?.origin || "";
   const isAllowed = origin === "https://ryanschmidt.design" ||
     origin === "https://www.ryanschmidt.design" ||
+    origin.endsWith(".vercel.app") ||
     origin.startsWith("http://localhost:") ||
     origin.startsWith("http://127.0.0.1:");
   
@@ -2327,7 +2332,7 @@ export default async function handler(req, res) {
     };
 
     // In-memory response cache: skip Gemini for identical questions within 1 hour
-    // Fit questions are cached too — company info doesn't change minute-to-minute
+    // Fit questions are cached too: company info doesn't change minute-to-minute
     const cached = getCachedResponse(lastUser, intent, isFit);
     if (cached) {
       modelOutput = cached;
@@ -2339,7 +2344,7 @@ export default async function handler(req, res) {
       }
     } else if (useGemini) {
       if (wantsStream) {
-        // Streaming path — send answer text as SSE chunks, metadata as final event
+        // Streaming path: send answer text as SSE chunks, metadata as final event
         res.writeHead(200, {
           "Content-Type": "text/event-stream",
           "Cache-Control": "no-cache",
@@ -2483,7 +2488,7 @@ export default async function handler(req, res) {
 
     // Send the final answer text (polished) plus metadata
     if (wantsStream) {
-      // The answer text was already streamed as chunks — now send the
+      // The answer text was already streamed as chunks: now send the
       // polished version so the client can update its display, plus metadata
       res.write(`data: ${JSON.stringify({
         type: "done",

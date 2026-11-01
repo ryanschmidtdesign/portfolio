@@ -1,8 +1,6 @@
 (function () {
   'use strict';
 
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   function ImageSplitter(container) {
     this.container = container;
     this.viewport = container.querySelector('.splitter-viewport');

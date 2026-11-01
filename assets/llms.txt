@@ -1,5 +1,4 @@
-# Ryan Schmidt
-## Senior SaaS Product Designer
+# Ryan Schmidt: Senior SaaS Product Designer
 
 > Ryan Schmidt is a CX/UX designer at i4cp focused on information architecture,
 > member experience, and AI-augmented product UX. He turns messy research and
@@ -18,10 +17,10 @@
 
 ## Contact & profiles
 
-- Portfolio: https://ryanschmidt.design/
-- About: https://ryanschmidt.design/pages/about
-- Resume (PDF): https://ryanschmidt.design/assets/ryan-schmidt-resume.pdf
-- LinkedIn: https://www.linkedin.com/in/ryanschmidt1989/
+- [Portfolio](https://ryanschmidt.design/): Home page and work overview
+- [About](https://ryanschmidt.design/pages/about): Background, experience, leadership
+- [Resume PDF](https://ryanschmidt.design/assets/ryan-schmidt-resume.pdf): Downloadable one-page resume
+- [LinkedIn](https://www.linkedin.com/in/ryanschmidt1989/): Professional profile
 
 ## Ask the portfolio AI
 
@@ -49,7 +48,8 @@ metrics, and structured fit-matching. Endpoint: /api/chat (POST).
   Outcomes: Shipped September 11, 2026; +500% Ahri sessions and doubled daily activity.
 
 ## Optional
-- https://ryanschmidt.design/assets/llms.txt: This file (LLMs summary)
-- https://ryanschmidt.design/assets/llms-full.txt: Full LLMs.txt with detailed case study synopses
-- https://ryanschmidt.design/assets/portfolio-kb.json: Full KB used by the on-site AI assistant.
-- https://ryanschmidt.design/assets/ryan-schmidt-resume.pdf
+
+- [LLMs Summary](https://ryanschmidt.design/assets/llms.txt): This file (LLMs summary)
+- [Full LLMs Context](https://ryanschmidt.design/assets/llms-full.txt): Detailed case study synopses and design system specs
+- [Knowledge Base JSON](https://ryanschmidt.design/assets/portfolio-kb.json): Full KB powering the on-site AI assistant
+- [Resume PDF](https://ryanschmidt.design/assets/ryan-schmidt-resume.pdf): Downloadable one-page resume

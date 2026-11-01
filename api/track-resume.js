@@ -1,7 +1,7 @@
-// Vercel serverless function — /api/track-resume.js
+// Vercel serverless function: /api/track-resume.js
 // Logs resume PDF downloads to Supabase.
 
-const SUPABASE_URL   = "https://ggmkmymtilpkezkpihxt.supabase.co";
+const SUPABASE_URL   = process.env.SUPABASE_URL || "https://ggmkmymtilpkezkpihxt.supabase.co";
 const SUPABASE_KEY   = process.env.SUPABASE_SERVICE_KEY || "";
 
 const SUPABASE_HEADERS = SUPABASE_KEY ? {
@@ -14,6 +14,7 @@ function setCorsHeaders(req, res) {
   const origin = req.headers?.origin || "";
   const isAllowed = origin === "https://ryanschmidt.design" ||
     origin === "https://www.ryanschmidt.design" ||
+    origin.endsWith(".vercel.app") ||
     origin.startsWith("http://localhost:") ||
     origin.startsWith("http://127.0.0.1:");
   

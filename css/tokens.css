@@ -21,16 +21,13 @@
   --space-8: 5.0625rem;   /* 81px */
   --space-9: 7.6rem;      /* 121px */
 
-  /* Macro tier (large desktop hero/section spacing) */
-  --space-10: 11.4rem;    /* 182px */
-
-  /* Fluid section padding — use instead of bespoke clamps */
+  /* Fluid section padding: use instead of bespoke clamps */
   --space-section-sm: clamp(2.5rem, 5vw, 4rem);
-  /* 40 → 64px  — compact sections */
+  /* 40 -> 64px: compact sections */
   --space-section-md: clamp(4rem, 7vw, 6rem);
-  /* 64 → 96px  — default */
+  /* 64 -> 96px: default */
   --space-section-lg: clamp(5rem, 10vw, 8rem);
-  /* 80 → 128px — hero, anchor sections */
+  /* 80 -> 128px: hero, anchor sections */
 
   /* Typography */
   /* ─── Font families (Architectural Neo-Grotesque + Editorial Serifs + Telemetry Mono) ─── */
@@ -55,7 +52,7 @@
   --fs-3xl: 3.242rem;    /* 51.87px */
   --fs-4xl: 4.05rem;     /* 64.8px */
 
-  /* Fluid display tier — pushing the extremes */
+  /* Fluid display tier: pushing the extremes */
   --fs-display-sm: clamp(2.075rem, 1.5rem + 2vw, 3.242rem);
   --fs-display-md: clamp(2.593rem, 2rem + 3vw, 4.05rem);
   --fs-display-lg: clamp(3.242rem, 2.5rem + 5vw, 6.5rem);
@@ -71,7 +68,7 @@
   --lh-2xl: 1.2;
   --lh-display: 1.05;
 
-  /* Long-form reading rhythm — unchanged, these are good */
+  /* Long-form reading rhythm: unchanged, these are good */
   --lh-prose: 1.7;
   --lh-tight: 1.15;
   --lh-snug: 1.35;
@@ -87,7 +84,7 @@
   --tracking-loose: 0.01em;
   --tracking-looser: 0.025em;
 
-  /* Caps tracking — expanded for extreme high-tech aesthetic */
+  /* Caps tracking: expanded for extreme high-tech aesthetic */
   --tracking-caps-tight: 0.06em;
   --tracking-caps: 0.1em;
   --tracking-caps-wide: 0.15em;
@@ -100,7 +97,7 @@
   --weight-semibold: 600;
   --weight-bold: 700;
 
-  /* ─── Application tokens (intent-based — keep) ──────────────────────── */
+  /* ─── Application tokens (intent-based: keep) ──────────────────────── */
   --type-overline: var(--fs-xs);
   --type-label: var(--fs-xs);
   --type-body: var(--fs-body);
@@ -132,23 +129,6 @@
   --transition-fast: var(--dur-1) var(--ease-out);
   --transition-spring: 260ms var(--ease-spring-snappy);
   --blur-md: blur(12px);
-
-  /* === Obsidian Westworld / Star Wars Telemetry Surface Tier === */
-  --surface-obsidian-void: #050608;
-  --surface-obsidian-base: #08090C;
-  --surface-obsidian-panel: #0D0E12;
-  --surface-obsidian-elevated: #13151B;
-  --surface-obsidian-glass: rgba(12, 11, 15, 0.65);
-  --surface-obsidian-border: rgba(255, 255, 255, 0.08);
-  --surface-obsidian-border-strong: rgba(255, 255, 255, 0.16);
-  --surface-obsidian-glow: rgba(200, 90, 50, 0.25);
-  --surface-obsidian-phosphor: rgba(224, 107, 62, 0.42);
-  --text-obsidian-bright: #F5F5F7;
-  --text-obsidian-secondary: #A1A4B0;
-  --text-obsidian-dim: #7C7E86;
-  --text-obsidian-terracotta: #E06B3E;
-  --text-obsidian-amber: #F59E0B;
-  --text-obsidian-emerald: #10B981;
 
   /* === The Daytime Desert Canvas & Obsidian Hotel System === */
   --bg-sandstone-day: #F3E8DF;
@@ -333,20 +313,9 @@
   /* Raw channels */
   --rgb-white: 255 255 255;
   --rgb-black: 0 0 0;
-  --rgb-blue: 0 51 255;
-  --rgb-outline: 28 22 18;
-  --rgb-accent-small: 200 90 50;
   --rgb-cool: 200 90 50;
 
-  --img-frame: rgb(var(--rgb-white) / 0.16);
   --img-matte: rgb(var(--rgb-black) / 0.22);
-
-  /* Dark surfaces */
-  --surface-dark: #0A0B0E;
-  --surface-dark-edge: #14151B;
-  --surface-dark-glass: rgba(10, 10, 14, 0.92);
-  --surface-dark-solid: #0A0B0E;
-  --surface-dark-border: rgba(255, 255, 255, 0.12);
 
   /* === Hero overlay gradients === */
 }
@@ -389,6 +358,7 @@
     --fs-2xl: 2.75rem;    /* 44px */
     --space-9: 7.5rem;
     --kpi-gap: 4rem;
+    --page-gutter: clamp(2rem, 4vw, 3rem);
   }
 }
 
@@ -418,14 +388,5 @@
 @media (min-width: 1400px) and (max-width: 1599px) {
   :root {
     --page-gutter: clamp(2rem, 3vw, 3rem);
-  }
-}
-
-/* =====================================================
-   1920px+ ULTRA-WIDE OPTIMIZATION
-   ===================================================== */
-@media (min-width: 1920px) {
-  :root {
-    --page-gutter: clamp(2rem, 4vw, 3rem);
   }
 }

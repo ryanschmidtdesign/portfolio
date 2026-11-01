@@ -6,13 +6,12 @@
 
 - https://ryanschmidt.design/ : Homepage
 - https://ryanschmidt.design/pages/about : About Ryan
-- https://ryanschmidt.design/pages/dashboard : AI-Powered Dashboards (case study)
-- https://ryanschmidt.design/pages/inventory : Real-Time Inventory (case study)
-- https://ryanschmidt.design/pages/member-portal-overhaul : i4cp Member Portal Redesign (case study)
-- https://ryanschmidt.design/pages/ai-coding-portfolio : AI-Coding my Portfolio (case study)
+- https://ryanschmidt.design/pages/dashboard : Custom Dashboards & AI Summaries (case study)
+- https://ryanschmidt.design/pages/inventory : Inventory, Purchasing & Receiving (case study)
+- https://ryanschmidt.design/pages/member-portal-overhaul : i4cp Member Portal & Research Discovery (case study)
+- https://ryanschmidt.design/pages/ai-coding-portfolio : Building My Portfolio in Code (case study)
 - https://ryanschmidt.design/sitemap.xml : XML sitemap
 - https://ryanschmidt.design/robots.txt : Robots exclusion
-- https://ryanschmidt.design/404 : 404 page
 
 ## Contact & profiles
 
@@ -146,15 +145,15 @@ https://ryanschmidt.design/pages/ai-coding-portfolio
 ## Design system
 
 Custom CSS custom properties defining:
-- **Spacing:** 8px grid (4px through 128px) with fluid section padding
-- **Typography:** IBM Plex Sans, fixed scale (12px-38px) + fluid display scale (28px-72px)
-- **Line heights:** 1.1 (display) through 1.7 (prose)
-- **Radii:** 4px, 8px, 12px, 999px
+- **Spacing:** 8px base grid with 1.5x geometric macro scale (var(--space-1) through var(--space-9))
+- **Typography:** IBM Plex Sans (system UI/display), Newsreader (editorial serif accent), Space Mono (telemetry & data) with 1.250 Major Third type scale
+- **Line heights:** 1.15 (display) through 1.68 (prose)
+- **Radii:** 2px (knife-edge cards/inputs/buttons), 8px, 14px, 18px, 999px pill
 - **Motion:** cubic-bezier(0.16, 1, 0.3, 1) easing, 120ms/180ms durations
-- **Colors:** Slate neutrals, desaturated indigo accent (#4F6EF7), 5-level text hierarchy
+- **Colors:** Sandstone Day Canvas (#F3E8DF, #ECE0D6), Obsidian Glass Hotel darks (#050608 to #141110), Terracotta accent (#C85A32 / #8C3B1E), Emerald (#166534), Amber (#92400E)
 - **Shadows:** 3 tiers with 1px border simulation
-- **Semantic surfaces:** base, elevated, elevated-strong, code, dark variants
-- **Accessibility:** Visible focus rings, reduced motion support, skip-to-content link
+- **Semantic surfaces:** sandstone canvas, obsidian glass, elevated panels, code surface
+- **Accessibility:** Visible focus rings, WCAG AAA text contrast (7.2:1 to 8.8:1), reduced motion support, skip-to-content link
 
 ## AI assistant
 

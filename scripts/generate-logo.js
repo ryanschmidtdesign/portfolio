@@ -2,19 +2,19 @@
 /**
  * generate-logo.js
  * -----------------------------------------------------------------------------
- * Portfolio brand mark generator — Variant #12 (final direction).
+ * Portfolio brand mark generator: Variant #12 (final direction).
  *
  * Two overlapping hexagons (pointy-top, rounded corners, thin stroke):
- *   - Front hex  : Primary Brand Blue  #4F8CFF  (slightly heavier stroke)
- *   - Rear hex   : Secondary Blue      #6BA3FF  (15% dimmer)
+ *   - Front hex  : Primary Terracotta  #C85A32  (slightly heavier stroke)
+ *   - Rear hex   : Secondary Ochre     #E07844  (dimmed 15%)
  *   - Overlap    : subtle soft bloom, no filters (renderer-safe gradients)
- *   - Favicon    : filled silhouette on #081423 rounded tile (legible at 16px)
+ *   - Favicon    : filled silhouette on #131211 rounded tile (legible at 16px)
  *
  * Colors (portfolio tokens):
- *   Primary  #4F8CFF   Secondary #6BA3FF   Highlight #D9ECFF
- *   BG       #081423   Dark      #0F1E33
+ *   Primary  #C85A32   Secondary #E07844   Highlight #F5E6DF
+ *   BG       #131211   Dark      #0A0908
  *
- * Delivers (per brief):
+ * Delivers:
  *   logo.svg, logo-dark.svg, logo-light.svg, favicon.svg, favicon.ico,
  *   favicon-16/32/48.png, apple-touch-icon.png (180), android 192/512,
  *   social-avatar.png (512), og-image.png (1200x630).
@@ -52,7 +52,7 @@ function hexPath(cx, cy, r, cornerRadius = 0) {
   return { d, stroke };
 }
 
-/** Stroked hexagon with round joins/caps — thin line weight, rounded corners. */
+/** Stroked hexagon with round joins/caps : thin line weight, rounded corners. */
 function strokedHex(cx, cy, r, width, color, opacity = 1) {
   const { d } = hexPath(cx, cy, r, 0);
   return (
@@ -82,7 +82,7 @@ const BG_DARK = "#0A0908";
 
 /** Stroked two-hex mark (logo family). Centered on (cx, cy), symmetric. */
 function strokedMark(cx, cy, R, glow = { color: BLUE, alpha: 0.16, r: null }) {
-  const off = R * 0.33; // horizontal offset — silhouette stays mirror-symmetric
+  const off = R * 0.33; // horizontal offset : silhouette stays mirror-symmetric
   const glowR = glow.r ?? R * 1.35;
   const bloom =
     `<radialGradient id="bloom" cx="50%" cy="50%" r="50%">` +
@@ -112,7 +112,7 @@ function tileMark(size, tile = BG, hexR = null, rounded = true) {
     `<stop offset="100%" stop-color="${HIGHLIGHT}" stop-opacity="0"/>` +
     `</radialGradient>`;
   return (
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" role="img" aria-label="Ryan Schmidt — brand mark">` +
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" role="img" aria-label="Ryan Schmidt : brand mark">` +
     `<defs>${bloom}</defs>` +
     `<rect width="${size}" height="${size}" rx="${rounded ? size * 0.22 : 0}" fill="${tile}"/>` +
     `<circle cx="${cx}" cy="${cy}" r="${glowR}" fill="url(#bloom)"/>` +
@@ -127,48 +127,48 @@ function tileMark(size, tile = BG, hexR = null, rounded = true) {
 /* ------------------------------------------------------------------ */
 
 const defs = (v) =>
-  `<!-- Variant #12 — two overlapping hexagons. Brand tokens: ` +
+  `<!-- Variant #12 : two overlapping hexagons. Brand tokens: ` +
   `#4F8CFF / #6BA3FF / #D9ECFF / #081423 / #0F1E33 -->\n${v}`;
 
 const files = [];
 
-/** logo.svg — canonical (light surfaces) */
+/** logo.svg : canonical (light surfaces) */
 {
   const mark = strokedMark(200, 200, 110, { color: BLUE, alpha: 0.16, r: 150 });
   files.push([
     "assets/logo/logo.svg",
     defs(
-      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Ryan Schmidt — brand mark">${mark}</svg>`
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Ryan Schmidt : brand mark">${mark}</svg>`
     ),
   ]);
 }
 
-/** logo-dark.svg — tuned for dark surfaces */
+/** logo-dark.svg : tuned for dark surfaces */
 {
   const mark = strokedMark(200, 200, 110, { color: HIGHLIGHT, alpha: 0.22, r: 150 });
   files.push([
     "assets/logo/logo-dark.svg",
     defs(
-      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Ryan Schmidt — brand mark (dark)">${mark}</svg>`
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Ryan Schmidt : brand mark (dark)">${mark}</svg>`
     ),
   ]);
 }
 
-/** logo-light.svg — tuned for light surfaces */
+/** logo-light.svg : tuned for light surfaces */
 {
   const mark = strokedMark(200, 200, 110, { color: "#3D6FFF", alpha: 0.10, r: 150 });
   files.push([
     "assets/logo/logo-light.svg",
     defs(
-      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Ryan Schmidt — brand mark (light)">${mark}</svg>`
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Ryan Schmidt : brand mark (light)">${mark}</svg>`
     ),
   ]);
 }
 
-/** favicon.svg — root, filled silhouette on brand tile */
+/** favicon.svg : root, filled silhouette on brand tile */
 files.push(["favicon.svg", tileMark(64, BG)]);
 
-/** og-image.png — 1200x630 brand card (mark + wordmark) */
+/** og-image.png : 1200x630 brand card (mark + wordmark) */
 {
   const svg =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">` +
@@ -196,11 +196,11 @@ files.push(["favicon.svg", tileMark(64, BG)]);
   ]);
 }
 
-/** social-avatar.png — transparent, mark only */
+/** social-avatar.png : transparent, mark only */
 {
   const mark = strokedMark(256, 256, 150, { color: BLUE, alpha: 0.16, r: 220 });
   const svg =
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Ryan Schmidt — brand mark">${mark}</svg>`;
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Ryan Schmidt : brand mark">${mark}</svg>`;
   files.push(["assets/logo/social-avatar.svg", defs(svg)]);
   files.push([
     "assets/logo/social-avatar.png",
@@ -242,7 +242,7 @@ async function main() {
     console.log(`wrote ${cfg.name} (${cfg.size}x${cfg.size})`);
   }
 
-  // favicon.ico — PNG-compressed entries (16, 32, 48)
+  // favicon.ico : PNG-compressed entries (16, 32, 48)
   const sizes = [16, 32, 48];
   const pngs = [];
   for (const size of sizes) {

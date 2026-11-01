@@ -34,19 +34,33 @@
     {
       "source": "/css/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
       ]
     },
     {
       "source": "/scripts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
       ]
     },
     {
       "source": "/styles.css",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/assets/(llms.txt|llms-full.txt|portfolio-kb.json)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, HEAD, OPTIONS" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/assets/(images|icons)/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
@@ -55,22 +69,18 @@
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://ryanschmidt.design; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
-        }
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://ryanschmidt.design; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" }
       ]
     }
   ],
+  "rewrites": [
+    { "source": "/portfolio-kb.json", "destination": "/assets/portfolio-kb.json" },
+    { "source": "/llms.txt", "destination": "/assets/llms.txt" },
+    { "source": "/llms-full.txt", "destination": "/assets/llms-full.txt" }
+  ],
   "redirects": [
-    { "source": "/about", "destination": "/pages/about", "permanent": true },
-    { "source": "/about.html", "destination": "/pages/about", "permanent": true },
-    { "source": "/dashboard", "destination": "/pages/dashboard", "permanent": true },
-    { "source": "/dashboard.html", "destination": "/pages/dashboard", "permanent": true },
-    { "source": "/inventory", "destination": "/pages/inventory", "permanent": true },
-    { "source": "/inventory.html", "destination": "/pages/inventory", "permanent": true },
-    { "source": "/ai-coding-portfolio", "destination": "/pages/ai-coding-portfolio", "permanent": true },
-    { "source": "/ai-coding-portfolio.html", "destination": "/pages/ai-coding-portfolio", "permanent": true },
-    { "source": "/member-portal-overhaul", "destination": "/pages/member-portal-overhaul", "permanent": true },
-    { "source": "/member-portal-overhaul.html", "destination": "/pages/member-portal-overhaul", "permanent": true },
     {
       "source": "/:path(.*)",
       "has": [
@@ -82,6 +92,16 @@
       "destination": "https://ryanschmidt.design/:path",
       "permanent": true
     },
+    { "source": "/about", "destination": "/pages/about", "permanent": true },
+    { "source": "/about.html", "destination": "/pages/about", "permanent": true },
+    { "source": "/dashboard", "destination": "/pages/dashboard", "permanent": true },
+    { "source": "/dashboard.html", "destination": "/pages/dashboard", "permanent": true },
+    { "source": "/inventory", "destination": "/pages/inventory", "permanent": true },
+    { "source": "/inventory.html", "destination": "/pages/inventory", "permanent": true },
+    { "source": "/ai-coding-portfolio", "destination": "/pages/ai-coding-portfolio", "permanent": true },
+    { "source": "/ai-coding-portfolio.html", "destination": "/pages/ai-coding-portfolio", "permanent": true },
+    { "source": "/member-portal-overhaul", "destination": "/pages/member-portal-overhaul", "permanent": true },
+    { "source": "/member-portal-overhaul.html", "destination": "/pages/member-portal-overhaul", "permanent": true },
     {
       "source": "/design-system",
       "destination": "/pages/ai-coding-portfolio",
@@ -90,21 +110,6 @@
     {
       "source": "/design-system.html",
       "destination": "/pages/ai-coding-portfolio",
-      "permanent": true
-    },
-    {
-      "source": "/portfolio-kb.json",
-      "destination": "/assets/portfolio-kb.json",
-      "permanent": true
-    },
-    {
-      "source": "/llms.txt",
-      "destination": "/assets/llms.txt",
-      "permanent": true
-    },
-    {
-      "source": "/llms-full.txt",
-      "destination": "/assets/llms-full.txt",
       "permanent": true
     },
     {

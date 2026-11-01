@@ -290,33 +290,25 @@ code {
   }
 }
 
-@media print {
-  .site-footer {
-    display: none !important;
-  }
-
-  body {
-    background: #fff !important;
-    color: var(--ink-on-glass) !important;
-  }
-}
-
 /* =====================================================
-   PRINT MEDIA OPTIMIZATION
+   PRINT MEDIA OPTIMIZATION (FOR RECRUITERS & REVIEWERS)
    ===================================================== */
-
 @media print {
-
+  .site-header,
+  .site-footer,
   .ai-mini-wrapper,
-  .rs-chat-widget {
+  .rs-chat-widget,
+  .image-splitter .splitter-handle,
+  button,
+  video {
     display: none !important;
   }
 
   body {
-    background: white;
-    color: black;
-    font-size: 12pt;
-    line-height: 1.6;
+    background: white !important;
+    color: black !important;
+    font-size: 11pt;
+    line-height: 1.5;
   }
 
   * {
@@ -331,6 +323,17 @@ code {
 
   .site-main {
     padding: 0 !important;
+  }
+
+  .case-study {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tldr {
+    page-break-after: avoid;
   }
 
   .case-study figure {
@@ -352,7 +355,12 @@ code {
     border-radius: 4px;
   }
 
-  a:not([href^="#"])::after {
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  a:not([href^="#"]):not([href^="/"]):not([href*="ryanschmidt.design"])::after {
     content: " (" attr(href) ")";
     font-size: 0.8em;
     color: var(--text-secondary);
@@ -373,7 +381,18 @@ code {
     page-break-inside: avoid;
   }
 
-  h2, h3 {
+  h1, h2, h3 {
+    color: black !important;
     page-break-after: avoid;
+  }
+
+  p, li {
+    page-break-inside: avoid;
+  }
+
+  .home-project-card {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+    margin-bottom: 1rem;
   }
 }

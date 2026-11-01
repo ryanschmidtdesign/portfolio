@@ -1,25 +1,10 @@
 /**
- * Command Palette (⌘K) — Atelier Editorial & Clean Navigation
+ * Command Palette (⌘K): Atelier Editorial & Clean Navigation
  * High-craft command palette matching the warm paper & ceramic aesthetic.
  * Instant search, clean keyboard shortcuts, zero noise, zero latency.
  */
 (function () {
     'use strict';
-
-    /**
-     * Silent audio interface (no audio synthesis / no audio context)
-     */
-    class SilentAudioEngine {
-        playBoot() {}
-        playKey() {}
-        playTick() {}
-        playExec() {}
-        playClose() {}
-        toggle() { return false; }
-    }
-
-    const audioFX = new SilentAudioEngine();
-    window.rsAudioFX = audioFX;
 
     class AtelierCommandPalette {
         constructor() {
@@ -28,8 +13,6 @@
             this.activeIndex = 0;
             this.filteredItems = [];
             this.lastFocusedEl = null;
-            this.pointerX = 0.5;
-            this.pointerY = 0.5;
 
             this.injectStyles();
             this.buildDOM();
@@ -778,22 +761,9 @@
                 this.escBtn.addEventListener('click', () => this.close());
             }
 
-            if (this.sfxBtn) {
-                this.sfxBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const isOn = audioFX.toggle();
-                    this.sfxBtn.classList.toggle('is-active', isOn);
-                    this.sfxBtn.setAttribute('aria-pressed', isOn ? 'true' : 'false');
-                    this.sfxBtn.innerHTML = `<span class="rs-cmd-btn-text">[SFX: ${isOn ? 'ON' : 'OFF'}]</span>`;
-                    this.inputEl.focus();
-                });
-            }
-
             // Track pointer for modal ambient glow and HUD canvas parallax
             this.overlay.addEventListener('pointermove', (e) => {
                 if (!this.isOpen) return;
-                this.pointerX = e.clientX / Math.max(1, window.innerWidth);
-                this.pointerY = e.clientY / Math.max(1, window.innerHeight);
                 if (this.modalEl) {
                     const rect = this.modalEl.getBoundingClientRect();
                     const mx = e.clientX - rect.left;
@@ -808,8 +778,6 @@
 
             // Search input live filtering
             this.inputEl.addEventListener('input', () => {
-                this.hudPulse = 1;
-                audioFX.playKey();
                 this.renderList(this.inputEl.value);
             });
 
@@ -817,17 +785,12 @@
             this.inputEl.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowDown') {
                     e.preventDefault();
-                    this.hudPulse = 0.65;
-                    audioFX.playTick();
                     this.moveSelection(1);
                 } else if (e.key === 'ArrowUp') {
                     e.preventDefault();
-                    this.hudPulse = 0.65;
-                    audioFX.playTick();
                     this.moveSelection(-1);
                 } else if (e.key === 'Enter') {
                     e.preventDefault();
-                    audioFX.playExec();
                     this.executeActive();
                 }
             });
@@ -931,7 +894,6 @@
                 `;
 
                 row.addEventListener('click', () => {
-                    audioFX.playExec();
                     item.action();
                 });
 
@@ -990,10 +952,6 @@
                 window.rsChatWidget.send(query);
                 return;
             }
-            if (typeof window.rsHomeStageAsk === 'function' && document.body.classList.contains('is-home')) {
-                window.rsHomeStageAsk(query);
-                return;
-            }
             const miniInput = document.getElementById('ai-mini-input') || document.getElementById('home-omnibar-input');
             const miniSend = document.getElementById('ai-mini-send') || document.getElementById('home-omnibar-send');
             if (miniInput && miniSend) {
@@ -1010,9 +968,6 @@
             this.themeIndex = (this.themeIndex + 1) % ACCENT_THEMES.length;
             const theme = ACCENT_THEMES[this.themeIndex];
             document.documentElement.style.setProperty('--accent', theme.value);
-            if (this.themeLabelEl) {
-                this.themeLabelEl.textContent = `[PHOSPHOR: ${theme.name}]`;
-            }
         }
 
         toggleInspector() {
@@ -1022,13 +977,11 @@
         open(initialQuery = '') {
             this.lastFocusedEl = document.activeElement;
             this.isOpen = true;
-            this.hudPulse = 1;
             this.overlay.classList.add('is-open');
             this.inputEl.setAttribute('aria-expanded', 'true');
             const q = String(initialQuery || '');
             this.inputEl.value = q;
             this.renderList(q);
-            audioFX.playBoot();
             setTimeout(() => {
                 this.inputEl.focus();
                 if (q) {
@@ -1043,7 +996,6 @@
             this.overlay.classList.remove('is-open');
             this.inputEl.setAttribute('aria-expanded', 'false');
             this.inputEl.blur();
-            audioFX.playClose();
             if (this.lastFocusedEl && typeof this.lastFocusedEl.focus === 'function') {
                 this.lastFocusedEl.focus();
             }

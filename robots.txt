@@ -4,11 +4,17 @@ User-agent: *
 Allow: /
 Allow: /scripts/
 Allow: /css/
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /assets/llms.txt
+Allow: /assets/llms-full.txt
 
-# Exclude internal/backend files
+# Exclude internal/backend files and error page
 Disallow: /_meta/
 Disallow: /.vscode/
 Disallow: /api/
+Disallow: /404
+Disallow: /404.html
 
 # Sitemap
 Sitemap: https://ryanschmidt.design/sitemap.xml

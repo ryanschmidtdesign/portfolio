@@ -2,7 +2,7 @@
   "meta": {
     "owner": "Ryan Schmidt",
     "version": "2.2",
-    "last_updated": "2026-08-08",
+    "last_updated": "2026-11-01",
     "voice": "concise, conversational, outcome-first, lightly human. Never robotic.",
     "primary_goal": "Help the visitor decide Ryan is worth a 30-minute conversation, and make it easy to start one.",
     "audience": [
@@ -1370,6 +1370,11 @@
   ],
   "router": {
     "page_to_case": {
+      "/dashboard": "dashboard",
+      "/inventory": "inventory",
+      "/ai-coding-portfolio": "ai-coding-portfolio",
+      "/member-portal-overhaul": "member-portal-overhaul",
+      "/about": null,
       "/dashboard.html": "dashboard",
       "/inventory.html": "inventory",
       "/ai-coding-portfolio.html": "ai-coding-portfolio",
@@ -1514,9 +1519,10 @@
       ]
     },
     "fallback_case_order": [
+      "member-portal-overhaul",
       "dashboard",
-      "ai-coding-portfolio",
-      "inventory"
+      "inventory",
+      "ai-coding-portfolio"
     ]
   },
   "chips": {

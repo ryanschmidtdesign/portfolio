@@ -262,6 +262,7 @@
 
 /* Label-first strong carries hierarchy */
 .case-study section li>strong:first-child {
+  color: var(--text);
   font-weight: var(--weight-semibold);
 }
 
@@ -275,7 +276,7 @@
 }
 
 /* -------------------------------------------------------
-   Case study — section lede pattern
+   Case study - section lede pattern
    --------------------------------------------------------*/
 .case-study section>h2+p,
 .case-study section>.section-divider+p {
@@ -286,7 +287,7 @@
 }
 
 /* -------------------------------------------------------
-   Case study — link treatment
+   Case study - link treatment
    --------------------------------------------------------*/
 .case-study a {
   color: var(--accent-text);
@@ -378,7 +379,7 @@
 }
 
 /* -------------------------------------------------------
-   Case study — responsive KPI & impact layout
+   Case study - responsive KPI & impact layout
    --------------------------------------------------------*/
 @media (max-width: 860px) {
   .tldr-meta {
@@ -454,25 +455,11 @@
   text-wrap: pretty;
 }
 
-/* Eyebrow/meta labels */
-.case-study .tldr-label {
-  font-size: var(--fs-xs);
-  line-height: var(--lh-2xs);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-caps-wide);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-
 /* Body text inside case study (supporting prose) */
 .case-study section p,
 .case-study .impact-lede,
 .case-study dl.meta dd,
-.tldr-role p,
-.case-study section li,
-.case-study blockquote p,
-.case-study .case-study-summary__list li,
-.case-study-next__desc {
+.case-study section li {
   font-size: var(--fs-body);
   line-height: var(--lh-prose);
   font-weight: var(--weight-regular);
@@ -512,11 +499,6 @@
 
 .case-study ::marker {
   color: rgb(var(--rgb-cool) / 0.85);
-  font-weight: var(--weight-semibold);
-}
-
-.case-study section li>strong:first-child {
-  color: var(--text);
   font-weight: var(--weight-semibold);
 }
 
@@ -808,7 +790,7 @@
 
 .kpis--hero li .metric:not([data-animate]) {
   font-size: var(--fs-article-h3);
-  /* 20px — reads as label, not display */
+  /* 20px - reads as label, not display */
   letter-spacing: -0.01em;
 }
 
@@ -997,10 +979,6 @@
 /* ── Semantic status labels ── */
 .status-label--done {
   color: var(--green);
-}
-
-.status-label--pending {
-  color: var(--amber);
 }
 
 /* :target highlight for anchor-linked sections */
@@ -1367,7 +1345,7 @@ figure.case-study-media[data-reveal].is-revealed {
   font: inherit;
 }
 
-/* Stage + nodes — all use indigo accent only */
+/* Stage + nodes - all use indigo accent only */
 .asd-stage {
   display: flex;
   flex-direction: column;
@@ -1395,7 +1373,8 @@ figure.case-study-media[data-reveal].is-revealed {
   transform: scale(1.01);
 }
 
-.asd-node h3 {
+.asd-node h3,
+.asd-node .asd-node-title {
   margin: 0;
   font-size: var(--fs-control);
   letter-spacing: -0.01em;
@@ -1766,7 +1745,7 @@ figure.case-study-media[data-reveal].is-revealed {
   font-weight: var(--weight-semibold);
 }
 
-/* All panels share one grid cell — they swap in the same space, no gap */
+/* All panels share one grid cell - they swap in the same space, no gap */
 [data-compare] .compare-panels {
   display: grid;
 }
@@ -2042,11 +2021,6 @@ figure.case-study-media[data-reveal].is-revealed {
   line-height: var(--lh-prose-loose);
 }
 
-/* Fix global layout overlap for floating NLI widget */
-body {
-  padding-bottom: clamp(100px, 12vh, 130px) !important;
-}
-
 /* ==========================================================================
    Bespoke Interactions: Constraints & Solution Cards
    ========================================================================== */
@@ -2133,8 +2107,7 @@ body {
 
 
 /* Generic Buttons */
-.btn-primary,
-.btn-outline {
+.btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2156,17 +2129,6 @@ body {
 .btn-primary:hover {
   background: var(--accent-hover, #DC6237);
   box-shadow: var(--glow-accent);
-}
-
-.btn-outline {
-  background: var(--surface-elevated, #FFFFFF);
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-.btn-outline:hover {
-  background: var(--gray-200);
-  border-color: var(--accent);
-  color: var(--accent);
 }
 
 /* ==========================================================================
@@ -3056,6 +3018,9 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .ia-card {
@@ -3362,15 +3327,6 @@ body {
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.16) 30%, rgba(200, 90, 50, 0.35) 70%, transparent 100%);
   pointer-events: none;
-}
-  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 240ms ease, border-color 220ms ease;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  text-decoration: none;
-  color: inherit;
-  position: relative;
-  overflow: hidden;
 }
 
 .case-study-next:hover {

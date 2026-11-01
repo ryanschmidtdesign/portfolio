@@ -15,7 +15,8 @@
     '.sa-step',
     '.home-omnibar-shell',
     '.subpage-omnibar-shell',
-    '.case-study-next'
+    '.case-study-next',
+    '.constraint-card'
   ].join(', ');
 
   const cards = document.querySelectorAll(spotlightSelector);

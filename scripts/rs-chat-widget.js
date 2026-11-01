@@ -25,7 +25,7 @@
   document.body.appendChild(host);
   const shadow = host.attachShadow({ mode: 'open' });
 
-  // 2) UI (Shadow DOM) — minimal, robust, no FAB
+  // 2) UI (Shadow DOM) - minimal, robust, no FAB
   shadow.innerHTML = `
     <style>
       :host {
@@ -856,7 +856,7 @@
   }
 
 
-  // clearChat removed — unused
+  // clearChat removed - unused
 
   // --- Seeded intro message (hide on type/submit, reappear on hard refresh) ---
 
@@ -967,7 +967,6 @@ if (savedHist.length > 0) {
     panel.classList.remove('open');
     backdrop.classList.remove('open');
     document.body.classList.remove('rs-chat-drawer-open');
-    window.rsAudioFX?.playClose?.();
 
     const dockEls = getDockElements();
     dockEls.forEach(el => {
@@ -1029,8 +1028,31 @@ if (savedHist.length > 0) {
         window.rsCommandPalette?.cycleTheme();
         return true;
       }
-      if (lower === '/work' || lower === 'work') {
+      if (lower === '/xray' || lower === 'xray') {
+        window.rsCommandPalette?.toggleInspector();
+        return true;
+      }
+      if (lower === '/perf' || lower === 'perf' || lower === '/skills' || lower === 'skills') {
         window.rsCommandPalette?.open();
+        window.rsCommandPalette?.runCLICommand(lower.replace('/', ''));
+        return true;
+      }
+      if (lower === '/work' || lower === 'work') {
+        const workEl = document.getElementById('work');
+        if (workEl && document.body.classList.contains('is-home')) {
+          workEl.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.rsCommandPalette?.open();
+        }
+        return true;
+      }
+      if (lower === '/about' || lower === 'about') {
+        const path = window.location.pathname || '/';
+        window.location.href = path.includes('/pages/') ? 'about.html' : 'pages/about.html';
+        return true;
+      }
+      if (lower === '/linkedin' || lower === 'linkedin') {
+        window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
         return true;
       }
       if (lower === '/resume' || lower === 'resume') {
@@ -1486,7 +1508,7 @@ if (savedHist.length > 0) {
     setPagePills();
   }
 
-  // renderSources removed — unused
+  // renderSources removed - unused
 
   function renderContextCases(container, contextCases) {
     if (!Array.isArray(contextCases) || !contextCases.length) return;
@@ -1627,7 +1649,7 @@ if (savedHist.length > 0) {
     }
     if (inFlight) return;
 
-    // URLs are handled server-side — send them through to the API
+    // URLs are handled server-side - send them through to the API
 
     inFlight = true;
     streamAborted = false;
