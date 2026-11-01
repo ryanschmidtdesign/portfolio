@@ -752,19 +752,6 @@
   text-align: center;
 }
 
-@media (max-width: 860px) {
-  .kpis--hero {
-    flex-wrap: wrap;
-    justify-content: flex-start !important;
-    text-align: left !important;
-    gap: var(--space-6);
-  }
-
-  .kpis--hero>li {
-    text-align: left !important;
-  }
-}
-
 .kpis--hero li strong {
   display: block;
   font-size: var(--fs-display-sm);
@@ -3148,6 +3135,11 @@ figure.case-study-media[data-reveal].is-revealed {
   font-size: var(--fs-sm);
   color: var(--text);
   outline: none;
+}
+
+.mock-omnibar-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .omnibar-mode-pill {

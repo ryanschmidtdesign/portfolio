@@ -18,7 +18,7 @@ const CSE_ID = process.env.CSE_ID || "";
 const LOG_WEBHOOK_URL = process.env.LOG_WEBHOOK_URL || "";
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://ggmkmymtilpkezkpihxt.supabase.co";
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || "";
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
 const SUPABASE_HEADERS = SUPABASE_KEY ? {
   "apikey": SUPABASE_KEY,
@@ -26,18 +26,29 @@ const SUPABASE_HEADERS = SUPABASE_KEY ? {
   "Content-Type": "application/json"
 } : null;
 
-async function supabaseFetch(path, options = {}) {
+async function supabaseFetch(path, options = {}, timeoutMs = 3000) {
   if (!SUPABASE_HEADERS) return null;
-  const resp = await fetch(`${SUPABASE_URL}${path}`, {
-    ...options,
-    headers: { ...SUPABASE_HEADERS, ...options.headers }
-  });
-  if (!resp.ok) {
-    const text = await resp.text().catch(() => "");
-    console.warn(`Supabase error ${resp.status} ${path}: ${text.slice(0, 200)}`);
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const resp = await fetch(`${SUPABASE_URL}${path}`, {
+      ...options,
+      signal: controller.signal,
+      headers: { ...SUPABASE_HEADERS, ...options.headers }
+    });
+    if (!resp.ok) {
+      const text = await resp.text().catch(() => "");
+      console.warn(`Supabase error ${resp.status} ${path}: ${text.slice(0, 200)}`);
+      return null;
+    }
+    return resp;
+  } catch (err) {
+    console.warn(`Supabase fetch failed (${path}): ${err?.message || "timeout"}`);
     return null;
+  } finally {
+    clearTimeout(timer);
   }
-  return resp;
 }
 
 const DISALLOWED = [
@@ -82,6 +93,10 @@ function getCachedResponse(message, intent, isFit) {
 }
 
 function setCachedResponse(message, intent, isFit, output) {
+  if (RESPONSE_CACHE.size >= 500) {
+    const oldest = RESPONSE_CACHE.keys().next().value;
+    if (oldest) RESPONSE_CACHE.delete(oldest);
+  }
   const key = cacheKey(message, intent, isFit);
   RESPONSE_CACHE.set(key, { output, timestamp: Date.now() });
 }
@@ -100,6 +115,10 @@ function checkRateLimit(clientIp) {
   const timestamps = (RATE_LIMITS.get(clientIp) || []).filter(t => t > windowStart);
   if (timestamps.length >= RATE_LIMIT_MAX) return false;
   timestamps.push(now);
+  if (RATE_LIMITS.size >= 500) {
+    const oldest = RATE_LIMITS.keys().next().value;
+    if (oldest) RATE_LIMITS.delete(oldest);
+  }
   RATE_LIMITS.set(clientIp, timestamps);
   return true;
 }
@@ -1439,25 +1458,35 @@ async function generateQueryEmbedding(text = "") {
   if (!GEMINI_API_KEY || !GEMINI_API_KEY.trim()) return null;
 
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 3500);
 
-  const resp = await fetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "models/text-embedding-004",
-      content: { parts: [{ text: String(text || "").slice(0, 2000) }] },
-      outputDimensionality: 768
-    })
-  });
+  try {
+    const resp = await fetch(endpoint, {
+      signal: controller.signal,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "models/text-embedding-004",
+        content: { parts: [{ text: String(text || "").slice(0, 2000) }] },
+        outputDimensionality: 768
+      })
+    });
 
-  if (!resp.ok) {
-    const err = await resp.text().catch(() => "");
-    console.warn(`Embedding error: ${resp.status} ${err.slice(0, 200)}`);
+    if (!resp.ok) {
+      const err = await resp.text().catch(() => "");
+      console.warn(`Embedding error: ${resp.status} ${err.slice(0, 200)}`);
+      return null;
+    }
+
+    const data = await resp.json();
+    return data.embedding?.values || null;
+  } catch (err) {
+    console.warn(`Embedding request failed: ${err?.message || "timeout"}`);
     return null;
+  } finally {
+    clearTimeout(timer);
   }
-
-  const data = await resp.json();
-  return data.embedding?.values || null;
 }
 
 async function retrieveKbChunks(userText = "", options = {}) {
@@ -2133,17 +2162,11 @@ async function logIfEnabled(payload) {
   } catch {}
 }
 
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
-
 function setCorsHeaders(req, res) {
   const origin = req.headers?.origin || "";
   const isAllowed = origin === "https://ryanschmidt.design" ||
     origin === "https://www.ryanschmidt.design" ||
-    origin.endsWith(".vercel.app") ||
+    (origin.startsWith("https://ryanschmidt-portfolio") && origin.endsWith(".vercel.app")) ||
     origin.startsWith("http://localhost:") ||
     origin.startsWith("http://127.0.0.1:");
   
@@ -2441,51 +2464,6 @@ export default async function handler(req, res) {
       retrievalChunks: retrievedChunks.length
     });
 
-    if (SUPABASE_HEADERS) {
-      let sessionId = null;
-
-      // Upsert session if token provided
-      if (sessionToken) {
-        const sessionResp = await supabaseFetch("/rest/v1/chat_sessions", {
-          method: "POST",
-          headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
-          body: JSON.stringify({
-            session_token: sessionToken,
-            page_url: String(pageContext?.url || "").slice(0, 512),
-            user_agent: String(req.headers["user-agent"] || "").slice(0, 256),
-            updated_at: new Date().toISOString()
-          })
-        });
-
-        if (sessionResp) {
-          const sessionRows = await sessionResp.json().catch(() => []);
-          if (Array.isArray(sessionRows) && sessionRows.length > 0) {
-            sessionId = sessionRows[0].id;
-          }
-        }
-      }
-
-      // Store messages (linked to session if available)
-      supabaseFetch("/rest/v1/chat_messages", {
-        method: "POST",
-        body: JSON.stringify({
-          session_id: sessionId,
-          role: "user",
-          content: String(lastUser || "").slice(0, 4000),
-          metadata: { intent }
-        })
-      }).catch(() => {});
-      supabaseFetch("/rest/v1/chat_messages", {
-        method: "POST",
-        body: JSON.stringify({
-          session_id: sessionId,
-          role: "assistant",
-          content: String(answer || "").slice(0, 4000),
-          metadata: { suggested_pills, hire_intent, context_cases }
-        })
-      }).catch(() => {});
-    }
-
     // Send the final answer text (polished) plus metadata
     if (wantsStream) {
       // The answer text was already streamed as chunks: now send the
@@ -2502,6 +2480,62 @@ export default async function handler(req, res) {
           action_highlight
         }
       })}\n\n`);
+    }
+
+    if (SUPABASE_HEADERS) {
+      const persistAnalytics = async () => {
+        let sessionId = null;
+        if (sessionToken) {
+          const sessionResp = await supabaseFetch("/rest/v1/chat_sessions", {
+            method: "POST",
+            headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
+            body: JSON.stringify({
+              session_token: sessionToken,
+              page_url: String(pageContext?.url || "").slice(0, 512),
+              user_agent: String(req.headers["user-agent"] || "").slice(0, 256),
+              updated_at: new Date().toISOString()
+            })
+          }, 2000);
+
+          if (sessionResp) {
+            const sessionRows = await sessionResp.json().catch(() => []);
+            if (Array.isArray(sessionRows) && sessionRows.length > 0) {
+              sessionId = sessionRows[0].id;
+            }
+          }
+        }
+
+        await Promise.allSettled([
+          supabaseFetch("/rest/v1/chat_messages", {
+            method: "POST",
+            headers: { "Prefer": "return=minimal" },
+            body: JSON.stringify({
+              session_id: sessionId,
+              role: "user",
+              content: String(lastUser || "").slice(0, 4000),
+              metadata: { intent }
+            })
+          }, 2000),
+          supabaseFetch("/rest/v1/chat_messages", {
+            method: "POST",
+            headers: { "Prefer": "return=minimal" },
+            body: JSON.stringify({
+              session_id: sessionId,
+              role: "assistant",
+              content: String(answer || "").slice(0, 4000),
+              metadata: { suggested_pills, hire_intent, context_cases }
+            })
+          }, 2000)
+        ]);
+      };
+
+      await Promise.race([
+        persistAnalytics(),
+        new Promise(resolve => setTimeout(resolve, 2200))
+      ]);
+    }
+
+    if (wantsStream) {
       return res.end();
     }
 
@@ -2518,6 +2552,13 @@ export default async function handler(req, res) {
     const failure = "I'm having trouble reaching the portfolio assistant. Try asking about a case study, role fit, or Ryan's process.";
     await logIfEnabled({ type: "chat_error", lastUser, answer: failure, error: e?.message || "unknown" });
     if (wantsStream) {
+      if (!res.headersSent) {
+        res.writeHead(200, {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache",
+          "Connection": "keep-alive"
+        });
+      }
       res.write(`data: ${JSON.stringify({
         type: "done",
         data: { answer: failure, suggested_pills: defaultSuggestedPills(intent, lastUser), hire_intent: false, context_cases: [], sources: [] }

@@ -661,7 +661,6 @@ body.is-home {
   background-color: var(--bg) !important;
   background-image: none !important;
   color: var(--text);
-  padding-bottom: clamp(140px, 18vh, 180px) !important;
   display: block;
 }
 
@@ -1558,9 +1557,16 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   cursor: not-allowed;
 }
 
-/* Ensure subpages have comfortable clearance above the fixed bottom CLI dock */
-body:not(.is-home) main.site-main {
-  padding-bottom: clamp(160px, 20vh, 220px) !important;
+.home-omnibar-send:focus-visible,
+.subpage-omnibar-send:focus-visible {
+  outline: 2px solid var(--accent, #C85A32);
+  outline-offset: 2px;
+}
+
+.home-omnibar-input:focus-visible,
+.subpage-omnibar-input:focus-visible {
+  outline: 1.5px solid var(--accent, #C85A32);
+  outline-offset: 1px;
 }
 
 /* Responsive Breakpoints */
@@ -1662,8 +1668,10 @@ body:not(.is-home) main.site-main {
 }
 
 /* Generous bottom clearance across pages so floating CLI console never occludes content */
-body.is-home main,
-main.case-study,
-main {
-  padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)) !important;
+body.is-home main {
+  padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+}
+
+body:not(.is-home) main {
+  padding-bottom: clamp(160px, 20vh, 220px);
 }

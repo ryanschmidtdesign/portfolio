@@ -147,6 +147,7 @@
   --surface-elevated: #FFFFFF;
   --surface-elevated-strong: #FFFFFF;
   --surface-code: #ECE0D6;
+  --surface-obsidian: #171412;
 
   /* KPI system */
   --kpi-gap: 3.25rem;
@@ -242,7 +243,8 @@
   --text: var(--slate-900);
   --text-primary: var(--text);
   --text-secondary: #5C554E;
-  --text-muted: #7E746A;
+  --text-muted: #70665D;
+  --text-inverse: #F7F5F2;
   --text-on-accent: #FFFFFF;
   --surface-subtle: var(--surface-1);
 

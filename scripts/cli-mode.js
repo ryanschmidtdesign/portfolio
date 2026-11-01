@@ -6,6 +6,12 @@
 (function () {
     'use strict';
 
+    const ACCENT_THEMES = [
+        { name: 'Terracotta', value: '#C85A32' },
+        { name: 'Ember', value: '#E07844' },
+        { name: 'Sedona', value: '#D46D3B' }
+    ];
+
     class AtelierCommandPalette {
         constructor() {
             this.isOpen = false;
@@ -964,6 +970,10 @@
             }
         }
 
+        runCLICommand(cmd = '') {
+            this.open(cmd);
+        }
+
         cycleTheme() {
             this.themeIndex = (this.themeIndex + 1) % ACCENT_THEMES.length;
             const theme = ACCENT_THEMES[this.themeIndex];
@@ -1013,9 +1023,6 @@
     function initObsidianDock() {
         const shells = document.querySelectorAll('.home-omnibar-shell, .subpage-omnibar-shell');
         shells.forEach((shell) => {
-            // Remove legacy sci-fi elements
-            shell.querySelectorAll('.rs-dock-reticle, .rs-dock-telemetry, .rs-dock-prompt-tag').forEach((el) => el.remove());
-
             // Track pointer over shell for dynamic vitreous specular radial highlight
             shell.addEventListener('pointermove', (e) => {
                 const rect = shell.getBoundingClientRect();

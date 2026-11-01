@@ -6,9 +6,6 @@
 (function () {
   'use strict';
 
-  const omnibarForm = document.getElementById('home-omnibar-form');
-  const omnibarInput = document.getElementById('home-omnibar-input');
-
   // Scroll spy to highlight active section in the top header
   function updateActiveNav() {
     const scrollPos = window.scrollY + 200;

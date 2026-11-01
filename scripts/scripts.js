@@ -9,7 +9,16 @@
     const href = anchor.getAttribute("href");
     if (href === "#") return;
 
-    const target = document.querySelector(href);
+    let target = null;
+    try {
+      target = document.querySelector(href);
+    } catch (_) {
+      try {
+        const id = href.replace(/^#/, '');
+        target = document.getElementById(id);
+      } catch (_) {}
+    }
+
     if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -127,18 +136,18 @@
 
   function formatMetric(original, value) {
     const trimmed = original.trim();
+    const match = trimmed.match(/^([^\d-]*)(-?\d+(?:\.\d+)?)(.*)$/);
+    if (!match) return original;
+    const prefix = match[1];
+    const numPart = match[2];
+    const suffix = match[3];
 
-    const prefixPlus = trimmed.startsWith("+");
-    const suffixPlus = trimmed.endsWith("+");
-    const hasPercent = trimmed.includes("%");
-
-    let v = value.toFixed(trimmed.includes(".") ? 1 : 0);
-    if (!trimmed.includes(".")) {
+    let v = value.toFixed(numPart.includes(".") ? 1 : 0);
+    if (!numPart.includes(".")) {
       v = v.replace(/\.0$/, "");
     }
 
-    // Keep + where it originally was (prefix vs suffix)
-    return (prefixPlus ? "+" : "") + v + (hasPercent ? "%" : "") + (suffixPlus ? "+" : "");
+    return prefix + v + suffix;
   }
 
   function animateMetric(el) {
@@ -303,7 +312,7 @@
 
   // Resume download tracking
   document.addEventListener("click", (e) => {
-    const link = e.target.closest('a[href*="ryan-schmidt-resume"][href$=".pdf"]');
+    const link = e.target.closest('a[href*="resume"]');
     if (!link) return;
     const sessionToken = sessionStorage.getItem('rs_chat_session_token') || null;
     fetch("/api/track-resume", {
@@ -312,7 +321,8 @@
       body: JSON.stringify({
         pageUrl: location.pathname,
         sessionToken
-      })
+      }),
+      keepalive: true
     }).catch(() => {});
   });
 
@@ -649,7 +659,10 @@
 
       const togglePlay = () => {
         if (video.paused) {
-          video.play();
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {});
+          }
           video.setAttribute('aria-label', 'Video demonstration (playing): click to pause');
         } else {
           video.pause();

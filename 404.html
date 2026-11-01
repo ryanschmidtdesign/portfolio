@@ -44,6 +44,25 @@
         radial-gradient(ellipse 70% 50% at 15% 100%, rgba(200, 95, 55, 0.12) 0%, transparent 65%);
       background-attachment: fixed;
     }
+    .skip-link {
+      position: absolute;
+      top: -9999px;
+      left: 1rem;
+      background: #171412;
+      color: #F7F5F2;
+      padding: 0.5rem 1rem;
+      z-index: 10000;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .skip-link:focus,
+    .skip-link:focus-visible {
+      top: 1rem;
+      outline: 2px solid #C85A32;
+      outline-offset: 2px;
+    }
     .container { text-align: center; max-width: 36rem; }
     .code { font-size: clamp(5rem, 12vw, 8rem); font-weight: 700; line-height: 1; letter-spacing: -0.04em; color: #171412; }
     .code span { color: #C85A32; }
@@ -55,11 +74,13 @@
     .links a:first-child:hover { background: #C85A32; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(172, 73, 37, 0.4); }
     .links a:last-child { border: 1.5px solid rgba(255, 255, 255, 0.16); background: #1A1614; color: #F7F5F2; }
     .links a:last-child:hover { border-color: #C85A32; color: #E07A5F; transform: translateY(-2px); }
+    .links a:focus-visible { outline: 2px solid #C85A32; outline-offset: 2px; }
     @media (prefers-reduced-motion: reduce) { .links a { transition: none; } .links a:hover { transform: none; } }
-    .page-footer { position: fixed; bottom: 1rem; font-size: 0.75rem; color: #78716C; }
+    .page-footer { position: fixed; bottom: 1rem; font-size: 0.75rem; color: #6E6762; }
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <main id="main-content">
     <div class="container">
       <div class="code">4<span>0</span>4</div>

@@ -3,7 +3,13 @@
   "trailingSlash": false,
   "functions": {
     "api/chat.js": {
-      "includeFiles": "assets/portfolio-kb.json"
+      "includeFiles": "assets/portfolio-kb.json",
+      "maxDuration": 60,
+      "memory": 1024
+    },
+    "api/track-resume.js": {
+      "maxDuration": 15,
+      "memory": 512
     }
   },
   "headers": [
@@ -16,7 +22,7 @@
       ]
     },
     {
-      "source": "/(.*).html",
+      "source": "/(pages/.*|.*\\.html)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
         { "key": "Pragma", "value": "no-cache" },
@@ -58,7 +64,7 @@
       ]
     },
     {
-      "source": "/assets/(images|icons)/(.*)",
+      "source": "/assets/(case-studies|images|icons|logo)/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
@@ -66,12 +72,11 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://ryanschmidt.design; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" }
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://ryanschmidt.design; connect-src 'self' https://vitals.vercel-insights.com https://*.vercel-insights.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" }
       ]
     }
   ],
@@ -93,15 +98,10 @@
       "permanent": true
     },
     { "source": "/about", "destination": "/pages/about", "permanent": true },
-    { "source": "/about.html", "destination": "/pages/about", "permanent": true },
     { "source": "/dashboard", "destination": "/pages/dashboard", "permanent": true },
-    { "source": "/dashboard.html", "destination": "/pages/dashboard", "permanent": true },
     { "source": "/inventory", "destination": "/pages/inventory", "permanent": true },
-    { "source": "/inventory.html", "destination": "/pages/inventory", "permanent": true },
     { "source": "/ai-coding-portfolio", "destination": "/pages/ai-coding-portfolio", "permanent": true },
-    { "source": "/ai-coding-portfolio.html", "destination": "/pages/ai-coding-portfolio", "permanent": true },
     { "source": "/member-portal-overhaul", "destination": "/pages/member-portal-overhaul", "permanent": true },
-    { "source": "/member-portal-overhaul.html", "destination": "/pages/member-portal-overhaul", "permanent": true },
     {
       "source": "/design-system",
       "destination": "/pages/ai-coding-portfolio",

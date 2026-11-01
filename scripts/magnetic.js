@@ -59,6 +59,10 @@
     magneticTargets.forEach((el) => {
       let rafId = null;
 
+      el.addEventListener('pointerenter', () => {
+        el.style.transition = '';
+      });
+
       el.addEventListener('pointermove', (e) => {
         if (rafId) cancelAnimationFrame(rafId);
         rafId = requestAnimationFrame(() => {

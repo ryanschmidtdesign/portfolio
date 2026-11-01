@@ -1033,8 +1033,7 @@ if (savedHist.length > 0) {
         return true;
       }
       if (lower === '/perf' || lower === 'perf' || lower === '/skills' || lower === 'skills') {
-        window.rsCommandPalette?.open();
-        window.rsCommandPalette?.runCLICommand(lower.replace('/', ''));
+        window.rsCommandPalette?.open(lower.replace('/', ''));
         return true;
       }
       if (lower === '/work' || lower === 'work') {
@@ -1723,6 +1722,8 @@ if (savedHist.length > 0) {
       if (textEl) textEl.textContent = loadingPhrases[phraseIndex];
     }, 1500);
 
+    let timeoutTimer = null;
+
     try {
       // Best effort: make sure KB is available before calling the server.
       // The server also has its own fallback, so this is just extra reliability.
@@ -1745,7 +1746,7 @@ if (savedHist.length > 0) {
       if (state.kb) payload.kb = state.kb;
       if (state.sectionContext) payload.sectionContext = state.sectionContext;
 
-      let timeoutTimer = setTimeout(() => currentController.abort(), 60000);
+      timeoutTimer = setTimeout(() => currentController.abort(), 60000);
       const res = await fetch(chatApi, {
         method:'POST',
         headers:{
@@ -1970,7 +1971,7 @@ if (savedHist.length > 0) {
       state.history.push({ role:'assistant', content: ans });
       saveHistory();
     } catch (e) {
-      clearTimeout(timeoutTimer);
+      if (timeoutTimer) clearTimeout(timeoutTimer);
       if (e.name === 'AbortError') {
         thinking.remove();
       } else {

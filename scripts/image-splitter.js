@@ -88,6 +88,7 @@
     }, { passive: false });
 
     document.addEventListener('touchend', stopDrag);
+    document.addEventListener('touchcancel', stopDrag);
 
     this.handle.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {

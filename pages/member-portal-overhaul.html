@@ -51,7 +51,7 @@
     <!-- Fonts (IBM Plex Sans + Newsreader italic serif for editorial accents) -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <link rel="stylesheet" href="../styles.css?v=80">
+    <link rel="stylesheet" href="../styles.css?v=81">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -91,32 +91,6 @@
         "Prototyping in code",
         "Research synthesis",
         "AI-augmented product UX"
-      ],
-      "workExample": [
-        {
-          "@type": "Article",
-          "@id": "https://ryanschmidt.design/pages/dashboard#work",
-          "name": "Custom Dashboards & AI Summaries",
-          "url": "https://ryanschmidt.design/pages/dashboard"
-        },
-        {
-          "@type": "Article",
-          "@id": "https://ryanschmidt.design/pages/inventory#work",
-          "name": "Inventory, Purchasing & Receiving",
-          "url": "https://ryanschmidt.design/pages/inventory"
-        },
-        {
-          "@type": "Article",
-          "@id": "https://ryanschmidt.design/pages/ai-coding-portfolio#work",
-          "name": "Building My Portfolio in Code",
-          "url": "https://ryanschmidt.design/pages/ai-coding-portfolio"
-        },
-        {
-          "@type": "Article",
-          "@id": "https://ryanschmidt.design/pages/member-portal-overhaul#work",
-          "name": "i4cp Member Portal & Research Discovery",
-          "url": "https://ryanschmidt.design/pages/member-portal-overhaul"
-        }
       ]
     },
     {
@@ -143,6 +117,12 @@
       },
       "description": "Case study: Reworked navigation and research discovery around member priorities. Shipped September 11, 2026; Ahri sessions increased 500% and daily activity doubled.",
       "primaryImageOfPage": "https://ryanschmidt.design/assets/case-studies/member-portal/design-highlights/Home_new.png",
+      "breadcrumb": {
+        "@id": "https://ryanschmidt.design/pages/member-portal-overhaul#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://ryanschmidt.design/pages/member-portal-overhaul#work"
+      },
       "dateModified": "2026-11-01",
       "inLanguage": "en-US"
     },
@@ -179,9 +159,6 @@
       "audience": {
         "@type": "Audience",
         "audienceType": "Hiring managers, design leaders, recruiters"
-      },
-      "publisher": {
-        "@id": "https://ryanschmidt.design/#person"
       }
     },
     {
@@ -378,7 +355,7 @@
                 </div>
                 <div class="splitter-handle" role="slider" tabindex="0" aria-label="Compare legacy homepage with redesigned practice-area homepage" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
                   <div class="splitter-handle-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <path d="M20.7931 11.5L15.2931 5.99995L16.0002 5.29285L22.3537 11.6464V12.3535L16.0002 18.7071L15.2931 18L20.793 12.5L3.20719 12.5L8.70714 18L8.00004 18.7071L1.64648 12.3535L1.64648 11.6464L8.00004 5.29285L8.70714 5.99995L3.2071 11.5L20.7931 11.5Z" fill="currentColor"/>
                     </svg>
                   </div>
@@ -441,7 +418,7 @@
                 </div>
                 <div class="splitter-handle" role="slider" tabindex="0" aria-label="Compare legacy taxonomy view with redesigned content taxonomy" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
                   <div class="splitter-handle-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <path d="M20.7931 11.5L15.2931 5.99995L16.0002 5.29285L22.3537 11.6464V12.3535L16.0002 18.7071L15.2931 18L20.793 12.5L3.20719 12.5L8.70714 18L8.00004 18.7071L1.64648 12.3535L1.64648 11.6464L8.00004 5.29285L8.70714 5.99995L3.2071 11.5L20.7931 11.5Z" fill="currentColor"/>
                     </svg>
                   </div>
@@ -469,11 +446,11 @@
 
             <div class="ia-breadcrumb-trail" role="tablist" aria-label="Progressive drilldown trail">
               <button type="button" class="crumb-segment is-active" id="crumb-areas" data-crumb="areas" role="tab" aria-selected="true" aria-controls="panel-ia-areas" tabindex="0">1. Areas of Focus</button>
-              <span class="crumb-separator" aria-hidden="true">/</span>
+              <span class="crumb-separator" role="presentation" aria-hidden="true">/</span>
               <button type="button" class="crumb-segment" id="crumb-priorities" data-crumb="priorities" role="tab" aria-selected="false" aria-controls="panel-ia-priorities" tabindex="-1">2. Priorities</button>
-              <span class="crumb-separator" aria-hidden="true">/</span>
+              <span class="crumb-separator" role="presentation" aria-hidden="true">/</span>
               <button type="button" class="crumb-segment" id="crumb-topics" data-crumb="topics" role="tab" aria-selected="false" aria-controls="panel-ia-topics" tabindex="-1">3. Topics</button>
-              <span class="crumb-separator" aria-hidden="true">/</span>
+              <span class="crumb-separator" role="presentation" aria-hidden="true">/</span>
               <button type="button" class="crumb-segment" id="crumb-content" data-crumb="content" role="tab" aria-selected="false" aria-controls="panel-ia-content" tabindex="-1">4. Content Assets</button>
             </div>
 
@@ -610,7 +587,7 @@
                 </div>
                 <div class="splitter-handle" role="slider" tabindex="0" aria-label="Compare legacy flat navigation with redesigned progressive disclosure navigation" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
                   <div class="splitter-handle-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <path d="M20.7931 11.5L15.2931 5.99995L16.0002 5.29285L22.3537 11.6464V12.3535L16.0002 18.7071L15.2931 18L20.793 12.5L3.20719 12.5L8.70714 18L8.00004 18.7071L1.64648 12.3535L1.64648 11.6464L8.00004 5.29285L8.70714 5.99995L3.2071 11.5L20.7931 11.5Z" fill="currentColor"/>
                     </svg>
                   </div>
@@ -631,13 +608,13 @@
                 </div>
                 <div class="splitter-after" style="clip-path: inset(0 0 0 50%);">
                   <picture>
-                    <source srcset="../assets/case-studies/member-portal/design-highlights/Ahri%20Full%20Page%20Redesign%20-%20Main.webp" type="image/webp">
-                    <img src="../assets/case-studies/member-portal/design-highlights/Ahri%20Full%20Page%20Redesign%20-%20Main.webp" alt="Ask Ahri conversational AI discovery omnibar interface" class="no-reveal" width="1440" height="900" draggable="false" loading="lazy">
+                    <source srcset="../assets/case-studies/member-portal/design-highlights/ahri.webp" type="image/webp">
+                    <img src="../assets/case-studies/member-portal/design-highlights/ahri.webp" alt="Ask Ahri conversational AI discovery omnibar interface" class="no-reveal" width="1440" height="900" draggable="false" loading="lazy">
                   </picture>
                 </div>
                 <div class="splitter-handle" role="slider" tabindex="0" aria-label="Compare legacy search bar with Ask Ahri AI discovery engine" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
                   <div class="splitter-handle-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                       <path d="M20.7931 11.5L15.2931 5.99995L16.0002 5.29285L22.3537 11.6464V12.3535L16.0002 18.7071L15.2931 18L20.793 12.5L3.20719 12.5L8.70714 18L8.00004 18.7071L1.64648 12.3535L1.64648 11.6464L8.00004 5.29285L8.70714 5.99995L3.2071 11.5L20.7931 11.5Z" fill="currentColor"/>
                     </svg>
                   </div>
@@ -851,11 +828,11 @@
       </div>
     </div>
 
-    <script src="../scripts/cli-mode.js?v=80" defer></script>
-    <script src="../scripts/scripts.js?v=80" defer></script>
-    <script src="../scripts/magnetic.js?v=80" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=80" defer></script>
-    <script src="../scripts/image-splitter.js?v=80" defer></script>
+    <script src="../scripts/cli-mode.js?v=81" defer></script>
+    <script src="../scripts/scripts.js?v=81" defer></script>
+    <script src="../scripts/magnetic.js?v=81" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=81" defer></script>
+    <script src="../scripts/image-splitter.js?v=81" defer></script>
     <!-- SEO Landmark Footer (visually hidden) -->
     <footer class="site-footer">
       <div class="site-footer-inner">
