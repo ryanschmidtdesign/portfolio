@@ -1040,6 +1040,8 @@
 
         if (inputs.length === 0) return;
 
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         const SUGGESTIONS = [
             "Ask AI about Ryan's work...",
             "Ask about the Member Portal overhaul...",
@@ -1052,57 +1054,129 @@
         ];
 
         let currentIndex = 0;
-        let timerId = null;
+        let timeoutId = null;
+        let isTyping = false;
 
-        function rotate() {
-            if (document.hidden) return;
-
-            currentIndex = (currentIndex + 1) % SUGGESTIONS.length;
-            const nextSuggestion = SUGGESTIONS[currentIndex];
-
+        function setPlaceholderText(text) {
             inputs.forEach(input => {
-                if (input.value && input.value.trim().length > 0) return;
-                if (document.activeElement === input) return;
-
-                input.classList.add('is-placeholder-fading');
-                setTimeout(() => {
-                    input.placeholder = nextSuggestion;
-                    input.classList.remove('is-placeholder-fading');
-                }, 260);
+                if (!input.value || input.value.trim().length === 0) {
+                    input.placeholder = text;
+                }
             });
         }
 
-        inputs.forEach(input => {
-            if (!input.value || input.value.trim().length === 0) {
-                input.placeholder = SUGGESTIONS[0];
+        function cancelTimer() {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
+        }
+
+        function isAnyInputActive() {
+            return Array.from(inputs).some(input => {
+                return document.activeElement === input || (input.value && input.value.trim().length > 0);
+            });
+        }
+
+        if (prefersReduced) {
+            setPlaceholderText(SUGGESTIONS[0]);
+            setInterval(() => {
+                if (document.hidden || isAnyInputActive()) return;
+                currentIndex = (currentIndex + 1) % SUGGESTIONS.length;
+                setPlaceholderText(SUGGESTIONS[currentIndex]);
+            }, 3800);
+            return;
+        }
+
+        function typeText(targetText, onDone) {
+            let idx = 0;
+            isTyping = true;
+
+            function nextChar() {
+                if (isAnyInputActive()) {
+                    isTyping = false;
+                    return;
+                }
+                idx++;
+                setPlaceholderText(targetText.slice(0, idx));
+                if (idx < targetText.length) {
+                    timeoutId = setTimeout(nextChar, 22);
+                } else {
+                    isTyping = false;
+                    if (onDone) onDone();
+                }
             }
 
-            input.addEventListener('focus', () => {
-                if (timerId) {
-                    clearInterval(timerId);
-                    timerId = null;
+            nextChar();
+        }
+
+        function eraseText(onDone) {
+            const currentText = inputs[0]?.placeholder || '';
+            let len = currentText.length;
+            isTyping = true;
+
+            function prevChar() {
+                if (isAnyInputActive()) {
+                    isTyping = false;
+                    return;
                 }
+                len = Math.max(0, len - 1);
+                setPlaceholderText(currentText.slice(0, len));
+                if (len > 0) {
+                    timeoutId = setTimeout(prevChar, 11);
+                } else {
+                    isTyping = false;
+                    if (onDone) onDone();
+                }
+            }
+
+            prevChar();
+        }
+
+        function runCycle() {
+            if (document.hidden || isAnyInputActive()) {
+                timeoutId = setTimeout(runCycle, 800);
+                return;
+            }
+
+            eraseText(() => {
+                timeoutId = setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % SUGGESTIONS.length;
+                    typeText(SUGGESTIONS[currentIndex], () => {
+                        timeoutId = setTimeout(runCycle, 3200);
+                    });
+                }, 180);
+            });
+        }
+
+        // Start initial type effect shortly after load
+        setPlaceholderText('');
+        timeoutId = setTimeout(() => {
+            typeText(SUGGESTIONS[0], () => {
+                timeoutId = setTimeout(runCycle, 3200);
+            });
+        }, 350);
+
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                cancelTimer();
+                isTyping = false;
             });
 
             input.addEventListener('blur', () => {
-                if (!timerId && (!input.value || input.value.trim().length === 0)) {
-                    timerId = setInterval(rotate, 3800);
+                if (!input.value || input.value.trim().length === 0) {
+                    cancelTimer();
+                    timeoutId = setTimeout(runCycle, 1200);
                 }
             });
         });
 
-        timerId = setInterval(rotate, 3800);
-
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
-                if (timerId) {
-                    clearInterval(timerId);
-                    timerId = null;
-                }
-            } else {
-                if (!timerId) {
-                    timerId = setInterval(rotate, 3800);
-                }
+                cancelTimer();
+            } else if (!isAnyInputActive() && !isTyping) {
+                cancelTimer();
+                timeoutId = setTimeout(runCycle, 800);
             }
         });
     }
