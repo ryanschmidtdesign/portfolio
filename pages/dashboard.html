@@ -56,7 +56,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=88">
+    <link rel="stylesheet" href="../styles.css?v=89">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -467,7 +467,7 @@
           <ul data-progress-story>
             <li data-story-step>
               <span class="step-label">1. Responsive 12-Column Widget Grid</span>
-              <p class="step-copy">Rather than building isolated reporting pages, I architected a modular 12-column CSS grid supporting three standardized widget viewports: 1x1 KPI counter, 2x2 trend chart, and 3x2 data table. Users could instantiate from an opinionated domain template or an empty canvas, dragging and configuring cards to match their operational morning scan.</p>
+              <p class="step-copy">Rather than building isolated reporting pages, I designed a modular 12-column grid supporting three widget sizes: a 1x1 counter, 2x2 trend chart, and 3x2 data table. Users could start from a role-specific template or a blank canvas, dragging and configuring cards to match their operational morning scan.</p>
               <p class="step-copy">To preserve page performance under heavy data loads, we enforced strict widget pagination and asynchronous, card-isolated data fetching.</p>
             </li>
             <li data-story-step>
@@ -586,7 +586,7 @@
             <h2>Execution Constraints: Managing Without a Design System</h2>
           </div>
           <p>
-            Without an established design system in place, every new visualization card risked turning into a bespoke, unmaintainable React component. To prevent front-end technical debt and protect our delivery milestone, I established a strict foundational token specification: a unified 12-column responsive layout, 16px spatial padding increments, and standardized asynchronous skeleton loaders. Establishing these constraints prevented cumulative layout shifts (CLS) during parallel widget queries and became the direct architectural foundation for the 100-component design system I later built across D-Tools Cloud.
+            Without an established design system in place, every new visualization card risked turning into a bespoke, unmaintainable React component. To prevent front-end technical debt and protect our delivery milestone, I established a strict foundational token specification: a unified 12-column responsive layout, 16px spatial padding increments, and standardized asynchronous skeleton loaders. Establishing these constraints prevented cumulative layout shifts (CLS) during parallel widget queries and became the direct architectural foundation for the 100+ production components we later scaled and maintained across D-Tools Cloud.
           </p>
           <h3>Permissions and speed: Role-based security and caching</h3>
           <p>
@@ -650,7 +650,7 @@
             Users applied an average of 2.4 custom filter rules per card (filtering by job phase, assigned technician, or warehouse location), confirming that teams were shaping the system around their internal organizational hierarchy rather than default presets.
           </p>
           <p>
-            Product telemetry surfaced a clear operational bifurcation: visual charts and dispatch counters peaked between 6:45 AM and 8:15 AM every weekday as managers routed field crews. Conversely, AI summary triggers remained dormant midweek before surging at month-end and quarter-close, when department leads used the narrative generator to compile owner reports.
+            Usage data showed a clear split in daily habits: visual charts and dispatch counters peaked between 6:45 AM and 8:15 AM every weekday as managers routed field crews. Conversely, AI summary triggers remained dormant midweek before surging at month-end and quarter-close, when department leads used the narrative generator to compile owner reports.
           </p>
 
           <figure class="case-study-media" data-reveal>
@@ -720,10 +720,10 @@
     </div>
 
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=88" defer></script>
-    <script src="../scripts/scripts.js?v=88" defer></script>
-    <script src="../scripts/magnetic.js?v=88" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=88" defer></script>
+    <script src="../scripts/cli-mode.js?v=89" defer></script>
+    <script src="../scripts/scripts.js?v=89" defer></script>
+    <script src="../scripts/magnetic.js?v=89" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=89" defer></script>
     <!-- SEO Landmark Footer (visually hidden) -->
     <footer class="site-footer">
       <div class="site-footer-inner">
