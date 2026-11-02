@@ -629,7 +629,7 @@
                     keywords: 'approach philosophy principles leadership systemizer designing in code verifiable outcomes craft builder',
                     action: () => {
                         this.close();
-                        window.location.href = `${pagesPrefix}about.html#leadership`;
+                        window.location.href = `${prefix}about.html#leadership`;
                     }
                 },
                 {

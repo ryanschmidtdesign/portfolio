@@ -316,13 +316,14 @@
   width: 100%;
   height: auto;
   aspect-ratio: 3/4;
-  border-radius: 8px;
-  background-color: #FFFFFF;
-  border: 10px solid #FFFFFF;
+  border-radius: var(--radius-md);
+  background-color: var(--surface-elevated-strong, #FCFBF9);
+  border: 10px solid var(--surface-elevated-strong, #FCFBF9);
   border-bottom-width: 32px;
   box-shadow: 
-    3px 10px 28px rgba(50, 40, 30, 0.18),
-    0 2px 4px rgba(50, 40, 30, 0.08);
+    3px 10px 28px rgba(28, 20, 15, 0.18),
+    0 2px 4px rgba(28, 20, 15, 0.08),
+    0 0 0 1px var(--border-subtle);
   transform: rotate(-1.2deg);
   transition: transform 220ms ease;
 }

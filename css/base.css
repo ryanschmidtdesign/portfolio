@@ -207,7 +207,7 @@ a:hover {
 .about-text p a:not([class]):hover,
 .leadership-prose p a:not([class]):hover {
   background-size: 100% 1px;
-  color: var(--accent-text-hover, #F09A80);
+  color: var(--accent-text-hover, #732F16);
 }
 
 a,
@@ -247,7 +247,7 @@ code {
   font-size: 0.88em;
   padding: 0.15em 0.4em;
   border-radius: var(--radius-xs);
-  background: var(--surface-code, #120F0E);
+  background: var(--surface-code, #EAE0D5);
   border: 1px solid var(--border-subtle);
   color: var(--text);
 }
