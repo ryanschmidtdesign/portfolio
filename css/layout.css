@@ -202,13 +202,6 @@ body:not(.is-home) {
   }
 }
 
-@media (max-width: 520px) {
-  /* On compact screens, hide Philosophy anchor link to preserve generous link spacing */
-  .site-header__link[href*="approach"] {
-    display: none;
-  }
-}
-
 @media (max-width: 440px) {
   /* On narrow mobile phones, hide secondary external links (Email, LinkedIn) so primary Work, About, Resume breathe */
   .site-header__link[href*="mailto"],

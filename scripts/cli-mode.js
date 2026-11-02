@@ -622,19 +622,14 @@
                     id: 'nav-approach',
                     group: 'Navigation',
                     icon: '◇',
-                    title: 'Design Philosophy & Principles',
-                    sub: 'Systemizer instinct, designing in code, and verifiable business outcomes',
-                    badge: 'Philosophy',
-                    targetPath: 'index.html#approach',
-                    keywords: 'approach philosophy principles systemizer designing in code verifiable outcomes craft builder',
+                    title: 'Design Leadership & Ethos',
+                    sub: 'Systems, prototyping in code, and verified outcomes on the About page',
+                    badge: 'Leadership',
+                    targetPath: 'pages/about.html#leadership',
+                    keywords: 'approach philosophy principles leadership systemizer designing in code verifiable outcomes craft builder',
                     action: () => {
                         this.close();
-                        const target = document.getElementById('approach');
-                        if (target) {
-                            target.scrollIntoView({ behavior: 'smooth' });
-                        } else {
-                            window.location.href = `${homeHref}#approach`;
-                        }
+                        window.location.href = `${pagesPrefix}about.html#leadership`;
                     }
                 },
                 {
