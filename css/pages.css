@@ -1357,26 +1357,26 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-cmdk .ai-mini-cmdk__kbd {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 500;
   letter-spacing: 0.04em;
   color: #A8A29E;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 2px;
-  height: 24px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  height: auto;
   line-height: 1;
-  padding: 0 6px;
+  padding: 0 4px;
   display: inline-flex;
   align-items: center;
   box-sizing: border-box;
-  transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
+  transition: color 160ms ease;
 }
 
 .home-omnibar-cmdk:hover .ai-mini-cmdk__kbd {
   color: #F7F5F2;
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.22);
+  background: transparent;
+  border: none;
 }
 
 .home-omnibar-send,
