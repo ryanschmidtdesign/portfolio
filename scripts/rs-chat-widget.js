@@ -31,7 +31,7 @@
       :host {
         all: initial;
         --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        --font-mono: 'Space Mono', monospace;
+        --font-mono: 'IBM Plex Mono', 'SF Mono', Monaco, Consolas, monospace;
         --accent: #C85A32;
         --accent-hover: #AC4925;
         --accent-soft: rgba(200, 90, 50, 0.14);
@@ -78,15 +78,15 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        background: rgba(12, 11, 15, 0.78);
-        backdrop-filter: blur(24px) saturate(190%);
-        -webkit-backdrop-filter: blur(24px) saturate(190%);
+        background: rgba(18, 15, 13, 0.92);
+        backdrop-filter: blur(24px) saturate(160%);
+        -webkit-backdrop-filter: blur(24px) saturate(160%);
         color: #F7F5F2;
         border: none;
-        border-left: 1px solid rgba(255, 255, 255, 0.16);
+        border-left: 1px solid rgba(255, 255, 255, 0.14);
         box-shadow:
-          -16px 0 44px rgba(0, 0, 0, 0.72),
-          -1px 0 0 rgba(255, 255, 255, 0.12);
+          -16px 0 48px rgba(0, 0, 0, 0.72),
+          -1px 0 0 rgba(255, 255, 255, 0.10);
         border-radius: 0;
         visibility: hidden;
         opacity: 0;
@@ -110,8 +110,8 @@
           right: 0;
           bottom: 0;
           width: 100%;
-          height: min(85vh, 720px);
-          max-height: 85vh;
+          height: min(85dvh, 720px);
+          max-height: 85dvh;
           border-left: none;
           border-top: 1px solid rgba(255, 255, 255, 0.16);
           border-radius: 2px 2px 0 0;
@@ -119,6 +119,9 @@
         }
         .panel.open {
           transform: translateY(0);
+        }
+        .text {
+          font-size: 16px !important;
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -223,7 +226,7 @@
         flex-direction: column;
         gap: 12px;
         padding: 16px 18px 14px;
-        background: rgba(16, 14, 18, 0.70);
+        background: rgba(14, 12, 10, 0.78);
         flex: 1 1 auto;
         min-height: 0;
         overflow-y: auto;
@@ -236,44 +239,43 @@
         word-break: break-word;
         overflow-wrap: anywhere;
         padding: 11px 14px;
-        border-radius: 2px;
+        border-radius: 3px;
         font-size: 14px;
         line-height: 1.56;
       }
       .msg.user {
         white-space: pre-wrap;
         align-self: flex-end;
-        background: #1A1614;
-        border: 1px solid rgba(255, 255, 255, 0.10);
-        border-right: 3px solid var(--accent, #C85A32);
+        background: #24201C;
+        border: 1px solid rgba(255, 255, 255, 0.14);
         color: #F7F5F2;
         border-bottom-right-radius: 2px;
         font-weight: 500;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       }
       .msg.user::before {
         content: "You";
         display: block;
         font-family: var(--font-mono);
         font-size: 10px;
-        font-weight: 700;
+        font-weight: 600;
         letter-spacing: 0.04em;
-        color: var(--accent, #C85A32);
+        color: #A8A29E;
         margin-bottom: 4px;
-        opacity: 0.95;
+        opacity: 0.9;
       }
       .msg.bot {
         align-self: flex-start;
         width: 100%;
         max-width: 100%;
-        background: #1A1614;
-        border: 1px solid rgba(255, 255, 255, 0.09);
-        border-left: 3px solid var(--accent, #C85A32);
+        background: #181513;
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-left: 2px solid var(--accent, #C85A32);
         color: #F7F5F2;
         position: relative;
         line-height: 1.6;
         border-bottom-left-radius: 2px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
       }
       .msg.bot:not([data-seeded="true"])::before {
         content: "Portfolio Assistant";
@@ -410,7 +412,7 @@
         gap: 6px;
         padding: 9px 18px 8px;
         flex: 0 0 auto;
-        background: rgba(16, 14, 18, 0.75);
+        background: rgba(18, 15, 13, 0.85);
         border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
       .pill {
@@ -418,8 +420,8 @@
         font-size: 11.5px;
         font-weight: 500;
         color: #A8A29E;
-        background: #1A1614;
-        border: 1px solid rgba(255, 255, 255, 0.10);
+        background: #1C1916;
+        border: 1px solid rgba(255, 255, 255, 0.11);
         border-radius: 2px;
         padding: 5px 10px;
         cursor: pointer;
@@ -460,7 +462,7 @@
         align-items: center;
         gap: 0;
         padding: 10px 16px 14px;
-        background: rgba(16, 14, 18, 0.75);
+        background: rgba(18, 15, 13, 0.88);
         box-sizing: border-box;
         position: relative;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -479,8 +481,8 @@
         flex: 1;
         font: inherit;
         font-size: 13.5px;
-        background: rgba(26, 22, 28, 0.75);
-        border: 1.5px solid rgba(255, 255, 255, 0.14);
+        background: rgba(28, 24, 21, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.14);
         color: #F7F5F2;
         border-radius: 2px;
         white-space: nowrap;
@@ -587,14 +589,14 @@
         gap: 6px;
         margin: 12px 0 4px;
         padding: 14px;
-        background: #1A1614;
-        border: 1px solid rgba(255, 255, 255, 0.10);
-        border-radius: 10px;
+        background: #1C1916;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 4px;
         position: relative;
         overflow: hidden;
       }
       .hire-card-title {
-        font-weight: 700;
+        font-weight: 600;
         font-size: 14px;
         color: #F7F5F2;
       }
@@ -608,7 +610,7 @@
         display: inline-flex;
         align-items: center;
         padding: 6px 13px;
-        border-radius: 999px;
+        border-radius: 2px;
         font-size: 12.5px;
         font-weight: 600;
         text-decoration: none;
@@ -768,6 +770,7 @@
         <div class="inp">
           <span class="inp-prompt" aria-hidden="true">❯</span>
           <label for="input" class="visually-hidden">Ask Ryan's portfolio assistant</label>
+          <span id="rs-chat-hint" class="visually-hidden">Press Enter to send, Esc to dismiss</span>
           <input type="text" class="text" id="input" placeholder="Paste a job link or ask about Ryan's work..." aria-label="Ask a question about Ryan" aria-describedby="rs-chat-hint" autocomplete="off" />
           <button class="send" id="send" type="button" aria-label="Send message">→</button>
         </div>
@@ -1795,7 +1798,8 @@ if (savedHist.length > 0) {
           }
         }
 
-        // Extend timeout for streaming (60s total, not 30)
+        // Extend timeout for streaming (60s total)
+        timeoutTimer = setTimeout(() => currentController.abort(), 60000);
         try {
           while (true) {
             const { done, value } = await reader.read();
@@ -1806,11 +1810,17 @@ if (savedHist.length > 0) {
           // Flush remaining buffer
           processSseBuffer();
         } finally {
+          clearTimeout(timeoutTimer);
           reader.releaseLock();
         }
 
         if (!data && accumulatedText) {
-          data = { answer: accumulatedText };
+          let fallbackAnswer = accumulatedText;
+          try {
+            const jsonFallback = JSON.parse(accumulatedText);
+            if (jsonFallback && jsonFallback.answer) fallbackAnswer = jsonFallback.answer;
+          } catch (_) {}
+          data = { answer: fallbackAnswer };
         }
       } else {
         // ---- Non-streaming (JSON) fallback ----

@@ -35,7 +35,7 @@
     "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-display: var(--font-sans);
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
-  --font-mono: "Space Mono", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
+  --font-mono: "IBM Plex Mono", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
     Consolas, monospace;
 
   /* ─── Type scale (Strict Major Third: 1.250 ratio, Base 17px) ───────── */
@@ -105,12 +105,12 @@
   --type-heading-4: var(--fs-md);
   --type-caption: var(--fs-sm);
 
-  /* Radii (Engineered Hardware Knife-Edge) */
+  /* Radii (Engineered Hardware Knife-Edge & Architectural Chamfer) */
   --radius-xs: 2px;
-  --radius-sm: 2px;
-  --radius-md: 2px;
-  --radius-lg: 2px;
-  --radius-xl: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
   --radius-pill: 999px;
 
   --focus-outline-offset: 3px;
@@ -131,23 +131,36 @@
   --blur-md: blur(12px);
 
   /* === The Daytime Desert Canvas & Obsidian Hotel System === */
-  --bg-sandstone-day: #F3E8DF;
-  --bg-sandstone-deep: #ECE0D6;
-  --gray-100: #F3E8DF;
-  --gray-200: #ECE0D6;
-  --gray-300: #E0D1C5;
-  --bg: #F3E8DF;
+  --bg-sandstone-day: #F2EBE3;
+  --bg-sandstone-deep: #EAE0D5;
+  --gray-100: #F2EBE3;
+  --gray-200: #EAE0D5;
+  --gray-300: #DDD1C4;
+  --bg: #F2EBE3;
 
   /* Surface levels */
   --surface-1: rgba(28, 22, 18, 0.035);
   --surface-2: rgba(28, 22, 18, 0.065);
 
-  /* Card surfaces - porcelain sandstone plinths on daytime desert canvas */
-  --card-bg-strong: #FFFFFF;
-  --surface-elevated: #FFFFFF;
-  --surface-elevated-strong: #FFFFFF;
-  --surface-code: #ECE0D6;
-  --surface-obsidian: #171412;
+  /* Card surfaces - sun-bleached mineral limestone plinths on desert travertine canvas */
+  --card-bg-strong: #FAF7F2;
+  --surface-elevated: #FAF7F2;
+  --surface-elevated-strong: #FCFBF9;
+  --surface-code: #EAE0D5;
+  --surface-obsidian: #141210;
+
+  /* Obsidian Architecture System (Smoked Black Glass & Polished Basalt) */
+  --obsidian-bg: #141210;
+  --obsidian-surface: #1C1916;
+  --obsidian-surface-raised: #24201C;
+  --obsidian-glass: rgba(18, 15, 13, 0.88);
+  --obsidian-glass-heavy: rgba(16, 13, 11, 0.94);
+  --obsidian-border: rgba(255, 255, 255, 0.11);
+  --obsidian-border-strong: rgba(255, 255, 255, 0.19);
+  --obsidian-specular: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  --obsidian-text: #F7F5F2;
+  --obsidian-text-secondary: #A8A29E;
+  --obsidian-text-muted: #78716C;
 
   /* KPI system */
   --kpi-gap: 3.25rem;
@@ -170,23 +183,26 @@
 
   /* Obsidian Hotel Cantilever Drop Shadows (Deep, Crisp Architectural Shadows over Sunlit Desert) */
   --shadow-header:
-    0 16px 36px -4px rgba(28, 20, 15, 0.28),
-    0 2px 8px rgba(28, 20, 15, 0.14);
+    0 18px 42px -6px rgba(24, 18, 14, 0.34),
+    0 4px 12px rgba(24, 18, 14, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 
   --shadow-dock:
-    0 24px 60px -8px rgba(28, 20, 15, 0.42),
-    0 4px 16px rgba(28, 20, 15, 0.20),
-    0 0 0 1px rgba(0, 0, 0, 0.35);
+    0 24px 60px -8px rgba(24, 18, 14, 0.46),
+    0 6px 18px rgba(24, 18, 14, 0.24),
+    0 0 0 1px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 
   --shadow-dock-focus:
-    0 26px 64px -8px rgba(28, 20, 15, 0.48),
-    0 4px 16px rgba(28, 20, 15, 0.22),
-    0 0 0 1px rgba(0, 0, 0, 0.35);
+    0 28px 68px -8px rgba(24, 18, 14, 0.54),
+    0 6px 20px rgba(24, 18, 14, 0.28),
+    0 0 0 1px rgba(200, 90, 50, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 
   --shadow-modal:
-    0 32px 80px -16px rgba(0, 0, 0, 0.75),
-    0 8px 24px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    0 32px 80px -16px rgba(0, 0, 0, 0.78),
+    0 8px 24px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 
   /* Unified Semantic Z-Index Hierarchy */
   --z-base: 1;
@@ -212,20 +228,21 @@
     0 0 0 1px var(--border-subtle);
 
   --shadow-card:
-    0 1px 3px rgba(28, 20, 15, 0.04),
-    0 8px 24px -4px rgba(28, 20, 15, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 1px 2px rgba(28, 20, 15, 0.04),
+    0 10px 28px -6px rgba(28, 20, 15, 0.065),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
 
   --shadow-card-hover:
-    0 2px 6px rgba(28, 20, 15, 0.06),
-    0 16px 36px -8px rgba(200, 90, 50, 0.16),
-    0 0 0 1px rgba(200, 90, 50, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 1);
+    0 2px 6px rgba(28, 20, 15, 0.055),
+    0 18px 40px -10px rgba(28, 20, 15, 0.11),
+    0 0 0 1px rgba(200, 90, 50, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 
   --shadow-card-strong:
-    0 2px 4px rgba(28, 20, 15, 0.04),
+    0 2px 4px rgba(28, 20, 15, 0.045),
     0 16px 36px -10px rgba(28, 20, 15, 0.08),
-    0 0 0 1px var(--border-subtle);
+    0 0 0 1px var(--border-subtle),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
 
   --accent-cool-soft: rgba(200, 90, 50, 0.10);
   --divider-accent-width: 48px;
@@ -309,7 +326,7 @@
   --ink-on-glass: #F7F5F2;
 
   /* Body gradient endpoint */
-  --bg-gradient-end: #ECE0D6;
+  --bg-gradient-end: #EAE0D5;
 
   /* Raw channels */
   --rgb-white: 255 255 255;

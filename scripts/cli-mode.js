@@ -60,21 +60,33 @@
                     z-index: 1;
                     width: min(620px, 100%);
                     max-height: 80vh;
-                    background: rgba(12, 11, 15, 0.78);
-                    backdrop-filter: blur(20px) saturate(190%);
-                    -webkit-backdrop-filter: blur(20px) saturate(190%);
-                    border: 1px solid rgba(255, 255, 255, 0.18);
-                    border-radius: 2px;
+                    background: var(--obsidian-glass, rgba(18, 15, 13, 0.90));
+                    backdrop-filter: blur(22px) saturate(160%);
+                    -webkit-backdrop-filter: blur(22px) saturate(160%);
+                    border: 1px solid var(--obsidian-border-strong, rgba(255, 255, 255, 0.18));
+                    border-radius: 3px;
                     box-shadow:
-                        0 24px 64px -12px rgba(0, 0, 0, 0.8),
-                        0 4px 16px rgba(0, 0, 0, 0.4),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+                        0 28px 72px -12px rgba(0, 0, 0, 0.82),
+                        0 6px 20px rgba(0, 0, 0, 0.45),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.18);
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
                     transform: translateY(-8px) scale(0.985);
                     transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
                     color: #F7F5F2;
+                }
+
+                .rs-cmd-modal::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 1px;
+                    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.22) 50%, transparent 100%);
+                    pointer-events: none;
+                    z-index: 2;
                 }
 
                 .rs-cmd-overlay.is-open .rs-cmd-modal {
@@ -122,8 +134,8 @@
                     align-items: center;
                     gap: 12px;
                     padding: 12px 16px;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-                    background: rgba(16, 14, 18, 0.70);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+                    background: rgba(24, 20, 18, 0.82);
                 }
 
                 .rs-cmd-prompt-glyph {
@@ -330,7 +342,7 @@
                     font-size: 0.65rem;
                     font-weight: 600;
                     padding: 2px 7px;
-                    border-radius: 4px;
+                    border-radius: 2px;
                     letter-spacing: 0.02em;
                     white-space: nowrap;
                 }
@@ -359,7 +371,7 @@
                     font-size: 0.64rem;
                     font-weight: 500;
                     padding: 2px 7px;
-                    border-radius: 4px;
+                    border-radius: 2px;
                     background: rgba(255, 255, 255, 0.05);
                     color: #78716C;
                     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -420,7 +432,7 @@
                     justify-content: center;
                     min-width: 18px;
                     padding: 1px 5px;
-                    border-radius: 4px;
+                    border-radius: 2px;
                     background: rgba(255, 255, 255, 0.06);
                     color: #A8A29E;
                     border: 1px solid rgba(255, 255, 255, 0.12);

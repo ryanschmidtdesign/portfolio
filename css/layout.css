@@ -12,8 +12,8 @@ body:not(.is-home) {
 /* -------------------------------------------------------
    Site Header - Monolithic Obsidian Black Glass Sky-Bridge
    Contemporary all-black glass hotel architecture hovering over
-   the sunlit daytime desert: 6px small radius, razor titanium
-   hairlines, crisp bone-white typography.
+   the sunlit daytime desert: razor titanium hairlines, subtle
+   top specular edge, crisp bone-white typography.
    --------------------------------------------------------*/
 .site-header {
   position: fixed;
@@ -23,11 +23,11 @@ body:not(.is-home) {
   width: min(1160px, calc(100vw - 32px));
   max-width: 1160px;
   z-index: var(--z-header, 9990);
-  background: rgba(12, 11, 15, 0.72);
-  backdrop-filter: blur(16px) saturate(190%);
-  -webkit-backdrop-filter: blur(16px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 2px;
+  background: var(--obsidian-glass, rgba(18, 15, 13, 0.88));
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--obsidian-border, rgba(255, 255, 255, 0.11));
+  border-radius: var(--radius-sm, 3px);
   box-shadow: var(--shadow-header);
   overflow: hidden;
   margin: 0;
@@ -37,11 +37,18 @@ body:not(.is-home) {
 }
 
 .site-header::before {
-  display: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
+  pointer-events: none;
 }
 
 .site-header:hover {
-  border-color: rgba(255, 255, 255, 0.20);
+  border-color: var(--obsidian-border-strong, rgba(255, 255, 255, 0.19));
 }
 
 .site-header__inner {

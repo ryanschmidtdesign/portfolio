@@ -314,7 +314,10 @@
   document.addEventListener("click", (e) => {
     const link = e.target.closest('a[href*="resume"]');
     if (!link) return;
-    const sessionToken = sessionStorage.getItem('rs_chat_session_token') || null;
+    let sessionToken = null;
+    try {
+      sessionToken = sessionStorage.getItem('rs_chat_session_token');
+    } catch (_) {}
     fetch("/api/track-resume", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
