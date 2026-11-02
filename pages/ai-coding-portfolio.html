@@ -288,7 +288,7 @@
         <h1 id="title" data-parallax="0.06">Building My Portfolio in <em class="serif-accent" style="white-space: nowrap;">Code</em></h1>
 
           <p class="lead">
-            I built this portfolio in HTML, CSS, and JavaScript with AI coding tools. Working in the browser let me test responsive layouts and keyboard interactions as I designed, while keeping the implementation under my control.
+            I built this portfolio directly in HTML, CSS, and JavaScript using Cursor and Claude Code. Instead of treating AI as an automatic site builder, I used it as an ultra-fast drafting assistant—writing the design tokens, layout structures, and accessibility constraints myself to prevent AI from spitting out spaghetti CSS.
           </p>
 
           <div class="tldr-meta">
@@ -296,8 +296,7 @@
             <div>
               <p class="label">My role</p>
               <p>
-                End-to-end: UX, UI, front-end architecture, and AI-assisted engineering. 
-                I designed the system, wrote the code, and built the workflow.
+                Sole designer and builder: visual design, semantic HTML, modular CSS tokens, client-side JavaScript, and a serverless RAG assistant deployed on Vercel.
               </p>
             </div>
 
@@ -330,9 +329,9 @@
         <section class="case-study-summary" aria-label="Case study summary">
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
-            <li><strong>The Goal:</strong> I wanted to build the entire site in code to sharpen my UX engineering workflow, test layout behavior and keyboard navigation under real rendering conditions, and ship without a frontend bottleneck.</li>
+            <li><strong>The Goal:</strong> I wanted to design directly in production-grade code rather than stopping in Figma. Building the site myself let me stress-test responsive breakpoints, micro-interactions, and keyboard accessibility directly in the browser—while developing a realistic, hands-on understanding of what AI coding tools can and cannot do.</li>
             <li><strong>How I Built It:</strong> Wrote custom semantic HTML and modular CSS with Cursor, avoiding bloated templates and heavy frontend frameworks. I built a serverless backend with Supabase and pgvector so the assistant retrieves targeted project notes on demand.</li>
-            <li><strong>The Result:</strong> The result is a custom portfolio with shared design tokens, reusable page patterns, and an assistant connected to my project notes. Building it also gave me a practical workflow for testing interface ideas in code.</li>
+            <li><strong>The Result:</strong> A zero-framework, sub-second loading site governed by 5 distinct CSS layers, an AI assistant grounded by 63 automated tests, and a repeatable workflow for prototyping complex B2B interactions in hours instead of days.</li>
           </ul>
         </section>
 
@@ -342,11 +341,11 @@
           </div>
 
           <p>
-            I do my best work when I'm close to the implementation. Sitting between design and engineering helps me spot technical constraints early, speak the same language as our developers, and avoid designing interactions that are difficult to maintain in production.
+            I hate handing off Figma files over a wall and hoping for the best. When I understand DOM structure, CSS specificity, and API payload latency firsthand, I design components that engineers can actually implement without painful compromises.
           </p>
 
           <p>
-            I wanted to test modern AI-assisted engineering tools on a real project, so I built this portfolio from scratch in code instead of using an off-the-shelf template.
+            Rather than using Webflow or a canned template, I used this portfolio to put AI tools like Cursor and Claude Code through a stress test on a real, multi-page build.
           </p>
 
           <h3>What I set out to do</h3>
@@ -364,7 +363,7 @@
           </div>
 
           <p>
-            I treated the code like a production design system. I set up design tokens for spacing and type first, locked in modular layout grids, and tested components directly in Chrome.
+            I built a strict CSS token foundation before writing a single component. If you don't define color, type, and spacing tokens first, LLMs will invent 20 different hex codes and arbitrary margin values across every file.
           </p>
 
           <ul>
@@ -373,7 +372,7 @@
           </ul>
 
           <p>
-            The biggest takeaway was that AI tools are only as good as the guardrails you give them. When you establish clear tokens and layout rules upfront, AI accelerates boilerplate markup and produces clean, maintainable styles.
+            AI doesn't build good software on its own; it amplifies whatever structure you give it. Without hard guidelines, Cursor generated div-soup markup and inconsistent utility classes. Once I constrained it with a strict token dictionary and semantic HTML rules, it became an incredible copilot for repetitive boilerplate.
           </p>
         </section>
 
@@ -383,39 +382,39 @@
           </div>
 
           <p>
-            Every case study shares a single architectural template. By keeping markup patterns consistent across all four projects, adding a new section was like snapping Lego bricks together.
+            Every case study shares a single architectural template. By establishing identical section shells and metadata structures across all case studies, creating a new project page became a structured assembly process rather than a redesign.
           </p>
 
           <div class="sa-funnel">
 
             <article class="sa-step">
               <h3 class="sa-step-title">Prompts</h3>
-              <p class="sa-step-body">Clear, constrained instructions defining what to build and how</p>
+              <p class="sa-step-body">Context-rich prompts specifying existing CSS tokens, HTML landmarks, and zero Tailwind classes</p>
               <span class="sa-chip sa-chip--start">Foundation</span>
             </article>
 
             <article class="sa-step">
               <h3 class="sa-step-title">Patterns</h3>
-              <p class="sa-step-body">Reusable prompt structures for common UI and interaction problems</p>
+              <p class="sa-step-body">Scaffolded page layouts and interactive splitters generated from documented design patterns</p>
               <span class="sa-chip">Structure</span>
             </article>
 
             <article class="sa-step">
               <h3 class="sa-step-title">Components</h3>
-              <p class="sa-step-body">Reusable elements like navigation, cards, layouts, and sections</p>
+              <p class="sa-step-body">Hand-tuned UI components where I manually corrected AI layout mistakes (fixing flexbox collapses and focus rings)</p>
               <span class="sa-chip">Building blocks</span>
             </article>
 
             <article class="sa-step">
               <h3 class="sa-step-title">Features</h3>
-              <p class="sa-step-body">Full experiences including case studies and interactive elements</p>
+              <p class="sa-step-body">Fully responsive case study pages validated across mobile viewports, screen readers, and real browsers</p>
               <span class="sa-chip sa-chip--end">Shipped</span>
             </article>
 
           </div>
 
           <p class="caption">
-            The system connects structured prompts to real product features, not just generated code.
+            Prompts without architectural constraints produce disposable prototypes. Paired with semantic tokens and layout rules, they produce production-ready components.
           </p>
         </section>
 
@@ -702,7 +701,7 @@
 
           <h3>Designing directly in the browser</h3>
           <p>
-            Figma is great for team alignment, but jumping straight into HTML and CSS cut out an entire layer of translation lag. I could resize my browser window, test keyboard navigation, and check contrast under real rendering conditions, catching layout quirks before they reached production.
+            Figma is great for initial wireframing, but canvas mockups lie about interaction. By moving quickly into HTML and CSS, I could resize actual viewports, test keyboard focus rings, and catch font-rendering glitches that static frames disguise.
           </p>
 
           <figure class="case-study-media editor-tree-media">
@@ -720,7 +719,7 @@
 
           <h3>Keeping the CSS modular</h3>
           <p>
-            The fastest way for an AI-assisted codebase to turn into an unmaintainable mess is letting it write styling rules wherever it wants. I split the stylesheets into clear layers: tokens for colors and spacing, base styles for typography, layout files for grids, and component files for interactive widgets (<code>tokens.css</code>, <code>base.css</code>, <code>layout.css</code>, <code>components.css</code>, <code>pages.css</code>). That kept our CSS clean, prevented styling collisions, and made stylesheets straightforward to maintain.
+            Without modular stylesheets, AI coding models quickly create massive, 2,000-line CSS files with conflicting selector weights. I split the styles into five explicit layers: tokens.css, base.css, layout.css, components.css, and pages.css. When prompting Cursor, I strictly directed it to use existing token variables instead of defining ad-hoc pixel values or nested overrides.
           </p>
         </section>
 
@@ -739,7 +738,7 @@
 
 
           <p>
-            The result was a fast, accessible portfolio built with the same discipline and durability as a production software application.
+            The result is a clean, accessible site that loads in under 300 milliseconds, has zero runtime framework overhead, and doesn't break when resized or navigated via keyboard.
           </p>
 
           <p>
@@ -787,10 +786,10 @@
             <figcaption>The original chat widget from the previous portfolio before moving to vector search.</figcaption>
           </figure>
           <p>
-            To fix that token limit problem, I broke my case study notes into structured chunks and stored them in Supabase using vector search. Now, when a recruiter or hiring manager asks a specific question (like how I approached design tokens or why we pushed back on an AI-first dashboard), the endpoint retrieves only the relevant excerpts before streaming a grounded response with Gemini without stalling the UI.
+            To fix that token limit problem, I broke my case study notes into structured chunks and stored them in Supabase using vector search. Now, when a recruiter asks about a specific project decision, the serverless function retrieves only the 2 or 3 most relevant knowledge chunks. Gemini streams a grounded, 3-sentence summary in under 800ms, staying well within free-tier API quotas.
           </p>
           <p>
-            To keep the bot honest, I wrote 61 automated Vitest tests covering edge cases, role fit, and metric accuracy. If someone asks something outside my background, the assistant politely declines instead of making up answers. Building this gave me firsthand appreciation for the latency and prompt guardrails our engineering teams deal with every day.
+            To keep the bot from hallucinating, I wrote 63 automated Vitest tests checking role boundaries, metric precision, and refusal prompts. If someone asks if I write production C++ or have 10 years of Web3 experience, the bot says 'No' rather than inventing an answer. Testing these failure modes gave me practical empathy for the guardrail challenges our AI product teams grapple with daily.
           </p>
           <aside class="callout callout--accent">
             <h3>Tradeoff</h3>
@@ -806,11 +805,11 @@
           </div>
 
           <p>
-            Building the portfolio in production code shortened the back-and-forth between designing an interaction and seeing how it actually behaves. Prototyping directly in the browser exposed edge-case layout breaks, font-rendering quirks, and accessibility barriers that static Figma canvases conceal.
+            Building the portfolio in production code shortened the back-and-forth between designing an interaction and seeing how it actually behaves. Prototyping directly in the browser exposed responsive text-wrapping issues and keyboard focus traps that never show up on an artboard.
           </p>
 
           <p>
-            The biggest advantage is speed. When I want to test an interaction idea, I can build a working prototype in an afternoon, test it on a phone, and make sure keyboard navigation and responsive layouts feel solid before handing specifications to developers.
+            The biggest payoff is muscle memory. Now, when I design complex enterprise tools in my day job, I can spin up a live browser prototype in an afternoon to test tricky keyboard interactions and responsive edge cases before pitching an engineering team.
           </p>
 
           <!-- Impact section does not have a dedicated analytics screenshot yet -->

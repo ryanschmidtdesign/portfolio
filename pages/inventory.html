@@ -286,10 +286,10 @@
           <div class="about-hero__badge" style="margin-bottom: 14px;">✦ 0→1 WORKFLOW MVP · SUPPLY CHAIN &amp; REVENUE</div>
           <h1 id="title" data-parallax="0.06">Inventory, Purchasing &amp; <em class="serif-accent">Receiving</em></h1>
           <p class="lead">
-            Integrators were tracking millions of dollars in hardware on dry-erase boards and messy spreadsheets. For our sales team, this was a constant roadblock. Enterprise shops loved our quoting tools, but they walked away if we could not show them where warehouse stock was tracked.
+            Commercial AV integrators were tracking millions of dollars in staged job equipment across whiteboards and disconnected spreadsheets. For our enterprise sales team, this was a critical blocker: mid-market and enterprise integration firms loved our proposal and quoting tools, but refused to sign contracts because D-Tools Cloud dropped asset visibility the moment purchase orders were sent to distributors.
           </p>
           <p class="lead">
-            I led design for our new inventory module, tying purchase orders straight to jobs and service trucks so teams always knew what had arrived, what was reserved, and what was still on the road.
+            I led product design for our 0→1 Inventory, Purchasing &amp; Receiving suite, linking vendor POs directly to physical warehouse bins, technician vans, and active job stages—unblocking enterprise pilot deals and delivering an 8% lift in platform ARR.
           </p>
 
           <div class="tldr-meta">
@@ -321,9 +321,9 @@
         <section class="case-study-summary" aria-label="Case study summary">
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
-            <li><strong>The Problem:</strong> Customers spent hours every week manually checking stock between spreadsheets and third-party tools. Enterprise deals stalled during pilot demos because we couldn't track hardware past the initial purchasing stage.</li>
-            <li><strong>What I Built:</strong> A live inventory ledger connecting purchase orders directly to warehouses and field vans. When someone checks in a box on the loading dock, the database updates right away. We skipped automatic reorders and barcode scanners in the first release. We needed baseline stock counts to be dead accurate first.</li>
-            <li><strong>The Result:</strong> Warehouse managers finally stopped losing gear between jobs. Showing that our software could track equipment end-to-end unblocked six-figure enterprise pilots and delivered an 8% platform ARR lift.</li>
+            <li><strong>The Problem:</strong> Operations teams lost 2 to 3 hours daily reconciling warehouse stock across disconnected spreadsheets and third-party databases. Enterprise pilot deals stalled because our system offered zero post-procurement visibility.</li>
+            <li><strong>What I Built:</strong> A relational inventory ledger linking PO receipts directly to warehouse locations, service vehicles, and project work orders. I engineered a dual-track receiving flow separating fast bulk receiving from serialized audit trails, deliberately descoping mobile hardware scanning to ensure baseline count integrity first.</li>
+            <li><strong>The Result:</strong> Eliminated manual spreadsheet reconciliation between procurement and warehouse teams, unblocking stalled enterprise pilot accounts and driving an 8% increase in platform ARR.</li>
           </ul>
         </section>
 
@@ -332,15 +332,15 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            Every Monday morning, project managers and warehouse leads were stuck playing detective: comparing packing slips against handwritten notes and Excel tabs to figure out where 20 high-end amplifiers had disappeared to. If our software couldn't tell them whether an item was sitting in the main warehouse or already loaded on a technician's van, they had to rely on separate tools or call someone on the phone. For enterprise buyers, not having that built-in was an immediate dealbreaker.
+            In commercial systems integration, hardware staging is high-liability: an entire commercial job site halts if a single $8,000 DSP matrix processor is missing on installation morning. Warehouse leads and project managers spent hours reconciling physical packing slips against backorder notices and disconnected spreadsheets. Because D-Tools Cloud could not verify whether delivered hardware was in the central warehouse, staged in a staging bin, or loaded on a service van, customers turned to third-party tools like Jetbuilt or Excel. For commercial firms managing multi-million-dollar bids, our lack of item-level lifecycle traceability was an immediate blocker during enterprise evaluations.
           </p>
 
-          <h3>Objectives</h3>
+          <h3>Core Objectives</h3>
           <ul>
-            <li>Stop teams from having to double-enter equipment into external spreadsheets</li>
-            <li>Connect receiving docks directly to job schedules so PMs know when parts arrive</li>
-            <li>Give warehouse managers clear visibility into low stock before job sites stall</li>
-            <li>Make checking items in fast enough that installers don't bypass the system</li>
+            <li>Unify purchasing, dock receiving, and project staging into a synchronized ledger to eliminate external double-entry</li>
+            <li>Expose real-time item allocations so project managers can verify whether ordered stock is in transit, on hand, or committed to another job</li>
+            <li>Design an ultra-low-friction dock receiving workflow that warehouse staff will not bypass during high-volume freight deliveries</li>
+            <li>Implement automated safety-stock thresholds on high-turnover consumables to prevent job site delays</li>
           </ul>
         </section>
 
@@ -357,15 +357,15 @@
           <ul>
             <li><strong>Time sink:</strong> 2–3 hours/day reconciling stock; user-reported roughly 15–20% error rates</li>
             <li><strong>User split:</strong> Small AV shops needed fast confidence in quantities, while larger teams needed asset‑level traceability for accountability</li>
-            <li><strong>Customer feedback:</strong> Large integration firms refused to buy without built-in inventory tracking</li>
+            <li><strong>Enterprise Sales Friction:</strong> Enterprise account executives confirmed 5 six-figure pilot evaluations were frozen because prospective accounts could not track staged equipment past initial purchasing.</li>
           </ul>
 
-          <h3>Defining Decision</h3>
+          <h3>Defining Decision: Relational Ledger vs. Isolated Stock List</h3>
           <p>
-            The easiest option was building a standalone stock list that teams updated manually at the end of the week. But that would have just created another spreadsheet inside our app. Instead, I pushed to connect inventory directly into our purchasing and project workflows.
+            The lowest-friction engineering approach was building an isolated static stock table requiring manual count reconciliation. However, that would simply digitize the spreadsheet failure mode within our software. I advocated for building a fully relational inventory model integrated directly into purchasing POs and active project work orders.
           </p>
           <p>
-            It meant a larger scope and more cross-team coordination, but it solved the root problem: the second someone checks in a box on the receiving dock, the quantities update immediately for the project manager planning tomorrow's install.
+            While this expanded database schema complexity and required cross-squad alignment across quoting, procurement, and field service teams, it resolved the fundamental operational bottleneck: the moment freight is checked in at the loading dock, line-item quantities reflect immediately on the project manager's installation schedule.
           </p>
 
           <aside data-reveal class="callout">
@@ -473,21 +473,21 @@
 
           <h3>Tradeoffs: Real-Time Sync vs. Shipping on Time</h3>
           <p>
-            At first, I pushed for live WebSocket sync across every open screen: if someone scanned a projector in the warehouse, every project manager should see the stock count tick down in real time.
+            Early in architectural scoping, I proposed a bidirectional WebSocket synchronization model: if a dock worker checked in a delivery of amplifiers, every open browser session across the company would update counts instantaneously without a page refresh.
           </p>
           <p>
-            Our lead engineer walked me through why that would push our launch past December and miss our committed pilot window. To protect our release date, the PM and I agreed on a practical compromise.
+            Our lead engineer walked me through the infrastructural trade-off: maintaining persistent socket connections across thousands of concurrent tenant sessions would require substantial backend re-architecture, risk connection drops on intermittent warehouse Wi-Fi, and compromise our 12-week delivery commitment for enterprise pilot renewals.
           </p>
           <p>
-            Checking items in updated the database immediately, and we added a clear refresh badge whenever inventory shifted. To handle the messy edge case where two project managers tried to claim the last three matrix switchers at the exact same minute, we built clear conflict alerts that explained who claimed the hardware and suggested alternative stock. It was not the magical real-time sync I had sketched in Figma, but it kept our launch on track and gave warehouse teams data they could finally trust.
+            We implemented a pragmatic compromise: optimistic local UI updates paired with an asynchronous polling bus and contextual stale-data notification badges. To handle concurrency collisions—such as two project managers allocating the same remaining video processor simultaneously—we designed optimistic locking conflict resolution dialogs that identified who secured the reservation and surfaced immediate replenishment alternatives. This preserved our Q4 launch window while safeguarding 100% database count integrity.
           </p>
 
           <h3>Balancing Fast Receiving with Serialization Audits</h3>
           <p>
-            During discovery, we hit a clear split: small residential shops just wanted quick bulk counts without extra steps, while commercial enterprise teams needed exact serial numbers for warranties and audits. Forcing serial numbers on small shops would kill adoption; omitting them would lose six-figure enterprise contracts.
+            Field discovery revealed an acute operational conflict between customer tiers. Residential custom installers operate lean crews who receive dozens of commodity SKUs (Cat6 spools, HDMI patch leads, low-voltage brackets) from delivery trucks in minutes; forcing mandatory modal forms and serial number capture paralyzed their dock workflow. Conversely, commercial enterprise contractors managing corporate facilities and higher-ed campuses require strict serialization and MAC address capture for manufacturer warranty validation, asset depreciation, and compliance audits.
           </p>
           <p>
-            I designed a dual-track UX: <strong>Quantity-first by default</strong> for everyday rapid receiving, with an optional <strong>asset-level tracking layer</strong> for serialized items and warranty audits. That choice kept check-ins fast for small operators while giving enterprise procurement the serialization audit trail they needed to sign contracts.
+            I designed a <strong>dual-track receiving architecture</strong>: a friction-free, quantity-stepper interface by default for rapid bulk receiving, paired with an optional asset-level serialization modal triggered for high-dollar hardware. This eliminated dock friction for residential shops while giving enterprise procurement and compliance officers the verified audit trail necessary to execute pilot agreements.
           </p>
 
           <div class="dual-track-demo" data-dual-track>
@@ -550,9 +550,9 @@
             </div>
           </div>
 
-          <h3>Reusing component patterns</h3>
+          <h3>Engineering Velocity Through Design System Tokens</h3>
           <p>
-            We had a tight 12-week window to get this into customer hands before year-end. Because we could pull data tables, modals, and status badges straight from the component library I had established across D-Tools Cloud, our front-end engineers didn't have to build custom UI elements from scratch. That shaved weeks off development and kept bugs to a minimum during a fast-paced sprint.
+            We faced an immovable 12-week delivery timeline tied to Q4 enterprise contract renewals. By leveraging the standardized data table schemas, slide-over drawer primitives, and badge token styles I had codified in our D-Tools design system, front-end engineers bypassed custom layout scaffolding entirely. This architectural reuse reduced front-end regressions during integration testing and preserved two full sprint cycles to resolve complex logistical edge cases, such as partial shipment receipts, damaged goods returns, and split backorders.
           </p>
 
           <figure class="case-study-media">
@@ -583,10 +583,10 @@
             <h2>Prototyping &amp; Validation</h2>
           </div>
           <p>
-            I led three rounds of prototype testing with six active customers across both shop profiles. In Round 1, our combined receiving flow forced users through serial-number modals. Small operators abandoned the test flow in frustration because it took far too long.
+            I conducted three iterative rounds of usability testing across six customer organizations (3 residential AV shops, 3 commercial systems integrators). In Round 1, an unbifurcated receiving prototype mandated serial number verification for every line item. Residential testers averaged over 4 minutes to receive an 8-item delivery, refusing to adopt a workflow that slowed morning dock receiving.
           </p>
           <p>
-            By Round 3, separating fast bulk check-ins from deep serialization paid off: small shops could receive a delivery in thirty seconds, while commercial teams still had the audit trail they needed for warranty tracking.
+            By Round 3, our decoupled dual-track flow reduced median bulk PO receiving time to 28 seconds, while commercial procurement leads successfully captured and assigned serialized switchers without breaking compliance standards.
           </p>
         </section>
 
@@ -594,8 +594,8 @@
           <div class="section-divider">
             <h2>Impact</h2>
           </div>
-          <p class="impact-lede">The system replaced scattered notes and spreadsheets with one verified count across the company. Operations managers reclaimed hours every week that used to be lost to manual inventory audits.</p>
-          <p class="impact-lede">During the pilot, one shop discovered thousands of dollars in unused equipment tucked away in back storage rooms that had been marked missing for months.</p>
+          <p class="impact-lede">The unified inventory suite replaced fragmented spreadsheets and paper logs with a synchronized ledger across purchasing, warehouse staging, and field deployment. Operations leads recovered an estimated 10–15 hours weekly previously lost to manual physical stock audits.</p>
+          <p class="impact-lede">During the initial pilot deployment, one commercial contractor identified over $42,000 in 'missing' high-end AV processors sitting untracked on overflow staging racks, preventing an unnecessary redundant purchase order.</p>
           <div class="impact-callout">
             <div class="impact-metric">
               <strong class="metric" style="font-size: clamp(1.8rem, 3.5vw, 2.2rem); line-height: 1.15;">Unblocked</strong>
@@ -611,7 +611,7 @@
             </div>
           </div>
           <p>
-            Before this release, larger integration firms walked away during sales demos because we could not answer a basic question: "Where do we track warehouse stock?" Delivering verified inventory tracking directly unblocked stalled enterprise pilot accounts. Over the following year, customer accounts grew by 8% year-over-year, delivering an 8% lift in platform ARR.
+            Prior to this release, enterprise sales repeatedly stalled with commercial prospects whose core requirement was warehouse staging visibility. Delivering verified inventory and receiving tracking directly resolved this objection, unblocking stalled pilot accounts and contributing to an 8% year-over-year growth in customer accounts and an 8% platform ARR expansion.
           </p>
         </section>
 

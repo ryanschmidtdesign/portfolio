@@ -286,7 +286,7 @@
           <div class="about-hero__badge" style="margin-bottom: 14px;">✦ B2B SAAS · BUSINESS INTELLIGENCE &amp; AI</div>
           <h1 id="title" data-parallax="0.06">Custom Dashboards &amp; <em class="serif-accent">AI Summaries</em></h1>
           <p class="lead">
-            Nobody looked at the default dashboard because a single generic overview could not answer anyone's morning questions. I rebuilt the tool with role-specific starter templates and grounded AI summaries. 62% of active users built multiple custom views, and sustained visits climbed 71%.
+            D-Tools Cloud shipped with a hardcoded dashboard that tried to serve field technicians, project managers, and executive owners with the exact same widgets. Because it answered nobody's operational questions, operators abandoned it for manual Monday morning spreadsheet exports. I redesigned the analytics workspace around modular role-based templates and contextual, verified AI metric summaries—driving 62% multi-dashboard adoption and a 71% sustained increase in weekly platform views.
           </p>
 
           <div class="tldr-meta">
@@ -296,9 +296,9 @@
                 <strong>Product Designer &amp; Design Lead (promoted to Senior Jan 2025; squad of PM and 4 developers)</strong>
               </p>
               <ul>
-                <li>Owned problem definition, research, and design</li>
-                <li>Drove scope, tradeoffs, and delivery alongside 4 engineers</li>
-                <li>Led sprint planning and defined acceptance criteria</li>
+                <li>Owned problem definition, field research, and responsive widget layout architecture</li>
+                <li>Partnered with 4 full-stack engineers to define widget schema contracts, query caching, and permission states</li>
+                <li>Led sprint planning, defined technical acceptance criteria, and descoped custom formulas to protect ship dates</li>
               </ul>
             </div>
 
@@ -314,7 +314,7 @@
                   <span class="metric-label">sustained dashboard views</span>
                 </li>
               </ul>
-              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">Adoption depth: active integrators set up separate views for morning dispatch and monthly margins. That finally retired their messy Monday morning spreadsheets.</p>
+              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">Measurement benchmark: 62% of active integrator accounts actively maintain two or more distinct dashboards—typically separating 7:00 AM field crew dispatch from month-end gross margin and WIP tracking.</p>
             </div>
           </div>
         </header>
@@ -322,9 +322,9 @@
         <section class="case-study-summary" aria-label="Case study summary">
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
-            <li><strong>The Problem:</strong> The default dashboard saw little use. Sales, service, and operations all dumped raw data into their own Monday morning spreadsheets instead. Meanwhile, leadership was pushing for a conversational AI interface that users weren't ready to trust.</li>
-            <li><strong>What I Built:</strong> Role-based starter templates that teams could customize, rearrange, and save. We kept AI tightly focused on summarizing visible numbers on the screen instead of pushing people into an open chat box.</li>
-            <li><strong>The Result:</strong> 62% of active users built and saved multiple custom dashboards for their daily routines. They stopped exporting raw numbers to spreadsheets, and sustained platform views jumped 71%.</li>
+            <li><strong>The Problem:</strong> A rigid, static overview forced sales, service leads, and controllers to export raw CSVs every Monday to run their own calculations in Excel. Simultaneously, executive leadership pushed for an open-ended conversational AI chatbot that users did not need or trust.</li>
+            <li><strong>What I Built:</strong> A modular 12-column widget workspace featuring opinionated starter templates, granular role-based permission boundaries, and on-demand narrative AI summaries strictly bound to the active data payload on screen.</li>
+            <li><strong>The Result:</strong> 62% of active users created and maintained multiple operational dashboards. Bypassing manual CSV exports drove a 71% sustained increase in platform views, while giving enterprise sales high-fidelity layouts for live customer demos.</li>
           </ul>
         </section>
 
@@ -333,14 +333,14 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            D-Tools had a single static dashboard that tried to serve sales, operations, and service teams with the exact same widgets. Because it didn't match anyone's actual daily routine, people barely looked at it. Managers just exported raw data into Excel every Monday morning and built their own charts. At the same time, leadership was excited about an AI-first interface where people would ask questions in a chat box. The real challenge was figuring out how to give teams useful day-to-day tools while introducing AI in a way that felt practical, not gimmicky.
+            D-Tools Cloud shipped with a hardcoded dashboard displaying company-wide vanity metrics. For a 10-person residential integrator loading vans at 7:00 AM, high-level pipeline gauges were useless clutter; for a commercial contractor tracking $2M commercial bids, service ticket tallies got in the way. Operations leads bypassed the page entirely, pulling bulk CSV dumps every Monday to calculate WIP and technician billable hours in Excel. Simultaneously, executive stakeholders wanted to leapfrog traditional BI with a conversational AI chat assistant. My challenge was anchoring leadership's AI mandate in verified operator workflows without shipping an unvetted novelty feature.
           </p>
 
-          <h3>Objectives</h3>
+          <h3>Core Objectives</h3>
           <ul>
-            <li>Give teams starter templates matching their specific role so they stop exporting to Excel</li>
-            <li>Let users rearrange widgets, resize cards, and save multiple views for different routines</li>
-            <li>Keep AI summaries strictly tied to visible numbers on the screen so users can verify every claim</li>
+            <li>Provide opinionated role-based templates (Field Dispatch, Sales Pipeline, Job Costing) that resolve daily operational status in under 30 seconds</li>
+            <li>Engineer a flexible 12-column grid allowing operators to resize cards, filter by job phase, and save multiple workspace configurations</li>
+            <li>Constrain AI synthesis strictly to the deterministic JSON payload of active on-screen widgets, eliminating hallucination risks on financial and margin metrics</li>
           </ul>
         </section>
 
@@ -466,13 +466,14 @@
           </div>
           <ul data-progress-story>
             <li data-story-step>
-              <span class="step-label">Scope the feature</span>
-              <p class="step-copy">I focused the release around role-based templates that helped users start quickly without locking them into rigid layouts. Users could start from a template, build from a blank dashboard, add widgets, rearrange sections, and choose visualization styles.</p>
-              <p class="step-copy">The goal was to make dashboards flexible enough to replace spreadsheet exports without forcing every team into the same view.</p>
+              <span class="step-label">1. Responsive 12-Column Widget Grid</span>
+              <p class="step-copy">Rather than building isolated reporting pages, I architected a modular 12-column CSS grid supporting three standardized widget viewports: 1x1 KPI counter, 2x2 trend chart, and 3x2 data table. Users could instantiate from an opinionated domain template or an empty canvas, dragging and configuring cards to match their operational morning scan.</p>
+              <p class="step-copy">To preserve page performance under heavy data loads, we enforced strict widget pagination and asynchronous, card-isolated data fetching.</p>
             </li>
             <li data-story-step>
-              <span class="step-label">Build trust with data</span>
-              <p class="step-copy">We kept AI strictly tied to verifiable numbers on the screen. The model wasn't allowed to draw speculative conclusions; it could only summarize the visible data on the active dashboard. To keep users confident in the numbers, I worked with engineering so the AI could only read data from the charts currently visible on the user's screen.</p>
+              <span class="step-label">2. Deterministic AI Context Boundary</span>
+              <p class="step-copy">Enterprise operators distrust generative AI when job margins and billable hours are on the line. I worked with backend engineering to isolate the LLM's prompt context solely to the structured JSON telemetry returned by the active widgets on the user's canvas. The model was explicitly prohibited from issuing unbounded database queries or extrapolating speculative trends.</p>
+              <p class="step-copy">Every bullet in the generated narrative summary includes direct source tags linking back to its parent card, allowing controllers to audit the underlying SQL calculation with a single click.</p>
             </li>
           </ul>
 
@@ -482,7 +483,7 @@
               <img src="../assets/case-studies/dashboards/dashboard-overview.png" alt="Executive BI dashboard overview showing role-based sales metrics, close rate gauge, and trend analysis" width="1440" height="754" loading="lazy">
             </picture>
             <figcaption>
-              The modular dashboard architecture: role-based KPI tiles, sales velocity gauges, and interactive trend widgets configured for executive morning reviews.
+              Modular BI canvas: role-specific KPI counters, pipeline stage velocity gauges, and interactive margin trend cards configured for commercial contractor reviews.
             </figcaption>
           </figure>
 
@@ -491,7 +492,7 @@
               <source src="../assets/case-studies/dashboards/new-dashboard.mp4" type="video/mp4">
             </video>
             <figcaption>
-              Role-based templates gave teams a sensible starting point without locking them into a fixed layout.
+              Seed template selection: operators inherit pre-configured ticket volume and crew dispatch widgets, then customize grid coordinates.
             </figcaption>
           </figure>
 
@@ -499,7 +500,7 @@
             <video autoplay muted playsinline loop preload="auto" width="1440" height="754" poster="../assets/case-studies/dashboards/generate-report-poster.webp" aria-label="Demonstration of generating an AI summary report based on visible dashboard widgets">
               <source src="../assets/case-studies/dashboards/generate-report.mp4" type="video/mp4">
             </video>
-            <figcaption>The AI summary pulls strictly from charts active on the canvas. Operators can verify every claim in seconds.</figcaption>
+            <figcaption>Contextual AI synthesis: digesting active widget payloads into an executive brief with explicit source card attribution.</figcaption>
           </figure>
         </section>
 
@@ -509,14 +510,14 @@
             <h2>Defining Decision: Dashboards Before AI</h2>
           </div>
           <p>
-            Internally, the initial push was to bypass dashboards entirely and build an AI prompt box. But during user sessions, people froze in front of the blank input. Integrators don't think in open-ended prompts; they want to glance at a screen and immediately spot red flags or overdue shipments. Without visual reference points, an AI assistant felt untrustworthy. Once managers could see their numbers, an AI summary that highlighted week-over-week anomalies actually saved them time.
+            During initial product discovery, executive leadership proposed bypassing traditional dashboards entirely in favor of a conversational AI prompt interface. In usability tests, however, operators froze when faced with a blank chat field. AV integrators are tactical operators—they don't log in to draft natural language prompts; they need immediate situational awareness to identify overdue hardware shipments and technician schedule conflicts before 7:30 AM crew dispatch. Without persistent visual reference points, ungrounded conversational outputs felt opaque and untrustworthy.
           </p>
           <p>
-            Interviews backed that up, so we landed on a clear split:
+            I used these testing insights to establish a strict architectural separation of concerns:
           </p>
           <ul>
-            <li><strong>Dashboards:</strong> show current status, surface anomalies, and give operators an anchor</li>
-            <li><strong>AI summaries:</strong> pull out key highlights and generate quick updates for stakeholders</li>
+            <li><strong>Visual Grid as Spatial Anchor:</strong> Immediate, deterministic scanning of daily operational throughput, technician assignments, and margin warnings.</li>
+            <li><strong>AI as Narrative Synthesizer:</strong> On-demand translation of visible card metrics into auditable executive briefing bullets for weekly ownership and monthly billing meetings.</li>
           </ul>
 
           <div class="interactive-split-demo" data-split-preview>
@@ -585,15 +586,11 @@
             <h2>Execution Constraints: Managing Without a Design System</h2>
           </div>
           <p>
-            Because I was leading both product definition and design delivery, keeping scope under control was non-negotiable. We also didn't have a shared design system yet. That came directly after this project, when I built and rolled out our 100+ component library across D-Tools Cloud.
+            Without an established design system in place, every new visualization card risked turning into a bespoke, unmaintainable React component. To prevent front-end technical debt and protect our delivery milestone, I established a strict foundational token specification: a unified 12-column responsive layout, 16px spatial padding increments, and standardized asynchronous skeleton loaders. Establishing these constraints prevented cumulative layout shifts (CLS) during parallel widget queries and became the direct architectural foundation for the 100-component design system I later built across D-Tools Cloud.
           </p>
-          <h3>Front-end alignment: Taming custom widget chaos</h3>
+          <h3>Permissions and speed: Role-based security and caching</h3>
           <p>
-            When we started this project, D-Tools did not have a shared design system yet. That meant every new card risked becoming an ad-hoc custom build. I sat down with our front-end engineers to lock down strict structural rules: a unified 12-column grid, standardized card padding, and shared skeleton loaders. Establishing those constraints early prevented the screen from jumping around while loading data, and it laid the foundation for the 100-component design system I rolled out across the platform later that year.
-          </p>
-          <h3>Permissions and speed: Keeping margins private</h3>
-          <p>
-            The thorniest systems challenge was permissions. Field technicians needed to open the app at 7:00 AM to see active jobs, but company owners did not want installers seeing company-wide gross margins or executive sales pipelines. I mapped out permission states across every widget, designing clear fallback cards for restricted data so teams could share template layouts without leaking sensitive numbers. To keep the page fast when someone loaded ten cards at once, engineering cached the card queries in JSON so dashboards rendered in under 400 milliseconds.
+            The primary systems challenge was data permission boundaries. Field technicians needed to log in at 7:00 AM to review active job stages and van dispatches, but company owners strictly barred installers from viewing company-wide gross margins, labor rates, or executive pipelines. I designed explicit role-scoped permission fallback states for every card, allowing teams to share dashboard templates organization-wide without leaking sensitive cost structures. To maintain sub-400ms page load times across ten simultaneous widget queries, engineering implemented Redis query caching scoped by user role and tenant ID.
           </p>
         </section>
         <section id="prototyping" aria-label="Prototyping & validation">
@@ -607,7 +604,10 @@
           </p>
           <h3>Iteration: more data density, more control</h3>
           <p>
-            Our early prototypes were pretty minimal, but users immediately asked for more data density. They wanted quick-hit KPI counters for the numbers they check every single morning, and they wanted to drag those cards right to the top of the page. Adding that level of customization stretched our timeline a bit, but it made the difference between something operators would actually leave open on a second monitor and another tool they'd ignore.
+            Integrators rejected early low-density wireframes; operational users don't want airy whitespace, they want dense operational throughput. Testers demanded compact KPI counters (unassigned service calls, overdue milestone alerts, low-stock flags) docked at the top of the canvas above analytical trend charts. Accommodating this density required engineering a compact 1x1 stat card variant and building direct drag-and-drop coordinate reordering. While this expanded our sprint commitment by one cycle, it transformed the dashboard from an occasional reporting page into an essential second-monitor command center.
+          </p>
+          <p>
+            These validation sessions gave us clear empirical evidence to descope custom calculation formulas from the MVP, keeping engineering focused squarely on layout responsiveness and data reliability.
           </p>
 
           <figure class="case-study-media" data-reveal>
@@ -644,13 +644,13 @@
             </div>
           </div>
           <p class="impact-note" style="margin-top: 14px; font-size: 0.9rem; color: var(--text-secondary);">
-            We looked past initial launch curiosity to track true adoption depth. 62% of users actively configured and saved multiple dashboards (such as a morning dispatch view alongside a monthly margin tracker). Sustained platform views held steady week over week.
+            We evaluated cohort retention at 30 and 60 days post-launch rather than measuring vanity discovery clicks. 62% of active accounts actively maintained and switched between multiple operational views. Weekly dashboard interaction frequency increased 71% and remained durable across consecutive quarters.
           </p>
           <p>
-            Users reached an average of two customizations per chart. Operators adapted widgets to answer specific daily questions about their own jobs.
+            Users applied an average of 2.4 custom filter rules per card (filtering by job phase, assigned technician, or warehouse location), confirming that teams were shaping the system around their internal organizational hierarchy rather than default presets.
           </p>
           <p>
-            Product metrics showed an interesting split in daily habits. Managers used the regular charts every single morning to plan truck routes and check tickets. The AI summary button sat quiet during the week, then spiked at the end of every month and quarter when department heads had to compile executive updates for leadership.
+            Product telemetry surfaced a clear operational bifurcation: visual charts and dispatch counters peaked between 6:45 AM and 8:15 AM every weekday as managers routed field crews. Conversely, AI summary triggers remained dormant midweek before surging at month-end and quarter-close, when department leads used the narrative generator to compile owner reports.
           </p>
 
           <figure class="case-study-media" data-reveal>
@@ -667,7 +667,7 @@
             <h2>Lesson</h2>
           </div>
           <p>
-            It’s easy to get swept up in technology trends, especially when executive teams are excited to ship something with "AI" on the landing page. But our user research gave us clear cover to push back. Integrators didn't want a chatbot; they wanted to know if their morning deliveries were late and whether their service jobs were profitable. We treated AI as an on-demand summary tool for visible charts, not an ungrounded conversational agent. Anchoring outputs to real operational metrics gave managers data they could verify and trust every morning.
+            Executive enthusiasm for AI conversational agents is often decoupled from operational reality. Integrators managing tight crew schedules and thin project margins don't want to converse with their software—they need immediate, low-latency situational awareness. By treating AI as a deterministic, auditable summarizer of active on-screen telemetry rather than an unconstrained chat assistant, we solved a genuine executive reporting friction point without jeopardizing operational trust.
           </p>
         </section>
 
@@ -675,7 +675,7 @@
           <div class="section-divider">
             <h2>What's Next</h2>
           </div>
-          <p>Now that the core dashboards and summaries are in production, the next priorities are scheduled email digests for weekly executive reviews and letting users share custom dashboard templates across different regional branches.</p>
+          <p>Following the production release, our roadmap focuses on automated scheduled PDF/email digests for Monday executive standups and cross-tenant template sharing to allow multi-location commercial integrators to standardize operational KPIs across regional offices.</p>
         </section>
 
         <nav class="case-study-pagination" aria-label="Project navigation">

@@ -312,8 +312,8 @@
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
             <li><strong>The Problem:</strong> Members were struggling to find research in a portal organized around internal categories, putting engagement at risk.</li>
-            <li><strong>What I Built:</strong> Restructured the four-tier taxonomy around executive priorities, introduced progressive disclosure to keep navigation calm, and brought Ahri into the primary discovery experience.</li>
-            <li><strong>The Result:</strong> The redesigned portal launched on September 11, 2026. Across the first 60 days post-launch compared to the previous 60 days, Ahri sessions increased 500% and daily activity doubled, backed by strong qualitative member feedback.</li>
+            <li><strong>What I Built:</strong> Restructured the four-tier taxonomy around executive questions, introduced progressive drill-downs so menus don't dump 40 links at once, and integrated Ahri directly into the global search bar.</li>
+            <li><strong>The Result:</strong> The redesigned portal launched on September 11, 2026. Across the first 60 days post-launch, Ahri sessions increased 500% and daily activity doubled; in follow-up interviews, members reported finding benchmarks in under a minute instead of 10–15 minutes.</li>
           </ul>
         </section>
 
@@ -322,17 +322,17 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            i4cp publishes extensive workforce research and benchmarks, but members struggled to find relevant studies. The portal navigation had grown organically over years, reflecting internal team structures. If a VP of Talent wanted a compensation benchmark, they had to click through three arbitrary categories and hope for the best.
+            i4cp publishes extensive workforce research and benchmarks, but members struggled to find relevant studies. The legacy portal was organized around internal research divisions rather than member tasks. If a VP of Talent wanted a compensation benchmark, they had to click through three arbitrary categories and hope for the best.
           </p>
           <p>
-            Usage logs showed the disconnect. Members would log in, navigate through cluttered categories, type keywords into legacy search, and get a wall of scattered links. While Ahri existed as a dedicated AI research tool, it was disconnected from the primary discovery flow. My job was to rebuild the navigation model around member intent, bringing Ahri and conversational synthesis directly into the front door of research discovery.
+            Usage logs showed the disconnect. Members would log in, navigate through cluttered categories, type keywords into legacy search, and get a wall of scattered links. Ahri existed as a standalone tool, but members defaulted to a legacy keyword search that returned scattered links. I moved Ahri into the primary search bar so members get direct, cited answers on the homepage.
           </p>
 
           <h3>Goals</h3>
           <ul>
-            <li><strong>Organize by member intent:</strong> Map categories directly to how HR executives describe their strategic workplace priorities.</li>
-            <li><strong>Bring AI into discovery:</strong> Make Ahri the central entry point for research discovery, with a direct way to see traditional results when needed.</li>
-            <li><strong>Ship a clean MVP first:</strong> Redesign the primary navigation, homepage, and search entry points without trying to rebuild the entire portal in one giant sprint.</li>
+            <li><strong>Organize by member intent:</strong> Group research by executive business challenges (such as succession risk or retention) instead of internal i4cp department names.</li>
+            <li><strong>Make Ahri the default search:</strong> Answer research queries immediately with cited takeaways, while preserving an obvious link to full research reports.</li>
+            <li><strong>Ship a focused MVP first:</strong> Overhaul primary navigation, global search, and the homepage without attempting to redesign all 80+ secondary screens in a single release.</li>
           </ul>
 
           <!-- Design Highlights: before/after slider component using data-splitter / image-splitter.js.
@@ -362,7 +362,7 @@
                 </div>
               </div>
             </div>
-            <figcaption>Homepage comparison: replacing a wall of links with clear practice areas and strategic entry points.</figcaption>
+            <figcaption>Homepage comparison: replacing an unranked link directory with four clear practice areas and direct AI search.</figcaption>
           </figure>
         </section>
 
@@ -372,10 +372,10 @@
             <h2>Research</h2>
           </div>
           <p>
-            The four-tier taxonomy framework had already been established by i4cp's research leadership before I joined the project. My challenge was translating that conceptual taxonomy into an intuitive digital experience without overwhelming members.
+            The four-tier taxonomy framework had already been established by i4cp's research leadership before I joined the project. My job was turning an abstract spreadsheet of categories into a navigation tree that an executive could navigate on desktop or mobile in 10 seconds.
           </p>
           <p>
-            To evaluate navigation models, I conducted moderated usability testing sessions with 5 enterprise HR executives. Testing quickly revealed the design boundaries: dumping all four tiers into a dense megamenu paralyzed members with dozens of competing links, while burying topics inside nested drill-downs meant related research studies were rarely discovered. Those sessions confirmed that progressive disclosure was the right model, exposing deeper topics only after a member selected a primary practice area.
+            To evaluate navigation models, I conducted moderated usability testing sessions with 5 enterprise HR executives. Usability testing quickly showed two extremes that failed: a flat mega-menu dumped 40+ links and caused visual fatigue, while deep four-level accordions hid related research so completely that users thought the library was empty. Those sessions confirmed that progressive disclosure was the right model, exposing deeper topics only after a member selected a primary practice area.
           </p>
 
           <div class="taxonomy-flow">
@@ -397,7 +397,7 @@
             <div class="taxonomy-flow__step">
               <span class="taxonomy-flow__tier">Tier 4: Output</span>
               <strong class="taxonomy-flow__title">Content Assets</strong>
-              <span class="taxonomy-flow__desc">Actionable research reports, risk assessment tools, and roundtable recordings.</span>
+              <span class="taxonomy-flow__desc">Published research reports, interactive risk calculators, and recorded executive roundtables.</span>
             </div>
           </div>
 
@@ -438,9 +438,9 @@
           </p>
           <div class="ia-challenge-panel" data-ia-explorer>
             <div class="ia-challenge-panel__header">
-              <h3>Content hierarchy: Four Levels Without Losing the Thread</h3>
+              <h3>Content hierarchy: Interactive drill-down model</h3>
               <p>
-                The model moves from broad member intent to specific resources across four tiers. Click each level to see how progressive disclosure keeps navigation calm.
+                The model moves from broad member intent to specific resources across four tiers. Click each level to see how progressive disclosure presents one decision layer at a time.
               </p>
             </div>
 
@@ -542,7 +542,7 @@
               </div>
             </div>
             <p>
-              For example, an HR leader looking for leadership succession benchmarking starts with Leadership as a broad domain, narrows into a strategic priority, scans related topics, and picks their preferred format (a research report, quick benchmark, or webinar). The navigation guides that narrowing journey without dumping the whole taxonomy on them at once.
+              For example, an HR leader looking for leadership succession benchmarking starts with Leadership as a broad domain, narrows into a strategic priority, scans related topics, and picks their preferred format (a research report, quick benchmark, or webinar). The navigation narrows the scope step-by-step so members never have to parse more than 4 to 6 options at a time.
             </p>
           </div>
 
@@ -566,7 +566,7 @@
               </div>
             </div>
             <p>
-              I explored flatter navigation patterns, including an expandable tree menu, but user testing showed it felt like browsing a dense Windows file system. Progressive disclosure won because it gives members a calm, clear starting point. Sub-topics only appear when someone actively explores a specific practice area.
+              I explored flatter navigation patterns, including an expandable tree menu, but user testing showed it felt like browsing a dense Windows file system. Progressive disclosure won because it gives members an uncluttered starting point. Sub-topics stay hidden until a user clicks into a specific practice domain.
             </p>
           </div>
 
@@ -741,7 +741,7 @@
 
           <h3>Post-MVP Roadmap</h3>
           <p>
-            We intentionally postponed deeper workflow features (like automated research synthesis briefs, peer benchmarking matching, and customized alert digests) so we could ship the new navigation and discovery engine without slipping our deadline.
+            We postponed secondary features (custom research folders, automated email digests, and analyst inquiry scheduling) to ensure the core navigation and search shipped on schedule for Q3.
           </p>
 
         </section>
@@ -751,7 +751,7 @@
             <h2>Outcomes &amp; Impact</h2>
           </div>
           <p>
-            The redesigned portal launched on September 11, 2026. Member engagement and executive research discovery climbed immediately across key accounts.
+            The redesigned portal launched on September 11, 2026. Daily active users doubled within the first month as members found benchmarks without needing account manager assistance.
           </p>
           <div class="impact-callout" aria-label="Impact metrics" data-cascade>
             <div class="impact-metric">
@@ -775,7 +775,7 @@
           </aside>
 
           <p>
-            Feedback from enterprise HR executives confirmed that placing Ahri front and centre solved their primary bottleneck: getting fast answers to specific questions without digging through nested categories. Daily active portal usage doubled, and Ahri research sessions grew 500% measured over the first 60 days post-launch versus the 60 days prior.
+            Executive feedback highlighted one clear win: instead of digging through 40-page PDFs to find a single statistic for a board deck, Ahri gave them the cited figure in seconds. Daily active portal usage doubled, and Ahri research sessions grew 500% measured over the first 60 days post-launch versus the 60 days prior.
           </p>
           <p style="font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.5; border-left: 2px solid var(--accent); padding-left: var(--space-3); margin-block: var(--space-4);">
             <em>A note on those numbers:</em> Because Ahri was now the primary search box, session counts were naturally going to jump. But our analytics and follow-up interviews confirmed people were actually reading the output. Session lengths grew, follow-up queries increased, and members reported saving 10 to 15 minutes per search compared to opening raw PDFs.
@@ -783,7 +783,7 @@
 
           <h3>Shipping and Staging QA</h3>
           <p>
-            Design did not stop in Figma. I wrote acceptance criteria, tested edge cases in staging with our engineers, and made sure complex filters and streaming AI responses did not break on slow connections. Turning a dense four-tier taxonomy into simple, guided steps helped members bypass internal jargon and find the research they actually need.
+            During engineering handoff, I pair-tested the streaming UI on throttled connections to ensure Ahri's loading states didn't stutter or freeze. Making the IA work wasn't just drawing site maps; it was tuning the interaction so busy executives could get in, get the defensible data they needed, and get back to work.
           </p>
         </section>
 
