@@ -1,39 +1,7 @@
+/* Meta / eyebrow labels */
 .case-study .tldr-label {
   padding: 0;
   padding-bottom: var(--space-2);
-}
-
-/* -------------------------------------------------------
-   Headings / labels
-   --------------------------------------------------------*/
-.section-title {
-  font-size: clamp(var(--fs-xl), 4vw, var(--fs-2xl));
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-tighter);
-  line-height: var(--lh-2xl);
-  margin-bottom: var(--space-6);
-  color: var(--text);
-  text-wrap: balance;
-}
-
-.leadership-section .section-title,
-.builder-section .section-title,
-.about-section .section-title {
-  color: var(--text);
-}
-
-.label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  line-height: var(--lh-2xs);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-caps);
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-
-/* Meta / eyebrow labels */
-.case-study .tldr-label {
   font-size: var(--fs-xs);
   line-height: var(--lh-2xs);
   font-weight: var(--weight-semibold);
@@ -215,18 +183,7 @@
   }
 }
 
-/* -------------------------------------------------------
-   Case study – base
-   --------------------------------------------------------*/
-
-/* Mobile: prevent “too big” body type + keep margins efficient */
-@media (max-width: 768px) {
-  .case-study {
-    --fs-body: 1rem;      /* 16px */
-    --fs-md: 1.125rem;   /* 18px */
-  }
-}
-
+/* Case study – base */
 .case-study {
   --prose: 720px;
   --prose-tight: 660px;
@@ -239,15 +196,6 @@
   background: transparent;
   border: none;
   box-shadow: none;
-}
-
-/* Alternating section bands removed for premium editorial whitespace */
-.case-study .section--alt {
-  position: relative;
-}
-
-.case-study .section--alt::before {
-  display: none;
 }
 
 /* Borders (outline tone) */
@@ -318,32 +266,6 @@
   margin: 0;
   font-size: var(--fs-body);
   line-height: var(--lh-prose-loose);
-}
-
-.case-study pre {
-  margin: var(--space-6) 0;
-  padding: var(--space-5);
-  background: var(--surface-code);
-  border: none;
-  border-radius: 0;
-  box-shadow: var(--shadow-card);
-  overflow-x: auto;
-  max-width: var(--prose);
-}
-
-.callout pre {
-  background: var(--surface-code, #EAE0D5);
-  box-shadow: none;
-  margin-block: var(--space-3);
-}
-
-.case-study pre code {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  font-size: var(--fs-sm);
-  line-height: var(--lh-md);
-  color: var(--text);
 }
 
 /* Tables (for comparisons, rollout plans, metrics) */
@@ -529,62 +451,6 @@
 .case-study .callout>*:last-child,
 .case-study aside>*:last-child {
   margin-bottom: 0;
-}
-
-/* -------------------------------------------------------
-   Case Study Summary Box
-   --------------------------------------------------------*/
-.case-study-summary {
-  margin-bottom: var(--space-6);
-  margin-top: 0;
-  max-width: var(--prose);
-  margin-inline: auto;
-  padding: 24px 28px;
-  background: var(--surface-elevated, #FAF7F2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
-  color: var(--text);
-}
-
-.case-study .case-study-summary .case-study-summary__label {
-  margin-top: 0;
-  margin-bottom: var(--space-3);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--accent-text);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.case-study .case-study-summary__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.case-study .case-study-summary__list li {
-  position: relative;
-  padding-left: 0;
-  margin-bottom: 0;
-  color: inherit;
-}
-
-.case-study .case-study-summary__list li::before {
-  content: "→";
-  color: var(--accent-text);
-  font-weight: var(--weight-semibold);
-  margin-right: var(--space-3);
-}
-
-@media (max-width: 768px) {
-  .case-study-summary {
-    padding: var(--space-4);
-  }
 }
 
 .callout--accent {
@@ -1796,52 +1662,6 @@ figure.case-study-media[data-reveal].is-revealed {
   background-color: var(--green);
 }
 
-/* ============================================================================
-   Removed: data-spotlight (no longer wired to HTML)
-   ============================================================================ */
-
-/* Removed: site copy widgets. Copy actions remain only inside the AI chat assistant. */
-
-[data-section-summary] {
-  margin-top: var(--space-5);
-  display: inline;
-  padding: 0;
-  border: none;
-  background: transparent;
-  font-family: inherit;
-  font-size: var(--fs-sm);
-  font-weight: var(--weight-regular);
-  color: var(--text);
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-  margin-bottom: var(--space-4);
-  cursor: pointer;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height var(--dur-3) ease, opacity var(--dur-3) ease;
-}
-
-[data-section-summary].is-open {
-  max-height: 12rem;
-  opacity: 1;
-}
-
-/* ============================================================================
-   Feature 12: Live Design Token Playground (Phase 2)
-   ============================================================================ */
-
-
-/* -------------------------------------------------------
-   Dashboard case study layout
-   --------------------------------------------------------*/
-
-
-/* ============================================================================
-   Interaction Enhancements (Progress, Reveals, 3D, Parallax)
-   ============================================================================ */
-
-
 /* Chat widget highlight class */
 .rs-chat-highlight {
   box-shadow: 0 0 0 6px var(--accent-soft);
@@ -1857,12 +1677,6 @@ figure.case-study-media[data-reveal].is-revealed {
 
 .what-i-got-wrong-card {
   background: linear-gradient(135deg, var(--red-soft), var(--surface-elevated) 62%);
-}
-
-[aria-label="Design approach & decisions"] [data-story-step]::before,
-[aria-label="Discovery & problem framing"] [data-story-step]::before {
-  content: none;
-  display: none;
 }
 
 /* Viewport optimization component overrides */
@@ -2114,9 +1928,6 @@ figure.case-study-media[data-reveal].is-revealed {
   font-size: var(--fs-sm);
   transition: all 0.2s ease;
   cursor: pointer;
-}
-
-.btn-primary {
   background: var(--accent, #C85A32);
   color: #FFFFFF;
   border: 1px solid transparent;
@@ -2466,10 +2277,6 @@ figure.case-study-media[data-reveal].is-revealed {
     0 16px 38px -10px rgba(24, 18, 14, 0.42),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
   overflow: hidden;
-}
-
-.mini-ai-card::after {
-  display: none;
 }
 
 .mini-ai-head {
@@ -3440,63 +3247,4 @@ figure.case-study-media[data-reveal].is-revealed {
 
 .synthesis-matrix__table tr:last-child td {
   border-bottom: none;
-}
-
-.synthesis-matrix__footer {
-  margin-top: var(--space-3);
-  font-size: var(--fs-2xs);
-  color: var(--text-secondary);
-  line-height: 1.45;
-}
-
-.taxonomy-flow {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-3);
-  margin-block: var(--space-5);
-  background: var(--card-bg-strong, #FAF7F2);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: clamp(1rem, 2.5vw, 1.5rem);
-  box-shadow: var(--shadow-1);
-}
-
-.taxonomy-flow__step {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  position: relative;
-  padding: var(--space-3);
-  border-radius: var(--radius-sm);
-  background: var(--surface-1);
-  border: 1px solid var(--border-subtle);
-}
-
-.taxonomy-flow__tier {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-}
-
-.taxonomy-flow__title {
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.25;
-}
-
-.taxonomy-flow__desc {
-  font-size: var(--fs-xs);
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
-@media (max-width: 768px) {
-  .taxonomy-flow {
-    grid-template-columns: 1fr;
-    gap: var(--space-3);
-  }
 }

@@ -5,7 +5,6 @@ body:not(.is-home) {
 
 .site-main {
   padding-top: clamp(84px, 12vh, 108px);
-  padding-bottom: 64px;
   scroll-snap-type: none;
 }
 
@@ -266,13 +265,7 @@ body:not(.is-home) .site-main {
   padding-inline: var(--page-gutter);
 }
 
-/* Homepage-specific container padding: increase left padding by 25% */
-.is-home .container {
-  padding: 0 clamp(0.9375rem, 5vw, 1.25rem);
-}
-
 /* Scroll anchors */
-.hero,
 .leadership-section,
 .builder-section,
 .about-section {
@@ -285,7 +278,6 @@ body:not(.is-home) .site-main {
   transition: transform 80ms linear;
 }
 
-
 /* Consistent section padding
    (fix: avoid double horizontal padding; containers handle inline padding) */
 .leadership-section,
@@ -295,25 +287,7 @@ body:not(.is-home) .site-main {
   padding-inline: 0;
 }
 
-
-
-/* Research/process blocks should glow cool, not blue */
-
-.hero {
-  position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 0;
-  overflow: hidden;
-  color: var(--text);
-}
-
-
-
-/* Optimizations for ultra-wide 1920px+ viewports */
-
 @media (max-width: 768px) {
-
   .leadership-section,
   .builder-section,
   .about-section {
@@ -332,7 +306,6 @@ body:not(.is-home) .site-main {
 
 /* 1920px+ ULTRA-WIDE OPTIMIZATION */
 @media (min-width: 1920px) {
-
   .case-study figure img {
     max-width: 100%;
     height: auto;
@@ -354,10 +327,6 @@ body:not(.is-home) .site-main {
 
 /* Mobile layout adjustments */
 @media (max-width: 768px) {
-  .site-main {
-    padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
-  }
-
   .site-main > section:last-of-type,
   .leadership-section:last-of-type,
   .builder-section:last-of-type,

@@ -83,7 +83,7 @@ html {
 /* Fallbacks for experimental `text-wrap` usages: ensure sensible wrapping in
    browsers that don't support `text-wrap: balance|pretty`. This keeps layout
    stable and prevents overflow/poor wrapping on headings and long paragraphs. */
-:where(p, h1, h2, h3, h4, .section-title, .leadership-lede, .about-text, .metric-body, .timeline-content) {
+:where(p, h1, h2, h3, .section-title, .leadership-lede, .about-text, .metric-body, .timeline-content) {
   overflow-wrap: anywhere;
 }
 
@@ -134,7 +134,7 @@ body.is-home {
   min-height: 100dvh;
 }
 
-:where(h1, h2, h3, h4, h5, h6) {
+:where(h1, h2, h3) {
   color: var(--text);
   font-kerning: normal;
   font-weight: var(--weight-semibold);
@@ -156,18 +156,6 @@ h2 {
 
 h3 {
   font-size: var(--fs-lg);
-}
-
-h4 {
-  font-size: var(--fs-md);
-}
-
-h5 {
-  font-size: var(--fs-body);
-}
-
-h6 {
-  font-size: var(--fs-sm);
 }
 
 strong,
@@ -211,38 +199,23 @@ a:hover {
 }
 
 a,
-button,
-[role="menuitem"] {
+button {
   touch-action: manipulation;
 }
 
 button:not(:disabled):active,
-[role="button"]:not([aria-disabled="true"]):active,
-.btn:active {
+[role="button"]:not([aria-disabled="true"]):active {
   transform: scale(0.98);
 }
 
 button,
-input,
-select,
-textarea {
+input {
   font-family: inherit;
 }
 
-code,
-pre code {
+code {
   font-variant-ligatures: none;
   font-feature-settings: "liga" 0, "calt" 0;
-}
-
-/* Focus styles */
-:where(a, button, [role="button"], .btn):focus-visible {
-  outline: var(--focus-outline);
-  outline-offset: var(--focus-outline-offset);
-  box-shadow: var(--focus-ring);
-}
-
-code {
   font-family: var(--font-mono);
   font-size: 0.88em;
   padding: 0.15em 0.4em;
@@ -252,11 +225,12 @@ code {
   color: var(--text);
 }
 
-/* Duplicate selection rule removed (kept the global one near top). */
-
-/* -------------------------------------------------------
-   Premium hover glow (desktop only, subtle)
-   --------------------------------------------------------*/
+/* Focus styles */
+:where(a, button, [role="button"]):focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+  box-shadow: var(--focus-ring);
+}
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -291,7 +265,7 @@ code {
   .site-header,
   .site-footer,
   .ai-mini-wrapper,
-  .rs-chat-widget,
+  #rs-chat-root,
   .image-splitter .splitter-handle,
   button,
   video {
@@ -340,7 +314,7 @@ code {
     border: 1px solid #ddd;
   }
 
-  pre, code {
+  code {
     font-family: var(--font-mono);
     font-size: 10pt;
     background: #f5f5f5 !important;

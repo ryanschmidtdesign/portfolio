@@ -22,8 +22,6 @@
   --space-9: 7.6rem;      /* 121px */
 
   /* Fluid section padding: use instead of bespoke clamps */
-  --space-section-sm: clamp(2.5rem, 5vw, 4rem);
-  /* 40 -> 64px: compact sections */
   --space-section-md: clamp(4rem, 7vw, 6rem);
   /* 64 -> 96px: default */
   --space-section-lg: clamp(5rem, 10vw, 8rem);
@@ -39,7 +37,6 @@
     Consolas, monospace;
 
   /* ─── Type scale (Strict Major Third: 1.250 ratio, Base 17px) ───────── */
-  --fs-3xs: 0.544rem;    /* 8.704px - Micro labels / eyebrows (Strict 1.250 Major Third) */
   --fs-2xs: 0.68rem;     /* 10.88px - Micro labels */
   --fs-xs: 0.85rem;      /* 13.6px - Utility */
   --fs-control: 0.9375rem; /* 15px - Apple-style control text (intentional deviation) */
@@ -50,15 +47,11 @@
   --fs-xl: 2.075rem;     /* 33.2px */
   --fs-2xl: 2.593rem;    /* 41.5px */
   --fs-3xl: 3.242rem;    /* 51.87px */
-  --fs-4xl: 4.05rem;     /* 64.8px */
 
   /* Fluid display tier: pushing the extremes */
   --fs-display-sm: clamp(2.075rem, 1.5rem + 2vw, 3.242rem);
-  --fs-display-md: clamp(2.593rem, 2rem + 3vw, 4.05rem);
-  --fs-display-lg: clamp(3.242rem, 2.5rem + 5vw, 6.5rem);
 
   /* ─── Line height (per-role, not universal) ─────────────────────────── */
-  --lh-3xs: 1.35;
   --lh-2xs: 1.4;
   --lh-xs: 1.45;
   --lh-body: 1.55;
@@ -72,7 +65,6 @@
   --lh-prose: 1.7;
   --lh-tight: 1.15;
   --lh-snug: 1.35;
-  --lh-relaxed: 1.8;
   --lh-prose-loose: 1.75;
 
   /* ─── Tracking (body + display ramp) ────────────────────────────────── */
@@ -82,13 +74,11 @@
   --tracking-snug: -0.005em;
   --tracking-normal: 0;
   --tracking-loose: 0.01em;
-  --tracking-looser: 0.025em;
 
   /* Caps tracking: expanded for extreme high-tech aesthetic */
   --tracking-caps-tight: 0.06em;
   --tracking-caps: 0.1em;
   --tracking-caps-wide: 0.15em;
-  --tracking-caps-extreme: 0.22em;
 
   /* ─── Font weight ramp ──────────────────────────────────────────────── */
   --weight-light: 300;
@@ -98,11 +88,7 @@
   --weight-bold: 700;
 
   /* ─── Application tokens (intent-based: keep) ──────────────────────── */
-  --type-overline: var(--fs-xs);
-  --type-label: var(--fs-xs);
   --type-body: var(--fs-body);
-  --type-heading-3: var(--fs-lg);
-  --type-heading-4: var(--fs-md);
   --type-caption: var(--fs-sm);
 
   /* Radii (Engineered Hardware Knife-Edge & Architectural Chamfer) */
@@ -110,7 +96,6 @@
   --radius-sm: 3px;
   --radius-md: 4px;
   --radius-lg: 4px;
-  --radius-xl: 6px;
   --radius-pill: 999px;
 
   --focus-outline-offset: 3px;
@@ -119,23 +104,17 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-spring-snappy: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-hud-sweep: cubic-bezier(0.19, 1, 0.22, 1);
   --dur-1: 120ms;
   --dur-2: 180ms;
   --dur-3: 300ms;
   --dur-4: 450ms;
-  --transition-base: var(--dur-2) var(--ease-out);
   --transition-fast: var(--dur-1) var(--ease-out);
-  --transition-spring: 260ms var(--ease-spring-snappy);
   --blur-md: blur(12px);
 
   /* === The Daytime Desert Canvas & Obsidian Hotel System === */
   --bg-sandstone-day: #F2EBE3;
   --bg-sandstone-deep: #EAE0D5;
-  --gray-100: #F2EBE3;
   --gray-200: #EAE0D5;
-  --gray-300: #DDD1C4;
   --bg: #F2EBE3;
 
   /* Surface levels */
@@ -157,10 +136,6 @@
   --obsidian-glass-heavy: rgba(16, 13, 11, 0.94);
   --obsidian-border: rgba(255, 255, 255, 0.11);
   --obsidian-border-strong: rgba(255, 255, 255, 0.19);
-  --obsidian-specular: inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  --obsidian-text: #F7F5F2;
-  --obsidian-text-secondary: #A8A29E;
-  --obsidian-text-muted: #78716C;
 
   /* KPI system */
   --kpi-gap: 3.25rem;
@@ -173,9 +148,7 @@
   /* Borders (Hairline precision ceramic & titanium) */
   --border-subtle: rgba(28, 22, 18, 0.065);
   --border: rgba(28, 22, 18, 0.095);
-  --border-accessible: rgba(28, 22, 18, 0.46);
   --border-strong: rgba(28, 22, 18, 0.18);
-  --border-interactive: rgba(200, 90, 50, 0.35);
 
   --border-w-strong: 2px;
   --dot-size: 14px;
@@ -199,32 +172,14 @@
     0 0 0 1px rgba(200, 90, 50, 0.38),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
 
-  --shadow-modal:
-    0 32px 80px -16px rgba(0, 0, 0, 0.78),
-    0 8px 24px rgba(0, 0, 0, 0.48),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
-
   /* Unified Semantic Z-Index Hierarchy */
-  --z-base: 1;
   --z-header: 9990;
   --z-dock: 9995;
-  --z-drawer: 9998;
-  --z-modal: 9999;
   --z-skip: 10000;
 
   --shadow-1:
     0 1px 2px rgba(28, 20, 15, 0.03),
     0 2px 4px rgba(28, 20, 15, 0.05),
-    0 0 0 1px var(--border-subtle);
-
-  --shadow-2:
-    0 2px 4px rgba(28, 20, 15, 0.04),
-    0 12px 28px rgba(28, 20, 15, 0.07),
-    0 0 0 1px var(--border-subtle);
-
-  --shadow-3:
-    0 4px 8px rgba(28, 20, 15, 0.04),
-    0 24px 52px rgba(28, 20, 15, 0.10),
     0 0 0 1px var(--border-subtle);
 
   --shadow-card:
@@ -244,15 +199,12 @@
     0 0 0 1px var(--border-subtle),
     inset 0 1px 0 rgba(255, 255, 255, 0.75);
 
-  --accent-cool-soft: rgba(200, 90, 50, 0.10);
   --divider-accent-width: 48px;
   
   /* Terracotta Ember Glows for interactive states */
   --glow-accent: 0 4px 18px rgba(200, 90, 50, 0.28);
-  --glow-accent-strong: 0 6px 28px rgba(200, 90, 50, 0.45);
 
   /* === Neutrals & Inks === */
-  --slate-600: #5C554E;
   --slate-900: #171412;
 
   /* Text (Deep volcanic basalt obsidian on daytime desert sandstone) */
@@ -262,32 +214,16 @@
   --text-muted: #70665D;
   --text-inverse: #F7F5F2;
   --text-on-accent: #FFFFFF;
-  --surface-subtle: var(--surface-1);
 
   /* === Brand accent: Futuristic Ember Terracotta === */
   --accent: #C85A32;
-  --accent-primary: var(--accent);
   --accent-hover: #DC6237;
   --accent-text: #8C3B1E;       /* 7.2:1 AAA on #F3E8DF */
   --accent-text-hover: #732F16; /* 8.8:1 AAA on #F3E8DF */
   --accent-btn-fill: #AC4925;   /* 5.6:1 contrast with white text */
   --accent-btn-hover: #8C3B1E;  /* 7.6:1 contrast with white text */
   --accent-soft: rgba(200, 90, 50, 0.08);
-  --accent-medium: rgba(200, 90, 50, 0.14);
   --accent-strong: rgba(200, 90, 50, 0.24);
-  
-  /* The spark - used for micro-tensions */
-  --spark: #FF3366;
-
-  --color-primary: var(--accent);
-
-  /* === Brand mark (Variant #12 - two overlapping hexagons in Terracotta & Ochre) ===
-     Source of truth: scripts/generate-logo.js - keep in sync. */
-  --brand-primary: #C85A32;
-  --brand-secondary: #E07844;
-  --brand-highlight: #F5E6DF;
-  --brand-bg: #171412;
-  --brand-bg-dark: #0A0908;
 
   /* === Status colors (WCAG 2.2 AA compliant contrast) === */
   --green: #166534;
@@ -297,18 +233,9 @@
   --red: #991B1B;
   --red-soft: rgb(153 27 27 / 0.10);
 
-  /* Menu / elevated shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-menu: 0 24px 64px rgba(0, 0, 0, 0.7);
-  --shadow-menu-hover: 0 28px 72px rgba(0, 0, 0, 0.8);
-  --ease-menu: cubic-bezier(.2, .9, .2, 1);
-
   /* Focus */
   --focus-ring: 0 0 0 3px rgb(var(--rgb-cool) / 0.25), 0 0 16px rgb(var(--rgb-cool) / 0.35);
   --focus-outline: 2px solid var(--accent);
-
-  /* Glass */
-  --glass-border: rgba(255, 255, 255, 0.12);
 
   /* Article type ramp - opens H2/H3 separation */
   --fs-article-h1: clamp(2.25rem, 1.6rem + 2.6vw, 3.25rem);
@@ -322,20 +249,11 @@
   --case-h3-to-body: var(--space-3);
   --case-h3-top: var(--space-6);
 
-  /* Nav ink */
-  --ink-on-glass: #F7F5F2;
-
-  /* Body gradient endpoint */
-  --bg-gradient-end: #EAE0D5;
-
   /* Raw channels */
-  --rgb-white: 255 255 255;
   --rgb-black: 0 0 0;
   --rgb-cool: 200 90 50;
 
   --img-matte: rgb(var(--rgb-black) / 0.22);
-
-  /* === Hero overlay gradients === */
 }
 
 /* Optimizations for 1440px (important breakpoint) */
@@ -349,6 +267,7 @@
     --fs-xl: 1.9375rem;   /* 31px */
     --fs-2xl: 2.5rem;     /* 40px */
     --space-9: 6.5rem;
+    --page-gutter: clamp(2rem, 3vw, 3rem);
   }
 }
 
@@ -397,14 +316,5 @@
   :root {
     --container-max: 100%;
     --page-gutter: 1.5rem;
-  }
-}
-
-/* =====================================================
-   1440px OPTIMIZATION (Important Breakpoint)
-   ===================================================== */
-@media (min-width: 1400px) and (max-width: 1599px) {
-  :root {
-    --page-gutter: clamp(2rem, 3vw, 3rem);
   }
 }
