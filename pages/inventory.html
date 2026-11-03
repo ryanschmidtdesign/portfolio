@@ -467,6 +467,9 @@
             Residential installers receive dozens of commodity parts (Cat6 spools, HDMI cables, brackets) in minutes; forcing them through serial-number modals would bring their loading dock to a halt. Commercial contractors, on the other hand, need serial numbers and MAC addresses recorded for warranties and compliance audits.
           </p>
           <p>
+            For day-one physical dock operations, receiving clerks worked from desktop terminals at the warehouse intake bench paired with handheld USB or Bluetooth wedge barcode scanners (deferring mobile camera scanning to post-MVP). Scanning a barcode populated the active line item immediately without requiring manual keyboard entry.
+          </p>
+          <p>
             I designed a <strong>dual-track receiving flow</strong>: a fast quantity stepper by default for bulk parts, paired with an optional serial-capture drawer for high-value gear:
           </p>
 
@@ -534,12 +537,15 @@
           <p>
             To hit our Q4 enterprise renewal window, we reused existing data tables, slide-over drawers, and status badges from our D-Tools component library. Skipping custom layout work saved two full sprints for the hardest edge cases: partial shipments, damaged returns, and split backorders.
           </p>
+          <p>
+            When suppliers delivered incomplete orders, line items received a <strong>"Partially Received"</strong> status. This kept remaining quantities on backorder while immediately releasing checked-in units to project managers for staging and van assignment.
+          </p>
 
           <figure class="case-study-media">
-            <video autoplay muted playsinline loop preload="auto" width="2880" height="1496" poster="../assets/case-studies/inventory/inventory-modal-poster.webp" aria-label="Screen recording of receiving modal tracking vendor equipment serial numbers">
+            <video autoplay muted playsinline loop preload="auto" width="2880" height="1496" poster="../assets/case-studies/inventory/inventory-modal-poster.webp" aria-label="Screen recording of onboarding wizard configuring inventory suppliers, items, and warehouse locations">
               <source src="../assets/case-studies/inventory/inventory-modal.mp4" type="video/mp4">
             </video>
-            <figcaption>Serialized receiving modal letting technicians scan vendor barcodes and log serial numbers directly into active POs.</figcaption>
+            <figcaption>Guided onboarding wizard walking operations teams through configuring supplier records, item catalogs, and physical warehouse locations.</figcaption>
           </figure>
 
           <figure class="case-study-media">

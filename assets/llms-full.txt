@@ -34,7 +34,7 @@ Key timeline:
 - May 2021 – Apr 2026: Senior Critique Group Facilitator at Designlab (Mentored 1,500+ designers across 400+ sessions)
 - 2021: Product Designer at Bytemark (Mobile transit ticketing)
 - 2014 – 2021: UI/UX Designer & Facility Specialist at TASB
-- 2011 – 2014: US Navy Reserve Aircrewman (AWF3, Secret Clearance)
+- 2011 – 2014: US Navy Reserve
 
 ### Builder
 
@@ -100,11 +100,11 @@ https://ryanschmidt.design/pages/inventory
 
 https://ryanschmidt.design/pages/member-portal-overhaul
 
-**Status:** Shipped, live in production September 11, 2026.
+**Status:** Shipped, live in production September 1, 2026.
 
 **Problem:** Members couldn't find what they came for. The portal's navigation didn't reflect how content was actually structured. A well-validated content taxonomy existed but wasn't visible in the UI.
 
-**Role:** Lead Product Designer (Sole Design Lead across Product & Engineering). Owning IA, design system tokens, acceptance criteria, and staging QA.
+**Role:** CX/UX Designer (Sole Design Lead across Product & Engineering). Owning IA, design system tokens, acceptance criteria, and staging QA.
 
 **Research:** Validated the existing 4-tier taxonomy through moderated usability testing with 5 enterprise HR executives, finding flat navigation overwhelmed users while progressive disclosure kept entry calm.
 

@@ -574,7 +574,7 @@
           </p>
           <h3>Permissions and speed: Role-based security and caching</h3>
           <p>
-            Field technicians needed to log in at 7:00 AM to check job stages and van dispatches, but company owners barred installers from seeing gross margins or labor rates. I designed permission fallback states for every card so teams could share dashboard templates company-wide without leaking financials, while engineering added role-scoped Redis caching to keep load times under 400ms.
+            Field technicians logged in at 7:00 AM to check job stages and van dispatches, but company owners barred installers from viewing gross margins or labor rates. Because permissions were user-configured by administrators rather than locked behind pricing tiers, cards tied to restricted financial metrics simply didn't render for unauthorized users. Shared dashboards reflowed cleanly without empty placeholder boxes or permission warning clutter, while engineering added role-scoped Redis caching to keep load times under 400ms.
           </p>
         </section>
         <section id="prototyping" aria-label="Prototyping & validation">
