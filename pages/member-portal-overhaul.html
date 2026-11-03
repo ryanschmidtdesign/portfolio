@@ -287,7 +287,7 @@
             <div class="tldr-role">
               <p class="tldr-label label" data-reveal>My role</p>
               <p>
-                <strong>Senior Product Designer (Solo Design Lead partnering with VP of Product and 4 developers)</strong> <br>
+                <strong>CX/UX Designer (Solo Design Lead partnering with VP of Product and 4 developers)</strong> <br>
                 Owned information architecture, search flows, and UI specs from kickoff to release. Created CSS tokens for four developers and built working browser prototypes to speed up delivery.
               </p>
             </div>
@@ -322,10 +322,10 @@
             <h2 data-reveal>Problem</h2>
           </div>
           <p>
-            i4cp publishes extensive workforce research and benchmarks, but members struggled to find relevant studies. The legacy portal was organized around internal research divisions rather than member tasks. If a VP of Talent wanted a compensation benchmark, they had to click through three arbitrary categories and hope for the best.
+            i4cp publishes extensive workforce research and benchmarks, but the legacy portal was organized around internal research committees rather than member tasks. If a VP of Talent needed a compensation benchmark, they had to guess which internal division owned the topic and click through three arbitrary folders.
           </p>
           <p>
-            Usage logs showed the disconnect. Members would log in, navigate through cluttered categories, type keywords into legacy search, and get a wall of scattered links. Ahri existed as a standalone tool, but members defaulted to a legacy keyword search that returned scattered links. I moved Ahri into the primary search bar so members get direct, cited answers on the homepage.
+            Search had a similar disconnect. Ahri existed as a separate tool buried in the nav, so members defaulted to a basic keyword box that returned unranked lists of PDFs. Moving Ahri directly into the main search bar let members get cited answers right from the homepage.
           </p>
 
           <h3>Goals</h3>
@@ -372,34 +372,11 @@
             <h2>Research</h2>
           </div>
           <p>
-            The four-tier taxonomy framework had already been established by i4cp's research leadership before I joined the project. My job was turning an abstract spreadsheet of categories into a navigation tree that an executive could navigate on desktop or mobile in 10 seconds.
+            i4cp's research leadership had already defined a new four-tier taxonomy in a spreadsheet before I joined. My job was turning that spreadsheet into a navigation menu an executive could scan in 10 seconds.
           </p>
           <p>
-            To evaluate navigation models, I conducted moderated usability testing sessions with 5 enterprise HR executives. Usability testing quickly showed two extremes that failed: a flat mega-menu dumped 40+ links and caused visual fatigue, while deep four-level accordions hid related research so completely that users thought the library was empty. Those sessions confirmed that progressive disclosure was the right model, exposing deeper topics only after a member selected a primary practice area.
+            I ran moderated usability tests with 5 enterprise HR executives across two early prototypes. A flat mega-menu dumped 40+ links at once and overwhelmed testers, while deep four-level accordions hid content so completely that users thought the library was empty. Progressive disclosure solved both: showing broad practice areas first and revealing deeper topics only after a user clicked in.
           </p>
-
-          <div class="taxonomy-flow">
-            <div class="taxonomy-flow__step">
-              <span class="taxonomy-flow__tier">Tier 1: Domain</span>
-              <strong class="taxonomy-flow__title">Areas of Focus</strong>
-              <span class="taxonomy-flow__desc">Broad executive practice domains (Leadership, Talent, Culture, Total Rewards).</span>
-            </div>
-            <div class="taxonomy-flow__step">
-              <span class="taxonomy-flow__tier">Tier 2: Intent</span>
-              <strong class="taxonomy-flow__title">Strategic Priorities</strong>
-              <span class="taxonomy-flow__desc">Key business questions within each area (e.g. Executive Succession Planning).</span>
-            </div>
-            <div class="taxonomy-flow__step">
-              <span class="taxonomy-flow__tier">Tier 3: Depth</span>
-              <strong class="taxonomy-flow__title">Subject Topics</strong>
-              <span class="taxonomy-flow__desc">Specific subject clusters (e.g. C-Suite Turnover Benchmarks).</span>
-            </div>
-            <div class="taxonomy-flow__step">
-              <span class="taxonomy-flow__tier">Tier 4: Output</span>
-              <strong class="taxonomy-flow__title">Content Assets</strong>
-              <span class="taxonomy-flow__desc">Published research reports, interactive risk calculators, and recorded executive roundtables.</span>
-            </div>
-          </div>
 
           <figure class="case-study-media">
             <div class="image-splitter" data-splitter data-splitter-initial="50">
@@ -541,9 +518,6 @@
                 </div>
               </div>
             </div>
-            <p>
-              For example, an HR leader looking for leadership succession benchmarking starts with Leadership as a broad domain, narrows into a strategic priority, scans related topics, and picks their preferred format (a research report, quick benchmark, or webinar). The navigation narrows the scope step-by-step so members never have to parse more than 4 to 6 options at a time.
-            </p>
           </div>
 
           <div class="ia-challenge-panel">
@@ -555,19 +529,18 @@
             </div>
             <div data-compare data-compare-default="progressive">
               <div class="compare-tabs">
+                <button type="button" data-compare-button="flat" aria-pressed="false">Flat navigation</button>
+                <button type="button" data-compare-button="progressive" aria-pressed="true">Progressive disclosure</button>
               </div>
               <div class="compare-panels">
                 <div class="compare-panel" data-compare-state="flat">
-                  <p>Exposes too much structure upfront. It overwhelms members who need a quick answer to a specific question.</p>
+                  <p>Exposes too much structure upfront. An expandable tree menu felt like browsing a dense Windows file system and overwhelmed members looking for a quick answer.</p>
                 </div>
-                <div class="compare-panel" data-compare-state="progressive">
-                  <p>Reveals deeper levels only as members commit to a practice area or priority.</p>
+                <div class="compare-panel is-active" data-compare-state="progressive">
+                  <p>Reveals deeper levels only as members commit to a practice area or priority, keeping each step focused on 4 to 6 options at a time.</p>
                 </div>
               </div>
             </div>
-            <p>
-              I explored flatter navigation patterns, including an expandable tree menu, but user testing showed it felt like browsing a dense Windows file system. Progressive disclosure won because it gives members an uncluttered starting point. Sub-topics stay hidden until a user clicks into a specific practice domain.
-            </p>
           </div>
 
           <figure class="case-study-media">
@@ -756,7 +729,7 @@
           </aside>
 
           <p>
-            Executive feedback highlighted one clear win: instead of digging through 40-page PDFs to find a single statistic for a board deck, Ahri gave them the cited figure in seconds. Daily active portal usage doubled, and Ahri research sessions grew 500% measured over the first 60 days post-launch versus the 60 days prior.
+            Executive feedback highlighted one clear win: instead of digging through 40-page PDFs to find a single statistic for a board deck, Ahri gave them the cited figure in seconds.
           </p>
           <p style="font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.5; border-left: 2px solid var(--accent); padding-left: var(--space-3); margin-block: var(--space-4);">
             <em>A note on those numbers:</em> Because Ahri was now the primary search box, session counts were naturally going to jump. But our analytics and follow-up interviews confirmed people were actually reading the output. Session lengths grew, follow-up queries increased, and members reported saving 10 to 15 minutes per search compared to opening raw PDFs.

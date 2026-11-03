@@ -288,7 +288,7 @@
         <h1 id="title" data-parallax="0.06">Building My Portfolio in <em class="serif-accent" style="white-space: nowrap;">Code</em></h1>
 
           <p class="lead">
-            I built this portfolio directly in HTML, CSS, and JavaScript using Cursor and Claude Code. Instead of treating AI as an automatic site builder, I used it as an ultra-fast drafting assistant—writing the design tokens, layout structures, and accessibility constraints myself to prevent AI from spitting out spaghetti CSS.
+            I built this portfolio directly in HTML, CSS, and JavaScript using Cursor and Claude Code. Instead of treating AI as an automatic site builder, I used it as a fast drafting assistant, writing the design tokens, layout structures, and accessibility constraints myself to keep the code clean.
           </p>
 
           <div class="tldr-meta">
@@ -329,9 +329,9 @@
         <section class="case-study-summary" aria-label="Case study summary">
           <h2 class="case-study-summary__label">At a glance</h2>
           <ul class="case-study-summary__list">
-            <li><strong>The Goal:</strong> I wanted to design directly in production-grade code rather than stopping in Figma. Building the site myself let me stress-test responsive breakpoints, micro-interactions, and keyboard accessibility directly in the browser—while developing a realistic, hands-on understanding of what AI coding tools can and cannot do.</li>
-            <li><strong>How I Built It:</strong> Wrote custom semantic HTML and modular CSS with Cursor, avoiding bloated templates and heavy frontend frameworks. I built a serverless backend with Supabase and pgvector so the assistant retrieves targeted project notes on demand.</li>
-            <li><strong>The Result:</strong> A zero-framework, sub-second loading site governed by 5 distinct CSS layers, an AI assistant grounded by 63 automated tests, and a repeatable workflow for prototyping complex B2B interactions in hours instead of days.</li>
+            <li><strong>The Goal:</strong> Design directly in production code rather than stopping in Figma, testing responsive breakpoints, micro-interactions, and keyboard accessibility in the browser.</li>
+            <li><strong>How I Built It:</strong> Wrote custom semantic HTML and modular CSS with Cursor, and built a serverless backend with Supabase pgvector so the assistant retrieves targeted project notes on demand.</li>
+            <li><strong>The Result:</strong> A zero-framework site governed by 5 CSS layers, an AI assistant guarded by 63 unit tests, and a fast workflow for prototyping B2B interactions in hours.</li>
           </ul>
         </section>
 
@@ -341,20 +341,8 @@
           </div>
 
           <p>
-            I hate handing off Figma files over a wall and hoping for the best. When I understand DOM structure, CSS specificity, and API payload latency firsthand, I design components that engineers can actually implement without painful compromises.
+            I hate handing off Figma files over a wall and hoping for the best. When I understand DOM structure, CSS specificity, and API latency firsthand, I design components that engineers can implement without painful compromises. Rather than using Webflow or a template, I used this portfolio to stress-test Cursor and Claude Code on a real multi-page build.
           </p>
-
-          <p>
-            Rather than using Webflow or a canned template, I used this portfolio to put AI tools like Cursor and Claude Code through a stress test on a real, multi-page build.
-          </p>
-
-          <h3>What I set out to do</h3>
-          <ul>
-            <li>Move directly from an interaction idea into working code in a few hours</li>
-            <li>Create a clean token hierarchy that keeps styles modular across multiple pages</li>
-            <li>Build an AI chat assistant connected to relevant project notes</li>
-            <li>Keep the site lightweight, semantic, and keyboard accessible</li>
-          </ul>
         </section>
 
         <section id="approach" aria-label="Approach" class="section--alt">
@@ -363,16 +351,7 @@
           </div>
 
           <p>
-            I built a strict CSS token foundation before writing a single component. If you don't define color, type, and spacing tokens first, LLMs will invent 20 different hex codes and arbitrary margin values across every file.
-          </p>
-
-          <ul>
-            <li><strong>Cursor &amp; Claude Code:</strong> Coding environments for writing semantic markup, styling tokens, and frontend scripts</li>
-            <li><strong>Vercel &amp; Supabase:</strong> Serverless deployment, vector search, and edge caching</li>
-          </ul>
-
-          <p>
-            AI doesn't build good software on its own; it amplifies whatever structure you give it. Without hard guidelines, Cursor generated div-soup markup and inconsistent utility classes. Once I constrained it with a strict token dictionary and semantic HTML rules, it became an incredible copilot for repetitive boilerplate.
+            AI doesn't build good software on its own; it amplifies whatever structure you give it. Without hard guidelines, Cursor generated div-soup markup and invented 20 different hex codes. Once I constrained it with a strict CSS token dictionary and semantic HTML rules, it became a great copilot for repetitive boilerplate.
           </p>
         </section>
 
@@ -728,21 +707,8 @@
             <h2>Implementation highlights</h2>
           </div>
 
-          <ul>
-            <li>A consistent case study template that lets readers scan decisions quickly</li>
-            <li>Reusable layout patterns and components across every page</li>
-            <li>An AI chat widget connected to semantic search for hiring managers who want quick answers</li>
-            <li>Semantic HTML, ARIA landmarks, and SEO metadata baked directly into the templates</li>
-          </ul>
-
-
-
           <p>
-            The result is a clean, accessible site that loads in under 300 milliseconds, has zero runtime framework overhead, and doesn't break when resized or navigated via keyboard.
-          </p>
-
-          <p>
-            Here is a look at the previous version of this portfolio (hand-built, static HTML) compared to the current rebuild.
+            The site loads in under 300 milliseconds with zero framework runtime overhead, and every interactive component works via keyboard and screen reader. Here is a look at the previous static version compared to the rebuild.
           </p>
 
           <div class="before-after-grid">
@@ -805,14 +771,8 @@
           </div>
 
           <p>
-            Building the portfolio in production code shortened the back-and-forth between designing an interaction and seeing how it actually behaves. Prototyping directly in the browser exposed responsive text-wrapping issues and keyboard focus traps that never show up on an artboard.
+            The biggest payoff is muscle memory. When I design complex enterprise tools in my day job now, I can spin up a live browser prototype in an afternoon to test keyboard focus states, responsive wrapping, and edge cases before pitching an engineering team.
           </p>
-
-          <p>
-            The biggest payoff is muscle memory. Now, when I design complex enterprise tools in my day job, I can spin up a live browser prototype in an afternoon to test tricky keyboard interactions and responsive edge cases before pitching an engineering team.
-          </p>
-
-          <!-- Impact section does not have a dedicated analytics screenshot yet -->
         </section>
 
         <section id="what-didnt-work" aria-label="What didn't work">
@@ -820,10 +780,7 @@
             <h2>What Didn't Work</h2>
           </div>
           <p>
-            Early on, I went down a rabbit hole building multiple visual skins, including a dark mode and a retro Windows 95 theme (alongside the terminal mode). While they were fun technical experiments, maintaining three separate color palettes and border conventions tripled CSS token maintenance and distracted from the case studies themselves.
-          </p>
-          <p>
-            I stripped the site back to a single high-contrast light theme to keep the design system maintainable and focused on content clarity. The lesson was straightforward: just because AI makes generating code fast doesn't mean you should keep every feature you prototype.
+            Early on, I went down a rabbit hole building multiple visual skins, including a dark mode and a retro Windows 95 theme alongside the terminal mode. Maintaining three separate color palettes tripled token upkeep and distracted from the case studies, so I stripped the site back to a single high-contrast light theme. Just because AI makes generating code fast does not mean you should keep every feature you prototype.
           </p>
         </section>
 
@@ -832,15 +789,9 @@
             <h2>Lessons & Next Steps</h2>
           </div>
 
-          <h3>Lessons</h3>
           <p>
-            AI coding tools do not replace good software practices. If anything, they punish you faster if you do not have a plan. Without clear architecture upfront, an LLM will happily hand you messy CSS and duplicate utility classes.
+            AI coding tools do not replace software architecture. Without clear rules upfront, an LLM will happily hand you messy CSS and duplicate utility classes. The real work is defining the constraints and knowing what to cut.
           </p>
-          <ul>
-            <li><strong>Detailed system rules beat prompt hacking:</strong> Setting up explicit coding conventions and design tokens in markdown prevented messy rewrites later.</li>
-            <li><strong>Browser testing catches real-world friction:</strong> Inspecting live HTML and CSS revealed keyboard navigation quirks and awkward responsive wrapping that Figma never surfaced.</li>
-            <li><strong>Fast prototyping requires discipline:</strong> When coding is quick, it's easy to build unnecessary features (like the retro themes I ended up cutting). Knowing what to prune is the real job.</li>
-          </ul>
 
           <h3>Next</h3>
           <ul>
