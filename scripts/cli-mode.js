@@ -477,10 +477,23 @@
                     action: () => { window.location.href = `${prefix}dashboard.html`; }
                 },
                 {
-                    id: 'nav-inventory',
+                    id: 'nav-member-portal',
                     group: 'Case Studies',
                     icon: '02',
-                    title: 'Real-Time Inventory & Receiving',
+                    title: 'i4cp Member Portal & Research Discovery',
+                    sub: 'i4cp Enterprise · Research IA and conversational AI',
+                    badge: 'Case Study',
+                    kpi: '+500% AI',
+                    kpiType: 'terracotta',
+                    targetPath: 'pages/member-portal-overhaul.html',
+                    keywords: 'i4cp member portal ai search synthesis rag overhaul enterprise research membership 500% sessions daily activity',
+                    action: () => { window.location.href = `${prefix}member-portal-overhaul.html`; }
+                },
+                {
+                    id: 'nav-inventory',
+                    group: 'Case Studies',
+                    icon: '03',
+                    title: 'Inventory, Purchasing & Receiving',
                     sub: 'D-Tools Cloud · Desktop supply chain ledger',
                     badge: 'Case Study',
                     kpi: '+8% ARR',
@@ -490,23 +503,10 @@
                     action: () => { window.location.href = `${prefix}inventory.html`; }
                 },
                 {
-                    id: 'nav-member-portal',
-                    group: 'Case Studies',
-                    icon: '03',
-                    title: 'i4cp Member Portal & Ahri',
-                    sub: 'i4cp · Research IA and conversational AI',
-                    badge: 'Case Study',
-                    kpi: '+500% AI',
-                    kpiType: 'terracotta',
-                    targetPath: 'pages/member-portal-overhaul.html',
-                    keywords: 'i4cp member portal ai search synthesis rag overhaul enterprise research membership 500% sessions daily activity',
-                    action: () => { window.location.href = `${prefix}member-portal-overhaul.html`; }
-                },
-                {
                     id: 'nav-ai-portfolio',
                     group: 'Case Studies',
                     icon: '04',
-                    title: 'AI-Native Portfolio Architecture',
+                    title: 'Building My Portfolio in Code',
                     sub: 'Zero-build stack · Vector search · Design tokens',
                     badge: 'Architecture',
                     kpi: 'Zero-Build',
@@ -1059,36 +1059,8 @@
             });
         }
 
-        // Start initial type effect shortly after load
-        setPlaceholderText('');
-        timeoutId = setTimeout(() => {
-            typeText(SUGGESTIONS[0], () => {
-                timeoutId = setTimeout(runCycle, 3200);
-            });
-        }, 350);
-
-        inputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                cancelTimer();
-                isTyping = false;
-            });
-
-            input.addEventListener('blur', () => {
-                if (!input.value || input.value.trim().length === 0) {
-                    cancelTimer();
-                    timeoutId = setTimeout(runCycle, 1200);
-                }
-            });
-        });
-
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                cancelTimer();
-            } else if (!isAnyInputActive() && !isTyping) {
-                cancelTimer();
-                timeoutId = setTimeout(runCycle, 800);
-            }
-        });
+        // Set initial static placeholder; no continuous typing loop
+        setPlaceholderText(SUGGESTIONS[0]);
     }
 
     if (document.readyState === 'loading') {

@@ -674,25 +674,25 @@ body.is-home {
   width: 100%;
   max-width: 1160px;
   margin-inline: auto;
-  padding: clamp(72px, 10vh, 96px) 0 0;
+  padding: clamp(56px, 7vh, 72px) 0 0;
   position: relative;
   z-index: 1;
 }
 
 @media (max-width: 1199px) {
   .home-main {
-    padding: clamp(72px, 10vh, 96px) 20px 0;
+    padding: clamp(56px, 7vh, 72px) 20px 0;
   }
 }
 
 /* Hero Section Wrapper: Content Left, Drawing Right */
 .home-hero-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: clamp(24px, 3.5vw, 44px);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+  gap: clamp(20px, 3vw, 36px);
   align-items: center;
-  margin-top: clamp(0.75rem, 2vh, 1.75rem);
-  margin-bottom: clamp(3rem, 6vh, 4.5rem);
+  margin-top: clamp(0.5rem, 1.5vh, 1.25rem);
+  margin-bottom: clamp(2rem, 4vh, 3rem);
   position: relative;
 }
 
@@ -781,13 +781,6 @@ body.is-home {
   background: rgba(28, 22, 18, 0.04);
   border: 1px solid rgba(28, 22, 18, 0.085);
   color: var(--text-secondary);
-  transition: all 160ms ease;
-}
-
-.home-tag:hover {
-  background: var(--surface-elevated-strong, #FCFBF9);
-  border-color: var(--accent);
-  color: var(--accent-text);
 }
 
 /* Right Column: Family Drawing Studio Vignette (Floating Seamlessly on Sandstone Canvas) */
@@ -801,7 +794,7 @@ body.is-home {
 .home-drawing-paper {
   position: relative;
   width: 100%;
-  max-width: 540px;
+  max-width: 420px;
   background: var(--surface-elevated-strong, #FCFBF9);
   padding: clamp(14px, 2.5vw, 20px);
   border-radius: var(--radius-md);
