@@ -58,22 +58,22 @@
                 .rs-cmd-modal {
                     position: relative;
                     z-index: 1;
-                    width: min(620px, 100%);
+                    width: min(560px, 100%);
                     max-height: 80vh;
-                    background: var(--obsidian-glass, rgba(18, 15, 13, 0.90));
-                    backdrop-filter: blur(22px) saturate(160%);
-                    -webkit-backdrop-filter: blur(22px) saturate(160%);
-                    border: 1px solid var(--obsidian-border-strong, rgba(255, 255, 255, 0.18));
-                    border-radius: 3px;
+                    background: var(--obsidian-glass, rgba(18, 15, 13, 0.94));
+                    backdrop-filter: blur(24px) saturate(160%);
+                    -webkit-backdrop-filter: blur(24px) saturate(160%);
+                    border: 1px solid var(--obsidian-border-strong, rgba(255, 255, 255, 0.14));
+                    border-radius: 6px;
                     box-shadow:
-                        0 28px 72px -12px rgba(0, 0, 0, 0.82),
+                        0 28px 72px -12px rgba(0, 0, 0, 0.85),
                         0 6px 20px rgba(0, 0, 0, 0.45),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+                        inset 0 1px 0 rgba(255, 255, 255, 0.16);
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
                     transform: translateY(-8px) scale(0.985);
-                    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+                    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
                     color: #F7F5F2;
                 }
 
@@ -93,58 +93,21 @@
                     transform: translateY(0) scale(1);
                 }
 
-                /* Header bar */
-                .rs-cmd-telemetry {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: 10px;
-                    padding: 8px 16px;
-                    background: rgba(255, 255, 255, 0.02);
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-                    font-family: var(--font-sans);
-                    font-size: 0.72rem;
-                    font-weight: 500;
-                    color: #A8A29E;
-                    user-select: none;
-                }
-
-                .rs-cmd-telemetry__left {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
-                }
-
-                .rs-cmd-sys-tag {
-                    font-weight: 600;
-                    color: #F7F5F2;
-                }
-
-                .rs-cmd-sys-divider {
-                    color: rgba(255, 255, 255, 0.20);
-                }
-
-                .rs-cmd-sys-meta {
-                    color: #78716C;
-                }
-
                 /* Search bar */
                 .rs-cmd-search {
                     display: flex;
                     align-items: center;
                     gap: 12px;
-                    padding: 12px 16px;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
-                    background: rgba(24, 20, 18, 0.82);
+                    padding: 13px 16px;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                    background: transparent;
                 }
 
-                .rs-cmd-prompt-glyph {
-                    font-family: var(--font-mono);
-                    font-size: 0.95rem;
-                    font-weight: 700;
-                    color: var(--accent, #C85A32);
+                .rs-cmd-search-icon {
+                    width: 16px;
+                    height: 16px;
+                    color: #78716C;
                     flex-shrink: 0;
-                    user-select: none;
                 }
 
                 .rs-cmd-input {
@@ -152,8 +115,8 @@
                     border: none;
                     background: transparent;
                     font-family: var(--font-sans);
-                    font-size: 0.98rem;
-                    font-weight: var(--weight-medium);
+                    font-size: 0.95rem;
+                    font-weight: var(--weight-medium, 500);
                     color: #F7F5F2;
                     outline: none;
                     padding: 0;
@@ -166,42 +129,28 @@
                     font-weight: 400;
                 }
 
-                .rs-cmd-node-count {
-                    font-family: var(--font-mono);
-                    font-size: 0.64rem;
-                    font-weight: 600;
-                    letter-spacing: 0.04em;
-                    padding: 2px 7px;
-                    border-radius: 2px;
-                    background: rgba(255, 255, 255, 0.05);
-                    color: #A8A29E;
-                    border: 1px solid rgba(255, 255, 255, 0.09);
-                    flex-shrink: 0;
-                    user-select: none;
-                }
-
                 .rs-cmd-esc {
                     display: inline-flex;
                     align-items: center;
-                    padding: 2px 7px;
+                    padding: 2px 6px;
                     font-family: var(--font-mono);
-                    font-size: 0.64rem;
+                    font-size: 0.62rem;
                     font-weight: 600;
                     letter-spacing: 0.04em;
                     text-transform: uppercase;
-                    border-radius: 2px;
-                    background: rgba(255, 255, 255, 0.06);
-                    color: #A8A29E;
-                    border: 1px solid rgba(255, 255, 255, 0.12);
+                    border-radius: 3px;
+                    background: rgba(255, 255, 255, 0.05);
+                    color: #78716C;
+                    border: 1px solid rgba(255, 255, 255, 0.09);
                     flex-shrink: 0;
                     user-select: none;
                     cursor: pointer;
-                    transition: all 140ms ease;
+                    transition: all 120ms ease;
                 }
 
                 .rs-cmd-esc:hover {
-                    background: rgba(200, 90, 50, 0.20);
-                    border-color: rgba(200, 90, 50, 0.45);
+                    background: rgba(255, 255, 255, 0.10);
+                    border-color: rgba(255, 255, 255, 0.18);
                     color: #F7F5F2;
                 }
 
@@ -209,32 +158,22 @@
                 .rs-cmd-results {
                     flex: 1;
                     overflow-y: auto;
-                    padding: 8px 10px 14px;
-                    max-height: 400px;
+                    padding: 6px 8px 10px;
+                    max-height: 380px;
                     overscroll-behavior: contain;
                     scrollbar-width: thin;
                     scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
                 }
 
                 .rs-cmd-group-title {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
                     font-family: var(--font-sans);
-                    font-size: 0.70rem;
+                    font-size: 0.68rem;
                     font-weight: 600;
                     text-transform: uppercase;
-                    letter-spacing: 0.06em;
+                    letter-spacing: 0.07em;
                     color: #78716C;
-                    padding: 10px 8px 4px;
+                    padding: 9px 10px 4px;
                     user-select: none;
-                }
-
-                .rs-cmd-group-title::after {
-                    content: "";
-                    flex: 1;
-                    height: 1px;
-                    background: rgba(255, 255, 255, 0.07);
                 }
 
                 .rs-cmd-item {
@@ -243,55 +182,53 @@
                     align-items: center;
                     justify-content: space-between;
                     gap: 12px;
-                    padding: 9px 12px;
-                    border-radius: 2px;
+                    padding: 8px 10px;
+                    border-radius: 4px;
                     cursor: pointer;
                     text-decoration: none;
                     color: inherit;
-                    transition: background 120ms ease, border-color 120ms ease;
+                    transition: background 100ms ease;
                     user-select: none;
-                    margin-bottom: 2px;
+                    margin-bottom: 1px;
                     border: 1px solid transparent;
-                    border-left: 2.5px solid transparent;
                     background: transparent;
                 }
 
                 .rs-cmd-item:hover,
                 .rs-cmd-item.is-selected {
-                    background: rgba(200, 90, 50, 0.10);
-                    border-color: rgba(200, 90, 50, 0.25);
-                    border-left-color: var(--accent, #C85A32);
+                    background: rgba(255, 255, 255, 0.06);
+                    border-color: rgba(255, 255, 255, 0.08);
                 }
 
                 .rs-cmd-item__left {
                     display: flex;
                     align-items: center;
-                    gap: 11px;
+                    gap: 10px;
                     min-width: 0;
                     flex: 1;
                 }
 
                 .rs-cmd-item__icon {
-                    width: 24px;
-                    height: 24px;
-                    border-radius: 2px;
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    color: #A8A29E;
+                    width: 22px;
+                    height: 22px;
+                    border-radius: 3px;
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(255, 255, 255, 0.07);
+                    color: #78716C;
                     font-family: var(--font-mono);
-                    font-size: 0.68rem;
+                    font-size: 0.65rem;
                     font-weight: 600;
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
                     flex-shrink: 0;
-                    transition: all 120ms ease;
+                    transition: all 100ms ease;
                 }
 
                 .rs-cmd-item.is-selected .rs-cmd-item__icon,
                 .rs-cmd-item:hover .rs-cmd-item__icon {
-                    background: rgba(200, 90, 50, 0.20);
-                    border-color: rgba(200, 90, 50, 0.45);
+                    background: rgba(255, 255, 255, 0.09);
+                    border-color: rgba(255, 255, 255, 0.14);
                     color: #F7F5F2;
                 }
 
@@ -304,7 +241,7 @@
 
                 .rs-cmd-item__title {
                     font-size: 0.88rem;
-                    font-weight: 600;
+                    font-weight: 500;
                     color: #F7F5F2;
                     line-height: 1.25;
                     white-space: nowrap;
@@ -314,8 +251,8 @@
                 }
 
                 .rs-cmd-item__sub {
-                    font-size: 0.74rem;
-                    color: #A8A29E;
+                    font-size: 0.73rem;
+                    color: #78716C;
                     line-height: 1.3;
                     white-space: nowrap;
                     overflow: hidden;
@@ -339,9 +276,9 @@
 
                 .rs-cmd-item__kpi {
                     font-family: var(--font-mono);
-                    font-size: 0.65rem;
-                    font-weight: 600;
-                    padding: 2px 7px;
+                    font-size: 0.64rem;
+                    font-weight: 500;
+                    padding: 2px 6px;
                     border-radius: 2px;
                     letter-spacing: 0.02em;
                     white-space: nowrap;
@@ -351,78 +288,68 @@
                 .rs-cmd-kpi--terracotta {
                     background: rgba(200, 90, 50, 0.15);
                     color: #E07A5F;
-                    border: 1px solid rgba(200, 90, 50, 0.35);
+                    border: 1px solid rgba(200, 90, 50, 0.30);
                 }
 
                 .rs-cmd-kpi--emerald {
                     background: rgba(34, 197, 94, 0.12);
                     color: #4ADE80;
-                    border: 1px solid rgba(34, 197, 94, 0.25);
+                    border: 1px solid rgba(34, 197, 94, 0.22);
                 }
 
                 .rs-cmd-kpi--slate {
                     background: rgba(255, 255, 255, 0.05);
                     color: #A8A29E;
-                    border: 1px solid rgba(255, 255, 255, 0.09);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
                 }
 
                 .rs-cmd-item__badge {
                     font-family: var(--font-mono);
-                    font-size: 0.64rem;
+                    font-size: 0.63rem;
                     font-weight: 500;
-                    padding: 2px 7px;
+                    padding: 2px 6px;
                     border-radius: 2px;
-                    background: rgba(255, 255, 255, 0.05);
+                    background: rgba(255, 255, 255, 0.04);
                     color: #78716C;
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border: 1px solid rgba(255, 255, 255, 0.07);
                     white-space: nowrap;
                 }
 
                 .rs-cmd-item__return {
                     font-family: var(--font-mono);
                     font-size: 0.72rem;
-                    font-weight: 700;
-                    color: var(--accent, #C85A32);
+                    font-weight: 600;
+                    color: #78716C;
                     opacity: 0;
                     transform: translateX(-3px);
-                    transition: all 120ms ease;
+                    transition: all 100ms ease;
                 }
 
                 .rs-cmd-item.is-selected .rs-cmd-item__return,
                 .rs-cmd-item:hover .rs-cmd-item__return {
                     opacity: 1;
                     transform: translateX(0);
+                    color: var(--accent, #C85A32);
                 }
 
                 /* Footer */
                 .rs-cmd-footer {
                     display: flex;
                     align-items: center;
-                    justify-content: space-between;
-                    gap: 12px;
-                    padding: 8px 16px;
+                    justify-content: flex-end;
+                    padding: 8px 14px;
                     border-top: 1px solid rgba(255, 255, 255, 0.06);
-                    background: rgba(255, 255, 255, 0.02);
+                    background: transparent;
                     font-size: 0.68rem;
                     color: #78716C;
                     font-family: var(--font-sans);
                     user-select: none;
                 }
 
-                .rs-cmd-footer__brand {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 6px;
-                    color: #A8A29E;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-
                 .rs-cmd-footer__shortcuts {
                     display: inline-flex;
                     align-items: center;
-                    gap: 10px;
+                    gap: 12px;
                     flex-shrink: 0;
                 }
 
@@ -430,13 +357,13 @@
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
-                    min-width: 18px;
-                    padding: 1px 5px;
+                    min-width: 17px;
+                    padding: 1px 4px;
                     border-radius: 2px;
-                    background: rgba(255, 255, 255, 0.06);
+                    background: rgba(255, 255, 255, 0.05);
                     color: #A8A29E;
-                    border: 1px solid rgba(255, 255, 255, 0.12);
-                    font-size: 0.62rem;
+                    border: 1px solid rgba(255, 255, 255, 0.10);
+                    font-size: 0.60rem;
                     font-family: var(--font-mono);
                     font-weight: 600;
                     margin-right: 3px;
@@ -484,16 +411,11 @@
 
             this.overlay.innerHTML = `
                 <div class="rs-cmd-modal" id="rsCmdModal">
-                    <div class="rs-cmd-telemetry">
-                        <div class="rs-cmd-telemetry__left">
-                            <span class="rs-cmd-sys-tag">Command Palette</span>
-                            <span class="rs-cmd-sys-divider" aria-hidden="true">·</span>
-                            <span class="rs-cmd-sys-meta" id="rsCmdTelemetryCoord">Navigation &amp; Actions</span>
-                        </div>
-                    </div>
-
                     <div class="rs-cmd-search">
-                        <span class="rs-cmd-prompt-glyph" aria-hidden="true">❯</span>
+                        <svg class="rs-cmd-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
                         <input
                             type="text"
                             class="rs-cmd-input"
@@ -502,24 +424,20 @@
                             aria-expanded="false"
                             aria-autocomplete="list"
                             aria-controls="rsCmdResults"
-                            aria-label="Search case studies, pages, or execute commands"
-                            placeholder="Search case studies, pages, or ask portfolio AI..."
+                            aria-label="Search case studies, pages, or commands"
+                            placeholder="Search projects, pages, or commands..."
                             autocomplete="off"
                             spellcheck="false"
                         />
-                        <span class="rs-cmd-node-count" id="rsCmdNodeCount">11 ITEMS</span>
                         <kbd class="rs-cmd-esc" id="rsCmdEscBtn" title="Close (Esc)">esc</kbd>
                     </div>
 
                     <div class="rs-cmd-results" id="rsCmdResults" role="listbox"></div>
 
                     <div class="rs-cmd-footer">
-                        <div class="rs-cmd-footer__brand">
-                            <span id="rsCmdFooterTarget">Ryan Schmidt · Product Design Portfolio</span>
-                        </div>
                         <div class="rs-cmd-footer__shortcuts">
                             <span><kbd class="rs-cmd-key">↑↓</kbd>navigate</span>
-                            <span><kbd class="rs-cmd-key">↵</kbd>open</span>
+                            <span><kbd class="rs-cmd-key">↵</kbd>select</span>
                             <span><kbd class="rs-cmd-key">esc</kbd>close</span>
                         </div>
                     </div>
@@ -549,8 +467,8 @@
                     id: 'nav-dashboard',
                     group: 'Case Studies',
                     icon: '01',
-                    title: 'Custom Dashboards & AI Summaries (D-Tools Cloud)',
-                    sub: '+71% Sustained Views · 62% Multi-dashboard adoption',
+                    title: 'Custom Dashboards & AI Summaries',
+                    sub: 'D-Tools Cloud · 62% multi-dashboard adoption',
                     badge: 'Case Study',
                     kpi: '+71% Views',
                     kpiType: 'terracotta',
@@ -562,10 +480,10 @@
                     id: 'nav-inventory',
                     group: 'Case Studies',
                     icon: '02',
-                    title: 'Inventory, Purchasing & Receiving (D-Tools Cloud)',
-                    sub: '+8% Recurring Revenue · 8% YoY adoption growth',
+                    title: 'Real-Time Inventory & Receiving',
+                    sub: 'D-Tools Cloud · Desktop supply chain ledger',
                     badge: 'Case Study',
-                    kpi: '+8% MRR',
+                    kpi: '+8% ARR',
                     kpiType: 'emerald',
                     targetPath: 'pages/inventory.html',
                     keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain warehouse enterprise 8% mrr recurring revenue',
@@ -575,10 +493,10 @@
                     id: 'nav-member-portal',
                     group: 'Case Studies',
                     icon: '03',
-                    title: 'i4cp Member Portal & Research Discovery',
-                    sub: '+500% Ahri Sessions · Research IA & conversational AI discovery',
+                    title: 'i4cp Member Portal & Ahri',
+                    sub: 'i4cp · Research IA and conversational AI',
                     badge: 'Case Study',
-                    kpi: '+500% Sessions',
+                    kpi: '+500% AI',
                     kpiType: 'terracotta',
                     targetPath: 'pages/member-portal-overhaul.html',
                     keywords: 'i4cp member portal ai search synthesis rag overhaul enterprise research membership 500% sessions daily activity',
@@ -588,8 +506,8 @@
                     id: 'nav-ai-portfolio',
                     group: 'Case Studies',
                     icon: '04',
-                    title: 'Designing & Building an AI-Native Portfolio',
-                    sub: 'Zero-Build Stack · Vector Grounding · Design Token System',
+                    title: 'AI-Native Portfolio Architecture',
+                    sub: 'Zero-build stack · Vector search · Design tokens',
                     badge: 'Architecture',
                     kpi: 'Zero-Build',
                     kpiType: 'slate',
@@ -603,9 +521,9 @@
                     id: 'nav-work-overview',
                     group: 'Navigation',
                     icon: '★',
-                    title: 'Selected Work & Shipped Outcomes',
-                    sub: '4 featured case studies across BI, supply chain, and enterprise AI',
-                    badge: 'Index',
+                    title: 'Selected Work',
+                    sub: 'Four enterprise case studies',
+                    badge: 'Work',
                     targetPath: 'index.html#work',
                     keywords: 'work selected projects case studies shipped outcomes portfolio overview index',
                     action: () => {
@@ -619,26 +537,12 @@
                     }
                 },
                 {
-                    id: 'nav-approach',
-                    group: 'Navigation',
-                    icon: '◇',
-                    title: 'Design Leadership & Ethos',
-                    sub: 'Systems, prototyping in code, and verified outcomes on the About page',
-                    badge: 'Leadership',
-                    targetPath: 'pages/about.html#leadership',
-                    keywords: 'approach philosophy principles leadership systemizer designing in code verifiable outcomes craft builder',
-                    action: () => {
-                        this.close();
-                        window.location.href = `${prefix}about.html#leadership`;
-                    }
-                },
-                {
                     id: 'nav-about',
                     group: 'Navigation',
                     icon: 'RS',
-                    title: 'About Ryan Schmidt: Leadership & Background',
-                    sub: '6+ years in B2B SaaS, Design Systems, and mentoring 1,500+ designers',
-                    badge: 'About Page',
+                    title: 'About Ryan Schmidt',
+                    sub: 'Background, seniority, and personal craft',
+                    badge: 'About',
                     targetPath: 'pages/about.html',
                     keywords: 'about bio leadership experience career history philosophy background ryan schmidt mentor designlab 6+ years',
                     action: () => { window.location.href = `${prefix}about.html`; }
@@ -647,8 +551,8 @@
                     id: 'nav-home',
                     group: 'Navigation',
                     icon: '⌂',
-                    title: 'Home: Editorial Index',
-                    sub: 'Return to primary portfolio editorial hero and index',
+                    title: 'Homepage',
+                    sub: 'Senior B2B SaaS Product Designer',
                     badge: 'Home',
                     targetPath: 'index.html#top',
                     keywords: 'home index start main portfolio top hero',
@@ -666,10 +570,10 @@
                 // Quick Actions & Direct Links
                 {
                     id: 'act-resume',
-                    group: 'Direct Links',
+                    group: 'Connect',
                     icon: '↓',
-                    title: 'View Resume Dossier (PDF)',
-                    sub: 'Open ryan-schmidt-resume.pdf in a new tab',
+                    title: 'Resume (PDF)',
+                    sub: 'Download or view dossier in new tab',
                     badge: 'PDF ↗',
                     targetPath: 'assets/ryan-schmidt-resume.pdf',
                     keywords: 'resume cv pdf download hire background experience skills ryan schmidt',
@@ -680,10 +584,10 @@
                 },
                 {
                     id: 'act-email',
-                    group: 'Direct Links',
+                    group: 'Connect',
                     icon: '@',
-                    title: 'Email Ryan Schmidt',
-                    sub: 'ryanschmidt1989@gmail.com (opens default email client)',
+                    title: 'Email',
+                    sub: 'ryanschmidt1989@gmail.com',
                     badge: 'Email ↗',
                     targetPath: 'mailto:ryanschmidt1989@gmail.com',
                     keywords: 'email contact hire reach out message ryanschmidt1989 gmail write direct inbox mailto',
@@ -694,10 +598,10 @@
                 },
                 {
                     id: 'act-linkedin',
-                    group: 'Direct Links',
+                    group: 'Connect',
                     icon: '↗',
-                    title: 'Connect on LinkedIn',
-                    sub: 'linkedin.com/in/ryanschmidt1989 (message or network directly)',
+                    title: 'LinkedIn',
+                    sub: 'linkedin.com/in/ryanschmidt1989',
                     badge: 'LinkedIn ↗',
                     targetPath: 'linkedin.com/in/ryanschmidt1989',
                     keywords: 'linkedin contact hire reach out message connect social network',
@@ -900,8 +804,7 @@
                         </div>
                     </div>
                     <div class="rs-cmd-item__right">
-                        ${item.kpi ? `<span class="rs-cmd-item__kpi rs-cmd-kpi--${this.escapeHtml(item.kpiType)}">${this.escapeHtml(item.kpi)}</span>` : ''}
-                        <span class="rs-cmd-item__badge">${this.escapeHtml(item.badge)}</span>
+                        ${item.kpi ? `<span class="rs-cmd-item__kpi rs-cmd-kpi--${this.escapeHtml(item.kpiType)}">${this.escapeHtml(item.kpi)}</span>` : `<span class="rs-cmd-item__badge">${this.escapeHtml(item.badge)}</span>`}
                         <span class="rs-cmd-item__return" aria-hidden="true">↵</span>
                     </div>
                 `;
