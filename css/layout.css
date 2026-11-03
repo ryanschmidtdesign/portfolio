@@ -203,16 +203,15 @@ body:not(.is-home) {
 }
 
 @media (max-width: 440px) {
-  /* On narrow mobile phones, hide secondary external links (Email, LinkedIn) so primary Work, About, Resume breathe */
-  .site-header__link[href*="mailto"],
+  /* On narrow mobile phones, hide LinkedIn so primary Work, About, Resume, and Email breathe */
   .site-header__link[href*="linkedin"] {
     display: none;
   }
   .site-header__nav {
-    gap: 10px;
+    gap: 8px;
   }
   .site-header__link {
-    font-size: 0.80rem;
+    font-size: 0.78rem;
   }
   .site-header__arrow {
     display: none;

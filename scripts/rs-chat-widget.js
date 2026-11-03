@@ -1172,7 +1172,7 @@ if (savedHist.length > 0) {
     '/': [
       "What did Ryan ship at D-Tools? (+71% engagement)",
       "How did he lift AI adoption by 500% at i4cp?",
-      "Walk me through the real-time inventory MVP (+8% MRR)",
+      "Walk me through the real-time inventory MVP (+8% ARR)",
       "Is Ryan a fit for a Senior / Staff Product Designer role?"
     ]
   };
@@ -1841,8 +1841,8 @@ if (savedHist.length > 0) {
         const qLower = (text || '').toLowerCase();
         if (qLower.includes('71%') || qLower.includes('engagement') || qLower.includes('dashboard')) {
           ans = "At D-Tools Cloud, Ryan redesigned static reporting into role-based executive dashboards with AI summaries based on visible widget data. The redesign drove a **+71% lift in dashboard engagement** and **62% multi-dashboard adoption**.";
-        } else if (qLower.includes('8%') || qLower.includes('18%') || qLower.includes('revenue') || qLower.includes('mrr') || qLower.includes('inventory')) {
-          ans = "For D-Tools Cloud, Ryan connected purchasing, receiving, and stock tracking in one workflow. The release removed a recurring sales blocker and contributed to an **+8% increase in company-wide MRR** over the following year.";
+        } else if (qLower.includes('8%') || qLower.includes('18%') || qLower.includes('revenue') || qLower.includes('arr') || qLower.includes('inventory')) {
+          ans = "For D-Tools Cloud, Ryan connected purchasing, receiving, and stock tracking in one workflow. The release removed a recurring sales blocker and contributed to an **+8% increase in platform ARR** over the following year.";
         } else if (qLower.includes('500%') || qLower.includes('i4cp') || qLower.includes('member portal')) {
           ans = "At i4cp, Ryan reworked navigation and research discovery around member priorities, bringing Ahri into the main discovery experience. Following launch, **Ahri sessions increased 500%** and **daily activity doubled**.";
         } else if (qLower.includes('research') || qLower.includes('process')) {
@@ -1852,7 +1852,7 @@ if (savedHist.length > 0) {
         } else if (qLower.includes('fit') || qLower.includes('role') || qLower.includes('staff') || qLower.includes('senior')) {
           ans = "Ryan brings 6+ years of experience leading product design for B2B SaaS platforms, design tokens, and AI workflows. He bridges strategic product vision with production craft in code.";
         } else {
-          ans = "Ryan Schmidt is a senior product designer & UX engineer with 6+ years designing B2B SaaS platforms and design systems. Explore his featured work above: **Dashboards (+71% Engagement)**, **Inventory (+8% MRR)**, **i4cp Discovery (+500% Sessions)**, and **Building in Code**.";
+          ans = "Ryan Schmidt is a senior product designer & UX engineer with 6+ years designing B2B SaaS platforms and design systems. Explore his featured work above: **Dashboards (+71% Engagement)**, **Inventory (+8% ARR)**, **i4cp Discovery (+500% Sessions)**, and **Building in Code**.";
         }
       }
 

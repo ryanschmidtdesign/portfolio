@@ -56,7 +56,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=89">
+    <link rel="stylesheet" href="../styles.css?v=91">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -315,18 +315,16 @@
           </div>
         </header>
 
-        <section class="case-study-summary" aria-label="Case study summary">
-          <h2 class="case-study-summary__label">At a glance</h2>
-          <ul class="case-study-summary__list">
-            <li><strong>The Problem:</strong> Operations teams lost 2 to 3 hours daily reconciling warehouse stock across spreadsheets, while enterprise sales stalled because buyers needed post-PO asset tracking.</li>
-            <li><strong>What I Built:</strong> A connected inventory ledger tying PO receipts to warehouse shelves, vans, and job work orders, with a dual-track receiving flow that separated fast bulk check-ins from serialized hardware audits.</li>
-            <li><strong>The Result:</strong> Replaced manual spreadsheet tracking, recovered 10–15 hours of weekly audit time for operations leads, and drove an 8% increase in platform ARR.</li>
-          </ul>
-        </section>
+        <figure class="case-study-media">
+          <video autoplay muted playsinline loop preload="auto" width="2880" height="1496" poster="../assets/case-studies/inventory/inventory-assets-poster.webp" aria-label="Screen recording of real-time inventory ledger tracking warehouse stock and project allocations">
+            <source src="../assets/case-studies/inventory/inventory-assets.mp4" type="video/mp4">
+          </video>
+          <figcaption>Real-time inventory ledger connecting warehouse stock directly to project allocations and job schedules.</figcaption>
+        </figure>
 
         <section id="problem" aria-label="Problem & goals">
           <div class="section-divider">
-            <h2 data-reveal>Problem</h2>
+            <h2 data-reveal>The Problem: The Post-PO Blind Spot</h2>
           </div>
           <p>
             In commercial AV integration, an entire job site halts if a single $8,000 matrix switcher is missing on installation morning. Because D-Tools Cloud couldn't show whether delivered hardware was sitting on a warehouse shelf, staged for a job, or loaded on a service van, teams relied on Excel or third-party tools like Jetbuilt.
@@ -545,13 +543,6 @@
           </figure>
 
           <figure class="case-study-media">
-            <video autoplay muted playsinline loop preload="auto" width="2880" height="1496" poster="../assets/case-studies/inventory/inventory-assets-poster.webp" aria-label="Screen recording of real-time inventory ledger tracking warehouse stock and project allocations">
-              <source src="../assets/case-studies/inventory/inventory-assets.mp4" type="video/mp4">
-            </video>
-            <figcaption>Item detail view showing which active jobs have parts reserved so PMs don't accidentally grab someone else's gear.</figcaption>
-          </figure>
-
-          <figure class="case-study-media">
             <picture>
               <source srcset="../assets/case-studies/inventory/inventory-controls.webp" type="image/webp">
               <img src="../assets/case-studies/inventory/inventory-controls.webp" alt="Inventory settings for alerts, thresholds, and automation rules" width="1440" height="754" loading="lazy" class="no-reveal">
@@ -562,7 +553,7 @@
 
         <section id="validation" aria-label="Validation">
           <div class="section-divider">
-            <h2>Prototyping &amp; Validation</h2>
+            <h2>Validation: Cutting Receiving from 4 Minutes to 28 Seconds</h2>
           </div>
           <p>
             In Round 1, our first receiving prototype forced warehouse staff to scan serial numbers for every single line item. Residential testers took over four minutes to check in an eight-item delivery, immediately rejecting anything that slowed down morning dock receiving.
@@ -574,21 +565,21 @@
 
         <section id="impact" aria-label="Impact" class="section--alt">
           <div class="section-divider">
-            <h2>Impact</h2>
+            <h2>Impact: Six-Figure Deals and Recovered Warehouse Hours</h2>
           </div>
           <p class="impact-lede">Operations leads recovered an estimated 10–15 hours a week previously spent on manual stock counts. During pilot rollout, one commercial contractor found over $42,000 in 'missing' AV processors sitting untracked on overflow racks, avoiding a duplicate purchase order.</p>
           <div class="impact-callout">
             <div class="impact-metric">
-              <strong class="metric" style="font-size: clamp(1.8rem, 3.5vw, 2.2rem); line-height: 1.15;">Unblocked</strong>
-              <span class="metric-label">enterprise deals in pilot demos</span>
-            </div>
-            <div class="impact-metric">
-              <strong class="metric" data-animate>+8%</strong>
-              <span class="metric-label">YoY adoption growth</span>
-            </div>
-            <div class="impact-metric">
               <strong class="metric" data-animate>+8%</strong>
               <span class="metric-label">Platform ARR lift</span>
+            </div>
+            <div class="impact-metric">
+              <strong class="metric" data-animate>28s</strong>
+              <span class="metric-label">Median dock check-in</span>
+            </div>
+            <div class="impact-metric">
+              <strong class="metric" data-animate>10–15h</strong>
+              <span class="metric-label">Saved weekly per ops lead</span>
             </div>
           </div>
         </section>
@@ -606,17 +597,17 @@
         </section>
 
         <nav class="case-study-pagination" aria-label="Project navigation">
-          <a href="/pages/member-portal-overhaul" class="case-study-next" aria-label="Next Case Study: i4cp Member Portal &amp; Research Discovery">
+          <a href="/pages/ai-coding-portfolio" class="case-study-next" aria-label="Next Case Study: Building My Portfolio in Code">
             <div class="case-study-next__eyebrow">
               <span>Next Project</span>
-              <span class="case-study-next__badge">Enterprise UX · Information Architecture &amp; AI</span>
+              <span class="case-study-next__badge">Systems Craft · AI-Assisted Front-End</span>
             </div>
             <span class="case-study-next__title">
-              i4cp Member Portal &amp; Research Discovery
+              Building My Portfolio in Code
               <span class="case-study-next__arrow" aria-hidden="true">→</span>
             </span>
             <p class="case-study-next__desc">
-              Rebuilding a cluttered research portal around real executive questions and putting our Ahri AI assistant directly on the homepage.
+              How I built this entire portfolio in HTML, CSS, and vanilla JavaScript using AI coding tools to test layout ideas directly in the browser.
             </p>
           </a>
         </nav>
@@ -647,7 +638,7 @@
     </div>
 
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=90" defer></script>
+    <script src="../scripts/cli-mode.js?v=91" defer></script>
     <script src="../scripts/scripts.js?v=89" defer></script>
     <script src="../scripts/magnetic.js?v=89" defer></script>
     <script src="../scripts/rs-chat-widget.js?v=89" defer></script>

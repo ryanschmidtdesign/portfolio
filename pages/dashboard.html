@@ -56,7 +56,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=89">
+    <link rel="stylesheet" href="../styles.css?v=91">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -319,18 +319,19 @@
           </div>
         </header>
 
-        <section class="case-study-summary" aria-label="Case study summary">
-          <h2 class="case-study-summary__label">At a glance</h2>
-          <ul class="case-study-summary__list">
-            <li><strong>The Problem:</strong> A single hardcoded view forced managers to pull weekly CSV exports into Excel, while leadership wanted an open-ended AI chat bot that operators didn't trust.</li>
-            <li><strong>What I Built:</strong> A customizable 12-column dashboard with role-based templates, permission rules for sensitive financial cards, and one-click AI summaries strictly bound to the active widgets on screen.</li>
-            <li><strong>The Result:</strong> 62% of active accounts built multiple views, weekly dashboard usage rose 71%, and sales reps got ready-made layouts for live customer demos.</li>
-          </ul>
-        </section>
+        <figure class="case-study-media" data-reveal>
+          <picture>
+            <source srcset="../assets/case-studies/dashboards/dashboard-overview.webp" type="image/webp">
+            <img src="../assets/case-studies/dashboards/dashboard-overview.png" alt="Executive BI dashboard overview showing role-based sales metrics, close rate gauge, and trend analysis" width="1440" height="754" loading="eager" fetchpriority="high">
+          </picture>
+          <figcaption>
+            Role-specific KPI counters, pipeline velocity gauges, and margin trend cards configured for commercial contractor reviews.
+          </figcaption>
+        </figure>
 
         <section id="problem" aria-label="Problem & goals">
           <div class="section-divider">
-            <h2 data-reveal>Problem</h2>
+            <h2 data-reveal>The Problem: Trapped in Static Spreadsheets</h2>
           </div>
           <p>
             For a 10-person residential AV shop loading vans at 7:00 AM, high-level sales gauges were useless clutter. For a commercial contractor tracking $2M bids, daily service ticket counts got in the way. Meanwhile, leadership wanted to jump straight to a conversational AI chatbot. My job was to solve the immediate reporting pain first and channel the AI push into something operators would actually trust with their job margins.
@@ -475,16 +476,6 @@
           </ul>
 
           <figure class="case-study-media" data-reveal>
-            <picture>
-              <source srcset="../assets/case-studies/dashboards/dashboard-overview.webp" type="image/webp">
-              <img src="../assets/case-studies/dashboards/dashboard-overview.png" alt="Executive BI dashboard overview showing role-based sales metrics, close rate gauge, and trend analysis" width="1440" height="754" loading="lazy">
-            </picture>
-            <figcaption>
-              Role-specific KPI counters, pipeline velocity gauges, and margin trend cards configured for commercial contractor reviews.
-            </figcaption>
-          </figure>
-
-          <figure class="case-study-media" data-reveal>
             <video autoplay muted playsinline loop preload="auto" width="1440" height="754" poster="../assets/case-studies/dashboards/new-dashboard-poster.webp" aria-label="Walkthrough of selecting a role-based template to create a new dashboard">
               <source src="../assets/case-studies/dashboards/new-dashboard.mp4" type="video/mp4">
             </video>
@@ -614,7 +605,7 @@
 
         <section id="impact" aria-label="Lessons & next" class="section--alt">
           <div class="section-divider">
-            <h2>Impact</h2>
+            <h2>Impact: Replacing Weekly Exports with Daily Habit</h2>
           </div>
           <p class="impact-lede">
             Measured at 30 and 60 days post-launch, 62% of active accounts maintained multiple custom dashboards, and weekly dashboard views rose 71% across consecutive quarters.
@@ -659,17 +650,17 @@
         </section>
 
         <nav class="case-study-pagination" aria-label="Project navigation">
-          <a href="/pages/inventory" class="case-study-next" aria-label="Next Case Study: Inventory, Purchasing &amp; Receiving">
+          <a href="/pages/member-portal-overhaul" class="case-study-next" aria-label="Next Case Study: i4cp Member Portal &amp; Research Discovery">
             <div class="case-study-next__eyebrow">
               <span>Next Project</span>
-              <span class="case-study-next__badge">B2B SaaS · ERP &amp; Operations</span>
+              <span class="case-study-next__badge">Enterprise UX · Information Architecture &amp; AI</span>
             </div>
             <span class="case-study-next__title">
-              Inventory, Purchasing &amp; Receiving
+              i4cp Member Portal &amp; Research Discovery
               <span class="case-study-next__arrow" aria-hidden="true">→</span>
             </span>
             <p class="case-study-next__desc">
-              How connecting warehouse receiving to active project schedules unblocked six-figure enterprise pilot deals.
+              Rebuilding a cluttered research portal around member tasks and placing our conversational AI assistant directly on the homepage.
             </p>
           </a>
         </nav>
@@ -700,7 +691,7 @@
     </div>
 
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=90" defer></script>
+    <script src="../scripts/cli-mode.js?v=91" defer></script>
     <script src="../scripts/scripts.js?v=89" defer></script>
     <script src="../scripts/magnetic.js?v=89" defer></script>
     <script src="../scripts/rs-chat-widget.js?v=89" defer></script>

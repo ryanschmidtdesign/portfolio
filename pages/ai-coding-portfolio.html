@@ -56,7 +56,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=89">
+    <link rel="stylesheet" href="../styles.css?v=91">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -326,18 +326,17 @@
           </dl>
         </header>
 
-        <section class="case-study-summary" aria-label="Case study summary">
-          <h2 class="case-study-summary__label">At a glance</h2>
-          <ul class="case-study-summary__list">
-            <li><strong>The Goal:</strong> Design directly in production code rather than stopping in Figma, testing responsive breakpoints, micro-interactions, and keyboard accessibility in the browser.</li>
-            <li><strong>How I Built It:</strong> Wrote custom semantic HTML and modular CSS with Cursor, and built a serverless backend with Supabase pgvector so the assistant retrieves targeted project notes on demand.</li>
-            <li><strong>The Result:</strong> A zero-framework site governed by 5 CSS layers, an AI assistant guarded by 63 unit tests, and a fast workflow for prototyping B2B interactions in hours.</li>
-          </ul>
-        </section>
+        <figure class="case-study-media">
+          <picture>
+            <source srcset="../assets/case-studies/ai-coding-portfolio/portfolio-code-architecture.webp" type="image/webp">
+            <img src="../assets/case-studies/ai-coding-portfolio/portfolio-code-architecture.webp" alt="Design token system, semantic HTML architecture, and browser testing for Ryan Schmidt portfolio" width="1440" height="754" loading="eager" fetchpriority="high">
+          </picture>
+          <figcaption>Zero-build architecture: modular CSS tokens, semantic HTML, and browser-verified accessibility without framework bloat.</figcaption>
+        </figure>
 
         <section id="problem" aria-label="Problem & goals">
           <div class="section-divider">
-            <h2>Problem</h2>
+            <h2>The Problem: Handing Off Static Artboards Over a Wall</h2>
           </div>
 
           <p>
@@ -347,7 +346,7 @@
 
         <section id="approach" aria-label="Approach" class="section--alt">
           <div class="section-divider">
-            <h2>Approach</h2>
+            <h2>Approach: Production Code as the Design Medium</h2>
           </div>
 
           <p>
@@ -357,7 +356,7 @@
 
         <section id="system-architecture" aria-label="System architecture">
           <div class="section-divider">
-            <h2>System architecture</h2>
+            <h2>System Architecture: Zero-Build Semantic Layers</h2>
           </div>
 
           <p>
@@ -704,7 +703,7 @@
 
         <section id="implementation-highlights" aria-label="Implementation highlights">
           <div class="section-divider">
-            <h2>Implementation highlights</h2>
+            <h2>Implementation Highlights: Responsive &amp; Accessible Foundations</h2>
           </div>
 
           <p>
@@ -767,7 +766,7 @@
 
         <section id="impact" aria-label="Impact">
           <div class="section-divider">
-            <h2>Impact</h2>
+            <h2>Impact: Prototyping at the Speed of Thought</h2>
           </div>
 
           <p>
@@ -843,7 +842,7 @@
     </div>
 
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=90" defer></script>
+    <script src="../scripts/cli-mode.js?v=91" defer></script>
     <script src="../scripts/scripts.js?v=89" defer></script>
     <script src="../scripts/magnetic.js?v=89" defer></script>
     <script src="../scripts/rs-chat-widget.js?v=89" defer></script>

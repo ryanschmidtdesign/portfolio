@@ -395,7 +395,7 @@
           "note": "Daily activity doubled"
         }
       ],
-      "impact_narrative": "The redesigned portal launched on September 11, 2026. Following launch, Ahri sessions increased 500% and daily activity doubled.",
+      "impact_narrative": "The redesigned portal launched on September 1, 2026. Following launch, Ahri sessions increased 500% and daily activity doubled.",
       "sections": [
         {
           "id": "problem",
@@ -420,7 +420,7 @@
         {
           "id": "outcomes",
           "heading": "Outcomes & Impact",
-          "summary": "Shipped to production on September 11, 2026. Ahri sessions increased 500% and daily activity doubled following the redesign."
+          "summary": "Shipped to production on September 1, 2026. Ahri sessions increased 500% and daily activity doubled following the redesign."
         }
       ]
     },

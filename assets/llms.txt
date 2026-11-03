@@ -45,7 +45,7 @@ metrics, and structured fit-matching. Endpoint: /api/chat (POST).
 
 - [i4cp Member Portal & Research Discovery](https://ryanschmidt.design/pages/member-portal-overhaul)
   Research-led navigation and IA overhaul for an enterprise HR research portal.
-  Outcomes: Shipped September 11, 2026; +500% Ahri sessions and doubled daily activity.
+  Outcomes: Shipped September 1, 2026; +500% Ahri sessions and doubled daily activity.
 
 ## Optional
 
