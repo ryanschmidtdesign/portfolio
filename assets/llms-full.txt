@@ -15,7 +15,7 @@
 
 ## Contact & profiles
 
-- Email: via LinkedIn
+- Email: ryanschmidt1989@gmail.com
 - LinkedIn: https://www.linkedin.com/in/ryanschmidt1989/
 - Resume: https://ryanschmidt.design/assets/ryan-schmidt-resume.pdf
 - AI assistant endpoint: https://ryanschmidt.design/api/chat (POST)
@@ -92,6 +92,8 @@ https://ryanschmidt.design/pages/inventory
 
 **Impact:**
 - Contributed to an 8% increase in recurring revenue and 8% year-over-year adoption growth
+- 28-second median receiving time for dock clerks
+- 10 to 15 hours saved weekly per operations lead
 - MVP shipped: December 2024
 
 **Lessons:** Operational products earn trust through state clarity. Users don't just need to know how many: they need to understand why the number is trustworthy.
@@ -146,11 +148,11 @@ https://ryanschmidt.design/pages/ai-coding-portfolio
 
 Custom CSS custom properties defining:
 - **Spacing:** 8px base grid with 1.5x geometric macro scale (var(--space-1) through var(--space-9))
-- **Typography:** IBM Plex Sans (system UI/display), Newsreader (editorial serif accent), Space Mono (telemetry & data) with 1.250 Major Third type scale
+- **Typography:** IBM Plex Sans (system UI/display), Newsreader (editorial serif accent), IBM Plex Mono (telemetry & data) with 1.250 Major Third type scale
 - **Line heights:** 1.15 (display) through 1.68 (prose)
-- **Radii:** 2px (knife-edge cards/inputs/buttons), 8px, 14px, 18px, 999px pill
+- **Radii:** 2px, 4px (inputs/buttons), 8px, 12px, 999px pill
 - **Motion:** cubic-bezier(0.16, 1, 0.3, 1) easing, 120ms/180ms durations
-- **Colors:** Sandstone Day Canvas (#F3E8DF, #ECE0D6), Obsidian Glass Hotel darks (#050608 to #141110), Terracotta accent (#C85A32 / #8C3B1E), Emerald (#166534), Amber (#92400E)
+- **Colors:** Sandstone Day Canvas (#F2EBE3, #EDE5DC), Obsidian Glass Hotel darks (#050608 to #141110), Terracotta accent (#C85A32 / #8C3B1E), Emerald (#166534), Amber (#92400E)
 - **Shadows:** 3 tiers with 1px border simulation
 - **Semantic surfaces:** sandstone canvas, obsidian glass, elevated panels, code surface
 - **Accessibility:** Visible focus rings, WCAG AAA text contrast (7.2:1 to 8.8:1), reduced motion support, skip-to-content link

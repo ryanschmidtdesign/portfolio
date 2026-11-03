@@ -100,7 +100,7 @@
   line-height: var(--lh-body);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1024px) {
   .page-about .timeline-list {
     display: flex;
     flex-direction: column;

@@ -563,6 +563,18 @@
       crumb.addEventListener('click', () => activateCrumb(crumb));
     });
 
+    // Also allow clicking an ia-card inside an active panel to advance to the next crumb
+    panels.forEach((panel, pIdx) => {
+      const cards = panel.querySelectorAll('.ia-card');
+      cards.forEach((card) => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => {
+          const nextCrumb = crumbs[pIdx + 1] || crumbs[0];
+          activateCrumb(nextCrumb);
+        });
+      });
+    });
+
     setupAriaTabs({ tablist, tabs: crumbs, panels });
   }
 

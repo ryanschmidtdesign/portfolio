@@ -250,7 +250,7 @@
           "Owned end-to-end UX across 5 B2B Cloud modules as the platform grew from 6,500 to 18,000 active users.",
           "Designed a desktop-first, real-time inventory MVP through field research and usability testing, contributing to an 8% increase in recurring revenue and 8% year-over-year adoption growth.",
           "Grew the design system to 100+ production components with 92% adoption across engineering.",
-          "Designed dashboard suite with customizable views and AI summaries (**71% engagement during beta**, **62% multi-dashboard adoption**)."
+          "Designed dashboard suite with customizable views and AI summaries (**+71% sustained dashboard views**, **62% multi-dashboard adoption**)."
         ]
       },
       {
@@ -325,7 +325,7 @@
     "achievements_top": [
       "Drove **+500%** Ahri sessions and doubled daily activity after i4cp Member Portal overhaul.",
       "Grew design system to 100+ production components with **92% engineer adoption** across five Cloud modules.",
-      "Increased dashboard engagement by **+71%** during beta (**62% multi-dashboard adoption**).",
+      "Increased dashboard weekly views by **+71%** across consecutive quarters (**62% multi-dashboard adoption**).",
       "Contributed to an **8% increase in recurring revenue** and **8% YoY adoption growth** after Inventory MVP.",
       "Shipped coded prototypes to staging via Cursor, saving **~4 hours of engineering QA per week**."
     ]
@@ -369,12 +369,12 @@
         "Eng",
         "Content/Research"
       ],
-      "timeline": "12 weeks (discovery to rollout)",
+      "timeline": "Feb 2026 – Sept 2026 (discovery through rollout)",
       "methods": [
-        "Stakeholder interviews",
-        "Card sorting",
-        "Tree testing",
-        "Prototyping"
+        "Stakeholder synthesis",
+        "Moderated usability testing (5 HR execs)",
+        "Token architecture",
+        "Prototyping in Cursor"
       ],
       "components": [
         "Global nav",
@@ -584,9 +584,24 @@
       "summary_short": "Connected purchasing, receiving, and stock tracking in one workflow, contributing to an 8% increase in recurring revenue and 8% YoY adoption growth.",
       "outcomes": [
         {
+          "metric": "**Platform ARR**",
+          "value": "**+8%**",
+          "note": "Platform ARR lift contributing to enterprise deal closes"
+        },
+        {
           "metric": "**Recurring Revenue**",
           "value": "**+8%**",
           "note": "Company-wide MRR increase over the following year"
+        },
+        {
+          "metric": "**Dock Check-In**",
+          "value": "**28s**",
+          "note": "Median dock receiving time for shipments"
+        },
+        {
+          "metric": "**Time Saved**",
+          "value": "**10–15h**",
+          "note": "Saved weekly per operations lead"
         },
         {
           "metric": "**YoY Adoption**",
