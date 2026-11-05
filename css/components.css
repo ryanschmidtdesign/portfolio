@@ -1720,6 +1720,17 @@ figure.case-study-media--mobile {
   background: linear-gradient(135deg, var(--red-soft), var(--surface-elevated) 62%);
 }
 
+/* Callout sub-heading: H3 within the Research narrative, matches section H3 scale */
+.what-i-got-wrong-card h3 {
+  font-size: var(--fs-article-h3);
+  font-weight: var(--weight-semibold);
+  line-height: 1.35;
+  letter-spacing: var(--tracking-snug);
+  margin: 0 0 var(--case-h3-to-body) 0;
+  color: var(--text);
+  text-wrap: pretty;
+}
+
 /* Viewport optimization component overrides */
 @media (min-width: 1440px) and (max-width: 1599px) {
   .metric {
@@ -2028,20 +2039,17 @@ figure.case-study-media--mobile {
   flex-direction: column;
   align-items: center;
   width: 136px;
-  background: var(--surface-elevated-strong, #FCFBF9);
-  padding: 8px 8px 14px 8px;
-  border-radius: var(--radius-sm);
-  box-shadow: 0 14px 28px rgba(28, 20, 15, 0.18), 0 3px 8px rgba(28, 20, 15, 0.08);
+  background: var(--surface-elevated, #FAF7F2);
+  padding: 8px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card-hover);
   border: 1px solid var(--border);
   transition: transform 0.2s ease;
 }
 
-.polaroid-popup--cats .polaroid-frame {
-  transform: rotate(-3deg);
-}
-
+.polaroid-popup--cats .polaroid-frame,
 .polaroid-popup--cooking .polaroid-frame {
-  transform: rotate(2.5deg);
+  transform: none;
 }
 
 .polaroid-frame img {
@@ -2097,7 +2105,12 @@ figure.case-study-media--mobile {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-5);
+}
+
+/* Same spacing whether or not the item ends the list */
+.decision-bridges .bridge-list .bridge-item {
+  margin-bottom: 0;
 }
 
 .bridge-item {
@@ -3223,7 +3236,7 @@ figure.case-study-media--mobile {
   margin: 0;
   font-size: var(--fs-sm);
   color: #D4CFCA;
-  line-height: var(--lh-snug);
+  line-height: 1.5;
   max-width: 60ch;
 }
 
@@ -3288,4 +3301,68 @@ figure.case-study-media--mobile {
 
 .synthesis-matrix__table tr:last-child td {
   border-bottom: none;
+}
+
+
+/* Mobile: stack synthesis matrix rows as cards instead of horizontal scroll */
+@media (max-width: 600px) {
+  .synthesis-matrix {
+    padding: var(--space-4) var(--space-3);
+  }
+
+  .synthesis-matrix__table {
+    min-width: 0;
+  }
+
+  .synthesis-matrix__table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .synthesis-matrix__table,
+  .synthesis-matrix__table tbody,
+  .synthesis-matrix__table tr,
+  .synthesis-matrix__table th,
+  .synthesis-matrix__table td {
+    display: block;
+    width: auto !important;
+  }
+
+  .synthesis-matrix__table tbody tr {
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .synthesis-matrix__table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .synthesis-matrix__table tbody th,
+  .synthesis-matrix__table td {
+    padding: var(--space-1) 0;
+    border-bottom: none;
+  }
+
+  .synthesis-matrix__table td::before {
+    display: block;
+    margin-bottom: 2px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+  }
+
+  .synthesis-matrix__table td:nth-of-type(1)::before {
+    content: "First Morning Question";
+  }
+
+  .synthesis-matrix__table td:nth-of-type(2)::before {
+    content: "Failure Mode of Hardcoded Views";
+  }
 }

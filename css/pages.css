@@ -51,16 +51,20 @@
 
 /* About page section layout: intro + metrics above, timeline full-width below */
 .page-about .leadership-wrapper {
+  max-width: 1160px;
+  margin-inline: auto;
   flex-wrap: wrap;
   row-gap: var(--space-7);
 }
 
 .page-about .leadership-left {
-  flex: 1 1 min(58%, 42rem);
+  flex: 1 1 min(54%, 38rem);
+  min-width: 0;
 }
 
 .page-about .leadership-right {
-  flex: 1 1 min(38%, 32rem);
+  flex: 1 1 min(38%, 30rem);
+  min-width: 0;
 }
 
 /* Timelines become their own full-width row */
@@ -276,26 +280,22 @@
   margin: 0;
 }
 
-/* Polaroid Photo Treatment */
+/* Editorial Portrait Treatment */
 .about-image img {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 3/4;
-  border-radius: var(--radius-md);
-  background-color: var(--surface-elevated-strong, #FCFBF9);
-  border: 10px solid var(--surface-elevated-strong, #FCFBF9);
-  border-bottom-width: 32px;
-  box-shadow: 
-    3px 10px 28px rgba(28, 20, 15, 0.18),
-    0 2px 4px rgba(28, 20, 15, 0.08),
-    0 0 0 1px var(--border-subtle);
-  transform: rotate(-1.2deg);
-  transition: transform 220ms ease;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
 }
 
 .about-image:hover img {
-  transform: rotate(0deg) scale(1.01);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 @media (max-width: 900px) {
@@ -913,63 +913,16 @@ body.is-home {
 }
 
 /* -------------------------------------------------------
-   Card media: tinted stage + inset, CSS-cropped screenshot.
-   Fine-tune each crop with --crop-x / --crop-y (focal point,
-   used for object-position and transform-origin) and
-   --crop-scale (zoom).
+   Card media: full, uncropped edge-to-edge screenshot
    ------------------------------------------------------- */
-.home-project-card {
-  --crop-x: 50%;
-  --crop-y: 50%;
-  --crop-scale: 1.6;
-}
-
-.home-project-card--dashboards {
-  /* Closed Sales total + Sales Cycle gauge; blue sidebar cropped out */
-  --crop-x: 85%;
-  --crop-y: 24%;
-  --crop-scale: 1.2;
-}
-
-.home-project-card--member-portal {
-  /* Ahri prompt chips + surrounding feed cards */
-  --crop-x: 12%;
-  --crop-y: 92%;
-  --crop-scale: 1.7;
-}
-
-.home-project-card--inventory {
-  /* Stock count row + In Stock / Picked status column; sidebar cropped out */
-  --crop-x: 100%;
-  --crop-y: 26%;
-  --crop-scale: 1.5;
-}
-
-.home-project-card--portfolio {
-  /* RAG retrieval panel */
-  --crop-x: 98%;
-  --crop-y: 50%;
-  --crop-scale: 2;
-}
-
-.home-project-card__stage {
-  --stage-pad: var(--space-5);
-  position: relative;
-  flex-shrink: 0;
-  aspect-ratio: 1.91 / 1;
-  background: var(--surface-1);
-}
-
-/* Inset frame: equal padding on all four sides of the stage */
 .home-project-card__media {
-  position: absolute;
-  inset: var(--stage-pad);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.91 / 1;
   margin: 0;
   overflow: hidden;
-  background: var(--surface-elevated-strong);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-1);
+  background: var(--surface-code);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .home-project-card__media img {
@@ -977,14 +930,18 @@ body.is-home {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: var(--crop-x) var(--crop-y);
-  transform-origin: var(--crop-x) var(--crop-y);
-  transform: scale(var(--crop-scale));
-  transition: transform 200ms var(--ease-out);
+  object-position: top center;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .home-project-card:hover .home-project-card__media img {
-  transform: scale(calc(var(--crop-scale) * 1.03));
+  transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-project-card:hover .home-project-card__media img {
+    transform: none;
+  }
 }
 
 /* -------------------------------------------------------
@@ -997,37 +954,35 @@ body.is-home {
   flex: 1;
 }
 
-.home-project-eyebrow {
+.home-project-card__eyebrow-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2);
   font-family: var(--font-mono);
   font-size: 0.70rem;
-  font-weight: 600;
-  color: var(--text-muted, #70665D);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  line-height: var(--lh-tight, 1.25);
 }
 
-/* Eyebrow -> metric: tight */
-.home-project-card__metric {
-  margin: var(--space-1) 0 0;
-  font-family: var(--font-sans);
-  font-size: var(--fs-lg);
-  font-weight: var(--weight-regular);
-  line-height: var(--lh-lg);
-  letter-spacing: var(--tracking-tight);
-  color: var(--text-primary);
+.home-project-eyebrow {
+  color: var(--text-muted, #70665D);
+  font-weight: var(--weight-medium, 500);
 }
 
-.home-project-card__metric-num {
-  font-weight: var(--weight-semibold);
+.home-project-card__dot {
+  color: var(--text-muted, #70665D);
+  font-weight: var(--weight-regular, 400);
+  user-select: none;
+}
+
+.home-project-metric {
   color: var(--accent);
+  font-weight: var(--weight-semibold, 600);
 }
 
-.home-project-card__metric-label {
-  font-weight: var(--weight-regular);
-  color: var(--text-primary);
-}
-
-/* Metric -> title: tight; eyebrow -> title when there is no metric */
+/* Eyebrow row -> title: tight spacing (existing small spacing token: --space-2) */
 .home-project-card__title {
   margin: var(--space-2) 0 0;
   font-size: 1.25rem;

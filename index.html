@@ -1095,7 +1095,7 @@
     </header>
 
     <!-- Selected Work Section -->
-    <section class="home-section" id="work" aria-label="Selected Work">
+    <section class="home-section" id="work" aria-label="Work">
       <div class="home-section__header">
         <h2 class="home-section__title">Work</h2>
       </div>
@@ -1103,19 +1103,20 @@
       <div class="home-work-grid">
         <!-- Project 1: D-Tools Dashboards -->
         <article class="home-project-card home-project-card--dashboards">
-          <div class="home-project-card__stage">
-            <figure class="home-project-card__media">
-              <img src="assets/case-studies/dashboards/dashboard-overview.webp" alt="D-Tools Cloud executive BI dashboard showing sales results, close rate, sales cycle gauge, and trend reports" width="1440" height="754" loading="lazy">
-            </figure>
-          </div>
+          <figure class="home-project-card__media">
+            <img src="assets/case-studies/dashboards/dashboard-overview.webp" alt="D-Tools Cloud executive BI dashboard showing sales results, close rate, sales cycle gauge, and trend reports" width="1440" height="754" loading="lazy">
+          </figure>
           <div class="home-project-card__body">
-            <span class="home-project-eyebrow">D-Tools Cloud</span>
-            <p class="home-project-card__metric"><span class="home-project-card__metric-num">62%</span> <span class="home-project-card__metric-label">adoption</span></p>
+            <div class="home-project-card__eyebrow-row">
+              <span class="home-project-eyebrow">D-Tools Cloud</span>
+              <span class="home-project-card__dot" aria-hidden="true">·</span>
+              <span class="home-project-metric">62% adoption</span>
+            </div>
             <h3 class="home-project-card__title">
-              <a href="pages/dashboard.html" class="home-project-card__link">Replacing spreadsheet exports with live dashboards</a>
+              <a href="pages/dashboard.html" class="home-project-card__link">Replaced static dashboards with customizable, AI-powered dashboards</a>
             </h3>
             <p class="home-project-card__summary">
-              Dispatchers and executives got custom dashboards with AI summaries instead of exported spreadsheets. Weekly views stayed up 71%.
+              Installers and executives got customizable dashboards with AI reporting instead of static, out-of-the-box dashboards.
             </p>
             <div class="home-project-card__footer">
               <ul class="home-project-card__tags" aria-label="Topics">
@@ -1131,19 +1132,20 @@
         </article>
         <!-- Project 2: i4cp Member Portal -->
         <article class="home-project-card home-project-card--member-portal">
-          <div class="home-project-card__stage">
-            <figure class="home-project-card__media">
-              <img src="assets/case-studies/member-portal/design-highlights/Home_new.webp" alt="Redesigned i4cp member portal homepage organized by strategic practice areas" width="1920" height="1080" loading="lazy">
-            </figure>
-          </div>
+          <figure class="home-project-card__media">
+            <img src="assets/case-studies/member-portal/design-highlights/Home_new.webp" alt="Redesigned i4cp member portal homepage organized by strategic practice areas" width="2048" height="1156" loading="lazy">
+          </figure>
           <div class="home-project-card__body">
-            <span class="home-project-eyebrow">i4cp</span>
-            <p class="home-project-card__metric"><span class="home-project-card__metric-num">+500%</span> <span class="home-project-card__metric-label">AI search</span></p>
+            <div class="home-project-card__eyebrow-row">
+              <span class="home-project-eyebrow">i4cp</span>
+              <span class="home-project-card__dot" aria-hidden="true">·</span>
+              <span class="home-project-metric">+500% AI search</span>
+            </div>
             <h3 class="home-project-card__title">
               <a href="pages/member-portal-overhaul.html" class="home-project-card__link">Making a research library easy to explore for HR leaders</a>
             </h3>
             <p class="home-project-card__summary">
-              Rebuilt the member portal around clear topic hubs and Ahri, a conversational AI assistant. Daily research activity doubled.
+              Rebuilt the member portal around clear topic hubs and Ahri, a conversational AI assistant.
             </p>
             <div class="home-project-card__footer">
               <ul class="home-project-card__tags" aria-label="Topics">
@@ -1159,19 +1161,20 @@
         </article>
         <!-- Project 3: Real-Time Inventory -->
         <article class="home-project-card home-project-card--inventory">
-          <div class="home-project-card__stage">
-            <figure class="home-project-card__media">
-              <img src="assets/case-studies/inventory/inventory-assets-thumb.webp" alt="Real-time equipment asset tracking, serial numbers, stock quantities, and PO statuses in D-Tools Cloud" width="1440" height="748" loading="lazy">
-            </figure>
-          </div>
+          <figure class="home-project-card__media">
+            <img src="assets/case-studies/inventory/inventory-assets-thumb.webp" alt="Real-time equipment asset tracking, serial numbers, stock quantities, and PO statuses in D-Tools Cloud" width="1440" height="748" loading="lazy">
+          </figure>
           <div class="home-project-card__body">
-            <span class="home-project-eyebrow">D-Tools Cloud</span>
-            <p class="home-project-card__metric"><span class="home-project-card__metric-num">+8%</span> <span class="home-project-card__metric-label">ARR</span></p>
+            <div class="home-project-card__eyebrow-row">
+              <span class="home-project-eyebrow">D-Tools Cloud</span>
+              <span class="home-project-card__dot" aria-hidden="true">·</span>
+              <span class="home-project-metric">+8% ARR</span>
+            </div>
             <h3 class="home-project-card__title">
               <a href="pages/inventory.html" class="home-project-card__link">Connecting warehouse receiving to live job schedules</a>
             </h3>
             <p class="home-project-card__summary">
-              Field teams can now see where every piece of gear is, from purchase order to install. That visibility helped close six-figure enterprise deals.
+              Field teams can now see where every piece of gear is, from purchase order to install. That visibility helped close large enterprise deals.
             </p>
             <div class="home-project-card__footer">
               <ul class="home-project-card__tags" aria-label="Topics">
@@ -1187,14 +1190,13 @@
         </article>
         <!-- Project 4: AI Coding Portfolio -->
         <article class="home-project-card home-project-card--portfolio">
-          <div class="home-project-card__stage">
-            <figure class="home-project-card__media">
-              <img src="assets/case-studies/ai-coding-portfolio/portfolio-code-architecture.webp" alt="Design token system, semantic HTML architecture, and browser testing for Ryan Schmidt portfolio" width="1440" height="754" loading="lazy">
-            </figure>
-          </div>
+          <figure class="home-project-card__media">
+            <img src="assets/case-studies/ai-coding-portfolio/portfolio-code-architecture.webp" alt="Design token system, semantic HTML architecture, and browser testing for Ryan Schmidt portfolio" width="1440" height="754" loading="lazy">
+          </figure>
           <div class="home-project-card__body">
-            <span class="home-project-eyebrow">THIS SITE</span>
-            <p class="home-project-card__metric"><span class="home-project-card__metric-label">Live on this site</span></p>
+            <div class="home-project-card__eyebrow-row">
+              <span class="home-project-eyebrow">THIS SITE</span>
+            </div>
             <h3 class="home-project-card__title">
               <a href="pages/ai-coding-portfolio.html" class="home-project-card__link">Designing and building this portfolio from scratch</a>
             </h3>
