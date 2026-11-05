@@ -375,36 +375,38 @@
           100% { transform: scaleX(0.18); }
         }
 
-        /* ----------------------------------------------------------- */
-        /* INTERACTIVE CATS (Mouse-in "meow!")                        */
-        /* ----------------------------------------------------------- */
-        .cat-interactive {
-          cursor: pointer;
-          pointer-events: auto;
-        }
-        .cat-meow {
-          font-family: var(--font-serif, "Newsreader", Georgia, serif);
-          font-style: italic;
-          font-size: 15px;
-          font-weight: 500;
-          fill: var(--accent, #AC4925);
-          opacity: 0;
-          transform: translateY(3px);
-          transition: opacity 180ms ease, transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
-          pointer-events: none;
-          user-select: none;
-        }
-        .cat-interactive:hover .cat-meow,
-        .cat-interactive:focus-visible .cat-meow {
-          opacity: 1;
-          transform: translateY(0);
-        }
       }
 
       @media (prefers-reduced-motion: reduce) {
         * {
           animation: none !important;
         }
+      }
+
+      /* ----------------------------------------------------------- */
+      /* INTERACTIVE CATS (Mouse-in "meow!")                        */
+      /* ----------------------------------------------------------- */
+      .cat-interactive {
+        cursor: pointer;
+        pointer-events: all;
+      }
+      .cat-meow {
+        font-family: var(--font-serif, "Newsreader", Georgia, serif);
+        font-style: italic;
+        font-size: 20px;
+        font-weight: 500;
+        fill: var(--accent, #AC4925);
+        opacity: 0;
+        transform: translateY(3px);
+        transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1), transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none !important;
+        user-select: none;
+      }
+      .cat-interactive:hover .cat-meow,
+      .cat-interactive:focus-visible .cat-meow,
+      .cat-interactive.is-meowing .cat-meow {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
       }
     </style>
   </defs>
