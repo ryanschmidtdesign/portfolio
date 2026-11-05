@@ -1943,7 +1943,7 @@ figure.case-study-media[data-reveal].is-revealed {
    ========================================================================== */
 .polaroid-trigger {
   position: relative;
-  display: inline-block;
+  display: inline;
   cursor: pointer;
   border-bottom: 1.5px dashed var(--accent, #C85A32);
   color: inherit;
