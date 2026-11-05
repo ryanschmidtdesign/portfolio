@@ -802,9 +802,10 @@ body.is-home {
 .cat-meow {
   font-family: var(--font-serif, "Newsreader", Georgia, serif);
   font-style: italic;
-  font-size: 20px;
-  font-weight: 500;
-  fill: var(--accent, #AC4925);
+  font-size: 26px;
+  font-weight: 600;
+  fill: #1C1A17;
+  color: #1C1A17;
   opacity: 0;
   transform: translateY(3px);
   transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1), transform 160ms cubic-bezier(0.16, 1, 0.3, 1);

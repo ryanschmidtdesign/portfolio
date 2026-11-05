@@ -264,11 +264,24 @@
         /* Ambient Sun, Cloud, Bats & Heart */
         #sun {
           transform-origin: 513px 87px;
-          animation: sun-breathe 8s ease-in-out infinite alternate;
+          animation: sun-vibrate 1.4s ease-in-out infinite;
         }
-        @keyframes sun-breathe {
-          0% { transform: scale(1) rotate(0deg); }
-          100% { transform: scale(1.025) rotate(3.5deg); }
+        @keyframes sun-vibrate {
+          0%, 100% {
+            transform: scale(1) rotate(0deg) translate(0, 0);
+          }
+          20% {
+            transform: scale(1.04) rotate(1.8deg) translate(1px, -1px);
+          }
+          40% {
+            transform: scale(0.99) rotate(-1.5deg) translate(-1px, 1px);
+          }
+          60% {
+            transform: scale(1.05) rotate(2deg) translate(1px, 0.5px);
+          }
+          80% {
+            transform: scale(1.01) rotate(-1deg) translate(-0.5px, -1px);
+          }
         }
 
         #cloud {
@@ -368,6 +381,22 @@
           37%, 52% { transform: translate(0, 0); }
           56%, 70% { transform: translate(1.5px, -1px); }
           74%, 100% { transform: translate(0, 0); }
+        }
+
+        /* ----------------------------------------------------------- */
+        /* DAD WAVING HAND                                            */
+        /* ----------------------------------------------------------- */
+        #dad-waving-arm {
+          transform-origin: 416px 260px;
+          animation: dad-wave-hand 1.4s ease-in-out infinite alternate;
+        }
+        @keyframes dad-wave-hand {
+          0% {
+            transform: rotate(-12deg);
+          }
+          100% {
+            transform: rotate(9deg);
+          }
         }
 
         /* ----------------------------------------------------------- */
@@ -640,9 +669,10 @@
       .cat-meow {
         font-family: var(--font-serif, "Newsreader", Georgia, serif);
         font-style: italic;
-        font-size: 20px;
-        font-weight: 500;
-        fill: var(--accent, #AC4925);
+        font-size: 26px;
+        font-weight: 600;
+        fill: #1C1A17;
+        color: #1C1A17;
         opacity: 0;
         transform: translateY(3px);
         transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1), transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -756,7 +786,7 @@
     <!-- ===================================================================== -->
     <!-- 6. MOM (Left of Son - Grounded Natural Proportions)                   -->
     <!-- ===================================================================== -->
-    <g id="mom">
+    <g id="mom" transform="translate(14, 0)">
       <!-- Topknot bun & terracotta hair tie -->
       <circle cx="186" cy="208" r="9.5" fill="#1C1A17" stroke="#1C1A17" stroke-width="2" />
       <path d="M 180,216 Q 188,213 194,216" stroke="#C85A32" stroke-width="2.8" fill="none" />
@@ -804,13 +834,13 @@
     <!-- 7. TODDLER SON (Center, Joyful Hands Held Up)                         -->
     <!-- ===================================================================== -->
     <g id="toddler-son">
-      <!-- Left & Right Arms reaching up to Mom and Dad -->
-      <path d="M 289,342 Q 278,333 269,323" stroke="#2B2622" stroke-width="2.7" fill="none" />
-      <path d="M 311,342 Q 322,333 331,323" stroke="#2B2622" stroke-width="2.7" fill="none" />
+      <!-- Left & Right Arms reaching up to Mom and Dad (Connected Cozily) -->
+      <path d="M 289,342 Q 285,332 282,323" stroke="#2B2622" stroke-width="2.7" fill="none" />
+      <path d="M 311,342 Q 315,332 319,323" stroke="#2B2622" stroke-width="2.7" fill="none" />
 
       <!-- Clasped hands -->
-      <circle cx="268" cy="322" r="3.6" fill="#FCD9B8" stroke="#2B2622" stroke-width="2" />
-      <circle cx="332" cy="322" r="3.6" fill="#FCD9B8" stroke="#2B2622" stroke-width="2" />
+      <circle cx="282" cy="322" r="3.6" fill="#FCD9B8" stroke="#2B2622" stroke-width="2" />
+      <circle cx="319" cy="322" r="3.6" fill="#FCD9B8" stroke="#2B2622" stroke-width="2" />
 
       <!-- Niko Head Group (Animated: looking up at Mom, then Dad) -->
       <g id="niko-head">
@@ -849,7 +879,7 @@
     <!-- ===================================================================== -->
     <!-- 8. DAD (Ryan, Right of Son - Grounded Natural Proportions)            -->
     <!-- ===================================================================== -->
-    <g id="dad">
+    <g id="dad" transform="translate(-14, 0)">
       <!-- Head contour -->
       <ellipse cx="398" cy="222" rx="22" ry="23" fill="#FCEBD9" stroke="#2B2622" stroke-width="2.7" />
 
@@ -871,11 +901,13 @@
       <!-- Left Arm reaching gently to Toddler Son's right hand -->
       <path d="M 380,262 Q 356,294 333,322" stroke="#2B2622" stroke-width="2.8" fill="none" />
 
-      <!-- Right Arm waving warmly -->
-      <path d="M 416,260 Q 432,234 444,204" stroke="#2B2622" stroke-width="2.8" fill="none" />
-      <circle cx="445" cy="202" r="3.5" fill="#FCEBD9" stroke="#2B2622" stroke-width="2" />
-      <path d="M 442,195 L 441,188 M 447,196 L 450,189 M 451,200 L 458,194 M 451,204 L 458,202"
-            stroke="#2B2622" stroke-width="1.9" />
+      <!-- Right Arm waving warmly (Animated) -->
+      <g id="dad-waving-arm">
+        <path d="M 416,260 Q 432,234 444,204" stroke="#2B2622" stroke-width="2.8" fill="none" />
+        <circle cx="445" cy="202" r="3.5" fill="#FCEBD9" stroke="#2B2622" stroke-width="2" />
+        <path d="M 442,195 L 441,188 M 447,196 L 450,189 M 451,200 L 458,194 M 451,204 L 458,202"
+              stroke="#2B2622" stroke-width="1.9" />
+      </g>
 
       <!-- Olive Green Crewneck T-Shirt -->
       <path d="M 379,255 L 417,255 L 420,328 L 376,328 Z"
@@ -1005,6 +1037,7 @@
 
   </g>
 </svg>
+
         </div>
       </figure>
     </header>
