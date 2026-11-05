@@ -264,23 +264,23 @@
         /* Ambient Sun, Cloud, Bats & Heart */
         #sun {
           transform-origin: 513px 87px;
-          animation: sun-vibrate 1.4s ease-in-out infinite;
+          animation: sun-vibrate 1.5s ease-in-out infinite;
         }
         @keyframes sun-vibrate {
           0%, 100% {
             transform: scale(1) rotate(0deg) translate(0, 0);
           }
           20% {
-            transform: scale(1.04) rotate(1.8deg) translate(1px, -1px);
+            transform: scale(1.03) rotate(1.35deg) translate(0.7px, -0.7px);
           }
           40% {
-            transform: scale(0.99) rotate(-1.5deg) translate(-1px, 1px);
+            transform: scale(0.992) rotate(-1.1deg) translate(-0.7px, 0.7px);
           }
           60% {
-            transform: scale(1.05) rotate(2deg) translate(1px, 0.5px);
+            transform: scale(1.038) rotate(1.5deg) translate(0.7px, 0.4px);
           }
           80% {
-            transform: scale(1.01) rotate(-1deg) translate(-0.5px, -1px);
+            transform: scale(1.008) rotate(-0.75deg) translate(-0.4px, -0.7px);
           }
         }
 
@@ -499,27 +499,30 @@
 
         /* ----------------------------------------------------------- */
         /* PESTO THE TABBY CAT: Walk, Watch Butterfly, Stand & Play   */
+        /* (Desynchronized timing: rests first, plays at 50-70%)      */
         /* ----------------------------------------------------------- */
         #pesto-cat-track {
           animation: pesto-walk-track 20s ease-in-out infinite;
         }
         @keyframes pesto-walk-track {
-          0% {
+          0%, 28% {
+            /* Resting at home spot */
             transform: translateX(0);
           }
-          20% {
-            /* Walk right toward butterfly / flowers */
+          44% {
+            /* Walks right toward butterfly and flowers */
             transform: translateX(38px);
           }
-          60% {
-            /* Standing / playing with butterfly */
+          74% {
+            /* Finished playing, still at right spot */
             transform: translateX(38px);
           }
-          80% {
-            /* Walk back home */
+          88% {
+            /* Walks back home */
             transform: translateX(0);
           }
           100% {
+            /* Rest at home */
             transform: translateX(0);
           }
         }
@@ -529,36 +532,42 @@
           animation: pesto-actions 20s ease-in-out infinite;
         }
         @keyframes pesto-actions {
-          0%, 5%, 10%, 15%, 20% {
+          0%, 28% {
+            /* Sitting relaxed at base spot */
             transform: scaleX(1) translateY(0);
           }
-          2.5%, 7.5%, 12.5%, 17.5% {
+          30%, 34%, 38%, 42%, 44% {
+            /* Walking right toward flowers: natural gait bounce */
+            transform: scaleX(1) translateY(0);
+          }
+          32%, 36%, 40% {
             transform: scaleX(1) translateY(-2.5px);
           }
-          22%, 26% {
-            /* Stops, watches butterfly */
+          46%, 49% {
+            /* Stops, watches butterfly approach */
             transform: scaleX(1) translateY(0);
           }
-          29%, 52% {
-            /* STANDS UP on hind legs to catch butterfly! */
+          52%, 70% {
+            /* STANDS UP on hind legs to catch the butterfly! */
             transform: scaleX(1) translateY(-14px) scaleY(1.12);
           }
-          55%, 58% {
-            /* Drops back down */
+          72%, 74% {
+            /* Drops back down on all fours */
             transform: scaleX(1) translateY(0);
           }
-          61% {
+          76% {
             /* Turn left to walk home */
             transform: scaleX(-1) translateY(0);
           }
-          64.5%, 69.5%, 74.5%, 79.5% {
+          78.5%, 82.5%, 86.5% {
+            /* Walking left back home */
             transform: scaleX(-1) translateY(-2.5px);
           }
-          62%, 67%, 72%, 77%, 80% {
+          77%, 80.5%, 84.5%, 88% {
             transform: scaleX(-1) translateY(0);
           }
-          83%, 100% {
-            /* Resting at home */
+          91%, 100% {
+            /* Facing forward, resting at home */
             transform: scaleX(1) translateY(0);
           }
         }
@@ -569,11 +578,12 @@
           animation: pesto-reach-paws 20s ease-in-out infinite;
         }
         @keyframes pesto-reach-paws {
-          0%, 28% { opacity: 0; transform: translateY(0); }
-          29% { opacity: 1; transform: translateY(-4px); }
-          32%, 38%, 44%, 50% { opacity: 1; transform: translateY(-10px) rotate(6deg); }
-          35%, 41%, 47% { opacity: 1; transform: translateY(-4px) rotate(-6deg); }
-          53% { opacity: 0; transform: translateY(0); }
+          0%, 50% { opacity: 0; transform: translateY(0); }
+          51% { opacity: 1; transform: translateY(-4px); }
+          54%, 60%, 66% { opacity: 1; transform: translateY(-10px) rotate(6deg); }
+          57%, 63% { opacity: 1; transform: translateY(-4px) rotate(-6deg); }
+          69% { opacity: 1; transform: translateY(-2px) rotate(0deg); }
+          71% { opacity: 0; transform: translateY(0); }
           100% { opacity: 0; transform: translateY(0); }
         }
 
@@ -582,21 +592,20 @@
           animation: pesto-look-up 20s ease-in-out infinite;
         }
         @keyframes pesto-look-up {
-          0%, 22% { transform: rotate(0deg); }
-          25%, 52% { transform: rotate(-10deg) translateY(-4px); }
-          55%, 100% { transform: rotate(0deg); }
+          0%, 46% { transform: rotate(0deg); }
+          48%, 70% { transform: rotate(-10deg) translateY(-4px); }
+          73%, 100% { transform: rotate(0deg); }
         }
 
         #pesto-tail {
           transform-origin: 505px 396px;
-          animation: tail-sway-pesto 5s ease-in-out infinite alternate;
+          animation: tail-sway-pesto 4.2s ease-in-out infinite alternate;
         }
         @keyframes tail-sway-pesto {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(6deg); }
         }
 
-        /* ----------------------------------------------------------- */
         /* BUTTERFLY FLIGHT & WING FLAP                                */
         /* ----------------------------------------------------------- */
         #butterfly {
@@ -604,53 +613,71 @@
         }
         @keyframes butterfly-flight-loop {
           0% {
-            transform: translate(380px, 350px) rotate(5deg);
+            /* Starts fluttering near left bluebonnets */
+            transform: translate(90px, 340px) rotate(8deg);
           }
           15% {
-            transform: translate(440px, 320px) rotate(-10deg);
+            /* Flutters low over the bluebonnets */
+            transform: translate(160px, 320px) rotate(-12deg);
           }
           28% {
-            /* Flutters right in front of Pesto who is at x ~ 530 */
-            transform: translate(525px, 290px) rotate(15deg);
+            /* Wanders near toddler son */
+            transform: translate(270px, 290px) rotate(14deg);
           }
-          36% {
-            /* Dips playfully down toward Pesto's reaching paws */
-            transform: translate(515px, 310px) rotate(-8deg);
+          40% {
+            /* Loops gently past Dad toward right side */
+            transform: translate(410px, 270px) rotate(-10deg);
           }
-          45% {
-            /* Flutters upward dodging the paw */
-            transform: translate(535px, 275px) rotate(12deg);
+          48% {
+            /* Descends toward right bluebonnets and Pesto */
+            transform: translate(490px, 295px) rotate(12deg);
           }
-          56% {
-            /* Loops high above Dad */
-            transform: translate(460px, 230px) rotate(-15deg);
+          54% {
+            /* Dips playfully right above Pesto's reaching paws */
+            transform: translate(508px, 292px) rotate(-6deg);
+          }
+          60% {
+            /* Flutters slightly up dodging the playful paw */
+            transform: translate(522px, 268px) rotate(15deg);
+          }
+          66% {
+            /* Teases back downward within Pesto's gaze */
+            transform: translate(502px, 280px) rotate(-10deg);
           }
           72% {
-            /* Flutters toward center bluebonnets */
-            transform: translate(340px, 290px) rotate(10deg);
+            /* Flutters upward away from Pesto */
+            transform: translate(520px, 240px) rotate(14deg);
           }
-          85% {
-            /* Drifts low near the flowers */
-            transform: translate(270px, 340px) rotate(-5deg);
+          82% {
+            /* Loops high across the sky */
+            transform: translate(380px, 210px) rotate(-16deg);
+          }
+          92% {
+            /* Drifts back down toward left flowers */
+            transform: translate(200px, 280px) rotate(10deg);
           }
           100% {
-            transform: translate(380px, 350px) rotate(5deg);
+            /* Returns to start near left bluebonnets */
+            transform: translate(90px, 340px) rotate(8deg);
           }
         }
 
         .wing-l {
           transform-origin: 0 0;
-          animation: wing-beat 0.22s ease-in-out infinite alternate;
+          animation: wing-beat-l 0.22s ease-in-out infinite alternate;
         }
         .wing-r {
           transform-origin: 0 0;
-          animation: wing-beat 0.22s ease-in-out infinite alternate;
+          animation: wing-beat-r 0.22s ease-in-out infinite alternate;
         }
-        @keyframes wing-beat {
+        @keyframes wing-beat-l {
           0% { transform: scaleX(1); }
-          100% { transform: scaleX(0.18); }
+          100% { transform: scaleX(0.2); }
         }
-
+        @keyframes wing-beat-r {
+          0% { transform: scaleX(1); }
+          100% { transform: scaleX(0.2); }
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -1009,7 +1036,31 @@
     </g>
 
     <!-- ===================================================================== -->
-    <!-- 11. HAND-LETTERED SIGN-OFF: "AUSTIN, TX ★"                            -->
+    <!-- 11. PLAYFUL BUTTERFLY (Flutters across yard & plays with Pesto)       -->
+    <!-- ===================================================================== -->
+    <g id="butterfly" pointer-events="none">
+      <!-- Tiny antennae -->
+      <path d="M -1,-5 Q -3,-9 -5,-9 M 1,-5 Q 3,-9 5,-9" stroke="#2B2622" stroke-width="1.2" fill="none" />
+      <!-- Left wing pair -->
+      <g class="wing-l">
+        <path d="M 0,-4 C -6,-11 -12,-7 -10,-1 C -8,3 -4,1 0,1 Z" fill="#F2C94C" stroke="#C85A32" stroke-width="1.4" />
+        <path d="M 0,0 C -5,2 -8,7 -5,9 C -2,10 -1,6 0,2 Z" fill="#D46A44" stroke="#2B2622" stroke-width="1.2" />
+        <!-- Wing detail dot -->
+        <circle cx="-6" cy="-3" r="1.2" fill="#3B6082" />
+      </g>
+      <!-- Right wing pair -->
+      <g class="wing-r">
+        <path d="M 0,-4 C 6,-11 12,-7 10,-1 C 8,3 4,1 0,1 Z" fill="#F2C94C" stroke="#C85A32" stroke-width="1.4" />
+        <path d="M 0,0 C 5,2 8,7 5,9 C 2,10 1,6 0,2 Z" fill="#D46A44" stroke="#2B2622" stroke-width="1.2" />
+        <!-- Wing detail dot -->
+        <circle cx="6" cy="-3" r="1.2" fill="#3B6082" />
+      </g>
+      <!-- Slender body -->
+      <ellipse cx="0" cy="0" rx="1.6" ry="5.5" fill="#2B2622" />
+    </g>
+
+    <!-- ===================================================================== -->
+    <!-- 12. HAND-LETTERED SIGN-OFF: "AUSTIN, TX ★"                            -->
     <!-- ===================================================================== -->
     <g id="austin-signoff" fill="none">
       <!-- 'A' -->
@@ -1038,6 +1089,7 @@
   </g>
 </svg>
 
+
         </div>
       </figure>
     </header>
@@ -1051,7 +1103,7 @@
       <div class="home-work-grid">
         <!-- Project 1: D-Tools Dashboards -->
         <article class="home-project-card">
-          <a href="pages/dashboard.html" class="home-project-card__media-link" aria-label="Read Custom Dashboards &amp; AI Summaries case study">
+          <a href="pages/dashboard.html" class="home-project-card__media-link" aria-label="Read case study: Replacing weekly spreadsheet exports with role-based dashboards">
             <figure class="home-project-card__media">
               <img src="assets/case-studies/dashboards/dashboard-overview.webp" alt="D-Tools Cloud executive BI dashboard showing sales results, close rate, sales cycle gauge, and trend reports" width="1440" height="754" loading="lazy">
             </figure>
@@ -1059,22 +1111,21 @@
           <div class="home-project-card__body">
             <div class="home-project-card__top">
               <span class="home-project-eyebrow">D-Tools Cloud</span>
-              <span class="home-kpi-badge">62% Adoption</span>
+              <span class="home-kpi-badge">62% adoption</span>
             </div>
             <h3 class="home-project-card__title">
-              <a href="pages/dashboard.html">Custom Dashboards &amp; AI Summaries</a>
+              <a href="pages/dashboard.html">Replacing weekly spreadsheet exports with role-based dashboards</a>
             </h3>
             <p class="home-project-card__summary">
-              Replaced weekly spreadsheet exports with customizable, role-based dashboards for commercial AV dispatchers and executives—lifting sustained weekly views by 71%.
+              Dispatchers and executives got custom dashboards with AI summaries instead of exported spreadsheets. Weekly views stayed up 71%.
             </p>
             <div class="home-project-card__footer">
               <div class="home-project-card__tags">
-                <span>B2B SaaS</span>
+                <span>Data visualization</span>
                 <span>AI UX</span>
-                <span>Data Viz</span>
               </div>
               <div class="home-project-card__actions">
-                <a href="pages/dashboard.html" class="home-project-card__cta" aria-label="Read Custom Dashboards &amp; AI Summaries case study">
+                <a href="pages/dashboard.html" class="home-project-card__cta" aria-label="Read case study: Replacing weekly spreadsheet exports with role-based dashboards">
                   <span>Read case study</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -1085,30 +1136,29 @@
 
         <!-- Project 2: i4cp Member Portal -->
         <article class="home-project-card">
-          <a href="pages/member-portal-overhaul.html" class="home-project-card__media-link" aria-label="Read i4cp Member Portal &amp; Research Discovery case study">
+          <a href="pages/member-portal-overhaul.html" class="home-project-card__media-link" aria-label="Read case study: Making a research library easy to explore for HR leaders">
             <figure class="home-project-card__media">
               <img src="assets/case-studies/member-portal/design-highlights/Home_new.webp" alt="Redesigned i4cp member portal homepage organized by strategic practice areas" width="1920" height="1080" loading="lazy">
             </figure>
           </a>
           <div class="home-project-card__body">
             <div class="home-project-card__top">
-              <span class="home-project-eyebrow">i4cp Enterprise</span>
-              <span class="home-kpi-badge">+500% AI Search</span>
+              <span class="home-project-eyebrow">i4cp</span>
+              <span class="home-kpi-badge">+500% AI search</span>
             </div>
             <h3 class="home-project-card__title">
-              <a href="pages/member-portal-overhaul.html">i4cp Member Portal &amp; Research Discovery</a>
+              <a href="pages/member-portal-overhaul.html">Making a research library easy to explore for HR leaders</a>
             </h3>
             <p class="home-project-card__summary">
-              Redesigned an enterprise research library for HR executives around clear topic hubs and Ahri, our conversational AI assistant—doubling daily research activity.
+              Rebuilt the member portal around clear topic hubs and Ahri, a conversational AI assistant. Daily research activity doubled.
             </p>
             <div class="home-project-card__footer">
               <div class="home-project-card__tags">
-                <span>Enterprise SaaS</span>
-                <span>Information Architecture</span>
+                <span>Information architecture</span>
                 <span>Conversational AI</span>
               </div>
               <div class="home-project-card__actions">
-                <a href="pages/member-portal-overhaul.html" class="home-project-card__cta" aria-label="Read i4cp Member Portal &amp; Research Discovery case study">
+                <a href="pages/member-portal-overhaul.html" class="home-project-card__cta" aria-label="Read case study: Making a research library easy to explore for HR leaders">
                   <span>Read case study</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -1119,7 +1169,7 @@
 
         <!-- Project 3: Real-Time Inventory -->
         <article class="home-project-card">
-          <a href="pages/inventory.html" class="home-project-card__media-link" aria-label="Read Inventory, Purchasing &amp; Receiving case study">
+          <a href="pages/inventory.html" class="home-project-card__media-link" aria-label="Read case study: Connecting warehouse receiving to live job schedules">
             <figure class="home-project-card__media">
               <img src="assets/case-studies/inventory/inventory-assets-thumb.webp" alt="Real-time equipment asset tracking, serial numbers, stock quantities, and PO statuses in D-Tools Cloud" width="1440" height="748" loading="lazy">
             </figure>
@@ -1127,22 +1177,21 @@
           <div class="home-project-card__body">
             <div class="home-project-card__top">
               <span class="home-project-eyebrow">D-Tools Cloud</span>
-              <span class="home-kpi-badge">+8% ARR Lift</span>
+              <span class="home-kpi-badge">+8% ARR</span>
             </div>
             <h3 class="home-project-card__title">
-              <a href="pages/inventory.html">Inventory, Purchasing &amp; Receiving</a>
+              <a href="pages/inventory.html">Connecting warehouse receiving to live job schedules</a>
             </h3>
             <p class="home-project-card__summary">
-              Connected warehouse receiving directly to active job schedules so field teams always know where gear is. Unblocked six-figure enterprise deals and drove an 8% lift in platform ARR.
+              Field teams can now see where every piece of gear is, from purchase order to install. That visibility helped close six-figure enterprise deals.
             </p>
             <div class="home-project-card__footer">
               <div class="home-project-card__tags">
-                <span>0→1 Systems</span>
-                <span>Workflow Automation</span>
-                <span>Supply Chain</span>
+                <span>Workflow automation</span>
+                <span>Supply chain</span>
               </div>
               <div class="home-project-card__actions">
-                <a href="pages/inventory.html" class="home-project-card__cta" aria-label="Read Inventory, Purchasing &amp; Receiving case study">
+                <a href="pages/inventory.html" class="home-project-card__cta" aria-label="Read case study: Connecting warehouse receiving to live job schedules">
                   <span>Read case study</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -1153,7 +1202,7 @@
 
         <!-- Project 4: AI Coding Portfolio -->
         <article class="home-project-card">
-          <a href="pages/ai-coding-portfolio.html" class="home-project-card__media-link" aria-label="Read Building My Portfolio in Code case study">
+          <a href="pages/ai-coding-portfolio.html" class="home-project-card__media-link" aria-label="Read case study: Designing and building this portfolio from scratch">
             <figure class="home-project-card__media">
               <img src="assets/case-studies/ai-coding-portfolio/portfolio-code-architecture.webp" alt="Design token system, semantic HTML architecture, and browser testing for Ryan Schmidt portfolio" width="1440" height="754" loading="lazy">
             </figure>
@@ -1161,21 +1210,21 @@
           <div class="home-project-card__body">
             <div class="home-project-card__top">
               <span class="home-project-eyebrow">Architecture Lab</span>
-              <span class="home-kpi-badge">Engineered in Code</span>
+              <span class="home-kpi-badge">Built in code</span>
             </div>
             <h3 class="home-project-card__title">
-              <a href="pages/ai-coding-portfolio.html">Building My Portfolio in Code</a>
+              <a href="pages/ai-coding-portfolio.html">Designing and building this portfolio from scratch</a>
             </h3>
             <p class="home-project-card__summary">
-              Built this portfolio from scratch with semantic HTML, CSS tokens, and vanilla JavaScript—testing keyboard navigation, responsiveness, and an AI chat assistant right in the browser.
+              Semantic HTML, CSS design tokens, and vanilla JavaScript, plus an AI chat assistant that answers from my project notes.
             </p>
             <div class="home-project-card__footer">
               <div class="home-project-card__tags">
-                <span>Design Tokens</span>
-                <span>Prototyping in Code</span>
+                <span>Design tokens</span>
+                <span>Front-end code</span>
               </div>
               <div class="home-project-card__actions">
-                <a href="pages/ai-coding-portfolio.html" class="home-project-card__cta" aria-label="Read Building My Portfolio in Code case study">
+                <a href="pages/ai-coding-portfolio.html" class="home-project-card__cta" aria-label="Read case study: Designing and building this portfolio from scratch">
                   <span>Read case study</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
