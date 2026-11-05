@@ -758,6 +758,26 @@ body.is-home {
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: heroDrawingFloat 8s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroDrawingFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px) rotate(0.2deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-0.15deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-drawing-paper {
+    animation: none !important;
+  }
 }
 
 .home-drawing-img {
@@ -767,6 +787,11 @@ body.is-home {
   aspect-ratio: 600 / 460;
   user-select: none;
   pointer-events: none;
+}
+
+.home-drawing-img .cat-interactive {
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 /* Sections */
