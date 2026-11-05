@@ -55,7 +55,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../styles.css?v=91">
+  <link rel="stylesheet" href="../styles.css?v=94">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -364,7 +364,7 @@
         </div>
 
         <section class="leadership-timeline" aria-labelledby="career-history-title">
-          <h3 id="career-history-title" class="sr-only">Career History</h3>
+          <h3 id="career-history-title" class="timeline-section-label">Work History</h3>
           <ol class="timeline-list" role="list">
             <li class="timeline-item timeline-item--current">
               <time class="timeline-date" datetime="2026-02">Feb 2026 – Present</time>
@@ -398,34 +398,34 @@
         </section>
 
         <section class="leadership-timeline" style="margin-top: clamp(var(--space-6), 5vw, var(--space-8));" aria-labelledby="education-title">
-          <h3 id="education-title" style="font-family: var(--font-mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: var(--tracking-loose); color: var(--text-secondary); margin-bottom: var(--space-5);">Education &amp; Certifications</h3>
+          <h3 id="education-title" class="timeline-section-label">Education &amp; Certifications</h3>
           <ol class="timeline-list" role="list">
             <li class="timeline-item">
               <time class="timeline-date" datetime="2025">2025</time>
               <div class="timeline-content">
-                <strong>Fullstack Developer Certification</strong>
-                <p>Scrimba · Modern frontend engineering and fullstack web application development</p>
+                <strong>Fullstack Developer Cert.<span class="timeline-company">Scrimba</span></strong>
+                <p>Modern frontend engineering and fullstack web application development</p>
               </div>
             </li>
             <li class="timeline-item">
               <time class="timeline-date" datetime="2022">2022</time>
               <div class="timeline-content">
-                <strong>Design Systems Certification</strong>
-                <p>Memorisely · Token architectures, component scalability, and handoff workflows</p>
+                <strong>Design Systems Certification<span class="timeline-company">Memorisely</span></strong>
+                <p>Token architectures, component scalability, and handoff workflows</p>
               </div>
             </li>
             <li class="timeline-item">
               <time class="timeline-date" datetime="2020">2019 – 2020</time>
               <div class="timeline-content">
-                <strong>UX/UI Design Certification</strong>
-                <p>Designlab · UX Academy immersion in user research, information architecture, and prototyping</p>
+                <strong>UX/UI Design Certification<span class="timeline-company">Designlab</span></strong>
+                <p>UX Academy immersion in user research, information architecture, and prototyping</p>
               </div>
             </li>
             <li class="timeline-item">
               <time class="timeline-date" datetime="2013">2008 – 2013</time>
               <div class="timeline-content">
-                <strong>BA, Anthropology</strong>
-                <p>Clarion University of Pennsylvania · Qualitative Research Methods concentration</p>
+                <strong>BA, Anthropology<span class="timeline-company">Clarion University of Pennsylvania</span></strong>
+                <p>Qualitative Research Methods concentration</p>
               </div>
             </li>
           </ol>
@@ -434,36 +434,35 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about-section" aria-labelledby="about-title">
+    <section id="about" class="leadership-section about-section" aria-labelledby="life-lately-title">
       <div class="leadership-wrapper">
-        <div class="about-content">
+        <div class="leadership-left">
           <figure class="about-image about-image--featured">
             <img src="../assets/images/family-pic.jpg" alt="Ryan Schmidt with his family hiking in the woods"
               loading="eager" fetchpriority="high" decoding="async" id="about-photo" width="600" height="800" />
             <figcaption class="sr-only">Ryan Schmidt hiking in Austin with his family</figcaption>
           </figure>
+        </div>
 
-          <div class="about-text">
-            <h2 id="about-title" class="section-title" data-parallax="0.04">
-              Life Lately
-            </h2>
+        <div class="leadership-right">
+          <h2 id="life-lately-title" class="section-title" data-parallax="0.04">
+            Life Lately
+          </h2>
 
-            <div class="about-prose">
-              <p class="about-lead">
-                I live in Austin with my wife, our toddler, and our
-                <span class="polaroid-trigger">two cats, Pickles and Pesto<span class="polaroid-popup polaroid-popup--cats" aria-hidden="true"><span class="polaroid-frame"><img src="../assets/images/polaroids/pickles-pesto.jpg" alt="Pickles and Pesto" width="640" height="480" loading="lazy" onerror="this.classList.add('is-missing');"><span class="polaroid-fallback"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg><span>Pickles & Pesto</span></span><span class="polaroid-caption">Pickles & Pesto 🐾</span></span></span></span>.
-                Most of life right now revolves around my son: parks, swimming, bedtime stories,
-                "It's pizza time!", and getting outside whenever we can.
-              </p>
+          <div class="about-prose">
+            <p class="about-lead">
+              I live in Austin with my wife, our toddler, and our
+              <span class="polaroid-trigger">two cats, Pickles and Pesto<span class="polaroid-popup polaroid-popup--cats" aria-hidden="true"><span class="polaroid-frame"><img src="../assets/images/polaroids/pickles-pesto.jpg" alt="Pickles and Pesto" width="640" height="480" loading="lazy" onerror="this.classList.add('is-missing');"><span class="polaroid-fallback"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg><span>Pickles & Pesto</span></span><span class="polaroid-caption">Pickles & Pesto 🐾</span></span></span></span>.
+              Most of life right now revolves around my son: parks, swimming, bedtime stories,
+              "It's pizza time!", and getting outside whenever we can.
+            </p>
 
-              <p class="about-lead" style="margin-top: var(--space-5);">
-                When I'm not designing, I'm usually captaining a beer-league hockey team,
-                trying to learn guitar solos that are definitely above my skill level, or
-                <span class="polaroid-trigger">cooking recipes taken from our travels<span class="polaroid-popup polaroid-popup--cooking" aria-hidden="true"><span class="polaroid-frame"><img src="../assets/images/polaroids/travel-recipes.jpg" alt="Travel cooking recipes" width="640" height="557" loading="lazy" onerror="this.classList.add('is-missing');"><span class="polaroid-fallback"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg><span>Kitchen Lab</span></span><span class="polaroid-caption">Travel recipe lab 🍳</span></span></span></span>.
-                I grew up in Pittsburgh, an while I definitely don't miss scraping ice off my windshield in February, I do miss the snowy Christmases.
-              </p>
-            </div>
-
+            <p class="about-lead">
+              When I'm not designing, I'm usually captaining a beer-league hockey team,
+              trying to learn guitar solos that are definitely above my skill level, or
+              <span class="polaroid-trigger">cooking recipes taken from our travels<span class="polaroid-popup polaroid-popup--cooking" aria-hidden="true"><span class="polaroid-frame"><img src="../assets/images/polaroids/travel-recipes.jpg" alt="Travel cooking recipes" width="640" height="557" loading="lazy" onerror="this.classList.add('is-missing');"><span class="polaroid-fallback"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg><span>Kitchen Lab</span></span><span class="polaroid-caption">Travel recipe lab 🍳</span></span></span></span>.
+              I grew up in Pittsburgh, and while I definitely don't miss scraping ice off my windshield in February, I do miss the snowy Christmases.
+            </p>
           </div>
         </div>
       </div>

@@ -100,9 +100,18 @@
 
 .page-about .timeline-content strong {
   font-size: clamp(var(--fs-control), 1.35vw, var(--fs-md));
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   line-height: var(--lh-md);
   margin-bottom: var(--space-2);
+}
+
+.timeline-section-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-loose);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
 }
 
 .timeline-company {
@@ -218,7 +227,7 @@
 
 .metric-text {
   font-size: var(--fs-lg);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   line-height: 1.15;
   letter-spacing: var(--tracking-snug);
   margin-bottom: var(--space-2);
@@ -233,41 +242,12 @@
   font-size: var(--fs-md);
   line-height: 1.2;
   letter-spacing: var(--tracking-snug);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   color: var(--text);
   margin-bottom: var(--space-2);
 }
 
-/* About */
-.about-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-8);
-  align-items: center;
-}
-
-.about-section .leadership-wrapper {
-  display: block;
-}
-
-.about-section .about-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-7);
-  align-items: start;
-  width: 100%;
-}
-
-
-/* Fix: use flex rhythm instead of margins (less cramped) */
-.about-text {
-  max-width: 42rem;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
+/* About (Life Lately) - uses shared leadership-wrapper two-column flex grid */
 .about-section .section-title {
   margin: 0;
 }
@@ -293,7 +273,7 @@
   position: relative;
   display: block;
   max-width: 480px;
-  margin-inline: auto;
+  margin: 0;
 }
 
 /* Polaroid Photo Treatment */
@@ -888,7 +868,7 @@ body.is-home {
   background:
     radial-gradient(480px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(200, 90, 50, 0.045), transparent 65%),
     var(--surface-elevated, #FAF7F2);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-card);
@@ -977,8 +957,7 @@ body.is-home {
   position: relative;
   flex-shrink: 0;
   aspect-ratio: 1.91 / 1;
-  background: var(--surface-code);
-  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-1);
 }
 
 /* Inset frame: equal padding on all four sides of the stage */
@@ -1031,11 +1010,21 @@ body.is-home {
 .home-project-card__metric {
   margin: var(--space-1) 0 0;
   font-family: var(--font-sans);
-  font-size: var(--fs-xl);
-  font-weight: var(--weight-semibold);
-  line-height: var(--lh-xl);
+  font-size: var(--fs-lg);
+  font-weight: var(--weight-regular);
+  line-height: var(--lh-lg);
   letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+.home-project-card__metric-num {
+  font-weight: var(--weight-semibold);
   color: var(--accent);
+}
+
+.home-project-card__metric-label {
+  font-weight: var(--weight-regular);
+  color: var(--text-primary);
 }
 
 /* Metric -> title: tight; eyebrow -> title when there is no metric */
@@ -1046,13 +1035,12 @@ body.is-home {
   line-height: 1.28;
   color: var(--text-primary);
   letter-spacing: -0.018em;
-  /* Reserve exactly 2 lines and clamp at 2 */
+  /* 2-line clamp safety limit */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
-  min-height: calc(2em * 1.28);
 }
 
 .home-project-card__link {
@@ -1089,6 +1077,7 @@ body.is-home {
   font-size: var(--fs-xs);
   line-height: var(--lh-body);
   color: var(--text-primary);
+  max-width: 62ch;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -1526,11 +1515,11 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   .home-omnibar-cmdk { display: none !important; }
 }
 
-/* Generous bottom clearance across pages so floating CLI console never occludes content */
+/* Clean bottom clearance: main requires no extra stacked padding; body handles dock clearance */
 body.is-home main {
-  padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: 0;
 }
 
 body:not(.is-home) main {
-  padding-bottom: clamp(160px, 20vh, 220px);
+  padding-bottom: 0;
 }

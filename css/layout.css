@@ -331,7 +331,7 @@ body:not(.is-home) .site-main {
   .leadership-section:last-of-type,
   .builder-section:last-of-type,
   .about-section:last-of-type {
-    padding-bottom: calc(var(--space-8) + 80px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: var(--space-8);
   }
 }
 
