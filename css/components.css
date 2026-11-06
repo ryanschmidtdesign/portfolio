@@ -884,7 +884,7 @@ figure.case-study-media[data-reveal].is-revealed {
 }
 
 .case-study-media figcaption {
-  max-width: 80%;
+  max-width: min(820px, 100%);
   margin: var(--space-3) auto var(--space-2);
   padding-inline: var(--page-gutter);
   text-align: center;
