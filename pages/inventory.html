@@ -56,7 +56,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
     <!-- CSS (preload + apply) -->
-    <link rel="stylesheet" href="../styles.css?v=91">
+    <link rel="stylesheet" href="../styles.css?v=98">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -305,7 +305,7 @@
                   <span class="metric-label">platform ARR</span>
                 </li>
               </ul>
-              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">Connecting warehouse receiving to active job timelines unblocked five six-figure enterprise pilot accounts and cut median receiving from 4+ minutes to 28 seconds.</p>
+              <p class="metric-footnote" style="margin-top: 12px; font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45;">Connecting warehouse receiving to active job timelines unblocked six-figure enterprise accounts.</p>
             </div>
           </div>
         </header>
@@ -322,14 +322,14 @@
             <h2 data-reveal>The Problem: The Post-PO Blind Spot</h2>
           </div>
           <p>
-            In commercial AV integration, an entire job site halts if a single $8,000 matrix switcher is missing on installation morning. Because D-Tools Cloud couldn't show whether delivered hardware was sitting on a warehouse shelf, staged for a job, or loaded on a service van, teams relied on Excel or third-party tools like Jetbuilt.
+            In AV integration, an entire job site halts if a single $8,000 piece of equipment is missing on installation morning. Because D-Tools Cloud couldn't show whether delivered hardware was sitting on a warehouse shelf, staged for a job, or loaded on a service van, teams relied on Excel or third-party tools like Jetbuilt.
           </p>
 
           <h3>Goals</h3>
           <ul>
-            <li>Connect purchasing, dock receiving, and job staging in one ledger to eliminate double entry</li>
+            <li>Connect purchasing, receiving, and staging in one ledger to eliminate double entry</li>
             <li>Show real-time item status so project managers know what is on order, available, or already claimed by another job</li>
-            <li>Keep dock receiving fast enough for small residential crews while supporting serial-number tracking for commercial compliance</li>
+            <li>Keep receiving fast enough for small teams while supporting serial-number tracking for larger commercial teams</li>
             <li>Flag low stock automatically on high-turnover parts before installers run out on site</li>
           </ul>
         </section>
@@ -344,7 +344,7 @@
           <ul>
             <li><strong>Time sink:</strong> 2–3 hours daily reconciling stock, with 15–20% user-reported count errors</li>
             <li><strong>Workflow split:</strong> Small residential shops needed 10-second bulk check-ins, while commercial integrators needed serial numbers tied to warranties</li>
-            <li><strong>Sales blocker:</strong> Account executives confirmed 5 six-figure enterprise pilots were frozen until we shipped post-PO staging visibility</li>
+            <li><strong>Sales blocker:</strong> Sales leadership confirmed 5 massive enterprise potential accounts were frozen until we shipped post-PO staging visibility</li>
           </ul>
 
           <h3>Defining Decision: Connected Ledger vs. Simple Stock Table</h3>
@@ -361,11 +361,11 @@
             <div class="compare-panels">
               <div class="compare-panel is-active" data-compare-state="spreadsheet" data-tone="bad">
                 <h3>Legacy spreadsheet workflow</h3>
-                <p>Teams spent 2 to 3 hours daily cross-referencing 14 spreadsheets. Stale stock counts caused expensive purchasing mistakes before morning crews ever reached the job site.</p>
+                <p>Stock counts lived separately from purchasing and project schedules, so every handoff created another chance for inventory data to fall out of sync.</p>
               </div>
               <div class="compare-panel" data-compare-state="software" data-tone="bad">
                 <h3>Third-party tool tax</h3>
-                <p>Paying for separate tools like Jetbuilt created duplicate data entry, disconnected project costs, and frequent tracking errors.</p>
+                <p>Paying for separate tools that didn't integrate with D-Tools Cloud like Jetbuilt created duplicate data entry, disconnected project costs, and frequent tracking errors.</p>
               </div>
               <div class="compare-panel" data-compare-state="system" data-tone="good">
                 <h3>Unified inventory platform</h3>
@@ -451,7 +451,7 @@
 
           <h3>Tradeoffs: Real-Time Sync vs. Shipping on Time</h3>
           <p>
-            Early in scoping, I proposed live WebSocket updates so that when a dock worker checked in a box of amplifiers, every open browser across the company updated instantly. Our lead engineer walked me through the cost: keeping persistent socket connections open across thousands of tenants would require a major backend rewrite, drop connections on spotty warehouse Wi-Fi, and blow past our 12-week Q4 deadline.
+            Early in scoping, I proposed real-time updates so that when a dock worker checked in a box of amplifiers, every open browser across the company updated instantly. Our lead engineer walked me through the cost: keeping persistent socket connections open across thousands of tenants would require a major backend rewrite, drop connections on spotty warehouse Wi-Fi, and blow past our 12-week Q4 deadline.
           </p>
           <p>
             Instead, we updated the UI immediately for the person making the change and polled in the background for everyone else. If two project managers tried to claim the last video switcher at the exact same moment, a conflict dialog showed who got it first and offered a one-click PO request to order a replacement.
@@ -465,7 +465,7 @@
             For day-one physical dock operations, receiving clerks worked from desktop terminals at the warehouse intake bench paired with handheld USB or Bluetooth wedge barcode scanners (deferring mobile camera scanning to post-MVP). Scanning a barcode populated the active line item immediately without requiring manual keyboard entry.
           </p>
           <p>
-            I designed a <strong>dual-track receiving flow</strong>: a fast quantity stepper by default for bulk parts, paired with an optional serial-capture drawer for high-value gear:
+            I designed a <strong>dual-track receiving flow</strong>: a fast quantity stepper by default for bulk parts, paired with an optional serial-capture drawer for high-value gear (this path is determined by user settings and permissions):
           </p>
 
           <div class="dual-track-demo" data-dual-track>
@@ -530,7 +530,7 @@
 
           <h3>Shipping on a 12-Week Deadline</h3>
           <p>
-            To hit our Q4 enterprise renewal window, we reused existing data tables, slide-over drawers, and status badges from our D-Tools component library. Skipping custom layout work saved two full sprints for the hardest edge cases: partial shipments, damaged returns, and split backorders.
+            To hit our December deadline, we reused existing data tables, slide-over drawers, and status badges from our D-Tools component library. Skipping custom layout work saved two full sprints for the hardest edge cases: partial shipments, damaged returns, and split backorders.
           </p>
           <p>
             When suppliers delivered incomplete orders, line items received a <strong>"Partially Received"</strong> status. This kept remaining quantities on backorder while immediately releasing checked-in units to project managers for staging and van assignment.
@@ -560,7 +560,7 @@
             In Round 1, our first receiving prototype forced warehouse staff to scan serial numbers for every single line item. Residential testers took over four minutes to check in an eight-item delivery, immediately rejecting anything that slowed down morning dock receiving.
           </p>
           <p>
-            By Round 3, separating bulk items from serialized gear cut median receiving time to 28 seconds, while commercial teams still captured high-value equipment without missing compliance steps.
+            By Round 3, separating bulk items from serialized gear (though this is always optional) cut median receiving time to 28 seconds, while commercial teams still captured high-value equipment without missing compliance steps.
           </p>
         </section>
 
@@ -568,7 +568,7 @@
           <div class="section-divider">
             <h2>Impact: Six-Figure Deals and Recovered Warehouse Hours</h2>
           </div>
-          <p class="impact-lede">Operations leads recovered an estimated 10–15 hours a week previously spent on manual stock counts. During pilot rollout, one commercial contractor found over $42,000 in 'missing' AV processors sitting untracked on overflow racks, avoiding a duplicate purchase order.</p>
+          <p class="impact-lede">Operations leads recovered an estimated 10–15 hours a week previously spent on manual stock counts. During pilot rollout, one commercial contractor found over $42,000 in 'missing' equipment sitting untracked on overflow racks, avoiding a duplicate purchase order.</p>
           <div class="impact-callout">
             <div class="impact-metric">
               <strong class="metric" data-animate>+8%</strong>
@@ -592,16 +592,14 @@
           <p>
             In warehouse software, trust is binary. If a technician drives to a job site and the four switches the app said were in stock aren't in the van, they stop using the app and go back to pen and paper. This feature succeeded because every number explained its history: where the item came from, which project had it claimed, and when the replacement was arriving.
           </p>
-          <ul>
-            <li><strong>What comes next:</strong> Once teams trusted the baseline counts, the next logical steps were mobile barcode scanning in the warehouse and auto-generating reorder POs when stock hits minimums. We held those back from the MVP on purpose to make sure the foundation was rock-solid first.</li>
-          </ul>
+            <h3>What comes next:</h3>
+            <p>Once teams trusted the baseline counts, the next logical steps were mobile barcode scanning in the warehouse and auto-generating reorder POs when stock hits minimums. We held those back from the MVP on purpose to make sure the foundation was rock-solid first.</p>
         </section>
 
         <nav class="case-study-pagination" aria-label="Project navigation">
           <a href="ai-coding-portfolio.html" class="case-study-next" aria-label="Next Case Study: Building My Portfolio in Code">
             <div class="case-study-next__eyebrow">
               <span>Next Project</span>
-              <span class="case-study-next__badge">Systems Craft · AI-Assisted Front-End</span>
             </div>
             <span class="case-study-next__title">
               Building My Portfolio in Code
