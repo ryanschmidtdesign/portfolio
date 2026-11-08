@@ -83,7 +83,7 @@ html {
 /* Fallbacks for experimental `text-wrap` usages: ensure sensible wrapping in
    browsers that don't support `text-wrap: balance|pretty`. This keeps layout
    stable and prevents overflow/poor wrapping on headings and long paragraphs. */
-:where(p, h1, h2, h3, .section-title, .leadership-lede, .about-text, .metric-body, .timeline-content) {
+:where(p, h1, h2, h3, .section-title, .leadership-lede, .about-lead, .metric-body, .timeline-content) {
   overflow-wrap: anywhere;
 }
 
@@ -179,7 +179,7 @@ a:hover {
 
 /* Editorial expanding hairline underline for prose links */
 .case-study p a:not([class]),
-.about-text p a:not([class]),
+.about-prose p a:not([class]),
 .leadership-prose p a:not([class]) {
   text-decoration: none;
   background-image: linear-gradient(var(--accent), var(--accent));
@@ -192,7 +192,7 @@ a:hover {
 }
 
 .case-study p a:not([class]):hover,
-.about-text p a:not([class]):hover,
+.about-prose p a:not([class]):hover,
 .leadership-prose p a:not([class]):hover {
   background-size: 100% 1px;
   color: var(--accent-text-hover, #732F16);
