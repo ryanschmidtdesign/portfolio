@@ -286,12 +286,11 @@
       <header class="tldr" aria-label="Executive summary">
         <h1 id="title" data-parallax="0.06">Building My Portfolio in <em class="serif-accent" style="white-space: nowrap;">Code</em></h1>
 
-          <p class="tldr-label lead">
+          <p class="lead">
             I built this portfolio directly in HTML, CSS, and JavaScript using Cursor and Claude Code. Instead of treating AI as an automatic site builder, I used it as a fast drafting assistant, writing the design tokens, layout structures, and accessibility constraints myself to keep the code clean.
           </p>
 
           <div class="tldr-meta">
-
             <div>
               <p class="tldr-label label">My role</p>
               <p>
@@ -299,30 +298,21 @@
               </p>
             </div>
 
-            <div>
-              <p class="label" style="margin-bottom: var(--space-3);">Key outcomes</p>
-              <ul>
-                <li><strong>Fully custom site</strong> built without templates or CMS</li>
-                <li><strong>Reusable UI + code patterns</strong> across all case studies</li>
-                <li><strong>AI assistant connected to project notes</strong></li>
-              </ul>
-            </div>
+            <dl class="meta">
+             <dt>Stack</dt>
+              <dd>Semantic HTML, Modular CSS, JavaScript, Vercel Serverless Functions, Supabase (pgvector), Gemini API</dd>
 
-          </div>
-
-          <dl class="meta">
-            <dt>Stack</dt>
-            <dd>Semantic HTML, Modular CSS, JavaScript, Vercel Serverless Functions, Supabase (pgvector), Gemini API</dd>
-
-            <dt>Tools</dt>
-            <dd>Cursor, Claude Code, Vercel, GitHub, Supabase</dd>
+              <dt>Tools</dt>
+              <dd>Cursor, Claude Code, Vercel, GitHub, Supabase</dd>
 
             <dt>Repository</dt>
-            <dd><a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="text-decoration:underline;">View source on GitHub ↗</a></dd>
+              <dd><a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="text-decoration:underline;">View source on GitHub ↗</a></dd>
 
             <dt>Scope</dt>
-            <dd>Design, front-end architecture, AI workflow, and implementation</dd>
-          </dl>
+              <dd>Design, front-end architecture, AI workflow, and implementation</dd>
+            </dl>
+          </div>
+          
         </header>
 
         <figure class="case-study-media">
@@ -330,7 +320,7 @@
             <source srcset="../assets/case-studies/ai-coding-portfolio/portfolio-code-architecture.webp" type="image/webp">
             <img src="../assets/case-studies/ai-coding-portfolio/portfolio-code-architecture.webp" alt="Design token system, semantic HTML architecture, and browser testing for Ryan Schmidt portfolio" width="1440" height="754" loading="eager" fetchpriority="high">
           </picture>
-          <figcaption>Zero-build architecture: modular CSS tokens, semantic HTML, and browser-verified accessibility without framework bloat.</figcaption>
+          <figcaption>Architecture: modular CSS tokens, semantic HTML, and browser-verified accessibility without framework bloat.</figcaption>
         </figure>
 
         <section id="problem" aria-label="Problem & goals">
@@ -359,317 +349,41 @@
           </div>
 
           <p>
-            Every case study shares a single architectural template. By establishing identical section shells and metadata structures across all case studies, creating a new project page became a structured assembly process rather than a redesign.
+            Every case study uses the same template, with the same sections and the same metadata. So adding a new project means filling in the pieces, not designing a new page.
           </p>
 
           <div class="sa-funnel">
 
             <article class="sa-step">
               <h3 class="sa-step-title">Prompts</h3>
-              <p class="sa-step-body">Context-rich prompts specifying existing CSS tokens, HTML landmarks, and zero Tailwind classes</p>
+              <p class="sa-step-body">Prompts backed by .md files with my CSS tokens and HTML rules</p>
               <span class="sa-chip sa-chip--start">Foundation</span>
             </article>
 
             <article class="sa-step">
               <h3 class="sa-step-title">Patterns</h3>
-              <p class="sa-step-body">Scaffolded page layouts and interactive splitters generated from documented design patterns</p>
+              <p class="sa-step-body">Page layouts and components built from patterns I documented first</p>
               <span class="sa-chip">Structure</span>
             </article>
 
             <article class="sa-step">
               <h3 class="sa-step-title">Components</h3>
-              <p class="sa-step-body">Hand-tuned UI components where I manually corrected AI layout mistakes (fixing flexbox collapses and focus rings)</p>
-              <span class="sa-chip">Building blocks</span>
+              <p class="sa-step-body">UI pieces I fixed by hand when AI broke the layout, like flexbox collapses and focus rings</p>
+              <span class="sa-chip">Parts</span>
             </article>
 
             <article class="sa-step">
               <h3 class="sa-step-title">Features</h3>
-              <p class="sa-step-body">Fully responsive case study pages validated across mobile viewports, screen readers, and real browsers</p>
+              <p class="sa-step-body">Responsive case studies tested on mobile, with screen readers, and in real browsers</p>
               <span class="sa-chip sa-chip--end">Shipped</span>
             </article>
 
           </div>
 
           <p class="caption">
-            Prompts without architectural constraints produce disposable prototypes. Paired with semantic tokens and layout rules, they produce production-ready components.
+            AI only started giving me code I could ship once it had my tokens and layout rules to work from.
           </p>
         </section>
-
-        <section id="interactive-demo" aria-label="Interactive system demo" class="asd-shell" data-state="idle">
-          <div class="asd-header">
-            <p class="asd-eyebrow">Illustrative architecture walkthrough</p>
-            <h2>See how the assistant works</h2>
-            <p>
-              This diagram traces how a visitor question moves through the assistant pipeline, from prompt input to vector retrieval and streaming response.
-            </p>
-          </div>
-
-          <div class="asd-prompt-bar">
-            <input
-              type="text"
-              class="asd-fake-input"
-              id="asdInput"
-              name="query"
-              placeholder="What has Ryan built related to AI product design?"
-              autocomplete="off"
-              aria-label="Ask the portfolio assistant a question"
-            >
-            <button class="btn-primary asd-send-btn" id="asdSend" type="button" style="height: 48px;">
-              Run walkthrough
-            </button>
-          </div>
-
-          <div class="asd-stage">
-            <!-- Input -->
-            <div class="asd-node" data-id="input" data-accent="blue">
-              <div class="asd-node-top">
-                <span class="asd-kicker">Visitor question</span>
-                <div class="asd-dot"></div>
-              </div>
-              <strong class="asd-node-title">What has Ryan built related to AI?</strong>
-              <p>User submits question from the chat widget</p>
-            </div>
-
-            <div class="asd-flow-line" data-id="flow-1"></div>
-
-            <!-- Function -->
-            <div class="asd-node asd-function-node" data-id="function" data-accent="function">
-              <div class="asd-node-top">
-                <span class="asd-kicker">Vercel serverless function</span>
-                <div class="asd-dot"></div>
-              </div>
-              <strong class="asd-node-title">API Route</strong>
-              <p>Receives question, checks tools needed, routes to RAG</p>
-
-              <button class="asd-peek-btn" id="asdPeek" type="button" aria-expanded="false" aria-controls="asdInternals">
-                + Show function internals
-              </button>
-              <div class="asd-internals" id="asdInternals" hidden>
-                <ol style="padding:0;margin:0;list-style:none">
-                  <li data-id="substep-1">Parse question intent</li>
-                  <li data-id="substep-2">Check portfolio context</li>
-                  <li data-id="substep-3">Route to knowledge retrieval</li>
-                  <li data-id="substep-4">Format system prompt</li>
-                </ol>
-              </div>
-            </div>
-
-            <div class="asd-flow-line" data-id="flow-2"></div>
-
-            <!-- Branch -->
-            <div class="asd-branch">
-              <div class="asd-flow-line asd-flow-line-h" data-id="flow-branch-l"></div>
-              <div class="asd-flow-line asd-flow-line-h" data-id="flow-branch-r"></div>
-            </div>
-
-            <div class="asd-branch">
-              <div class="asd-node" data-id="supabase" data-accent="green">
-                <div class="asd-node-top">
-                  <span class="asd-kicker">Vector store</span>
-                  <div class="asd-dot"></div>
-                </div>
-                <strong class="asd-node-title">Supabase pgvector</strong>
-                <p>Searches 34 curated knowledge chunks for context</p>
-              </div>
-
-              <div class="asd-node" data-id="gemini" data-accent="purple">
-                <div class="asd-node-top">
-                  <span class="asd-kicker">Language model</span>
-                  <div class="asd-dot"></div>
-                </div>
-                <strong class="asd-node-title">Gemini 2.5 Flash</strong>
-                <p>Generates answer from retrieved context + system prompt</p>
-              </div>
-            </div>
-
-            <div class="asd-flow-line" data-id="flow-3"></div>
-
-            <!-- Answer card -->
-            <div class="asd-answer-card" data-id="answer">
-              <div class="asd-answer-head">
-                <span>Response</span>
-              </div>
-              <p>
-                Ryan built an AI-powered portfolio assistant that uses structured project content, retrieval, and Gemini to answer visitor questions about his product design work, systems thinking, and builder experience.
-              </p>
-            </div>
-          </div>
-
-          <p class="asd-caption" id="asdCaption" aria-live="polite">
-            <strong>Ready</strong>
-            <span>Type a question or use the default prompt, then run the walkthrough.</span>
-          </p>
-        </section>
-
-        <script>
-          (function () {
-            const shell = document.querySelector('.asd-shell');
-            if (!shell) return;
-
-            const peekBtn = document.getElementById('asdPeek');
-            const caption = document.getElementById('asdCaption');
-            const internals = document.getElementById('asdInternals');
-            const inputEl = document.getElementById('asdInput');
-            const sendBtn = document.getElementById('asdSend');
-            const inputNode = shell.querySelector('[data-id="input"] .asd-node-title') || shell.querySelector('[data-id="input"] h3');
-            const answerEl = shell.querySelector('[data-id="answer"] p');
-
-            const fallbackAnswer = 'Ryan built an AI-powered portfolio assistant that uses structured project content, retrieval, and Gemini to answer visitor questions about his product design work, systems thinking, and builder experience.';
-
-            function setCaption(label, message) {
-              if (!caption) return;
-              caption.innerHTML = '<strong>' + label + '</strong><span>' + message + '</span>';
-            }
-
-            async function fetchAnswer(question) {
-              const chatApi = window.RS_CHAT_API || '/api/chat';
-
-              const pageContext = { url: location.pathname };
-              if (document.title) pageContext.title = document.title;
-              const desc = document.querySelector('meta[name="description"]')?.content;
-              if (desc) pageContext.description = desc;
-
-              const payload = {
-                messages: [ { role: 'user', content: question } ],
-                pageContext
-              };
-
-              try {
-                const res = await fetch(chatApi, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(payload)
-                });
-
-                if (!res.ok) throw new Error('Chat request failed');
-
-                const data = await res.json().catch(() => ({}));
-                if (data.answer) {
-                  return { isLive: true, text: data.answer };
-                }
-                return { isLive: false, text: generateFallbackAnswer(question) };
-              } catch (e) {
-                return { isLive: false, text: generateFallbackAnswer(question) };
-              }
-            }
-
-            function generateFallbackAnswer(question) {
-              const q = String(question || '').trim();
-              if (!q) return fallbackAnswer;
-              if (/\b(ai|model|gemini|vector|supabase|retriev)/i.test(q)) {
-                return `Ryan built an AI assistant using pgvector retrieval and Gemini to answer questions about his design systems and B2B workflows.`;
-              }
-              if (/\bfit|role|resume|hiring|interview/i.test(q)) {
-                return `Ryan focuses on roles that blend design and engineering, combining UX strategy, design tokens, and browser-tested code.`;
-              }
-              return fallbackAnswer;
-            }
-
-            function activate(id) {
-              shell.querySelectorAll('[data-id="' + id + '"]').forEach(function (el) {
-                el.classList.add('is-active');
-              });
-            }
-
-            function deactivateAll() {
-              shell.querySelectorAll('.is-active').forEach(function (el) {
-                el.classList.remove('is-active');
-              });
-            }
-
-            const steps = [
-              { id: 'input', label: 'Step 1/5', msg: 'Visitor submits a question from the chat widget.', delay: 160 },
-              { id: 'flow-1', label: 'Step 1/5', msg: 'Question moves into the assistant pipeline.', delay: 120 },
-              { id: 'function', label: 'Step 2/5', msg: 'Serverless function parses intent and routes the request.', delay: 260 },
-              { id: 'substep-1', label: 'Step 2/5', msg: 'Parse question intent.', delay: 80 },
-              { id: 'substep-2', label: 'Step 2/5', msg: 'Check portfolio context.', delay: 100 },
-              { id: 'substep-3', label: 'Step 2/5', msg: 'Route to knowledge retrieval.', delay: 100 },
-              { id: 'substep-4', label: 'Step 2/5', msg: 'Format system prompt.', delay: 100 },
-              { id: 'flow-2', label: 'Step 2/5', msg: 'Request continues to retrieval and generation.', delay: 120 },
-              { id: 'flow-branch-l', label: 'Step 3/5', msg: 'Vector store searches embedded portfolio chunks.', delay: 80 },
-              { id: 'flow-branch-r', label: 'Step 4/5', msg: 'Gemini prepares a context-aware response.', delay: 80 },
-              { id: 'supabase', label: 'Step 3/5', msg: 'Supabase returns relevant project context.', delay: 260 },
-              { id: 'gemini', label: 'Step 4/5', msg: 'Gemini generates an answer from retrieved context.', delay: 320 },
-              { id: 'flow-3', label: 'Step 4/5', msg: 'The generated answer moves back to the UI.', delay: 120 },
-              { id: 'answer', label: 'Step 5/5', msg: 'Structured answer delivered back to the visitor.', delay: 260 }
-            ];
-
-            let isRequestPending = false;
-
-            async function animateSequence() {
-              if (shell.dataset.state === 'running') return;
-
-              deactivateAll();
-              shell.dataset.state = 'running';
-              if (sendBtn) sendBtn.disabled = true;
-
-              const question = inputEl.value.trim() || 'What has Ryan built related to AI product design?';
-              if (inputNode) inputNode.textContent = question;
-              if (answerEl) answerEl.textContent = 'Generating answer...';
-              setCaption('Running', 'Sending the question through the assistant pipeline.');
-
-              isRequestPending = true;
-
-              fetchAnswer(question).then(function (result) {
-                isRequestPending = false;
-                if (answerEl) {
-                  if (result.isLive) {
-                    answerEl.textContent = result.text;
-                  } else {
-                    answerEl.innerHTML = '<span style="display:inline-block; font-size:0.85em; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">Example response: live answer unavailable</span><br>' + result.text;
-                  }
-                }
-                if (shell.dataset.state === 'anim-complete') {
-                  shell.dataset.state = 'complete';
-                  if (sendBtn) sendBtn.disabled = false;
-                  setCaption('Complete', 'The visitor sees a structured answer. Run it again with a different question.');
-                }
-              });
-
-              let totalDelay = 0;
-
-              steps.forEach(function (step) {
-                totalDelay += step.delay;
-                window.setTimeout(function () {
-                  activate(step.id);
-                  setCaption(step.label, step.msg);
-                }, totalDelay);
-              });
-
-              window.setTimeout(function () {
-                if (isRequestPending) {
-                  shell.dataset.state = 'anim-complete';
-                  setCaption('Waiting', 'Explanatory animation complete; waiting for assistant response.');
-                } else {
-                  shell.dataset.state = 'complete';
-                  if (sendBtn) sendBtn.disabled = false;
-                  setCaption('Complete', 'The visitor sees a structured answer. Run it again with a different question.');
-                }
-              }, totalDelay + 300);
-            }
-
-            if (peekBtn && internals) {
-              peekBtn.addEventListener('click', function () {
-                const expanded = peekBtn.getAttribute('aria-expanded') === 'true';
-                peekBtn.setAttribute('aria-expanded', String(!expanded));
-                internals.hidden = expanded;
-                peekBtn.textContent = expanded ? '+ Show function internals' : '− Hide function internals';
-              });
-            }
-
-            if (sendBtn) {
-              sendBtn.addEventListener('click', animateSequence);
-            }
-
-            if (inputEl) {
-              inputEl.addEventListener('keydown', function (event) {
-                if (event.key === 'Enter') animateSequence();
-              });
-            }
-
-            activate('input');
-          })();
-        </script>
 
         <section id="key-decisions" aria-label="Key decisions & trade-offs" class="section--alt">
           <div class="section-divider">
@@ -678,7 +392,7 @@
 
           <h3>Designing directly in the browser</h3>
           <p>
-            Figma is great for initial wireframing, but canvas mockups lie about interaction. By moving quickly into HTML and CSS, I could resize actual viewports, test keyboard focus rings, and catch font-rendering glitches that static frames disguise.
+            Figma is great for initial wireframing, but canvas mockups can't show interactions, animations, or rendering between different browsers. By moving quickly into HTML and CSS, I could resize actual viewports, test keyboard focus rings, and catch bugs and glitches that static frames ignore.
           </p>
 
           <figure class="case-study-media editor-tree-media">
@@ -691,7 +405,7 @@
 
           <h3>Setting ground rules before writing code</h3>
           <p>
-            If you do not give an AI coding tool strict rules, it will happily invent new CSS classes on every prompt and pad your copy with corporate fluff. Before writing code, I set up explicit project guidelines in local markdown files (<code>CONTEXT.md</code> and <code>AGENTS.md</code>). These defined my tone preferences, banned resume buzzwords, and set hard standards for keyboard accessibility and semantic HTML.
+            If you don't give an AI coding tool strict rules, it will happily invent new CSS classes on every prompt. Before writing code, I set up explicit project guidelines in local markdown files (<code>CONTEXT.md</code> and <code>AGENTS.md</code>). These defined my style/tone preferences and set hard standards for keyboard accessibility and semantic HTML.
           </p>
 
           <h3>Keeping the CSS modular</h3>
@@ -742,6 +456,13 @@
             The first version of my portfolio assistant passed an entire 40KB JSON file on every API call. It was quick to build, but wildly inefficient. It blew past token limits whenever someone asked a detailed question about past project metrics.
           </p>
 
+          <p>
+            To fix that token limit problem, I broke my case study notes into structured chunks and stored them in Supabase using vector search. Now, when a recruiter asks about a specific project decision, the serverless function retrieves only the 2 or 3 most relevant knowledge chunks. Gemini streams a grounded, 3-sentence summary in under 800ms, staying well within free-tier API quotas.
+          </p>
+          <p>
+            To keep the bot from hallucinating, I wrote 63 automated Vitest tests checking role boundaries, metric precision, and refusal prompts. If someone asks if I write production C++ or have 10 years of Web3 experience, the bot says 'No' rather than inventing an answer. Testing these failure modes gave me practical empathy for the guardrail challenges our AI product teams grapple with daily.
+          </p>
+
           <figure class="case-study-media assistant-legacy-media">
             <picture>
               <source srcset="../assets/case-studies/ai-coding-portfolio/old-chat.webp" type="image/webp">
@@ -749,18 +470,7 @@
             </picture>
             <figcaption>The original chat widget from the previous portfolio before moving to vector search.</figcaption>
           </figure>
-          <p>
-            To fix that token limit problem, I broke my case study notes into structured chunks and stored them in Supabase using vector search. Now, when a recruiter asks about a specific project decision, the serverless function retrieves only the 2 or 3 most relevant knowledge chunks. Gemini streams a grounded, 3-sentence summary in under 800ms, staying well within free-tier API quotas.
-          </p>
-          <p>
-            To keep the bot from hallucinating, I wrote 63 automated Vitest tests checking role boundaries, metric precision, and refusal prompts. If someone asks if I write production C++ or have 10 years of Web3 experience, the bot says 'No' rather than inventing an answer. Testing these failure modes gave me practical empathy for the guardrail challenges our AI product teams grapple with daily.
-          </p>
-          <aside class="callout callout--accent">
-            <h3>Tradeoff</h3>
-            <p>
-              Setting up vector search and test guardrails took extra time upfront. But it turned a generic chatbot into a grounded tool that actually reflects how I work.
-            </p>
-          </aside>
+
         </section>
 
         <section id="impact" aria-label="Impact">
@@ -773,29 +483,16 @@
           </p>
         </section>
 
-        <section id="what-didnt-work" aria-label="What didn't work">
-          <div class="section-divider">
-            <h2>What Didn't Work</h2>
-          </div>
-          <p>
-            Early on, I went down a rabbit hole building multiple visual skins, including a dark mode and a retro Windows 95 theme alongside the terminal mode. Maintaining three separate color palettes tripled token upkeep and distracted from the case studies, so I stripped the site back to a single high-contrast light theme. Just because AI makes generating code fast does not mean you should keep every feature you prototype.
-          </p>
-        </section>
-
         <section id="lessons" aria-label="Lessons & next" class="section--alt">
           <div class="section-divider">
             <h2>Lessons & Next Steps</h2>
           </div>
-
+          <p>
+            Early on, I went down a rabbit hole building multiple visual skins, including a dark mode and a retro Windows 95 theme alongside the terminal mode. Maintaining three separate color palettes tripled token upkeep and distracted from the case studies, so I stripped the site back to a single high-contrast light theme. Just because AI makes generating code fast does not mean you should keep every feature you prototype.
+          </p>
           <p>
             AI coding tools do not replace software architecture. Without clear rules upfront, an LLM will happily hand you messy CSS and duplicate utility classes. The real work is defining the constraints and knowing what to cut.
           </p>
-
-          <h3>Next</h3>
-          <ul>
-            <li>Fine-tune vector retrieval evaluation for more precise project citations in the chat widget</li>
-            <li>Add lightweight code sandboxes for interactive case-study components</li>
-          </ul>
         </section>
 
         <nav class="case-study-pagination" aria-label="Project navigation">
