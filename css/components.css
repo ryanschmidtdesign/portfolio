@@ -716,6 +716,11 @@
   max-width: var(--prose);
 }
 
+.tldr-meta dl.meta {
+  margin: 0;
+  padding: var(--space-4);
+}
+
 
 @media (max-width: 640px) {
   .case-study dl.meta {
