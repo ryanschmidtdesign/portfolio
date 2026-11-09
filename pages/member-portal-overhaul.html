@@ -28,7 +28,6 @@
       })();
     </script>
 
-    <link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://ryanschmidt.design">
 
     <title>i4cp Member Portal &amp; Research Discovery: Ryan Schmidt</title>
@@ -213,7 +212,6 @@
 <link rel="sitemap" type="application/xml" href="../sitemap.xml">
 
 <!-- DNS prefetch fallbacks (older browsers ignore preconnect) -->
-<link rel="dns-prefetch" href="https://generativelanguage.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
@@ -279,7 +277,7 @@
         <header class="tldr" aria-label="Executive summary">
           <h1 id="title" data-parallax="0.06">i4cp Member Portal &amp; <em class="serif-accent">Research Discovery</em></h1>
           <p class="lead">
-            Members could not find research because our portal was structured like an internal corporate org chart. As i4cp's sole designer, I rebuilt the navigation around real executive questions and put our Ahri AI assistant directly into the main search flow.
+            Members couldn't find research because our portal was structured like an internal corporate org chart. As i4cp's sole designer, I rebuilt the navigation around how HR pracitioners actually think and work, and put our Ahri AI assistant directly into the main search flow.
           </p>
 
           <div class="tldr-meta">
@@ -287,7 +285,7 @@
               <p class="tldr-label label" data-reveal>My role</p>
               <p>
                 <strong>CX/UX Designer (Solo Design Lead partnering with VP of Product and 4 developers)</strong> <br>
-                Owned information architecture, search flows, and UI specs from kickoff to release. Created CSS tokens for four developers and built working browser prototypes to speed up delivery.
+                Owned UX and UI specs from kickoff to release. Built working browser prototypes to speed up delivery.
               </p>
             </div>
 
@@ -331,7 +329,7 @@
               </div>
             </div>
           </div>
-          <figcaption>Homepage comparison: replacing an unranked link directory with strategic practice areas and direct AI search.</figcaption>
+          <figcaption>Homepage comparison: simplified the navigation and replaced a standard yet cluttered, "What's new" feed with strategic practice areas and contextual AI.</figcaption>
         </figure>
 
         <section id="problem" aria-label="Problem & goals">
@@ -339,33 +337,30 @@
             <h2 data-reveal>The Problem: High-Value Research Trapped in an Org Chart</h2>
           </div>
           <p>
-            i4cp publishes extensive workforce research and benchmarks, but the legacy portal was organized around internal research committees rather than member tasks. If a VP of Talent needed a compensation benchmark, they had to guess which internal division owned the topic and click through three arbitrary folders.
+            i4cp publishes extensive workforce research and benchmarks, but the legacy portal was organized around internal research committees rather than member tasks. If a VP of Talent needed research on how AI is affecting the HR community, they had to guess which internal division owned the topic and click through three arbitrary folders, with no easy way to navigate back or know where they were.
           </p>
           <p>
-            Search had a similar disconnect. Ahri existed as a separate tool buried in the nav, so members defaulted to a basic keyword box that returned unranked lists of PDFs. Moving Ahri directly into the main search bar let members get cited answers right from the homepage.
+            Search had a similar disconnect. Ahri existed as a separate tool buried in the nav, so members defaulted to a basic keyword box that returned unranked results. Making Ahri contextual to the page the user is viewing let users take quick actionsno matter whaere they were in the product.
           </p>
 
           <h3>Goals</h3>
           <ul>
             <li><strong>Organize by member intent:</strong> Group research by executive business challenges (such as succession risk or retention) instead of internal i4cp department names.</li>
-            <li><strong>Make Ahri the default search:</strong> Answer research queries immediately with cited takeaways, while preserving an obvious link to full research reports.</li>
-            <li><strong>Ship a focused MVP first:</strong> Overhaul primary navigation, global search, and the homepage without attempting to redesign all 80+ secondary screens in a single release.</li>
+            <li><strong>Make Ahri the default search:</strong> Answer research queries immediately with cited takeaways, while preserving an obvious link to full results.</li>
+            <li><strong>Ship a focused MVP first:</strong> Overhaul primary navigation and the general look & feel without attempting to 0 to 1 redesign every secondary screen in a single release.</li>
           </ul>
         </section>
 
 
-        <section id="research" data-reveal aria-label="Research" class="section--alt">
+        <section id="research" aria-label="Research" class="section--alt">
           <div class="section-divider">
             <h2>Research: Testing Two Navigation Extremes with HR Executives</h2>
           </div>
           <p>
-            i4cp's research leadership had already defined a new four-tier taxonomy in a spreadsheet before I joined. My job was turning that spreadsheet into a navigation menu an executive could scan in 10 seconds.
+            i4cp's research leadership had already defined a new four-tier taxonomy before I joined. My job was turning that new taxonomy into a navigation menu an executive could scan in 10 seconds.
           </p>
           <p>
-            While early research centered on four prototype practice domains, leadership expanded the taxonomy to six core areas during my onboarding. Because our navigation framework relied on flexible semantic containers rather than rigid hardcoded slots, scaling to six practice areas required zero layout refactoring.
-          </p>
-          <p>
-            I ran moderated usability tests with 5 enterprise HR executives across two early prototypes. A flat mega-menu dumped 40+ links at once and overwhelmed testers, while deep four-level accordions hid content so completely that users thought the library was empty. Progressive disclosure solved both: showing broad practice areas first and revealing deeper topics only after a user clicked in.
+            I ran moderated usability tests with 5 enterprise HR executives across two early prototypes. A flat mega-menu dumped 40+ links at once and overwhelmed testers, while deep four-level accordions hid content so completely that users thought the library was empty. Progressive disclosure solved both: showing broad practice areas first and revealing deeper topics only after a user hovered in.
           </p>
 
           <figure class="case-study-media">
@@ -396,7 +391,7 @@
           </figure>
         </section>
 
-        <section id="ia-challenge" data-reveal aria-label="The IA challenge">
+        <section id="ia-challenge" aria-label="The IA challenge">
           <div class="section-divider">
             <h2>The IA Challenge: Four Levels Without Losing the Thread</h2>
           </div>
@@ -423,7 +418,7 @@
 
             <div data-compare data-compare-default="areas">
               <div class="compare-panels">
-                <div class="compare-panel" id="panel-ia-areas" data-compare-state="areas" role="tabpanel" aria-labelledby="crumb-areas" tabindex="0">
+                <div class="compare-panel is-active" id="panel-ia-areas" data-compare-state="areas" role="tabpanel" aria-labelledby="crumb-areas" tabindex="0">
                   <div class="ia-tier-preview">
                     <span class="ia-tier-label">Level 1: Broadest Practice Domains</span>
                     <ul class="ia-cards-grid">
@@ -526,15 +521,15 @@
               </p>
             </div>
             <div data-compare data-compare-default="progressive">
-              <div class="compare-tabs">
-                <button type="button" data-compare-button="flat" aria-pressed="false">Flat navigation</button>
-                <button type="button" data-compare-button="progressive" aria-pressed="true">Progressive disclosure</button>
+              <div class="compare-tabs" role="tablist" aria-label="Navigation approach comparison">
+                <button type="button" id="tab-compare-flat" data-compare-button="flat" role="tab" aria-selected="false" aria-controls="panel-compare-flat" tabindex="-1">Flat navigation</button>
+                <button type="button" id="tab-compare-progressive" data-compare-button="progressive" role="tab" aria-selected="true" aria-controls="panel-compare-progressive" tabindex="0">Progressive disclosure</button>
               </div>
               <div class="compare-panels">
-                <div class="compare-panel" data-compare-state="flat">
+                <div class="compare-panel" id="panel-compare-flat" data-compare-state="flat" role="tabpanel" aria-labelledby="tab-compare-flat" tabindex="0">
                   <p>Exposes too much structure upfront. An expandable tree menu felt like browsing a dense Windows file system and overwhelmed members looking for a quick answer.</p>
                 </div>
-                <div class="compare-panel is-active" data-compare-state="progressive">
+                <div class="compare-panel is-active" id="panel-compare-progressive" data-compare-state="progressive" role="tabpanel" aria-labelledby="tab-compare-progressive" tabindex="0">
                   <p>Reveals deeper levels only as members commit to a practice area or priority, keeping each step focused on 4 to 6 options at a time.</p>
                 </div>
               </div>

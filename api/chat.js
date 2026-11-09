@@ -12,13 +12,13 @@ import path from "node:path";
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.0-flash";
 const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-2.0-flash";
-const GEMINI_FALLBACK_MODEL = process.env.GEMINI_FALLBACK_MODEL || "gemini-1.5-flash";
+const GEMINI_FALLBACK_MODEL = process.env.GEMINI_FALLBACK_MODEL || "gemini-2.0-flash-lite";
 const CSE_API_KEY = process.env.CSE_API_KEY || "";
 const CSE_ID = process.env.CSE_ID || "";
 const LOG_WEBHOOK_URL = process.env.LOG_WEBHOOK_URL || "";
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://ggmkmymtilpkezkpihxt.supabase.co";
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_ROLE_KEY || "";
 
 const SUPABASE_HEADERS = SUPABASE_KEY ? {
   "apikey": SUPABASE_KEY,
@@ -2505,28 +2505,24 @@ export default async function handler(req, res) {
           }
         }
 
-        await Promise.allSettled([
-          supabaseFetch("/rest/v1/chat_messages", {
-            method: "POST",
-            headers: { "Prefer": "return=minimal" },
-            body: JSON.stringify({
+        await supabaseFetch("/rest/v1/chat_messages", {
+          method: "POST",
+          headers: { "Prefer": "return=minimal" },
+          body: JSON.stringify([
+            {
               session_id: sessionId,
               role: "user",
               content: String(lastUser || "").slice(0, 4000),
               metadata: { intent }
-            })
-          }, 2000),
-          supabaseFetch("/rest/v1/chat_messages", {
-            method: "POST",
-            headers: { "Prefer": "return=minimal" },
-            body: JSON.stringify({
+            },
+            {
               session_id: sessionId,
               role: "assistant",
               content: String(answer || "").slice(0, 4000),
               metadata: { suggested_pills, hire_intent, context_cases }
-            })
-          }, 2000)
-        ]);
+            }
+          ])
+        }, 2000);
       };
 
       await Promise.race([

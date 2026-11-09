@@ -84,13 +84,13 @@
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
           entry.target.classList.add('is-revealed');
           observer.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.15 }
+    { threshold: [0, 0.15], rootMargin: '0px 0px -20px 0px' }
   );
 
   const observeElement = (el) => {
@@ -103,6 +103,13 @@
   };
 
   observeAll();
+
+  // Safety fallback: ensure nothing stays permanently hidden if observer stalls on tall elements
+  setTimeout(() => {
+    document.querySelectorAll('[data-reveal]:not(.is-revealed)').forEach((el) => {
+      el.classList.add('is-revealed');
+    });
+  }, 1200);
 
   const mutationObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
@@ -279,6 +286,10 @@
       stateButtons.forEach((button) => {
         const pressed = button.dataset.compareButton === current;
         button.setAttribute("aria-pressed", pressed ? "true" : "false");
+        if (button.getAttribute("role") === "tab") {
+          button.setAttribute("aria-selected", pressed ? "true" : "false");
+          button.tabIndex = pressed ? 0 : -1;
+        }
       });
       panels.forEach((panel) => {
         const active = panel.dataset.compareState === current;
@@ -311,9 +322,7 @@
   });
 
   // Resume download tracking
-  document.addEventListener("click", (e) => {
-    const link = e.target.closest('a[href*="resume"]');
-    if (!link) return;
+  window.trackResumeDownload = function() {
     let sessionToken = null;
     try {
       sessionToken = sessionStorage.getItem('rs_chat_session_token');
@@ -327,6 +336,13 @@
       }),
       keepalive: true
     }).catch(() => {});
+  };
+
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest('a[href*="resume"]');
+    if (link) {
+      window.trackResumeDownload();
+    }
   });
 
   // ==========================================================================
@@ -547,6 +563,10 @@
     });
 
     setupAriaTabs({ tablist, tabs: crumbs, panels });
+    const initialCrumb = crumbs.find(c => c.classList.contains('is-active')) || crumbs[0];
+    if (initialCrumb) {
+      activateCrumb(initialCrumb);
+    }
   }
 
   // ==========================================================================

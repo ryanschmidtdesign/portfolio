@@ -250,7 +250,7 @@
           "Owned end-to-end UX across 5 B2B Cloud modules as the platform grew from 6,500 to 18,000 active users.",
           "Designed a desktop-first, real-time inventory MVP through field research and usability testing, contributing to an 8% increase in recurring revenue and 8% year-over-year adoption growth.",
           "Grew the design system to 100+ production components with 92% adoption across engineering.",
-          "Designed dashboard suite with customizable views and AI summaries (**+71% sustained dashboard views**, **62% multi-dashboard adoption**)."
+          "Designed dashboard suite with customizable views and AI summaries (**71% multi-dashboard adoption**, **+64% sustained dashboard views**)."
         ]
       },
       {
@@ -475,25 +475,25 @@
         "Alerts",
         "Drill-down panels"
       ],
-      "summary_short": "Turned an ignored dashboard feature into the main way teams track their work, driving a 71% jump in adoption.",
+      "summary_short": "Turned an ignored dashboard feature into the main way teams track their work, driving 71% multi-dashboard adoption.",
       "outcomes": [
         {
-          "metric": "**Dashboard Engagement**",
-          "value": "**+71%**",
-          "note": "Increase in feature navigation"
+          "metric": "**Multi-dashboard adoption**",
+          "value": "**71%**",
+          "note": "Active accounts maintaining multiple custom dashboards"
         },
         {
-          "metric": "**Multi-dashboard users**",
-          "value": "**62%**",
-          "note": "Post-launch adoption"
+          "metric": "**Sustained dashboard views**",
+          "value": "**+64%**",
+          "note": "Weekly dashboard views across consecutive quarters"
         },
         {
-          "metric": "**Interaction depth**",
-          "value": "**2.0**",
-          "note": "Customization depth"
+          "metric": "**Custom filter rules**",
+          "value": "**2.4**",
+          "note": "Average rules per card"
         }
       ],
-      "impact_narrative": "Drove a 71% increase in dashboard engagement, transformed static reporting into an interactive sales-demo highlight, and established a trusted foundation for AI features.",
+      "impact_narrative": "Drove 71% multi-dashboard adoption and a +64% rise in sustained weekly views across consecutive quarters, transforming static reporting into daily habit and establishing a trusted foundation for AI features.",
       "sections": [
         {
           "id": "problem",
@@ -501,34 +501,44 @@
           "summary": "Teams ignored default dashboards, relying on ad-hoc report requests and spreadsheet exports instead of self-serve reporting."
         },
         {
-          "id": "research-insights",
-          "heading": "Research Insights",
+          "id": "research",
+          "heading": "Research & Insights",
           "summary": "10 user interviews showed users skipped dashboards and went straight to exports. They wanted familiar KPIs as quick-scan, role-based views. Sales needed demo-ready dashboards immediately."
         },
         {
-          "id": "design-approach-decisions",
+          "id": "design-approach",
           "heading": "Design Approach & Decisions",
-          "summary": "Scoped MVP to role-based templates instead of edge cases. Limited AI to verifiable dashboard metrics after testing showed low trust in black-box outputs."
+          "summary": "Scoped MVP to a 12-column widget grid and role-based templates. Limited AI to verifiable dashboard metrics after testing showed low trust in black-box outputs."
         },
         {
-          "id": "defining-decision-dashboards-vs-ai-first",
-          "heading": "Defining Decision: Dashboards vs. AI-first",
+          "id": "defining-decision",
+          "heading": "Defining Decision: Dashboards Before AI",
           "summary": "Pushed back on AI-first based on interviews. Users needed familiar KPIs for orientation before exploring AI insights. Hybrid model: dashboards as foundation, AI layered for summarization."
         },
         {
-          "id": "design-highlights",
-          "heading": "Design Highlights",
-          "summary": "Role-based templates, drag-resize widget editor, and AI report generation from verified dashboard metrics."
+          "id": "execution",
+          "heading": "Execution & System Design",
+          "summary": "Built a modular widget system with drag-and-drop customization, multi-dashboard management, and query-based report generation."
         },
         {
-          "id": "prototyping-validation",
+          "id": "prototyping",
           "heading": "Prototyping & Validation",
           "summary": "Usability tests validated template selection, customization flows, and AI report generation with real KPI data."
         },
         {
           "id": "impact",
           "heading": "Impact",
-          "summary": "+71% dashboard engagement following the redesign. 62% of users created multiple dashboards. Teams shifted toward self-serve reporting."
+          "summary": "71% multi-dashboard adoption and +64% sustained dashboard views across consecutive quarters. Teams shifted toward self-serve reporting."
+        },
+        {
+          "id": "lessons",
+          "heading": "Lessons",
+          "summary": "AI amplifies structured workflows rather than replacing them. Familiar visual scanning builds trust before automated generation."
+        },
+        {
+          "id": "next-steps",
+          "heading": "Next Steps",
+          "summary": "Expand customizable widget library, introduce collaborative dashboard sharing, and surface predictive alerts."
         }
       ]
     },
@@ -617,39 +627,29 @@
           "summary": "Teams spent 2 to 3 hours per day reconciling spreadsheets with 15 to 20% error rates. Enterprise prospects expected integrated inventory before signing."
         },
         {
-          "id": "research-insights",
-          "heading": "Research Insights",
+          "id": "research",
+          "heading": "Research & Insights",
           "summary": "6 user interviews revealed small teams needed quantity confidence while larger teams needed asset-level traceability. Integrated inventory was table stakes in enterprise deals."
         },
         {
-          "id": "defining-decision",
-          "heading": "Defining Decision",
-          "summary": "Chose a real-time unified system across locations despite added complexity. Eliminated duplicate sources of truth so teams could trust counts everywhere."
+          "id": "system-model",
+          "heading": "System Model & Tradeoffs",
+          "summary": "Designed a connected ledger tying purchase orders, stock counts, and project schedules in real time, balancing quick-receipt workflows with serialized asset tracking."
         },
         {
-          "id": "solution-journey",
-          "heading": "Solution Journey",
-          "summary": "Surface low-stock risk with visual indicators and incoming PO signals. Automate stock updates when POs are received across locations."
-        },
-        {
-          "id": "key-decisions-tradeoffs",
-          "heading": "Key decisions & tradeoffs",
-          "summary": "Real-time unified model over periodic updates. Manual reordering alerts in MVP before full automation. Native integration with purchasing and project tools."
-        },
-        {
-          "id": "design-highlights",
-          "heading": "Design Highlights",
-          "summary": "Low-stock indicators, incoming PO tracking, bulk actions, movement history, and threshold-based alert settings."
-        },
-        {
-          "id": "prototyping-validation",
-          "heading": "Prototyping & Validation",
-          "summary": "Three rounds of high-fidelity Figma tests validated receiving, alerts, multi-location inventory, and reordering flows. Quantity-first default with optional asset-level depth."
+          "id": "validation",
+          "heading": "Validation",
+          "summary": "Three rounds of high-fidelity prototype testing validated receiving flows, stock alerts, and multi-location transfers across both small and enterprise AV integrators."
         },
         {
           "id": "impact",
           "heading": "Impact",
-          "summary": "Contributed to an 8% increase in company-wide MRR over the following year. One customer uncovered thousands in unused equipment after switching to unified tracking."
+          "summary": "93% mobile scanning adoption, zero lost equipment reports in Q4, and contributed to +8% company-wide recurring revenue growth."
+        },
+        {
+          "id": "lessons",
+          "heading": "Lessons",
+          "summary": "Designing for dual scales requires progressive disclosure: keep primary actions rapid for high-velocity teams while exposing granular controls for enterprise audits."
         }
       ]
     },
@@ -720,8 +720,8 @@
       "impact_narrative": "Ryan can move from UX idea to shipped front-end feature without waiting on engineering handoffs.",
       "sections": [
         {
-          "id": "problem-goals",
-          "heading": "Problem",
+          "id": "problem",
+          "heading": "Problem & Goals",
           "summary": "Portfolios often show design thinking without proof of building and shipping. AI tools are often used at a surface level instead of as a repeatable workflow."
         },
         {
@@ -731,23 +731,33 @@
         },
         {
           "id": "system-architecture",
-          "heading": "System architecture",
+          "heading": "System Architecture",
           "summary": "Structured funnel from prompts to patterns, components, and full features: connecting clear instructions to real product output."
         },
         {
-          "id": "building-the-system",
-          "heading": "Building the system",
-          "summary": "Started in code instead of Figma, treated AI like a junior engineer with constraints and review, and built reusable patterns early."
+          "id": "key-decisions",
+          "heading": "Key Decisions & Tradeoffs",
+          "summary": "Started in code instead of Figma, established strict design tokens and rules, and avoided heavyweight JS frameworks for pure web standards."
         },
         {
           "id": "implementation-highlights",
-          "heading": "Implementation highlights",
+          "heading": "Implementation Highlights",
           "summary": "Custom case study system, reusable layouts, integrated AI chat widget, and SEO/metadata structure built into templates."
+        },
+        {
+          "id": "assistant-architecture",
+          "heading": "Making the AI Assistant Useful",
+          "summary": "Migrated from 40KB monolithic JSON payload to chunked Supabase pgvector semantic retrieval and streaming Gemini generation with 63 Vitest tests."
         },
         {
           "id": "impact",
           "heading": "Impact",
-          "summary": "Can test and ship product ideas faster without engineering dependency; portfolio demonstrates execution in code, not just design thinking."
+          "summary": "Loads in under 300ms with zero framework overhead, full keyboard/screen-reader accessibility, and proves end-to-end AI-augmented front-end execution."
+        },
+        {
+          "id": "lessons",
+          "heading": "Lessons",
+          "summary": "AI amplifies structure. Speed requires discipline. Test failure modes early to build genuine empathy for production AI challenges."
         }
       ]
     }
@@ -1015,7 +1025,7 @@
         "Comfortable turning ambiguous product problems into scalable patterns."
       ],
       "proof": [
-        "+71% dashboard engagement.",
+        "71% multi-dashboard adoption and +64% sustained dashboard views.",
         "92% engineer adoption across 100+ tokenized components.",
         "+8% company-wide MRR after inventory MVP."
       ]
@@ -1033,7 +1043,7 @@
       "proof": [
         "Pushed back on AI-first dashboard direction after research.",
         "Layered AI summarization on familiar KPI workflows.",
-        "+71% dashboard engagement on Custom Dashboards."
+        "71% multi-dashboard adoption and +64% sustained dashboard views."
       ]
     }
   },
@@ -1070,7 +1080,7 @@
         "member-portal-overhaul"
       ],
       "proof": [
-        "+71% dashboard engagement",
+        "71% multi-dashboard adoption and +64% sustained dashboard views",
         "AI summarization on verified dashboard metrics"
       ]
     },
@@ -1657,7 +1667,7 @@
     {
       "intent": "resume_proof",
       "prompt": "What are Ryan's top 3 proof points?",
-      "answer": "**+500% Ahri sessions and doubled daily activity** after an IA overhaul at i4cp, **+8% company-wide MRR** unblocking enterprise deals with the inventory system, and a **+71% increase in sustained dashboard views** on Custom Dashboards. Want context on any of them?"
+      "answer": "**+500% Ahri sessions and doubled daily activity** after an IA overhaul at i4cp, **+8% company-wide MRR** unblocking enterprise deals with the inventory system, and a **71% multi-dashboard adoption with +64% sustained views** on Custom Dashboards. Want context on any of them?"
     },
     {
       "intent": "looking_for",
@@ -1747,7 +1757,7 @@
     {
       "intent": "company_fit_specific",
       "prompt": "Why is Ryan a fit at a B2B SaaS company like Stripe?",
-      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove a **+500% increase in Ahri sessions** through a complex IA overhaul, unblocked enterprise deals to contribute to **+8% company-wide MRR**, and increased dashboard engagement by **71%**. For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
+      "answer": "Ryan's deep experience in **B2B SaaS design systems, IA, and AI-augmented workflows** maps directly to companies like Stripe. He drove a **+500% increase in Ahri sessions** through a complex IA overhaul, unblocked enterprise deals to contribute to **+8% company-wide MRR**, and increased dashboard weekly views by **+64%** (with **71%** multi-dashboard adoption). For a platform that serves complex developer and business needs, that signals someone who can systemize without over-engineering."
     },
     {
       "intent": "stakeholder_influence",

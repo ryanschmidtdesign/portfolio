@@ -1060,6 +1060,7 @@ if (savedHist.length > 0) {
       if (lower === '/resume' || lower === 'resume') {
         const path = window.location.pathname || '/';
         const resumePath = path.includes('/pages/') ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
+        if (typeof window.trackResumeDownload === 'function') window.trackResumeDownload();
         window.open(resumePath, '_blank');
         return true;
       }

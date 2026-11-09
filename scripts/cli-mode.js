@@ -578,6 +578,7 @@
                     targetPath: 'assets/ryan-schmidt-resume.pdf',
                     keywords: 'resume cv pdf download hire background experience skills ryan schmidt',
                     action: () => {
+                        if (typeof window.trackResumeDownload === 'function') window.trackResumeDownload();
                         window.open(resumePath, '_blank', 'noopener');
                         this.close();
                     }

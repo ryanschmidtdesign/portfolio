@@ -33,7 +33,7 @@ metrics, and structured fit-matching. Endpoint: /api/chat (POST).
 
 - [Custom Dashboards & AI Summaries](https://ryanschmidt.design/pages/dashboard)
   Operational dashboard surfacing high-frequency tasks and customizable views.
-  Outcomes: +71% sustained dashboard views, 62% multi-dashboard adoption.
+  Outcomes: 71% multi-dashboard adoption, +64% sustained dashboard views.
 
 - [Inventory, Purchasing & Receiving](https://ryanschmidt.design/pages/inventory)
   Connected purchasing, receiving, and stock tracking in one workflow.

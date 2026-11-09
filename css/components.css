@@ -1105,6 +1105,12 @@ figure.case-study-media--mobile {
   will-change: opacity, transform;
 }
 
+section[data-reveal],
+main[data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 [data-reveal].is-revealed {
   opacity: 1;
   transform: translateY(0);
@@ -1197,7 +1203,8 @@ figure.case-study-media--mobile {
   transform: scale(0.97);
 }
 
-[data-compare] button[data-compare-button][aria-pressed="true"] {
+[data-compare] button[data-compare-button][aria-pressed="true"],
+[data-compare] button[data-compare-button][aria-selected="true"] {
   background: var(--accent-btn-fill, #AC4925);
   border-color: var(--accent-btn-fill, #AC4925);
   color: var(--text-on-accent);

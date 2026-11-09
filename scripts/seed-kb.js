@@ -6,11 +6,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const SUPABASE_URL = 'https://ggmkmymtilpkezkpihxt.supabase.co';
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://ggmkmymtilpkezkpihxt.supabase.co';
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!GEMINI_API_KEY || !SUPABASE_SERVICE_KEY) {
-  console.error('Missing required env vars: GEMINI_API_KEY, SUPABASE_SERVICE_KEY');
+  console.error('Missing required env vars: GEMINI_API_KEY, SUPABASE_SERVICE_KEY (or SUPABASE_SERVICE_ROLE_KEY)');
   process.exit(1);
 }
 
@@ -193,22 +193,13 @@ async function main() {
   const chunks = buildChunks();
   console.log(`Generated ${chunks.length} text chunks`);
 
-  console.log('Clearing existing KB chunks...');
-  await fetch(`${SUPABASE_URL}/rest/v1/kb_chunks`, {
-    method: 'DELETE',
-    headers: {
-      'apikey': SUPABASE_SERVICE_KEY,
-      'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`
-    }
-  });
-
-  console.log('Generating embeddings and inserting...');
-  let ok = 0;
+  console.log('Generating embeddings in memory first...');
+  const preparedChunks = [];
   let fail = 0;
 
   for (let i = 0; i < chunks.length; i++) {
     const chunk = chunks[i];
-    process.stdout.write(`[${i + 1}/${chunks.length}] ${chunk.source}... `);
+    process.stdout.write(`[${i + 1}/${chunks.length}] Embedding ${chunk.source}... `);
 
     try {
       const embedding = await generateEmbedding(chunk.chunk_text);
@@ -218,13 +209,8 @@ async function main() {
         continue;
       }
       chunk.embedding = embedding;
-      const inserted = await insertChunk(chunk);
-      if (inserted) {
-        console.log('OK');
-        ok++;
-      } else {
-        fail++;
-      }
+      preparedChunks.push(chunk);
+      console.log('OK');
     } catch (e) {
       console.log(`ERROR: ${e.message}`);
       fail++;
@@ -236,7 +222,56 @@ async function main() {
     }
   }
 
-  console.log(`\nDone: ${ok} inserted, ${fail} failed`);
+  if (preparedChunks.length === 0) {
+    console.error('No chunks prepared. Aborting database clear and insert.');
+    process.exit(1);
+  }
+
+  console.log(`\nGenerated ${preparedChunks.length} embeddings (${fail} failed). Clearing existing KB chunks...`);
+  // PostgREST requires a filter to DELETE rows (preventing accidental full-table wipes)
+  let clearResp = await fetch(`${SUPABASE_URL}/rest/v1/kb_chunks?id=not.is.null`, {
+    method: 'DELETE',
+    headers: {
+      'apikey': SUPABASE_SERVICE_KEY,
+      'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`
+    }
+  });
+
+  if (!clearResp.ok) {
+    // Fallback filter if id column is not named id
+    clearResp = await fetch(`${SUPABASE_URL}/rest/v1/kb_chunks?chunk_text=not.is.null`, {
+      method: 'DELETE',
+      headers: {
+        'apikey': SUPABASE_SERVICE_KEY,
+        'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`
+      }
+    });
+  }
+
+  if (!clearResp.ok) {
+    const err = await clearResp.text().catch(() => "");
+    console.warn(`Warning: Could not clear existing chunks (${clearResp.status}: ${err}). Proceeding to insert...`);
+  } else {
+    console.log('Existing KB chunks cleared successfully.');
+  }
+
+  console.log('Inserting prepared chunks into Supabase...');
+  let ok = 0;
+  let insertFail = 0;
+
+  for (let i = 0; i < preparedChunks.length; i++) {
+    const chunk = preparedChunks[i];
+    process.stdout.write(`[${i + 1}/${preparedChunks.length}] Inserting ${chunk.source}... `);
+    const inserted = await insertChunk(chunk);
+    if (inserted) {
+      console.log('OK');
+      ok++;
+    } else {
+      insertFail++;
+    }
+  }
+
+  console.log(`\nDone: ${ok} inserted, ${insertFail} failed`);
 }
 
 main().catch(e => {

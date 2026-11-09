@@ -29,7 +29,6 @@
       })();
     </script>
 
-    <link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://ryanschmidt.design">
 
     <title>Inventory, Purchasing &amp; Receiving: Ryan Schmidt</title>
@@ -219,7 +218,6 @@
 <link rel="sitemap" type="application/xml" href="../sitemap.xml">
 
 <!-- DNS prefetch fallbacks (older browsers ignore preconnect) -->
-<link rel="dns-prefetch" href="https://generativelanguage.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
@@ -353,21 +351,21 @@
           </p>
 
           <div data-compare data-compare-default="spreadsheet">
-            <div class="compare-tabs">
-              <button type="button" data-compare-button="spreadsheet" aria-pressed="true">Legacy spreadsheet workflow</button>
-              <button type="button" data-compare-button="software" aria-pressed="false">Third-party tool tax</button>
-              <button type="button" data-compare-button="system" aria-pressed="false">Unified inventory platform</button>
+            <div class="compare-tabs" role="tablist" aria-label="Workflow comparison">
+              <button type="button" id="tab-compare-spreadsheet" data-compare-button="spreadsheet" role="tab" aria-selected="true" aria-controls="panel-compare-spreadsheet" tabindex="0">Legacy spreadsheet workflow</button>
+              <button type="button" id="tab-compare-software" data-compare-button="software" role="tab" aria-selected="false" aria-controls="panel-compare-software" tabindex="-1">Third-party tool tax</button>
+              <button type="button" id="tab-compare-system" data-compare-button="system" role="tab" aria-selected="false" aria-controls="panel-compare-system" tabindex="-1">Unified inventory platform</button>
             </div>
             <div class="compare-panels">
-              <div class="compare-panel is-active" data-compare-state="spreadsheet" data-tone="bad">
+              <div class="compare-panel is-active" id="panel-compare-spreadsheet" data-compare-state="spreadsheet" data-tone="bad" role="tabpanel" aria-labelledby="tab-compare-spreadsheet" tabindex="0">
                 <h3>Legacy spreadsheet workflow</h3>
                 <p>Stock counts lived separately from purchasing and project schedules, so every handoff created another chance for inventory data to fall out of sync.</p>
               </div>
-              <div class="compare-panel" data-compare-state="software" data-tone="bad">
+              <div class="compare-panel" id="panel-compare-software" data-compare-state="software" data-tone="bad" role="tabpanel" aria-labelledby="tab-compare-software" tabindex="0">
                 <h3>Third-party tool tax</h3>
                 <p>Paying for separate tools that didn't integrate with D-Tools Cloud like Jetbuilt created duplicate data entry, disconnected project costs, and frequent tracking errors.</p>
               </div>
-              <div class="compare-panel" data-compare-state="system" data-tone="good">
+              <div class="compare-panel" id="panel-compare-system" data-compare-state="system" data-tone="good" role="tabpanel" aria-labelledby="tab-compare-system" tabindex="0">
                 <h3>Unified inventory platform</h3>
                 <p>A unified system tying POs directly to job schedules. Warehouse teams catch stock shortages early and eliminate manual count reconciliation.</p>
               </div>

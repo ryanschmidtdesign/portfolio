@@ -29,7 +29,6 @@
       })();
     </script>
 
-    <link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://ryanschmidt.design">
 
     <title>Custom Dashboards &amp; AI Summaries: Ryan Schmidt</title>
@@ -114,7 +113,7 @@
         "@id": "https://ryanschmidt.design/#person"
       },
       "description": "Case study: Custom operational dashboards. 71% multi-dashboard adoption.",
-      "primaryImageOfPage": "https://ryanschmidt.design/assets/case-studies/dashboards/rename-dashboard.png",
+      "primaryImageOfPage": "https://ryanschmidt.design/assets/case-studies/dashboards/dashboard-overview.png",
       "breadcrumb": {
         "@id": "https://ryanschmidt.design/pages/dashboard#breadcrumb"
       },
@@ -139,7 +138,7 @@
       "datePublished": "2024-08-01",
       "articleSection": "Case Study",
       "inLanguage": "en-US",
-      "image": "https://ryanschmidt.design/assets/case-studies/dashboards/rename-dashboard.png",
+      "image": "https://ryanschmidt.design/assets/case-studies/dashboards/dashboard-overview.png",
       "about": [
         {
           "@type": "Thing",
@@ -219,7 +218,6 @@
 <link rel="sitemap" type="application/xml" href="../sitemap.xml">
 
 <!-- DNS prefetch fallbacks (older browsers ignore preconnect) -->
-<link rel="dns-prefetch" href="https://generativelanguage.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
@@ -233,10 +231,10 @@
   <meta property="og:title" content="Custom Dashboards &amp; AI Summaries: Ryan Schmidt">
   <meta property="og:description" content="Case study: Operational dashboard surfacing high-frequency tasks and prioritized alerts. 71% multi-dashboard adoption.">
   <meta property="og:url" content="https://ryanschmidt.design/pages/dashboard">
-  <meta property="og:image" content="https://ryanschmidt.design/assets/case-studies/dashboards/rename-dashboard.png">
+  <meta property="og:image" content="https://ryanschmidt.design/assets/case-studies/dashboards/dashboard-overview.png">
   <meta property="og:image:alt" content="Custom dashboard showing role-based templates and live metric tiles">
-  <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1440">
+<meta property="og:image:height" content="754">
 <meta property="og:image:type" content="image/png">
 <meta property="og:locale" content="en_US">
 
@@ -244,7 +242,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Custom Dashboards &amp; AI Summaries: Ryan Schmidt">
 <meta name="twitter:description" content="Case study: Operational dashboard surfacing high-frequency tasks and prioritized alerts. 71% multi-dashboard adoption.">
-<meta name="twitter:image" content="https://ryanschmidt.design/assets/case-studies/dashboards/rename-dashboard.png">
+<meta name="twitter:image" content="https://ryanschmidt.design/assets/case-studies/dashboards/dashboard-overview.png">
 <meta name="twitter:image:alt" content="Custom dashboard showing role-based templates and live metric tiles">
 </head>
 
@@ -396,9 +394,8 @@
               </ul>
             </div>
           </div>
-        </section>
         
-        <h3>What I got wrong first</h3>
+          <h3>What I got wrong first</h3>
           <p>
             Early in wireframing, I pitched three static department layouts: Sales, Service, and Operations. But during user walkthroughs, the approach broke down immediately. A 12-person residential integrator runs completely differently than a 60-person commercial shop; their daily priorities had almost zero overlap. Hardcoded department views would have recreated the exact problem we were trying to fix. That pushed us toward modular templates that managers could reorganize, customize, and rename quickly, easily, and whenever they wanted.
           </p>
@@ -410,7 +407,7 @@
             </div>
             <div style="overflow-x: auto;">
               <table class="synthesis-matrix__table">
-                <caption class="visually-hidden">Research synthesis comparing residential and commercial integrator daily workflows</caption>
+                <caption class="sr-only">Research synthesis comparing residential and commercial integrator daily workflows</caption>
                 <thead>
                   <tr>
                     <th scope="col" style="width: 25%;">Integrator Cohort</th>
@@ -425,7 +422,7 @@
                       <span style="color: var(--text-secondary); font-size: 0.8rem;">10-15 staff</span>
                     </th>
                     <td>
-                      <em>"Is this month's revenue better than last month's?"</em><br>
+                      <em>"Is this month's revenue better than last month's?"</em>
                     </td>
                     <td>
                       Current revenue totals lacked the prior-month context needed to show whether performance was improving.
@@ -437,7 +434,7 @@
                       <span style="color: var(--text-secondary); font-size: 0.8rem;">50+ staff</span>
                     </th>
                     <td>
-                      <em>"Where are active change orders eroding our project margins?"</em><br>
+                      <em>"Where are active change orders eroding our project margins?"</em>
                     </td>
                     <td>
                       Margin impact was buried across individual change orders, making it difficult to see which active projects were losing profitability.
@@ -447,8 +444,9 @@
               </table>
             </div>
           </div>
+        </section>
 
-        <section id="design-approach" data-reveal aria-label="Design approach & decisions">
+        <section id="design-approach" aria-label="Design approach & decisions">
           <div class="section-divider">
             <h2>Design Approach & Decisions</h2>
           </div>
@@ -486,7 +484,7 @@
             <h2>Defining Decision: Dashboards Before AI</h2>
           </div>
           <p>
-            Leadership originally wanted to skip visual dashboards and build a chat prompt interface. In usability tests, however, integrators froze when faced with a blank chat box. AV integrators don't log in at 7:00 AM to write prompts. They need an immediate visual scan of how they can improve their business <i>that day</i>.
+            Leadership originally wanted to skip visual dashboards and build a chat prompt interface. In usability tests, however, integrators froze when faced with a blank chat box. AV integrators don't log in at 7:00 AM to write prompts. They need an immediate visual scan of how they can improve their business <em>that day</em>.
           </p>
           <p>
             That testing convinced leadership to keep visual cards as the primary morning workspace and (for now) use AI strictly as a quick report writer for weekly/monthly/quarterly leadership meetings:
@@ -535,7 +533,8 @@
           <p class="impact-lede">
             Measured at 30 days post-launch, 71% of active accounts maintained multiple custom dashboards, and weekly dashboard views rose 64% across consecutive quarters.
           </p>
-          <div class="impact-metric">
+          <div class="impact-callout" role="region" aria-label="Key business outcomes">
+            <div class="impact-metric">
               <strong class="metric">71%</strong>
               <span class="metric-label">multi-dashboard adoption</span>
             </div>
@@ -543,6 +542,7 @@
               <strong class="metric">+64%</strong>
               <span class="metric-label">sustained dashboard views</span>
             </div>
+          </div>
           <p style="margin-top: 16px;">
             Users applied an average of 2.4 custom filter rules per card. Usage data also showed a clear split in daily habits: visual charts peaked between 6:45 AM and 8:15 AM as managers routed field crews, while AI reporting clicks surged at month-end and quarter-close when leads compiled owner reports.
           </p>

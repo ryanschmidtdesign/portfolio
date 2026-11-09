@@ -69,8 +69,8 @@ https://ryanschmidt.design/pages/dashboard
 **Validation:** End-to-end Figma prototype tested with 5 target users. 4/5 said templates matched their workflow. All users customized without guidance.
 
 **Impact:**
-- Sustained dashboard views: +71%
-- Multi-dashboard adoption: 62%
+- Multi-dashboard adoption: 71%
+- Sustained dashboard views: +64%
 
 **Lessons:** Research is how you earn the right to push back. Users don't know what they don't know: they need data visible before they can ask good questions.
 
@@ -136,7 +136,7 @@ https://ryanschmidt.design/pages/ai-coding-portfolio
 
 **System architecture:** Prompts → Patterns → Components → Features. Structured prompts connected to real product features.
 
-**Illustrative architecture walkthrough:** Shows how a question moves from input to retrieval (Supabase pgvector) and generation (Gemini), explaining the system pipeline.
+**Assistant architecture:** Shifted from monolithic JSON injection to vector retrieval in Supabase pgvector and Gemini generation, with 63 Vitest tests verifying guardrails, metric precision, and refusal prompts.
 
 **Key decisions:** Strict coding rules and design tokens established before writing code. Database-driven retrieval replaced a single JSON file with semantic search from project notes.
 
