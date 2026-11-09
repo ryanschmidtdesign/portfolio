@@ -146,22 +146,26 @@ function buildChunks() {
 }
 
 async function generateEmbedding(text) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
-  const resp = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'models/text-embedding-004',
-      content: { parts: [{ text: text.slice(0, 2000) }] },
-      outputDimensionality: 768
-    })
-  });
-  if (!resp.ok) {
-    const err = await resp.text();
-    throw new Error(`Embedding error: ${resp.status} ${err}`);
+  const models = ['gemini-embedding-001', 'text-embedding-004'];
+  let lastErr = '';
+  for (const model of models) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:embedContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: `models/${model}`,
+        content: { parts: [{ text: text.slice(0, 2000) }] },
+        outputDimensionality: 768
+      })
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      return data.embedding?.values;
+    }
+    lastErr = `${resp.status} ${await resp.text()}`;
   }
-  const data = await resp.json();
-  return data.embedding?.values;
+  throw new Error(`Embedding error: ${lastErr}`);
 }
 
 async function insertChunk(chunk) {

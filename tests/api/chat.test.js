@@ -13,6 +13,7 @@ import {
   sanitizeSources,
   buildMetricAllowlist,
   validateAnswerMetrics,
+  buildLocalFallbackAnswer,
   KB_FALLBACK
 } from '../../api/chat.js';
 
@@ -400,6 +401,34 @@ describe('api/chat serverless helpers', () => {
     expect(validateAnswerMetrics('Conversions jumped **995%**.', allowlist)).toBe('Conversions jumped a documented portfolio outcome.');
     expect(validateAnswerMetrics('Revenue surged **$2,000,000**.', allowlist)).toBe('Revenue surged a documented portfolio outcome.');
     expect(validateAnswerMetrics('User engagement rose **250%**.', allowlist)).toBe('User engagement rose a documented portfolio outcome.');
+  });
+
+  it('detects natural greetings like "Hi Ryan" and "Hello there"', () => {
+    expect(detectIntent('Hi Ryan')).toBe('greeting');
+    expect(detectIntent('Hello there!')).toBe('greeting');
+    expect(detectIntent('Hey, how are you?')).toBe('greeting');
+  });
+
+  it('pivots out-of-KB questions like "Does Ryan like astronomy?" to detailed professional credentials', () => {
+    const res = buildLocalFallbackAnswer({
+      intent: detectIntent('Does Ryan like astronomy?'),
+      lastUser: 'Does Ryan like astronomy?',
+      kb
+    });
+    expect(res.answer.toLowerCase()).toContain('astronomy');
+    expect(res.answer).toContain('hockey');
+    expect(res.answer).toContain('i4cp Member Portal Overhaul');
+    expect(res.answer).toContain('+500%');
+    expect(res.answer).toContain('92% engineer adoption');
+
+    const res2 = buildLocalFallbackAnswer({
+      intent: detectIntent('Does Ryan like snowboarding?'),
+      lastUser: 'Does Ryan like snowboarding?',
+      kb
+    });
+    expect(res2.answer.toLowerCase()).toContain('snowboarding');
+    expect(res2.answer).toContain('i4cp Member Portal Overhaul');
+    expect(res2.answer).toContain('92% engineer adoption');
   });
 });
 

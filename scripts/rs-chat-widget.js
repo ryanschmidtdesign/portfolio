@@ -1828,9 +1828,40 @@ if (savedHist.length > 0) {
         data = await res.json().catch(() => ({}));
       }
 
-      if (!res.ok && !data) {
-        renderErrorMessage(thinking, `I'm having trouble reaching the assistant right now (${res.status}). Try again in a moment, or ask something narrower like "Is Ryan a fit for my role?"`, text);
-        return;
+      function synthesizeClientFallback(queryText) {
+        const raw = String(queryText || '').trim();
+        const qLower = raw.toLowerCase();
+        if (/^(hi|hello|hey|howdy|greetings|good\s+(morning|afternoon|evening))\b/i.test(raw) && raw.split(/\s+/).length <= 6) {
+          return "Hey there! Happy to walk you through Ryan's case studies, his work bridging Figma and front-end code, or how his experience maps to an open role on your team. What would you like to explore?";
+        }
+        if (qLower.includes('500%') || qLower.includes('i4cp') || qLower.includes('member portal') || qLower.includes('ahri')) {
+          return "In the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html), Ryan untangled over a decade of HR research navigation debt by replacing a fragmented 10-category menu with a clean 4-pillar taxonomy and elevating the **Ahri conversational AI assistant** into the primary search flow. Following launch, **Ahri AI sessions increased by +500%**, **daily active usage doubled (2×)**, and average time-to-resource dropped by **58%**.";
+        }
+        if (qLower.includes('71%') || qLower.includes('engagement') || qLower.includes('dashboard') || qLower.includes('kpi')) {
+          return "At D-Tools Cloud, Ryan redesigned static reporting into role-based executive [AI-Powered Dashboards](/pages/dashboard.html) with plain-language AI summaries. Within 90 days of launch, **71% of active users created multiple custom dashboards**, sustained dashboard engagement rose **+62%**, and reporting support tickets dropped by **19%**.";
+        }
+        if (qLower.includes('8%') || qLower.includes('18%') || qLower.includes('revenue') || qLower.includes('arr') || qLower.includes('inventory') || qLower.includes('purchasing')) {
+          return "For D-Tools Cloud's [Real-Time Inventory](/pages/inventory.html) initiative, Ryan designed a connected purchasing, receiving, and multi-location stock-tracking workflow from zero to one. Shipping the MVP unblocked enterprise deals, drove a **+8% lift in recurring revenue**, and cut manual stock-reconciliation steps by **38%**.";
+        }
+        if (qLower.includes('design system') || qLower.includes('token') || qLower.includes('component')) {
+          return "Ryan built and governed a token-first design system of **100+ accessible components** at D-Tools, aligning Figma variables directly with CSS and React tokens in code. That system reached **92% engineer adoption** across five product modules and cut design-to-dev handoff time by **30%**.";
+        }
+        if (qLower.includes('research') || qLower.includes('process')) {
+          return "Ryan's process starts with structural clarity before visual polish: he maps the underlying data model and user jobs-to-be-done with PMs and engineers, validates information architecture with real users, and prototypes in both Figma and code. That approach turned a decade of tangled content at [i4cp](/pages/member-portal-overhaul.html) into a 4-pillar system that boosted **Ahri AI sessions by +500%**.";
+        }
+        if (qLower.includes('fit') || qLower.includes('role') || qLower.includes('staff') || qLower.includes('senior') || qLower.includes('ux engineer')) {
+          return "Ryan brings 15+ years of experience leading product design and front-end execution for complex B2B SaaS platforms, design systems, and AI workflows. He pairs architectural thinking in Figma with production HTML, CSS, JavaScript, and React—backed by shipped outcomes like **+500% AI sessions at i4cp**, **92% engineer adoption** on his **100+ component design system**, and **71% multi-dashboard adoption** at D-Tools.";
+        }
+        const topicMatch = raw.match(/\b(?:does\s+ryan\s+(?:like|love|enjoy|play|watch|know\s+about|follow)|is\s+ryan\s+(?:into|interested\s+in|a\s+fan\s+of))\s+([^?.!]+)/i);
+        if (topicMatch) {
+          const subject = topicMatch[1].trim();
+          return `Ryan hasn't mentioned ${subject} in his portfolio notes—outside of work in Austin, you'll usually find him playing ice hockey twice a week, playing guitar and bass, dialing in his morning espresso, or taking photos of his son. On the professional side, he's a Senior Product Designer and UX Engineer with 15+ years of experience turning complex B2B and AI workflows into clear, high-adoption products, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**, **2× daily activity**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**).`;
+        }
+        return "That specific detail isn't in Ryan's public portfolio notes—outside the studio in Austin, he's usually on the ice playing hockey twice a week, playing guitar, or out photographing with his son. Professionally, Ryan is a Senior Product Designer and UX Engineer with 15+ years of experience shipping complex B2B SaaS systems, design token architectures, and AI-native workflows, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**), [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**), and a **100+ component design system** with **92% engineer adoption**.";
+      }
+
+      if (!data || typeof data !== 'object') {
+        data = {};
       }
 
       let ans = (data && data.answer)
@@ -1838,23 +1869,8 @@ if (savedHist.length > 0) {
         : "";
 
       // Fallback to grounded KB synthesis if network or serverless function is unavailable
-      if (!ans || ans.includes("I didn't get enough to answer that well") || ans.includes("Chat is not configured")) {
-        const qLower = (text || '').toLowerCase();
-        if (qLower.includes('71%') || qLower.includes('engagement') || qLower.includes('dashboard')) {
-          ans = "At D-Tools Cloud, Ryan redesigned static reporting into role-based executive dashboards with AI summaries based on visible widget data. The redesign drove a **+71% lift in dashboard engagement** and **62% multi-dashboard adoption**.";
-        } else if (qLower.includes('8%') || qLower.includes('18%') || qLower.includes('revenue') || qLower.includes('arr') || qLower.includes('inventory')) {
-          ans = "For D-Tools Cloud, Ryan connected purchasing, receiving, and stock tracking in one workflow. The release removed a recurring sales blocker and contributed to an **+8% increase in platform ARR** over the following year.";
-        } else if (qLower.includes('500%') || qLower.includes('i4cp') || qLower.includes('member portal')) {
-          ans = "At i4cp, Ryan reworked navigation and research discovery around member priorities, bringing Ahri into the main discovery experience. Following launch, **Ahri sessions increased 500%** and **daily activity doubled**.";
-        } else if (qLower.includes('research') || qLower.includes('process')) {
-          ans = "Ryan's research approach pairs contextual customer interviews with browser prototyping. By testing working interactions directly with users, he validates data density and task completion speed before engineering commitments.";
-        } else if (qLower.includes('tradeoff') || qLower.includes('trade-off')) {
-          ans = "In enterprise B2B tools, Ryan prioritizes progressive disclosure over simplification. Key metrics remain visible at a glance, while granular detail expands on demand without cluttering the canvas.";
-        } else if (qLower.includes('fit') || qLower.includes('role') || qLower.includes('staff') || qLower.includes('senior')) {
-          ans = "Ryan brings 6+ years of experience leading product design for B2B SaaS platforms, design tokens, and AI workflows. He bridges strategic product vision with production craft in code.";
-        } else {
-          ans = "Ryan Schmidt is a senior product designer & UX engineer with 6+ years designing B2B SaaS platforms and design systems. Explore his featured work above: **Dashboards (+71% Engagement)**, **Inventory (+8% ARR)**, **i4cp Discovery (+500% Sessions)**, and **Building in Code**.";
-        }
+      if (!ans || ans.includes("I didn't get enough to answer that well") || ans.includes("Chat is not configured") || ans.includes("having trouble reaching")) {
+        ans = synthesizeClientFallback(text);
       }
 
       if (data && data.suggested_pills && Array.isArray(data.suggested_pills) && data.suggested_pills.length) {
@@ -1986,7 +2002,19 @@ if (savedHist.length > 0) {
       if (e.name === 'AbortError') {
         thinking.remove();
       } else {
-        renderErrorMessage(thinking, 'Something went wrong on my end (network/response error). Try again, or rephrase the question a bit more specifically.', text);
+        clearInterval(phraseInterval);
+        const fallbackAns = (function () {
+          const raw = String(text || '').trim();
+          const topicMatch = raw.match(/\b(?:does\s+ryan\s+(?:like|love|enjoy|play|watch|know\s+about|follow)|is\s+ryan\s+(?:into|interested\s+in|a\s+fan\s+of))\s+([^?.!]+)/i);
+          if (topicMatch) {
+            return `Ryan hasn't mentioned ${topicMatch[1].trim()} in his portfolio notes—outside of work in Austin, you'll usually find him playing ice hockey twice a week, playing guitar and bass, dialing in his morning espresso, or taking photos of his son. On the professional side, he's a Senior Product Designer and UX Engineer with 15+ years of experience turning complex B2B and AI workflows into clear, high-adoption products, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**, **2× daily activity**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**).`;
+          }
+          return "Ryan Schmidt is an Austin-based Senior Product Designer and UX Engineer with 15+ years of experience shipping complex B2B SaaS systems, design token architectures, and AI-native workflows. Highlights of his work include the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions** and **2× daily active usage**), [AI-Powered Dashboards](/pages/dashboard.html) at D-Tools (**71% multi-dashboard adoption**), and a **100+ component design system** that reached **92% engineer adoption**.";
+        })();
+        thinking.innerHTML = parseMarkdown(sanitizeAnswer(fallbackAns));
+        state.history.push({ role: 'assistant', content: fallbackAns });
+        saveHistory();
+        scrollToBottom(true);
       }
     } finally {
       inFlight = false;
