@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://ggmkmymtilpkezkpihxt.supabase.co';
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://bquvmwvontiifejngvaz.supabase.co';
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!GEMINI_API_KEY || !SUPABASE_SERVICE_KEY) {

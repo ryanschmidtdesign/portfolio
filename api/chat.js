@@ -17,7 +17,7 @@ const CSE_API_KEY = process.env.CSE_API_KEY || "";
 const CSE_ID = process.env.CSE_ID || "";
 const LOG_WEBHOOK_URL = process.env.LOG_WEBHOOK_URL || "";
 
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://ggmkmymtilpkezkpihxt.supabase.co";
+const SUPABASE_URL = process.env.SUPABASE_URL || "https://bquvmwvontiifejngvaz.supabase.co";
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_ROLE_KEY || "";
 
 const SUPABASE_HEADERS = SUPABASE_KEY ? {
