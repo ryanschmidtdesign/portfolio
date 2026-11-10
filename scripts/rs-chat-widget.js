@@ -968,7 +968,6 @@ if (savedHist.length > 0) {
 
     panel.classList.add('open');
     backdrop.classList.add('open');
-    window.rsAudioFX?.playBoot?.();
 
     (inputEl || panel)?.focus?.();
   }
@@ -1315,9 +1314,6 @@ if (savedHist.length > 0) {
     const pills = getCurrentPagePills(customPills);
     setPillsFromArray(pills);
     requestAnimationFrame(() => pillsContainer.classList.add('show'));
-    if (isCaseStudyPage() && typeof renderFloatingCaseStudyPills === 'function') {
-      renderFloatingCaseStudyPills(pills);
-    }
   }
 
   // Set pills on load
@@ -1517,28 +1513,6 @@ if (savedHist.length > 0) {
     card.appendChild(copy);
     card.appendChild(actions);
     container.appendChild(card);
-  }
-
-  function renderErrorMessage(thinking, message, originalText) {
-    thinking.innerHTML = '';
-
-    const text = document.createElement('div');
-    text.textContent = message;
-    thinking.appendChild(text);
-
-    const retry = document.createElement('button');
-    retry.className = 'pill';
-    retry.style.marginTop = '8px';
-    retry.textContent = 'Try again';
-    retry.addEventListener('click', () => {
-      thinking.remove();
-      send(originalText);
-    });
-    thinking.appendChild(retry);
-
-    state.history.push({ role: 'assistant', content: message });
-    saveHistory();
-    setPagePills();
   }
 
   // renderSources removed - unused
@@ -1914,9 +1888,6 @@ if (savedHist.length > 0) {
             setPillsFromArray(data.suggested_pills);
             requestAnimationFrame(function () { pillsContainer.classList.add('show'); });
           }, 180);
-        }
-        if (isCaseStudyPage() && typeof renderFloatingCaseStudyPills === 'function') {
-          renderFloatingCaseStudyPills(data.suggested_pills);
         }
       }
 

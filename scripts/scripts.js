@@ -39,13 +39,6 @@
 
   function onScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop > 20) {
-      document.body.classList.add("scrolled");
-    } else {
-      document.body.classList.remove("scrolled");
-    }
-
     const maxOffset = 16; // px clamp to prevent overlap/jank on long pages
     parallaxEls.forEach((el) => {
       const speed = parseFloat(el.dataset.parallax) || 0.05;
@@ -566,75 +559,6 @@
     if (initialCrumb) {
       activateCrumb(initialCrumb);
     }
-  }
-
-  // ==========================================================================
-  // Omnibar Query Simulator (pages/member-portal-overhaul.html)
-  // ==========================================================================
-  const omniSim = document.querySelector('[data-omnibar-sim]');
-  if (omniSim) {
-    const tablist = omniSim.querySelector('.omnibar-chip-triggers');
-    const chips = Array.from(omniSim.querySelectorAll('.query-chip'));
-    const inputEl = document.getElementById('simOmniInput');
-    const modePill = document.getElementById('simOmniMode');
-    const iconEl = document.getElementById('simOmniIcon');
-    const views = Array.from(omniSim.querySelectorAll('.omnibar-view'));
-    const seeAllBtn = omniSim.querySelector('[data-trigger-traditional]');
-
-    const queryData = {
-      ai: {
-        val: 'Executive succession planning',
-        mode: 'Ask Ahri (AI Search)',
-        modeClass: 'pill--ai',
-        icon: '✨'
-      },
-      keyword: {
-        val: 'Executive succession planning',
-        mode: 'Traditional Results',
-        modeClass: 'pill--keyword',
-        icon: '🔍'
-      }
-    };
-
-    function activateMode(type, triggerChip) {
-      if (!queryData[type]) return;
-
-      chips.forEach((c) => {
-        const active = c.dataset.queryType === type;
-        c.classList.toggle('is-active', active);
-        c.setAttribute('aria-selected', active ? 'true' : 'false');
-        c.setAttribute('tabindex', active ? '0' : '-1');
-      });
-
-      const data = queryData[type];
-      if (inputEl) inputEl.value = data.val;
-      if (modePill) {
-        modePill.textContent = data.mode;
-        modePill.className = 'omnibar-mode-pill ' + data.modeClass;
-      }
-      if (iconEl) iconEl.textContent = data.icon;
-
-      views.forEach((v) => {
-        v.classList.toggle('is-active', v.dataset.simView === type);
-      });
-
-      if (triggerChip) triggerChip.focus();
-    }
-
-    chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        activateMode(chip.dataset.queryType, chip);
-      });
-    });
-
-    if (seeAllBtn) {
-      seeAllBtn.addEventListener('click', () => {
-        const keywordChip = omniSim.querySelector('.query-chip[data-query-type="keyword"]');
-        activateMode('keyword', keywordChip);
-      });
-    }
-
-    setupAriaTabs({ tablist, tabs: chips, panels: views });
   }
 
   // ==========================================================================
