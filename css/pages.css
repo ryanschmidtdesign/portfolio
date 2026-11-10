@@ -83,16 +83,6 @@
   width: 100%;
 }
 
-/* Reverse timeline items to chronological progression (oldest to newest, left-to-right) */
-.page-about .timeline-list .timeline-item:nth-child(1) { order: 8; }
-.page-about .timeline-list .timeline-item:nth-child(2) { order: 7; }
-.page-about .timeline-list .timeline-item:nth-child(3) { order: 6; }
-.page-about .timeline-list .timeline-item:nth-child(4) { order: 5; }
-.page-about .timeline-list .timeline-item:nth-child(5) { order: 4; }
-.page-about .timeline-list .timeline-item:nth-child(6) { order: 3; }
-.page-about .timeline-list .timeline-item:nth-child(7) { order: 2; }
-.page-about .timeline-list .timeline-item:nth-child(8) { order: 1; }
-
 .page-about .timeline-content {
   max-width: 34ch;
 }
