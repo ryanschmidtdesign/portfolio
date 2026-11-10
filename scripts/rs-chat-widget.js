@@ -191,7 +191,7 @@
       .hdr-sub {
         margin: 0;
         font-family: var(--font-mono);
-        font-size: 10px;
+        font-size: 12px;
         color: #A8A29E;
         letter-spacing: 0.05em;
         text-transform: uppercase;
@@ -209,7 +209,7 @@
         background: #1A1614;
         color: #A8A29E;
         font-family: var(--font-mono);
-        font-size: 10.5px;
+        font-size: 12px;
         font-weight: 600;
         letter-spacing: 0.05em;
         cursor: pointer;
@@ -270,7 +270,7 @@
         content: "You";
         display: block;
         font-family: var(--font-mono);
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 600;
         letter-spacing: 0.04em;
         color: #A8A29E;
@@ -294,7 +294,7 @@
         content: "Portfolio Assistant";
         display: block;
         font-family: var(--font-mono);
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.04em;
         color: #A8A29E;
@@ -328,7 +328,7 @@
         padding-top: 8px;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
         font-family: var(--font-mono);
-        font-size: 10.5px;
+        font-size: 12px;
         color: #A8A29E;
       }
       .chat-copy-btn {
@@ -340,7 +340,7 @@
         background: #141110;
         border: 1px solid rgba(255, 255, 255, 0.12);
         font-family: var(--font-mono);
-        font-size: 10.5px;
+        font-size: 12px;
         font-weight: 600;
         color: #A8A29E;
         cursor: pointer;
@@ -357,7 +357,7 @@
         border-color: var(--green, #166534);
       }
       .chat-telemetry-tag {
-        font-size: 10px;
+        font-size: 12px;
         color: #A8A29E;
         letter-spacing: 0.05em;
         text-transform: uppercase;
@@ -393,7 +393,7 @@
         align-items: center;
         gap: 6px;
         font-family: var(--font-mono);
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
@@ -408,7 +408,7 @@
       }
       .seed-badge {
         font-family: var(--font-mono);
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 600;
         letter-spacing: 0.04em;
         padding: 3px 8px;
@@ -430,7 +430,7 @@
       }
       .pill {
         font-family: var(--font-sans);
-        font-size: 11.5px;
+        font-size: 12px;
         font-weight: 500;
         color: #A8A29E;
         background: #1C1916;
@@ -447,7 +447,7 @@
       .pill::before {
         content: "❯ ";
         font-family: var(--font-mono);
-        font-size: 10px;
+        font-size: 12px;
         color: var(--accent, #C85A32);
         opacity: 0.85;
       }
@@ -652,7 +652,7 @@
       }
       .chat-sources-label {
         font-family: var(--font-mono);
-        font-size: 10px;
+        font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         color: #A8A29E;
@@ -673,7 +673,7 @@
       .chat-sources-list a {
         display: inline-flex;
         align-items: center;
-        font-size: 11.5px;
+        font-size: 12px;
         font-weight: 500;
         padding: 2px 8px;
         border-radius: 5px;
@@ -725,7 +725,7 @@
       }
       .stop-btn {
         font-family: var(--font-mono);
-        font-size: 10.5px;
+        font-size: 12px;
         font-weight: 600;
         padding: 3px 9px;
         border-radius: 999px;
@@ -1186,7 +1186,7 @@ if (savedHist.length > 0) {
       "What was the hardest tradeoff?"
     ],
     '/': [
-      "What did Ryan ship at D-Tools? (+71% engagement)",
+      "What did Ryan ship at D-Tools? (71% adoption, +64% views)",
       "How did he lift AI adoption by 500% at i4cp?",
       "Walk me through the real-time inventory MVP (+8% ARR)",
       "Is Ryan a fit for a Senior / Staff Product Designer role?"
@@ -1205,8 +1205,6 @@ if (savedHist.length > 0) {
       return null;
     }
   }
-
-  ensureKbLoaded().catch(() => {});
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
@@ -1507,15 +1505,13 @@ if (savedHist.length > 0) {
   
     actions.appendChild(linkedin);
   
-    const resumeUrl = state.kb?.links?.resume_pdf;
-    if (resumeUrl) {
-      const resume = document.createElement('a');
-      resume.href = resumeUrl;
-      resume.target = '_blank';
-      resume.rel = 'noopener noreferrer';
-      resume.textContent = 'View resume';
-      actions.appendChild(resume);
-    }
+    const resumeUrl = state.kb?.links?.resume_pdf || '/assets/ryan-schmidt-resume.pdf';
+    const resume = document.createElement('a');
+    resume.href = resumeUrl;
+    resume.target = '_blank';
+    resume.rel = 'noopener noreferrer';
+    resume.textContent = 'View resume';
+    actions.appendChild(resume);
   
     card.appendChild(title);
     card.appendChild(copy);
@@ -1621,7 +1617,7 @@ if (savedHist.length > 0) {
       cursor.textContent = '▍';
       container.appendChild(cursor);
   
-      const TYPE_DELAY = total > 600 ? 2 : total > 300 ? 4 : 8;
+      const TYPE_DELAY = total > 600 ? 1 : total > 300 ? 2 : 4;
   
       async function streamNode(node, parent) {
         if (streamAborted) return;
@@ -1631,13 +1627,12 @@ if (savedHist.length > 0) {
           const textNode = document.createTextNode('');
           parent.insertBefore(textNode, cursor);
   
-          for (let i = 0; i < text.length; i++) {
+          const step = 6;
+          for (let i = 0; i < text.length; i += step) {
             if (streamAborted) return;
-            textNode.data += text[i];
-            if (i % 3 === 0) {
-              scrollToBottom(false);
-              await new Promise(r => setTimeout(r, TYPE_DELAY));
-            }
+            textNode.data += text.slice(i, i + step);
+            scrollToBottom(false);
+            await new Promise(r => setTimeout(r, TYPE_DELAY));
           }
           return;
         }
@@ -1766,9 +1761,10 @@ if (savedHist.length > 0) {
     let timeoutTimer = null;
 
     try {
-      // Best effort: make sure KB is available before calling the server.
-      // The server also has its own fallback, so this is just extra reliability.
-      await ensureKbLoaded();
+      // Fetch KB in background if not already cached (non-blocking)
+      if (!state.kb) {
+        ensureKbLoaded().catch(() => {});
+      }
 
       const chatApi = (window.RS_CHAT_API || '/api/chat');
       const pageContext = {
@@ -1872,29 +1868,29 @@ if (savedHist.length > 0) {
           return "Hey there! Happy to walk you through Ryan's case studies, his work bridging Figma and front-end code, or how his experience maps to an open role on your team. What would you like to explore?";
         }
         if (qLower.includes('500%') || qLower.includes('i4cp') || qLower.includes('member portal') || qLower.includes('ahri')) {
-          return "In the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html), Ryan untangled over a decade of HR research navigation debt by replacing a fragmented 10-category menu with a clean 4-pillar taxonomy and elevating the **Ahri conversational AI assistant** into the primary search flow. Following launch, **Ahri AI sessions increased by +500%**, **daily active usage doubled (2×)**, and average time-to-resource dropped by **58%**.";
+          return "In the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html), Ryan untangled over a decade of HR research navigation debt by replacing a fragmented 10-category menu with a clean 4-pillar taxonomy and elevating the **Ahri conversational AI assistant** into the primary search flow. Following launch, **Ahri AI sessions increased by +500%** and **daily active usage doubled (2×)**.";
         }
         if (qLower.includes('71%') || qLower.includes('engagement') || qLower.includes('dashboard') || qLower.includes('kpi')) {
-          return "At D-Tools Cloud, Ryan redesigned static reporting into role-based executive [AI-Powered Dashboards](/pages/dashboard.html) with plain-language AI summaries. Within 90 days of launch, **71% of active users created multiple custom dashboards**, sustained dashboard engagement rose **+62%**, and reporting support tickets dropped by **19%**.";
+          return "At D-Tools Cloud, Ryan redesigned static reporting into role-based executive [AI-Powered Dashboards](/pages/dashboard.html) with plain-language AI summaries. Following launch, active accounts reached **71% multi-dashboard adoption** and weekly engagement grew to **+64% sustained dashboard views** across consecutive quarters.";
         }
         if (qLower.includes('8%') || qLower.includes('18%') || qLower.includes('revenue') || qLower.includes('arr') || qLower.includes('inventory') || qLower.includes('purchasing')) {
-          return "For D-Tools Cloud's [Real-Time Inventory](/pages/inventory.html) initiative, Ryan designed a connected purchasing, receiving, and multi-location stock-tracking workflow from zero to one. Shipping the MVP unblocked enterprise deals, drove a **+8% lift in recurring revenue**, and cut manual stock-reconciliation steps by **38%**.";
+          return "For D-Tools Cloud's [Real-Time Inventory](/pages/inventory.html) initiative, Ryan designed a connected purchasing, receiving, and multi-location stock-tracking workflow from zero to one. Shipping the MVP unblocked enterprise deals, drove an **+8% lift in recurring revenue**, and reached **+8% year-over-year adoption growth** with a median **28s dock check-in**.";
         }
         if (qLower.includes('design system') || qLower.includes('token') || qLower.includes('component')) {
-          return "Ryan built and governed a token-first design system of **100+ accessible components** at D-Tools, aligning Figma variables directly with CSS and React tokens in code. That system reached **92% engineer adoption** across five product modules and cut design-to-dev handoff time by **30%**.";
+          return "Ryan built and governed a token-first design system of **100+ accessible components** at D-Tools, aligning Figma variables directly with CSS and React tokens in code. That system reached **92% engineer adoption** across five Cloud modules.";
         }
         if (qLower.includes('research') || qLower.includes('process')) {
           return "Ryan's process starts with structural clarity before visual polish: he maps the underlying data model and user jobs-to-be-done with PMs and engineers, validates information architecture with real users, and prototypes in both Figma and code. That approach turned a decade of tangled content at [i4cp](/pages/member-portal-overhaul.html) into a 4-pillar system that boosted **Ahri AI sessions by +500%**.";
         }
         if (qLower.includes('fit') || qLower.includes('role') || qLower.includes('staff') || qLower.includes('senior') || qLower.includes('ux engineer')) {
-          return "Ryan brings 15+ years of experience leading product design and front-end execution for complex B2B SaaS platforms, design systems, and AI workflows. He pairs architectural thinking in Figma with production HTML, CSS, JavaScript, and React—backed by shipped outcomes like **+500% AI sessions at i4cp**, **92% engineer adoption** on his **100+ component design system**, and **71% multi-dashboard adoption** at D-Tools.";
+          return "Ryan brings 6+ years of experience leading product design and front-end execution for complex B2B SaaS platforms, design systems, and AI workflows. He pairs architectural thinking in Figma with production HTML, CSS, JavaScript, and React—backed by shipped outcomes like **+500% AI sessions at i4cp**, **92% engineer adoption** on his **100+ component design system**, and **71% multi-dashboard adoption** at D-Tools.";
         }
         const topicMatch = raw.match(/\b(?:does\s+ryan\s+(?:like|love|enjoy|play|watch|know\s+about|follow)|is\s+ryan\s+(?:into|interested\s+in|a\s+fan\s+of))\s+([^?.!]+)/i);
         if (topicMatch) {
           const subject = topicMatch[1].trim();
-          return `Ryan hasn't mentioned ${subject} in his portfolio notes—outside of work in Austin, you'll usually find him playing ice hockey twice a week, playing guitar and bass, dialing in his morning espresso, or taking photos of his son. On the professional side, he's a Senior Product Designer and UX Engineer with 15+ years of experience turning complex B2B and AI workflows into clear, high-adoption products, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**, **2× daily activity**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**).`;
+          return `Ryan hasn't mentioned ${subject} in his portfolio notes—outside of work in Austin, you'll usually find him playing ice hockey twice a week, playing guitar and bass, dialing in his morning espresso, or taking photos of his son. On the professional side, he's a Senior Product Designer and UX Engineer with 6+ years of experience turning complex B2B and AI workflows into clear, high-adoption products, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**, **2× daily activity**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**, **+64% sustained dashboard views**).`;
         }
-        return "That specific detail isn't in Ryan's public portfolio notes—outside the studio in Austin, he's usually on the ice playing hockey twice a week, playing guitar, or out photographing with his son. Professionally, Ryan is a Senior Product Designer and UX Engineer with 15+ years of experience shipping complex B2B SaaS systems, design token architectures, and AI-native workflows, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**), [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**), and a **100+ component design system** with **92% engineer adoption**.";
+        return "That specific detail isn't in Ryan's public portfolio notes—outside the studio in Austin, he's usually on the ice playing hockey twice a week, playing guitar, or out photographing with his son. Professionally, Ryan is a Senior Product Designer and UX Engineer with 6+ years of experience shipping complex B2B SaaS systems, design token architectures, and AI-native workflows, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**), [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**, **+64% sustained dashboard views**), and a **100+ component design system** with **92% engineer adoption**.";
       }
 
       if (!data || typeof data !== 'object') {
@@ -2044,9 +2040,9 @@ if (savedHist.length > 0) {
           const raw = String(text || '').trim();
           const topicMatch = raw.match(/\b(?:does\s+ryan\s+(?:like|love|enjoy|play|watch|know\s+about|follow)|is\s+ryan\s+(?:into|interested\s+in|a\s+fan\s+of))\s+([^?.!]+)/i);
           if (topicMatch) {
-            return `Ryan hasn't mentioned ${topicMatch[1].trim()} in his portfolio notes—outside of work in Austin, you'll usually find him playing ice hockey twice a week, playing guitar and bass, dialing in his morning espresso, or taking photos of his son. On the professional side, he's a Senior Product Designer and UX Engineer with 15+ years of experience turning complex B2B and AI workflows into clear, high-adoption products, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**, **2× daily activity**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**).`;
+            return `Ryan hasn't mentioned ${topicMatch[1].trim()} in his portfolio notes—outside of work in Austin, you'll usually find him playing ice hockey twice a week, playing guitar and bass, dialing in his morning espresso, or taking photos of his son. On the professional side, he's a Senior Product Designer and UX Engineer with 6+ years of experience turning complex B2B and AI workflows into clear, high-adoption products, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**, **2× daily activity**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**, **+64% sustained dashboard views**).`;
           }
-          return "Ryan Schmidt is an Austin-based Senior Product Designer and UX Engineer with 15+ years of experience shipping complex B2B SaaS systems, design token architectures, and AI-native workflows. Highlights of his work include the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions** and **2× daily active usage**), [AI-Powered Dashboards](/pages/dashboard.html) at D-Tools (**71% multi-dashboard adoption**), and a **100+ component design system** that reached **92% engineer adoption**.";
+          return "Ryan Schmidt is an Austin-based Senior Product Designer and UX Engineer with 6+ years of experience shipping complex B2B SaaS systems, design token architectures, and AI-native workflows. Highlights of his work include the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions** and **2× daily active usage**), [AI-Powered Dashboards](/pages/dashboard.html) at D-Tools (**71% multi-dashboard adoption**, **+64% sustained dashboard views**), and a **100+ component design system** that reached **92% engineer adoption**.";
         })();
         thinking.innerHTML = parseMarkdown(sanitizeAnswer(fallbackAns));
         state.history.push({ role: 'assistant', content: fallbackAns });

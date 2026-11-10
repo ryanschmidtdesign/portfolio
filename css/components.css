@@ -1609,7 +1609,7 @@ main[data-reveal] {
   gap: 6px;
   color: var(--text-secondary);
   font-family: var(--font-mono, monospace);
-  font-size: 10px;
+  font-size: var(--fs-2xs, 12px);
   font-weight: 500;
   letter-spacing: 0.02em;
 }
@@ -1814,7 +1814,7 @@ main[data-reveal] {
 }
 
 .node-sub {
-  font-size: 11px;
+  font-size: var(--fs-2xs, 12px);
   color: var(--text-muted, #70665D);
   font-family: var(--font-mono);
   white-space: nowrap;
@@ -1841,7 +1841,7 @@ main[data-reveal] {
 
 .sim-sku {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-2xs, 12px);
   color: var(--text-secondary);
   text-transform: uppercase;
 }
@@ -1878,7 +1878,7 @@ main[data-reveal] {
 
 .sim-cell-label {
   display: block;
-  font-size: 11px;
+  font-size: var(--fs-2xs, 12px);
   font-family: var(--font-mono);
   text-transform: uppercase;
   color: var(--text-secondary);
@@ -2017,27 +2017,27 @@ main[data-reveal] {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--obsidian-bg, #141210);
+  background: var(--surface-code, #EAE0D5);
   padding: 4px 6px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--obsidian-border, rgba(255, 255, 255, 0.12));
+  border: 1px solid var(--border);
 }
 
 .stepper-btn {
   min-width: 30px;
   min-height: 30px;
   border-radius: var(--radius-xs);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: var(--obsidian-surface-raised, #24201C);
+  border: 1px solid var(--border);
+  background: var(--surface-elevated, #FAF7F2);
   font-size: 15px;
   font-weight: 600;
-  color: #F7F5F2;
+  color: var(--text);
   cursor: pointer;
   user-select: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 2px rgba(44, 36, 29, 0.08);
   transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out), transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
 }
 
@@ -2059,17 +2059,17 @@ main[data-reveal] {
   font-family: var(--font-mono);
   font-size: var(--fs-sm);
   font-weight: 600;
-  color: #F7F5F2;
+  color: var(--text);
   transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms ease;
 }
 
 .stepper-val.is-pulsing {
-  color: #E07844;
+  color: var(--accent);
   transform: scale(1.18);
 }
 
 .mock-done-pill {
-  font-size: 11px;
+  font-size: var(--fs-2xs, 12px);
   font-weight: 600;
   background: var(--green-soft, rgb(22 101 52 / 0.12));
   color: var(--green, #166534);
@@ -2089,14 +2089,14 @@ main[data-reveal] {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   padding: 6px 10px;
-  border: 1px solid var(--obsidian-border-strong, rgba(255, 255, 255, 0.18));
+  border: 1px solid var(--border);
   border-radius: var(--radius-xs);
-  background: var(--obsidian-bg, #141210);
-  color: #F7F5F2;
+  background: var(--surface-elevated, #FAF7F2);
+  color: var(--text);
 }
 
 .mock-verified-badge {
-  font-size: 11px;
+  font-size: var(--fs-2xs, 12px);
   font-weight: 600;
   background: var(--green-soft, rgb(22 101 52 / 0.12));
   color: var(--green, #166534);
@@ -2157,10 +2157,10 @@ main[data-reveal] {
 
 .crumb-segment:hover,
 .crumb-segment.is-active {
-  background: var(--obsidian-bg, #141210);
-  color: #F7F5F2;
+  background: var(--accent);
+  color: #ffffff;
   font-weight: 600;
-  box-shadow: 0 1px 4px rgba(20, 18, 16, 0.25);
+  box-shadow: 0 1px 4px rgb(var(--rgb-cool) / 0.15);
 }
 
 .crumb-segment:focus-visible {
@@ -2237,7 +2237,7 @@ main[data-reveal] {
 }
 
 .deliv-badge {
-  font-size: 10px;
+  font-size: var(--fs-2xs, 12px);
   font-family: var(--font-mono);
   font-weight: 600;
   color: var(--accent);
@@ -2305,8 +2305,8 @@ main[data-reveal] {
 .query-chip:focus-visible,
 .query-chip.is-active {
   border-color: var(--accent);
-  background: var(--obsidian-bg, #141210);
-  color: #F7F5F2;
+  background: var(--surface-elevated-strong, #FFFFFF);
+  color: var(--accent-hover);
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -2336,7 +2336,7 @@ main[data-reveal] {
 
 .omnibar-mode-pill {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--fs-2xs, 12px);
   font-weight: 600;
   padding: 3px 8px;
   border-radius: var(--radius-xs);
@@ -2390,7 +2390,7 @@ main[data-reveal] {
 }
 
 .ahri-latency {
-  font-size: 11px;
+  font-size: var(--fs-2xs, 12px);
   color: var(--text-secondary);
   font-family: var(--font-mono);
 }
@@ -2454,7 +2454,7 @@ main[data-reveal] {
 }
 
 .res-type {
-  font-size: 10px;
+  font-size: var(--fs-2xs, 12px);
   font-family: var(--font-mono);
   font-weight: 600;
   text-transform: uppercase;
@@ -2462,7 +2462,7 @@ main[data-reveal] {
 }
 
 .res-meta {
-  font-size: 11px;
+  font-size: var(--fs-2xs, 12px);
   color: var(--text-secondary);
   font-family: var(--font-mono);
 }
