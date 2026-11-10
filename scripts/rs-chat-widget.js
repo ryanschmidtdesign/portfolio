@@ -1148,26 +1148,27 @@ if (savedHist.length > 0) {
 
   const PAGE_PILLS = {
     '/dashboard.html': [
-      "How did you drive 71% more engagement?",
-      "Walk me through your UX research process.",
-      "What were the key tradeoffs?"
+      "How did Ryan drive 71% more engagement?",
+      "Walk me through Ryan's UX research process.",
+      "What were the key tradeoffs on this dashboard?"
     ],
     '/inventory.html': [
-      "Why start with an MVP?",
-      "How did you get stakeholder buy-in?",
+      "Why did Ryan start with an MVP?",
+      "How did he get stakeholder buy-in?",
       "What were the biggest tradeoffs?"
     ],
     '/ai-coding-portfolio.html': [
-      "What tools and workflow did you use?",
+      "What tools and workflow did Ryan use?",
       "Why a database over a JSON file?",
       "What were the key takeaways?"
     ],
     '/about.html': [
-      "What does your mentorship work look like?",
-      "What is your design philosophy?"
+      "What does Ryan's mentorship work look like?",
+      "What is Ryan's design philosophy?"
     ],
     '/member-portal-overhaul.html': [
       "Why progressive disclosure over flat navigation?",
+      "How did Ryan lift Ahri AI adoption by 500%?",
       "What was the hardest tradeoff?"
     ],
     '/': [
@@ -1310,6 +1311,25 @@ if (savedHist.length > 0) {
   // Set pills on load
   setPagePills();
 
+  function normalizeHrefForNav(href = '') {
+    let value = String(href || '').trim();
+    if (!value) return '';
+    try {
+      if (/^https?:\/\//i.test(value)) {
+        const u = new URL(value);
+        const host = u.hostname.toLowerCase();
+        if (host === 'ryanschmidt.design' || host === 'www.ryanschmidt.design' || host.endsWith('.vercel.app') || host === location.hostname.toLowerCase()) {
+          let p = u.pathname.replace(/\/$/, '') || '/';
+          if (p.startsWith('/pages/') && !p.endsWith('.html')) p += '.html';
+          return p + (u.search || '') + (u.hash || '');
+        }
+      } else if (value.startsWith('/pages/') && !value.includes('.html') && !value.includes('?') && !value.includes('#')) {
+        return value.replace(/\/$/, '') + '.html';
+      }
+    } catch {}
+    return value;
+  }
+
   function isSafeHref(href = '') {
     const value = String(href || '').trim();
     if (value.startsWith('//')) return false;
@@ -1355,7 +1375,7 @@ if (savedHist.length > 0) {
       if (!token) return match;
 
       const { label, href } = token;
-      const safeHref = String(href || '').trim();
+      const safeHref = normalizeHrefForNav(href);
 
       if (!isSafeHref(safeHref)) {
         // Unsafe: render label as plain escaped text, drop the link.
@@ -1527,11 +1547,14 @@ if (savedHist.length > 0) {
     contextCases.slice(0, 2).forEach((c) => {
       const li = document.createElement('li');
       if (c?.url) {
+        const navUrl = normalizeHrefForNav(c.url);
         const a = document.createElement('a');
-        a.href = c.url;
-        a.textContent = c.title || c.url;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
+        a.href = navUrl;
+        a.textContent = c.title || navUrl;
+        if (/^https?:\/\//i.test(navUrl)) {
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        }
         li.appendChild(a);
       } else {
         li.textContent = c?.title || '';
@@ -1747,7 +1770,6 @@ if (savedHist.length > 0) {
         answerStyle,
         pageContext
       };
-      if (state.kb) payload.kb = state.kb;
       if (state.sectionContext) payload.sectionContext = state.sectionContext;
 
       timeoutTimer = setTimeout(() => currentController.abort(), 60000);
@@ -1807,12 +1829,13 @@ if (savedHist.length > 0) {
             if (done) break;
             buf += decoder.decode(value, { stream: true });
             processSseBuffer();
+            if (data) break;
           }
           // Flush remaining buffer
-          processSseBuffer();
+          if (!data) processSseBuffer();
         } finally {
           clearTimeout(timeoutTimer);
-          reader.releaseLock();
+          try { reader.releaseLock(); } catch {}
         }
 
         if (!data && accumulatedText) {

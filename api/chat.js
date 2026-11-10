@@ -73,13 +73,14 @@ const MAX_LINK_CHARS = 14000;
 // In-memory response cache and rate limiter (AI Gateway light)
 // -----------------------------------------------------------------------------
 const RESPONSE_CACHE = new Map();
+const SESSION_ID_CACHE = new Map();
 const RATE_LIMITS = new Map();
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
 const RATE_LIMIT_MAX = 25; // max requests per window per client
 
-function cacheKey(message, intent, isFit) {
-  const str = `${message}|${intent}|${isFit}`;
+function cacheKey(message, intent, isFit, pageUrl = "", prevTurnContext = "") {
+  const str = `${String(message || "").trim().toLowerCase()}|${intent}|${isFit}|${String(pageUrl || "").toLowerCase()}|${String(prevTurnContext || "").slice(0, 120).toLowerCase()}`;
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     hash = ((hash << 5) - hash) + str.charCodeAt(i);
@@ -88,8 +89,8 @@ function cacheKey(message, intent, isFit) {
   return hash.toString();
 }
 
-function getCachedResponse(message, intent, isFit) {
-  const key = cacheKey(message, intent, isFit);
+function getCachedResponse(message, intent, isFit, pageUrl = "", prevTurnContext = "") {
+  const key = cacheKey(message, intent, isFit, pageUrl, prevTurnContext);
   const entry = RESPONSE_CACHE.get(key);
   if (!entry) return null;
   if (Date.now() - entry.timestamp > CACHE_TTL_MS) {
@@ -99,12 +100,12 @@ function getCachedResponse(message, intent, isFit) {
   return entry.output;
 }
 
-function setCachedResponse(message, intent, isFit, output) {
+function setCachedResponse(message, intent, isFit, output, pageUrl = "", prevTurnContext = "") {
   if (RESPONSE_CACHE.size >= 500) {
     const oldest = RESPONSE_CACHE.keys().next().value;
     if (oldest) RESPONSE_CACHE.delete(oldest);
   }
-  const key = cacheKey(message, intent, isFit);
+  const key = cacheKey(message, intent, isFit, pageUrl, prevTurnContext);
   RESPONSE_CACHE.set(key, { output, timestamp: Date.now() });
 }
 
@@ -696,7 +697,7 @@ function buildComingSoonPolicy(kb) {
   const cases = (kb?.cases || []).filter(c => isComingSoonCase(kb, c.id));
   if (!cases.length) return "";
   const lines = cases.map((c) =>
-    `- ${c.title} (${c.id}): in progress \u2014 do NOT claim outcomes or unpublished details. If asked, say it's coming soon and point to published work ([AI-Powered Dashboards](https://ryanschmidt.design/dashboard.html), [Real-Time Inventory](https://ryanschmidt.design/inventory.html), [i4cp Member Portal Overhaul](https://ryanschmidt.design/member-portal-overhaul.html), or [AI-Coding my Portfolio](https://ryanschmidt.design/ai-coding-portfolio.html)).`
+    `- ${c.title} (${c.id}): in progress \u2014 do NOT claim outcomes or unpublished details. If asked, say it's coming soon and point to published work ([AI-Powered Dashboards](/pages/dashboard.html), [Real-Time Inventory](/pages/inventory.html), [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html), or [AI-Assisted Portfolio](/pages/ai-coding-portfolio.html)).`
   );
   return [
     "### COMING SOON CASES (deflect)",
@@ -716,26 +717,22 @@ function caseIdFromPageUrl(kb, pageUrl = "") {
   }
   const raw = decodeURIComponent(pathname || "");
   let normalized = raw.replace(/\/$/, "") || "/";
-  if (normalized === "/index.html") normalized = "/";
+  if (normalized === "/index.html" || normalized === "/index") normalized = "/";
   const pagesMatch = normalized.match(/^\/pages\/(.+)$/);
   if (pagesMatch) normalized = "/" + pagesMatch[1];
+  if (normalized !== "/" && !normalized.endsWith(".html")) {
+    normalized = normalized + ".html";
+  }
   const id = map[normalized] ?? map[raw] ?? null;
   return id || null;
 }
 
 function chooseCaseIdsFromText(kb, messagesArray, fallbackText, max = 2, pageUrl = "", intent = "general", isFit = false) {
   const picked = [];
-  const caseRelevantIntent =
-    intent === "case_select" ||
-    intent === "case_detail" ||
-    intent === "case_compare" ||
-    intent === "proof_points" ||
-    intent === "process" ||
-    intent === "technical_depth" ||
-    isFit;
-  if (caseRelevantIntent) {
-    const pageCaseId = caseIdFromPageUrl(kb, pageUrl);
-    if (pageCaseId && !picked.includes(pageCaseId)) picked.push(pageCaseId);
+  // Always prioritize the case study page the visitor is actively viewing
+  const pageCaseId = caseIdFromPageUrl(kb, pageUrl);
+  if (pageCaseId && !picked.includes(pageCaseId)) {
+    picked.push(pageCaseId);
   }
   const recentUserText = Array.isArray(messagesArray)
     ? messagesArray.filter(m => m.role === "user").map(m => m.content).join(" ")
@@ -764,13 +761,30 @@ function chooseCaseIdsFromText(kb, messagesArray, fallbackText, max = 2, pageUrl
   return picked.slice(0, max);
 }
 
+function normalizeInternalCaseUrl(rawUrl) {
+  const s = String(rawUrl || "").trim();
+  if (!s) return "";
+  try {
+    const u = new URL(s, "https://ryanschmidt.design");
+    const host = u.hostname.toLowerCase();
+    if (host === "ryanschmidt.design" || host === "www.ryanschmidt.design" || host.endsWith(".vercel.app")) {
+      let p = u.pathname.replace(/\/$/, "") || "/";
+      if (p.startsWith("/pages/") && !p.endsWith(".html")) {
+        p += ".html";
+      }
+      return p;
+    }
+  } catch {}
+  return s;
+}
+
 function summarizePickedCases(kb, caseIds) {
   const cases = Array.isArray(kb?.cases) ? kb.cases : [];
   const byId = new Map(cases.map(c => [c.id, c]));
   return (caseIds || [])
     .map(id => byId.get(id))
     .filter(Boolean)
-    .map(c => ({ title: String(c.title || ""), url: String(c.url || "") }))
+    .map(c => ({ title: String(c.title || ""), url: normalizeInternalCaseUrl(c.url || "") }))
     .filter(c => c.title);
 }
 
@@ -787,12 +801,18 @@ function buildFocusedCaseContext(kb, caseIds) {
       return bits.join(": ");
     });
     const proof = Array.isArray(c.proof_points) ? c.proof_points : (Array.isArray(c.proofPoints) ? c.proofPoints : []);
+    const sections = Array.isArray(c.sections)
+      ? c.sections.map(s => `- ${s.heading}: ${s.summary}`).filter(Boolean)
+      : [];
     const status = String(c.status || "").trim();
     const isComingSoon = status.toLowerCase() === "coming_soon";
     return [
       `## ${c.title}`,
+      c.company ? `Company: ${c.company}` : "",
       status ? `Status: ${status}${isComingSoon ? " (do not claim results; case details are not published yet)" : ""}` : "",
       c.url ? `URL: ${c.url}` : "",
+      c.timeline ? `Timeline: ${c.timeline}` : "",
+      Array.isArray(c.team) && c.team.length ? `Team: ${c.team.join(", ")}` : "",
       c.audience ? `Audience: ${c.audience}` : "",
       c.problem ? `Problem: ${c.problem}` : "",
       Array.isArray(c.constraints) && c.constraints.length ? `Constraints: ${c.constraints.join("; ")}` : "",
@@ -801,6 +821,7 @@ function buildFocusedCaseContext(kb, caseIds) {
       Array.isArray(c.components) && c.components.length ? `Components: ${c.components.join(", ")}` : "",
       (c.summary_short || c.summary || c.summaryShort) ? `Summary: ${c.summary_short || c.summary || c.summaryShort}` : "",
       (!isComingSoon && proof.length) ? `Proof points:\n- ${proof.slice(0, 6).join("\n- ")}` : (isComingSoon && proof.length ? `Notes:\n- ${proof.slice(0, 4).join("\n- ")}` : ""),
+      (!isComingSoon && sections.length) ? `Case study breakdown:\n${sections.join("\n")}` : "",
       (!isComingSoon && outcomes.length) ? `Outcomes:\n- ${outcomes.join("\n- ")}` : "",
       (!isComingSoon && c.impact_narrative) ? `Impact narrative: ${c.impact_narrative}` : (isComingSoon ? "Impact narrative: Coming soon." : ""),
     ].filter(Boolean).join("\n");
@@ -946,7 +967,7 @@ function reconcileContextCases(kb, cases, fallback = []) {
   const seenUrls = new Set();
   const pushMatch = (match, fallbackTitle = '') => {
     if (!match) return;
-    const url = String(match.url || '');
+    const url = normalizeInternalCaseUrl(match.url || '');
     const title = String(match.title || match.short_title || fallbackTitle || '');
     if (!title) return;
     const dedupeKey = (url || title).toLowerCase();
@@ -1060,6 +1081,40 @@ function defaultSuggestedPills(intent, lastUser) {
     default:
       return generic;
   }
+}
+
+function dedupeSuggestedPills(pills, messages, intent, lastUser) {
+  const asked = new Set(
+    (messages || [])
+      .filter(m => m && m.role === "user")
+      .map(m => normalizeText(m.content || "").toLowerCase().replace(/[?.!]+$/g, ""))
+      .filter(Boolean)
+  );
+  if (lastUser) {
+    asked.add(normalizeText(lastUser).toLowerCase().replace(/[?.!]+$/g, ""));
+  }
+
+  const backupPool = [
+    ...defaultSuggestedPills(intent, lastUser),
+    "How did Ryan lift AI adoption by 500% at i4cp?",
+    "Walk me through the real-time inventory MVP (+8% ARR)",
+    "How did Ryan drive 71% multi-dashboard adoption at D-Tools?",
+    "How does Ryan bridge Figma and front-end code?",
+    "Is Ryan a fit for a Senior or Staff Product Designer role?"
+  ];
+
+  const out = [];
+  const seen = new Set();
+  for (const p of [...(pills || []), ...backupPool]) {
+    const cleaned = String(p || "").trim();
+    if (!cleaned) continue;
+    const norm = normalizeText(cleaned).toLowerCase().replace(/[?.!]+$/g, "");
+    if (asked.has(norm) || seen.has(norm)) continue;
+    seen.add(norm);
+    out.push(cleaned);
+    if (out.length >= 2) break;
+  }
+  return out;
 }
 
 function pickRelevantExamples(kb, intent, lastUserMsg = "", max = 4) {
@@ -1653,11 +1708,156 @@ function buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks = [], 
 }
 
 // -----------------------------------------------------------------------------
-// Supabase vector retrieval (Phase 3)
+// Supabase vector + in-memory hybrid retrieval (Phase 3)
 // -----------------------------------------------------------------------------
 
 const EMBEDDING_MODELS = ["gemini-embedding-001", "text-embedding-004"];
 const embeddingCache = new Map();
+let LOCAL_CHUNKS_CACHE = null;
+let autoSeedTriggered = false;
+
+function buildAllKbChunks(kb) {
+  if (!kb) return [];
+  if (LOCAL_CHUNKS_CACHE) return LOCAL_CHUNKS_CACHE;
+  const chunks = [];
+
+  if (Array.isArray(kb.cases)) {
+    for (const c of kb.cases) {
+      if (String(c.status || "").toLowerCase() === "coming_soon") continue;
+      const meta = { caseId: c.id, caseTitle: c.title, caseUrl: c.url };
+      const overview = [
+        `${c.title} (${c.company || "Independent"})`,
+        c.summary_short || "",
+        c.problem ? `Problem: ${c.problem}` : "",
+        Array.isArray(c.proof_points) ? `Proof points: ${c.proof_points.join(" ")}` : "",
+        c.impact_narrative || ""
+      ].filter(Boolean).join("\n");
+      chunks.push({ chunk_text: overview, source: `case_study:${c.id}`, metadata: meta });
+
+      if (Array.isArray(c.sections)) {
+        for (const s of c.sections) {
+          chunks.push({
+            chunk_text: `${c.title} — ${s.heading}: ${s.summary}`,
+            source: `case_section:${c.id}:${s.id}`,
+            metadata: meta
+          });
+        }
+      }
+    }
+  }
+
+  if (kb.resume) {
+    const cur = kb.resume.current_role || {};
+    if (cur.title || cur.org) {
+      chunks.push({
+        chunk_text: `Current Role: ${cur.title} at ${cur.org} (${cur.dates || ""}). ${(cur.highlights || []).join(" ")}`,
+        source: "resume:current_role",
+        metadata: {}
+      });
+    }
+    if (Array.isArray(kb.resume.prior)) {
+      for (const p of kb.resume.prior) {
+        chunks.push({
+          chunk_text: `Prior Role: ${p.title} at ${p.org} (${p.dates || ""}). ${(p.highlights || []).join(" ")}`,
+          source: `resume:${p.org}`,
+          metadata: {}
+        });
+      }
+    }
+    if (Array.isArray(kb.resume.education)) {
+      const eduText = kb.resume.education.map(e => `${e.degree} — ${e.school} (${e.dates})`).join("; ");
+      chunks.push({
+        chunk_text: `Education, School, College, University, Degree & Certifications (where Ryan studied): ${eduText}`,
+        source: "resume:education",
+        metadata: {}
+      });
+    }
+  }
+
+  if (Array.isArray(kb.points_of_view)) {
+    for (const pov of kb.points_of_view) {
+      chunks.push({
+        chunk_text: `Point of view (${pov.id}): ${pov.stance} ${pov.context}`,
+        source: `pov:${pov.id}`,
+        metadata: {}
+      });
+    }
+  }
+
+  if (Array.isArray(kb.faq)) {
+    for (const f of kb.faq) {
+      chunks.push({
+        chunk_text: `Q: ${f.q}\nA: ${f.a}`,
+        source: "faq",
+        metadata: { question: f.q }
+      });
+    }
+  }
+
+  LOCAL_CHUNKS_CACHE = chunks;
+  return chunks;
+}
+
+function retrieveLocalKbChunks(kb, userText = "", matchCount = 4) {
+  const all = buildAllKbChunks(kb);
+  if (!all.length || !userText) return [];
+  const stopWords = new Set(["what", "when", "where", "which", "who", "whom", "whose", "why", "how", "does", "did", "has", "have", "had", "ryan", "schmidt", "his", "him", "the", "and", "for", "with", "about", "from", "that", "this", "are", "was", "were", "can", "could", "would", "should", "tell", "more", "into", "over", "like"]);
+  const tokens = String(userText || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9+%-\s]/g, " ")
+    .split(/\s+/)
+    .filter(w => w.length >= 3 && !stopWords.has(w));
+  if (!tokens.length) return [];
+
+  const scored = [];
+  for (const item of all) {
+    const hay = item.chunk_text.toLowerCase();
+    // Respect Bytemark rule unless explicitly asked
+    if (hay.includes("bytemark") && !/\b(bytemark|transit|ticket|swiftly|earlier|prior|history)\b/i.test(userText)) {
+      continue;
+    }
+    let hits = 0;
+    for (const tok of tokens) {
+      if (hay.includes(tok)) hits += (tok.length >= 6 ? 2 : 1);
+    }
+    if (hits > 0) {
+      const sim = Math.min(0.95, 0.65 + (hits / (tokens.length * 2)) * 0.3);
+      scored.push({ ...item, similarity: sim, _hits: hits });
+    }
+  }
+
+  scored.sort((a, b) => b._hits - a._hits);
+  return scored.slice(0, matchCount).map(({ _hits, ...rest }) => rest);
+}
+
+async function autoSeedKbChunksIfEmpty(kb) {
+  if (autoSeedTriggered || !SUPABASE_HEADERS || !GEMINI_API_KEY) return;
+  autoSeedTriggered = true;
+  try {
+    const checkResp = await supabaseFetch("/rest/v1/kb_chunks?select=id&limit=1", { method: "GET" }, 2000);
+    if (!checkResp) return;
+    const existing = await checkResp.json().catch(() => []);
+    if (Array.isArray(existing) && existing.length > 0) return;
+
+    const chunks = buildAllKbChunks(kb);
+    for (const chunk of chunks.slice(0, 35)) {
+      const emb = await generateQueryEmbedding(chunk.chunk_text);
+      if (!emb) continue;
+      await supabaseFetch("/rest/v1/kb_chunks", {
+        method: "POST",
+        headers: { "Prefer": "return=minimal" },
+        body: JSON.stringify({
+          chunk_text: chunk.chunk_text,
+          source: chunk.source,
+          metadata: chunk.metadata || {},
+          embedding: emb
+        })
+      }, 2500);
+    }
+  } catch (e) {
+    console.warn("Background kb_chunks seed skipped:", e?.message || "error");
+  }
+}
 
 async function generateQueryEmbedding(text = "") {
   if (!GEMINI_API_KEY || !GEMINI_API_KEY.trim()) return null;
@@ -1672,7 +1872,7 @@ async function generateQueryEmbedding(text = "") {
   for (const embModel of EMBEDDING_MODELS) {
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${embModel}:embedContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 3000);
+    const timer = setTimeout(() => controller.abort(), 2500);
 
     try {
       const resp = await fetch(endpoint, {
@@ -1712,14 +1912,17 @@ async function generateQueryEmbedding(text = "") {
 async function retrieveKbChunks(userText = "", options = {}) {
   const {
     matchCount = 6,
-    similarityThreshold = 0.68
+    similarityThreshold = 0.68,
+    kb = KB_FALLBACK
   } = options;
 
-  if (!SUPABASE_HEADERS) return [];
-  if (!userText || String(userText).trim().length < 3) return [];
+  const localChunks = retrieveLocalKbChunks(kb, userText, 4);
+  if (!SUPABASE_HEADERS || !userText || String(userText).trim().length < 3) {
+    return localChunks;
+  }
 
   const embedding = await generateQueryEmbedding(userText);
-  if (!embedding || !Array.isArray(embedding)) return [];
+  if (!embedding || !Array.isArray(embedding)) return localChunks;
 
   const resp = await supabaseFetch("/rest/v1/rpc/match_kb_chunks", {
     method: "POST",
@@ -1728,22 +1931,37 @@ async function retrieveKbChunks(userText = "", options = {}) {
       match_count: matchCount,
       similarity_threshold: similarityThreshold
     })
-  });
+  }, 2200);
 
-  if (!resp) return [];
+  if (!resp) return localChunks;
 
   const rows = await resp.json().catch(() => []);
-  if (!Array.isArray(rows)) return [];
+  const vectorChunks = Array.isArray(rows)
+    ? rows
+        .filter(row => row && row.chunk_text)
+        .map(row => ({
+          chunk_text: String(row.chunk_text || ""),
+          source: String(row.source || ""),
+          metadata: row.metadata || {},
+          similarity: typeof row.similarity === "number" ? row.similarity : null
+        }))
+    : [];
 
-  return rows
-    .filter(row => row && row.chunk_text)
-    .map(row => ({
-      chunk_text: String(row.chunk_text || ""),
-      source: String(row.source || ""),
-      metadata: row.metadata || {},
-      similarity: typeof row.similarity === "number" ? row.similarity : null
-    }))
-    .slice(0, matchCount);
+  if (vectorChunks.length === 0 && !autoSeedTriggered) {
+    // Trigger non-blocking background seed if table is empty
+    autoSeedKbChunksIfEmpty(kb).catch(() => {});
+  }
+
+  const seen = new Set();
+  const merged = [];
+  for (const c of [...vectorChunks, ...localChunks]) {
+    const key = c.chunk_text.slice(0, 120).toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    merged.push(c);
+    if (merged.length >= matchCount) break;
+  }
+  return merged;
 }
 
 function buildRetrievedKbContext(chunks = []) {
@@ -1773,12 +1991,6 @@ function buildRetrievedKbContext(chunks = []) {
 
   return `### RETRIEVED KB CONTEXT\nUse these retrieved chunks as high-signal grounding. Do not invent facts beyond this or the structured KB.\n\n${formatted}`;
 }
-
-// -----------------------------------------------------------------------------
-// (Grok/xAI handler removed: superseded by Gemini)
-// -----------------------------------------------------------------------------
-
-// Grok removed → see git history
 
 function safeExtractAnswer(raw) {
   if (typeof raw !== "string") return null;
@@ -1830,13 +2042,33 @@ async function callGemini(systemPrompt, messages, webSnippets, kb, answerStyle, 
 
   if (kb?.about || kb?.resume || kb?.links) {
     const aboutLine = kb?.about?.one_liner || kb?.about?.headline || "";
-    const bioShort = kb?.about?.bio_short || "";
-    const hobbiesLine = Array.isArray(kb?.about?.interests) ? `Off-hours interests & hobbies: ${kb.about.interests.join("; ")}` : "";
+    const bioShort = kb?.about?.bio_short || kb?.about?.bio_75_words || "";
+    const hobbiesList = [
+      ...(Array.isArray(kb?.about?.hobbies) ? kb.about.hobbies : []),
+      ...(Array.isArray(kb?.about?.interests) ? kb.about.interests : []),
+      ...(Array.isArray(kb?.about?.fun_facts) ? kb.about.fun_facts : [])
+    ];
+    const hobbiesLine = hobbiesList.length ? `Off-hours life, hobbies & fun facts (Austin, TX): ${hobbiesList.join("; ")}` : "";
     const achievements = Array.isArray(kb?.resume?.achievements_top) ? kb.resume.achievements_top : [];
+    const curRole = kb?.resume?.current_role;
+    const curRoleLine = curRole?.title ? `Current role: ${curRole.title} at ${curRole.org} (${curRole.dates}) — ${(curRole.highlights || []).join(" ")}` : "";
+    const askAboutBytemark = /\b(bytemark|transit|ticket|swiftly|earlier|prior|history)\b/i.test(lastUserMsg);
+    const priorRoles = Array.isArray(kb?.resume?.prior)
+      ? kb.resume.prior
+          .filter(p => askAboutBytemark || !/bytemark/i.test(p.org || ""))
+          .map(p => `- ${p.title} at ${p.org} (${p.dates}): ${(p.highlights || []).join(" ")}`)
+          .join("\n")
+      : "";
+    const eduLine = Array.isArray(kb?.resume?.education)
+      ? `Education & Certifications: ${kb.resume.education.map(e => `${e.degree}, ${e.school} (${e.dates})`).join(" | ")}`
+      : "";
     const linksLine = kb?.links ? `Links: ${Object.entries(kb.links).map(([k,v]) => `${k}: ${v}`).join(", ")}` : "";
     const extra = [
       aboutLine ? `About: ${aboutLine}` : "",
       bioShort ? `Bio: ${bioShort}` : "",
+      curRoleLine,
+      priorRoles ? `Career & Mentorship History:\n${priorRoles}` : "",
+      eduLine,
       hobbiesLine,
       achievements.length ? `Top proof points:\n- ${achievements.slice(0, 5).join("\n- ")}` : "",
       linksLine
@@ -2435,14 +2667,14 @@ export default async function handler(req, res) {
       intent === "role_fit" ||
       /\babout\s+[A-Za-z0-9&.\-_\s]{2,}\b/i.test(lastUser) ||
       /\bcompany\b/i.test(lastUser);
-    const webSnippets = shouldWebSearch ? await maybeSearchCompanyFit(lastUser) : null;
 
-    let retrievedChunks = [];
-    try {
-      retrievedChunks = await retrieveKbChunks(lastUser, { matchCount: 6, similarityThreshold: 0.68 });
-    } catch (e) {
-      console.warn(`Retrieval error: ${e?.message || "unknown"}`);
-    }
+    const [webSnippets, retrievedChunks] = await Promise.all([
+      shouldWebSearch ? maybeSearchCompanyFit(lastUser) : Promise.resolve(null),
+      retrieveKbChunks(lastUser, { matchCount: 6, similarityThreshold: 0.68 }, kb).catch((e) => {
+        console.warn(`Retrieval error: ${e?.message || "unknown"}`);
+        return [];
+      })
+    ]);
 
     const augmentedMessages = Array.isArray(messages) ? [...messages] : [];
     if (pageContext && (pageContext.title || pageContext.description || pageContext.url)) {
@@ -2470,14 +2702,16 @@ export default async function handler(req, res) {
 
     let modelOutput;
     let usedFallback = false;
+    const pageUrl = pageContext?.url || "";
+    const prevAssistantMsg = [...messages].slice(0, -1).reverse().find(m => m.role === "assistant")?.content || "";
     const baseOptions = {
-      pageUrl: pageContext?.url || "",
+      pageUrl,
       sectionContext,
       useFitModel: isFit,
       lastUserOverride: lastUser
     };
 
-    const cached = getCachedResponse(lastUser, intent, isFit);
+    const cached = getCachedResponse(lastUser, intent, isFit, pageUrl, prevAssistantMsg);
     if (cached) {
       modelOutput = cached;
       if (wantsStream) {
@@ -2504,7 +2738,7 @@ export default async function handler(req, res) {
           usedFallback = true;
           const fallbackContextCases = (retrievedChunks || [])
             .filter(c => c.metadata && c.metadata.caseTitle && c.metadata.caseUrl)
-            .map(c => ({ title: c.metadata.caseTitle, url: c.metadata.caseUrl }))
+            .map(c => ({ title: c.metadata.caseTitle, url: normalizeInternalCaseUrl(c.metadata.caseUrl) }))
             .slice(0, 2);
           modelOutput = buildLocalFallbackAnswer({
             intent,
@@ -2526,7 +2760,7 @@ export default async function handler(req, res) {
           usedFallback = true;
           const fallbackContextCases = (retrievedChunks || [])
             .filter(c => c.metadata && c.metadata.caseTitle && c.metadata.caseUrl)
-            .map(c => ({ title: c.metadata.caseTitle, url: c.metadata.caseUrl }))
+            .map(c => ({ title: c.metadata.caseTitle, url: normalizeInternalCaseUrl(c.metadata.caseUrl) }))
             .slice(0, 2);
           modelOutput = buildLocalFallbackAnswer({
             intent,
@@ -2540,19 +2774,22 @@ export default async function handler(req, res) {
     }
 
     if (!usedFallback && modelOutput && !cached) {
-      setCachedResponse(lastUser, intent, isFit, modelOutput);
+      setCachedResponse(lastUser, intent, isFit, modelOutput, pageUrl, prevAssistantMsg);
     }
 
     const metricAllowlist = buildMetricAllowlist(kb);
     let answer = polishAnswerText(validateAnswerMetrics(modelOutput.answer, metricAllowlist));
-    let suggested_pills = Array.isArray(modelOutput.suggested_pills) && modelOutput.suggested_pills.length
+    let rawPills = Array.isArray(modelOutput.suggested_pills) && modelOutput.suggested_pills.length
       ? modelOutput.suggested_pills.slice(0, 2)
       : defaultSuggestedPills(intent, lastUser);
+    let suggested_pills = dedupeSuggestedPills(rawPills, messages, intent, lastUser);
     const messageCount = messages.filter(m => m.role === "user").length;
     const selectiveHireIntent = shouldShowHireIntent(intent, lastUser, messageCount, isFit);
     let hire_intent = Boolean(modelOutput.hire_intent && selectiveHireIntent);
     let sources = Array.isArray(modelOutput.sources) ? modelOutput.sources : [];
-    let context_cases = Array.isArray(modelOutput.context_cases) ? modelOutput.context_cases.slice(0, 2) : [];
+    let context_cases = Array.isArray(modelOutput.context_cases)
+      ? modelOutput.context_cases.slice(0, 2).map(c => ({ title: c.title, url: normalizeInternalCaseUrl(c.url) }))
+      : [];
     const action_scroll_to = String(modelOutput.action_scroll_to || "");
     const action_highlight = String(modelOutput.action_highlight || "");
 
@@ -2560,7 +2797,7 @@ export default async function handler(req, res) {
       await logIfEnabled({ type: "policy_block_out", lastUser, answer, time: Date.now() });
       const safeFallback = buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks, contextCases: context_cases });
       answer = safeFallback.answer;
-      suggested_pills = safeFallback.suggested_pills;
+      suggested_pills = dedupeSuggestedPills(safeFallback.suggested_pills, messages, intent, lastUser);
       hire_intent = false;
     }
 
@@ -2588,8 +2825,8 @@ export default async function handler(req, res) {
 
     if (SUPABASE_HEADERS) {
       const persistAnalytics = async () => {
-        let sessionId = null;
-        if (sessionToken) {
+        let sessionId = sessionToken ? SESSION_ID_CACHE.get(sessionToken) || null : null;
+        if (sessionToken && !sessionId) {
           const sessionResp = await supabaseFetch("/rest/v1/chat_sessions", {
             method: "POST",
             headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
@@ -2599,12 +2836,17 @@ export default async function handler(req, res) {
               user_agent: String(req.headers["user-agent"] || "").slice(0, 256),
               updated_at: new Date().toISOString()
             })
-          }, 2000);
+          }, 1500);
 
           if (sessionResp) {
             const sessionRows = await sessionResp.json().catch(() => []);
-            if (Array.isArray(sessionRows) && sessionRows.length > 0) {
+            if (Array.isArray(sessionRows) && sessionRows.length > 0 && sessionRows[0].id) {
               sessionId = sessionRows[0].id;
+              if (SESSION_ID_CACHE.size > 500) {
+                const oldest = SESSION_ID_CACHE.keys().next().value;
+                if (oldest) SESSION_ID_CACHE.delete(oldest);
+              }
+              SESSION_ID_CACHE.set(sessionToken, sessionId);
             }
           }
         }
@@ -2617,7 +2859,7 @@ export default async function handler(req, res) {
               session_id: sessionId,
               role: "user",
               content: String(lastUser || "").slice(0, 4000),
-              metadata: { intent }
+              metadata: { intent, page_url: pageUrl }
             },
             {
               session_id: sessionId,
@@ -2626,12 +2868,12 @@ export default async function handler(req, res) {
               metadata: { suggested_pills, hire_intent, context_cases }
             }
           ])
-        }, 2000);
+        }, 1500);
       };
 
       await Promise.race([
         persistAnalytics(),
-        new Promise(resolve => setTimeout(resolve, 2200))
+        new Promise(resolve => setTimeout(resolve, 1600))
       ]);
     }
 
@@ -2669,5 +2911,9 @@ export {
   buildMetricAllowlist,
   validateAnswerMetrics,
   buildLocalFallbackAnswer,
+  retrieveLocalKbChunks,
+  chooseCaseIdsFromText,
+  buildFocusedCaseContext,
+  dedupeSuggestedPills,
   KB_FALLBACK
 };

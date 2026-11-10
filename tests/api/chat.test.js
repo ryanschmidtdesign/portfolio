@@ -14,6 +14,10 @@ import {
   buildMetricAllowlist,
   validateAnswerMetrics,
   buildLocalFallbackAnswer,
+  retrieveLocalKbChunks,
+  chooseCaseIdsFromText,
+  buildFocusedCaseContext,
+  dedupeSuggestedPills,
   KB_FALLBACK
 } from '../../api/chat.js';
 
@@ -429,6 +433,45 @@ describe('api/chat serverless helpers', () => {
     expect(res2.answer.toLowerCase()).toContain('snowboarding');
     expect(res2.answer).toContain('i4cp Member Portal Overhaul');
     expect(res2.answer).toContain('92% engineer adoption');
+  });
+
+  it('retrieveLocalKbChunks retrieves relevant case sections, education, and mentorship chunks', () => {
+    const portalChunks = retrieveLocalKbChunks(kb, 'Why progressive disclosure over flat navigation on the member portal?', 4);
+    expect(portalChunks.length).toBeGreaterThan(0);
+    expect(portalChunks.some(c => c.chunk_text.toLowerCase().includes('four levels') || c.chunk_text.toLowerCase().includes('member portal'))).toBe(true);
+
+    const eduChunks = retrieveLocalKbChunks(kb, 'Where did Ryan go to school and what did he study?', 4);
+    expect(eduChunks.some(c => c.chunk_text.includes('Anthropology'))).toBe(true);
+
+    const mentorChunks = retrieveLocalKbChunks(kb, 'Tell me about Ryan mentoring designers at Designlab', 4);
+    expect(mentorChunks.some(c => c.chunk_text.includes('Designlab'))).toBe(true);
+  });
+
+  it('chooseCaseIdsFromText prioritizes current case study page even when intent is general', () => {
+    const picked = chooseCaseIdsFromText(kb, [], 'What were the hardest tradeoffs?', 2, '/pages/inventory.html', 'general');
+    expect(picked[0]).toBe('inventory');
+  });
+
+  it('buildFocusedCaseContext includes case study sections, company, and timeline', () => {
+    const ctx = buildFocusedCaseContext(kb, ['member-portal-overhaul']);
+    expect(ctx).toContain('Case study breakdown:');
+    expect(ctx).toContain('The IA Challenge: Four Levels Without Losing the Thread');
+    expect(ctx).toContain('Company: i4cp');
+  });
+
+  it('dedupeSuggestedPills removes questions the user already asked and backfills fresh prompts', () => {
+    const history = [
+      { role: 'user', content: 'Tell me about Ryan\'s recent work' },
+      { role: 'assistant', content: 'Here is a summary...' }
+    ];
+    const pills = dedupeSuggestedPills(
+      ["Tell me about Ryan's recent work", "Show the strongest proof points."],
+      history,
+      'general',
+      "Tell me about Ryan's recent work"
+    );
+    expect(pills.length).toBe(2);
+    expect(pills.map(p => p.toLowerCase())).not.toContain("tell me about ryan's recent work");
   });
 });
 
