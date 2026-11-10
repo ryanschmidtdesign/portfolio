@@ -46,7 +46,7 @@
 
 /* About page section layout: intro + metrics above, timeline full-width below */
 .page-about .leadership-wrapper {
-  max-width: 1160px;
+  max-width: var(--container-macro, 1160px);
   margin-inline: auto;
   flex-wrap: wrap;
   row-gap: var(--space-7);
@@ -583,16 +583,20 @@ body.is-home {
 /* Homepage Main Layout Container */
 .home-main {
   width: 100%;
-  max-width: 1160px;
+  max-width: var(--container-macro, 1160px);
   margin-inline: auto;
-  padding: clamp(56px, 7vh, 72px) 0 0;
+  padding-top: clamp(56px, 7vh, 72px);
+  padding-bottom: 0;
+  padding-inline: var(--page-gutter);
   position: relative;
   z-index: 1;
 }
 
 @media (max-width: 1199px) {
   .home-main {
-    padding: clamp(56px, 7vh, 72px) 20px 0;
+    padding-top: clamp(56px, 7vh, 72px);
+    padding-bottom: 0;
+    padding-inline: var(--page-gutter);
   }
 }
 
@@ -903,7 +907,7 @@ body.is-home {
    Card body
    ------------------------------------------------------- */
 .home-project-card__body {
-  padding: 22px 24px 24px;
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
   flex: 1;

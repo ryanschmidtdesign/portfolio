@@ -533,7 +533,7 @@
 .tldr-meta {
   margin-top: var(--space-6);
   margin-bottom: var(--space-6);
-  padding: 24px 28px;
+  padding: var(--space-5);
   background: var(--surface-elevated, #FAF7F2);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -602,6 +602,8 @@
 
 .tldr-kpis .kpis--hero {
   justify-content: flex-start;
+  gap: var(--space-5);
+  flex-wrap: wrap;
 }
 
 .tldr-kpis .kpis--hero>li {
@@ -648,6 +650,13 @@
   margin-top: var(--space-1);
   font-size: var(--fs-xs);
   color: var(--kpi-note-color);
+}
+
+.metric-footnote {
+  margin-top: var(--space-3);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  line-height: var(--lh-xs);
 }
 
 
@@ -2478,7 +2487,7 @@ main[data-reveal] {
   margin-bottom: var(--space-6);
   max-width: var(--prose);
   margin-inline: auto;
-  padding: 22px 24px 24px;
+  padding: var(--space-5);
   background-color: var(--surface-elevated, #FAF7F2);
   background-image: radial-gradient(
     440px circle at var(--mouse-x, 50%) var(--mouse-y, 0%),

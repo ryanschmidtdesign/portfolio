@@ -1,4 +1,4 @@
-/* screen-reader only helper */
+/* Screen-reader only helper */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -9,6 +9,12 @@
   clip: rect(0, 0, 1px, 1px);
   white-space: nowrap;
   border: 0;
+}
+
+/* Editorial line length constraint */
+.u-measure {
+  max-width: var(--prose);
+  margin-inline: auto;
 }
 
 /* -------------------------------------------------------

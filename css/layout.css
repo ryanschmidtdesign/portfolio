@@ -1,8 +1,4 @@
-/* Non-home page margins */
-body:not(.is-home) {
-  --page-margin: 6rem;
-}
-
+/* Site main landmark */
 .site-main {
   padding-top: clamp(84px, 12vh, 108px);
   scroll-snap-type: none;

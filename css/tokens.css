@@ -3,8 +3,8 @@
   --page-gutter: clamp(var(--space-4), 4vw, var(--space-6));
   --page-margin: var(--page-gutter);
   /* 16 → 32px */
-  --container-max: 88rem;
-  /* 1200px / 16 */
+  --container-max: 72.5rem; /* 1160px macro container */
+  --container-macro: 72.5rem; /* 1160px */
   --impact-callout-max: 48.75rem;
   /* 780px / 16 */
   --prose: 720px;
