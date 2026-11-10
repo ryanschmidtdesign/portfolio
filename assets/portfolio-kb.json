@@ -67,7 +67,7 @@
     "one_liner": "Senior Product Designer who builds and tests coded prototypes in Cursor to resolve design questions before engineering starts.",
     "elevator_30s": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. He builds and tests coded prototypes in Cursor to resolve design questions before engineering starts. Sole designer at i4cp; previously owned UX across five D-Tools Cloud modules as the platform grew from 6,500 to 18,000 active users.",
     "bio_75_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. He builds and tests coded prototypes in Cursor to resolve design questions before engineering starts. Sole designer at i4cp; previously owned UX across five D-Tools Cloud modules as active users grew from 6,500 to 18,000. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
-    "bio_150_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. As the sole designer at i4cp (Institute for Corporate Productivity), he owns platform experience across the member portal and internal admin tools, standardizing UI across 3 core platforms for 4 developers, shipping coded prototypes in Cursor saving ~4 hours QA weekly, and designing Ahri conversational AI (+500% adoption increase). Previously, he owned UX across five D-Tools Cloud modules as the platform scaled from 6,500 to 18,000 active users, designing a real-time inventory MVP (+8% recurring revenue, 8% YoY adoption growth) and a 100+ component design system with 92% engineering adoption. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
+    "bio_150_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. As the sole designer at i4cp (Institute for Corporate Productivity), he owns platform experience across the member portal and internal admin tools, standardizing UI across 2 core platforms for 4 developers, shipping coded prototypes in Cursor saving ~4 hours QA weekly, and designing Ahri conversational AI (+500% adoption increase and 2x daily active users). Previously, he owned UX across five D-Tools Cloud modules as the platform scaled from 6,500 to 18,000 active users, designing a real-time inventory MVP (+8% recurring revenue, 8% YoY adoption growth) and a 100+ component design system with 92% engineering adoption. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
     "specialties": [
       "Information Architecture",
       "Design Systems",
@@ -235,9 +235,9 @@
       "org": "Institute for Corporate Productivity (i4cp)",
       "dates": "February 2026–Present",
       "highlights": [
-        "Replaced legacy Bootstrap UI with a custom design system across 3 core web platforms to standardize interfaces for 4 developers.",
+        "Replaced legacy Bootstrap UI with a custom design system across 2 core web platforms to standardize interfaces for 4 developers.",
         "Shipped HTML/CSS/JS prototypes to staging through Cursor so developers could work from functioning examples, saving approximately 4 hours of engineering QA per week.",
-        "Designed the conversational AI experience for Ahri, replacing legacy search with prompt-driven access to HR research and driving a 500% adoption increase.",
+        "Designed the conversational AI experience for Ahri, replacing legacy search with prompt-driven access to HR research, driving a 500% adoption increase and 2x daily active users.",
         "Established the organization’s first user research practice and used findings to shape product priorities with executive stakeholders."
       ]
     },
@@ -273,11 +273,11 @@
         "disclose_only_if_asked": false
       },
       {
-        "title": "UI/UX Designer & Facility Specialist",
+        "title": "Facility Specialist",
         "org": "Texas Association of School Boards (TASB)",
         "dates": "September 2014–March 2021",
         "highlights": [
-          "Redesigned Member Services and user profile workflows for TASB’s legacy environmental management software (UI/UX Designer Dec 2020–Mar 2021); led operations consulting projects managing delivery and client relationships (Facility Specialist 2014–2021)."
+          "Redesigned Member Services and user profile workflows for TASB’s legacy environmental management software; led operations consulting projects managing delivery and client relationships (Facility Specialist 2014–2021)."
         ],
         "disclose_only_if_asked": false
       },
