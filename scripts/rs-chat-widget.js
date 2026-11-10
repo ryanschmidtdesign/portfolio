@@ -78,15 +78,17 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        background: rgba(18, 15, 13, 0.92);
+        background: rgba(18, 15, 13, 0.88);
         backdrop-filter: blur(24px) saturate(160%);
         -webkit-backdrop-filter: blur(24px) saturate(160%);
         color: #F7F5F2;
         border: none;
         border-left: 1px solid rgba(255, 255, 255, 0.14);
         box-shadow:
-          -16px 0 48px rgba(0, 0, 0, 0.72),
-          -1px 0 0 rgba(255, 255, 255, 0.10);
+          -24px 0 64px -8px rgba(24, 18, 14, 0.52),
+          -6px 0 20px rgba(24, 18, 14, 0.28),
+          -1px 0 0 rgba(255, 255, 255, 0.12),
+          inset 1px 0 0 rgba(255, 255, 255, 0.08);
         border-radius: 0;
         visibility: hidden;
         opacity: 0;
@@ -95,6 +97,17 @@
         transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease, visibility 200ms ease;
         z-index: 2147482999;
         overflow: hidden;
+      }
+      .panel::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 1px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.16) 100%);
+        pointer-events: none;
+        z-index: 4;
       }
       .panel-reticle { display: none !important; }
       .panel.open {
@@ -226,7 +239,7 @@
         flex-direction: column;
         gap: 12px;
         padding: 16px 18px 14px;
-        background: rgba(14, 12, 10, 0.78);
+        background: transparent;
         flex: 1 1 auto;
         min-height: 0;
         overflow-y: auto;
@@ -294,16 +307,16 @@
         font-weight: 700;
       }
       .msg.bot a {
-        color: #E07A5F;
+        color: #E07844;
         text-decoration: underline;
-        text-decoration-color: rgba(224, 122, 95, 0.4);
+        text-decoration-color: rgba(224, 120, 68, 0.4);
         text-underline-offset: 2px;
         font-weight: 600;
         transition: color 150ms ease, text-decoration-color 150ms ease;
       }
       .msg.bot a:hover {
         color: #F09A80;
-        text-decoration-color: #E07A5F;
+        text-decoration-color: #E07844;
       }
       .chat-action-bar {
         display: flex;
@@ -339,13 +352,13 @@
         border-color: var(--accent);
       }
       .chat-copy-btn.is-copied {
-        background: #059669;
+        background: var(--green, #166534);
         color: #FFFFFF;
-        border-color: #059669;
+        border-color: var(--green, #166534);
       }
       .chat-telemetry-tag {
         font-size: 10px;
-        color: #78716C;
+        color: #A8A29E;
         letter-spacing: 0.05em;
         text-transform: uppercase;
       }
@@ -356,7 +369,7 @@
         font-size: 0.88em;
         font-weight: 700;
         letter-spacing: -0.01em;
-        color: #E07A5F;
+        color: #E07844;
         background: rgba(200, 90, 50, 0.15);
         border: 1px solid rgba(200, 90, 50, 0.35);
         padding: 1px 5px;
@@ -412,7 +425,7 @@
         gap: 6px;
         padding: 9px 18px 8px;
         flex: 0 0 auto;
-        background: rgba(18, 15, 13, 0.85);
+        background: rgba(18, 15, 13, 0.55);
         border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
       .pill {
@@ -462,7 +475,7 @@
         align-items: center;
         gap: 0;
         padding: 10px 16px 14px;
-        background: rgba(18, 15, 13, 0.88);
+        background: rgba(18, 15, 13, 0.65);
         box-sizing: border-box;
         position: relative;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -521,8 +534,9 @@
       .send:focus-visible,
       .chat-copy-btn:focus-visible,
       .stop-btn:focus-visible {
-        outline: 2px solid #8C3B1E;
+        outline: 2px solid var(--accent, #C85A32);
         outline-offset: 2px;
+        box-shadow: 0 0 0 4px rgba(200, 90, 50, 0.3);
       }
       .send {
         position: absolute;
@@ -664,7 +678,7 @@
         padding: 2px 8px;
         border-radius: 5px;
         background: rgba(200, 90, 50, 0.15);
-        color: #E07A5F;
+        color: #E07844;
         border: 1px solid rgba(200, 90, 50, 0.3);
         text-decoration: none;
       }
@@ -722,9 +736,9 @@
         transition: all 0.15s ease;
       }
       .stop-btn:hover {
-        background: rgba(220, 38, 38, 0.1);
-        border-color: rgba(220, 38, 38, 0.3);
-        color: #DC2626;
+        background: rgba(200, 60, 40, 0.15);
+        border-color: rgba(200, 60, 40, 0.35);
+        color: #E05238;
       }
 
       /* Blinking cursor */

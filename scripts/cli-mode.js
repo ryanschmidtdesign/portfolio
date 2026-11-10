@@ -64,11 +64,12 @@
                     backdrop-filter: blur(24px) saturate(160%);
                     -webkit-backdrop-filter: blur(24px) saturate(160%);
                     border: 1px solid var(--obsidian-border-strong, rgba(255, 255, 255, 0.14));
-                    border-radius: 6px;
+                    border-radius: 4px;
                     box-shadow:
-                        0 28px 72px -12px rgba(0, 0, 0, 0.85),
-                        0 6px 20px rgba(0, 0, 0, 0.45),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+                        0 28px 72px -12px rgba(24, 18, 14, 0.75),
+                        0 6px 20px rgba(24, 18, 14, 0.40),
+                        0 0 0 1px rgba(0, 0, 0, 0.50),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.18);
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
@@ -106,7 +107,7 @@
                 .rs-cmd-search-icon {
                     width: 16px;
                     height: 16px;
-                    color: #78716C;
+                    color: #A8A29E;
                     flex-shrink: 0;
                 }
 
@@ -125,7 +126,7 @@
                 }
 
                 .rs-cmd-input::placeholder {
-                    color: #78716C;
+                    color: #8C8680;
                     font-weight: 400;
                 }
 
@@ -140,7 +141,7 @@
                     text-transform: uppercase;
                     border-radius: 3px;
                     background: rgba(255, 255, 255, 0.05);
-                    color: #78716C;
+                    color: #A8A29E;
                     border: 1px solid rgba(255, 255, 255, 0.09);
                     flex-shrink: 0;
                     user-select: none;
@@ -171,7 +172,7 @@
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.07em;
-                    color: #78716C;
+                    color: #A8A29E;
                     padding: 9px 10px 4px;
                     user-select: none;
                 }
@@ -196,8 +197,20 @@
 
                 .rs-cmd-item:hover,
                 .rs-cmd-item.is-selected {
-                    background: rgba(255, 255, 255, 0.06);
-                    border-color: rgba(255, 255, 255, 0.08);
+                    background: rgba(255, 255, 255, 0.07);
+                    border-color: rgba(255, 255, 255, 0.12);
+                    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+                }
+
+                .rs-cmd-item.is-selected::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 6px;
+                    bottom: 6px;
+                    width: 2px;
+                    border-radius: 1px;
+                    background: var(--accent, #C85A32);
                 }
 
                 .rs-cmd-item__left {
@@ -214,7 +227,7 @@
                     border-radius: 3px;
                     background: rgba(255, 255, 255, 0.04);
                     border: 1px solid rgba(255, 255, 255, 0.07);
-                    color: #78716C;
+                    color: #A8A29E;
                     font-family: var(--font-mono);
                     font-size: 0.65rem;
                     font-weight: 600;
@@ -252,7 +265,7 @@
 
                 .rs-cmd-item__sub {
                     font-size: 0.73rem;
-                    color: #78716C;
+                    color: #A8A29E;
                     line-height: 1.3;
                     white-space: nowrap;
                     overflow: hidden;
@@ -287,14 +300,14 @@
                 .rs-cmd-kpi--cobalt,
                 .rs-cmd-kpi--terracotta {
                     background: rgba(200, 90, 50, 0.15);
-                    color: #E07A5F;
+                    color: #E07844;
                     border: 1px solid rgba(200, 90, 50, 0.30);
                 }
 
                 .rs-cmd-kpi--emerald {
-                    background: rgba(34, 197, 94, 0.12);
+                    background: rgba(22, 101, 52, 0.18);
                     color: #4ADE80;
-                    border: 1px solid rgba(34, 197, 94, 0.22);
+                    border: 1px solid rgba(22, 101, 52, 0.36);
                 }
 
                 .rs-cmd-kpi--slate {
@@ -310,7 +323,7 @@
                     padding: 2px 6px;
                     border-radius: 2px;
                     background: rgba(255, 255, 255, 0.04);
-                    color: #78716C;
+                    color: #A8A29E;
                     border: 1px solid rgba(255, 255, 255, 0.07);
                     white-space: nowrap;
                 }
@@ -319,7 +332,7 @@
                     font-family: var(--font-mono);
                     font-size: 0.72rem;
                     font-weight: 600;
-                    color: #78716C;
+                    color: #A8A29E;
                     opacity: 0;
                     transform: translateX(-3px);
                     transition: all 100ms ease;
@@ -341,7 +354,7 @@
                     border-top: 1px solid rgba(255, 255, 255, 0.06);
                     background: transparent;
                     font-size: 0.68rem;
-                    color: #78716C;
+                    color: #A8A29E;
                     font-family: var(--font-sans);
                     user-select: none;
                 }
