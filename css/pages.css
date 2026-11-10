@@ -488,15 +488,13 @@
   margin-top: 0;
 }
 
-/* Single column media styling for vertical IDE and legacy chat screenshots */
-.case-study--ai-coding-portfolio .editor-tree-media,
+/* Single column media styling for legacy chat screenshot */
 .case-study--ai-coding-portfolio .assistant-legacy-media {
   max-width: 480px;
   margin-inline: auto;
   text-align: center;
 }
 
-.case-study--ai-coding-portfolio .editor-tree-media img,
 .case-study--ai-coding-portfolio .assistant-legacy-media img {
   width: 100%;
   height: auto;

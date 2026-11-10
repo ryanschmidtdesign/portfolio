@@ -916,8 +916,9 @@ figure.case-study-media--mobile {
   align-items: center;
 }
 
-.case-study-media--mobile .mobile-frame {
-  max-width: 360px;
+.case-study-media--mobile .mobile-frame,
+.case-study-media--mobile-duo .mobile-frame {
+  max-width: 324px;
   width: 100%;
   margin: 0 auto;
   border-radius: var(--radius-lg);
@@ -928,19 +929,12 @@ figure.case-study-media--mobile {
     0 4px 14px rgba(28, 20, 15, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
   background: var(--surface-elevated, #FAF7F2);
-  transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
-}
-
-.case-study-media--mobile .mobile-frame:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 26px 56px -12px rgba(28, 20, 15, 0.24),
-    0 6px 18px rgba(28, 20, 15, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .case-study-media--mobile .mobile-frame picture,
-.case-study-media--mobile .mobile-frame img {
+.case-study-media--mobile .mobile-frame img,
+.case-study-media--mobile-duo .mobile-frame picture,
+.case-study-media--mobile-duo .mobile-frame img {
   display: block;
   width: 100%;
   height: auto;
@@ -948,6 +942,40 @@ figure.case-study-media--mobile {
   border-radius: 0;
   box-shadow: none;
   background: transparent;
+}
+
+/* 2-up side-by-side mobile screens */
+.case-study-media--mobile-duo .mobile-duo-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-6, 24px);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.case-study-media--mobile-duo .mobile-duo-col {
+  flex: 1 1 300px;
+  max-width: 324px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.case-study-media--mobile-duo .mobile-duo-col figcaption {
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-prose);
+  text-align: center;
+}
+
+@media (max-width: 680px) {
+  .case-study-media--mobile-duo .mobile-duo-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-8);
+  }
 }
 
 /* Before/after image splitter */

@@ -387,14 +387,6 @@
             Figma is great for initial wireframing, but canvas mockups can't show interactions, animations, or rendering between different browsers. By moving quickly into HTML and CSS, I could resize actual viewports, test keyboard focus rings, and catch bugs and glitches that static frames ignore.
           </p>
 
-          <figure class="case-study-media editor-tree-media">
-            <picture>
-              <source srcset="../assets/case-studies/ai-coding-portfolio/cursor-files.webp" type="image/webp">
-              <img src="../assets/case-studies/ai-coding-portfolio/cursor-files.webp" alt="Project file structure in the Cursor editor" width="508" height="1420" loading="lazy" class="no-reveal">
-            </picture>
-            <figcaption>Project file structure in Cursor, built and tested directly in the editor.</figcaption>
-          </figure>
-
           <h3>Setting ground rules before writing code</h3>
           <p>
             If you don't give an AI coding tool strict rules, it will happily invent new CSS classes on every prompt. Before writing code, I set up explicit project guidelines in local markdown files (like CONTEXT.md and AGENTS.md). These defined my style/tone preferences and set hard standards for keyboard accessibility and semantic HTML.
@@ -415,29 +407,29 @@
             The site loads in under 300 milliseconds with zero framework runtime overhead, and every interactive component works via keyboard and screen reader. Here is a look at the previous static version of this portfolio before the rebuild.
           </p>
 
-          <div class="before-after-grid">
-            <figure>
-              <picture>
-                <source srcset="../assets/case-studies/ai-coding-portfolio/old-home.webp" type="image/webp">
-                <img src="../assets/case-studies/ai-coding-portfolio/old-home.webp" alt="Previous homepage design" width="2880" height="1502" loading="lazy" class="no-reveal">
-              </picture>
-              <figcaption>Previous homepage design before the rebuild.</figcaption>
-            </figure>
-            <figure>
-              <picture>
-                <source srcset="../assets/case-studies/ai-coding-portfolio/old-case-study-1.webp" type="image/webp">
-                <img src="../assets/case-studies/ai-coding-portfolio/old-case-study-1.webp" alt="Previous case study layout" width="2880" height="1502" loading="lazy" class="no-reveal">
-              </picture>
-              <figcaption>Previous case study page layout.</figcaption>
-            </figure>
-            <figure>
-              <picture>
-                <source srcset="../assets/case-studies/ai-coding-portfolio/old-case-study-2.webp" type="image/webp">
-                <img src="../assets/case-studies/ai-coding-portfolio/old-case-study-2.webp" alt="Previous case study layout, alternate" width="2880" height="1502" loading="lazy" class="no-reveal">
-              </picture>
-              <figcaption>Alternate layout from the previous case study system.</figcaption>
-            </figure>
-          </div>
+          <figure class="case-study-media" data-reveal>
+            <picture>
+              <source srcset="../assets/case-studies/ai-coding-portfolio/old-home.webp" type="image/webp">
+              <img src="../assets/case-studies/ai-coding-portfolio/old-home.webp" alt="Previous homepage design" width="2880" height="1502" loading="lazy">
+            </picture>
+            <figcaption>Previous homepage design before the rebuild.</figcaption>
+          </figure>
+
+          <figure class="case-study-media" data-reveal>
+            <picture>
+              <source srcset="../assets/case-studies/ai-coding-portfolio/old-case-study-1.webp" type="image/webp">
+              <img src="../assets/case-studies/ai-coding-portfolio/old-case-study-1.webp" alt="Previous case study layout" width="2880" height="1502" loading="lazy">
+            </picture>
+            <figcaption>Previous case study page layout.</figcaption>
+          </figure>
+
+          <figure class="case-study-media" data-reveal>
+            <picture>
+              <source srcset="../assets/case-studies/ai-coding-portfolio/old-case-study-2.webp" type="image/webp">
+              <img src="../assets/case-studies/ai-coding-portfolio/old-case-study-2.webp" alt="Previous case study layout, alternate" width="2880" height="1502" loading="lazy">
+            </picture>
+            <figcaption>Alternate layout from the previous case study system.</figcaption>
+          </figure>
         </section>
 
         <section id="assistant-architecture" aria-label="Making the AI assistant useful" class="section--alt">
