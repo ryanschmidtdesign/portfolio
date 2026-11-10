@@ -313,7 +313,7 @@
 /* ── AI Coding Portfolio case study ── */
 .case-study--ai-coding-portfolio {
   font-size: var(--fs-body);
-  line-height: var(--lh-prose-loose);
+  line-height: var(--lh-prose);
 }
 
 /* AI Coding Portfolio: widen System Architecture only */
@@ -652,6 +652,7 @@ body.is-home {
 .home-hero__serif {
   font-family: var(--font-serif);
   font-style: italic;
+  font-optical-sizing: auto;
   font-weight: 400;
   color: var(--accent);
   letter-spacing: -0.015em;
@@ -755,8 +756,9 @@ body.is-home {
 .cat-meow {
   font-family: var(--font-serif, "Newsreader", Georgia, serif);
   font-style: italic;
+  font-optical-sizing: auto;
   font-size: 26px;
-  font-weight: 600;
+  font-weight: 500;
   fill: #1C1A17;
   color: #1C1A17;
   opacity: 0;
@@ -980,7 +982,7 @@ body.is-home {
 /* Title -> summary: medium */
 .home-project-card__summary {
   margin: var(--space-3) 0 0;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   line-height: var(--lh-body);
   color: var(--text-primary);
   max-width: 62ch;
@@ -1404,8 +1406,9 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 }
 
 .serif-accent {
-  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-family: var(--font-serif);
   font-style: italic;
+  font-optical-sizing: auto;
   font-weight: 400;
   color: var(--accent-text);
   letter-spacing: -0.015em;

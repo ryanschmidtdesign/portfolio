@@ -37,7 +37,7 @@
     Consolas, monospace;
 
   /* ─── Type scale (Strict Major Third: 1.250 ratio, Base 17px) ───────── */
-  --fs-2xs: 0.68rem;     /* 10.88px - Micro labels */
+  --fs-2xs: 0.75rem;     /* 12px - Micro labels */
   --fs-xs: 0.85rem;      /* 13.6px - Utility */
   --fs-control: 0.9375rem; /* 15px - Apple-style control text (intentional deviation) */
   --fs-sm: 0.9375rem;    /* Also mapped to 15px */
@@ -260,12 +260,6 @@
 @media (min-width: 1440px) and (max-width: 1599px) {
   :root {
     --container-max: 90rem;
-    /* 1440px */
-    --fs-body: 1.0625rem; /* 17px */
-    --fs-md: 1.3125rem;   /* 21px */
-    --fs-lg: 1.5625rem;   /* 25px */
-    --fs-xl: 1.9375rem;   /* 31px */
-    --fs-2xl: 2.5rem;     /* 40px */
     --space-9: 6.5rem;
     --page-gutter: clamp(2rem, 3vw, 3rem);
   }
@@ -274,11 +268,6 @@
 /* Large screens (1600px) - enhanced */
 @media (min-width: 1600px) and (max-width: 1919px) {
   :root {
-    --fs-body: 1.125rem;  /* 18px */
-    --fs-md: 1.375rem;    /* 22px */
-    --fs-lg: 1.625rem;    /* 26px */
-    --fs-xl: 2rem;        /* 32px */
-    --fs-2xl: 2.625rem;   /* 42px */
     --space-9: 7rem;
   }
 }
@@ -287,12 +276,6 @@
 @media (min-width: 1920px) {
   :root {
     --container-max: 100rem;
-    /* 1600px */
-    --fs-body: 1.125rem;  /* 18px */
-    --fs-md: 1.4375rem;   /* 23px */
-    --fs-lg: 1.6875rem;   /* 27px */
-    --fs-xl: 2.0625rem;   /* 33px */
-    --fs-2xl: 2.75rem;    /* 44px */
     --space-9: 7.5rem;
     --kpi-gap: 4rem;
     --page-gutter: clamp(2rem, 4vw, 3rem);

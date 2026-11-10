@@ -84,7 +84,7 @@ html {
    browsers that don't support `text-wrap: balance|pretty`. This keeps layout
    stable and prevents overflow/poor wrapping on headings and long paragraphs. */
 :where(p, h1, h2, h3, .section-title, .leadership-lede, .about-lead, .metric-body, .timeline-content) {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 /* Prevent accidental image dragging/highlighting for a more app-like feel */
@@ -99,7 +99,6 @@ body p {
 
 body {
   font-family: var(--font-sans);
-  font-optical-sizing: auto;
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--text);
@@ -114,7 +113,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-kerning: normal;
-  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "cv02" 1, "cv03" 1, "ss01" 1;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   font-variant-ligatures: contextual common-ligatures;
 }
 

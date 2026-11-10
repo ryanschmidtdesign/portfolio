@@ -473,6 +473,7 @@
 .callout--quote blockquote {
   font-family: var(--font-serif);
   font-style: italic;
+  font-optical-sizing: auto;
   font-size: 1.15rem;
   line-height: var(--lh-prose);
   color: var(--text);
@@ -829,7 +830,7 @@
 
 .case-study li {
   font-size: var(--fs-body);
-  line-height: var(--lh-md);
+  line-height: var(--lh-prose);
   background: transparent;
   border: none;
   box-shadow: none;
@@ -1055,7 +1056,7 @@ figure.case-study-media--mobile {
   top: 14px;
   z-index: 4;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1280,17 +1281,7 @@ main[data-reveal] {
 }
 
 /* Viewport optimization component overrides */
-@media (min-width: 1440px) and (max-width: 1599px) {
-  .metric {
-    font-size: 30px;
-  }
-}
-
 @media (min-width: 1920px) {
-  .metric {
-    font-size: 36px;
-  }
-
   .section-title {
     font-size: clamp(2.5rem, 4vw, 3rem);
     margin-bottom: var(--space-8);
@@ -1402,7 +1393,7 @@ main[data-reveal] {
 .timeline-content p {
   color: var(--text);
   font-size: var(--fs-sm);
-  line-height: var(--lh-xs);
+  line-height: var(--lh-body);
   margin: 0;
 }
 
@@ -1428,7 +1419,7 @@ main[data-reveal] {
 .case-study--inventory section ol li {
   margin-bottom: var(--space-2);
   max-width: var(--prose);
-  line-height: var(--lh-prose-loose);
+  line-height: var(--lh-prose);
 }
 
 /* ==========================================================================
@@ -1612,7 +1603,7 @@ main[data-reveal] {
 
 .polaroid-caption {
   font-family: var(--font-mono, monospace);
-  font-size: 10px;
+  font-size: 0.70rem;
   font-weight: 600;
   color: var(--text);
   text-align: center;
