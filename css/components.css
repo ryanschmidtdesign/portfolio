@@ -873,11 +873,13 @@ figure.case-study-media {
 }
 
 figure.case-study-media[data-reveal] {
-  transform: translateX(-50%);
-  transition: opacity .45s var(--ease-out);
+  opacity: 0;
+  transform: translate3d(-50%, 20px, 0);
+  transition: opacity .45s var(--ease-out), transform .45s var(--ease-out);
 }
 figure.case-study-media[data-reveal].is-revealed {
-  transform: translateX(-50%);
+  opacity: 1;
+  transform: translate3d(-50%, 0, 0);
 }
 
 .case-study-media .image-splitter {
@@ -976,7 +978,7 @@ figure.case-study-media--mobile {
 
 .splitter-after {
   z-index: 2;
-  transition: clip-path var(--dur-2) ease;
+  transition: clip-path 240ms var(--ease-out);
 }
 
 .image-splitter.is-dragging .splitter-after,
@@ -996,7 +998,7 @@ figure.case-study-media--mobile {
   transform: translateX(-50%);
   left: 50%;
   touch-action: none;
-  transition: left var(--dur-2) ease;
+  transition: left 240ms var(--ease-out);
 }
 
 .splitter-handle::before {
@@ -1229,7 +1231,8 @@ main[data-reveal] {
   padding: 12px;
   padding-left: 24px;
   position: relative;
-  transition: opacity var(--dur-3) var(--ease-out), visibility var(--dur-3) var(--ease-out);
+  transform: translateY(6px) scale(0.995);
+  transition: opacity var(--dur-3) var(--ease-out), visibility var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out);
 }
 
 [data-compare] .compare-panel::before {
@@ -1248,6 +1251,7 @@ main[data-reveal] {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  transform: translateY(0) scale(1);
 }
 
 [data-compare] .compare-panel h3 {
@@ -1643,7 +1647,7 @@ main[data-reveal] {
   border: 1px solid transparent;
   background: transparent;
   cursor: pointer;
-  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), transform 180ms var(--ease-out), outline-color 180ms var(--ease-out);
 }
 
 .bridge-item:hover,
@@ -1764,7 +1768,7 @@ main[data-reveal] {
   cursor: pointer;
   padding: 6px 8px;
   border-radius: var(--radius-md);
-  transition: all 180ms ease;
+  transition: background-color 180ms var(--ease-out), outline-color 180ms var(--ease-out);
 }
 
 .stepper-node:hover,
@@ -1790,7 +1794,7 @@ main[data-reveal] {
   height: 10px;
   border-radius: 50%;
   background: rgba(28, 22, 18, 0.24);
-  transition: all 180ms ease;
+  transition: background-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), transform 180ms var(--ease-out);
 }
 
 .node-label {
@@ -1846,7 +1850,7 @@ main[data-reveal] {
   font-family: var(--font-mono);
   padding: 4px 10px;
   border-radius: var(--radius-pill);
-  transition: all 200ms ease;
+  transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out), border-color 200ms var(--ease-out);
 }
 
 .sim-grid {
@@ -1941,7 +1945,7 @@ main[data-reveal] {
   padding: 6px 14px;
   border-radius: var(--radius-xs);
   cursor: pointer;
-  transition: all 180ms ease;
+  transition: background 180ms var(--ease-out), color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
 }
 
 .dual-tab-btn.is-active {
@@ -2025,7 +2029,7 @@ main[data-reveal] {
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out), transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
 }
 
 .stepper-btn:hover {
@@ -2063,7 +2067,7 @@ main[data-reveal] {
   border: 1px solid rgb(22 101 52 / 0.28);
   padding: 3px 8px;
   border-radius: var(--radius-xs);
-  transition: all 180ms ease;
+  transition: background-color 180ms var(--ease-out), color 180ms var(--ease-out), border-color 180ms var(--ease-out);
 }
 
 .mock-serial-input-group {
@@ -2134,7 +2138,7 @@ main[data-reveal] {
   min-height: 36px;
   padding: 6px 12px;
   border-radius: var(--radius-sm);
-  transition: all 160ms ease;
+  transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
   line-height: inherit;
   text-decoration: none;
   display: inline-flex;
@@ -2197,7 +2201,7 @@ main[data-reveal] {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  transition: all 180ms ease;
+  transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
 }
 
 .ia-card strong {
@@ -2285,7 +2289,7 @@ main[data-reveal] {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: all 180ms ease;
+  transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), color 180ms var(--ease-out), outline-color 180ms var(--ease-out);
 }
 
 .query-chip:hover,
@@ -2331,7 +2335,7 @@ main[data-reveal] {
   color: var(--accent-text, #8C3B1E);
   border: 1px solid rgba(200, 90, 50, 0.28);
   text-transform: uppercase;
-  transition: all 180ms ease;
+  transition: background-color 180ms var(--ease-out), color 180ms var(--ease-out), border-color 180ms var(--ease-out);
 }
 
 .omnibar-mode-pill.pill--keyword {

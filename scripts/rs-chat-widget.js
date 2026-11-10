@@ -218,7 +218,7 @@
         gap: 4px;
         flex-shrink: 0;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: background-color 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s cubic-bezier(0.16, 1, 0.3, 1), color 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .hdr-close:hover {
         background: rgba(200, 90, 50, 0.2);
@@ -344,7 +344,7 @@
         font-weight: 600;
         color: #A8A29E;
         cursor: pointer;
-        transition: all 140ms ease;
+        transition: background-color 140ms cubic-bezier(0.16, 1, 0.3, 1), border-color 140ms cubic-bezier(0.16, 1, 0.3, 1), color 140ms cubic-bezier(0.16, 1, 0.3, 1);
       }
       .chat-copy-btn:hover {
         background: var(--accent);
@@ -733,7 +733,7 @@
         border: 1px solid rgba(255, 255, 255, 0.12);
         color: #A8A29E;
         cursor: pointer;
-        transition: all 0.15s ease;
+        transition: background-color 0.15s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.15s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .stop-btn:hover {
         background: rgba(200, 60, 40, 0.15);

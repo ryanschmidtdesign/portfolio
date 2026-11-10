@@ -60,7 +60,7 @@
       let rafId = null;
 
       el.addEventListener('pointerenter', () => {
-        el.style.transition = '';
+        el.style.transition = 'transform 60ms linear';
       });
 
       el.addEventListener('pointermove', (e) => {

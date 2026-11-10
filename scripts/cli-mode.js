@@ -46,13 +46,14 @@
                     opacity: 0;
                     visibility: hidden;
                     pointer-events: none;
-                    transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1), visibility 200ms;
+                    transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 180ms;
                 }
 
                 .rs-cmd-overlay.is-open {
                     opacity: 1;
                     visibility: visible;
                     pointer-events: auto;
+                    transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0s;
                 }
 
                 .rs-cmd-modal {
@@ -146,7 +147,7 @@
                     flex-shrink: 0;
                     user-select: none;
                     cursor: pointer;
-                    transition: all 120ms ease;
+                    transition: background-color 120ms cubic-bezier(0.16, 1, 0.3, 1), border-color 120ms cubic-bezier(0.16, 1, 0.3, 1), color 120ms cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
                 .rs-cmd-esc:hover {
@@ -235,7 +236,7 @@
                     align-items: center;
                     justify-content: center;
                     flex-shrink: 0;
-                    transition: all 100ms ease;
+                    transition: background-color 100ms cubic-bezier(0.16, 1, 0.3, 1), border-color 100ms cubic-bezier(0.16, 1, 0.3, 1), color 100ms cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
                 .rs-cmd-item.is-selected .rs-cmd-item__icon,
@@ -335,7 +336,7 @@
                     color: #A8A29E;
                     opacity: 0;
                     transform: translateX(-3px);
-                    transition: all 100ms ease;
+                    transition: opacity 100ms cubic-bezier(0.16, 1, 0.3, 1), transform 100ms cubic-bezier(0.16, 1, 0.3, 1), color 100ms cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
                 .rs-cmd-item.is-selected .rs-cmd-item__return,

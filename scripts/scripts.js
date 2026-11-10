@@ -76,18 +76,17 @@
     return;
   }
 
-  // Stagger reveal timing for visual rhythm
-  els.forEach((el, i) => {
-    el.style.transitionDelay = `${Math.min(i * 30, 90)}ms`;
-  });
-
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting || entry.intersectionRatio > 0) {
-          entry.target.classList.add('is-revealed');
-          observer.unobserve(entry.target);
-        }
+      const intersecting = entries.filter((entry) => entry.isIntersecting || entry.intersectionRatio > 0);
+      intersecting.forEach((entry, idx) => {
+        const el = entry.target;
+        el.style.transitionDelay = `${Math.min(idx * 40, 120)}ms`;
+        el.classList.add('is-revealed');
+        observer.unobserve(el);
+        setTimeout(() => {
+          el.style.transitionDelay = '';
+        }, 500);
       });
     },
     { threshold: [0, 0.15], rootMargin: '0px 0px -20px 0px' }
