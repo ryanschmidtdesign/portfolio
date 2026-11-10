@@ -331,7 +331,8 @@
   };
 
   document.addEventListener("click", (e) => {
-    const link = e.target.closest('a[href*="resume"]');
+    const originEl = (typeof e.composedPath === "function" ? e.composedPath()[0] : null) || e.target;
+    const link = originEl && typeof originEl.closest === "function" ? originEl.closest('a[href*="resume"]') : null;
     if (link) {
       window.trackResumeDownload();
     }

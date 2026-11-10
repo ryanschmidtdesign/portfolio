@@ -18,6 +18,8 @@ import {
   chooseCaseIdsFromText,
   buildFocusedCaseContext,
   dedupeSuggestedPills,
+  violatesInputPolicy,
+  extractPastedJobDescription,
   KB_FALLBACK
 } from '../../api/chat.js';
 
@@ -371,6 +373,9 @@ describe('api/chat serverless helpers', () => {
   it('isPrivateHostname blocks metadata service and loopbacks', () => {
     expect(isPrivateHostname('169.254.169.254')).toBe(true);
     expect(isPrivateHostname('::1')).toBe(true);
+    expect(isPrivateHostname('[::1]')).toBe(true);
+    expect(isPrivateHostname('::ffff:127.0.0.1')).toBe(true);
+    expect(isPrivateHostname('fe80::1')).toBe(true);
     expect(isPrivateHostname('0.0.0.0')).toBe(true);
     expect(isPrivateHostname('100.64.0.1')).toBe(true);
     expect(isPrivateHostname('google.com')).toBe(false);
@@ -396,15 +401,37 @@ describe('api/chat serverless helpers', () => {
     const allowlist = buildMetricAllowlist(kb);
     expect(allowlist.size).toBeGreaterThan(10);
 
-    // Documented metrics pass through
+    // Documented metrics and structural compound terms pass through
     expect(validateAnswerMetrics('He achieved **+8%** recurring revenue.', allowlist)).toBe('He achieved **+8%** recurring revenue.');
     expect(validateAnswerMetrics('He drove **+500%** Ahri sessions.', allowlist)).toBe('He drove **+500%** Ahri sessions.');
     expect(validateAnswerMetrics('He led **10 interviews** with power users.', allowlist)).toBe('He led **10 interviews** with power users.');
+    expect(validateAnswerMetrics('He validated a **4-level taxonomy** and **12-column widget grid** for **Fortune 500** members.', allowlist)).toBe('He validated a **4-level taxonomy** and **12-column widget grid** for **Fortune 500** members.');
+    expect(validateAnswerMetrics('He shipped a **0-to-1 MVP** across **5-module** workflows.', allowlist)).toBe('He shipped a **0-to-1 MVP** across **5-module** workflows.');
 
     // Hallucinations containing single digits are blocked from substring bypass
     expect(validateAnswerMetrics('Conversions jumped **995%**.', allowlist)).toBe('Conversions jumped a documented portfolio outcome.');
     expect(validateAnswerMetrics('Revenue surged **$2,000,000**.', allowlist)).toBe('Revenue surged a documented portfolio outcome.');
     expect(validateAnswerMetrics('User engagement rose **250%**.', allowlist)).toBe('User engagement rose a documented portfolio outcome.');
+  });
+
+  it('allows pasted job descriptions over 2,800 characters without triggering violatesInputPolicy', () => {
+    const longJd = 'Senior Product Designer — About the Role\nResponsibilities:\n' + 'Design scalable B2B workflows and partner with engineering. '.repeat(60) + '\nQualifications:\n5+ years of experience in enterprise SaaS.';
+    expect(longJd.length).toBeGreaterThan(3000);
+    expect(violatesInputPolicy(longJd)).toBe(false);
+    const extracted = extractPastedJobDescription(longJd);
+    expect(extracted).not.toBeNull();
+    expect(extracted.via).toBe('paste');
+  });
+
+  it('uses +64% sustained dashboard views in local proof_points fallback', () => {
+    const res = buildLocalFallbackAnswer({
+      intent: 'proof_points',
+      lastUser: 'What are Ryan\'s top proof points?',
+      kb
+    });
+    expect(res.answer).toContain('71% multi-dashboard adoption');
+    expect(res.answer).toContain('+64% sustained dashboard views');
+    expect(res.answer).not.toContain('+62%');
   });
 
   it('detects natural greetings like "Hi Ryan" and "Hello there"', () => {

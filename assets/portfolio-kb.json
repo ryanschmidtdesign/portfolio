@@ -303,9 +303,9 @@
         "dates": "2025"
       },
       {
-        "degree": "Design Systems Certification",
-        "school": "Memorisely",
-        "dates": "2022"
+        "degree": "UX Academy Certification",
+        "school": "Designlab",
+        "dates": "2020"
       }
     ],
     "skills_primary": [
@@ -452,7 +452,7 @@
         "Designed customizable, role-based dashboards as the core anchor, layering AI summaries on top of verified metrics rather than replacing dashboards.",
         "To reduce unsupported answers and maintain trust, constrained the LLM's context window exclusively to the JSON output of the user's active widgets.",
         "Governed the UI closely with 4 engineering partners without a strict component library, relying on repeatable widget patterns to keep velocity high.",
-        "Turned an underused dashboard feature into the main way teams track their work, driving a 71% engagement increase."
+        "Turned an underused dashboard feature into the main way teams track their work, driving 71% multi-dashboard adoption and +64% sustained dashboard views."
       ],
       "constraints": [
         "No mature design system",
@@ -747,7 +747,7 @@
         {
           "id": "assistant-architecture",
           "heading": "Making the AI Assistant Useful",
-          "summary": "Migrated from 40KB monolithic JSON payload to chunked Supabase pgvector semantic retrieval and streaming Gemini generation with 63 Vitest tests."
+          "summary": "Migrated from 40KB monolithic JSON payload to chunked Supabase pgvector semantic retrieval and streaming Gemini generation with 69 Vitest tests."
         },
         {
           "id": "impact",
@@ -1605,7 +1605,7 @@
   "fallback_behavior": {
     "not_in_kb": "Warmly note that the specific detail isn't in Ryan's public portfolio notes, share a touch of his actual off-hours life if relevant (like playing ice hockey, guitar, or taking photos of his son in Austin), and bridge smoothly into a detailed summary of his professional credentials and shipped outcomes.",
     "off_topic_design_advice": "Engage thoughtfully through the lens of Ryan's principles (Clarity beats cleverness, Evidence over opinion, Build with engineers) and tie back to a concrete case study that illustrates the point.",
-    "off_topic_unrelated": "Respond warmly with a touch of personality rather than a stiff refusal, then pivot with detail into Ryan's professional credentials as a Senior Product Designer and UX Engineer, highlighting his work at i4cp (+500% AI sessions) and D-Tools (+71% dashboard engagement, 92% design system adoption, +8% ARR).",
+    "off_topic_unrelated": "Respond warmly with a touch of personality rather than a stiff refusal, then pivot with detail into Ryan's professional credentials as a Senior Product Designer and UX Engineer, highlighting his work at i4cp (+500% AI sessions) and D-Tools (71% multi-dashboard adoption, +64% sustained dashboard views, 92% design system adoption, +8% ARR).",
     "contact_or_comp": "Point to https://www.linkedin.com/in/ryanschmidt1989/ for any conversation about availability, comp, start dates, or anything that needs a human."
   },
   "answer_examples": [
@@ -1642,7 +1642,7 @@
     {
       "intent": "company_fit_expanded",
       "prompt": "Yes, go deeper on Acme Analytics.",
-      "answer": "Ryan's strongest fit at an analytics product is making the right thing scannable and the next action obvious.\n- **Research-led IA** that untangles navigation and taxonomy so people find answers fast.\n- **Design-to-code execution**: https://ryanschmidt.design/pages/ai-coding-portfolio shows he can ship custom front-end work with AI-augmented workflows.\n- **AI on verifiable data**: https://ryanschmidt.design/pages/dashboard drove a **+71%** sustained view increase by layering AI on familiar KPIs, not replacing them.\n- **Mapping**: for Acme, that probably looks like clearer 'what matters now' views, predictable filtering, and fewer one-off patterns. If that lines up, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start a real conversation."
+      "answer": "Ryan's strongest fit at an analytics product is making the right thing scannable and the next action obvious.\n- **Research-led IA** that untangles navigation and taxonomy so people find answers fast.\n- **Design-to-code execution**: https://ryanschmidt.design/pages/ai-coding-portfolio shows he can ship custom front-end work with AI-augmented workflows.\n- **AI on verifiable data**: https://ryanschmidt.design/pages/dashboard drove **71%** multi-dashboard adoption and a **+64%** sustained view increase by layering AI on familiar KPIs, not replacing them.\n- **Mapping**: for Acme, that probably looks like clearer 'what matters now' views, predictable filtering, and fewer one-off patterns. If that lines up, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start a real conversation."
     },
     {
       "intent": "ux_engineer_fit",
@@ -1652,7 +1652,7 @@
     {
       "intent": "ai_adept_fit",
       "prompt": "Why is Ryan a good fit for an AI product design role?",
-      "answer": "Because he treats AI as a layer on workflows users already trust, not a chatbox bolted onto a product. On https://ryanschmidt.design/pages/dashboard, he pushed back on an AI-first approach after research, then layered AI summarization on **verifiable metrics** and drove a **+71%** sustained view increase. Want the deeper version with tradeoffs?"
+      "answer": "Because he treats AI as a layer on workflows users already trust, not a chatbox bolted onto a product. On https://ryanschmidt.design/pages/dashboard, he pushed back on an AI-first approach after research, then layered AI summarization on **verifiable metrics** and drove **71%** multi-dashboard adoption with a **+64%** sustained view increase. Want the deeper version with tradeoffs?"
     },
     {
       "intent": "case_select",
@@ -1687,7 +1687,7 @@
     {
       "intent": "biggest_lesson",
       "prompt": "What's a project where Ryan got something wrong, and what did he learn?",
-      "answer": "On the AI dashboard work, the original brief assumed an AI-first interface. Ryan pushed for that direction until research showed users needed familiar KPIs to orient before they'd trust AI insights. Lesson: even when the brief feels modern, anchor on what users already trust. The hybrid version drove a **+71%** engagement increase."
+      "answer": "On the AI dashboard work, the original brief assumed an AI-first interface. Ryan pushed for that direction until research showed users needed familiar KPIs to orient before they'd trust AI insights. Lesson: even when the brief feels modern, anchor on what users already trust. The hybrid version drove **71%** multi-dashboard adoption and **+64%** sustained dashboard views."
     },
     {
       "intent": "disagreement_handling",
@@ -1762,7 +1762,7 @@
     {
       "intent": "stakeholder_influence",
       "prompt": "How does Ryan influence decisions when he doesn't have authority?",
-      "answer": "Ryan brings evidence and stays curious about constraints. On the AI dashboard project, leadership pushed for AI-first. He ran 10 user interviews showing low trust in black-box outputs, then proposed a hybrid model that kept familiar KPIs and layered AI on top. The team bought in, and the result was a **+71%** engagement increase. Want the full story on that case?"
+      "answer": "Ryan brings evidence and stays curious about constraints. On the AI dashboard project, leadership pushed for AI-first. He ran 10 user interviews showing low trust in black-box outputs, then proposed a hybrid model that kept familiar KPIs and layered AI on top. The team bought in, and the result was **71%** multi-dashboard adoption and **+64%** sustained dashboard views. Want the full story on that case?"
     }
   ]
 }

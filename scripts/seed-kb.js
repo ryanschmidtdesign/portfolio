@@ -259,23 +259,43 @@ async function main() {
     console.log('Existing KB chunks cleared successfully.');
   }
 
-  console.log('Inserting prepared chunks into Supabase...');
-  let ok = 0;
-  let insertFail = 0;
+  console.log('Inserting prepared chunks into Supabase in a single batch...');
+  const batchPayload = preparedChunks.map(chunk => ({
+    chunk_text: chunk.chunk_text,
+    source: chunk.source,
+    metadata: chunk.metadata,
+    embedding: chunk.embedding
+  }));
+  const batchResp = await fetch(`${SUPABASE_URL}/rest/v1/kb_chunks`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_SERVICE_KEY,
+      'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`
+    },
+    body: JSON.stringify(batchPayload)
+  });
 
-  for (let i = 0; i < preparedChunks.length; i++) {
-    const chunk = preparedChunks[i];
-    process.stdout.write(`[${i + 1}/${preparedChunks.length}] Inserting ${chunk.source}... `);
-    const inserted = await insertChunk(chunk);
-    if (inserted) {
-      console.log('OK');
-      ok++;
-    } else {
-      insertFail++;
+  if (batchResp.ok) {
+    console.log(`\nDone: ${preparedChunks.length} inserted in batch, 0 failed`);
+  } else {
+    const batchErr = await batchResp.text().catch(() => '');
+    console.warn(`Batch insert failed (${batchResp.status}: ${batchErr}), falling back to sequential insert...`);
+    let ok = 0;
+    let insertFail = 0;
+    for (let i = 0; i < preparedChunks.length; i++) {
+      const chunk = preparedChunks[i];
+      process.stdout.write(`[${i + 1}/${preparedChunks.length}] Inserting ${chunk.source}... `);
+      const inserted = await insertChunk(chunk);
+      if (inserted) {
+        console.log('OK');
+        ok++;
+      } else {
+        insertFail++;
+      }
     }
+    console.log(`\nDone: ${ok} inserted, ${insertFail} failed`);
   }
-
-  console.log(`\nDone: ${ok} inserted, ${insertFail} failed`);
 }
 
 main().catch(e => {

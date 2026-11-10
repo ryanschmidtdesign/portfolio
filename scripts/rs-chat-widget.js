@@ -1161,7 +1161,7 @@ if (savedHist.length > 0) {
 
   const PAGE_PILLS = {
     '/dashboard.html': [
-      "How did Ryan drive 71% more engagement?",
+      "How did Ryan drive 71% multi-dashboard adoption?",
       "Walk me through Ryan's UX research process.",
       "What were the key tradeoffs on this dashboard?"
     ],
@@ -1823,7 +1823,7 @@ if (savedHist.length > 0) {
         }
 
         if (!data && accumulatedText) {
-          let fallbackAnswer = accumulatedText;
+          let fallbackAnswer = sanitizeAnswer(accumulatedText);
           try {
             const jsonFallback = JSON.parse(accumulatedText);
             if (jsonFallback && jsonFallback.answer) fallbackAnswer = jsonFallback.answer;

@@ -64,7 +64,7 @@ const DISALLOWED = [
   /\b(abortion|gun control|immigration policy) (debate|argument|position)\b/i
 ];
 
-const MAX_IN_CHARS = 2800;
+const MAX_IN_CHARS = 12000;
 const MAX_OUT_CHARS = 4200;
 const MAX_LINK_CHARS = 14000;
 
@@ -166,7 +166,6 @@ function isBadHint(h = "") {
 
 function violatesInputPolicy(text = "") {
   if (!text) return false;
-  if (text.length > MAX_IN_CHARS) return true;
   return DISALLOWED.some(re => re.test(text));
 }
 
@@ -240,10 +239,10 @@ function extractFirstUrl(text = "") {
 }
 
 function isPrivateHostname(hostname = "") {
-  const h = String(hostname || "").toLowerCase().trim();
+  const h = String(hostname || "").toLowerCase().trim().replace(/^\[|\]$/g, "");
   if (!h) return true;
   if (h === "localhost" || h.endsWith(".local") || h.endsWith(".internal")) return true;
-  if (h === "::1" || h === "0.0.0.0" || h.startsWith("fe80:") || h.startsWith("fc00:") || h.startsWith("fd00:")) return true;
+  if (h === "::1" || h === "0:0:0:0:0:0:0:1" || h === "0.0.0.0" || h.startsWith("fe80:") || h.startsWith("fc00:") || h.startsWith("fd00:") || h.startsWith("::ffff:127.") || h.startsWith("::ffff:10.") || h.startsWith("::ffff:192.168.")) return true;
   if (/^\d{1,3}(\.\d{1,3}){3}$/.test(h)) {
     const [a, b] = h.split(".").map(n => parseInt(n, 10));
     if (a === 0 || a === 10 || a === 127) return true;
@@ -347,18 +346,22 @@ async function fetchJobDescriptionFromUrl(urlObj) {
         "Accept": "text/html,text/plain;q=0.9,*/*;q=0.1",
       }
     });
+    if (resp.url) {
+      let blockedRedirect = false;
+      try {
+        const finalHost = new URL(resp.url).hostname;
+        if (isPrivateHostname(finalHost)) {
+          blockedRedirect = true;
+        }
+      } catch {}
+      if (blockedRedirect) {
+        return { error: "Destination host is not permitted. Paste the job description text instead." };
+      }
+    }
     if (!resp.ok) {
       const jina = await fetchReadableTextViaJina(urlObj);
       if (jina) return { url: jina.url, excerpt: jina.excerpt, via: "jina" };
       return { error: `I couldn\u2019t fetch that link (HTTP ${resp.status}). Paste the job description text instead.` };
-    }
-    if (resp.url) {
-      try {
-        const finalHost = new URL(resp.url).hostname;
-        if (isPrivateHostname(finalHost)) {
-          return { error: "Destination host is not permitted. Paste the job description text instead." };
-        }
-      } catch {}
     }
     const ct = (resp.headers.get("content-type") || "").toLowerCase();
     if (ct.includes("application/pdf")) {
@@ -888,7 +891,10 @@ function validateAnswerMetrics(answer = "", allowlist) {
   if (!allowlist || !allowlist.size) return answer;
   return String(answer).replace(/\*\*([^*]+)\*\*/g, (full, inner) => {
     if (!/\d/.test(inner)) return full;
-    if (/\b(interviews?|weeks?|users?|engineers?|rounds?|pm|designers?|years?|months?|days?|hours?|minutes?|seconds?|sessions?|platforms?|modules?|components?|tiers?|levels?|developers?|teams?|projects?|cases?|studies|steps?|phases?|2x|2×)\b/i.test(inner)) {
+    if (/\b(interviews?|weeks?|users?|engineers?|rounds?|pm|designers?|years?|months?|days?|hours?|minutes?|seconds?|sessions?|platforms?|modules?|components?|tiers?|levels?|pillars?|columns?|categories|category|grids?|fortune\s*500|0-to-1|0\s+to\s+1|developers?|teams?|projects?|cases?|studies|steps?|phases?|workflows?|surfaces?|quarters?|rules?|tests?|tokens?|patterns?|views?|widgets?|accounts?|clients?|members?|leaders?|execs?|executives?|2x|2×|300ms|40kb|69\s+vitest|63\s+vitest)\b/i.test(inner)) {
+      return full;
+    }
+    if (!/[%$+]/.test(inner) && /^\d+\s*-\s*[a-z]+/i.test(inner.trim())) {
       return full;
     }
     const norm = normalizeMetricToken(inner);
@@ -1642,7 +1648,7 @@ function buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks = [], 
 
   if (intent === "proof_points" || intent === "case_select" || intent === "case_compare") {
     return assistantPayload({
-      answer: "Three flagship projects best show Ryan's impact across AI product design, enterprise B2B workflows, and systems architecture:\n- **[i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html)**: Rebuilt the research taxonomy and elevated the Ahri AI assistant, driving **+500% AI sessions** and **2× daily activity**.\n- **[AI-Powered Dashboards](/pages/dashboard.html) (D-Tools)**: Shipped role-based KPI views and AI summaries that reached **71% multi-dashboard adoption** and **+62% sustained engagement**.\n- **[Real-Time Inventory](/pages/inventory.html) (D-Tools)**: Designed a 0-to-1 purchasing and stock-tracking workflow that drove **+8% recurring revenue** and unblocked enterprise accounts.",
+      answer: "Three flagship projects best show Ryan's impact across AI product design, enterprise B2B workflows, and systems architecture:\n- **[i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html)**: Rebuilt the research taxonomy and elevated the Ahri AI assistant, driving **+500% AI sessions** and **2× daily activity**.\n- **[AI-Powered Dashboards](/pages/dashboard.html) (D-Tools)**: Shipped role-based KPI views and AI summaries that reached **71% multi-dashboard adoption** and **+64% sustained dashboard views**.\n- **[Real-Time Inventory](/pages/inventory.html) (D-Tools)**: Designed a 0-to-1 purchasing and stock-tracking workflow that drove **+8% recurring revenue** and unblocked enterprise accounts.",
       suggested_pills: [
         "Tell me more about the i4cp Member Portal overhaul",
         "How did the D-Tools AI Dashboards reach 71% adoption?"
@@ -1908,15 +1914,18 @@ async function generateQueryEmbedding(text = "") {
   return null;
 }
 
-async function retrieveKbChunks(userText = "", options = {}) {
+async function retrieveKbChunks(userText = "", options = {}, kbArg = null) {
   const {
     matchCount = 6,
     similarityThreshold = 0.68,
-    kb = KB_FALLBACK
+    kb = kbArg || KB_FALLBACK
   } = options;
 
   const localChunks = retrieveLocalKbChunks(kb, userText, 4);
   if (!SUPABASE_HEADERS || !userText || String(userText).trim().length < 3) {
+    return localChunks;
+  }
+  if (localChunks.length >= 3 && (localChunks[0]?.similarity || 0) >= 0.8) {
     return localChunks;
   }
 
@@ -2290,13 +2299,16 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
 
       if (resp.ok) {
         if (streamChunk) {
-          const fullText = await readGeminiStream(resp, streamChunk);
+          const fullText = await readGeminiStream(resp, null);
           const result = parseGeminiOutput(fullText, pickedCases, kb, isFit);
           if (typeof result.answer === "string" && result.answer.trim().startsWith("{") && result.answer.includes('"answer"')) {
             const extracted = safeExtractAnswer(fullText);
             if (extracted) {
               result.answer = extracted;
             }
+          }
+          if (result.answer) {
+            streamChunk(result.answer);
           }
           return result;
         }
@@ -2584,9 +2596,10 @@ export default async function handler(req, res) {
     const answerStyle = body.answerStyle || "concise";
     const sessionToken = String(body.sessionToken || "").slice(0, 128) || null;
 
-    lastUser = [...messages].reverse().find(m => m.role === "user")?.content || "";
-    const isFit = detectFitIntent(lastUser);
-    intent = detectIntent(lastUser);
+    lastUser = String([...messages].reverse().find(m => m.role === "user")?.content || "").slice(0, MAX_IN_CHARS);
+    const pastedJd = extractPastedJobDescription(lastUser);
+    const isFit = detectFitIntent(lastUser) || Boolean(pastedJd);
+    intent = pastedJd && intent === "general" ? "role_fit" : detectIntent(lastUser);
 
     // If Gemini API key is not configured or rate limit is reached, serve a natural grounded KB answer (never an error)
     const clientIp = getClientIp(req);
@@ -2596,12 +2609,12 @@ export default async function handler(req, res) {
     }
 
     if (violatesInputPolicy(lastUser)) {
-      const politePrivacyAnswer = "Ryan keeps personal contact details like his phone number, home address, and compensation history private on the public site, though you can always message him directly on [LinkedIn](https://www.linkedin.com/in/ryanschmidt1989/). If you're exploring his background for a role, he's a Senior Product Designer and UX Engineer in Austin who recently drove **+500% Ahri AI sessions** on the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) and built a **100+ component design system with 92% engineer adoption** at D-Tools.";
+      const politeRedirectAnswer = "I stay focused on Ryan's product design, UX engineering work, and role fit rather than political or religious debates. If you're exploring his background, he's a Senior Product Designer and UX Engineer in Austin who recently drove **+500% Ahri AI sessions** on the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) and built a **100+ component design system with 92% engineer adoption** at D-Tools.";
       await logIfEnabled({ type: "policy_refusal", lastUser, time: Date.now() });
       return sendChatResponse(res, wantsStream, {
-        answer: politePrivacyAnswer,
-        suggested_pills: defaultSuggestedPills("contact", lastUser),
-        hire_intent: true,
+        answer: politeRedirectAnswer,
+        suggested_pills: defaultSuggestedPills("general", lastUser),
+        hire_intent: false,
         context_cases: [{ title: "i4cp Member Portal Overhaul", url: "/pages/member-portal-overhaul.html" }],
         sources: []
       });
@@ -2925,5 +2938,7 @@ export {
   chooseCaseIdsFromText,
   buildFocusedCaseContext,
   dedupeSuggestedPills,
+  violatesInputPolicy,
+  extractPastedJobDescription,
   KB_FALLBACK
 };

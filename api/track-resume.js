@@ -21,6 +21,15 @@ function checkRateLimit(ip) {
   const timestamps = (RATE_LIMITS.get(ip) || []).filter(t => t > windowStart);
   if (timestamps.length >= RATE_LIMIT_MAX) return false;
   timestamps.push(now);
+  if (RATE_LIMITS.size >= 500) {
+    for (const [k, v] of RATE_LIMITS.entries()) {
+      if (v.every(t => t <= windowStart)) RATE_LIMITS.delete(k);
+    }
+    if (RATE_LIMITS.size >= 500) {
+      const oldest = RATE_LIMITS.keys().next().value;
+      if (oldest) RATE_LIMITS.delete(oldest);
+    }
+  }
   RATE_LIMITS.set(ip, timestamps);
   return true;
 }
