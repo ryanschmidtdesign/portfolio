@@ -254,18 +254,19 @@
    Long-form primitives (case studies)
    --------------------------------------------------------*/
 .case-study blockquote {
-  margin: var(--space-6) 0;
-  padding: var(--space-5) var(--space-6);
-  background: var(--surface-elevated-strong);
-  box-shadow: var(--shadow-card-strong);
+  margin: var(--space-7) auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   color: var(--text);
   max-width: var(--prose);
 }
 
 .case-study blockquote p {
   margin: 0;
-  font-size: var(--fs-body);
-  line-height: var(--lh-prose-loose);
+  font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.3rem);
+  line-height: var(--lh-prose);
 }
 
 /* Tables (for comparisons, rollout plans, metrics) */
@@ -327,7 +328,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: var(--space-5);
-    padding: var(--space-5) var(--space-4);
+    padding: var(--space-5) 0;
   }
 
   .case-study .impact-metric {
@@ -433,11 +434,11 @@
   margin-block: var(--space-6);
   max-width: var(--prose);
   margin-inline: auto;
-  padding: var(--space-5) var(--space-6);
-  background: var(--surface-elevated, #FAF7F2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  padding: var(--space-4) 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .case-study .callout h2,
@@ -739,16 +740,19 @@
 }
 
 .case-study .impact-callout {
-  margin: var(--space-6) auto var(--space-5);
-  padding: var(--space-6) var(--space-7);
+  margin: var(--space-7) auto var(--space-6);
+  padding: var(--space-6) 0;
   display: flex;
   justify-content: center;
-  gap: clamp(var(--space-5), 5vw, 3.25rem);
+  gap: clamp(var(--space-5), 5vw, 3.5rem);
   max-width: var(--impact-callout-max);
-  background: var(--surface-elevated-strong, #FCFBF9);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card-strong);
+  background: transparent;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .case-study .impact-metric {
@@ -1774,15 +1778,14 @@ main[data-reveal] {
   flex-shrink: 0;
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
-  line-height: 1.2;
+  line-height: 1.4;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 2px 6px;
-  border-radius: var(--radius-sm);
-  background: var(--accent-soft);
+  letter-spacing: 0.06em;
+  padding: 0;
+  background: transparent;
   color: var(--accent);
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .bridge-content {
@@ -1792,28 +1795,28 @@ main[data-reveal] {
 }
 
 .badge--alert {
-  background: var(--red-soft, rgb(153 27 27 / 0.10));
-  color: var(--red, #991B1B);
-  border: 1px solid rgb(153 27 27 / 0.28);
-  font-weight: 600;
+  background: rgba(185, 28, 28, 0.08);
+  color: #991B1B;
+  border: 1px solid rgba(185, 28, 28, 0.22);
+  font-weight: 500;
 }
 .badge--success {
-  background: var(--green-soft, rgb(22 101 52 / 0.12));
-  color: var(--green, #166534);
-  border: 1px solid rgb(22 101 52 / 0.28);
-  font-weight: 600;
+  background: rgba(22, 101, 52, 0.08);
+  color: #166534;
+  border: 1px solid rgba(22, 101, 52, 0.22);
+  font-weight: 500;
 }
 .badge--warning {
-  background: var(--amber-soft, rgb(146 64 14 / 0.12));
-  color: var(--amber, #92400E);
-  border: 1px solid rgb(146 64 14 / 0.28);
-  font-weight: 600;
+  background: rgba(180, 83, 9, 0.08);
+  color: #92400E;
+  border: 1px solid rgba(180, 83, 9, 0.22);
+  font-weight: 500;
 }
 .badge--order {
-  background: var(--accent-soft, rgba(200, 90, 50, 0.10));
+  background: rgba(200, 90, 50, 0.08);
   color: var(--accent-text, #8C3B1E);
-  border: 1px solid rgba(200, 90, 50, 0.28);
-  font-weight: 600;
+  border: 1px solid rgba(200, 90, 50, 0.22);
+  font-weight: 500;
 }
 
 /* ==========================================================================
@@ -1950,10 +1953,14 @@ main[data-reveal] {
 
 .sim-status-badge {
   font-size: var(--fs-xs);
-  font-weight: 600;
+  font-weight: 500;
   font-family: var(--font-mono);
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.02em;
   transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out), border-color 200ms var(--ease-out);
 }
 
@@ -1988,16 +1995,31 @@ main[data-reveal] {
 .sim-footer {
   display: flex;
   gap: var(--space-2);
-  align-items: flex-start;
-  background: var(--accent-soft);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
+  align-items: baseline;
+  background: transparent;
+  border-top: 1px solid var(--border-subtle);
+  border-radius: 0;
+  padding: var(--space-3) 0 0 0;
+  margin-top: var(--space-2);
+}
+
+.sim-rule-icon {
+  display: none;
 }
 
 .sim-rule-text {
   font-size: var(--fs-xs);
   line-height: var(--lh-prose);
-  color: var(--text);
+  color: var(--text-secondary);
+}
+
+.sim-rule-text strong {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs, 12px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-right: var(--space-1);
 }
 
 /* Dual-Track Demo */
@@ -2328,7 +2350,13 @@ main[data-reveal] {
 }
 
 .ia-card--deliverable {
-  border-left: 3px solid var(--accent);
+  border: 1px solid var(--border);
+  background: var(--surface-elevated, #FAF7F2);
+  transition: border-color 180ms var(--ease-out), background-color 180ms var(--ease-out);
+}
+
+.ia-card--deliverable:hover {
+  border-color: var(--accent);
 }
 
 .deliv-badge {
@@ -2337,7 +2365,9 @@ main[data-reveal] {
   font-weight: 600;
   color: var(--accent);
   text-transform: uppercase;
-  margin-bottom: 2px;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  display: inline-block;
 }
 
 /* -------------------------------------------------------
