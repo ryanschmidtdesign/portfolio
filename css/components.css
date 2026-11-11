@@ -455,8 +455,75 @@
 
 .case-study .callout--quote,
 .case-study aside.callout--quote {
-  border-left: 3px solid var(--accent);
-  background: var(--surface-1);
+  border-left: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* -------------------------------------------------------
+   Case study - Borderless Pull Quote (Option A)
+   --------------------------------------------------------*/
+.case-study .pull-quote {
+  margin-block: var(--space-7);
+  max-width: var(--prose);
+  margin-inline: auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.case-study .pull-quote blockquote {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  max-width: 100%;
+}
+
+.case-study .pull-quote blockquote p {
+  font-family: var(--font-sans);
+  font-size: clamp(1.2rem, 1.1rem + 0.5vw, 1.35rem);
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  font-style: normal;
+  text-wrap: pretty;
+  margin: 0 0 var(--space-4) 0;
+}
+
+.case-study .pull-quote blockquote strong {
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+}
+
+.case-study .pull-quote figcaption,
+.case-study .pull-quote-attribution {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+}
+
+.case-study .pull-quote-author {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.case-study .pull-quote-separator {
+  color: var(--border-strong, var(--text-secondary));
+}
+
+.case-study .pull-quote-role {
+  color: var(--text-secondary);
 }
 
 .callout--quote .callout-label {

@@ -18,6 +18,7 @@ import {
   chooseCaseIdsFromText,
   buildFocusedCaseContext,
   dedupeSuggestedPills,
+  parseGeminiOutput,
   violatesInputPolicy,
   extractPastedJobDescription,
   KB_FALLBACK
@@ -499,6 +500,39 @@ describe('api/chat serverless helpers', () => {
     );
     expect(pills.length).toBe(2);
     expect(pills.map(p => p.toLowerCase())).not.toContain("tell me about ryan's recent work");
+  });
+
+  describe('parseGeminiOutput robust recovery', () => {
+    it('parses valid JSON response', () => {
+      const json = JSON.stringify({
+        answer: 'Ryan built the **100+ component design system** at D-Tools.',
+        suggested_pills: ['Tell me more', 'View case study'],
+        hire_intent: false
+      });
+      const parsed = parseGeminiOutput(json, [], kb);
+      expect(parsed.answer).toBe('Ryan built the **100+ component design system** at D-Tools.');
+      expect(parsed.suggested_pills).toEqual(['Tell me more', 'View case study']);
+      expect(parsed.hire_intent).toBe(false);
+    });
+
+    it('recovers direct prose/markdown from the model when JSON is omitted', () => {
+      const prose = "Penguins primarily eat krill, squid, and small fish. While penguins aren't in Ryan's portfolio notes, Ryan is an Austin-based Senior Product Designer.";
+      const parsed = parseGeminiOutput(prose, [], kb);
+      expect(parsed.answer).toContain('Penguins primarily eat krill');
+      expect(parsed.answer).toContain('Senior Product Designer');
+    });
+
+    it('synthesizes a dynamic query-aware fallback instead of a static outcome string', () => {
+      const garbage = '<<<INVALID UNPARSEABLE STREAM CHUNK>>>';
+      const parsed = parseGeminiOutput(garbage, [], kb, false, {
+        lastUser: 'what do penguins eat?',
+        intent: 'general'
+      });
+      expect(parsed.isFallback).toBe(true);
+      expect(parsed.answer).toContain("That specific detail isn't in Ryan's public portfolio notes");
+      expect(parsed.answer).toContain('hockey');
+      expect(parsed.answer).not.toBe("Ryan's strongest shipped outcomes span **Custom Dashboards & AI Summaries at D-Tools Cloud** (71% multi-dashboard adoption, +64% sustained dashboard views), **Inventory, Purchasing & Receiving at D-Tools** (unblocking enterprise deals, +8% recurring revenue, 8% YoY adoption), and the **i4cp Member Portal Overhaul** (+500% Ahri sessions and 2× daily active usage).");
+    });
   });
 });
 

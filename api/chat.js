@@ -1204,7 +1204,7 @@ function extractJsonFromText(text) {
   return s;
 }
 
-function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
+function parseGeminiOutput(text, pickedCases, kb, isFit = false, fallbackOptions = {}) {
   const empty = {
     suggested_pills: [],
     hire_intent: false,
@@ -1236,6 +1236,9 @@ function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
   const cleaned = extractJsonFromText(text);
   try {
     const parsed = JSON.parse(cleaned);
+    if (!parsed || typeof parsed !== "object" || !parsed.answer || !String(parsed.answer).trim()) {
+      throw new Error("Missing or empty answer in parsed JSON");
+    }
     return normalizeAssistantPayload(parsed, pickedCases, kb, isFit);
   } catch {
     // Try to extract a complete "answer" field (even from truncated JSON)
@@ -1256,19 +1259,27 @@ function parseGeminiOutput(text, pickedCases, kb, isFit = false) {
         return { answer: sanitize(String(repairedAnswer)), ...empty };
       }
     }
+
+    // If Gemini output direct prose or markdown (not JSON and not HTML error), use it directly
+    const rawTrimmed = String(text || "").trim();
+    if (!rawTrimmed.startsWith("{") && !rawTrimmed.startsWith("<") && rawTrimmed.length > 15) {
+      const repairedAnswer = repairFitAnswer(rawTrimmed, isFit, kb);
+      return { answer: sanitize(polishAnswerText(repairedAnswer)), ...empty };
+    }
+
+    // Dynamic query-aware fallback synthesized from KB
     const fallbackCases = reconcileContextCases(kb, pickedCases, pickedCases);
+    const queryUser = fallbackOptions?.lastUser || "";
+    const queryIntent = fallbackOptions?.intent || (queryUser ? detectIntent(queryUser) : "general");
+    const fallback = buildLocalFallbackAnswer({
+      intent: queryIntent,
+      lastUser: queryUser,
+      kb,
+      contextCases: fallbackCases
+    });
     return {
-      answer: "Ryan's strongest shipped outcomes span **Custom Dashboards & AI Summaries at D-Tools Cloud** (71% multi-dashboard adoption, +64% sustained dashboard views), **Inventory, Purchasing & Receiving at D-Tools** (unblocking enterprise deals, +8% recurring revenue, 8% YoY adoption), and the **i4cp Member Portal Overhaul** (+500% Ahri sessions and 2× daily active usage).",
-      suggested_pills: [
-        "How did he drive 71% multi-dashboard adoption?",
-        "Tell me about the i4cp AI search overhaul",
-        "Is Ryan a fit for a Staff/Lead Product Designer role?"
-      ],
-      hire_intent: false,
-      action_scroll_to: "",
-      action_highlight: "",
-      context_cases: fallbackCases,
-      sources: []
+      ...fallback,
+      isFallback: true
     };
   }
 }
@@ -2225,12 +2236,20 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
     const role = m.role === "assistant" ? "model" : "user";
     const text = String(m.content || "").trim();
     if (!text) continue;
+    let turnText = text;
+    if (role === "model" && !text.startsWith("{")) {
+      turnText = JSON.stringify({
+        answer: text,
+        suggested_pills: [],
+        hire_intent: false
+      });
+    }
     if (contents.length > 0 && contents[contents.length - 1].role === role) {
-      contents[contents.length - 1].parts[0].text += `\n\n${text}`;
+      contents[contents.length - 1].parts[0].text += `\n\n${turnText}`;
     } else {
       contents.push({
         role,
-        parts: [{ text }]
+        parts: [{ text: turnText }]
       });
     }
   }
@@ -2298,9 +2317,10 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
       clearTimeout(timeout);
 
       if (resp.ok) {
+        const fallbackOptions = { intent, lastUser: lastUserMsg };
         if (streamChunk) {
           const fullText = await readGeminiStream(resp, null);
-          const result = parseGeminiOutput(fullText, pickedCases, kb, isFit);
+          const result = parseGeminiOutput(fullText, pickedCases, kb, isFit, fallbackOptions);
           if (typeof result.answer === "string" && result.answer.trim().startsWith("{") && result.answer.includes('"answer"')) {
             const extracted = safeExtractAnswer(fullText);
             if (extracted) {
@@ -2320,7 +2340,7 @@ Never label sections (no "Strengths:", "Proof:", "Mapping:", or "Closing:" prefi
           ? parts.map(p => p && p.text).filter(Boolean).join("\n")
           : (candidate?.parts?.[0]?.text || "");
 
-        const result = parseGeminiOutput(textRaw, pickedCases, kb, isFit);
+        const result = parseGeminiOutput(textRaw, pickedCases, kb, isFit, fallbackOptions);
         if (typeof result.answer === "string" && result.answer.trim().startsWith("{") && result.answer.includes('"answer"')) {
           const extracted = safeExtractAnswer(textRaw);
           if (extracted) {
@@ -2389,7 +2409,7 @@ async function readGeminiStream(resp, streamChunk) {
                 delta = text;
                 fullText += text;
               }
-              if (delta) streamChunk(delta);
+              if (delta && typeof streamChunk === "function") streamChunk(delta);
             }
           } catch {
             // Partial JSON chunk: skip, next frame will fill it
@@ -2787,7 +2807,7 @@ export default async function handler(req, res) {
       }
     }
 
-    if (!usedFallback && modelOutput && !cached) {
+    if (!usedFallback && modelOutput && !cached && !modelOutput.isFallback) {
       setCachedResponse(lastUser, intent, isFit, modelOutput, pageUrl, prevAssistantMsg);
     }
 
@@ -2938,6 +2958,7 @@ export {
   chooseCaseIdsFromText,
   buildFocusedCaseContext,
   dedupeSuggestedPills,
+  parseGeminiOutput,
   violatesInputPolicy,
   extractPastedJobDescription,
   KB_FALLBACK
