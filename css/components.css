@@ -470,6 +470,15 @@
   box-shadow: none !important;
 }
 
+.case-study .pull-quote-mark {
+  display: block;
+  width: 24px;
+  height: 20px;
+  color: var(--accent);
+  opacity: 0.55;
+  margin-bottom: var(--space-3);
+}
+
 .case-study .pull-quote blockquote,
 .case-study .callout--quote blockquote {
   margin: 0;
