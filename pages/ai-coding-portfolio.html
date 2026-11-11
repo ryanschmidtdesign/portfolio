@@ -375,6 +375,33 @@
           <p class="caption">
             AI only started giving me code I could ship once it had my tokens and layout rules to work from.
           </p>
+
+          <figure class="case-study-media case-study-media--template-duo" data-reveal>
+            <div class="template-duo-grid">
+              <div class="template-duo-col">
+                <div class="template-frame">
+                  <picture>
+                    <source srcset="../assets/case-studies/ai-coding-portfolio/template-member-portal.webp" type="image/webp">
+                    <img src="../assets/case-studies/ai-coding-portfolio/template-member-portal.webp" alt="Member Portal case study showing the standardized header, metadata bar, and interactive comparison" width="1024" height="533" loading="lazy">
+                  </picture>
+                </div>
+                <figcaption>Member Portal: standardized hero, two-column metadata card, and primary interactive before/after slider.</figcaption>
+              </div>
+
+              <div class="template-duo-col">
+                <div class="template-frame">
+                  <picture>
+                    <source srcset="../assets/case-studies/ai-coding-portfolio/template-dashboard.webp" type="image/webp">
+                    <img src="../assets/case-studies/ai-coding-portfolio/template-dashboard.webp" alt="Custom Dashboards case study showing the identical template architecture" width="1024" height="533" loading="lazy">
+                  </picture>
+                </div>
+                <figcaption>Custom Dashboards: same information hierarchy, metadata schema, and visual container structure.</figcaption>
+              </div>
+            </div>
+            <figcaption class="caption" style="text-align:center; margin-top: var(--space-4);">
+              One reusable template architecture: consistent section rhythm across case studies allows adding new projects without re-architecting the page.
+            </figcaption>
+          </figure>
         </section>
 
         <section id="key-decisions" aria-label="Key decisions & trade-offs" class="section--alt">
@@ -396,6 +423,16 @@
           <p>
             Without modular stylesheets, AI coding models quickly create massive, 2,000-line CSS files with conflicting selector weights. I split the styles into five explicit layers: tokens.css, base.css, layout.css, components.css, and pages.css. When prompting Cursor, I strictly directed it to use existing token variables instead of defining ad-hoc pixel values or nested overrides.
           </p>
+
+          <figure class="case-study-media" data-reveal>
+            <div class="template-frame">
+              <picture>
+                <source srcset="../assets/case-studies/ai-coding-portfolio/tokens-to-page.webp" type="image/webp">
+                <img src="../assets/case-studies/ai-coding-portfolio/tokens-to-page.webp" alt="Design tokens in tokens.css governing live rendered case study layout" width="1024" height="636" loading="lazy">
+              </picture>
+            </div>
+            <figcaption>Design rules in code (left) directly driving live UI (right): explicit spacing, type scales, and fluid clamps keep AI code aligned with design intent.</figcaption>
+          </figure>
         </section>
 
         <section id="implementation-highlights" aria-label="Implementation highlights">
@@ -404,31 +441,27 @@
           </div>
 
           <p>
-            The site loads in under 300 milliseconds with zero framework runtime overhead, and every interactive component works via keyboard and screen reader. Here is a look at the previous static version of this portfolio before the rebuild.
+            The site loads in under 300 milliseconds with zero framework runtime overhead, and every interactive component works via keyboard and screen reader. Catching where AI models produce flawed layouts or miss accessibility details requires hands-on design judgment.
           </p>
 
           <figure class="case-study-media" data-reveal>
-            <picture>
-              <source srcset="../assets/case-studies/ai-coding-portfolio/old-home.webp" type="image/webp">
-              <img src="../assets/case-studies/ai-coding-portfolio/old-home.webp" alt="Previous homepage design" width="2880" height="1502" loading="lazy">
-            </picture>
-            <figcaption>Previous homepage design before the rebuild.</figcaption>
+            <div class="template-frame">
+              <picture>
+                <source srcset="../assets/case-studies/ai-coding-portfolio/ai-mistake-before.webp" type="image/webp">
+                <img src="../assets/case-studies/ai-coding-portfolio/ai-mistake-before.webp" alt="Before: Generic AI-generated callout box with heavy border and cramped spacing" width="1024" height="147" loading="lazy">
+              </picture>
+            </div>
+            <figcaption>Before: An early AI generation produced a rigid, heavy-bordered callout box with cramped internal padding and generic typographic treatment.</figcaption>
           </figure>
 
           <figure class="case-study-media" data-reveal>
-            <picture>
-              <source srcset="../assets/case-studies/ai-coding-portfolio/old-case-study-1.webp" type="image/webp">
-              <img src="../assets/case-studies/ai-coding-portfolio/old-case-study-1.webp" alt="Previous case study layout" width="2880" height="1502" loading="lazy">
-            </picture>
-            <figcaption>Previous case study page layout.</figcaption>
-          </figure>
-
-          <figure class="case-study-media" data-reveal>
-            <picture>
-              <source srcset="../assets/case-studies/ai-coding-portfolio/old-case-study-2.webp" type="image/webp">
-              <img src="../assets/case-studies/ai-coding-portfolio/old-case-study-2.webp" alt="Previous case study layout, alternate" width="2880" height="1502" loading="lazy">
-            </picture>
-            <figcaption>Alternate layout from the previous case study system.</figcaption>
+            <div class="template-frame">
+              <picture>
+                <source srcset="../assets/case-studies/ai-coding-portfolio/ai-mistake-after.webp" type="image/webp">
+                <img src="../assets/case-studies/ai-coding-portfolio/ai-mistake-after.webp" alt="After: Refined editorial pull quote with custom quote mark and balanced typography" width="1024" height="286" loading="lazy">
+              </picture>
+            </div>
+            <figcaption>After: Replaced with an accessible, editorial pull quote using tokenized spacing, custom quotation glyph geometry, and clean metadata attribution.</figcaption>
           </figure>
         </section>
 
@@ -447,12 +480,31 @@
             To keep the bot from hallucinating, I wrote 69 automated Vitest tests checking role boundaries, metric precision, and refusal prompts. If someone asks if I write production C++ or have 10 years of Web3 experience, the bot says 'No' rather than inventing an answer. Testing these failure modes gave me practical empathy for the guardrail challenges our AI product teams grapple with daily.
           </p>
 
-          <figure class="case-study-media assistant-legacy-media">
-            <picture>
-              <source srcset="../assets/case-studies/ai-coding-portfolio/old-chat.webp" type="image/webp">
-              <img src="../assets/case-studies/ai-coding-portfolio/old-chat.webp" alt="Chat widget in the previous version of the portfolio" width="964" height="1498" loading="lazy" class="no-reveal">
-            </picture>
-            <figcaption>The original chat widget from the previous portfolio before moving to vector search.</figcaption>
+          <figure class="case-study-media case-study-media--mobile-duo" data-reveal>
+            <div class="mobile-duo-grid">
+              <div class="mobile-duo-col">
+                <div class="mobile-frame">
+                  <picture>
+                    <source srcset="../assets/case-studies/ai-coding-portfolio/chat-grounded-qa.webp" type="image/webp">
+                    <img src="../assets/case-studies/ai-coding-portfolio/chat-grounded-qa.webp" alt="Portfolio AI assistant answering a work history question with verified outcomes and citations" width="601" height="1024" loading="lazy">
+                  </picture>
+                </div>
+                <figcaption>Grounded answer: vector retrieval summarizes career metrics with cited case study links and follow-up chips.</figcaption>
+              </div>
+
+              <div class="mobile-duo-col">
+                <div class="mobile-frame">
+                  <picture>
+                    <source srcset="../assets/case-studies/ai-coding-portfolio/chat-refusal-pivot.webp" type="image/webp">
+                    <img src="../assets/case-studies/ai-coding-portfolio/chat-refusal-pivot.webp" alt="Portfolio AI assistant gracefully handling an out-of-domain question about jackfruit" width="602" height="1024" loading="lazy">
+                  </picture>
+                </div>
+                <figcaption>Conversation guardrails: gracefully refusing an out-of-domain query with a personal touch and pivoting back to professional credentials.</figcaption>
+              </div>
+            </div>
+            <figcaption class="caption" style="text-align:center; margin-top: var(--space-4);">
+              Conversation design in production: handling both grounded in-domain retrieval and graceful out-of-domain guardrail pivots.
+            </figcaption>
           </figure>
 
         </section>
