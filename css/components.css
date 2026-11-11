@@ -472,11 +472,12 @@
 
 .case-study .pull-quote-mark {
   display: block;
-  width: 24px;
-  height: 20px;
+  width: 28px;
+  height: auto;
   color: var(--accent);
   opacity: 0.55;
   margin-bottom: var(--space-3);
+  overflow: visible;
 }
 
 .case-study .pull-quote blockquote,
