@@ -599,7 +599,7 @@
             Beyond on-demand research reports, member executives rely heavily on peer working groups, exchange meetings, and the annual conference. Previously, events were separated into disparate calendar feeds with little context on relevance or peer attendance.
           </p>
           <p>
-            The redesigned Events hub consolidates virtual roundtables, board meetings, and conferences into a single filterable directory. Faceted filters, quick-topic pills, and contextual cards with direct calendar and Zoom actions make discovering and attending relevant sessions effortless.
+            The redesigned Events hub consolidates virtual roundtables, board meetings, and conferences into a single filterable directory. Faceted filters and contextual cards with direct calendar and Zoom actions make discovering and attending relevant sessions effortless.
           </p>
 
           <figure class="case-study-media">
@@ -630,47 +630,6 @@
           </figure>
         </section>
 
-        <section id="constraints" aria-label="Constraints" class="section--alt">
-          <div class="section-divider">
-            <h2>Constraints: Shipping MVP During a Live Brand Overhaul</h2>
-          </div>
-          <div class="constraints-grid" data-cascade>
-            <div class="constraint-card">
-              <div class="constraint-content">
-                <span class="constraint-label">Constraint</span>
-                <h3 class="constraint-title">Designing During a Rebrand</h3>
-                <p class="constraint-body">An external agency was overhauling i4cp's brand guidelines at the same time. Colors, fonts, and styling rules changed almost weekly.</p>
-              </div>
-              
-              <div class="constraint-solution">
-                <span class="constraint-label solution-label">Solution</span>
-                <h3 class="constraint-title">Design Token Layer</h3>
-                <p class="constraint-body">I built the portal UI on a foundation of CSS variables and design tokens. When the agency handed over finalized colors and type specs, we updated them in one place without touching component markup.</p>
-              </div>
-            </div>
-
-            <div class="constraint-card">
-              <div class="constraint-content">
-                <span class="constraint-label">Constraint</span>
-                <h3 class="constraint-title">Enormous Surface Area</h3>
-                <p class="constraint-body">Changing the information architecture affected nearly every page on the platform. Trying to redesign everything at once would have delayed release by a year.</p>
-              </div>
-              
-              <div class="constraint-solution">
-                <span class="constraint-label solution-label">Solution</span>
-                <h3 class="constraint-title">Strict MVP Phasing</h3>
-                <p class="constraint-body">We focused Phase 1 strictly on the primary navigation, global search, and the homepage. Deeper administrative views and secondary subpages were scheduled for fast follow-ups.</p>
-              </div>
-            </div>
-          </div>
-
-          <h3>Post-MVP Roadmap</h3>
-          <p>
-            We postponed secondary features (custom research folders, automated email digests, and analyst inquiry scheduling) to ensure the core navigation and search shipped on schedule for Q3.
-          </p>
-
-        </section>
-
         <section id="outcomes" aria-label="Outcomes & Impact">
           <div class="section-divider">
             <h2>Outcomes &amp; Impact</h2>
@@ -689,27 +648,25 @@
             </div>
           </div>
 
-          <figure class="pull-quote">
+          <aside class="callout callout--quote">
             <blockquote>
-              <p>“Before the redesign, finding a specific benchmark meant guessing which internal committee owned the topic. <strong>Now I can just search what I need on the homepage and get the exact stat without clicking through ten folders.</strong>”</p>
+              <p>"Before the redesign, finding a specific resource meant guessing which internal committee owned the topic. Now I can just ask Ahri to get the exact post without clicking through ten areas."</p>
             </blockquote>
-            <figcaption class="pull-quote-attribution">
-              <span class="pull-quote-author">VP of Talent Acquisition</span>
-              <span class="pull-quote-separator" aria-hidden="true">·</span>
-              <span class="pull-quote-role">Enterprise Member</span>
-            </figcaption>
-          </figure>
+            <p class="callout-attribution">
+              Enterprise Member &amp; VP of Talent Acquisition (Post-launch member interviews)
+            </p>
+          </aside>
 
           <p>
             Executive feedback highlighted one clear win: instead of digging through 40-page PDFs to find a single statistic for a board deck, Ahri gave them the cited figure in seconds.
           </p>
           <p style="font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.5; border-left: 2px solid var(--accent); padding-left: var(--space-3); margin-block: var(--space-4);">
-            <em>A note on those numbers:</em> Because Ahri was now the primary search box, session counts were naturally going to jump. But our analytics and follow-up interviews with 8 enterprise members confirmed people were actually reading the output. Session lengths grew, follow-up queries increased, and members reported saving 10 to 15 minutes per search compared to opening raw PDFs.
+            <em>A note on those numbers:</em> Because Ahri was now the primary search box, session counts were naturally going to jump. But our analytics and follow-up interviews with 8 enterprise members confirmed people were actually reading the output. Session lengths grew, follow-up queries increased, and members reported saving 10 to 15 minutes per search compared to opening PDFs.
           </p>
 
-          <h3>Shipping and Staging QA</h3>
+          <h3>Post-MVP Roadmap</h3>
           <p>
-            During engineering handoff, I pair-tested the streaming UI on throttled connections to ensure Ahri's loading states didn't stutter or freeze. Making the IA work wasn't just drawing site maps; it was tuning the interaction so busy executives could get in, get the defensible data they needed, and get back to work.
+            We postponed secondary features (smarter customizations, automated email digests, etc.) to ensure the core navigation and contextual AI shipped on schedule for Q3.
           </p>
         </section>
 
