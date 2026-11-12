@@ -457,9 +457,7 @@
 /* -------------------------------------------------------
    Case study - Borderless Pull Quote (Option A)
    --------------------------------------------------------*/
-.case-study .pull-quote,
-.case-study .callout--quote,
-.case-study aside.callout--quote {
+.case-study .pull-quote {
   margin-block: var(--space-7);
   max-width: var(--prose);
   margin-inline: auto;
@@ -480,8 +478,7 @@
   overflow: visible;
 }
 
-.case-study .pull-quote blockquote,
-.case-study .callout--quote blockquote {
+.case-study .pull-quote blockquote {
   margin: 0;
   padding: 0;
   background: transparent !important;
@@ -490,8 +487,7 @@
   max-width: 100%;
 }
 
-.case-study .pull-quote blockquote p,
-.case-study .callout--quote blockquote p {
+.case-study .pull-quote blockquote p {
   font-family: var(--font-sans);
   font-size: clamp(1.2rem, 1.1rem + 0.5vw, 1.35rem);
   line-height: 1.55;
@@ -502,15 +498,13 @@
   margin: 0;
 }
 
-.case-study .pull-quote blockquote strong,
-.case-study .callout--quote blockquote strong {
+.case-study .pull-quote blockquote strong {
   font-weight: var(--weight-medium, 500);
   color: var(--text);
 }
 
 .case-study .pull-quote figcaption,
-.case-study .pull-quote-attribution,
-.case-study .callout--quote .callout-attribution {
+.case-study .pull-quote-attribution {
   font-family: var(--font-sans);
   font-size: var(--fs-sm);
   color: var(--text-secondary);
@@ -538,14 +532,6 @@
 .case-study .pull-quote-source {
   color: var(--text-muted, #78716C);
   font-size: var(--fs-xs);
-}
-
-.case-study .pull-quote-separator {
-  color: var(--border-strong, var(--text-secondary));
-}
-
-.case-study .pull-quote-role {
-  color: var(--text-secondary);
 }
 
 
@@ -849,49 +835,6 @@
   color: var(--text-secondary);
 }
 
-.before-after-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
-  margin: var(--space-6) 0;
-}
-
-.before-after-grid figure {
-  margin: 0;
-}
-
-.before-after-grid figure img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: var(--radius-lg);
-  background: var(--img-matte);
-}
-
-.before-after-grid figcaption {
-  color: var(--text-secondary);
-  font-size: var(--fs-sm);
-  text-align: center;
-  padding: var(--space-2) 0 0;
-}
-
-@media (max-width: 860px) {
-  .before-after-grid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .before-after-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-
-
-
-
 .case-study li {
   font-size: var(--fs-body);
   line-height: var(--lh-prose);
@@ -965,13 +908,6 @@ figure.case-study-media[data-reveal].is-revealed {
 }
 
 /* Mobile device media frame for case studies */
-figure.case-study-media--mobile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.case-study-media--mobile .mobile-frame,
 .case-study-media--mobile-duo .mobile-frame {
   max-width: 324px;
   width: 100%;
@@ -986,8 +922,6 @@ figure.case-study-media--mobile {
   background: var(--surface-elevated, #FAF7F2);
 }
 
-.case-study-media--mobile .mobile-frame picture,
-.case-study-media--mobile .mobile-frame img,
 .case-study-media--mobile-duo .mobile-frame picture,
 .case-study-media--mobile-duo .mobile-frame img {
   display: block;
@@ -1463,7 +1397,7 @@ main[data-reveal] {
       var(--surface-2) 0%,
       var(--accent) 50%,
       var(--surface-2) 100%);
-  opacity: var(--line-opacity, 0.6);
+  opacity: 0.6;
   z-index: 0;
 }
 
@@ -1572,90 +1506,6 @@ main[data-reveal] {
   margin-bottom: var(--space-2);
   max-width: var(--prose);
   line-height: var(--lh-prose);
-}
-
-/* ==========================================================================
-   Bespoke Interactions: Constraints & Solution Cards
-   ========================================================================== */
-.constraints-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-4);
-  margin-top: var(--space-5);
-  margin-bottom: var(--space-6);
-}
-
-.constraint-card {
-  position: relative;
-  background: var(--surface-elevated, #FAF7F2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  box-shadow: var(--shadow-card);
-  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), border-color 240ms ease, box-shadow 240ms ease;
-}
-
-.constraint-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(480px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgb(var(--rgb-cool) / 0.05), transparent 55%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 260ms ease;
-}
-
-.constraint-card:hover {
-  transform: translateY(-2px);
-  border-color: rgb(var(--rgb-cool) / 0.32);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.constraint-card:hover::after {
-  opacity: 1;
-}
-
-.constraint-content, .constraint-solution {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.constraint-solution {
-  padding-top: var(--space-3);
-  border-top: 1px dashed var(--border-strong);
-}
-
-.constraint-label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  font-weight: var(--weight-bold);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-caps);
-  color: var(--text-secondary);
-}
-
-.constraint-label.solution-label {
-  color: var(--accent);
-}
-
-.constraint-title {
-  font-size: var(--fs-md);
-  margin: 0;
-  line-height: var(--lh-tight);
-}
-
-.constraint-body {
-  font-size: var(--fs-sm);
-  color: var(--text-secondary);
-  line-height: var(--lh-prose);
-  margin: 0;
 }
 
 /* ==========================================================================

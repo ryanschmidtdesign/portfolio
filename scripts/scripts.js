@@ -565,7 +565,7 @@
   // ==========================================================================
   // Looping Video Accessibility Controls (prefers-reduced-motion & click-to-pause)
   // ==========================================================================
-  const loopingVideos = document.querySelectorAll('.case-study-figure video, .case-study-media video');
+  const loopingVideos = document.querySelectorAll('.case-study-media video');
   if (loopingVideos.length) {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const handleMotion = (mq) => {

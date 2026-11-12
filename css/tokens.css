@@ -130,8 +130,6 @@
 
   /* Obsidian Architecture System (Smoked Black Glass & Polished Basalt) */
   --obsidian-bg: #141210;
-  --obsidian-surface: #1C1916;
-  --obsidian-surface-raised: #24201C;
   --obsidian-glass: rgba(18, 15, 13, 0.88);
   --obsidian-glass-heavy: rgba(16, 13, 11, 0.94);
   --obsidian-border: rgba(255, 255, 255, 0.11);

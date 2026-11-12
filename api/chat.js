@@ -12,7 +12,6 @@ import path from "node:path";
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 const GEMINI_FIT_MODEL = process.env.GEMINI_FIT_MODEL || "gemini-2.5-flash";
-const GEMINI_FALLBACK_MODEL = process.env.GEMINI_FALLBACK_MODEL || "gemini-2.5-flash-lite";
 const GEMINI_MODEL_CASCADE = [
   "gemini-2.5-flash",
   "gemini-2.5-flash-lite",
@@ -24,7 +23,7 @@ const CSE_ID = process.env.CSE_ID || "";
 const LOG_WEBHOOK_URL = process.env.LOG_WEBHOOK_URL || "";
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://bquvmwvontiifejngvaz.supabase.co";
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_ROLE_KEY || "";
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
 const SUPABASE_HEADERS = SUPABASE_KEY ? {
   "apikey": SUPABASE_KEY,
@@ -2619,7 +2618,10 @@ export default async function handler(req, res) {
     lastUser = String([...messages].reverse().find(m => m.role === "user")?.content || "").slice(0, MAX_IN_CHARS);
     const pastedJd = extractPastedJobDescription(lastUser);
     const isFit = detectFitIntent(lastUser) || Boolean(pastedJd);
-    intent = pastedJd && intent === "general" ? "role_fit" : detectIntent(lastUser);
+    const detectedIntent = detectIntent(lastUser);
+    intent = pastedJd
+      ? (detectedIntent === "ux_engineer_fit" ? "ux_engineer_fit" : "role_fit")
+      : detectedIntent;
 
     // If Gemini API key is not configured or rate limit is reached, serve a natural grounded KB answer (never an error)
     const clientIp = getClientIp(req);
@@ -2736,6 +2738,7 @@ export default async function handler(req, res) {
 
     let modelOutput;
     let usedFallback = false;
+    let streamOpened = false;
     const pageUrl = pageContext?.url || "";
     const prevAssistantMsg = [...messages].slice(0, -1).reverse().find(m => m.role === "assistant")?.content || "";
     const baseOptions = {
@@ -2744,13 +2747,23 @@ export default async function handler(req, res) {
       useFitModel: isFit,
       lastUserOverride: lastUser
     };
+    const buildFallbackPayload = () => {
+      const fallbackContextCases = (retrievedChunks || [])
+        .filter(c => c.metadata && c.metadata.caseTitle && c.metadata.caseUrl)
+        .map(c => ({ title: c.metadata.caseTitle, url: normalizeInternalCaseUrl(c.metadata.caseUrl) }))
+        .slice(0, 2);
+      return buildLocalFallbackAnswer({
+        intent,
+        lastUser,
+        kb,
+        retrievedChunks,
+        contextCases: fallbackContextCases
+      });
+    };
 
     const cached = getCachedResponse(lastUser, intent, isFit, pageUrl, prevAssistantMsg);
     if (cached) {
       modelOutput = cached;
-      if (wantsStream) {
-        return sendChatResponse(res, true, cached);
-      }
     } else {
       if (wantsStream) {
         res.writeHead(200, {
@@ -2758,6 +2771,7 @@ export default async function handler(req, res) {
           "Cache-Control": "no-cache",
           "Connection": "keep-alive"
         });
+        streamOpened = true;
 
         try {
           modelOutput = await callGemini(SYSTEM_PROMPT, augmentedMessages, webSnippets, kb, answerStyle, {
@@ -2770,17 +2784,7 @@ export default async function handler(req, res) {
         } catch (geminiErr) {
           console.warn(`Gemini streaming failed, using fallback: ${geminiErr?.message || "unknown"}`);
           usedFallback = true;
-          const fallbackContextCases = (retrievedChunks || [])
-            .filter(c => c.metadata && c.metadata.caseTitle && c.metadata.caseUrl)
-            .map(c => ({ title: c.metadata.caseTitle, url: normalizeInternalCaseUrl(c.metadata.caseUrl) }))
-            .slice(0, 2);
-          modelOutput = buildLocalFallbackAnswer({
-            intent,
-            lastUser,
-            kb,
-            retrievedChunks,
-            contextCases: fallbackContextCases
-          });
+          modelOutput = buildFallbackPayload();
           res.write(`data: ${JSON.stringify({ type: "chunk", text: modelOutput.answer || "" })}\n\n`);
         }
       } else {
@@ -2792,17 +2796,7 @@ export default async function handler(req, res) {
         } catch (geminiErr) {
           console.warn(`Gemini call failed, using fallback: ${geminiErr?.message || "unknown"}`);
           usedFallback = true;
-          const fallbackContextCases = (retrievedChunks || [])
-            .filter(c => c.metadata && c.metadata.caseTitle && c.metadata.caseUrl)
-            .map(c => ({ title: c.metadata.caseTitle, url: normalizeInternalCaseUrl(c.metadata.caseUrl) }))
-            .slice(0, 2);
-          modelOutput = buildLocalFallbackAnswer({
-            intent,
-            lastUser,
-            kb,
-            retrievedChunks,
-            contextCases: fallbackContextCases
-          });
+          modelOutput = buildFallbackPayload();
         }
       }
     }
@@ -2836,6 +2830,14 @@ export default async function handler(req, res) {
     }
 
     if (wantsStream) {
+      if (!streamOpened) {
+        res.writeHead(200, {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache",
+          "Connection": "keep-alive"
+        });
+        res.write(`data: ${JSON.stringify({ type: "chunk", text: answer || "" })}\n\n`);
+      }
       res.write(`data: ${JSON.stringify({
         type: "done",
         data: {

@@ -150,10 +150,16 @@
                     transition: background-color 120ms cubic-bezier(0.16, 1, 0.3, 1), border-color 120ms cubic-bezier(0.16, 1, 0.3, 1), color 120ms cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
-                .rs-cmd-esc:hover {
+                .rs-cmd-esc:hover,
+                .rs-cmd-esc:focus-visible {
                     background: rgba(255, 255, 255, 0.10);
                     border-color: rgba(255, 255, 255, 0.18);
                     color: #F7F5F2;
+                }
+
+                .rs-cmd-esc:focus-visible {
+                    outline: 2px solid var(--accent, #C85A32);
+                    outline-offset: 2px;
                 }
 
                 /* Results */
@@ -392,14 +398,6 @@
                     .rs-cmd-modal {
                         max-height: calc(100vh - 32px);
                     }
-                    .rs-cmd-telemetry {
-                        padding: 7px 12px 6px;
-                    }
-                    .rs-cmd-sys-meta,
-                    .rs-cmd-node-count,
-                    .rs-cmd-footer__brand {
-                        display: none;
-                    }
                     .rs-cmd-item__sub {
                         display: none;
                     }
@@ -443,7 +441,7 @@
                             autocomplete="off"
                             spellcheck="false"
                         />
-                        <kbd class="rs-cmd-esc" id="rsCmdEscBtn" title="Close (Esc)">esc</kbd>
+                        <button type="button" class="rs-cmd-esc" id="rsCmdEscBtn" aria-label="Close command palette" title="Close (Esc)">esc</button>
                     </div>
 
                     <div class="rs-cmd-results" id="rsCmdResults" role="listbox"></div>
@@ -462,9 +460,6 @@
             this.modalEl = this.overlay.querySelector('#rsCmdModal');
             this.inputEl = this.overlay.querySelector('#rsCmdInput');
             this.resultsEl = this.overlay.querySelector('#rsCmdResults');
-            this.nodeCountEl = this.overlay.querySelector('#rsCmdNodeCount');
-            this.footerTargetEl = this.overlay.querySelector('#rsCmdFooterTarget');
-            this.coordEl = this.overlay.querySelector('#rsCmdTelemetryCoord');
             this.escBtn = this.overlay.querySelector('#rsCmdEscBtn');
         }
 
@@ -693,21 +688,6 @@
                 this.escBtn.addEventListener('click', () => this.close());
             }
 
-            // Track pointer for modal ambient glow and HUD canvas parallax
-            this.overlay.addEventListener('pointermove', (e) => {
-                if (!this.isOpen) return;
-                if (this.modalEl) {
-                    const rect = this.modalEl.getBoundingClientRect();
-                    const mx = e.clientX - rect.left;
-                    const my = e.clientY - rect.top;
-                    this.modalEl.style.setProperty('--modal-mx', `${mx.toFixed(0)}px`);
-                    this.modalEl.style.setProperty('--modal-my', `${my.toFixed(0)}px`);
-                }
-                if (this.coordEl) {
-                    this.coordEl.textContent = 'Navigation & Actions';
-                }
-            });
-
             // Search input live filtering
             this.inputEl.addEventListener('input', () => {
                 this.renderList(this.inputEl.value);
@@ -781,11 +761,6 @@
                 this.filteredItems = matches;
             }
 
-            if (this.nodeCountEl) {
-                const count = this.filteredItems.length;
-                this.nodeCountEl.textContent = `${count} ${count === 1 ? 'ITEM' : 'ITEMS'}`;
-            }
-
             this.resultsEl.innerHTML = '';
             let currentGroup = null;
 
@@ -857,11 +832,6 @@
                     row.scrollIntoView({ block: 'nearest' });
                 }
             });
-
-            const activeItem = this.filteredItems[this.activeIndex];
-            if (this.footerTargetEl && activeItem) {
-                this.footerTargetEl.textContent = activeItem.targetPath || 'RYAN_SCHMIDT · PRINCIPAL_PORTFOLIO';
-            }
         }
 
         moveSelection(direction) {
@@ -893,10 +863,6 @@
                     detail: { prompt: query, sectionContext: { heading: 'Command Palette' } }
                 }));
             }
-        }
-
-        runCLICommand(cmd = '') {
-            this.open(cmd);
         }
 
         cycleTheme() {
@@ -945,18 +911,6 @@
         }
     }
 
-    function initObsidianDock() {
-        const shells = document.querySelectorAll('.home-omnibar-shell, .subpage-omnibar-shell');
-        shells.forEach((shell) => {
-            // Track pointer over shell for dynamic vitreous specular radial highlight
-            shell.addEventListener('pointermove', (e) => {
-                const rect = shell.getBoundingClientRect();
-                shell.style.setProperty('--mouse-x', `${(e.clientX - rect.left).toFixed(0)}px`);
-                shell.style.setProperty('--mouse-y', `${(e.clientY - rect.top).toFixed(0)}px`);
-            });
-        });
-    }
-
     function initRotatingPlaceholder() {
         const inputs = [
             document.getElementById('home-omnibar-input'),
@@ -975,12 +929,10 @@
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             window.rsCommandPalette = new AtelierCommandPalette();
-            initObsidianDock();
             initRotatingPlaceholder();
         });
     } else {
         window.rsCommandPalette = new AtelierCommandPalette();
-        initObsidianDock();
         initRotatingPlaceholder();
     }
 })();

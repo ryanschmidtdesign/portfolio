@@ -810,16 +810,6 @@
     return;
   }
 
-  // Typewriter placeholder on external trigger
-  const typewriterPhrases = [
-    'asking about Ryan\'s product strategy...',
-    'pasting a job link for fit...',
-    'asking about the dashboard redesign...',
-    'exploring AI product design work...',
-    'asking about cross-functional leadership...',
-    'checking role fit for Staff Designer...',
-  ];
-
   // Small helper: escape HTML when interpolating untrusted strings
   function escapeHtml(value = '') {
     return String(value)
@@ -1006,17 +996,6 @@ if (savedHist.length > 0) {
       el.style.transform = '';
     });
 
-    const triggers = document.querySelectorAll('[data-assistant-trigger]');
-    triggers.forEach((ask) => {
-      ask.addEventListener('click', (e) => {
-        // Ignore links, Command Palette (CLI ⌘K) button, or navigation menu buttons
-        if (e.target.closest('a') || e.target.closest('[data-cmdk-trigger], .ai-mini-cmdk, .home-omnibar-cmdk') || e.target.closest('button:not(.ai-mini-send):not(.home-omnibar-send)')) return;
-        e.preventDefault();
-        lastFocusedEl = ask;
-        openPanel();
-      });
-    });
-
     // 1-click conversational triggers anywhere on the page
     document.addEventListener('click', (e) => {
       const askBtn = e.target.closest('[data-ask-ai]');
@@ -1074,7 +1053,7 @@ if (savedHist.length > 0) {
         const path = window.location.pathname || '/';
         const resumePath = path.includes('/pages/') ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
         if (typeof window.trackResumeDownload === 'function') window.trackResumeDownload();
-        window.open(resumePath, '_blank');
+        window.open(resumePath, '_blank', 'noopener');
         return true;
       }
       if (lower === '/email' || lower === 'email' || lower === '/contact' || lower === 'contact') {
@@ -1287,10 +1266,6 @@ if (savedHist.length > 0) {
 
   // Load KB once (optional)
   // ─── Page-Aware Smart Pills ──────────────────────────────────────────────
-  function isCaseStudyPage() {
-    return !!document.querySelector('article.case-study, .case-study');
-  }
-
   function getCurrentPagePills(customPills) {
     const path = canonicalPagePath(location.pathname);
     const kbChips = state.kb?.chips?.default;
@@ -1950,11 +1925,7 @@ if (savedHist.length > 0) {
         try {
           const target = document.querySelector(data.action_scroll_to);
           if (target) {
-            if (window.lenis) {
-              window.lenis.scrollTo(target, { offset: -80 });
-            } else {
-              target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
             // Close widget on mobile so they can see the scrolled content
             if (window.innerWidth < 768) closePanel();
           }
@@ -1984,11 +1955,7 @@ if (savedHist.length > 0) {
           }
 
           if (target) {
-            if (window.lenis) {
-              window.lenis.scrollTo(target, { offset: -80 });
-            } else {
-              target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
             // Apply visual highlight using CSS class
             target.classList.add('rs-chat-highlight');

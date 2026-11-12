@@ -9,14 +9,8 @@
 
   // 1. Dynamic Cursor-Following Ambient Illumination across Cards & Docks
   const spotlightSelector = [
-    '.site-header',
     '.home-project-card',
-    '.leadership-metric',
-    '.sa-step',
-    '.home-omnibar-shell',
-    '.subpage-omnibar-shell',
-    '.case-study-next',
-    '.constraint-card'
+    '.case-study-next'
   ].join(', ');
 
   const cards = document.querySelectorAll(spotlightSelector);
@@ -39,10 +33,6 @@
 
           card.style.setProperty('--mouse-x', `${x.toFixed(0)}px`);
           card.style.setProperty('--mouse-y', `${y.toFixed(0)}px`);
-          card.style.setProperty('--header-mouse-x', `${x.toFixed(0)}px`);
-          card.style.setProperty('--header-mouse-y', `${y.toFixed(0)}px`);
-          card.style.setProperty('--x', `${x.toFixed(0)}px`);
-          card.style.setProperty('--y', `${y.toFixed(0)}px`);
         });
       });
 
@@ -55,7 +45,7 @@
 
   // 2. Spring Magnetic Micro-Pull for Primary Controls
   if (hasFinePointer && !prefersReduced) {
-    const magneticTargets = document.querySelectorAll('.magnetic, .ai-mini-send, .home-omnibar-send, .subpage-omnibar-send');
+    const magneticTargets = document.querySelectorAll('.ai-mini-send, .home-omnibar-send, .subpage-omnibar-send');
     magneticTargets.forEach((el) => {
       let rafId = null;
 

@@ -488,21 +488,6 @@
   margin-top: 0;
 }
 
-/* Single column media styling for legacy chat screenshot */
-.case-study--ai-coding-portfolio .assistant-legacy-media {
-  max-width: 480px;
-  margin-inline: auto;
-  text-align: center;
-}
-
-.case-study--ai-coding-portfolio .assistant-legacy-media img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-card);
-}
-
 /* Member Portal: IA challenge - align compare panel padding with card content */
 .case-study--member-portal #ia-challenge [data-compare] .compare-panel {
   /* No extra padding - keep text aligned with the card content (no indent) */
@@ -1023,9 +1008,6 @@ body.is-home {
   .home-project-card__cta svg {
     transition: none;
   }
-  .home-project-card:hover .home-project-card__media img {
-    transform: scale(var(--crop-scale));
-  }
   .home-project-card:hover .home-project-card__cta svg {
     transform: none;
   }
@@ -1251,8 +1233,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   flex-shrink: 0;
 }
 
-.home-omnibar-cmdk,
-.subpage-omnibar-cmdk {
+.home-omnibar-cmdk {
   position: static;
   height: 32px;
   padding: 0;
@@ -1263,8 +1244,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   align-items: center;
 }
 
-.home-omnibar-cmdk .ai-mini-cmdk__kbd,
-.subpage-omnibar-cmdk .ai-mini-cmdk__kbd {
+.home-omnibar-cmdk .ai-mini-cmdk__kbd {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
@@ -1282,8 +1262,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out);
 }
 
-.home-omnibar-cmdk:hover .ai-mini-cmdk__kbd,
-.subpage-omnibar-cmdk:hover .ai-mini-cmdk__kbd {
+.home-omnibar-cmdk:hover .ai-mini-cmdk__kbd {
   color: #F7F5F2;
   background: rgba(255, 255, 255, 0.11);
   border-color: rgba(255, 255, 255, 0.22);
@@ -1354,12 +1333,10 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
     font-size: 16px; /* Prevents unwanted iOS Safari viewport auto-zoom on input focus */
     padding: 1px 2px 2px;
   }
-  .home-omnibar-cmdk,
-  .subpage-omnibar-cmdk {
+  .home-omnibar-cmdk {
     display: inline-flex !important;
   }
-  .home-omnibar-cmdk .ai-mini-cmdk__kbd,
-  .subpage-omnibar-cmdk .ai-mini-cmdk__kbd {
+  .home-omnibar-cmdk .ai-mini-cmdk__kbd {
     padding: 0 2px;
     font-size: 10px;
     border: none;
