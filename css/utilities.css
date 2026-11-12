@@ -11,6 +11,11 @@
   border: 0;
 }
 
+/* Prevent text wrapping on brand/company tokens */
+.u-nowrap {
+  white-space: nowrap;
+}
+
 /* Editorial line length constraint */
 .u-measure {
   max-width: var(--prose);

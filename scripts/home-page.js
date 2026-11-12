@@ -46,36 +46,4 @@
       }
     });
   }
-
-  // Interactive Cats: "meow!" on mouse-in / touch
-  function initCatMeows() {
-    const cats = document.querySelectorAll('.cat-interactive');
-    cats.forEach((cat) => {
-      let timeout;
-      const show = () => {
-        clearTimeout(timeout);
-        cat.classList.add('is-meowing');
-      };
-      const hide = () => {
-        clearTimeout(timeout);
-        cat.classList.remove('is-meowing');
-      };
-
-      cat.addEventListener('mouseenter', show);
-      cat.addEventListener('mouseleave', hide);
-      cat.addEventListener('pointerenter', show);
-      cat.addEventListener('pointerleave', hide);
-      cat.addEventListener('touchstart', () => {
-        show();
-        clearTimeout(timeout);
-        timeout = setTimeout(hide, 2200);
-      }, { passive: true });
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCatMeows);
-  } else {
-    initCatMeows();
-  }
 })();
