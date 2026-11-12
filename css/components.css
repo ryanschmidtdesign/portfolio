@@ -1544,7 +1544,7 @@ main[data-reveal] {
 .polaroid-trigger:focus-visible .polaroid-popup {
   opacity: 1;
   transform: translate(-50%, -3px) scale(1.02);
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .polaroid-trigger:hover .polaroid-frame,
@@ -1556,9 +1556,10 @@ main[data-reveal] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 136px;
+  box-sizing: border-box;
+  width: 140px;
   background: var(--surface-elevated, #FAF7F2);
-  padding: 8px;
+  padding: 8px 8px 10px;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card-hover);
   border: 1px solid var(--border);
@@ -1571,7 +1572,8 @@ main[data-reveal] {
 }
 
 .polaroid-frame img {
-  width: 120px;
+  box-sizing: border-box;
+  width: 124px;
   height: 104px;
   object-fit: cover;
   border-radius: 2px;
@@ -1584,7 +1586,8 @@ main[data-reveal] {
 
 .polaroid-fallback {
   display: none;
-  width: 120px;
+  box-sizing: border-box;
+  width: 124px;
   height: 104px;
   background: linear-gradient(135deg, var(--bg-sandstone-day) 0%, var(--bg-sandstone-deep) 100%);
   border-radius: 2px;

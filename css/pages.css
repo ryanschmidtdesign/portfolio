@@ -88,7 +88,7 @@
 }
 
 .page-about .timeline-content strong {
-  font-size: clamp(var(--fs-control), 1.35vw, var(--fs-md));
+  font-size: var(--fs-control);
   font-weight: var(--weight-medium);
   line-height: var(--lh-md);
   margin-bottom: var(--space-2);
@@ -116,7 +116,7 @@
 .page-about .timeline-content p {
   max-width: 45ch;
   text-wrap: pretty;
-  font-size: clamp(var(--fs-sm), 1.1vw, var(--fs-body));
+  font-size: var(--fs-sm);
   line-height: var(--lh-body);
 }
 
@@ -164,7 +164,7 @@
 .leadership-right {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-5);
   min-width: 0;
 }
 
@@ -215,11 +215,17 @@
 }
 
 .metric-text {
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
   font-weight: var(--weight-medium);
   line-height: 1.15;
   letter-spacing: var(--tracking-snug);
   margin-bottom: var(--space-2);
+}
+
+.metric-body {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  color: var(--text-secondary);
 }
 
 .leadership-metric .metric-label {
