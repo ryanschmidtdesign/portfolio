@@ -594,8 +594,8 @@ body.is-home {
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
   gap: clamp(20px, 3vw, 36px);
   align-items: center;
-  margin-top: clamp(0.5rem, 1.5vh, 1.25rem);
-  margin-bottom: clamp(2rem, 4vh, 3rem);
+  margin-top: clamp(0.25rem, 1vh, 0.75rem);
+  margin-bottom: clamp(0.75rem, 1.5vh, 1.25rem);
   position: relative;
 }
 
@@ -635,12 +635,14 @@ body.is-home {
 }
 
 .home-hero__title {
-  font-size: clamp(2.75rem, 5.2vw, 4.1rem);
+  font-size: clamp(2.25rem, 4.1vw, 3.35rem);
   font-weight: 600;
-  line-height: 1.04;
+  line-height: 1.06;
   letter-spacing: -0.032em;
   color: var(--text-primary);
-  margin: 0 0 0.9rem;
+  margin: 0 0 1rem;
+  max-width: 18ch;
+  text-wrap: balance;
 }
 
 .home-hero__serif {
@@ -663,28 +665,73 @@ body.is-home {
   text-wrap: pretty;
 }
 
-.home-hero__tags {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+.home-hero__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
   list-style: none;
   padding: 0;
   margin: 0;
+  max-width: 600px;
+  border-top: 1px solid rgba(28, 22, 18, 0.12);
 }
 
-.home-tag {
-  display: inline-flex;
-  align-items: center;
+.home-hero__stats li + li .home-stat {
+  border-left: 1px solid rgba(28, 22, 18, 0.12);
+  padding-left: var(--space-4, 16px);
+}
+
+.home-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-3, 12px) var(--space-3, 12px) 0 0;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius-xs);
+}
+
+.home-stat__value {
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.home-stat__label {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 500;
   letter-spacing: 0.02em;
-  padding: 4px 10px;
-  border-radius: var(--radius-xs);
-  background: rgba(28, 22, 18, 0.04);
-  border: 1px solid rgba(28, 22, 18, 0.085);
+  line-height: 1.35;
   color: var(--text-secondary);
+}
+
+.home-stat:hover .home-stat__label {
+  color: var(--text-primary);
+}
+
+.home-stat:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 520px) {
+  .home-hero__stats {
+    grid-template-columns: 1fr;
+  }
+  .home-hero__stats li + li .home-stat {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(28, 22, 18, 0.12);
+  }
+  .home-stat {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: var(--space-3, 12px);
+  }
 }
 
 /* Right Column: Family Drawing Studio Vignette (Floating Seamlessly on Sandstone Canvas) */
@@ -779,11 +826,19 @@ body.is-home {
 .home-section#work,
 .home-section:first-of-type {
   border-top: none;
-  padding-top: clamp(1rem, 2vh, 2rem);
+  padding-top: 0;
 }
 
 .home-section__header {
   margin-bottom: 2rem;
+}
+
+.home-section#work .home-section__header {
+  margin-bottom: 1rem;
+}
+
+.home-section#work .home-section__title {
+  margin-bottom: 0;
 }
 
 .home-section__title {
@@ -888,6 +943,23 @@ body.is-home {
 @media (prefers-reduced-motion: reduce) {
   .home-project-card:hover .home-project-card__media img {
     transform: none;
+  }
+}
+
+/* i4cp thumbnail: zoom into the content column so the UI reads at card size */
+.home-project-card--member-portal .home-project-card__media img {
+  transform: scale(1.32);
+  transform-origin: 28% 0;
+  filter: contrast(1.06) saturate(1.08);
+}
+
+.home-project-card--member-portal:hover .home-project-card__media img {
+  transform: scale(1.36);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-project-card--member-portal:hover .home-project-card__media img {
+    transform: scale(1.32);
   }
 }
 
@@ -1061,7 +1133,7 @@ body.is-home {
     padding: 0;
   }
   .home-hero__title {
-    font-size: 2.25rem;
+    font-size: 2rem;
     line-height: 1.1;
   }
   .home-section {
