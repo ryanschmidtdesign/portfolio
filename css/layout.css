@@ -5,10 +5,10 @@
 }
 
 /* -------------------------------------------------------
-   Site Header - Monolithic Obsidian Black Glass Sky-Bridge
-   Contemporary all-black glass hotel architecture hovering over
-   the sunlit daytime desert: razor titanium hairlines, subtle
-   top specular edge, crisp bone-white typography.
+   Site Header - Elegant Floating Frosted Navigation Bridge
+   Designed to fit seamlessly with the warm sandstone daytime canvas:
+   Frosted sandstone glass, hairline ceramic border, crisp dark typography,
+   terracotta accents, and quiet architectural presence.
    --------------------------------------------------------*/
 .site-header {
   position: fixed;
@@ -18,10 +18,10 @@
   width: calc(min(var(--container-macro, 1160px), 100vw) - (var(--page-gutter) * 2));
   max-width: calc(var(--container-macro, 1160px) - (var(--page-gutter) * 2));
   z-index: var(--z-header, 9990);
-  background: var(--obsidian-glass, rgba(18, 15, 13, 0.88));
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid var(--obsidian-border, rgba(255, 255, 255, 0.11));
+  background: rgba(245, 240, 234, 0.84);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(28, 22, 18, 0.085);
   border-radius: var(--radius-sm, 3px);
   box-shadow: var(--shadow-header);
   overflow: hidden;
@@ -38,12 +38,13 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 50%, transparent 100%);
   pointer-events: none;
 }
 
 .site-header:hover {
-  border-color: var(--obsidian-border-strong, rgba(255, 255, 255, 0.19));
+  border-color: rgba(28, 22, 18, 0.16);
+  box-shadow: 0 6px 24px -2px rgba(28, 22, 18, 0.08), 0 2px 4px rgba(28, 22, 18, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .site-header__inner {
@@ -63,7 +64,7 @@
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: #F7F5F2;
+  color: var(--text-primary, #171412);
   font-family: var(--font-sans);
   font-size: var(--fs-sm, 0.9375rem);
   font-weight: 600;
@@ -79,7 +80,7 @@
 
 .site-header__name {
   font-weight: 600;
-  color: #F7F5F2;
+  color: var(--text-primary, #171412);
   letter-spacing: -0.015em;
   transition: color 160ms ease;
 }
@@ -90,7 +91,7 @@
 
 .site-header__sep {
   display: inline-block;
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(28, 22, 18, 0.22);
   font-size: 0.75rem;
   font-weight: 300;
   margin: 0 1px;
@@ -102,13 +103,13 @@
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 400;
-  color: #D4CFCA;
+  color: var(--text-secondary, #5C554E);
   letter-spacing: -0.005em;
   transition: color 160ms ease;
 }
 
 .site-header__brand:hover .site-header__role {
-  color: #D4CFCA;
+  color: var(--text-secondary, #5C554E);
 }
 
 .site-header__nav {
@@ -126,26 +127,27 @@
   font-family: var(--font-sans);
   font-size: var(--fs-xs, 0.84rem);
   font-weight: 500;
-  color: #A8A29E;
+  color: var(--text-secondary, #5C554E);
   text-decoration: none;
   padding: 8px 10px;
   border-radius: 2px;
-  transition: color 160ms ease;
+  transition: color 160ms ease, background-color 160ms ease;
   white-space: nowrap;
 }
 
 .site-header__link:hover {
-  color: #F7F5F2;
+  color: var(--text-primary, #171412);
+  background-color: rgba(28, 22, 18, 0.04);
 }
 
 .site-header__link:focus-visible {
-  color: #F7F5F2;
+  color: var(--text-primary, #171412);
   outline: 2px solid var(--accent, #C85A32) !important;
   outline-offset: -2px !important;
 }
 
 .site-header__link.is-current {
-  color: #F7F5F2;
+  color: var(--text-primary, #171412);
   font-weight: 600;
 }
 
@@ -162,7 +164,7 @@
 
 .site-header__arrow {
   font-size: 0.72rem;
-  color: var(--text-muted, #78716C);
+  color: var(--text-muted, #70665D);
   transition: transform 160ms ease, color 160ms ease;
 }
 

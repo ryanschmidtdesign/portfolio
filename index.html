@@ -86,7 +86,7 @@
   </noscript>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./styles.css?v=108">
+  <link rel="stylesheet" href="./styles.css?v=109">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="32x32">
@@ -376,39 +376,39 @@
           </div>
         </article>
       </div>
-
-      <!-- Quick AI Question / Search Bar (Item 2: In-flow below work cards) -->
-      <div class="home-omnibar-section" aria-label="Ask questions about Ryan's work">
-        <div class="home-omnibar-shell">
-          <form class="home-omnibar-form" id="home-omnibar-form" role="search" autocomplete="off">
-            <div class="home-omnibar-top">
-              <input
-                type="text"
-                id="home-omnibar-input"
-                name="q"
-                class="home-omnibar-input"
-                placeholder="Ask AI about Ryan's work..."
-                autocomplete="off"
-                aria-label="Ask Ryan's portfolio AI a question"
-              />
-            </div>
-
-            <div class="home-omnibar-actions">
-              <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette" aria-keyshortcuts="Control+k Meta+k" title="Open Command Palette (⌘K)">
-                <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
-              </button>
-              <button type="submit" id="home-omnibar-send" class="home-omnibar-send" aria-label="Submit search or question">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
     </section>
   </main>
+
+  <!-- Floating AI & CLI Omnibar Dock (unified across all pages) -->
+  <div class="ai-mini-wrapper home-omnibar-section subpage-omnibar-dock">
+    <div class="home-omnibar-shell subpage-omnibar-shell">
+      <form class="home-omnibar-form subpage-omnibar-form" id="home-omnibar-form" role="search" onsubmit="return false;" autocomplete="off">
+        <div class="home-omnibar-top subpage-omnibar-top">
+          <input
+            type="text"
+            id="home-omnibar-input"
+            name="q"
+            class="home-omnibar-input subpage-omnibar-input ai-mini-input"
+            placeholder="Ask AI about Ryan's work..."
+            autocomplete="off"
+            aria-label="Ask Ryan's portfolio AI a question"
+          />
+        </div>
+
+        <div class="home-omnibar-actions subpage-omnibar-actions">
+          <button type="button" class="ai-mini-cmdk home-omnibar-cmdk" data-cmdk-trigger aria-label="Open Command Palette" aria-keyshortcuts="Control+k Meta+k" title="Open Command Palette (⌘K)">
+            <kbd class="ai-mini-cmdk__kbd">⌘K</kbd>
+          </button>
+          <button type="submit" id="home-omnibar-send" class="home-omnibar-send subpage-omnibar-send" aria-label="Submit search or question">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- SEO Landmark Footer (visually hidden) -->
   <footer class="site-footer">

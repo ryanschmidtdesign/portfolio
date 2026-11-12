@@ -154,11 +154,11 @@
   --dot-size: 14px;
   --line-thickness: 2px;
 
-  /* Obsidian Hotel Cantilever Drop Shadows (Deep, Crisp Architectural Shadows over Sunlit Desert) */
+  /* Architectural Shadows over Sunlit Desert Canvas */
   --shadow-header:
-    0 18px 42px -6px rgba(24, 18, 14, 0.34),
-    0 4px 12px rgba(24, 18, 14, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    0 4px 20px -2px rgba(28, 22, 18, 0.06),
+    0 1px 3px rgba(28, 22, 18, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
 
   --shadow-dock:
     0 24px 60px -8px rgba(24, 18, 14, 0.46),
