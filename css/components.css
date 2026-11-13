@@ -957,9 +957,19 @@ figure.case-study-media[data-reveal].is-revealed {
   color: var(--text-secondary);
   line-height: var(--lh-prose);
   text-align: center;
+  width: 100%;
+  max-width: min(440px, 100%);
 }
 
 @media (max-width: 680px) {
+  .case-study-media--mobile-duo .mobile-duo-col {
+    max-width: min(440px, 100%);
+  }
+
+  .case-study-media--mobile-duo .mobile-duo-col figcaption {
+    max-width: min(440px, 100%);
+  }
+
   .case-study-media--mobile-duo .mobile-duo-grid {
     flex-direction: column;
     align-items: center;
@@ -1203,41 +1213,35 @@ main[data-reveal] {
 
 .case-study [data-progress-story] {
   position: relative;
+  list-style: none;
   padding: var(--space-5) 0 var(--space-3);
-  padding-left: var(--space-4);
+  padding-left: 0;
   margin-top: var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
 }
 
-[data-progress-story]::before {
+.case-study [data-progress-story] li::marker,
+.case-study [data-progress-story] [data-story-step]::marker {
+  display: none;
   content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(var(--space-5) + 0.25rem);
-  /* aligned to dot center */
-  height: 1px;
-  background: var(--border-subtle, rgba(28, 22, 18, 0.065));
+}
+
+[data-progress-story]::before {
+  display: none;
 }
 
 [data-progress-story] .progress-story-indicator {
-  position: absolute;
-  left: 0;
-  top: calc(var(--space-5) + 0.25rem);
-  height: 1px;
-  background: var(--accent);
-  width: 0%;
-  transition: width .26s var(--ease-standard);
+  display: none;
 }
 
 [data-progress-story] [data-story-step] {
   position: relative;
+  list-style: none;
   flex: 1 1 200px;
   min-width: 200px;
-  padding: var(--space-5) 0 0;
-  /* matches rail offset */
+  padding: 0;
 }
 
 [data-progress-story] .step-label {
@@ -1558,11 +1562,11 @@ main[data-reveal] {
   align-items: center;
   box-sizing: border-box;
   width: 140px;
-  background: var(--surface-elevated, #FAF7F2);
-  padding: 8px 8px 10px;
-  border-radius: var(--radius-md);
+  background: #ffffff;
+  padding: 8px 8px 12px;
+  border-radius: 4px;
   box-shadow: var(--shadow-card-hover);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease;
 }
 
@@ -1620,6 +1624,15 @@ main[data-reveal] {
 /* ==========================================================================
    Decision Bridges (pages/dashboard.html)
    ========================================================================== */
+.decision-bridges {
+  align-items: stretch;
+}
+
+.decision-bridges .research-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .decision-bridges .bridge-list {
   list-style: none;
   padding: 0;
@@ -1627,11 +1640,38 @@ main[data-reveal] {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  flex: 1 1 auto;
 }
 
 /* Same spacing whether or not the item ends the list */
 .decision-bridges .bridge-list .bridge-item {
   margin-bottom: 0;
+  flex: 1 1 0%;
+}
+
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 769px) {
+    .decision-bridges {
+      grid-template-rows: auto 1fr;
+    }
+
+    .decision-bridges .research-column {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 2;
+    }
+
+    .decision-bridges .bridge-list {
+      display: grid;
+      grid-template-rows: repeat(3, auto);
+      gap: var(--space-5);
+    }
+
+    .decision-bridges .bridge-list .bridge-item {
+      flex: none;
+      height: 100%;
+    }
+  }
 }
 
 .bridge-item {
@@ -1643,6 +1683,7 @@ main[data-reveal] {
   border-radius: var(--radius-md);
   border: 1px solid transparent;
   background: transparent;
+  box-sizing: border-box;
   cursor: pointer;
   transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), transform 180ms var(--ease-out), outline-color 180ms var(--ease-out);
 }
