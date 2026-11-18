@@ -86,7 +86,7 @@
   </noscript>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./styles.css?v=112">
+  <link rel="stylesheet" href="./styles.css?v=157">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="32x32">
@@ -201,56 +201,167 @@
       </a>
 
       <nav class="site-header__nav" aria-label="Main navigation">
-        <a href="#work" class="site-header__link">Work</a>
-        <a href="pages/about.html" class="site-header__link">About</a>
+        <a href="#work" class="site-header__link is-current" aria-current="page" data-nav-underline><span>Work</span></a>
+        <a href="pages/about.html" class="site-header__link" data-nav-underline><span>About</span></a>
         <a href="assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="site-header__link site-header__link--ext">
           <span>Resume</span>
-          <span class="site-header__arrow" aria-hidden="true">↗</span>
-        </a>
-        <a href="mailto:ryanschmidt1989@gmail.com" class="site-header__link site-header__link--ext" aria-label="Email Ryan Schmidt">
-          <span>Email</span>
           <span class="site-header__arrow" aria-hidden="true">↗</span>
         </a>
         <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" class="site-header__link site-header__link--ext">
           <span>LinkedIn</span>
           <span class="site-header__arrow" aria-hidden="true">↗</span>
         </a>
+        <button type="button" class="site-header__link site-header__copy-email" data-copy-email="ryanschmidt1989@gmail.com" aria-label="Copy email address ryanschmidt1989@gmail.com">
+          <span class="site-header__copy-stack">
+            <span class="site-header__copy-label site-header__copy-label--default">Email</span>
+            <span class="site-header__copy-label site-header__copy-label--copied" aria-hidden="true">Copied</span>
+          </span>
+          <span class="site-header__arrow site-header__copy-icon" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          </span>
+        </button>
+        <span class="site-header__underline" aria-hidden="true"></span>
       </nav>
     </div>
   </header>
 
   <main id="main" class="home-main">
-    <!-- Hero Section: Single Column Editorial Introduction -->
-    <section class="home-hero-wrap" aria-label="Introduction">
-      <div class="home-hero">
-        <h1 class="home-hero__title">
-          I design complex tools that people actually <em class="home-hero__serif">adopt</em>.
-        </h1>
-        <p class="home-hero__lead">
-          Six years designing data-heavy software for integrators, field teams, and HR leaders. I built a 100+ component design system, and I prototype in code before engineering starts.
-        </p>
-        <ul class="home-hero__stats" aria-label="Shipped outcomes">
-          <li>
-            <a class="home-stat" href="pages/dashboard.html">
-              <strong class="home-stat__value">92%</strong>
-              <span class="home-stat__label">Design system adoption by engineers · <span class="u-nowrap">D&#8209;Tools</span></span>
-            </a>
-          </li>
-          <li>
-            <a class="home-stat" href="pages/member-portal-overhaul.html">
-              <strong class="home-stat__value">+500%</strong>
-              <span class="home-stat__label">AI search sessions · i4cp</span>
-            </a>
-          </li>
-          <li>
-            <a class="home-stat" href="pages/dashboard.html">
-              <strong class="home-stat__value">71%</strong>
-              <span class="home-stat__label">Multi-dashboard adoption · <span class="u-nowrap">D&#8209;Tools</span></span>
-            </a>
-          </li>
-        </ul>
+
+    <!-- Floor contact shadows (warm brown multiply directly onto CSS floor beneath desk legs) -->
+    <div class="desk-floor-shadow" id="desk-floor-shadow" aria-hidden="true"></div>
+    <div class="desk-foot-shadow desk-foot-shadow--left" id="desk-foot-shadow-left" aria-hidden="true"></div>
+    <div class="desk-foot-shadow desk-foot-shadow--right" id="desk-foot-shadow-right" aria-hidden="true"></div>
+
+    <!-- Desk Scene Stage (Decorative visual layer: 3D scene, animated monitor, steam, and card connectors) -->
+    <div class="desk-scene" id="desk-scene" aria-hidden="true" data-scene-mode="three" data-glb-src="assets/models/ryan-seated.glb">
+      <!-- Static 3D furniture layer (desk, ultrawide monitor frame, lamp, mug on coaster) -->
+      <canvas class="desk-scene__bg-canvas" id="desk-bg-canvas" width="1200" height="900"></canvas>
+
+      <!-- Live HTML Scene Overlay Stage (scaled 1:1 with rendered scene image for pure percentage positioning) -->
+      <div class="desk-scene__stage" id="desk-scene-stage">
+        <!-- Elliptical blurred warm brown contact shadows on oak desktop (multiply directly onto wood) -->
+        <div class="desk-cat-shadow" id="desk-cat-shadow" aria-hidden="true"></div>
+        <div class="desk-mug-shadow" id="desk-mug-shadow" aria-hidden="true"></div>
+        <!-- Separate cat canvas layer rendered with subtle snoozing breath & ear twitch and CSS filter: contrast(0.88) saturate(0.9) sepia(0.08) -->
+        <canvas class="desk-cat-layer" id="desk-cat-layer" width="436" height="200" aria-hidden="true"></canvas>
+        <!-- Delicate rising steam tendrils over ceramic coffee mug -->
+        <div class="desk-steam" id="desk-steam" aria-hidden="true">
+          <svg class="desk-steam__svg desk-steam__wisp desk-steam__wisp--1" viewBox="0 0 24 44" fill="none">
+            <path d="M12 42 C8 33, 16 25, 11 16 C7 9, 13 4, 11 1" stroke="url(#steamGradA)" stroke-width="2.2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="steamGradA" x1="12" y1="42" x2="12" y2="1" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#D8CCC0" stop-opacity="0"/>
+                <stop offset="22%" stop-color="#B9A795" stop-opacity="0.62"/>
+                <stop offset="70%" stop-color="#C6B5A4" stop-opacity="0.44"/>
+                <stop offset="100%" stop-color="#D8CCC0" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <svg class="desk-steam__svg desk-steam__wisp desk-steam__wisp--2" viewBox="0 0 24 44" fill="none">
+            <path d="M12 42 C16 32, 8 24, 13 15 C17 8, 11 4, 13 1" stroke="url(#steamGradB)" stroke-width="2.4" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="steamGradB" x1="12" y1="42" x2="12" y2="1" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#D8CCC0" stop-opacity="0"/>
+                <stop offset="20%" stop-color="#AF9B88" stop-opacity="0.58"/>
+                <stop offset="72%" stop-color="#C4B2A0" stop-opacity="0.38"/>
+                <stop offset="100%" stop-color="#D8CCC0" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <svg class="desk-steam__svg desk-steam__wisp desk-steam__wisp--3" viewBox="0 0 24 44" fill="none">
+            <path d="M12 42 C9 34, 15 26, 11 17 C8 10, 14 5, 12 1" stroke="url(#steamGradC)" stroke-width="1.9" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="steamGradC" x1="12" y1="42" x2="12" y2="1" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#D8CCC0" stop-opacity="0"/>
+                <stop offset="24%" stop-color="#B9A795" stop-opacity="0.54"/>
+                <stop offset="74%" stop-color="#C8B7A6" stop-opacity="0.34"/>
+                <stop offset="100%" stop-color="#D8CCC0" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <!-- Live HTML Monitor Screen Layer (positioned in scene percentages & polygon-clipped under bezel) -->
+        <div class="desk-monitor-screen" id="desk-monitor-screen" data-layout="0">
+          <div class="desk-monitor__split">
+            <!-- Left half: dynamic multi-mode UI workspace + full-bleed object-fit: cover project preview -->
+            <div class="desk-monitor__ui-pane" id="desk-monitor-ui">
+              <div class="desk-monitor__ui-rail">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="desk-monitor__ui-stage">
+                <div class="desk-monitor__topbar">
+                  <span class="desk-monitor__dot desk-monitor__dot--r"></span>
+                  <span class="desk-monitor__dot desk-monitor__dot--y"></span>
+                  <span class="desk-monitor__dot desk-monitor__dot--g"></span>
+                  <span class="desk-monitor__workspace-pill" id="desk-monitor-pill"></span>
+                  <span class="desk-monitor__status-pill"></span>
+                </div>
+                <div class="desk-monitor__ui-canvas" data-layout="0">
+                  <!-- Low-contrast warm interface: 7 thin 2-3px rows + one thin SVG chart line (zero gray card blocks) -->
+                  <div class="desk-ui-rows" aria-hidden="true">
+                    <span class="desk-ui-thin-row desk-ui-thin-row--1"></span>
+                    <span class="desk-ui-thin-row desk-ui-thin-row--2"></span>
+                    <span class="desk-ui-thin-row desk-ui-thin-row--3"></span>
+                    <span class="desk-ui-thin-row desk-ui-thin-row--4"></span>
+                    <span class="desk-ui-thin-row desk-ui-thin-row--5"></span>
+                    <span class="desk-ui-thin-row desk-ui-thin-row--6"></span>
+                    <span class="desk-ui-thin-row desk-ui-thin-row--7"></span>
+                  </div>
+                  <svg class="desk-ui-linechart" viewBox="0 0 140 28" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M 2 22 Q 28 20, 48 15 T 92 12 T 138 5" class="desk-ui-linechart__stroke"/>
+                  </svg>
+                </div>
+            </div>
+          </div>
+          <!-- Right half: abstract warm dark code pane -->
+          <div class="desk-monitor__code-pane">
+            <div class="desk-code-tabs">
+              <span class="desk-code-tab is-active"></span>
+              <span class="desk-code-tab"></span>
+              <span class="desk-code-tab"></span>
+              <span class="desk-code-tab"></span>
+            </div>
+            <div class="desk-code-scroll" id="desk-code-scroll">
+              <div class="desk-code-line" style="--w: 62%; --w2: 24%; --indent: 0; --c: var(--code-accent); --c2: var(--code-sand)"></div>
+              <div class="desk-code-line" style="--w: 76%; --w2: 18%; --indent: 1; --c: var(--code-sand); --c2: var(--code-sage)"></div>
+              <div class="desk-code-line" style="--w: 48%; --w2: 28%; --indent: 2; --c: var(--code-muted); --c2: var(--code-accent)"></div>
+              <div class="desk-code-line" style="--w: 84%; --w2: 14%; --indent: 2; --c: var(--code-sage); --c2: var(--code-sand)"></div>
+              <div class="desk-code-line" style="--w: 66%; --w2: 22%; --indent: 1; --c: var(--code-sand); --c2: var(--code-muted)"></div>
+              <div class="desk-code-line" style="--w: 40%; --w2: 30%; --indent: 0; --c: var(--code-muted); --c2: var(--code-sage)"></div>
+              <div class="desk-code-line" style="--w: 70%; --w2: 20%; --indent: 1; --c: var(--code-accent); --c2: var(--code-sand)"></div>
+              <div class="desk-code-line" style="--w: 80%; --w2: 16%; --indent: 2; --c: var(--code-sand); --c2: var(--code-accent)"></div>
+              <div class="desk-code-line" style="--w: 54%; --w2: 26%; --indent: 2; --c: var(--code-sage); --c2: var(--code-sand)"></div>
+              <div class="desk-code-line" style="--w: 44%; --w2: 24%; --indent: 1; --c: var(--code-muted); --c2: var(--code-sage)"></div>
+              <div class="desk-code-line" style="--w: 64%; --w2: 22%; --indent: 0; --c: var(--code-accent); --c2: var(--code-sand)"></div>
+              <div class="desk-code-line" style="--w: 72%; --w2: 18%; --indent: 1; --c: var(--code-sand); --c2: var(--code-sage)"></div>
+              <div class="desk-code-line" style="--w: 50%; --w2: 28%; --indent: 2; --c: var(--code-sage); --c2: var(--code-accent)"></div>
+              <div class="desk-code-line" style="--w: 86%; --w2: 12%; --indent: 2; --c: var(--code-muted); --c2: var(--code-sand)"></div>
+              <div class="desk-code-line" style="--w: 58%; --w2: 24%; --indent: 1; --c: var(--code-sand); --c2: var(--code-sage)"></div>
+              <div class="desk-code-line" style="--w: 36%; --w2: 20%; --indent: 0; --c: var(--code-muted); --c2: var(--code-accent)"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Search bar focus thinking pulse overlay -->
+        <div class="desk-monitor__thinking" id="desk-monitor-thinking"></div>
       </div>
-    </section>
+      </div>
+
+      <!-- Live 3D Character & Foreground Chair Layer (renders in front of the right side of the monitor) -->
+      <canvas class="desk-scene__char-canvas" id="desk-char-canvas" width="1480" height="1180"></canvas>
+
+      <!-- Hover-only terracotta connector lines drawn from visible monitor screen points to card bottom centers -->
+      <svg class="desk-connectors-svg" id="desk-connectors-svg" aria-hidden="true"></svg>
+
+      <!-- Pre-rendered 5-pose crossfade fallback layer (used when data-scene-mode="poses" or WebGL is unavailable) -->
+      <div class="desk-pose-fallback" id="desk-pose-fallback" hidden>
+        <img class="desk-pose-fallback__bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/desk-scene/scene-bg.webp?v=147" alt="" width="1480" height="1180">
+        <img class="desk-pose-fallback__head is-active" data-pose="rest" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/desk-scene/ryan-head.webp?v=147" alt="" width="1480" height="1180">
+        <img class="desk-pose-fallback__head" data-pose="0" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/desk-scene/ryan-head-card0.webp?v=147" alt="" width="1480" height="1180">
+        <img class="desk-pose-fallback__head" data-pose="1" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/desk-scene/ryan-head-card1.webp?v=147" alt="" width="1480" height="1180">
+        <img class="desk-pose-fallback__head" data-pose="2" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/desk-scene/ryan-head-card2.webp?v=147" alt="" width="1480" height="1180">
+        <img class="desk-pose-fallback__head" data-pose="3" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="assets/desk-scene/ryan-head-card3.webp?v=147" alt="" width="1480" height="1180">
+      </div>
+    </div>
 
     <!-- Selected Work Section -->
     <section class="home-section" id="work" aria-label="Work">
@@ -260,9 +371,9 @@
 
       <div class="home-work-grid">
         <!-- Project 1: D-Tools Dashboards -->
-        <article class="home-project-card home-project-card--dashboards">
+        <article class="home-project-card home-project-card--dashboards" data-card-index="0">
           <figure class="home-project-card__media">
-            <img src="assets/case-studies/dashboards/dashboard-overview.webp" alt="D-Tools Cloud executive BI dashboard showing sales results, close rate, sales cycle gauge, and trend reports" width="1440" height="754" loading="lazy">
+            <img src="assets/case-studies/dashboards/dashboard-gauge-thumb.webp?v=147" alt="Sales Cycle 14-day average gauge from the D-Tools Cloud executive BI dashboard" width="1078" height="440" fetchpriority="high">
           </figure>
           <div class="home-project-card__body">
             <div class="home-project-card__eyebrow-row">
@@ -277,7 +388,7 @@
               71% multi-dashboard adoption across active integrator accounts.
             </p>
             <div class="home-project-card__footer">
-              <ul class="home-project-card__tags" aria-label="Topics">
+              <ul class="home-project-card__tags" role="list" aria-label="Topics">
                 <li>Data visualization</li>
                 <li>AI UX</li>
               </ul>
@@ -289,24 +400,24 @@
           </div>
         </article>
         <!-- Project 2: i4cp Member Portal -->
-        <article class="home-project-card home-project-card--member-portal">
+        <article class="home-project-card home-project-card--member-portal" data-card-index="1">
           <figure class="home-project-card__media">
-            <img src="assets/case-studies/member-portal/design-highlights/Home_new.webp" alt="Redesigned i4cp member portal homepage organized by strategic practice areas" width="2048" height="1156" loading="lazy">
+            <img src="assets/case-studies/member-portal/design-highlights/ahri-prompt-thumb.webp?v=147" alt="Ahri conversational AI search prompt and Key Takeaways response from the redesigned i4cp member portal" width="1078" height="440">
           </figure>
           <div class="home-project-card__body">
             <div class="home-project-card__eyebrow-row">
-              <span class="home-project-eyebrow">i4cp</span>
+              <span class="home-project-eyebrow home-project-eyebrow--preserve">i4cp</span>
               <span class="home-project-card__dot" aria-hidden="true">·</span>
               <span class="home-project-metric">+500% AI search</span>
             </div>
             <h3 class="home-project-card__title">
-              <a href="pages/member-portal-overhaul.html" class="home-project-card__link">i4cp Member Portal & Research Discovery</a>
+              <a href="pages/member-portal-overhaul.html" class="home-project-card__link">Member Portal & Conversational AI</a>
             </h3>
             <p class="home-project-card__summary">
               +500% lift in Ahri conversational AI search sessions and 2× daily active usage.
             </p>
             <div class="home-project-card__footer">
-              <ul class="home-project-card__tags" aria-label="Topics">
+              <ul class="home-project-card__tags" role="list" aria-label="Topics">
                 <li>Information architecture</li>
                 <li>Conversational AI</li>
               </ul>
@@ -318,9 +429,9 @@
           </div>
         </article>
         <!-- Project 3: Real-Time Inventory -->
-        <article class="home-project-card home-project-card--inventory">
+        <article class="home-project-card home-project-card--inventory" data-card-index="2">
           <figure class="home-project-card__media">
-            <img src="assets/case-studies/inventory/inventory-assets-thumb.webp" alt="Real-time equipment asset tracking, serial numbers, stock quantities, and PO statuses in D-Tools Cloud" width="1440" height="748" loading="lazy">
+            <img src="assets/case-studies/inventory/inventory-header-thumb.webp?v=147" alt="Product photo and On Hand, Available, Allocated, Ordered, and Needed stock count row in D-Tools Cloud Inventory" width="1078" height="440">
           </figure>
           <div class="home-project-card__body">
             <div class="home-project-card__eyebrow-row">
@@ -335,7 +446,7 @@
               +8% recurring revenue and 8% YoY adoption unblocking enterprise deals.
             </p>
             <div class="home-project-card__footer">
-              <ul class="home-project-card__tags" aria-label="Topics">
+              <ul class="home-project-card__tags" role="list" aria-label="Topics">
                 <li>Workflow automation</li>
                 <li>Supply chain</li>
               </ul>
@@ -347,9 +458,9 @@
           </div>
         </article>
         <!-- Project 4: AI Coding Portfolio -->
-        <article class="home-project-card home-project-card--portfolio">
+        <article class="home-project-card home-project-card--portfolio" data-card-index="3">
           <figure class="home-project-card__media">
-            <img src="assets/case-studies/ai-coding-portfolio/portfolio-code-architecture.webp" alt="Design token system, semantic HTML architecture, and browser testing for Ryan Schmidt portfolio" width="1440" height="754" loading="lazy">
+            <img src="assets/case-studies/ai-coding-portfolio/portfolio-detail-thumb.webp?v=147" alt="CSS design tokens code paired with the live porcelain preview for Ryan Schmidt portfolio" width="1078" height="440">
           </figure>
           <div class="home-project-card__body">
             <div class="home-project-card__eyebrow-row">
@@ -364,7 +475,7 @@
               Semantic HTML architecture and token-driven design built with Cursor.
             </p>
             <div class="home-project-card__footer">
-              <ul class="home-project-card__tags" aria-label="Topics">
+              <ul class="home-project-card__tags" role="list" aria-label="Topics">
                 <li>Design tokens</li>
                 <li>Front-end code</li>
               </ul>
@@ -425,10 +536,10 @@
     </div>
   </footer>
 
-  <script src="./scripts/cli-mode.js?v=92" defer></script>
+  <script src="./scripts/cli-mode.js?v=93" defer></script>
   <script src="./scripts/magnetic.js?v=90" defer></script>
-  <script src="./scripts/scripts.js?v=90" defer></script>
-  <script src="./scripts/home-page.js?v=90" defer></script>
+  <script src="./scripts/scripts.js?v=157" defer></script>
+  <script src="./scripts/home-page.js?v=155" defer></script>
   <script src="./scripts/rs-chat-widget.js?v=90" defer></script>
 </body>
 

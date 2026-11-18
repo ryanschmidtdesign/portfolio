@@ -911,6 +911,121 @@
         }
     }
 
+    const TYPEWRITER_PROMPTS = {
+        home: {
+            desktop: [
+                "Ask AI about Ryan's work...",
+                "How did Ryan drive 71% dashboard adoption?",
+                "How did he lift AI search by 500% at i4cp?",
+                "Walk me through the +8% ARR inventory MVP",
+                "Is Ryan a fit for a Senior Product Designer role?"
+            ],
+            mobile: [
+                "Ask AI about Ryan's work...",
+                "How did he hit 71% adoption?",
+                "How did AI search grow 500%?",
+                "Walk through the +8% ARR MVP",
+                "Is Ryan a fit for our role?"
+            ]
+        },
+        dashboard: {
+            desktop: [
+                "Ask AI about Ryan's work...",
+                "How did Ryan drive 71% dashboard adoption?",
+                "Walk me through Ryan's UX research process",
+                "What were the key tradeoffs on this dashboard?",
+                "Why modular templates over department views?"
+            ],
+            mobile: [
+                "Ask AI about Ryan's work...",
+                "How did he hit 71% adoption?",
+                "What was his UX research flow?",
+                "Key dashboard design tradeoffs?",
+                "Why use modular templates?"
+            ]
+        },
+        portal: {
+            desktop: [
+                "Ask AI about Ryan's work...",
+                "How did Ryan lift AI search adoption by 500%?",
+                "Why progressive disclosure over flat navigation?",
+                "What was the hardest tradeoff on this portal?",
+                "How did member task research shape the IA?"
+            ],
+            mobile: [
+                "Ask AI about Ryan's work...",
+                "How did AI search grow 500%?",
+                "Why progressive disclosure?",
+                "Hardest portal design tradeoff?",
+                "How did research shape the IA?"
+            ]
+        },
+        inventory: {
+            desktop: [
+                "Ask AI about Ryan's work...",
+                "Walk me through the +8% ARR inventory MVP",
+                "Why did Ryan start with an MVP scope?",
+                "How did he get engineering & stakeholder buy-in?",
+                "What were the biggest workflow tradeoffs?"
+            ],
+            mobile: [
+                "Ask AI about Ryan's work...",
+                "Walk through the +8% ARR MVP",
+                "Why start with an MVP scope?",
+                "How did he get team buy-in?",
+                "Biggest workflow tradeoffs?"
+            ]
+        },
+        portfolio: {
+            desktop: [
+                "Ask AI about Ryan's work...",
+                "What AI tools and workflow did Ryan use?",
+                "How are the CSS design tokens structured?",
+                "Why build with vanilla HTML, CSS, and JS?",
+                "How does the custom Gemini AI assistant work?"
+            ],
+            mobile: [
+                "Ask AI about Ryan's work...",
+                "What AI workflow did he use?",
+                "How do the CSS tokens work?",
+                "Why vanilla HTML, CSS & JS?",
+                "How does the AI chat work?"
+            ]
+        },
+        about: {
+            desktop: [
+                "Ask AI about Ryan's work...",
+                "What is Ryan's product design philosophy?",
+                "What does Ryan's design mentorship look like?",
+                "How does Ryan prototype in code with Cursor?",
+                "Is Ryan a fit for a Senior Product Designer role?"
+            ],
+            mobile: [
+                "Ask AI about Ryan's work...",
+                "What is his design philosophy?",
+                "How does Ryan mentor designers?",
+                "How does he prototype in code?",
+                "Is Ryan a fit for our role?"
+            ]
+        }
+    };
+
+    function getPagePromptKey() {
+        const path = (window.location.pathname || '/').toLowerCase();
+        if (path.includes('dashboard')) return 'dashboard';
+        if (path.includes('member-portal')) return 'portal';
+        if (path.includes('inventory')) return 'inventory';
+        if (path.includes('ai-coding-portfolio')) return 'portfolio';
+        if (path.includes('about')) return 'about';
+        return 'home';
+    }
+
+    function getActivePrompts() {
+        const key = getPagePromptKey();
+        const group = TYPEWRITER_PROMPTS[key] || TYPEWRITER_PROMPTS.home;
+        return window.innerWidth <= 600 ? group.mobile : group.desktop;
+    }
+
     function initRotatingPlaceholder() {
         const inputs = [
             document.getElementById('home-omnibar-input'),
@@ -919,10 +1034,53 @@
 
         if (inputs.length === 0) return;
 
+        const STATIC_PLACEHOLDER = "Ask AI about Ryan's work...";
+
         inputs.forEach(input => {
-            if (!input.value || input.value.trim().length === 0) {
-                input.placeholder = "Ask AI about Ryan's work...";
-            }
+            input.placeholder = STATIC_PLACEHOLDER;
+
+            const topContainer = input.closest('.home-omnibar-top, .subpage-omnibar-top') || input.parentElement;
+            if (!topContainer || topContainer.querySelector('.omnibar-typewriter')) return;
+
+            let promptIndex = 0;
+            const overlay = document.createElement('div');
+            overlay.className = 'omnibar-typewriter';
+            overlay.setAttribute('aria-hidden', 'true');
+
+            const track = document.createElement('span');
+            track.className = 'omnibar-typewriter__track';
+
+            const copy = document.createElement('span');
+            copy.className = 'omnibar-typewriter__copy';
+            copy.textContent = getActivePrompts()[0] || STATIC_PLACEHOLDER;
+
+            const caret = document.createElement('span');
+            caret.className = 'omnibar-typewriter__caret';
+
+            track.appendChild(copy);
+            track.appendChild(caret);
+            overlay.appendChild(track);
+            input.insertAdjacentElement('afterend', overlay);
+            input.classList.add('has-typewriter');
+
+            // Advance to the next idea at the end of each 6s wipe-retract cycle (when text is 100% clipped at 0%)
+            copy.addEventListener('animationiteration', () => {
+                const list = getActivePrompts();
+                promptIndex = (promptIndex + 1) % list.length;
+                copy.textContent = list[promptIndex] || STATIC_PLACEHOLDER;
+            });
+
+            // Restart cleanly from the first prompt when focus leaves an empty input
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    const list = getActivePrompts();
+                    promptIndex = 0;
+                    copy.textContent = list[0] || STATIC_PLACEHOLDER;
+                    track.classList.remove('is-restarting');
+                    void track.offsetWidth;
+                    track.classList.add('is-restarting');
+                }
+            });
         });
     }
 

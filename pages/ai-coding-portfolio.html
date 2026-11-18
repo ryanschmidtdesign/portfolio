@@ -57,7 +57,7 @@
     </noscript>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../styles.css?v=112">
+    <link rel="stylesheet" href="../styles.css?v=157">
 
     <!-- Icons & manifest -->
     <link rel="icon" href="../favicon.ico" sizes="32x32">
@@ -252,20 +252,26 @@
       </a>
 
       <nav class="site-header__nav" aria-label="Main navigation">
-        <a href="../index.html#work" class="site-header__link">Work</a>
-        <a href="about.html" class="site-header__link">About</a>
+        <a href="../index.html#work" class="site-header__link is-current" aria-current="page" data-nav-underline><span>Work</span></a>
+        <a href="about.html" class="site-header__link" data-nav-underline><span>About</span></a>
         <a href="../assets/ryan-schmidt-resume.pdf" target="_blank" rel="noopener" class="site-header__link site-header__link--ext">
           <span>Resume</span>
-          <span class="site-header__arrow" aria-hidden="true">↗</span>
-        </a>
-        <a href="mailto:ryanschmidt1989@gmail.com" class="site-header__link site-header__link--ext" aria-label="Email Ryan Schmidt">
-          <span>Email</span>
           <span class="site-header__arrow" aria-hidden="true">↗</span>
         </a>
         <a href="https://www.linkedin.com/in/ryanschmidt1989/" target="_blank" rel="noopener" class="site-header__link site-header__link--ext">
           <span>LinkedIn</span>
           <span class="site-header__arrow" aria-hidden="true">↗</span>
         </a>
+        <button type="button" class="site-header__link site-header__copy-email" data-copy-email="ryanschmidt1989@gmail.com" aria-label="Copy email address ryanschmidt1989@gmail.com">
+          <span class="site-header__copy-stack">
+            <span class="site-header__copy-label site-header__copy-label--default">Email</span>
+            <span class="site-header__copy-label site-header__copy-label--copied" aria-hidden="true">Copied</span>
+          </span>
+          <span class="site-header__arrow site-header__copy-icon" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          </span>
+        </button>
+        <span class="site-header__underline" aria-hidden="true"></span>
       </nav>
     </div>
   </header>
@@ -567,8 +573,8 @@
     </div>
 
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=92" defer></script>
-    <script src="../scripts/scripts.js?v=90" defer></script>
+    <script src="../scripts/cli-mode.js?v=93" defer></script>
+    <script src="../scripts/scripts.js?v=157" defer></script>
     <script src="../scripts/magnetic.js?v=90" defer></script>
     <script src="../scripts/rs-chat-widget.js?v=90" defer></script>
     <!-- SEO Landmark Footer (visually hidden) -->

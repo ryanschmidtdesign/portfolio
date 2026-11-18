@@ -338,6 +338,47 @@
     }
   });
 
+  // Copy email address button in top nav (inline 150ms crossfade to "Copied", 2s hold, crossfade back)
+  document.addEventListener("click", (e) => {
+    const copyBtn = e.target.closest("[data-copy-email]");
+    if (!copyBtn) return;
+
+    const email = copyBtn.getAttribute("data-copy-email");
+    if (!email) return;
+
+    const showCopied = () => {
+      copyBtn.classList.add("is-copied");
+      clearTimeout(copyBtn._copyTimer);
+      copyBtn._copyTimer = setTimeout(() => {
+        copyBtn.classList.remove("is-copied");
+      }, 2150);
+    };
+
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      navigator.clipboard.writeText(email).then(showCopied).catch(() => {
+        fallbackCopy(email);
+        showCopied();
+      });
+    } else {
+      fallbackCopy(email);
+      showCopied();
+    }
+
+    function fallbackCopy(text) {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      } catch (_) {}
+    }
+  });
+
   // ==========================================================================
   // Interactive Decision Bridges (pages/dashboard.html)
   // ==========================================================================
@@ -609,6 +650,158 @@
       });
     });
   }
+})();
+
+// ============================================================================
+// Shared Navigation Sliding Underline Controller
+// ============================================================================
+(function () {
+  const nav = document.querySelector(".site-header__nav");
+  if (!nav) return;
+
+  let underlineEl = nav.querySelector(".site-header__underline");
+  if (!underlineEl) {
+    underlineEl = document.createElement("span");
+    underlineEl.className = "site-header__underline";
+    underlineEl.setAttribute("aria-hidden", "true");
+    nav.appendChild(underlineEl);
+  }
+
+  const underlineTargets = Array.from(nav.querySelectorAll("[data-nav-underline]"));
+  const allNavItems = Array.from(nav.querySelectorAll(".site-header__link"));
+  if (!underlineTargets.length) return;
+
+  const BASE_WIDTH = 100;
+  let activePreviewTarget = null;
+  let returnTimer = null;
+
+  function getCurrentLink() {
+    return nav.querySelector(".site-header__link.is-current[data-nav-underline]") || underlineTargets[0];
+  }
+
+  function measureWordBox(linkEl) {
+    const wordSpan = linkEl && linkEl.querySelector("span");
+    if (!wordSpan) return null;
+
+    const navRect = nav.getBoundingClientRect();
+    const wordRect = wordSpan.getBoundingClientRect();
+    if (!navRect.width || !wordRect.width) return null;
+
+    // Measure exact font text baseline inside the word span
+    const probe = document.createElement("span");
+    probe.style.cssText =
+      "display:inline-block;width:0;height:0;overflow:hidden;vertical-align:baseline;pointer-events:none;";
+    wordSpan.appendChild(probe);
+    const baselineY = probe.getBoundingClientRect().bottom - navRect.top;
+    wordSpan.removeChild(probe);
+
+    return {
+      x: wordRect.left - navRect.left,
+      scaleX: wordRect.width / BASE_WIDTH,
+      y: baselineY + 8
+    };
+  }
+
+  function applyUnderline(targetLink, { preview = false } = {}) {
+    const box = measureWordBox(targetLink);
+    if (!box) return false;
+
+    nav.style.setProperty("--nav-ul-x", `${box.x.toFixed(2)}px`);
+    nav.style.setProperty("--nav-ul-scale", box.scaleX.toFixed(4));
+    nav.style.setProperty("--nav-ul-y", `${box.y.toFixed(2)}px`);
+    nav.classList.add("has-underline");
+    nav.classList.toggle("is-previewing", Boolean(preview));
+    return true;
+  }
+
+  function scheduleReturn() {
+    clearTimeout(returnTimer);
+    returnTimer = setTimeout(() => {
+      returnTimer = null;
+      const focusedTarget = underlineTargets.find((el) => el === document.activeElement);
+      const hoveredTarget = underlineTargets.find((el) => el.matches(":hover"));
+      if (hoveredTarget || focusedTarget) {
+        const active = hoveredTarget || focusedTarget;
+        activePreviewTarget = active;
+        applyUnderline(active, { preview: active !== getCurrentLink() });
+        return;
+      }
+      activePreviewTarget = null;
+      applyUnderline(getCurrentLink(), { preview: false });
+    }, 150);
+  }
+
+  function activateUnderlineTarget(link) {
+    clearTimeout(returnTimer);
+    returnTimer = null;
+    activePreviewTarget = link;
+    applyUnderline(link, { preview: link !== getCurrentLink() });
+  }
+
+  allNavItems.forEach((item) => {
+    const isUnderlineTarget = item.hasAttribute("data-nav-underline");
+    item.addEventListener("pointerenter", () => {
+      if (isUnderlineTarget) {
+        activateUnderlineTarget(item);
+      } else {
+        scheduleReturn();
+      }
+    });
+    item.addEventListener("focusin", () => {
+      if (isUnderlineTarget) {
+        activateUnderlineTarget(item);
+      } else {
+        scheduleReturn();
+      }
+    });
+  });
+
+  nav.addEventListener("pointerleave", () => {
+    scheduleReturn();
+  });
+
+  nav.addEventListener("focusout", () => {
+    requestAnimationFrame(() => {
+      if (!nav.contains(document.activeElement)) {
+        scheduleReturn();
+      }
+    });
+  });
+
+  function syncInitialPosition() {
+    nav.classList.remove("is-ready");
+    const target = activePreviewTarget || getCurrentLink();
+    applyUnderline(target, { preview: Boolean(activePreviewTarget && activePreviewTarget !== getCurrentLink()) });
+    void underlineEl.offsetWidth;
+    nav.classList.add("is-ready");
+  }
+
+  function reposition() {
+    const target = activePreviewTarget || getCurrentLink();
+    applyUnderline(target, { preview: Boolean(activePreviewTarget && activePreviewTarget !== getCurrentLink()) });
+  }
+
+  syncInitialPosition();
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      nav.classList.remove("is-ready");
+      reposition();
+      void underlineEl.offsetWidth;
+      nav.classList.add("is-ready");
+    });
+  }
+
+  if (typeof ResizeObserver === "function") {
+    const ro = new ResizeObserver(() => {
+      reposition();
+    });
+    ro.observe(nav);
+  }
+
+  window.addEventListener("resize", reposition, { passive: true });
+  window.addEventListener("pagereveal", syncInitialPosition);
+  window.addEventListener("hashchange", reposition);
 })();
 
 // --- EASTER EGG: Console Message for Tech Recruiters / EMs ---

@@ -1,3 +1,12 @@
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(nav-underline) {
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 /* Site main landmark */
 .site-main {
   padding-top: clamp(84px, 12vh, 108px);
@@ -18,33 +27,14 @@
   width: calc(min(var(--container-macro, 1160px), 100vw) - (var(--page-gutter) * 2));
   max-width: calc(var(--container-macro, 1160px) - (var(--page-gutter) * 2));
   z-index: var(--z-header, 9990);
-  background: rgba(245, 240, 234, 0.84);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(28, 22, 18, 0.085);
-  border-radius: var(--radius-sm, 3px);
-  box-shadow: var(--shadow-header);
-  overflow: hidden;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease, left 280ms cubic-bezier(0.16, 1, 0.3, 1), max-width 280ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.site-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 50%, transparent 100%);
-  pointer-events: none;
-}
-
-.site-header:hover {
-  border-color: rgba(28, 22, 18, 0.16);
-  box-shadow: 0 6px 24px -2px rgba(28, 22, 18, 0.08), 0 2px 4px rgba(28, 22, 18, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: left 280ms cubic-bezier(0.16, 1, 0.3, 1), max-width 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .site-header__inner {
@@ -55,7 +45,7 @@
   max-width: 100%;
   height: 48px;
   margin: 0;
-  padding: 0 18px;
+  padding: 0 4px;
   box-sizing: border-box;
 }
 
@@ -79,6 +69,7 @@
 }
 
 .site-header__name {
+  font-size: 1.03125rem;
   font-weight: 600;
   color: var(--text-primary, #171412);
   letter-spacing: -0.015em;
@@ -103,7 +94,7 @@
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 400;
-  color: var(--text-secondary, #5C554E);
+  color: #38332E;
   letter-spacing: -0.005em;
   transition: color 160ms ease;
 }
@@ -113,6 +104,7 @@
 }
 
 .site-header__nav {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -131,46 +123,152 @@
   text-decoration: none;
   padding: 8px 10px;
   border-radius: 2px;
-  transition: color 160ms ease, background-color 160ms ease;
+  background: transparent;
+  transition: color 150ms cubic-bezier(0.23, 1, 0.32, 1);
   white-space: nowrap;
 }
 
-.site-header__link:hover {
+.site-header__link:hover,
+.site-header__link:focus-visible {
   color: var(--text-primary, #171412);
-  background-color: rgba(28, 22, 18, 0.04);
 }
 
 .site-header__link:focus-visible {
-  color: var(--text-primary, #171412);
   outline: 2px solid var(--accent, #C85A32) !important;
   outline-offset: -2px !important;
 }
 
-.site-header__link.is-current {
-  color: var(--text-primary, #171412);
-  font-weight: 600;
+.site-header__link > span {
+  position: relative;
+  display: inline-block;
 }
 
-.site-header__link.is-current::after {
-  content: '';
+.site-header__link.is-current {
+  color: var(--text-primary, #171412);
+  font-weight: 500;
+}
+
+.site-header__nav.is-previewing .site-header__link.is-current:not(:hover):not(:focus-visible) {
+  color: var(--text-muted, #70665D);
+}
+
+/* Shared sliding underline measured strictly to the label span (8px below baseline) */
+.site-header__underline {
   position: absolute;
-  bottom: 0;
+  top: var(--nav-ul-y, 32px);
   left: 0;
-  right: 0;
+  width: 100px;
   height: 2px;
-  background: var(--accent, #C85A32);
-  border-radius: 1px;
+  border-radius: 0;
+  background-color: var(--accent, #C85A32);
+  pointer-events: none;
+  transform-origin: left center;
+  transform: translateX(var(--nav-ul-x, 0px)) scaleX(var(--nav-ul-scale, 0));
+  opacity: 0;
+  view-transition-name: nav-underline;
+}
+
+.site-header__nav.has-underline .site-header__underline {
+  opacity: 1;
+}
+
+.site-header__nav.has-underline.is-previewing .site-header__underline {
+  opacity: 0.4;
+}
+
+.site-header__nav.is-ready .site-header__underline {
+  transition:
+    transform 220ms cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 220ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .site-header__arrow {
-  font-size: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  line-height: 1;
   color: var(--text-muted, #70665D);
-  transition: transform 160ms ease, color 160ms ease;
+  transition:
+    transform 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    color 150ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.site-header__link:hover .site-header__arrow {
-  color: var(--accent, #C85A32);
-  transform: translate(1px, -1px);
+.site-header__copy-icon svg {
+  display: block;
+  width: 0.88em;
+  height: 0.88em;
+}
+
+.site-header__link:hover .site-header__arrow,
+.site-header__link:focus-visible .site-header__arrow {
+  color: var(--text-primary, #171412);
+  transform: translate(1.5px, -1.5px);
+}
+
+.site-header__copy-email {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: inherit;
+}
+
+.site-header__copy-stack {
+  display: inline-grid;
+  align-items: center;
+  justify-items: start;
+}
+
+.site-header__copy-label {
+  grid-area: 1 / 1;
+  transition: opacity 150ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.site-header__copy-label--default {
+  opacity: 1;
+}
+
+.site-header__copy-label--copied {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.site-header__copy-email.is-copied .site-header__copy-label--default {
+  opacity: 0;
+}
+
+.site-header__copy-email.is-copied .site-header__copy-label--copied {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.001ms !important;
+  }
+  .site-header__nav.is-ready .site-header__underline,
+  .site-header__link,
+  .site-header__arrow,
+  .site-header__copy-label {
+    transition-duration: 0ms !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-header {
+    width: min(1200px, 94vw);
+    max-width: min(1200px, 94vw);
+  }
+  .site-header__inner {
+    padding: 0;
+  }
+  .site-header__copy-email {
+    padding-right: 0;
+  }
 }
 
 @media (max-width: 820px) {
@@ -201,18 +299,19 @@
 }
 
 @media (max-width: 440px) {
-  /* On narrow mobile phones, hide LinkedIn so primary Work, About, Resume, and Email breathe */
+  /* On narrow mobile phones, hide LinkedIn so primary Work, About, Resume, and Copy email fit cleanly */
+  .site-header__inner {
+    padding: 0 4px;
+  }
   .site-header__link[href*="linkedin"] {
     display: none;
   }
   .site-header__nav {
-    gap: 8px;
+    gap: 5px;
   }
   .site-header__link {
-    font-size: 0.78rem;
-  }
-  .site-header__arrow {
-    display: none;
+    font-size: 0.72rem;
+    padding: 4px 2px;
   }
 }
 
