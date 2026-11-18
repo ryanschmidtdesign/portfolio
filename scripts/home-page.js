@@ -13,7 +13,6 @@
   const connectorsSvgEl = document.getElementById('desk-connectors-svg');
   const monitorScreenEl = document.getElementById('desk-monitor-screen');
   const monitorUiCanvasEl = document.querySelector('.desk-monitor__ui-canvas');
-  const monitorBars = Array.from(document.querySelectorAll('.desk-ui-bar'));
   const codeTabs = Array.from(document.querySelectorAll('.desk-code-tab'));
   const codeLines = Array.from(document.querySelectorAll('.desk-code-line'));
   const workGridEl = document.querySelector('.home-work-grid');
@@ -41,8 +40,6 @@
   // Distinct abstract workspace configurations for the 4 projects / 4 idle modes (zero text)
   const WORKSPACE_MODES = [
     {
-      bars: [44, 78, 56, 94, 68, 86],
-      cursor: { x: 42, y: 36 },
       codeProfile: [
         { w: 64, w2: 22, indent: 0, c: 'var(--code-accent)', c2: 'var(--code-sand)' },
         { w: 78, w2: 16, indent: 1, c: 'var(--code-sand)', c2: 'var(--code-sage)' },
@@ -55,8 +52,6 @@
       ]
     },
     {
-      bars: [62, 48, 88, 72, 92, 58],
-      cursor: { x: 64, y: 14 },
       codeProfile: [
         { w: 48, w2: 32, indent: 0, c: 'var(--code-accent)', c2: 'var(--code-sage)' },
         { w: 84, w2: 14, indent: 1, c: 'var(--code-sage)', c2: 'var(--code-sand)' },
@@ -69,8 +64,6 @@
       ]
     },
     {
-      bars: [82, 64, 46, 88, 54, 94],
-      cursor: { x: 58, y: 44 },
       codeProfile: [
         { w: 72, w2: 18, indent: 0, c: 'var(--code-sage)', c2: 'var(--code-sand)' },
         { w: 56, w2: 26, indent: 1, c: 'var(--code-sand)', c2: 'var(--code-accent)' },
@@ -83,8 +76,6 @@
       ]
     },
     {
-      bars: [54, 86, 74, 60, 84, 70],
-      cursor: { x: 68, y: 28 },
       codeProfile: [
         { w: 44, w2: 34, indent: 0, c: 'var(--code-accent)', c2: 'var(--code-sand)' },
         { w: 62, w2: 26, indent: 1, c: 'var(--code-sand)', c2: 'var(--code-accent)' },
@@ -325,12 +316,6 @@
       monitorUiCanvasEl.setAttribute('data-layout', String(idx));
     }
 
-    // Update chart bar heights
-    monitorBars.forEach((bar, i) => {
-      const h = cfg.bars[i % cfg.bars.length];
-      bar.style.setProperty('--bar-h', `${h}%`);
-    });
-
     // Switch active file tab bar in the code pane (abstract color only)
     codeTabs.forEach((tab, i) => {
       tab.classList.toggle('is-active', i === idx);
@@ -414,9 +399,9 @@
   }
 
   cards.forEach((card, idx) => {
-    card.addEventListener('pointerenter', () => activateCard(idx, card));
+    card.addEventListener('pointerenter', () => activateCard(idx));
     card.addEventListener('pointerleave', () => deactivateCard());
-    card.addEventListener('focusin', () => activateCard(idx, card));
+    card.addEventListener('focusin', () => activateCard(idx));
     card.addEventListener('focusout', (e) => {
       if (!card.contains(e.relatedTarget)) {
         deactivateCard();
@@ -444,13 +429,10 @@
   }
 
   // =========================================================================
-  // 7. Search Bar Focus Interaction (Monitor Thinking Pulse + Ryan Lean)
+  // 7. Search Bar Focus Interaction (Monitor Thinking Pulse)
   // =========================================================================
   function handleOmnibarFocus(focused) {
     document.body.classList.toggle('is-omnibar-focused', focused);
-    if (scene3DController) {
-      scene3DController.setSearchFocus(focused);
-    }
   }
 
   if (omnibarInput) {
@@ -467,12 +449,10 @@
   }
 
   // =========================================================================
-  // 8. Subtle Mouse-Move Parallax (Cards up to 6px, Scene up to 3px opposite)
+  // 8. Subtle Horizontal Mouse-Move Parallax on Cards
   // =========================================================================
   let targetMouseX = 0;
-  let targetMouseY = 0;
   let currentMouseX = 0;
-  let currentMouseY = 0;
   let parallaxRafId = null;
 
   function updateParallaxFrame() {
@@ -482,27 +462,13 @@
     }
 
     currentMouseX += (targetMouseX - currentMouseX) * 0.08;
-    currentMouseY += (targetMouseY - currentMouseY) * 0.08;
-
     const cardPx = (currentMouseX * 2.5).toFixed(2);
-    const cardPy = (currentMouseY * 2.5).toFixed(2);
-    const scenePx = (-currentMouseX * 3).toFixed(2);
-    const scenePy = (-currentMouseY * 3).toFixed(2);
 
     cards.forEach((card) => {
       card.style.setProperty('--card-px', `${cardPx}px`);
-      card.style.setProperty('--card-py', '0px');
     });
 
-    if (deskSceneEl) {
-      deskSceneEl.style.setProperty('--scene-px', '0px');
-      deskSceneEl.style.setProperty('--scene-py', '0px');
-    }
-
-    if (
-      Math.abs(targetMouseX - currentMouseX) > 0.002 ||
-      Math.abs(targetMouseY - currentMouseY) > 0.002
-    ) {
+    if (Math.abs(targetMouseX - currentMouseX) > 0.002) {
       parallaxRafId = requestAnimationFrame(updateParallaxFrame);
     } else {
       parallaxRafId = null;
@@ -514,7 +480,6 @@
     (e) => {
       if (isScenePaused() || window.innerWidth < 1024 || !finePointerQuery.matches) return;
       targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
       if (!parallaxRafId) {
         parallaxRafId = requestAnimationFrame(updateParallaxFrame);
       }

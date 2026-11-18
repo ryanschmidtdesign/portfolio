@@ -22,7 +22,6 @@
  */
 
 import * as THREE from './vendor/three.module.min.js';
-import { GLTFLoader } from './vendor/GLTFLoader.js';
 
 // Master studio asset dimensions & exact feature coordinates (v123: high-res 1480x1180)
 const SCENE_W = 1480;
@@ -62,23 +61,6 @@ const HEAD_CENTER = {
   x: 754,
   y: 533
 };
-
-// Cubic-bezier(0.23, 1, 0.32, 1) easeOutQuint evaluator (zero ease-in, instant responsive start)
-function cubicBezier023(t) {
-  if (t <= 0) return 0;
-  if (t >= 1) return 1;
-  let s = t;
-  for (let i = 0; i < 6; i++) {
-    const inv = 1 - s;
-    const x = 3 * inv * inv * s * 0.23 + 3 * inv * s * s * 0.32 + s * s * s;
-    const dx = 3 * inv * inv * 0.23 + 6 * inv * s * (0.32 - 0.23) + 3 * s * s * (1 - 0.32);
-    if (Math.abs(dx) < 1e-5) break;
-    s -= (x - t) / dx;
-    s = Math.max(0, Math.min(1, s));
-  }
-  const inv = 1 - s;
-  return 3 * inv * inv * s * 1.0 + 3 * inv * s * s * 1.0 + s * s * s;
-}
 
 function clamp(v, lo, hi) {
   return v < lo ? lo : v > hi ? hi : v;
@@ -200,7 +182,7 @@ export function initDeskScene3D(options = {}) {
     };
   }
 
-  // Build sub-region geometry anchored relative to a pivot point in 1060x980 space
+  // Build sub-region geometry anchored relative to a pivot point in 1480x1180 space
   function buildAnchoredSubGrid(bounds, cols, rows, pivot, optionsGrid = {}) {
     const { x0, y0, x1, y1 } = bounds;
     const geo = new THREE.PlaneGeometry(1, 1, cols, rows);
@@ -209,8 +191,6 @@ export function initDeskScene3D(options = {}) {
     const baseSX = new Float32Array(count);
     const baseSY = new Float32Array(count);
     const reliefZ = new Float32Array(count);
-    const breathW = new Float32Array(count);
-    const vertZone = new Float32Array(count);
     const crownMask = new Float32Array(count);
 
     for (let i = 0; i < count; i++) {
@@ -225,27 +205,18 @@ export function initDeskScene3D(options = {}) {
       uvAttr.setXY(i, sx / SCENE_W, 1 - sy / SCENE_H);
 
       if (optionsGrid.isCranial) {
-        // Gentle 3D cranial dome centered on HEAD_CENTER + cervical spine torsion + crown follow-through mask
+        // Gentle 3D cranial dome centered on HEAD_CENTER + crown follow-through mask
         const dx = (sx - HEAD_CENTER.x) / 86;
         const dy = (sy - HEAD_CENTER.y) / 86;
         const r2 = Math.min(1, dx * dx + dy * dy);
         reliefZ[i] = Math.sqrt(Math.max(0, 1 - r2)) * 0.052;
-        vertZone[i] = smoothstep(636, 560, sy);
         crownMask[i] = smoothstep(545, 442, sy);
-      }
-
-      if (optionsGrid.isBody) {
-        // Lower chair base stays anchored while upper shoulders/arm breathe & lean
-        breathW[i] = 1 - smoothstep(820, 960, sy);
-      } else {
-        breathW[i] = 1.0;
       }
     }
     uvAttr.needsUpdate = true;
-    geo.setAttribute('aVertZone', new THREE.BufferAttribute(vertZone, 1));
     geo.setAttribute('aCrownMask', new THREE.BufferAttribute(crownMask, 1));
 
-    return { geo, baseSX, baseSY, reliefZ, breathW, pivot };
+    return { geo, baseSX, baseSY, reliefZ, pivot };
   }
 
   // =========================================================================
@@ -289,8 +260,7 @@ export function initDeskScene3D(options = {}) {
     { x0: 585, y0: 594, x1: 968, y1: 1018 },
     28,
     28,
-    { x: 760, y: 840 },
-    { isBody: true }
+    { x: 760, y: 840 }
   );
   const bodyMat = new THREE.MeshBasicMaterial({
     transparent: true,
@@ -342,7 +312,7 @@ export function initDeskScene3D(options = {}) {
     { isCranial: true }
   );
 
-  // Bidirectional Optical-Flow 5-Pose Morph + Cervical Torsion + Hair Crown Follow-Through Shader (6 samplers <= 8 limit)
+  // Bidirectional Optical-Flow 5-Pose Morph + Hair Crown Follow-Through Shader (6 samplers <= 8 limit)
   const headShaderMat = new THREE.ShaderMaterial({
     transparent: true,
     premultipliedAlpha: true,
@@ -356,14 +326,11 @@ export function initDeskScene3D(options = {}) {
       uMapC3: { value: null },
       uFlowAtlas: { value: null },
       uAngle: { value: 0.0 },
-      uCrownLag: { value: 0.0 },
-      uCervicalTwist: { value: 0.0 }
+      uCrownLag: { value: 0.0 }
     },
     vertexShader: `
-      attribute float aVertZone;
       attribute float aCrownMask;
       uniform float uCrownLag;
-      uniform float uCervicalTwist;
       varying vec2 vUv;
       varying vec2 vFlowLocal;
 
@@ -498,35 +465,6 @@ export function initDeskScene3D(options = {}) {
       if (typeof options.onFallback === 'function') options.onFallback();
     });
 
-  // Optional external custom GLB support (`data-custom-glb`)
-  let customGlbBones = null;
-  const customGlbUrl = container.getAttribute('data-custom-glb');
-  if (customGlbUrl) {
-    const loader = new GLTFLoader();
-    loader.load(
-      customGlbUrl,
-      (gltf) => {
-        const model = gltf.scene;
-        const bones = {};
-        model.traverse((child) => {
-          const n = (child.name || '').toLowerCase();
-          if (n.includes('head') && !n.includes('top')) bones.head = child;
-          else if (n.includes('neck')) bones.neck = child;
-          else if (n.includes('spine2') || n.includes('chest')) bones.spine = child;
-        });
-        const hemi = new THREE.HemisphereLight(0xfff9f0, 0xdfd0be, 1.5);
-        const dir = new THREE.DirectionalLight(0xfff3e2, 2.0);
-        dir.position.set(-3, 3, 3);
-        fgScene.add(hemi, dir, model);
-        bodyMesh.visible = false;
-        headMesh.visible = false;
-        customGlbBones = bones;
-      },
-      undefined,
-      () => {}
-    );
-  }
-
   // =========================================================================
   // 2. GEOMETRY POSITIONING & OVERLAY SYNC
   // =========================================================================
@@ -548,14 +486,12 @@ export function initDeskScene3D(options = {}) {
     chinShadowMesh.position.set(chinP.wx, chinP.wy, 0.004);
     bodyMesh.position.set(bodyP.wx, bodyP.wy, 0.005);
 
-    const updateGridVerts = (grid, pivW, outX, outY) => {
+    const updateGridVerts = (grid, pivW) => {
       const pos = grid.geo.attributes.position;
       for (let i = 0; i < pos.count; i++) {
         const w = sceneToWorld(grid.baseSX[i], grid.baseSY[i]);
         const lx = w.wx - pivW.wx;
         const ly = w.wy - pivW.wy;
-        if (outX) outX[i] = lx;
-        if (outY) outY[i] = ly;
         pos.setXYZ(i, lx, ly, grid.reliefZ[i]);
       }
       pos.needsUpdate = true;
@@ -634,7 +570,7 @@ export function initDeskScene3D(options = {}) {
     }
 
     renderBackgroundPlate();
-    syncRigGeometry(0, 0);
+    syncRigGeometry();
     applyPoseAtTime(performance.now());
     renderer.render(fgScene, camera);
 
@@ -721,23 +657,8 @@ export function initDeskScene3D(options = {}) {
 
     headShaderMat.uniforms.uAngle.value = headSpring.pos;
     headShaderMat.uniforms.uCrownLag.value = crownSpring.pos - headSpring.pos;
-    headShaderMat.uniforms.uCervicalTwist.value = headSpring.pos - neckSpring.pos;
 
-    if (customGlbBones) {
-      if (customGlbBones.neck) {
-        customGlbBones.neck.rotation.y = neckEuler.yaw * 0.38;
-        customGlbBones.neck.rotation.x = neckEuler.pitch * 0.38;
-        customGlbBones.neck.rotation.z = neckEuler.roll * 0.38;
-      }
-      if (customGlbBones.head) {
-        customGlbBones.head.rotation.y = headEuler.yaw * 0.62;
-        customGlbBones.head.rotation.x = headEuler.pitch * 0.62;
-        customGlbBones.head.rotation.z = headEuler.roll * 0.62;
-      }
-      if (customGlbBones.spine) {
-        customGlbBones.spine.rotation.x = 0;
-      }
-    } else if (assetsReady) {
+    if (assetsReady) {
       // Layer 1 (lower neck hinge): 38% turn led by neckSpring
       neckBedGroup.rotation.set(
         neckEuler.pitch * 0.38,
@@ -820,7 +741,6 @@ export function initDeskScene3D(options = {}) {
     }
     applyPoseAtTime(now);
     renderer.render(fgScene, camera);
-    renderCatFrame(now);
     if (!prefersReducedMotion) {
       rafId = requestAnimationFrame(tick);
     } else {
@@ -850,10 +770,6 @@ export function initDeskScene3D(options = {}) {
     neckSpring.target = nextAngle;
     headSpring.target = nextAngle;
     ensureRunning();
-  }
-
-  function setSearchFocus() {
-    // Stationary body/shoulders: search focus affects only the monitor UI
   }
 
   function setPaused(paused) {
@@ -889,7 +805,6 @@ export function initDeskScene3D(options = {}) {
 
   return {
     setCardTarget,
-    setSearchFocus,
     setPaused,
     setReducedMotion,
     syncOverlaysAndResize

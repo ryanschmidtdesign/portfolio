@@ -346,10 +346,8 @@
 
 .case-study section+section,
 .case-study aside+section,
-.case-study .callout+section,
 .case-study figure+section,
-.case-study>aside,
-.case-study>.callout {
+.case-study>aside {
   margin-top: var(--case-section-gap);
 }
 
@@ -428,8 +426,6 @@
 /* -------------------------------------------------------
    Shared surfaces
    --------------------------------------------------------*/
-.case-study .callout,
-.case-study aside.callout,
 .case-study aside {
   margin-block: var(--space-6);
   max-width: var(--prose);
@@ -441,15 +437,12 @@
   box-shadow: none;
 }
 
-.case-study .callout h2,
 .case-study aside h2,
-.case-study .callout h3,
 .case-study aside h3 {
   margin-top: 0;
   margin-bottom: var(--space-3);
 }
 
-.case-study .callout>*:last-child,
 .case-study aside>*:last-child {
   margin-bottom: 0;
 }
@@ -532,11 +525,6 @@
 .case-study .pull-quote-source {
   color: var(--text-muted, #78716C);
   font-size: var(--fs-xs);
-}
-
-
-.callout+.callout {
-  margin-top: var(--space-8);
 }
 
 .case-study .tldr {

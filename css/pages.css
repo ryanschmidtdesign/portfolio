@@ -610,146 +610,6 @@ body.is-home {
 }
 
 /* -------------------------------------------------------
-   Left Column (~34% width on desktop): Headline, Lead, 3 Stats
-   Visible immediately (never animated in on load)
-   ------------------------------------------------------- */
-.home-hero-wrap {
-  display: block;
-  margin: 0;
-  position: relative;
-  z-index: 8;
-}
-
-@media (min-width: 1024px) {
-  .home-hero-wrap {
-    position: absolute;
-    top: 49%;
-    left: 3.8%;
-    transform: translateY(-50%);
-    width: clamp(336px, 30.2%, 440px);
-    pointer-events: auto;
-  }
-}
-
-.home-hero {
-  position: relative;
-  margin: 0;
-  padding: 0;
-}
-
-.home-hero__title {
-  font-size: clamp(2.05rem, 2.65vw, 2.85rem);
-  font-weight: var(--weight-semibold);
-  line-height: 1.08;
-  letter-spacing: -0.032em;
-  color: var(--text-primary);
-  margin: 0 0 14px;
-  max-width: 18ch;
-  text-wrap: balance;
-}
-
-.home-hero__serif {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-optical-sizing: auto;
-  font-weight: var(--weight-regular);
-  color: var(--accent);
-  letter-spacing: -0.015em;
-  padding-right: 0.04em;
-}
-
-.home-hero__lead {
-  font-size: clamp(0.95rem, 1.08vw, 1.08rem);
-  line-height: 1.54;
-  font-weight: var(--weight-regular);
-  color: #38332E;
-  max-width: 48ch;
-  margin: 0 0 18px;
-  text-wrap: pretty;
-}
-
-.home-hero__stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  max-width: 100%;
-  border-top: 1px solid rgba(28, 22, 18, 0.12);
-  align-items: stretch;
-}
-
-.home-hero__stats li {
-  display: flex;
-  flex-direction: column;
-}
-
-.home-hero__stats li + li .home-stat {
-  border-left: 1px solid rgba(28, 22, 18, 0.12);
-  padding-left: var(--space-3, 12px);
-}
-
-.home-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding: 10px 8px 0 0;
-  text-decoration: none;
-  color: inherit;
-  border-radius: var(--radius-xs);
-  height: 100%;
-  justify-content: flex-start;
-}
-
-.home-stat__value {
-  font-size: clamp(1.35rem, 1.75vw, 1.7rem);
-  font-weight: var(--weight-semibold);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-}
-
-.home-stat__label {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  letter-spacing: -0.005em;
-  line-height: 1.32;
-  color: #38332E;
-  margin-top: 2px;
-  white-space: normal;
-  text-wrap: pretty;
-}
-
-.home-stat:hover .home-stat__label {
-  color: var(--text-primary);
-}
-
-.home-stat:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-}
-
-@media (max-width: 640px) {
-  .home-hero__stats {
-    grid-template-columns: 1fr;
-  }
-  .home-hero__stats li + li .home-stat {
-    border-left: none;
-    padding-left: 0;
-    border-top: 1px solid rgba(28, 22, 18, 0.12);
-  }
-  .home-stat {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 12px;
-    padding-bottom: var(--space-3, 12px);
-  }
-}
-
-/* -------------------------------------------------------
    Centered Desk Scene Stage (Desktop >= 1024px)
    Shares the exact same 50% horizontal center axis as the 4-card arc
    and blends seamlessly into the cream page background (--bg: #F2EBE3)
@@ -993,12 +853,7 @@ body.is-home {
   }
 }
 
-/* Wall & floor kept completely free of murky shadows on bottom half */
-.desk-scene__wall-shadow {
-  display: none;
-}
-
-/* 3D Canvases: Background Furniture (z-index: auto so stage multiply shadows blend onto oak wood) & Foreground Character/Chair (z-index: 3) */
+/* 3D Canvases: Background Furniture (z-index: auto so stage multiply shadows blend onto oak wood) & Foreground Character/Chair (z-index: 4) */
 .desk-scene__bg-canvas,
 .desk-scene__char-canvas {
   position: absolute;
@@ -1014,7 +869,7 @@ body.is-home {
 }
 
 .desk-scene__char-canvas {
-  z-index: 3;
+  z-index: 4;
 }
 
 /* Hover/focus-only terracotta connector curves from visible monitor screen points up to card bottom centers */
@@ -1067,10 +922,6 @@ body.is-home {
   .desk-connectors-svg {
     display: none;
   }
-}
-
-.desk-scene__char-canvas {
-  z-index: 4;
 }
 
 /* -------------------------------------------------------

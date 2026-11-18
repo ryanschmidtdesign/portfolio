@@ -60,7 +60,7 @@
       ]
     },
     {
-      "source": "/assets/(case-studies|images|icons|logo)/(.*)",
+      "source": "/assets/(case-studies|desk-scene|images|icons|logo)/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]

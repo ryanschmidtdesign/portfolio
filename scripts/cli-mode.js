@@ -1076,9 +1076,11 @@
                     const list = getActivePrompts();
                     promptIndex = 0;
                     copy.textContent = list[0] || STATIC_PLACEHOLDER;
-                    track.classList.remove('is-restarting');
+                    copy.style.animation = 'none';
+                    caret.style.animation = 'none';
                     void track.offsetWidth;
-                    track.classList.add('is-restarting');
+                    copy.style.animation = '';
+                    caret.style.animation = '';
                 }
             });
         });
