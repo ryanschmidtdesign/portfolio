@@ -637,9 +637,12 @@ function getDeterministicAnswer(intent, kb) {
     case "looking_for": {
       const status = lookingFor.status || "Open to the right opportunity.";
       const roles = Array.isArray(lookingFor.target_roles_ranked)
-        ? lookingFor.target_roles_ranked.slice(0, 5).join(", ")
-        : "UX Engineer, Senior Product Designer, Staff Product Designer, and AI Product Designer roles";
-      return `${status} Ryan is especially interested in roles where design and engineering share a seat, including ${roles}.`;
+        ? lookingFor.target_roles_ranked.slice(0, 6).join(", ")
+        : "Senior, Lead, or Staff Product Designer, UX Engineer, and AI Product Designer roles";
+      const pmNote = /product manag/i.test(roles)
+        ? ""
+        : " He is also open to Associate or Mid-level Product Management roles, grounded in authoring PRDs and prompt specs and shaping roadmap priorities at i4cp, partnering with PMs on discovery and delivery at D-Tools, and validating requirements with coded Cursor prototypes.";
+      return `${status} Ryan is especially interested in roles where design and engineering share a seat, including ${roles}.${pmNote}`;
     }
     case "meta_qa": {
       const match = metaQa.find(item => /are you an ai/i.test(item.q || ""));
@@ -1380,11 +1383,16 @@ function buildPointsOfViewContext(kb, lastUserMsg = "", force = false) {
 function buildLookingForContext(kb) {
   const lf = kb?.looking_for;
   if (!lf) return "";
+  const hasPmTarget = Array.isArray(lf.target_roles_ranked) &&
+    lf.target_roles_ranked.some(r => /product manag/i.test(String(r)));
   const lines = [
     "### WHAT RYAN IS LOOKING FOR",
     lf.status ? `Status: ${lf.status}` : "",
     Array.isArray(lf.target_roles_ranked) && lf.target_roles_ranked.length
       ? `Target roles (ranked): ${lf.target_roles_ranked.join(", ")}` : "",
+    !hasPmTarget
+      ? "Additional role interest: Also open to Associate or Mid-level Product Management roles (alongside Senior/Lead/Staff Product Designer and UX Engineer roles), grounded in authoring PRDs/prompt specs and roadmap prioritization at i4cp, partnering with PMs on discovery and delivery at D-Tools, and validating requirements early with coded Cursor prototypes."
+      : "",
     Array.isArray(lf.what_matters) && lf.what_matters.length
       ? `What matters:\n- ${lf.what_matters.join("\n- ")}` : "",
     lf.location_pref ? `Location: ${lf.location_pref}` : "",
@@ -1422,16 +1430,31 @@ function buildEvidenceByRoleContext(kb, lastUserMsg = "") {
   const roleMatchers = [
     { key: "ux_engineer", patterns: [/\bux engineer\b/i, /\bdesign engineer\b/i, /\bfront[- ]?end\b/i, /\bprototype in code\b/i] },
     { key: "staff_product_designer", patterns: [/\bstaff product designer\b/i, /\bstaff designer\b/i, /\bsenior product designer\b/i, /\bplatform designer\b/i] },
-    { key: "ai_product_designer", patterns: [/\bai product designer\b/i, /\bai product role\b/i, /\bllm product\b/i, /\bai ux\b/i] }
+    { key: "ai_product_designer", patterns: [/\bai product designer\b/i, /\bai product role\b/i, /\bllm product\b/i, /\bai ux\b/i] },
+    { key: "product_manager", patterns: [/\b(associate |mid[- ]?level )?product manag(er|ement)\b/i, /\bapm\b/i, /\bpm role\b/i, /\bpm fit\b/i] }
   ];
+  const pmFallbackBlock = {
+    best_cases: ["member-portal-overhaul", "dashboard", "inventory"],
+    strengths: [
+      "Open to Associate or Mid-level Product Management roles alongside Senior/Lead/Staff Product Designer and UX Engineer roles.",
+      "Authors PRDs and prompt specs and shapes roadmap priorities directly with executive stakeholders.",
+      "Validates product requirements early using coded Cursor prototypes before engineering commits sprint capacity."
+    ],
+    proof: [
+      "At i4cp, established the first user research practice, authored PRDs/prompt specs, and prioritized roadmap work around the Ahri conversational AI search experience (+500% AI sessions, 2x daily active usage).",
+      "At D-Tools, partnered closely with PMs on discovery, scoping, and delivery across five Cloud modules (AI-Powered Dashboards: 71% multi-dashboard adoption and +64% sustained dashboard views; Real-Time Inventory MVP: +8% recurring revenue).",
+      "Shipped HTML/CSS/JS prototypes in Cursor to validate requirements before engineering builds, saving ~4 hours of engineering QA per week."
+    ]
+  };
   const matched = roleMatchers
     .filter(r => r.patterns.some(p => p.test(t)))
     .map(r => r.key)
-    .filter(k => evidence[k]);
+    .filter(k => evidence[k] || k === "product_manager");
   if (!matched.length) return "";
   const lines = ["### EVIDENCE BY ROLE (use when a specific role is named)"];
   for (const key of matched.slice(0, 2)) {
-    const block = evidence[key];
+    const block = evidence[key] || (key === "product_manager" ? pmFallbackBlock : null);
+    if (!block) continue;
     lines.push(`\n## ${key.replace(/_/g, " ")}`);
     if (Array.isArray(block.best_cases) && block.best_cases.length) {
       lines.push(`Best cases: ${block.best_cases.join(", ")}`);
@@ -1553,9 +1576,30 @@ function buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks = [], 
   if (intent === "role_fit" || detectFitIntent(lastUser)) {
     const companyHint = cleanHint(extractCompanyHint(lastUser));
     const roleHint = cleanHint(extractRoleHint(lastUser));
+    const isPmQuery = /\b(associate |mid[- ]?level )?product manag(er|ement)\b|\bapm\b|\bpm\s+(role|fit|position)\b/i.test(lastUser);
+    if (isPmQuery) {
+      return assistantPayload({
+        answer: [
+          "Alongside Senior, Lead, and Staff Product Designer and UX Engineer roles, Ryan is also open to **Associate or Mid-level Product Management** roles where hands-on discovery, requirements validation, and close engineering partnership matter.",
+          "- At **i4cp**, he authored PRDs and prompt specs, built the organization's first user research practice, and worked with executive stakeholders on roadmap prioritization around the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% AI sessions** and **2× daily active usage**).",
+          "- At **D-Tools**, he partnered closely with PMs on discovery, scoping, and delivery across five Cloud modules, helping ship [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**, **+64% sustained dashboard views**) and the [Real-Time Inventory MVP](/pages/inventory.html) (**+8% recurring revenue**).",
+          "- He also validates product requirements early with coded prototypes in Cursor before engineering builds, saving roughly 4 hours of engineering QA per week."
+        ].join("\n"),
+        suggested_pills: [
+          "Walk me through the i4cp Member Portal overhaul",
+          "How did Ryan partner with PMs at D-Tools?"
+        ],
+        hire_intent: false,
+        context_cases: [
+          { title: "i4cp Member Portal Overhaul", url: "/pages/member-portal-overhaul.html" },
+          { title: "AI-Powered Dashboards (D-Tools)", url: "/pages/dashboard.html" }
+        ],
+        sources: []
+      });
+    }
     const targetPhrase = companyHint && !isBadHint(companyHint)
       ? `for ${companyHint}`
-      : (roleHint && !isBadHint(roleHint) ? `for a ${roleHint} role` : "for Senior, Lead, or Staff Product Design and UX Engineer roles");
+      : (roleHint && !isBadHint(roleHint) ? `for a ${roleHint} role` : "for Senior, Lead, or Staff Product Design and UX Engineer roles (and is also open to Associate or Mid-level Product Management roles)");
     return assistantPayload({
       answer: [
         `Ryan is a strong match ${targetPhrase} because he pairs 6+ years of enterprise B2B systems design with hands-on front-end engineering.`,
@@ -2462,7 +2506,7 @@ VOICE & CRAFT
 
 CORE PHILOSOPHY & POSITIONING
 - Building designs in code as well as Figma is the modern standard for product design. Ryan bridges system architecture in Figma with production HTML, CSS, JavaScript, and React in code.
-- Target roles: Senior Product Designer, Lead Product Designer, Staff Product Designer, and UX Engineer.
+- Target roles: Senior Product Designer, Lead Product Designer, Staff Product Designer, and UX Engineer. He is also open to Associate or Mid-level Product Management roles, grounded in his experience authoring PRDs and prompt specs and shaping roadmap priorities at i4cp, partnering with PMs on discovery and delivery across five Cloud modules at D-Tools, and validating product requirements early with coded Cursor prototypes.
 
 LENGTH & SUBSTANCE
 - For simple greetings (e.g. "Hello", "Hi", "Hey there"), reply warmly and conversationally in 1-2 sentences, inviting them to explore Ryan's case studies, UX engineering background, or role fit.
@@ -2664,7 +2708,7 @@ export default async function handler(req, res) {
         if (pasted) externalJd = pasted;
       }
       if (externalJd?.error && !externalJd?.excerpt) {
-        const gracefulJdNote = "I couldn't load that job posting link directly (some job boards block automated readers), so feel free to paste the role description or company name right here and I'll map Ryan's experience to it. In the meantime, Ryan typically targets **Senior, Lead, and Staff Product Designer** or **UX Engineer** roles where he can pair enterprise systems design with production code—like his [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% AI sessions**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**).";
+        const gracefulJdNote = "I couldn't load that job posting link directly (some job boards block automated readers), so feel free to paste the role description or company name right here and I'll map Ryan's experience to it. In the meantime, Ryan typically targets **Senior, Lead, and Staff Product Designer** or **UX Engineer** roles where he can pair enterprise systems design with production code, and he's also open to **Associate or Mid-level Product Management** roles grounded in his PRD/prompt-spec authoring, roadmap prioritization at i4cp, and PM discovery partnership at D-Tools (like his [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) at **+500% AI sessions** and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) at **71% multi-dashboard adoption**).";
         return sendChatResponse(res, wantsStream, {
           answer: gracefulJdNote,
           suggested_pills: [
@@ -2681,7 +2725,7 @@ export default async function handler(req, res) {
       }
 
       if (!externalJd && !fitQuestionHasContext(lastUser)) {
-        const askForRole = "I'd love to map Ryan's background to your team—if you share the company name, role title, or paste the job description, I can tailor the breakdown to your exact stack. Broadly, Ryan is strongest in **Senior, Lead, or Staff Product Designer** and **UX Engineer** roles involving complex B2B workflows, AI product experiences, and design systems, backed by shipped outcomes like **+500% AI sessions at i4cp** and **92% engineer adoption** on his **100+ component design system at D-Tools**.";
+        const askForRole = "I'd love to map Ryan's background to your team: if you share the company name, role title, or paste the job description, I can tailor the breakdown to your exact stack. Broadly, Ryan is strongest in **Senior, Lead, or Staff Product Designer** and **UX Engineer** roles involving complex B2B workflows, AI product experiences, and design systems, and he is also open to **Associate or Mid-level Product Management** roles grounded in authoring PRDs/prompt specs and roadmap prioritization at i4cp, partnering with PMs on discovery and delivery at D-Tools, and validating requirements with coded Cursor prototypes. Shipped outcomes include **+500% AI sessions at i4cp** and **92% engineer adoption** on his **100+ component design system at D-Tools**.";
         return sendChatResponse(res, wantsStream, {
           answer: askForRole,
           suggested_pills: [

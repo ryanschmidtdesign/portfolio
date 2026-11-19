@@ -67,7 +67,7 @@
     "one_liner": "Senior Product Designer who builds and tests coded prototypes in Cursor to resolve design questions before engineering starts.",
     "elevator_30s": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. He builds and tests coded prototypes in Cursor to resolve design questions before engineering starts. Sole designer at i4cp; previously owned UX across five D-Tools Cloud modules as the platform grew from 6,500 to 18,000 active users.",
     "bio_75_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. He builds and tests coded prototypes in Cursor to resolve design questions before engineering starts. Sole designer at i4cp; previously owned UX across five D-Tools Cloud modules as active users grew from 6,500 to 18,000. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
-    "bio_150_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. As the sole designer at i4cp (Institute for Corporate Productivity), he owns platform experience across the member portal and internal admin tools, designing Ahri conversational AI (+500% adoption increase and 2x daily active users), replacing legacy Bootstrap UI patterns with a CSS token system across 2 core platforms to give 4 developers one shared set of standardized components, and shipping coded prototypes in Cursor saving ~4 hours QA weekly. Previously, he owned UX across five D-Tools Cloud modules as the platform scaled from 6,500 to 18,000 active users, designing customizable executive dashboards and deterministic AI summaries (71% multi-dashboard adoption, +64% sustained weekly views), a real-time inventory MVP (+8% recurring revenue, 8% YoY adoption growth), and a 100+ component design system with 92% engineering adoption. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
+    "bio_150_words": "Ryan Schmidt is a Senior Product Designer specializing in complex B2B SaaS, data-heavy desktop workflows, and design systems. As the sole designer at i4cp (Institute for Corporate Productivity), he owns platform experience across the member portal and internal admin tools, designing Ahri conversational AI (+500% sessions and 2x daily active users), replacing legacy Bootstrap UI patterns with a CSS token system across 2 core platforms to give 4 developers one shared set of standardized components, and shipping coded prototypes in Cursor saving ~4 hours QA weekly. Previously, he owned UX across five D-Tools Cloud modules as the platform scaled from 6,500 to 18,000 active users, designing customizable executive dashboards and deterministic AI summaries (71% multi-dashboard adoption, +64% sustained weekly views), a real-time inventory MVP (+8% recurring revenue, 8% YoY adoption growth), and a 100+ component design system with 92% engineering adoption. Over 5 years at Designlab, he mentored 1,500+ designers across 400+ critique sessions. Based in Austin, TX.",
     "specialties": [
       "Information Architecture",
       "Design Systems",
@@ -198,7 +198,8 @@
       "Lead Product Designer",
       "Staff Product Designer",
       "UX Engineer",
-      "AI Product Designer"
+      "AI Product Designer",
+      "Associate or Mid-level Product Manager"
     ],
     "what_matters": [
       "Roles where designers build their designs in code as well as Figma (the new standard for product design).",
@@ -235,7 +236,7 @@
       "org": "Institute for Corporate Productivity (i4cp)",
       "dates": "February 2026–Present",
       "highlights": [
-        "Designed the conversational AI experience for Ahri, replacing legacy search with prompt-driven access to HR research and driving a 500% adoption increase and 2x daily active users.",
+        "Designed the conversational AI experience for Ahri, replacing legacy search with prompt-driven access to HR research and driving +500% sessions and 2x daily active users.",
         "Replaced rigid legacy Bootstrap UI patterns with a CSS token system across 2 core platforms, giving our 4 developers one shared set of standardized components.",
         "Shipped HTML/CSS/JS prototypes to staging through Cursor so developers could work from functioning examples, saving approximately 4 hours of engineering QA per week.",
         "Established the organization’s first user research practice and used findings to shape product priorities with executive stakeholders."
@@ -927,7 +928,7 @@
     },
     {
       "q": "Is Ryan open to new roles?",
-      "a": "Yes, for the right opportunity. He's especially interested in roles where design and engineering work share a seat, including **UX Engineer**, **Senior** or **Staff Product Designer**, and **AI Product Designer** roles."
+      "a": "Yes, for the right opportunity. He's especially interested in roles where design and engineering work share a seat, including **UX Engineer**, **Senior**, **Lead**, or **Staff Product Designer**, and **AI Product Designer** roles. He is also open to **Associate or Mid-level Product Management** roles grounded in his PRD/prompt-spec authoring and roadmap prioritization at i4cp, PM discovery partnership at D-Tools, and coded Cursor prototyping."
     },
     {
       "q": "Does Ryan code?",
@@ -991,7 +992,7 @@
   "deterministic_answers": {
     "greeting": "Hi! Would you like to discuss Ryan's case studies, his background in UX design and front-end code, or how his experience might fit an open role on your team?",
     "contact": "LinkedIn is the best path for an intro: https://www.linkedin.com/in/ryanschmidt1989/. Want a short note you can paste into a message?",
-    "looking_for": "Ryan is open to the right opportunity, specifically roles where designers build their designs in code as well as Figma: the new standard for modern product design. His strongest targets are Senior, Lead, or Staff Product Designer and UX Engineer roles.",
+    "looking_for": "Ryan is open to the right opportunity, specifically roles where designers build their designs in code as well as Figma: the new standard for modern product design. His strongest targets are Senior, Lead, or Staff Product Designer and UX Engineer roles, and he is also open to Associate or Mid-level Product Management roles grounded in his PRD/prompt-spec authoring, roadmap prioritization at i4cp, and PM discovery partnership at D-Tools.",
     "role_fit": "Ryan is well suited for Senior, Lead, or Staff Product Designer and UX Engineer roles. He pairs deep systems thinking and workflow research with production-grade front-end code (HTML, CSS, modern JavaScript, and AI tool integration).",
     "proof_points": "Ryan's strongest proof points are +500% Ahri sessions and doubled daily activity after the i4cp Member Portal overhaul, 100+ components with 92% engineer adoption across five Cloud modules, +64% sustained dashboard views (71% multi-dashboard adoption), and +8% company-wide MRR after the inventory MVP.",
     "ux_engineer_fit": "Yes. Ryan codes, prototypes in the browser, uses AI tooling daily, and works closely with engineers. The strongest evidence is his AI-Coding my Portfolio case, coded prototyping habits, and AI dashboard/product workflow thinking."
@@ -1672,7 +1673,7 @@
     {
       "intent": "looking_for",
       "prompt": "Is Ryan looking for a new role?",
-      "answer": "Yes, for the right opportunity. He's looking for teams where designers build their designs in code as well as Figma (whether that's titled **Senior or Staff Product Designer**, **Lead Product Designer**, or **UX Engineer**). If you have something close, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start the conversation."
+      "answer": "Yes, for the right opportunity. He's looking for teams where designers build their designs in code as well as Figma (whether that's titled **Senior or Staff Product Designer**, **Lead Product Designer**, or **UX Engineer**), and he's also open to **Associate or Mid-level Product Management** roles grounded in his discovery, PRD/prompt-spec, and roadmap prioritization work. If you have something close, https://www.linkedin.com/in/ryanschmidt1989/ is the fastest way to start the conversation."
     },
     {
       "intent": "tools_and_stack",
