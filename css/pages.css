@@ -541,17 +541,9 @@
   line-height: var(--lh-prose);
 }
 
-.case-study--inventory [aria-label="Decisions and trade-offs"] .section-divider:nth-of-type(2) {
-  margin-top: 72px;
-}
-
 /* -------------------------------------------------------
    Homepage: "Desk Scene" Above-the-Fold Editorial Stage
    --------------------------------------------------------*/
-:root {
-  --ease-desk: cubic-bezier(0.23, 1, 0.32, 1);
-}
-
 body.is-home {
   background-color: var(--bg);
   color: var(--text);

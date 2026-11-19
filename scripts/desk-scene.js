@@ -3,22 +3,19 @@
  * Lazily loaded after hero text and case study cards render.
  *
  * Architecture:
- * - Master Studio Coordinate Space (1480 x 1180 at full native 1376x768 resolution):
- *   Scaled up ~25% vs v121 and framed so monitor top sits cleanly below the inner cards
- *   while Ryan & chair finish fading smoothly ABOVE the bottom search bar at 1440x900 & 1280x800:
- *   - Monitor screen: --mon-left: 35.14%, --mon-top: 43.22%, --mon-width: 29.59%, --mon-height: 14.49%
- *   - Coffee mug rim: --mug-left: 67.64%, --mug-top: 60.25% (strictly left of lamp shade)
+ * - Master Studio Coordinate Space (1480 x 1180, rendered from 2x 2960x2360 WebP studio plates):
+ *   - Monitor screen, coffee mug rim, and cat overlays synced via CSS custom properties.
  * - Static background pass (#desk-bg-canvas, z-index: 1):
- *   Renders `assets/desk-scene/scene-bg.webp?v=123`.
+ *   Renders `assets/desk-scene/scene-bg.webp?v=155`.
  * - Live HTML monitor layer (#desk-monitor-screen, z-index: 2):
  *   Dynamically synced via `--mon-left`, `--mon-top`, `--mon-width`, `--mon-height`.
  * - Dynamic 3D foreground pass (#desk-char-canvas, z-index: 3):
- *   - `upperBodyGroup` (4.5s idle breathing + search-focus lean)
- *     - `headPivotGroup` (ONE unified contoured head+neck cutout `ryan-head.webp?v=123`,
- *       renderOrder 1, pivoted at the base of the neck hidden under the sweater collar,
- *       max +-8deg turn for outer cards, +-3.5deg for inner cards, 450ms ease)
- *     - `bodyMesh` (`ryan-body.webp?v=123`, renderOrder 2): sweater collar rim, left arm & hand,
- *       and chair sitting strictly in front of neck base & chin crease so zero seam shows.
+ *   - `upperBodyGroup` (locked stationary shoulders/torso/chair)
+ *     - `neckBedGroup` (`ryan-neck-bed.webp?v=155`, renderOrder 1, 38% cervical hinge)
+ *     - `headPivotGroup` (5-pose optical-flow morphed head `ryan-head*.webp?v=155` + `flow-atlas.bin?v=155`,
+ *       renderOrder 1.5, residual 62% cranial turn driven by critically-damped springs)
+ *     - `chinShadowMesh` (renderOrder 2.4, soft hand-jaw contact occlusion)
+ *     - `bodyMesh` (`ryan-body.webp?v=155`, renderOrder 3): sweater collar rim, left arm & hand, and chair.
  */
 
 import * as THREE from './vendor/three.module.min.js';
@@ -152,6 +149,15 @@ export function initDeskScene3D(options = {}) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.setClearColor(0x000000, 0);
+
+  charCanvas.addEventListener('webglcontextlost', (e) => {
+    e.preventDefault();
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    if (typeof options.onFallback === 'function') options.onFallback();
+  });
 
   const bgCtx = bgCanvas.getContext('2d');
   const fgScene = new THREE.Scene();

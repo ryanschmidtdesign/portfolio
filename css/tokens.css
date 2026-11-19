@@ -31,7 +31,6 @@
   /* ─── Font families (Architectural Neo-Grotesque + Editorial Serifs + Telemetry Mono) ─── */
   --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont,
     "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-display: var(--font-sans);
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
   --font-mono: "IBM Plex Mono", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
     Consolas, monospace;
@@ -45,7 +44,6 @@
   --fs-md: 1.328rem;     /* 21.25px */
   --fs-lg: 1.66rem;      /* 26.56px */
   --fs-xl: 2.075rem;     /* 33.2px */
-  --fs-2xl: 2.593rem;    /* 41.5px */
   --fs-3xl: 3.242rem;    /* 51.87px */
 
   /* Fluid display tier: pushing the extremes */
@@ -58,13 +56,11 @@
   --lh-md: 1.45;
   --lh-lg: 1.35;
   --lh-xl: 1.25;
-  --lh-2xl: 1.2;
   --lh-display: 1.05;
 
   /* Long-form reading rhythm: unchanged, these are good */
   --lh-prose: 1.7;
   --lh-tight: 1.15;
-  --lh-snug: 1.35;
   --lh-prose-loose: 1.75;
 
   /* ─── Tracking (body + display ramp) ────────────────────────────────── */
@@ -102,14 +98,10 @@
 
   /* Motion (elegant + consistent + spring physics) */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --ease-spring-snappy: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-1: 120ms;
+  --ease-desk: cubic-bezier(0.23, 1, 0.32, 1);
   --dur-2: 180ms;
   --dur-3: 300ms;
   --dur-4: 450ms;
-  --transition-fast: var(--dur-1) var(--ease-out);
-  --blur-md: blur(12px);
 
   /* === The Daytime Desert Canvas & Obsidian Hotel System === */
   --bg-sandstone-day: #F2EBE3;
@@ -131,7 +123,6 @@
   /* Obsidian Architecture System (Smoked Black Glass & Polished Basalt) */
   --obsidian-bg: #141210;
   --obsidian-glass: rgba(18, 15, 13, 0.88);
-  --obsidian-glass-heavy: rgba(16, 13, 11, 0.94);
   --obsidian-border: rgba(255, 255, 255, 0.11);
   --obsidian-border-strong: rgba(255, 255, 255, 0.19);
 
@@ -158,18 +149,6 @@
     0 1px 3px rgba(28, 22, 18, 0.04),
     inset 0 1px 0 rgba(255, 255, 255, 0.85);
 
-  --shadow-dock:
-    0 24px 60px -8px rgba(24, 18, 14, 0.46),
-    0 6px 18px rgba(24, 18, 14, 0.24),
-    0 0 0 1px rgba(0, 0, 0, 0.42),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-
-  --shadow-dock-focus:
-    0 28px 68px -8px rgba(24, 18, 14, 0.54),
-    0 6px 20px rgba(24, 18, 14, 0.28),
-    0 0 0 1px rgba(200, 90, 50, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-
   /* Unified Semantic Z-Index Hierarchy */
   --z-header: 9990;
   --z-dock: 9995;
@@ -190,12 +169,6 @@
     0 18px 40px -10px rgba(28, 20, 15, 0.11),
     0 0 0 1px rgba(200, 90, 50, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
-
-  --shadow-card-strong:
-    0 2px 4px rgba(28, 20, 15, 0.045),
-    0 16px 36px -10px rgba(28, 20, 15, 0.08),
-    0 0 0 1px var(--border-subtle),
-    inset 0 1px 0 rgba(255, 255, 255, 0.75);
 
   --divider-accent-width: 48px;
   
@@ -219,17 +192,13 @@
   --accent-text: #8C3B1E;       /* 7.2:1 AAA on #F3E8DF */
   --accent-text-hover: #732F16; /* 8.8:1 AAA on #F3E8DF */
   --accent-btn-fill: #AC4925;   /* 5.6:1 contrast with white text */
-  --accent-btn-hover: #8C3B1E;  /* 7.6:1 contrast with white text */
   --accent-soft: rgba(200, 90, 50, 0.08);
   --accent-strong: rgba(200, 90, 50, 0.24);
 
   /* === Status colors (WCAG 2.2 AA compliant contrast) === */
   --green: #166534;
   --green-soft: rgb(22 101 52 / 0.12);
-  --amber: #92400E;
-  --amber-soft: rgb(146 64 14 / 0.12);
   --red: #991B1B;
-  --red-soft: rgb(153 27 27 / 0.10);
 
   /* Focus */
   --focus-ring: 0 0 0 3px rgb(var(--rgb-cool) / 0.25), 0 0 16px rgb(var(--rgb-cool) / 0.35);
@@ -283,7 +252,7 @@
 /* =====================================================
    MOBILE OPTIMIZATIONS (< 768px)
    ===================================================== */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   :root {
     --container-max: 100%;
     --page-gutter: 1rem;

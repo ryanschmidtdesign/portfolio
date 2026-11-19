@@ -259,14 +259,6 @@
 
     document.body.classList.add('is-desk-intro');
     requestAnimationFrame(() => {
-      const lastCard = cards[cards.length - 1];
-      const runningAnims = lastCard && typeof lastCard.getAnimations === 'function'
-        ? lastCard.getAnimations()
-        : [];
-      if (!runningAnims.length && prefersReducedMotion) {
-        document.body.classList.remove('is-desk-intro');
-        return;
-      }
       setTimeout(() => {
         document.body.classList.remove('is-desk-intro');
         updateCardOrigins();
@@ -435,10 +427,6 @@
     document.body.classList.toggle('is-omnibar-focused', focused);
   }
 
-  if (omnibarInput) {
-    omnibarInput.addEventListener('focus', () => handleOmnibarFocus(true));
-    omnibarInput.addEventListener('blur', () => handleOmnibarFocus(false));
-  }
   if (omnibarForm) {
     omnibarForm.addEventListener('focusin', () => handleOmnibarFocus(true));
     omnibarForm.addEventListener('focusout', (e) => {
@@ -446,6 +434,9 @@
         handleOmnibarFocus(false);
       }
     });
+  } else if (omnibarInput) {
+    omnibarInput.addEventListener('focus', () => handleOmnibarFocus(true));
+    omnibarInput.addEventListener('blur', () => handleOmnibarFocus(false));
   }
 
   // =========================================================================
@@ -515,12 +506,7 @@
     if (prefersReducedMotion) {
       cards.forEach((card) => {
         card.style.setProperty('--card-px', '0px');
-        card.style.setProperty('--card-py', '0px');
       });
-      if (deskSceneEl) {
-        deskSceneEl.style.setProperty('--scene-px', '0px');
-        deskSceneEl.style.setProperty('--scene-py', '0px');
-      }
     }
   }
 

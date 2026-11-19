@@ -4,8 +4,7 @@
   "functions": {
     "api/chat.js": {
       "includeFiles": "assets/portfolio-kb.json",
-      "maxDuration": 60,
-      "memory": 1024
+      "maxDuration": 60
     }
   },
   "headers": [

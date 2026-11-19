@@ -128,7 +128,7 @@ function tileMark(size, tile = BG, hexR = null, rounded = true) {
 
 const defs = (v) =>
   `<!-- Variant #12 : two overlapping hexagons. Brand tokens: ` +
-  `#4F8CFF / #6BA3FF / #D9ECFF / #081423 / #0F1E33 -->\n${v}`;
+  `${BLUE} / ${BLUE_SECONDARY} / ${HIGHLIGHT} / ${BG} / ${BG_DARK} -->\n${v}`;
 
 const files = [];
 
@@ -156,7 +156,7 @@ const files = [];
 
 /** logo-light.svg : tuned for light surfaces */
 {
-  const mark = strokedMark(200, 200, 110, { color: "#3D6FFF", alpha: 0.10, r: 150 });
+  const mark = strokedMark(200, 200, 110, { color: BLUE, alpha: 0.10, r: 150 });
   files.push([
     "assets/logo/logo-light.svg",
     defs(
@@ -187,7 +187,7 @@ files.push(["favicon.svg", tileMark(64, BG)]);
     strokedMark(270, 315, 150, { color: HIGHLIGHT, alpha: 0.18, r: 230 }) +
     `<text x="510" y="300" font-family="'IBM Plex Sans', -apple-system, sans-serif" font-size="76" font-weight="700" fill="#FFFFFF" letter-spacing="-1">Ryan Schmidt</text>` +
     `<text x="512" y="355" font-family="'IBM Plex Sans', sans-serif" font-size="34" font-weight="500" fill="#DDD7CD" letter-spacing="0.5">Senior SaaS Product Designer</text>` +
-    `<text x="512" y="410" font-family="'Space Mono', monospace" font-size="22" font-weight="600" fill="${BLUE_SECONDARY}" letter-spacing="3">ryanschmidt.design</text>` +
+    `<text x="512" y="410" font-family="'IBM Plex Mono', monospace" font-size="22" font-weight="600" fill="${BLUE_SECONDARY}" letter-spacing="3">ryanschmidt.design</text>` +
     `</svg>`;
   files.push(["assets/logo/og-image.svg", defs(svg)]);
   files.push([

@@ -8,16 +8,16 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) => {
       return Promise.all(keys.map((key) => caches.delete(key)));
     }).then(() => {
-      return self.registration.unregister();
-    }).then(() => {
       return self.clients.claim();
     }).then(() => {
-      return self.clients.matchAll({ type: 'window' });
+      return self.registration.unregister();
+    }).then(() => {
+      return self.clients.matchAll({ includeUncontrolled: true, type: 'window' });
     }).then((clients) => {
       for (const client of clients) {
         try { client.navigate(client.url); } catch (_) {}
       }
-    })
+    }).catch(() => {})
   );
 });
 

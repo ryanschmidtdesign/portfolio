@@ -44,7 +44,7 @@ Accessibility
 - CSS
 - JavaScript
 - JSON
-- Three.js
+- Three.js (lightweight procedural desk canvas)
 
 Favor existing architecture when possible.
 

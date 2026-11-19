@@ -45,11 +45,16 @@
 
   // 2. Spring Magnetic Micro-Pull for Primary Controls
   if (hasFinePointer && !prefersReduced) {
-    const magneticTargets = document.querySelectorAll('.ai-mini-send, .home-omnibar-send, .subpage-omnibar-send');
+    const magneticTargets = document.querySelectorAll('#ai-mini-send, .home-omnibar-send');
     magneticTargets.forEach((el) => {
       let rafId = null;
+      let leaveTimer = null;
 
       el.addEventListener('pointerenter', () => {
+        if (leaveTimer) {
+          clearTimeout(leaveTimer);
+          leaveTimer = null;
+        }
         el.style.transition = 'transform 60ms linear';
       });
 
@@ -74,7 +79,9 @@
         if (rafId) cancelAnimationFrame(rafId);
         el.style.transform = '';
         el.style.transition = 'transform 280ms cubic-bezier(0.16, 1, 0.3, 1)';
-        setTimeout(() => {
+        if (leaveTimer) clearTimeout(leaveTimer);
+        leaveTimer = setTimeout(() => {
+          leaveTimer = null;
           el.style.transition = '';
         }, 280);
       });

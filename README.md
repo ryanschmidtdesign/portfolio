@@ -8,7 +8,7 @@ Senior Product Designer. Systems thinker. Builder.
 
 - **Hosting**: Vercel (serverless functions for API)
 - **Chat**: Gemini API (Google AI) via serverless function
-- **Knowledge base**: JSON-based portfolio index with ~31 case examples
+- **Knowledge base**: JSON-based portfolio index with 4 case studies and 31 curated answer examples
 - **Frontend**: Vanilla JS, semantic HTML, minimal dependencies
 - **Styling**: Modular CSS (`styles.css` as entry point → tokens, base, layout, components, pages, utilities)
 
@@ -31,7 +31,7 @@ Senior Product Designer. Systems thinker. Builder.
 | `css/utilities.css` | Utility classes (`.sr-only`) |
 | `sw.js` | Service worker cache purger — unregisters legacy workers and clears stale cache |
 | `vitest.config.js` | Test runner config |
-| `tests/api/chat.test.js` | Chat API test suite (63 tests) + KB integrity checks |
+| `tests/api/chat.test.js` | Chat API test suite (74 tests) + KB integrity checks |
 | `.github/workflows/ci.yml` | CI pipeline (lint, HTML validate, test) |
 | `_meta/AGENTS.md` | AI context — mission, audience, design principles |
 | `scripts/generate-logo.js` | Brand mark generator (Variant #12 — two overlapping hexagons) |
@@ -50,7 +50,7 @@ The chat uses Gemini (`gemini-2.5-flash`) for both general Q&A and "fit" scoring
 Key design decisions:
 
 - **Caching**: Fit responses are cached to reduce API calls
-- **No streaming fallback**: The UI shows a spinner until full response arrives
+- **SSE streaming with local fallback**: Streams responses via `text/event-stream` with deterministic local KB fallback when the LLM is unavailable
 - **Intent detection**: `detectFitIntent()` and `detectIntent()` route questions to the right prompt template
 - **Retry**: 429 (quota) errors retry once with a 1s delay
 
@@ -58,7 +58,7 @@ Key design decisions:
 
 ```bash
 # Set up environment
-cp .env.example .env  # Add GEMINI_API_KEY, etc.
+# Create .env.local with GEMINI_API_KEY (and optional CSE_API_KEY / CSE_ID)
 
 # Start dev server
 vercel dev

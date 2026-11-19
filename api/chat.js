@@ -1,5 +1,4 @@
 // Vercel serverless function: /api/chat.js
-// Ported from netlify/functions/portfolio-chat.js
 // Gemini only. Grok/xAI code removed: kept in git history if needed.
 
 import fs from "node:fs";
@@ -2495,7 +2494,6 @@ export default async function handler(req, res) {
     const pageContext = body.pageContext || null;
     const sectionContext = body.sectionContext || null;
     const answerStyle = body.answerStyle || "concise";
-    const sessionToken = String(body.sessionToken || "").slice(0, 128) || null;
 
     lastUser = String([...messages].reverse().find(m => m.role === "user")?.content || "").slice(0, MAX_IN_CHARS);
     const pastedJd = extractPastedJobDescription(lastUser);
@@ -2541,9 +2539,8 @@ export default async function handler(req, res) {
       const urlObj = extractFirstUrl(lastUser);
       if (urlObj) {
         externalJd = await fetchJobDescriptionFromUrl(urlObj);
-      } else {
-        const pasted = extractPastedJobDescription(lastUser);
-        if (pasted) externalJd = pasted;
+      } else if (pastedJd) {
+        externalJd = pastedJd;
       }
       if (externalJd?.error && !externalJd?.excerpt) {
         const gracefulJdNote = "I couldn't load that job posting link directly (some job boards block automated readers), so feel free to paste the role description or company name right here and I'll map Ryan's experience to it. In the meantime, Ryan typically targets **Senior, Lead, and Staff Product Designer** or **UX Engineer** roles where he can pair enterprise systems design with production code, and he's also open to **Associate or Mid-level Product Management** roles grounded in his PRD/prompt-spec authoring, roadmap prioritization at i4cp, and PM discovery partnership at D-Tools (like his [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) at **+500% AI sessions** and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) at **71% multi-dashboard adoption**).";

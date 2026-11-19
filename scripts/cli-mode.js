@@ -304,7 +304,6 @@
                     white-space: nowrap;
                 }
 
-                .rs-cmd-kpi--cobalt,
                 .rs-cmd-kpi--terracotta {
                     background: rgba(200, 90, 50, 0.15);
                     color: #E07844;
@@ -481,7 +480,6 @@
                     badge: 'Case Study',
                     kpi: '+64% Views',
                     kpiType: 'terracotta',
-                    targetPath: 'pages/dashboard.html',
                     keywords: 'dashboard bi analytics d-tools cloud opportunity signals custom dashboards ai summaries kpi pipeline b2b data visualization metrics revenue 71% sustained views',
                     action: () => { window.location.href = `${prefix}dashboard.html`; }
                 },
@@ -494,7 +492,6 @@
                     badge: 'Case Study',
                     kpi: '+500% AI',
                     kpiType: 'terracotta',
-                    targetPath: 'pages/member-portal-overhaul.html',
                     keywords: 'i4cp member portal ai search synthesis rag overhaul enterprise research membership 500% sessions daily activity',
                     action: () => { window.location.href = `${prefix}member-portal-overhaul.html`; }
                 },
@@ -507,7 +504,6 @@
                     badge: 'Case Study',
                     kpi: '+8% ARR',
                     kpiType: 'emerald',
-                    targetPath: 'pages/inventory.html',
                     keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain warehouse enterprise 8% mrr recurring revenue',
                     action: () => { window.location.href = `${prefix}inventory.html`; }
                 },
@@ -520,7 +516,6 @@
                     badge: 'Architecture',
                     kpi: 'Zero-Build',
                     kpiType: 'slate',
-                    targetPath: 'pages/ai-coding-portfolio.html',
                     keywords: 'portfolio architecture zero-build vector search grounding coding tokens design systems vanilla web components cursor',
                     action: () => { window.location.href = `${prefix}ai-coding-portfolio.html`; }
                 },
@@ -533,7 +528,6 @@
                     title: 'Selected Work',
                     sub: 'Four enterprise case studies',
                     badge: 'Work',
-                    targetPath: 'index.html#work',
                     keywords: 'work selected projects case studies shipped outcomes portfolio overview index',
                     action: () => {
                         this.close();
@@ -552,7 +546,6 @@
                     title: 'About Ryan Schmidt',
                     sub: 'Background, seniority, and personal craft',
                     badge: 'About',
-                    targetPath: 'pages/about.html',
                     keywords: 'about bio leadership experience career history philosophy background ryan schmidt mentor designlab 6+ years',
                     action: () => { window.location.href = `${prefix}about.html`; }
                 },
@@ -563,7 +556,6 @@
                     title: 'Homepage',
                     sub: 'Senior B2B SaaS Product Designer',
                     badge: 'Home',
-                    targetPath: 'index.html#top',
                     keywords: 'home index start main portfolio top hero',
                     action: () => {
                         this.close();
@@ -584,7 +576,6 @@
                     title: 'Resume (PDF)',
                     sub: 'Download or view dossier in new tab',
                     badge: 'PDF ↗',
-                    targetPath: 'assets/ryan-schmidt-resume.pdf',
                     keywords: 'resume cv pdf download hire background experience skills ryan schmidt',
                     action: () => {
                         window.open(resumePath, '_blank', 'noopener');
@@ -598,7 +589,6 @@
                     title: 'Email',
                     sub: 'ryanschmidt1989@gmail.com',
                     badge: 'Email ↗',
-                    targetPath: 'mailto:ryanschmidt1989@gmail.com',
                     keywords: 'email contact hire reach out message ryanschmidt1989 gmail write direct inbox mailto',
                     action: () => {
                         window.location.href = 'mailto:ryanschmidt1989@gmail.com';
@@ -612,7 +602,6 @@
                     title: 'LinkedIn',
                     sub: 'linkedin.com/in/ryanschmidt1989',
                     badge: 'LinkedIn ↗',
-                    targetPath: 'linkedin.com/in/ryanschmidt1989',
                     keywords: 'linkedin contact hire reach out message connect social network',
                     action: () => {
                         window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
@@ -649,7 +638,8 @@
         bindEvents() {
             // Global ⌘K / Ctrl+K keyboard shortcut
             window.addEventListener('keydown', (e) => {
-                if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                const key = (e.key || '').toLowerCase();
+                if ((e.metaKey || e.ctrlKey) && key === 'k') {
                     e.preventDefault();
                     this.toggle();
                 } else if (e.key === 'Escape' && this.isOpen) {
@@ -751,7 +741,6 @@
                     title: `Ask AI: "${raw}"`,
                     sub: 'Search Ryan’s case studies, shipped outcomes, and role fit',
                     badge: 'Ask AI ↵',
-                    targetPath: 'AI Assistant',
                     action: () => {
                         this.triggerAIChat(raw);
                     }
@@ -946,7 +935,7 @@
         portal: {
             desktop: [
                 "Ask AI about Ryan's work...",
-                "How did Ryan lift AI search adoption by 500%?",
+                "How did Ryan lift AI search sessions by 500%?",
                 "Why progressive disclosure over flat navigation?",
                 "What was the hardest tradeoff on this portal?",
                 "How did member task research shape the IA?"

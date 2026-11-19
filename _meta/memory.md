@@ -32,7 +32,7 @@ Personal portfolio site for Ryan Schmidt, Senior SaaS Product Designer. Static H
 - CLS / Performance optimizations: Added intrinsic image dimensions to all polaroid images, preconnect tags, font display swapping.
 - Cleaned dead code and removed unused files: Deleted `scripts/home-titles.js`, removed obsolete `.home-logo`, `.home-stage-block`, `audio-context-*`, WebGL fallback styles, and duplicate CSS properties.
 - Heading hierarchy validation: Zero skipped heading levels on all 7 HTML pages with strictly one accessible `<h1>`.
-- Vitest suite passing 100% (63 unit tests green).
+- Vitest suite passing 100% (74 unit tests green).
 
 ## File Structure
 - `index.html` (root) — home page with editorial hero, interactive cats illustration, case studies grid, and omnibar

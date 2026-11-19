@@ -3,22 +3,6 @@
   const HOST_ID = 'rs-chat-widget-root';
   if (document.getElementById(HOST_ID)) return; // avoid double injection
 
-
-
-  // Session token: persists per tab (sessionStorage), generated once per session
-  const SESSION_KEY = 'rs_chat_session_token';
-  function getOrCreateSessionToken() {
-    try {
-      let token = sessionStorage.getItem(SESSION_KEY);
-      if (token) return token;
-      token = crypto.randomUUID ? crypto.randomUUID() : 's_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
-      sessionStorage.setItem(SESSION_KEY, token);
-      return token;
-    } catch {
-      return 's_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
-    }
-  }
-
   // 1) Host + Shadow
   const host = document.createElement('div');
   host.id = HOST_ID;
@@ -109,7 +93,6 @@
         pointer-events: none;
         z-index: 4;
       }
-      .panel-reticle { display: none !important; }
       .panel.open {
         visibility: visible;
         opacity: 1;
@@ -996,26 +979,6 @@ if (savedHist.length > 0) {
       el.style.transform = '';
     });
 
-    // 1-click conversational triggers anywhere on the page
-    document.addEventListener('click', (e) => {
-      const askBtn = e.target.closest('[data-ask-ai]');
-      if (askBtn) {
-        e.preventDefault();
-        e.stopPropagation();
-        const prompt = (askBtn.getAttribute('data-ask-ai') || askBtn.textContent || '').trim();
-        if (prompt) {
-          openPanel();
-          // Avoid duplicate identical user/bot bubbles if the exact prompt was just asked
-          const lastUserMsg = [...state.history].reverse().find(m => m.role === 'user');
-          if (inFlight || (lastUserMsg && lastUserMsg.content.trim().toLowerCase() === prompt.toLowerCase())) {
-            scrollToBottom(true);
-            return;
-          }
-          send(prompt);
-        }
-      }
-    });
-
     function handleOmnibarCommand(val) {
       if (!val) return false;
       const lower = val.trim().toLowerCase();
@@ -1136,6 +1099,7 @@ if (savedHist.length > 0) {
   let streamAborted = false;
   let currentController = null;
   let lastInteraction = Date.now();
+  let idlePillsReset = false;
 
   const PAGE_PILLS = {
     '/dashboard.html': [
@@ -1159,12 +1123,12 @@ if (savedHist.length > 0) {
     ],
     '/member-portal-overhaul.html': [
       "Why progressive disclosure over flat navigation?",
-      "How did Ryan lift Ahri AI adoption by 500%?",
+      "How did Ryan lift Ahri AI sessions by 500%?",
       "What was the hardest tradeoff?"
     ],
     '/': [
       "What did Ryan ship at D-Tools? (71% adoption, +64% views)",
-      "How did he lift AI adoption by 500% at i4cp?",
+      "How did he lift AI sessions by 500% at i4cp?",
       "Walk me through the real-time inventory MVP (+8% ARR)",
       "Is Ryan a fit for a Senior / Staff Product Designer role?"
     ]
@@ -1569,12 +1533,13 @@ if (savedHist.length > 0) {
   
       async function streamNode(node, parent) {
         if (streamAborted) return;
-        
+
         if (node.nodeType === Node.TEXT_NODE) {
           const text = node.textContent;
           const textNode = document.createTextNode('');
+          parent.appendChild(cursor);
           parent.insertBefore(textNode, cursor);
-  
+
           const step = 6;
           for (let i = 0; i < text.length; i += step) {
             if (streamAborted) return;
@@ -1584,14 +1549,15 @@ if (savedHist.length > 0) {
           }
           return;
         }
-  
+
         if (node.nodeType === Node.ELEMENT_NODE) {
           const el = document.createElement(node.tagName);
           for (const attr of node.attributes) {
             el.setAttribute(attr.name, attr.value);
           }
+          parent.appendChild(cursor);
           parent.insertBefore(el, cursor);
-  
+
           const isVoid = ['IMG', 'BR', 'HR'].includes(node.tagName.toUpperCase());
           if (!isVoid) {
             for (const child of Array.from(node.childNodes)) {
@@ -1723,7 +1689,6 @@ if (savedHist.length > 0) {
       if (desc) pageContext.description = desc;
 
       const payload = {
-        sessionToken: getOrCreateSessionToken(),
         messages: state.history.slice(-12),
         answerStyle,
         pageContext
@@ -1830,15 +1795,15 @@ if (savedHist.length > 0) {
         if (qLower.includes('research') || qLower.includes('process')) {
           return "Ryan's process starts with structural clarity before visual polish: he maps the underlying data model and user jobs-to-be-done with PMs and engineers, validates information architecture with real users, and prototypes in both Figma and code. That approach turned a decade of tangled content at [i4cp](/pages/member-portal-overhaul.html) into a 4-pillar system that boosted **Ahri AI sessions by +500%**.";
         }
-        if (qLower.includes('fit') || qLower.includes('role') || qLower.includes('staff') || qLower.includes('senior') || qLower.includes('ux engineer')) {
-          return "Ryan brings 6+ years of experience leading product design and front-end execution for complex B2B SaaS platforms, design systems, and AI workflows. He pairs architectural thinking in Figma with production HTML, CSS, JavaScript, and React—backed by shipped outcomes like **+500% AI sessions at i4cp**, **92% engineer adoption** on his **100+ component design system**, and **71% multi-dashboard adoption** at D-Tools.";
+        if (qLower.includes('fit') || qLower.includes('role') || qLower.includes('staff') || qLower.includes('senior') || qLower.includes('ux engineer') || qLower.includes('product manager') || qLower.includes('product management') || qLower.includes('apm')) {
+          return "Ryan brings 6+ years of experience leading product design and front-end execution for complex B2B SaaS platforms, design systems, and AI workflows, targeting **Senior, Lead, or Staff Product Designer** and **UX Engineer** roles. He is also open to **Associate or Mid-level Product Management** roles grounded in his PRD/prompt-spec authoring and roadmap prioritization at i4cp, PM discovery partnership at D-Tools, and coded Cursor prototyping. Shipped outcomes include **+500% AI sessions at i4cp**, **92% engineer adoption** on his **100+ component design system**, and **71% multi-dashboard adoption** at D-Tools.";
         }
         const topicMatch = raw.match(/\b(?:does\s+ryan\s+(?:like|love|enjoy|play|watch|know\s+about|follow)|is\s+ryan\s+(?:into|interested\s+in|a\s+fan\s+of))\s+([^?.!]+)/i);
         if (topicMatch) {
           const subject = topicMatch[1].trim();
-          return `Ryan hasn't mentioned ${subject} in his portfolio notes—outside of work in Austin, you'll usually find him playing ice hockey twice a week, playing guitar and bass, dialing in his morning espresso, or taking photos of his son. On the professional side, he's a Senior Product Designer and UX Engineer with 6+ years of experience turning complex B2B and AI workflows into clear, high-adoption products, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**, **2× daily activity**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**, **+64% sustained dashboard views**).`;
+          return `Ryan hasn't mentioned ${subject} in his portfolio notes. Outside of work in Austin, you'll usually find him playing ice hockey twice a week, playing guitar and bass, dialing in his morning espresso, or taking photos of his son. On the professional side, he's a Senior Product Designer and UX Engineer with 6+ years of experience turning complex B2B and AI workflows into clear, high-adoption products, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**, **2× daily activity**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**, **+64% sustained dashboard views**).`;
         }
-        return "That specific detail isn't in Ryan's public portfolio notes—outside the studio in Austin, he's usually on the ice playing hockey twice a week, playing guitar, or out photographing with his son. Professionally, Ryan is a Senior Product Designer and UX Engineer with 6+ years of experience shipping complex B2B SaaS systems, design token architectures, and AI-native workflows, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**), [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**, **+64% sustained dashboard views**), and a **100+ component design system** with **92% engineer adoption**.";
+        return "That specific detail isn't in Ryan's public portfolio notes. Outside the studio in Austin, he's usually on the ice playing hockey twice a week, playing guitar, or out photographing with his son. Professionally, Ryan is a Senior Product Designer and UX Engineer with 6+ years of experience shipping complex B2B SaaS systems, design token architectures, and AI-native workflows, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**), [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**, **+64% sustained dashboard views**), and a **100+ component design system** with **92% engineer adoption**.";
       }
 
       if (!data || typeof data !== 'object') {
@@ -1866,6 +1831,7 @@ if (savedHist.length > 0) {
       }
 
       lastInteraction = Date.now();
+      idlePillsReset = false;
 
       const html = parseMarkdown(sanitizeAnswer(ans));
       clearInterval(phraseInterval);
@@ -1977,7 +1943,7 @@ if (savedHist.length > 0) {
           const raw = String(text || '').trim();
           const topicMatch = raw.match(/\b(?:does\s+ryan\s+(?:like|love|enjoy|play|watch|know\s+about|follow)|is\s+ryan\s+(?:into|interested\s+in|a\s+fan\s+of))\s+([^?.!]+)/i);
           if (topicMatch) {
-            return `Ryan hasn't mentioned ${topicMatch[1].trim()} in his portfolio notes—outside of work in Austin, you'll usually find him playing ice hockey twice a week, playing guitar and bass, dialing in his morning espresso, or taking photos of his son. On the professional side, he's a Senior Product Designer and UX Engineer with 6+ years of experience turning complex B2B and AI workflows into clear, high-adoption products, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**, **2× daily activity**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**, **+64% sustained dashboard views**).`;
+            return `Ryan hasn't mentioned ${topicMatch[1].trim()} in his portfolio notes. Outside of work in Austin, you'll usually find him playing ice hockey twice a week, playing guitar and bass, dialing in his morning espresso, or taking photos of his son. On the professional side, he's a Senior Product Designer and UX Engineer with 6+ years of experience turning complex B2B and AI workflows into clear, high-adoption products, including the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions**, **2× daily activity**) and D-Tools [AI-Powered Dashboards](/pages/dashboard.html) (**71% multi-dashboard adoption**, **+64% sustained dashboard views**).`;
           }
           return "Ryan Schmidt is an Austin-based Senior Product Designer and UX Engineer with 6+ years of experience shipping complex B2B SaaS systems, design token architectures, and AI-native workflows. Highlights of his work include the [i4cp Member Portal Overhaul](/pages/member-portal-overhaul.html) (**+500% Ahri AI sessions** and **2× daily active usage**), [AI-Powered Dashboards](/pages/dashboard.html) at D-Tools (**71% multi-dashboard adoption**, **+64% sustained dashboard views**), and a **100+ component design system** that reached **92% engineer adoption**.";
         })();
@@ -1994,9 +1960,10 @@ if (savedHist.length > 0) {
     }
   }
 
-  // Pill reset timer - reset to page pills after 5 minutes of inactivity
+  // Pill reset timer - reset to page pills once after 5 minutes of inactivity
   setInterval(() => {
-    if (Date.now() - lastInteraction > 300000) {
+    if (!idlePillsReset && Date.now() - lastInteraction > 300000) {
+      idlePillsReset = true;
       setPagePills();
     }
   }, 30000);

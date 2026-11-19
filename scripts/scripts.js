@@ -107,10 +107,12 @@
     mutations.forEach((mutation) => {
       mutation.addedNodes.forEach((node) => {
         if (!(node instanceof HTMLElement)) return;
-        if (node.matches(revealSelector)) {
+        if (node.hasAttribute('data-reveal')) {
           observeElement(node);
         }
-        node.querySelectorAll?.(revealSelector).forEach(observeElement);
+        if (node.childElementCount > 0) {
+          node.querySelectorAll(revealSelector).forEach(observeElement);
+        }
       });
     });
   });
@@ -197,19 +199,6 @@
   metrics.forEach((el) => observer.observe(el));
 })();
 
-
-// Native standard browser navigation (zero interception, zero scroll-lock)
-
-// (Feature 2 removed - Image Lightbox was removed)
-// (Feature 3 removed - Read Time Estimator Badge was removed)
-// (Feature 8 removed - "Ask About This Section" chips no longer used)
-
-// ============================================================================
-// Feature 9: Subtle Grain / Noise Overlay (Phase 2)
-// ============================================================================
-// (Feature 11 removed - Progressive clip-path image wipe caused slow-loading appearance)
-
-// (Feature removed - Sticky Section Navigation Rail was removed)
 
 // ============================================================================
 // Shared interactive modules

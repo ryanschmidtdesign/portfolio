@@ -28,7 +28,7 @@ jobs:
         run: npx stylelint styles.css 2>/dev/null || echo "stylelint not available, skipping"
 
       - name: Check JS syntax
-        run: node --check scripts/rs-chat-widget.js scripts/cli-mode.js scripts/home-page.js scripts/magnetic.js scripts/image-splitter.js scripts/scripts.js api/chat.js && echo "JS syntax OK"
+        run: node --check scripts/rs-chat-widget.js scripts/cli-mode.js scripts/home-page.js scripts/desk-scene.js scripts/magnetic.js scripts/image-splitter.js scripts/scripts.js sw.js api/chat.js && echo "JS syntax OK"
 
       - name: Validate knowledge base integrity
         run: npm run validate:kb

@@ -106,6 +106,7 @@
         self.container.classList.add('is-dragging');
       }
       if (self.isDragging) {
+        if (!e.touches || !e.touches[0]) return;
         if (e.cancelable) e.preventDefault();
         self.onPointerMove(e.touches[0].clientX);
       }
@@ -139,6 +140,7 @@
 
   ImageSplitter.prototype.onPointerMove = function (clientX) {
     var rect = this.viewport.getBoundingClientRect();
+    if (!rect.width) return;
     var x = clientX - rect.left;
     var percent = (x / rect.width) * 100;
     percent = Math.max(0, Math.min(100, percent));

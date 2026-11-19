@@ -305,11 +305,6 @@
    Case study - responsive KPI & impact layout
    --------------------------------------------------------*/
 @media (max-width: 860px) {
-  .tldr-meta {
-    grid-template-columns: 1fr;
-    row-gap: var(--space-6);
-  }
-
   .kpis--hero {
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -1416,10 +1411,6 @@ main[data-reveal] {
   animation: dot-pulse 3s ease-in-out infinite;
 }
 
-.timeline-item--current::before {
-  animation: dot-pulse 2s ease-in-out infinite;
-}
-
 @keyframes dot-pulse {
 
   0%,
@@ -1452,6 +1443,7 @@ main[data-reveal] {
   background: var(--accent);
   border-color: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-soft);
+  animation: dot-pulse 2s ease-in-out infinite;
 }
 
 .timeline-item.timeline-item--current .timeline-date {

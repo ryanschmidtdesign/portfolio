@@ -9,7 +9,6 @@ import {
   isBadHint,
   extractRoleHint,
   fitQuestionHasContext,
-  cleanHint,
   sanitizeSources,
   buildMetricAllowlist,
   validateAnswerMetrics,

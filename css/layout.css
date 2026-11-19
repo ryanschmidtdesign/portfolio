@@ -363,26 +363,20 @@ body:not(.is-home) .site-main {
   padding-inline: var(--page-gutter);
 }
 
-/* Scroll anchors */
+/* Scroll anchors & consistent section padding
+   (fix: avoid double horizontal padding; containers handle inline padding) */
 .leadership-section,
 .builder-section,
 .about-section {
   scroll-margin-top: clamp(var(--space-4), 10vw, 72px);
+  padding-block: var(--page-margin, var(--space-section-md));
+  padding-inline: 0;
 }
 
 /* Parallax */
 [data-parallax] {
   will-change: transform;
   transition: transform 80ms linear;
-}
-
-/* Consistent section padding
-   (fix: avoid double horizontal padding; containers handle inline padding) */
-.leadership-section,
-.builder-section,
-.about-section {
-  padding-block: var(--page-margin, var(--space-section-md));
-  padding-inline: 0;
 }
 
 @media (max-width: 768px) {
