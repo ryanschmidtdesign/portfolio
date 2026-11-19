@@ -22,40 +22,6 @@ const CSE_API_KEY = process.env.CSE_API_KEY || "";
 const CSE_ID = process.env.CSE_ID || "";
 const LOG_WEBHOOK_URL = process.env.LOG_WEBHOOK_URL || "";
 
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://bquvmwvontiifejngvaz.supabase.co";
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
-
-const SUPABASE_HEADERS = SUPABASE_KEY ? {
-  "apikey": SUPABASE_KEY,
-  "Authorization": `Bearer ${SUPABASE_KEY}`,
-  "Content-Type": "application/json"
-} : null;
-
-async function supabaseFetch(path, options = {}, timeoutMs = 3000) {
-  if (!SUPABASE_HEADERS) return null;
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-    const resp = await fetch(`${SUPABASE_URL}${path}`, {
-      ...options,
-      signal: controller.signal,
-      headers: { ...SUPABASE_HEADERS, ...options.headers }
-    });
-    if (!resp.ok) {
-      const text = await resp.text().catch(() => "");
-      console.warn(`Supabase error ${resp.status} ${path}: ${text.slice(0, 200)}`);
-      return null;
-    }
-    return resp;
-  } catch (err) {
-    console.warn(`Supabase fetch failed (${path}): ${err?.message || "timeout"}`);
-    return null;
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 const DISALLOWED = [
   /\b(who should i vote for|trump|biden|democrat vs republican)\b/i,
   /\b(which religion is (right|true|best))\b/i,
@@ -71,7 +37,6 @@ const MAX_LINK_CHARS = 14000;
 // In-memory response cache and rate limiter (AI Gateway light)
 // -----------------------------------------------------------------------------
 const RESPONSE_CACHE = new Map();
-const SESSION_ID_CACHE = new Map();
 const RATE_LIMITS = new Map();
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
@@ -1767,13 +1732,10 @@ function buildLocalFallbackAnswer({ intent, lastUser, kb, retrievedChunks = [], 
 }
 
 // -----------------------------------------------------------------------------
-// Supabase vector + in-memory hybrid retrieval (Phase 3)
+// In-memory KB chunk retrieval
 // -----------------------------------------------------------------------------
 
-const EMBEDDING_MODELS = ["gemini-embedding-001", "text-embedding-004"];
-const embeddingCache = new Map();
 let LOCAL_CHUNKS_CACHE = null;
-let autoSeedTriggered = false;
 
 function buildAllKbChunks(kb) {
   if (!kb) return [];
@@ -1889,141 +1851,17 @@ function retrieveLocalKbChunks(kb, userText = "", matchCount = 4) {
   return scored.slice(0, matchCount).map(({ _hits, ...rest }) => rest);
 }
 
-async function autoSeedKbChunksIfEmpty(kb) {
-  if (autoSeedTriggered || !SUPABASE_HEADERS || !GEMINI_API_KEY) return;
-  autoSeedTriggered = true;
-  try {
-    const checkResp = await supabaseFetch("/rest/v1/kb_chunks?select=id&limit=1", { method: "GET" }, 2000);
-    if (!checkResp) return;
-    const existing = await checkResp.json().catch(() => []);
-    if (Array.isArray(existing) && existing.length > 0) return;
-
-    const chunks = buildAllKbChunks(kb);
-    for (const chunk of chunks.slice(0, 35)) {
-      const emb = await generateQueryEmbedding(chunk.chunk_text);
-      if (!emb) continue;
-      await supabaseFetch("/rest/v1/kb_chunks", {
-        method: "POST",
-        headers: { "Prefer": "return=minimal" },
-        body: JSON.stringify({
-          chunk_text: chunk.chunk_text,
-          source: chunk.source,
-          metadata: chunk.metadata || {},
-          embedding: emb
-        })
-      }, 2500);
-    }
-  } catch (e) {
-    console.warn("Background kb_chunks seed skipped:", e?.message || "error");
-  }
-}
-
-async function generateQueryEmbedding(text = "") {
-  if (!GEMINI_API_KEY || !GEMINI_API_KEY.trim()) return null;
-  const cleanText = String(text || "").trim().slice(0, 2000);
-  if (!cleanText) return null;
-
-  const cacheKey = cleanText.toLowerCase();
-  if (embeddingCache.has(cacheKey)) {
-    return embeddingCache.get(cacheKey);
-  }
-
-  for (const embModel of EMBEDDING_MODELS) {
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${embModel}:embedContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 2500);
-
-    try {
-      const resp = await fetch(endpoint, {
-        signal: controller.signal,
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: `models/${embModel}`,
-          content: { parts: [{ text: cleanText }] },
-          outputDimensionality: 768
-        })
-      });
-      clearTimeout(timer);
-
-      if (resp.ok) {
-        const data = await resp.json();
-        const values = data.embedding?.values || null;
-        if (values && Array.isArray(values)) {
-          if (embeddingCache.size > 100) {
-            const oldest = embeddingCache.keys().next().value;
-            embeddingCache.delete(oldest);
-          }
-          embeddingCache.set(cacheKey, values);
-          return values;
-        }
-      } else if (resp.status !== 404) {
-        break;
-      }
-    } catch (err) {
-      clearTimeout(timer);
-      console.warn(`Embedding request (${embModel}) failed: ${err?.message || "timeout"}`);
-    }
-  }
-  return null;
-}
-
 async function retrieveKbChunks(userText = "", options = {}, kbArg = null) {
   const {
     matchCount = 6,
-    similarityThreshold = 0.68,
     kb = kbArg || KB_FALLBACK
   } = options;
 
-  const localChunks = retrieveLocalKbChunks(kb, userText, 4);
-  if (!SUPABASE_HEADERS || !userText || String(userText).trim().length < 3) {
-    return localChunks;
-  }
-  if (localChunks.length >= 3 && (localChunks[0]?.similarity || 0) >= 0.8) {
-    return localChunks;
+  if (!userText || String(userText).trim().length < 3) {
+    return [];
   }
 
-  const embedding = await generateQueryEmbedding(userText);
-  if (!embedding || !Array.isArray(embedding)) return localChunks;
-
-  const resp = await supabaseFetch("/rest/v1/rpc/match_kb_chunks", {
-    method: "POST",
-    body: JSON.stringify({
-      query_embedding: embedding,
-      match_count: matchCount,
-      similarity_threshold: similarityThreshold
-    })
-  }, 2200);
-
-  if (!resp) return localChunks;
-
-  const rows = await resp.json().catch(() => []);
-  const vectorChunks = Array.isArray(rows)
-    ? rows
-        .filter(row => row && row.chunk_text)
-        .map(row => ({
-          chunk_text: String(row.chunk_text || ""),
-          source: String(row.source || ""),
-          metadata: row.metadata || {},
-          similarity: typeof row.similarity === "number" ? row.similarity : null
-        }))
-    : [];
-
-  if (vectorChunks.length === 0 && !autoSeedTriggered) {
-    // Trigger non-blocking background seed if table is empty
-    autoSeedKbChunksIfEmpty(kb).catch(() => {});
-  }
-
-  const seen = new Set();
-  const merged = [];
-  for (const c of [...vectorChunks, ...localChunks]) {
-    const key = c.chunk_text.slice(0, 120).toLowerCase();
-    if (seen.has(key)) continue;
-    seen.add(key);
-    merged.push(c);
-    if (merged.length >= matchCount) break;
-  }
-  return merged;
+  return retrieveLocalKbChunks(kb, userText, matchCount);
 }
 
 function buildRetrievedKbContext(chunks = []) {
@@ -2904,57 +2742,6 @@ export default async function handler(req, res) {
         retrievalChunks: retrievedChunks.length
       })
     ];
-
-    if (SUPABASE_HEADERS) {
-      const persistAnalytics = async () => {
-        let sessionId = sessionToken ? SESSION_ID_CACHE.get(sessionToken) || null : null;
-        if (sessionToken && !sessionId) {
-          const sessionResp = await supabaseFetch("/rest/v1/chat_sessions", {
-            method: "POST",
-            headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
-            body: JSON.stringify({
-              session_token: sessionToken,
-              page_url: String(pageContext?.url || "").slice(0, 512),
-              user_agent: String(req.headers["user-agent"] || "").slice(0, 256),
-              updated_at: new Date().toISOString()
-            })
-          }, 1200);
-
-          if (sessionResp) {
-            const sessionRows = await sessionResp.json().catch(() => []);
-            if (Array.isArray(sessionRows) && sessionRows.length > 0 && sessionRows[0].id) {
-              sessionId = sessionRows[0].id;
-              if (SESSION_ID_CACHE.size > 500) {
-                const oldest = SESSION_ID_CACHE.keys().next().value;
-                if (oldest) SESSION_ID_CACHE.delete(oldest);
-              }
-              SESSION_ID_CACHE.set(sessionToken, sessionId);
-            }
-          }
-        }
-
-        await supabaseFetch("/rest/v1/chat_messages", {
-          method: "POST",
-          headers: { "Prefer": "return=minimal" },
-          body: JSON.stringify([
-            {
-              session_id: sessionId,
-              role: "user",
-              content: String(lastUser || "").slice(0, 4000),
-              metadata: { intent, page_url: pageUrl }
-            },
-            {
-              session_id: sessionId,
-              role: "assistant",
-              content: String(answer || "").slice(0, 4000),
-              metadata: { suggested_pills, hire_intent, context_cases }
-            }
-          ])
-        }, 1200);
-      };
-
-      backgroundTasks.push(persistAnalytics());
-    }
 
     if (wantsStream) {
       res.end();

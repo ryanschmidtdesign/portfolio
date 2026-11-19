@@ -3,7 +3,6 @@ tests/
 .agents/
 .github/
 .vscode/
-scripts/seed-kb.js
 scripts/test-chat-api.js
 scripts/generate-logo.js
 vitest.config.js

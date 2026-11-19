@@ -313,31 +313,6 @@
     updateState(initial);
   });
 
-  // Resume download tracking
-  window.trackResumeDownload = function() {
-    let sessionToken = null;
-    try {
-      sessionToken = sessionStorage.getItem('rs_chat_session_token');
-    } catch (_) {}
-    fetch("/api/track-resume", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        pageUrl: location.pathname,
-        sessionToken
-      }),
-      keepalive: true
-    }).catch(() => {});
-  };
-
-  document.addEventListener("click", (e) => {
-    const originEl = (typeof e.composedPath === "function" ? e.composedPath()[0] : null) || e.target;
-    const link = originEl && typeof originEl.closest === "function" ? originEl.closest('a[href*="resume"]') : null;
-    if (link) {
-      window.trackResumeDownload();
-    }
-  });
-
   // Copy email address button in top nav (inline 150ms crossfade to "Copied", 2s hold, crossfade back)
   document.addEventListener("click", (e) => {
     const copyBtn = e.target.closest("[data-copy-email]");

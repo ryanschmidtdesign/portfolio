@@ -11,7 +11,6 @@ Senior Product Designer. Systems thinker. Builder.
 - **Knowledge base**: JSON-based portfolio index with ~31 case examples
 - **Frontend**: Vanilla JS, semantic HTML, minimal dependencies
 - **Styling**: Modular CSS (`styles.css` as entry point → tokens, base, layout, components, pages, utilities)
-- **DB (optional)**: Supabase for visit logging
 
 ## Key Files
 
@@ -23,7 +22,6 @@ Senior Product Designer. Systems thinker. Builder.
 | `scripts/home-page.js` | Homepage interactions (illustration states, cat vignettes) |
 | `scripts/scripts.js` | Shared site utilities, comparison widgets, and navigation |
 | `assets/portfolio-kb.json` | Knowledge base (cases, capabilities, FAQ, policy, answer guidelines) |
-| `scripts/seed-kb.js` | Chunks KB and seeds embeddings into Supabase (RAG) |
 | `styles.css` | CSS entry point (imports modular files from `css/`) |
 | `css/tokens.css` | Design tokens & custom properties |
 | `css/base.css` | Reset, global defaults, base elements |
@@ -60,7 +58,7 @@ Key design decisions:
 
 ```bash
 # Set up environment
-cp .env.example .env  # Add GEMINI_API_KEY, SUPABASE_URL, etc.
+cp .env.example .env  # Add GEMINI_API_KEY, etc.
 
 # Start dev server
 vercel dev

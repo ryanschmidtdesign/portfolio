@@ -297,10 +297,10 @@
 
               <dl class="meta">
                 <dt>Stack</dt>
-                  <dd>Semantic HTML, Modular CSS, JavaScript, Vercel Serverless Functions, Supabase (pgvector), Gemini API</dd>
+                  <dd>Semantic HTML, Modular CSS, JavaScript, Vercel Serverless Functions, Gemini API</dd>
 
                   <dt>Tools</dt>
-                  <dd>Cursor, Claude Code, Vercel, GitHub, Supabase</dd>
+                  <dd>Cursor, Claude Code, Vercel, GitHub</dd>
 
                 <dt>Repository</dt>
                   <dd><a href="https://github.com/ryanschmidtdesign/portfolio" target="_blank" rel="noopener" style="text-decoration:underline;">View source on GitHub ↗</a></dd>
@@ -459,7 +459,7 @@
           </p>
 
           <p>
-            To fix that token limit problem, I broke my case study notes into structured chunks and stored them in Supabase using vector search. Now, when a recruiter asks about a specific project decision, the serverless function retrieves only the 2 or 3 most relevant knowledge chunks. Gemini streams a grounded, 3-sentence summary in under 800ms, staying well within free-tier API quotas.
+            To fix that token limit problem, I broke my case study notes into structured, indexed knowledge chunks scored in memory inside the serverless function. Now, when a recruiter asks about a specific project decision, the API retrieves only the most relevant knowledge chunks with zero external database latency. Gemini streams a grounded, 3-sentence summary in under 800ms, staying well within free-tier API quotas.
           </p>
           <p>
             To keep the bot from hallucinating, I wrote 69 automated Vitest tests checking role boundaries, metric precision, and refusal prompts. If someone asks if I write production C++ or have 10 years of Web3 experience, the bot says 'No' rather than inventing an answer. Testing these failure modes gave me practical empathy for the guardrail challenges our AI product teams grapple with daily.

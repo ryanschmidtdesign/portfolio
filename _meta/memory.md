@@ -1,7 +1,7 @@
 # Memory
 
 ## Project
-Personal portfolio site for Ryan Schmidt, Senior SaaS Product Designer. Static HTML/CSS/JS site deployed via Vercel. Includes an AI chat assistant powered by Gemini API + Supabase vector store, with a unified Swiss/Atelier CLI omnibar identity and interactive conversational stage.
+Personal portfolio site for Ryan Schmidt, Senior SaaS Product Designer. Static HTML/CSS/JS site deployed via Vercel. Includes an AI chat assistant powered by Gemini API + in-memory chunked KB retrieval, with a unified Swiss/Atelier CLI omnibar identity and interactive conversational stage.
 
 ## Scores (Last: 2026-10-20)
 

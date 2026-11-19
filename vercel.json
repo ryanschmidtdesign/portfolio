@@ -6,10 +6,6 @@
       "includeFiles": "assets/portfolio-kb.json",
       "maxDuration": 60,
       "memory": 1024
-    },
-    "api/track-resume.js": {
-      "maxDuration": 15,
-      "memory": 512
     }
   },
   "headers": [

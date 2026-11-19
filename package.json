@@ -13,7 +13,6 @@
   },
   "scripts": {
     "generate-logo": "node scripts/generate-logo.js",
-    "seed-kb": "node scripts/seed-kb.js",
     "test:chat-api": "node scripts/test-chat-api.js",
     "test": "vitest run",
     "test:watch": "vitest",

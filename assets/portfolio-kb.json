@@ -748,7 +748,7 @@
         {
           "id": "assistant-architecture",
           "heading": "Making the AI Assistant Useful",
-          "summary": "Migrated from 40KB monolithic JSON payload to chunked Supabase pgvector semantic retrieval and streaming Gemini generation with 69 Vitest tests."
+          "summary": "Migrated from 40KB monolithic JSON payload to in-memory chunked KB retrieval and streaming Gemini generation with 74 Vitest tests."
         },
         {
           "id": "impact",

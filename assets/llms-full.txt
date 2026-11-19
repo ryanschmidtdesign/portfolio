@@ -40,7 +40,7 @@ Key timeline:
 
 Makes the shift from designing interfaces to building them. Uses Cursor and Claude Code to take product from concept through to staging without an engineering handoff. This portfolio is entirely hand-coded: no templates, no CMS, no static site generator.
 
-Built a custom AI chat assistant powered by Gemini + Supabase pgvector (34 curated knowledge chunks, 768-dimension vector index) that answers questions about Ryan's work, case studies, and role fit.
+Built a custom AI chat assistant powered by Gemini + in-memory chunked knowledge retrieval (~35 curated chunks) that answers questions about Ryan's work, case studies, and role fit.
 
 ### Mentorship
 
@@ -134,15 +134,15 @@ https://ryanschmidt.design/pages/ai-coding-portfolio
 
 **Role:** End-to-end: UX, UI, front-end architecture, AI-assisted engineering.
 
-**Stack:** HTML, CSS, JavaScript. Tools: Cursor, Vercel, GitHub, Supabase.
+**Stack:** HTML, CSS, JavaScript. Tools: Cursor, Vercel, GitHub.
 
 **Approach:** Built directly in HTML, CSS, and JavaScript with AI coding tools. Working in the browser allowed testing responsive layouts and keyboard interactions under real rendering conditions.
 
 **System architecture:** Prompts → Patterns → Components → Features. Structured prompts connected to real product features.
 
-**Assistant architecture:** Shifted from monolithic JSON injection to vector retrieval in Supabase pgvector and Gemini generation, with 63 Vitest tests verifying guardrails, metric precision, and refusal prompts.
+**Assistant architecture:** Shifted from monolithic JSON injection to in-memory chunked retrieval and Gemini generation, with 74 Vitest tests verifying guardrails, metric precision, and refusal prompts.
 
-**Key decisions:** Strict coding rules and design tokens established before writing code. Database-driven retrieval replaced a single JSON file with semantic search from project notes.
+**Key decisions:** Strict coding rules and design tokens established before writing code. In-memory chunked retrieval replaced passing a monolithic JSON payload on every call.
 
 **Impact:** Fully custom site: no templates, no CMS, no static site generator. Reusable page patterns and an assistant connected to project notes.
 
@@ -164,7 +164,7 @@ Custom CSS custom properties defining:
 ## AI assistant
 
 An AI chat widget powered by Gemini 2.5 Flash is available on every page. It answers questions about Ryan's background, case studies, working style, and role fit using:
-- RAG retrieval from a kb_chunks table in Supabase (pgvector, 768d)
+- In-memory chunked retrieval over curated knowledge base entries
 - An anti-hallucination policy preventing invented metrics or outcomes
 - Structured fit-matching via intent-based routing (28 intents)
 - A deterministic fallback for common questions when the LLM is unavailable
