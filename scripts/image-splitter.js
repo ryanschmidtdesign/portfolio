@@ -10,6 +10,10 @@
 
     this.isDragging = false;
     this.position = parseFloat(container.getAttribute('data-splitter-initial')) || 50;
+    this.viewportRect = null;
+    this.pendingClientX = null;
+    this.rafId = null;
+    this.keyboardTimer = null;
 
     this.init();
   }
@@ -43,11 +47,33 @@
     var isPointerDown = false;
     var pointerDownX = 0;
 
+    function schedulePointerMove(clientX) {
+      self.pendingClientX = clientX;
+      if (self.rafId !== null) return;
+      self.rafId = requestAnimationFrame(function () {
+        self.rafId = null;
+        if (typeof self.pendingClientX === 'number') {
+          self.onPointerMove(self.pendingClientX);
+        }
+      });
+    }
+
+    function applyKeyboardStep(nextPos) {
+      self.container.classList.add('is-keyboard');
+      clearTimeout(self.keyboardTimer);
+      self.update(nextPos);
+      self.keyboardTimer = setTimeout(function () {
+        self.container.classList.remove('is-keyboard');
+      }, 140);
+    }
+
     // Allow dragging from the handle AND clicking anywhere in the viewport
     function startDrag(clientX, ev, fromHandle) {
       if (ev && ev.preventDefault) ev.preventDefault();
       isPointerDown = true;
       pointerDownX = clientX;
+      self.viewportRect = self.viewport.getBoundingClientRect();
+      self.container.classList.remove('is-keyboard');
       if (fromHandle) {
         self.isDragging = true;
         self.container.classList.add('is-dragging');
@@ -60,11 +86,21 @@
 
     function stopDrag() {
       isPointerDown = false;
+      self.viewportRect = null;
+      if (self.rafId !== null) {
+        cancelAnimationFrame(self.rafId);
+        self.rafId = null;
+      }
+      self.pendingClientX = null;
       if (self.isDragging) {
         self.isDragging = false;
         self.container.classList.remove('is-dragging');
       }
     }
+
+    window.addEventListener('resize', function () {
+      self.viewportRect = null;
+    }, { passive: true });
 
     this.handle.addEventListener('mousedown', function (e) {
       startDrag(e.clientX, e, true);
@@ -83,7 +119,7 @@
         self.container.classList.add('is-dragging');
       }
       if (self.isDragging) {
-        self.onPointerMove(e.clientX);
+        schedulePointerMove(e.clientX);
       }
     });
 
@@ -108,7 +144,7 @@
       if (self.isDragging) {
         if (!e.touches || !e.touches[0]) return;
         if (e.cancelable) e.preventDefault();
-        self.onPointerMove(e.touches[0].clientX);
+        schedulePointerMove(e.touches[0].clientX);
       }
     }, { passive: false });
 
@@ -118,28 +154,28 @@
     this.handle.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
         e.preventDefault();
-        self.update(Math.max(0, Math.min(100, self.position - 2)));
+        applyKeyboardStep(Math.max(0, Math.min(100, self.position - 2)));
       } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
         e.preventDefault();
-        self.update(Math.max(0, Math.min(100, self.position + 2)));
+        applyKeyboardStep(Math.max(0, Math.min(100, self.position + 2)));
       } else if (e.key === 'PageDown') {
         e.preventDefault();
-        self.update(Math.max(0, Math.min(100, self.position - 10)));
+        applyKeyboardStep(Math.max(0, Math.min(100, self.position - 10)));
       } else if (e.key === 'PageUp') {
         e.preventDefault();
-        self.update(Math.max(0, Math.min(100, self.position + 10)));
+        applyKeyboardStep(Math.max(0, Math.min(100, self.position + 10)));
       } else if (e.key === 'Home') {
         e.preventDefault();
-        self.update(0);
+        applyKeyboardStep(0);
       } else if (e.key === 'End') {
         e.preventDefault();
-        self.update(100);
+        applyKeyboardStep(100);
       }
     });
   };
 
   ImageSplitter.prototype.onPointerMove = function (clientX) {
-    var rect = this.viewport.getBoundingClientRect();
+    var rect = this.viewportRect || this.viewport.getBoundingClientRect();
     if (!rect.width) return;
     var x = clientX - rect.left;
     var percent = (x / rect.width) * 100;

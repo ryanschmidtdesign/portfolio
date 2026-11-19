@@ -78,7 +78,7 @@
         opacity: 0;
         pointer-events: none;
         transform: translateX(100%);
-        transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease, visibility 200ms ease;
+        transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease, visibility 0s linear 280ms;
         z-index: 2147482999;
         overflow: hidden;
       }
@@ -98,6 +98,7 @@
         opacity: 1;
         pointer-events: auto;
         transform: translateX(0);
+        transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease, visibility 0s linear 0s;
       }
       @media (max-width: 768px) {
         .panel {
@@ -228,6 +229,16 @@
         overflow-y: auto;
         overflow-x: hidden;
       }
+      @keyframes rs-msg-in {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
       .msg {
         margin: 0;
         display: inline-block;
@@ -238,6 +249,10 @@
         border-radius: 3px;
         font-size: 14px;
         line-height: 1.56;
+        animation: rs-msg-in 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      .msg.no-anim {
+        animation: none;
       }
       .msg.user {
         white-space: pre-wrap;
@@ -300,6 +315,11 @@
       .msg.bot a:hover {
         color: #F09A80;
         text-decoration-color: #E07844;
+      }
+      .chat-action-bar,
+      .hire-card,
+      .chat-sources {
+        animation: rs-msg-in 160ms cubic-bezier(0.16, 1, 0.3, 1) both;
       }
       .chat-action-bar {
         display: flex;
@@ -441,6 +461,7 @@
       .pills.show .pill:nth-child(1) { transition-delay: 0ms; }
       .pills.show .pill:nth-child(2) { transition-delay: 50ms; }
       .pills.show .pill:nth-child(3) { transition-delay: 100ms; }
+      .pills.show .pill:nth-child(4) { transition-delay: 150ms; }
       .pill:hover,
       .pill:focus-visible {
         background: rgba(200, 90, 50, 0.18);
@@ -563,7 +584,7 @@
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transition: opacity 0.26s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.26s;
+        transition: opacity 260ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 260ms;
       }
       @media (min-width: 1100px) {
         .panel-backdrop {
@@ -575,6 +596,7 @@
           opacity: 1;
           visibility: visible;
           pointer-events: auto;
+          transition: opacity 260ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0s;
         }
       }
 
@@ -733,6 +755,10 @@
         vertical-align: text-bottom;
         margin-left: 3px;
         animation: blink 1s step-end infinite;
+      }
+      .cursor.is-streaming {
+        animation: none;
+        opacity: 1;
       }
       @keyframes blink {
         0%, 100% { opacity: 1; }
@@ -907,17 +933,13 @@ if (savedHist.length > 0) {
 
   let lastFocusedEl = null;
 
-  function getDockElements() {
-    return document.querySelectorAll('.ai-mini-wrapper, .home-omnibar-section, .subpage-omnibar-dock');
-  }
-
   function getActiveMiniInput() {
     return document.getElementById('ai-mini-input') || document.getElementById('home-omnibar-input');
   }
 
   function openPanel(){
     if (panel.classList.contains('open')) {
-      (inputEl || panel)?.focus?.();
+      requestAnimationFrame(() => (inputEl || panel)?.focus?.({ preventScroll: true }));
       return;
     }
     lastFocusedEl = document.activeElement;
@@ -928,21 +950,13 @@ if (savedHist.length > 0) {
       inputEl.value = miniInput.value;
     }
 
-    // Smoothly morph/hide the bottom floating CLI dock when the Telemetry Console Drawer is open
-    // so the dock never sticks out awkwardly behind the blurred backdrop on desktop or mobile
+    // Smoothly hide the bottom floating CLI dock via CSS (body.rs-chat-drawer-open)
     document.body.classList.add('rs-chat-drawer-open');
-    const dockEls = getDockElements();
-    dockEls.forEach(el => {
-      el.style.opacity = '0';
-      el.style.visibility = 'hidden';
-      el.style.pointerEvents = 'none';
-      el.style.transform = 'translateX(-50%) translateY(14px) scale(0.96)';
-    });
 
     panel.classList.add('open');
     backdrop.classList.add('open');
 
-    (inputEl || panel)?.focus?.();
+    requestAnimationFrame(() => (inputEl || panel)?.focus?.({ preventScroll: true }));
   }
 
   function closePanel(){
@@ -957,28 +971,11 @@ if (savedHist.length > 0) {
     backdrop.classList.remove('open');
     document.body.classList.remove('rs-chat-drawer-open');
 
-    const dockEls = getDockElements();
-    dockEls.forEach(el => {
-      el.style.visibility = '';
-      el.style.pointerEvents = '';
-      el.style.opacity = '';
-      el.style.transform = '';
-    });
-    
     try { lastFocusedEl?.focus?.(); } catch {}
     lastFocusedEl = null;
   }
   
   function wireExternalTrigger() {
-    // Guarantee bottom dock visibility on boot
-    const dockEls = getDockElements();
-    dockEls.forEach(el => {
-      el.style.visibility = '';
-      el.style.pointerEvents = '';
-      el.style.opacity = '';
-      el.style.transform = '';
-    });
-
     function handleOmnibarCommand(val) {
       if (!val) return false;
       const lower = val.trim().toLowerCase();
@@ -1199,7 +1196,7 @@ if (savedHist.length > 0) {
       state.history.forEach(m => {
         // use an internal silent render to avoid saving again during loop
         const div = document.createElement('div');
-        div.className = `msg ${m.role === 'user' ? 'user' : 'bot'}`;
+        div.className = `msg ${m.role === 'user' ? 'user' : 'bot'} no-anim`;
         if (m.role === 'user') {
           div.textContent = m.content;
         } else {
@@ -1524,13 +1521,26 @@ if (savedHist.length > 0) {
   
       container.innerHTML = '';
       const cursor = document.createElement('span');
-      cursor.className = 'cursor';
+      cursor.className = 'cursor is-streaming';
       cursor.setAttribute('aria-hidden', 'true');
       cursor.textContent = '▍';
       container.appendChild(cursor);
-  
+
       const TYPE_DELAY = total > 600 ? 1 : total > 300 ? 2 : 4;
-  
+      let scrollRafId = null;
+
+      function scheduleStreamScroll() {
+        if (scrollRafId || !msgsEl) return;
+        const nearBottom = (msgsEl.scrollHeight - msgsEl.scrollTop - msgsEl.clientHeight) < 72;
+        if (!nearBottom) return;
+        scrollRafId = requestAnimationFrame(() => {
+          scrollRafId = null;
+          if ((msgsEl.scrollHeight - msgsEl.scrollTop - msgsEl.clientHeight) < 120) {
+            scrollToBottom(false);
+          }
+        });
+      }
+
       async function streamNode(node, parent) {
         if (streamAborted) return;
 
@@ -1544,7 +1554,7 @@ if (savedHist.length > 0) {
           for (let i = 0; i < text.length; i += step) {
             if (streamAborted) return;
             textNode.data += text.slice(i, i + step);
-            scrollToBottom(false);
+            scheduleStreamScroll();
             await new Promise(r => setTimeout(r, TYPE_DELAY));
           }
           return;
@@ -1567,9 +1577,14 @@ if (savedHist.length > 0) {
           }
         }
       }
-  
+
       for (const child of Array.from(template.content.childNodes)) {
         await streamNode(child, container);
+      }
+
+      if (scrollRafId) {
+        cancelAnimationFrame(scrollRafId);
+        scrollRafId = null;
       }
 
       if (streamAborted) {
@@ -1580,7 +1595,9 @@ if (savedHist.length > 0) {
       }
 
       cursor.remove();
-      scrollToBottom(true);
+      if ((msgsEl.scrollHeight - msgsEl.scrollTop - msgsEl.clientHeight) < 120) {
+        scrollToBottom(true);
+      }
     } catch (error) {
       console.warn('Portfolio Chat: streaming failed, falling back to instant render', error);
       container.innerHTML = finalHtml;
@@ -1826,7 +1843,7 @@ if (savedHist.length > 0) {
           setTimeout(function () {
             setPillsFromArray(data.suggested_pills);
             requestAnimationFrame(function () { pillsContainer.classList.add('show'); });
-          }, 180);
+          }, 200);
         }
       }
 

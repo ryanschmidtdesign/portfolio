@@ -2,9 +2,15 @@
   navigation: auto;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dur-2, 180ms);
+  animation-timing-function: var(--ease-out);
+}
+
 ::view-transition-group(nav-underline) {
   animation-duration: 220ms;
-  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  animation-timing-function: var(--ease-desk);
 }
 
 /* Site main landmark */
@@ -34,7 +40,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: left 280ms cubic-bezier(0.16, 1, 0.3, 1), max-width 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  view-transition-name: site-header;
+  transition: left 280ms var(--ease-out), max-width 280ms var(--ease-out);
 }
 
 .site-header__inner {
@@ -59,7 +66,7 @@
   font-size: var(--fs-sm, 0.9375rem);
   font-weight: 600;
   letter-spacing: -0.015em;
-  transition: color 160ms ease;
+  transition: color var(--dur-1) var(--ease-desk);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -73,7 +80,7 @@
   font-weight: 600;
   color: var(--text-primary, #171412);
   letter-spacing: -0.015em;
-  transition: color 160ms ease;
+  transition: color var(--dur-1) var(--ease-desk);
 }
 
 .site-header__brand:hover .site-header__name {
@@ -96,7 +103,7 @@
   font-weight: 400;
   color: #38332E;
   letter-spacing: -0.005em;
-  transition: color 160ms ease;
+  transition: color var(--dur-1) var(--ease-desk);
 }
 
 .site-header__brand:hover .site-header__role {
@@ -124,13 +131,17 @@
   padding: 8px 10px;
   border-radius: 2px;
   background: transparent;
-  transition: color 150ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: color var(--dur-1) var(--ease-desk), transform var(--dur-1) var(--ease-desk);
   white-space: nowrap;
 }
 
 .site-header__link:hover,
 .site-header__link:focus-visible {
   color: var(--text-primary, #171412);
+}
+
+.site-header__link:active {
+  transform: scale(0.98);
 }
 
 .site-header__link:focus-visible {
@@ -178,8 +189,8 @@
 
 .site-header__nav.is-ready .site-header__underline {
   transition:
-    transform 220ms cubic-bezier(0.23, 1, 0.32, 1),
-    opacity 220ms cubic-bezier(0.23, 1, 0.32, 1);
+    transform 220ms var(--ease-desk),
+    opacity 220ms var(--ease-desk);
 }
 
 .site-header__arrow {
@@ -190,8 +201,8 @@
   line-height: 1;
   color: var(--text-muted, #70665D);
   transition:
-    transform 150ms cubic-bezier(0.23, 1, 0.32, 1),
-    color 150ms cubic-bezier(0.23, 1, 0.32, 1);
+    transform var(--dur-1) var(--ease-desk),
+    color var(--dur-1) var(--ease-desk);
 }
 
 .site-header__copy-icon svg {
@@ -221,24 +232,31 @@
 
 .site-header__copy-label {
   grid-area: 1 / 1;
-  transition: opacity 150ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition:
+    opacity var(--dur-1) var(--ease-desk),
+    transform var(--dur-1) var(--ease-desk);
 }
 
 .site-header__copy-label--default {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .site-header__copy-label--copied {
   opacity: 0;
+  transform: translateY(3px);
+  color: var(--accent-text);
   pointer-events: none;
 }
 
 .site-header__copy-email.is-copied .site-header__copy-label--default {
   opacity: 0;
+  transform: translateY(-3px);
 }
 
 .site-header__copy-email.is-copied .site-header__copy-label--copied {
   opacity: 1;
+  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -250,11 +268,23 @@
   ::view-transition-new(*) {
     animation-duration: 0.001ms !important;
   }
+  body,
+  .site-header,
+  .site-header__brand,
+  .site-header__name,
+  .site-header__role,
   .site-header__nav.is-ready .site-header__underline,
   .site-header__link,
   .site-header__arrow,
-  .site-header__copy-label {
-    transition-duration: 0ms !important;
+  .site-header__copy-label,
+  .subpage-ambient-glow {
+    transition-duration: 0.01ms !important;
+  }
+  .site-header__copy-label--default,
+  .site-header__copy-label--copied,
+  .site-header__copy-email.is-copied .site-header__copy-label--default,
+  .site-header__copy-email.is-copied .site-header__copy-label--copied {
+    transform: none !important;
   }
 }
 
@@ -376,7 +406,6 @@ body:not(.is-home) .site-main {
 /* Parallax */
 [data-parallax] {
   will-change: transform;
-  transition: transform 80ms linear;
 }
 
 @media (max-width: 768px) {
@@ -436,7 +465,7 @@ body:not(.is-home) .site-main {
 @media (min-width: 1100px) {
   body {
     --chat-panel-width: 440px;
-    transition: margin-right 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: margin-right 280ms var(--ease-out);
   }
 
   body.rs-chat-drawer-open {
@@ -450,6 +479,6 @@ body:not(.is-home) .site-main {
 
   body.rs-chat-drawer-open .subpage-ambient-glow {
     left: calc((100vw - var(--chat-panel-width)) / 2);
-    transition: left 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: left 280ms var(--ease-out);
   }
 }

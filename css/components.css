@@ -13,25 +13,35 @@
 @keyframes metric-count-in {
   from {
     opacity: 0;
-    filter: blur(8px);
-    transform: translateY(16px) scale(0.96);
+    transform: translateY(8px);
   }
 
   to {
     opacity: 1;
-    filter: blur(0);
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 .metric[data-animate] {
-  opacity: 0.01;
-  animation: metric-count-in 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  opacity: 0;
+}
+
+.metric[data-animate].is-counting {
+  animation: metric-count-in 450ms var(--ease-out) forwards;
 }
 
 .metric.metric--animated {
   opacity: 1;
   transition: opacity 300ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metric[data-animate],
+  .metric[data-animate].is-counting {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
 }
 
 .loading-dots {
@@ -1057,6 +1067,11 @@ figure.case-study-media[data-reveal].is-revealed {
   transition: none;
 }
 
+.image-splitter.is-keyboard .splitter-after,
+.image-splitter.is-keyboard .splitter-handle {
+  transition-duration: 90ms;
+}
+
 .splitter-handle {
   position: absolute;
   top: 0;
@@ -1110,6 +1125,11 @@ figure.case-study-media[data-reveal].is-revealed {
   border-color: var(--accent);
   color: #FFFFFF;
   transform: translate(-50%, -50%) scale(1.08);
+}
+
+.image-splitter.is-dragging .splitter-handle-icon {
+  transform: translate(-50%, -50%) scale(1.04);
+  cursor: grabbing;
 }
 
 .splitter-handle:focus-visible {
@@ -1167,7 +1187,8 @@ figure.case-study-media[data-reveal].is-revealed {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .splitter-after {
+  .splitter-after,
+  .splitter-handle {
     transition: none;
   }
 }
@@ -1192,6 +1213,29 @@ main[data-reveal] {
 [data-reveal].is-revealed {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
+}
+
+[data-cascade] > *:nth-child(2) {
+  transition-delay: 45ms;
+}
+
+[data-cascade] > *:nth-child(3) {
+  transition-delay: 90ms;
+}
+
+[data-cascade] > *:nth-child(4) {
+  transition-delay: 135ms;
+}
+
+[data-cascade] > *:nth-child(n+5) {
+  transition-delay: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-cascade] > * {
+    transition-delay: 0ms !important;
+  }
 }
 
 .case-study [data-progress-story] {
@@ -1547,7 +1591,18 @@ main[data-reveal] {
   border-radius: 4px;
   box-shadow: var(--shadow-card-hover);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease;
+  transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroid-popup,
+  .polaroid-frame {
+    transition: none;
+  }
+  .polaroid-trigger:hover .polaroid-popup,
+  .polaroid-trigger:focus-visible .polaroid-popup {
+    transform: translate(-50%, 0);
+  }
 }
 
 .polaroid-popup--cats .polaroid-frame,
@@ -1665,7 +1720,7 @@ main[data-reveal] {
   background: transparent;
   box-sizing: border-box;
   cursor: pointer;
-  transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), transform 180ms var(--ease-out), outline-color 180ms var(--ease-out);
+  transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), transform 180ms var(--ease-out), outline-color 180ms var(--ease-out), opacity 180ms var(--ease-out);
 }
 
 .bridge-item:hover,
@@ -1677,6 +1732,10 @@ main[data-reveal] {
   transform: translateX(3px);
   outline: 2px solid var(--accent-text, #8C3B1E);
   outline-offset: 2px;
+}
+
+.bridge-item:active {
+  transform: translateX(2px) scale(0.99);
 }
 
 .decision-bridges.has-hover .bridge-item:not(.is-linked) {
@@ -1785,7 +1844,7 @@ main[data-reveal] {
   cursor: pointer;
   padding: 6px 8px;
   border-radius: var(--radius-md);
-  transition: background-color 180ms var(--ease-out), outline-color 180ms var(--ease-out);
+  transition: background-color 180ms var(--ease-out), outline-color 180ms var(--ease-out), transform 160ms var(--ease-out);
 }
 
 .stepper-node:hover,
@@ -1793,6 +1852,10 @@ main[data-reveal] {
   background: rgba(200, 90, 50, 0.06);
   outline: 2px solid var(--accent-text, #8C3B1E);
   outline-offset: 2px;
+}
+
+.stepper-node:active {
+  transform: scale(0.96);
 }
 
 .stepper-node.is-active .node-dot {
@@ -1879,6 +1942,11 @@ main[data-reveal] {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--space-3);
   margin-bottom: var(--space-4);
+}
+
+.sim-grid.is-switching .sim-cell,
+.sim-grid.is-switching .sim-card {
+  animation: atelierFadeIn 180ms var(--ease-out) both;
 }
 
 .sim-cell {
@@ -1981,7 +2049,11 @@ main[data-reveal] {
   padding: 6px 14px;
   border-radius: var(--radius-xs);
   cursor: pointer;
-  transition: background 180ms var(--ease-out), color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+  transition: background 180ms var(--ease-out), color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), transform 140ms var(--ease-out);
+}
+
+.dual-tab-btn:active {
+  transform: scale(0.97);
 }
 
 .dual-tab-btn.is-active {
@@ -1994,13 +2066,32 @@ main[data-reveal] {
   padding: var(--space-5);
 }
 
+@keyframes atelierFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .dual-panel {
   display: none;
 }
 
 .dual-panel.is-active {
   display: block;
-  animation: atelierFadeIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: atelierFadeIn 240ms var(--ease-out) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dual-panel.is-active,
+  .sim-grid.is-switching .sim-cell,
+  .sim-grid.is-switching .sim-card {
+    animation: none;
+  }
 }
 
 .mock-receiving-row {
@@ -2174,12 +2265,16 @@ main[data-reveal] {
   min-height: 36px;
   padding: 6px 12px;
   border-radius: var(--radius-sm);
-  transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+  transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), box-shadow 160ms var(--ease-out), transform 140ms var(--ease-out);
   line-height: inherit;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.crumb-segment:active {
+  transform: scale(0.97);
 }
 
 .crumb-segment:hover,
@@ -2237,7 +2332,17 @@ main[data-reveal] {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+  transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), transform 180ms var(--ease-out);
+}
+
+.ia-card:hover {
+  border-color: rgba(200, 90, 50, 0.45);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-1);
+}
+
+.ia-card:active {
+  transform: scale(0.985);
 }
 
 .ia-card strong {
@@ -2292,25 +2397,33 @@ main[data-reveal] {
   margin-inline: auto;
   padding: var(--space-5);
   background-color: var(--surface-elevated, #FAF7F2);
-  background-image: radial-gradient(
-    440px circle at var(--mouse-x, 50%) var(--mouse-y, 0%),
-    rgba(200, 90, 50, 0.04),
-    transparent 65%
-  );
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   transition:
-    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 240ms var(--ease-out),
     border-color 200ms ease,
-    box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1),
-    background-image 300ms ease;
+    box-shadow 240ms var(--ease-out);
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: var(--text-primary);
   position: relative;
   overflow: hidden;
+}
+
+.case-study-next::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    800px circle at 100% 100%,
+    rgba(200, 90, 50, 0.08),
+    transparent 60%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms var(--ease-out);
 }
 
 .case-study-next::before {
@@ -2332,22 +2445,22 @@ main[data-reveal] {
   transform: scaleX(0.5);
   transform-origin: center;
   pointer-events: none;
-  transition: opacity 220ms ease, transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 220ms ease, transform 260ms var(--ease-out);
 }
 
 .case-study-next:hover {
   transform: translateY(-3px);
   border-color: rgba(200, 90, 50, 0.48);
-  background-image: radial-gradient(
-    560px circle at var(--mouse-x, 50%) var(--mouse-y, 0%),
-    rgba(200, 90, 50, 0.11),
-    transparent 70%
-  );
   box-shadow:
     0 1px 3px rgba(28, 22, 18, 0.04),
     0 8px 24px -4px rgba(200, 90, 50, 0.16),
     0 16px 36px -8px rgba(28, 22, 18, 0.09),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.case-study-next:hover::after,
+.case-study-next:focus-visible::after {
+  opacity: 1;
 }
 
 .case-study-next:hover::before,
@@ -2479,6 +2592,7 @@ main[data-reveal] {
 @media (prefers-reduced-motion: reduce) {
   .case-study-next,
   .case-study-next::before,
+  .case-study-next::after,
   .case-study-next__arrow,
   .case-study-next__eyebrow span::before {
     transition: none !important;

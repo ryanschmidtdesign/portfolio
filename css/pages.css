@@ -1666,9 +1666,11 @@ body.is-omnibar-focused .desk-monitor__thinking {
     opacity: 0;
     margin-top: 0;
     overflow: hidden;
+    transform: translateY(3px);
     transition:
       max-height 200ms var(--ease-desk),
       opacity 200ms var(--ease-desk),
+      transform 200ms var(--ease-desk),
       margin-top 200ms var(--ease-desk);
   }
 
@@ -1677,6 +1679,8 @@ body.is-omnibar-focused .desk-monitor__thinking {
     max-height: 44px;
     opacity: 1;
     margin-top: 4px;
+    transform: translateY(0);
+    transition-delay: 0ms, 35ms, 0ms, 0ms;
   }
 }
 
@@ -1929,7 +1933,7 @@ body.is-omnibar-focused .desk-monitor__thinking {
   transition:
     transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 200ms ease,
-    visibility 200ms ease;
+    visibility 0s linear 0s;
 }
 
 body.rs-chat-drawer-open .home-omnibar-section,
@@ -1938,6 +1942,10 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   visibility: hidden;
   pointer-events: none;
   transform: translateX(-50%) translateY(12px) scale(0.98);
+  transition:
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 200ms ease,
+    visibility 0s linear 240ms;
 }
 
 .home-omnibar-shell,
@@ -2094,17 +2102,22 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   right: 4px;
   top: 50%;
   transform: translateY(-50%);
-  display: none;
+  display: flex;
   align-items: center;
   pointer-events: none;
   user-select: none;
   overflow: hidden;
   z-index: 3;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 140ms var(--ease-desk), visibility 0s linear 140ms;
 }
 
 .home-omnibar-input.has-typewriter:not(:focus):placeholder-shown ~ .omnibar-typewriter,
 .subpage-omnibar-input.has-typewriter:not(:focus):placeholder-shown ~ .omnibar-typewriter {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 140ms var(--ease-desk), visibility 0s linear 0s;
 }
 
 .home-omnibar-input.has-typewriter:not(:focus):placeholder-shown::placeholder,
@@ -2244,6 +2257,10 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-send,
 .subpage-omnibar-send {
+  --mag-x: 0px;
+  --mag-y: 0px;
+  --btn-scale: 1;
+  transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) scale(var(--btn-scale, 1));
   background: rgba(255, 255, 255, 0.08);
   color: #F7F5F2;
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -2268,7 +2285,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-send:active,
 .subpage-omnibar-send:active {
-  transform: scale(0.96);
+  --btn-scale: 0.94;
   background: rgba(255, 255, 255, 0.22);
 }
 

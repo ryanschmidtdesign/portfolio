@@ -46,7 +46,7 @@
                     opacity: 0;
                     visibility: hidden;
                     pointer-events: none;
-                    transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 180ms;
+                    transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 200ms;
                 }
 
                 .rs-cmd-overlay.is-open {
@@ -162,6 +162,10 @@
                     outline-offset: 2px;
                 }
 
+                .rs-cmd-esc:active {
+                    transform: scale(0.96);
+                }
+
                 /* Results */
                 .rs-cmd-results {
                     flex: 1;
@@ -195,11 +199,28 @@
                     cursor: pointer;
                     text-decoration: none;
                     color: inherit;
-                    transition: background 100ms ease;
+                    transition:
+                        background-color 110ms cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 110ms cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 90ms cubic-bezier(0.16, 1, 0.3, 1);
                     user-select: none;
                     margin-bottom: 1px;
                     border: 1px solid transparent;
                     background: transparent;
+                }
+
+                .rs-cmd-item::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 6px;
+                    bottom: 6px;
+                    width: 2px;
+                    border-radius: 1px;
+                    background: var(--accent, #C85A32);
+                    transform: scaleY(0);
+                    transform-origin: center;
+                    transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
                 .rs-cmd-item:hover,
@@ -210,14 +231,11 @@
                 }
 
                 .rs-cmd-item.is-selected::before {
-                    content: "";
-                    position: absolute;
-                    left: 0;
-                    top: 6px;
-                    bottom: 6px;
-                    width: 2px;
-                    border-radius: 1px;
-                    background: var(--accent, #C85A32);
+                    transform: scaleY(1);
+                }
+
+                .rs-cmd-item:active {
+                    transform: scale(0.992);
                 }
 
                 .rs-cmd-item__left {
@@ -407,6 +425,20 @@
                     .rs-cmd-esc {
                         padding: 3px 6px;
                         font-size: 0.68rem;
+                    }
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                    .rs-cmd-overlay,
+                    .rs-cmd-overlay.is-open,
+                    .rs-cmd-modal,
+                    .rs-cmd-item,
+                    .rs-cmd-item::before,
+                    .rs-cmd-item__icon,
+                    .rs-cmd-item__return,
+                    .rs-cmd-esc {
+                        transition-duration: 0.01ms !important;
+                        animation-duration: 0.01ms !important;
                     }
                 }
             `;
@@ -871,12 +903,12 @@
             const q = String(initialQuery || '');
             this.inputEl.value = q;
             this.renderList(q);
-            setTimeout(() => {
-                this.inputEl.focus();
+            requestAnimationFrame(() => {
+                this.inputEl.focus({ preventScroll: true });
                 if (q) {
                     this.inputEl.selectionStart = this.inputEl.selectionEnd = q.length;
                 }
-            }, 40);
+            });
         }
 
         close() {

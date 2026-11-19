@@ -377,7 +377,7 @@
     }
     applyMonitorWorkspace(uiStep % 4, false);
 
-    // Return to rest only after 400ms with no card hovered
+    // Return to rest only after 220ms with no card hovered
     if (headResetTimeout) clearTimeout(headResetTimeout);
     headResetTimeout = setTimeout(() => {
       headResetTimeout = null;
@@ -387,7 +387,7 @@
         }
         setFallbackPose('rest');
       }
-    }, 400);
+    }, 220);
   }
 
   cards.forEach((card, idx) => {
@@ -425,9 +425,40 @@
   // =========================================================================
   function handleOmnibarFocus(focused) {
     document.body.classList.toggle('is-omnibar-focused', focused);
+    if (focused) {
+      if (headResetTimeout) {
+        clearTimeout(headResetTimeout);
+        headResetTimeout = null;
+      }
+      if (headTurnDelayTimeout) {
+        clearTimeout(headTurnDelayTimeout);
+        headTurnDelayTimeout = null;
+      }
+      activeCardIndex = null;
+      syncConnectorHighlight();
+      if (monitorScreenEl) {
+        monitorScreenEl.removeAttribute('data-active-card');
+      }
+      if (scene3DController && typeof scene3DController.setCardTarget === 'function') {
+        scene3DController.setCardTarget('rest');
+      }
+      setFallbackPose('rest');
+    }
   }
 
   if (omnibarForm) {
+    omnibarForm.addEventListener('pointerenter', () => {
+      if (activeCardIndex === null) {
+        if (headResetTimeout) {
+          clearTimeout(headResetTimeout);
+          headResetTimeout = null;
+        }
+        if (scene3DController && typeof scene3DController.setCardTarget === 'function') {
+          scene3DController.setCardTarget('rest');
+        }
+        setFallbackPose('rest');
+      }
+    });
     omnibarForm.addEventListener('focusin', () => handleOmnibarFocus(true));
     omnibarForm.addEventListener('focusout', (e) => {
       if (!omnibarForm.contains(e.relatedTarget)) {

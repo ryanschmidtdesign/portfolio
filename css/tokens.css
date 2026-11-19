@@ -99,6 +99,7 @@
   /* Motion (elegant + consistent + spring physics) */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-desk: cubic-bezier(0.23, 1, 0.32, 1);
+  --dur-1: 140ms;
   --dur-2: 180ms;
   --dur-3: 300ms;
   --dur-4: 450ms;

@@ -718,9 +718,10 @@ export function initDeskScene3D(options = {}) {
     // 1. Pinned resting lower body & paws (zero lift off shadow)
     catCtx.drawImage(catImage, CROP_X, CROP_Y + BASE_PAW_Y, CW, CH - BASE_PAW_Y, 0, BASE_PAW_Y, CW, CH - BASE_PAW_Y);
 
-    // 2. Smooth 2px vertical strips for ribcage rise/fall + ear twitch
-    for (let dx = 0; dx < CW; dx += 2) {
-      const sx = 334 + dx * 0.5;
+    // 2. Smooth 4px vertical strips for ribcage rise/fall + ear twitch (halves draw calls, prevents 2px seam shimmer)
+    for (let dx = 0; dx < CW; dx += 4) {
+      const sw = Math.min(4, CW - dx);
+      const sx = 334 + (dx + sw * 0.5) * 0.5;
       const ribDist = (sx - 418) / 48;
       const ribW = Math.exp(-(ribDist * ribDist));
       const earDist = (sx - 533) / 11;
@@ -730,11 +731,11 @@ export function initDeskScene3D(options = {}) {
         catImage,
         CROP_X + dx,
         CROP_Y,
-        2,
+        sw,
         BASE_PAW_Y,
         dx,
         -lift,
-        2,
+        sw,
         BASE_PAW_Y + lift
       );
     }

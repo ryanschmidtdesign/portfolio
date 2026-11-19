@@ -55,7 +55,7 @@
           clearTimeout(leaveTimer);
           leaveTimer = null;
         }
-        el.style.transition = 'transform 60ms linear';
+        el.style.transition = '--mag-x 60ms linear, --mag-y 60ms linear';
       });
 
       el.addEventListener('pointermove', (e) => {
@@ -71,14 +71,16 @@
           const pullX = Math.max(-maxPull, Math.min(maxPull, deltaX * 0.22));
           const pullY = Math.max(-maxPull, Math.min(maxPull, deltaY * 0.22));
 
-          el.style.transform = `translate3d(${pullX.toFixed(1)}px, ${pullY.toFixed(1)}px, 0)`;
+          el.style.setProperty('--mag-x', `${pullX.toFixed(2)}px`);
+          el.style.setProperty('--mag-y', `${pullY.toFixed(2)}px`);
         });
       });
 
       el.addEventListener('pointerleave', () => {
         if (rafId) cancelAnimationFrame(rafId);
-        el.style.transform = '';
-        el.style.transition = 'transform 280ms cubic-bezier(0.16, 1, 0.3, 1)';
+        el.style.setProperty('--mag-x', '0px');
+        el.style.setProperty('--mag-y', '0px');
+        el.style.transition = '--mag-x 280ms cubic-bezier(0.16, 1, 0.3, 1), --mag-y 280ms cubic-bezier(0.16, 1, 0.3, 1)';
         if (leaveTimer) clearTimeout(leaveTimer);
         leaveTimer = setTimeout(() => {
           leaveTimer = null;

@@ -21,7 +21,8 @@
 
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
     }
   });
 })();
@@ -30,6 +31,8 @@
 // Parallax functionality
 // ============================================================================
 (function () {
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
   const parallaxEls = [...document.querySelectorAll("[data-parallax]")].filter((el) => {
     // Avoid shifting large layout containers; keep parallax to small elements only.
     return !["SECTION", "ARTICLE", "MAIN"].includes(el.tagName);
@@ -37,7 +40,10 @@
 
   if (parallaxEls.length === 0) return;
 
-  function onScroll() {
+  let ticking = false;
+
+  function updateParallax() {
+    ticking = false;
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const maxOffset = 16; // px clamp to prevent overlap/jank on long pages
     parallaxEls.forEach((el) => {
@@ -48,8 +54,15 @@
     });
   }
 
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateParallax);
+    }
+  }
+
   window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  updateParallax();
 })();
 
 // ============================================================================
@@ -96,10 +109,13 @@
 
   observeAll();
 
-  // Safety fallback: ensure nothing stays permanently hidden if observer stalls on tall elements
+  // Safety fallback: ensure above-the-fold / in-view elements never stay hidden if observer stalls
   setTimeout(() => {
+    const cutoff = window.innerHeight + 80;
     document.querySelectorAll('[data-reveal]:not(.is-revealed)').forEach((el) => {
-      el.classList.add('is-revealed');
+      if (el.getBoundingClientRect().top < cutoff) {
+        el.classList.add('is-revealed');
+      }
     });
   }, 1200);
 
@@ -152,6 +168,7 @@
   }
 
   function animateMetric(el) {
+    el.classList.add("is-counting");
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       el.classList.add("metric--animated");
       return;
@@ -479,6 +496,13 @@
       if (availableEl) availableEl.textContent = data.available;
       if (scheduleEl) scheduleEl.textContent = data.schedule;
       if (ruleTextEl) ruleTextEl.innerHTML = data.rule;
+
+      const simGrid = simCard && simCard.querySelector('.sim-grid');
+      if (simGrid) {
+        simGrid.classList.remove('is-switching');
+        void simGrid.offsetWidth;
+        simGrid.classList.add('is-switching');
+      }
     };
 
     nodes.forEach((node) => {
@@ -638,9 +662,29 @@
   const BASE_WIDTH = 100;
   let activePreviewTarget = null;
   let returnTimer = null;
+  let baselineOffsetCache = new WeakMap();
+
+  function invalidateBaselineCache() {
+    baselineOffsetCache = new WeakMap();
+  }
 
   function getCurrentLink() {
     return nav.querySelector(".site-header__link.is-current[data-nav-underline]") || underlineTargets[0];
+  }
+
+  function getBaselineOffset(wordSpan, wordRect) {
+    if (baselineOffsetCache.has(wordSpan)) {
+      return baselineOffsetCache.get(wordSpan);
+    }
+    // Measure exact font text baseline offset relative to wordSpan top once per font/layout pass
+    const probe = document.createElement("span");
+    probe.style.cssText =
+      "display:inline-block;width:0;height:0;overflow:hidden;vertical-align:baseline;pointer-events:none;";
+    wordSpan.appendChild(probe);
+    const offset = probe.getBoundingClientRect().bottom - wordRect.top;
+    wordSpan.removeChild(probe);
+    baselineOffsetCache.set(wordSpan, offset);
+    return offset;
   }
 
   function measureWordBox(linkEl) {
@@ -651,13 +695,7 @@
     const wordRect = wordSpan.getBoundingClientRect();
     if (!navRect.width || !wordRect.width) return null;
 
-    // Measure exact font text baseline inside the word span
-    const probe = document.createElement("span");
-    probe.style.cssText =
-      "display:inline-block;width:0;height:0;overflow:hidden;vertical-align:baseline;pointer-events:none;";
-    wordSpan.appendChild(probe);
-    const baselineY = probe.getBoundingClientRect().bottom - navRect.top;
-    wordSpan.removeChild(probe);
+    const baselineY = (wordRect.top - navRect.top) + getBaselineOffset(wordSpan, wordRect);
 
     return {
       x: wordRect.left - navRect.left,
@@ -749,6 +787,7 @@
 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => {
+      invalidateBaselineCache();
       nav.classList.remove("is-ready");
       reposition();
       void underlineEl.offsetWidth;
@@ -758,12 +797,17 @@
 
   if (typeof ResizeObserver === "function") {
     const ro = new ResizeObserver(() => {
+      invalidateBaselineCache();
       reposition();
     });
     ro.observe(nav);
+  } else {
+    window.addEventListener("resize", () => {
+      invalidateBaselineCache();
+      reposition();
+    }, { passive: true });
   }
 
-  window.addEventListener("resize", reposition, { passive: true });
   window.addEventListener("pagereveal", syncInitialPosition);
   window.addEventListener("hashchange", reposition);
 })();
