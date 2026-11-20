@@ -169,11 +169,15 @@ function mat4TRS(tx, ty, tz, rx = 0, ry = 0, rz = 0, sx = 1, sy = 1) {
 const BASIC_VS = `
   attribute vec3 aPos;
   attribute vec2 aUv;
+  attribute float aBreathMask;
   uniform mat4 uMvp;
+  uniform float uBreathLift;
   varying vec2 vUv;
   void main() {
     vUv = aUv;
-    gl_Position = uMvp * vec4(aPos, 1.0);
+    vec3 p = aPos;
+    p.y += aBreathMask * uBreathLift;
+    gl_Position = uMvp * vec4(p, 1.0);
   }
 `;
 
@@ -181,10 +185,21 @@ const BASIC_FS = `
   precision highp float;
   uniform sampler2D uMap;
   uniform float uOpacity;
+  uniform float uRimStrength;
   varying vec2 vUv;
   void main() {
     vec4 col = texture2D(uMap, vUv) * uOpacity;
     if (col.a < 0.002) discard;
+    if (uRimStrength > 0.001) {
+      vec3 straight = col.rgb / col.a;
+      // Subtle right-side warm desk-lamp rim light + soft monitor bounce on upper shoulders
+      float rightRim = smoothstep(0.56, 0.96, vUv.x) * smoothstep(0.18, 0.78, vUv.y);
+      float monBounce = smoothstep(0.32, 0.72, vUv.x) * smoothstep(0.42, 0.92, vUv.y) * 0.35;
+      vec3 lampTint = vec3(1.0, 0.88, 0.72) * (rightRim * uRimStrength);
+      vec3 bounceTint = vec3(0.96, 0.92, 0.86) * (monBounce * uRimStrength);
+      straight = clamp(straight + (lampTint + bounceTint) * (1.0 - straight), 0.0, 1.0);
+      col.rgb = straight * col.a;
+    }
     gl_FragColor = col;
   }
 `;
@@ -252,11 +267,14 @@ const HEAD_FS = `
 
     if (outCol.a < 0.004) discard;
 
-    // Soft Sandstone daylight highlight rolloff as temple/ear rotates toward/away from left window
+    // Soft Sandstone daylight highlight rolloff + subtle right-side desk lamp rim & monitor bounce
     float sideGrad = clamp((0.5 - vFlowLocal.x) * 1.6, -1.0, 1.0);
     float lightShift = clamp(-uAngle, -1.0, 1.0) * sideGrad * 0.022;
     vec3 warmShift = vec3(1.04, 0.98, 0.92) * lightShift;
-    outCol.rgb = clamp(outCol.rgb + warmShift * (1.0 - outCol.rgb), 0.0, 1.0);
+    float headLampRim = smoothstep(0.64, 0.96, vFlowLocal.x) * smoothstep(0.22, 0.78, vFlowLocal.y) * 0.028;
+    float headMonBounce = smoothstep(0.28, 0.72, vFlowLocal.x) * smoothstep(0.10, 0.55, vFlowLocal.y) * 0.012;
+    vec3 studioWarmth = warmShift + vec3(1.0, 0.88, 0.72) * headLampRim + vec3(0.96, 0.92, 0.86) * headMonBounce;
+    outCol.rgb = clamp(outCol.rgb + studioWarmth * (1.0 - outCol.rgb), 0.0, 1.0);
 
     gl_FragColor = vec4(outCol.rgb * outCol.a, outCol.a);
   }
@@ -298,6 +316,7 @@ function buildGridData(bounds, cols, rows, pivot, optionsGrid = {}) {
   const baseSY = new Float32Array(vertCount);
   const reliefZ = new Float32Array(vertCount);
   const crownMask = new Float32Array(vertCount);
+  const breathMask = new Float32Array(vertCount);
   const uvs = new Float32Array(vertCount * 2);
   const positions = new Float32Array(vertCount * 3);
 
@@ -319,6 +338,10 @@ function buildGridData(bounds, cols, rows, pivot, optionsGrid = {}) {
         const r2 = Math.min(1, dx * dx + dy * dy);
         reliefZ[vi] = Math.sqrt(Math.max(0, 1 - r2)) * 0.052;
         crownMask[vi] = smoothstep(545, 442, sy);
+      }
+      if (optionsGrid.isTorso) {
+        // Upper shoulders/collar lift gently with breathing; lower chair/desk stays 100% locked
+        breathMask[vi] = smoothstep(860, 620, sy);
       }
       vi++;
     }
@@ -350,12 +373,14 @@ function buildGridData(bounds, cols, rows, pivot, optionsGrid = {}) {
     baseSY,
     reliefZ,
     crownMask,
+    breathMask,
     uvs,
     positions,
     indices,
     posBuf: null,
     uvBuf: null,
     crownBuf: null,
+    breathBuf: null,
     idxBuf: null
   };
 }
@@ -414,7 +439,7 @@ export function initDeskScene3D(options = {}) {
   };
 
   const neckBedGrid = buildGridData(NECK_BOUNDS, 12, 10, NECK_BASE_PIVOT);
-  const bodyGrid = buildGridData(BODY_BOUNDS, 28, 28, BODY_PIVOT);
+  const bodyGrid = buildGridData(BODY_BOUNDS, 28, 28, BODY_PIVOT, { isTorso: true });
   const headGrid = buildGridData(HEAD_BOUNDS, 28, 28, HEAD_ATLAS_PIVOT, { isCranial: true });
   const chinShadowGrid = buildGridData(CHIN_BOUNDS, 2, 2, CHIN_PIVOT);
   const allGrids = [neckBedGrid, bodyGrid, headGrid, chinShadowGrid];
@@ -491,6 +516,10 @@ export function initDeskScene3D(options = {}) {
       grid.crownBuf = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, grid.crownBuf);
       gl.bufferData(gl.ARRAY_BUFFER, grid.crownMask, gl.STATIC_DRAW);
+    } else {
+      grid.breathBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, grid.breathBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, grid.breathMask, gl.STATIC_DRAW);
     }
 
     grid.idxBuf = gl.createBuffer();
@@ -544,9 +573,12 @@ export function initDeskScene3D(options = {}) {
       basicLoc = {
         aPos: gl.getAttribLocation(basicProg, 'aPos'),
         aUv: gl.getAttribLocation(basicProg, 'aUv'),
+        aBreathMask: gl.getAttribLocation(basicProg, 'aBreathMask'),
         uMvp: gl.getUniformLocation(basicProg, 'uMvp'),
         uMap: gl.getUniformLocation(basicProg, 'uMap'),
-        uOpacity: gl.getUniformLocation(basicProg, 'uOpacity')
+        uOpacity: gl.getUniformLocation(basicProg, 'uOpacity'),
+        uBreathLift: gl.getUniformLocation(basicProg, 'uBreathLift'),
+        uRimStrength: gl.getUniformLocation(basicProg, 'uRimStrength')
       };
 
       headProg = createProgram(gl, HEAD_VS, HEAD_FS);
@@ -703,11 +735,13 @@ export function initDeskScene3D(options = {}) {
     drawCroppedLayer2D(charCtx2D, bodyImg, BODY_BOUNDS, dpr);
   }
 
-  function drawBasicMesh(grid, tex, mvp, opacity) {
+  function drawBasicMesh(grid, tex, mvp, opacity, breathLift = 0.0, rimStrength = 0.0) {
     if (!tex) return;
     gl.useProgram(basicProg);
     gl.uniformMatrix4fv(basicLoc.uMvp, false, mvp);
     gl.uniform1f(basicLoc.uOpacity, opacity);
+    gl.uniform1f(basicLoc.uBreathLift, breathLift);
+    gl.uniform1f(basicLoc.uRimStrength, rimStrength);
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, tex);
     gl.uniform1i(basicLoc.uMap, 0);
@@ -719,6 +753,12 @@ export function initDeskScene3D(options = {}) {
     gl.bindBuffer(gl.ARRAY_BUFFER, grid.uvBuf);
     gl.enableVertexAttribArray(basicLoc.aUv);
     gl.vertexAttribPointer(basicLoc.aUv, 2, gl.FLOAT, false, 0, 0);
+
+    if (basicLoc.aBreathMask >= 0 && grid.breathBuf) {
+      gl.bindBuffer(gl.ARRAY_BUFFER, grid.breathBuf);
+      gl.enableVertexAttribArray(basicLoc.aBreathMask);
+      gl.vertexAttribPointer(basicLoc.aBreathMask, 1, gl.FLOAT, false, 0, 0);
+    }
 
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, grid.idxBuf);
     gl.drawElements(gl.TRIANGLES, grid.indices.length, gl.UNSIGNED_SHORT, 0);
@@ -770,38 +810,40 @@ export function initDeskScene3D(options = {}) {
 
     const neckEuler = angleToEuler(neckSpring.pos);
     const headEuler = angleToEuler(headSpring.pos);
+    // Subtle human mid-sweep chin arc dip during head turn
+    const pitchDip = -Math.min(0.014, Math.abs(headSpring.vel) * 0.0045);
 
-    // Layer 1 (lower neck hinge: 38% turn led by neckSpring)
+    // Layer 1 (lower neck hinge: 38% turn led by neckSpring + unified breathing lift)
     const neckModel = mat4TRS(
       neckPosW.wx,
-      neckPosW.wy,
+      neckPosW.wy + currentBreathLift,
       0.0,
       neckEuler.pitch * 0.38,
       neckEuler.yaw * 0.38,
       neckEuler.roll * 0.38
     );
-    drawBasicMesh(neckBedGrid, textures.neckBed, mat4Mul(projView, neckModel), 1.0);
+    drawBasicMesh(neckBedGrid, textures.neckBed, mat4Mul(projView, neckModel), 1.0, 0.0, 0.025);
 
-    // Layer 2 (cranial dome atop C1 atlas: residual 62% so cumulative skull reaches target angle)
+    // Layer 2 (cranial dome atop C1 atlas: residual 62% + natural chin arc dip)
     const headLocal = mat4TRS(
       atlasPosW.wx - neckPosW.wx,
       atlasPosW.wy - neckPosW.wy,
       0.002,
-      headEuler.pitch - neckEuler.pitch * 0.38,
+      headEuler.pitch + pitchDip - neckEuler.pitch * 0.38,
       headEuler.yaw - neckEuler.yaw * 0.38,
       headEuler.roll - neckEuler.roll * 0.38
     );
     const headModel = mat4Mul(neckModel, headLocal);
     drawHeadMesh(mat4Mul(projView, headModel), headSpring.pos, crownSpring.pos - headSpring.pos);
 
-    // Layer 3 (soft dynamic chin contact AO shadow with right-turn jaw-lift occlusion)
+    // Layer 3 (soft dynamic chin contact AO shadow with right-turn jaw-lift occlusion + breathing lift)
     const rightTurn = Math.max(0, headSpring.pos);
     const chinScaleX = 1.0 + rightTurn * 0.15;
     const chinScaleY = 1.0 + rightTurn * 0.2;
     const chinOpacity = Math.max(0, 0.45 - Math.abs(headSpring.pos) * 0.08 - rightTurn * 0.08);
     const chinModel = mat4TRS(
       chinRestPos.wx + crownSpring.pos * 0.0045,
-      chinRestPos.wy - Math.abs(crownSpring.pos) * 0.0012,
+      chinRestPos.wy - Math.abs(crownSpring.pos) * 0.0012 + currentBreathLift,
       0.004,
       0,
       0,
@@ -809,11 +851,11 @@ export function initDeskScene3D(options = {}) {
       chinScaleX,
       chinScaleY
     );
-    drawBasicMesh(chinShadowGrid, textures.chinShadow, mat4Mul(projView, chinModel), chinOpacity);
+    drawBasicMesh(chinShadowGrid, textures.chinShadow, mat4Mul(projView, chinModel), chinOpacity, 0.0, 0.0);
 
-    // Layer 4 (stationary sweater collar, resting hand & chair)
+    // Layer 4 (upper shoulders/collar gently lift via aBreathMask; chair & desk stay locked + warm desk-lamp rim)
     const bodyModel = mat4TRS(bodyPosW.wx, bodyPosW.wy, 0.005);
-    drawBasicMesh(bodyGrid, textures.body, mat4Mul(projView, bodyModel), 1.0);
+    drawBasicMesh(bodyGrid, textures.body, mat4Mul(projView, bodyModel), 1.0, currentBreathLift, 0.04);
 
     webglDirty = false;
   }
@@ -933,10 +975,13 @@ export function initDeskScene3D(options = {}) {
     }
   }
 
-  const neckSpring = makeSpring(10.5, 1.0);
-  const headSpring = makeSpring(9.2, 1.0);
-  const crownSpring = makeSpring(8.4, 1.0);
+  const neckSpring = makeSpring(11.6, 0.95);
+  const headSpring = makeSpring(9.8, 0.92);
+  const crownSpring = makeSpring(8.6, 0.84);
   let lastPhysicsTime = performance.now();
+  let currentCardKey = 'rest';
+  let ambientGaze = 0.0;
+  let currentBreathLift = 0.0;
 
   let isPaused = false;
   let prefersReducedMotion =
@@ -948,22 +993,46 @@ export function initDeskScene3D(options = {}) {
     lastPhysicsTime = now;
 
     if (prefersReducedMotion || window.innerWidth < 1024) {
-      if (neckSpring.pos !== 0 || headSpring.pos !== 0 || crownSpring.pos !== 0) {
+      if (neckSpring.pos !== 0 || headSpring.pos !== 0 || crownSpring.pos !== 0 || currentBreathLift !== 0) {
         webglDirty = true;
       }
       neckSpring.pos = neckSpring.vel = neckSpring.target = 0;
       headSpring.pos = headSpring.vel = headSpring.target = 0;
       crownSpring.pos = crownSpring.vel = crownSpring.target = 0;
-    } else if (rawDt > 0 && (isSpringActive(neckSpring) || isSpringActive(headSpring) || isSpringActive(crownSpring))) {
-      const steps = Math.max(1, Math.ceil(rawDt / 0.004));
-      const dt = rawDt / steps;
-      for (let s = 0; s < steps; s++) {
-        stepSpring(neckSpring, dt);
-        stepSpring(headSpring, dt);
-        crownSpring.target = headSpring.pos;
-        stepSpring(crownSpring, dt);
+      currentBreathLift = 0.0;
+    } else {
+      // Gentle ~4.8s asymmetric thoracic breathing cycle (inhale 40%, exhale 60%)
+      const bCycle = (now % 4800) / 4800;
+      const bWave = bCycle < 0.4
+        ? 0.5 - 0.5 * Math.cos((Math.PI * bCycle) / 0.4)
+        : 0.5 + 0.5 * Math.cos((Math.PI * (bCycle - 0.4)) / 0.6);
+      const nextBreathLift = bWave * 0.0022;
+      if (Math.abs(nextBreathLift - currentBreathLift) > 1e-6) {
+        currentBreathLift = nextBreathLift;
+        webglDirty = true;
       }
-      webglDirty = true;
+
+      // Subtle organic idle gaze micro-drift (+-0.015) when at rest & cursor is centered/still
+      if (currentCardKey === 'rest') {
+        const idleDrift = Math.abs(ambientGaze) < 0.001
+          ? Math.sin(now * 0.00055) * 0.010 + Math.sin(now * 0.00091 + 1.3) * 0.005
+          : 0.0;
+        const restTarget = ambientGaze + idleDrift;
+        neckSpring.target = restTarget;
+        headSpring.target = restTarget;
+      }
+
+      if (rawDt > 0 && (isSpringActive(neckSpring) || isSpringActive(headSpring) || isSpringActive(crownSpring))) {
+        const steps = Math.max(1, Math.ceil(rawDt / 0.004));
+        const dt = rawDt / steps;
+        for (let s = 0; s < steps; s++) {
+          stepSpring(neckSpring, dt);
+          stepSpring(headSpring, dt);
+          crownSpring.target = headSpring.pos;
+          stepSpring(crownSpring, dt);
+        }
+        webglDirty = true;
+      }
     }
 
     renderCatFrame(now);
@@ -1043,11 +1112,27 @@ export function initDeskScene3D(options = {}) {
     const normKey = Object.prototype.hasOwnProperty.call(CARD_ANGLE_TARGETS, cardKey)
       ? String(cardKey)
       : 'rest';
-    const nextAngle = CARD_ANGLE_TARGETS[normKey];
+    currentCardKey = normKey;
+    const nextAngle = normKey === 'rest' ? ambientGaze : CARD_ANGLE_TARGETS[normKey];
     neckSpring.target = nextAngle;
     headSpring.target = nextAngle;
     webglDirty = true;
     ensureRunning();
+  }
+
+  function setAmbientGaze(normX) {
+    if (prefersReducedMotion || window.innerWidth < 1024) {
+      ambientGaze = 0.0;
+      return;
+    }
+    const clamped = clamp(Number(normX) || 0, -1, 1);
+    ambientGaze = clamped * 0.16;
+    if (currentCardKey === 'rest') {
+      neckSpring.target = ambientGaze;
+      headSpring.target = ambientGaze;
+      webglDirty = true;
+      ensureRunning();
+    }
   }
 
   function setPaused(paused) {
@@ -1141,6 +1226,7 @@ export function initDeskScene3D(options = {}) {
         if (g.posBuf) gl.deleteBuffer(g.posBuf);
         if (g.uvBuf) gl.deleteBuffer(g.uvBuf);
         if (g.crownBuf) gl.deleteBuffer(g.crownBuf);
+        if (g.breathBuf) gl.deleteBuffer(g.breathBuf);
         if (g.idxBuf) gl.deleteBuffer(g.idxBuf);
       });
       if (basicProg) gl.deleteProgram(basicProg);
@@ -1151,6 +1237,7 @@ export function initDeskScene3D(options = {}) {
 
   return {
     setCardTarget,
+    setAmbientGaze,
     setPaused,
     setReducedMotion,
     syncOverlaysAndResize,

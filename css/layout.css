@@ -154,6 +154,14 @@
   display: inline-block;
 }
 
+.site-header__link > .site-header__copy-stack {
+  display: inline-grid;
+}
+
+.site-header__link > .site-header__arrow {
+  display: inline-flex;
+}
+
 .site-header__link.is-current {
   color: var(--text-primary, #171412);
   font-weight: 500;

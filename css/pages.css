@@ -1389,10 +1389,12 @@ body.is-omnibar-focused .desk-monitor__thinking {
    Inner cards higher & closer to monitor center; outer cards lower & tilted outward
    & Normal 2-Column / 1-Column Grid (< 1024px)
    ------------------------------------------------------- */
-.home-section#work {
+.home-section#work,
+#work {
   border-top: none;
   padding: 0;
   margin: 0;
+  scroll-margin-top: 96px;
 }
 
 @media (min-width: 1024px) {

@@ -34,14 +34,14 @@
                 .rs-cmd-overlay {
                     position: fixed;
                     inset: 0;
-                    background: rgba(12, 10, 9, 0.65);
-                    backdrop-filter: blur(14px);
-                    -webkit-backdrop-filter: blur(14px);
+                    background: rgba(28, 25, 23, 0.28);
+                    backdrop-filter: blur(6px);
+                    -webkit-backdrop-filter: blur(6px);
                     z-index: 2147483000;
                     display: flex;
                     align-items: flex-start;
                     justify-content: center;
-                    padding-top: clamp(40px, 11vh, 100px);
+                    padding-top: clamp(48px, 12vh, 112px);
                     padding-inline: 16px;
                     opacity: 0;
                     visibility: hidden;
@@ -60,35 +60,19 @@
                     position: relative;
                     z-index: 1;
                     width: min(560px, 100%);
-                    max-height: 80vh;
-                    background: var(--obsidian-glass, rgba(18, 15, 13, 0.94));
-                    backdrop-filter: blur(24px) saturate(160%);
-                    -webkit-backdrop-filter: blur(24px) saturate(160%);
-                    border: 1px solid var(--obsidian-border-strong, rgba(255, 255, 255, 0.14));
-                    border-radius: 4px;
+                    max-height: 78vh;
+                    background: var(--surface-elevated, #FAF7F2);
+                    border: 1px solid rgba(28, 25, 23, 0.12);
+                    border-radius: 8px;
                     box-shadow:
-                        0 28px 72px -12px rgba(24, 18, 14, 0.75),
-                        0 6px 20px rgba(24, 18, 14, 0.40),
-                        0 0 0 1px rgba(0, 0, 0, 0.50),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+                        0 24px 60px rgba(28, 25, 23, 0.14),
+                        0 2px 10px rgba(28, 25, 23, 0.06);
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
-                    transform: translateY(-8px) scale(0.985);
+                    transform: translateY(-6px) scale(0.988);
                     transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-                    color: #F7F5F2;
-                }
-
-                .rs-cmd-modal::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    height: 1px;
-                    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.22) 50%, transparent 100%);
-                    pointer-events: none;
-                    z-index: 2;
+                    color: var(--text-primary, #171412);
                 }
 
                 .rs-cmd-overlay.is-open .rs-cmd-modal {
@@ -100,16 +84,26 @@
                     display: flex;
                     align-items: center;
                     gap: 12px;
-                    padding: 13px 16px;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                    padding: 15px 18px;
+                    border-bottom: 1px solid rgba(28, 25, 23, 0.09);
                     background: transparent;
+                    transition: border-color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+                }
+
+                .rs-cmd-search:focus-within {
+                    border-bottom-color: rgba(28, 25, 23, 0.16);
                 }
 
                 .rs-cmd-search-icon {
                     width: 16px;
                     height: 16px;
-                    color: #A8A29E;
+                    color: #8A8076;
                     flex-shrink: 0;
+                    transition: color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+                }
+
+                .rs-cmd-search:focus-within .rs-cmd-search-icon {
+                    color: var(--accent, #C85A32);
                 }
 
                 .rs-cmd-input {
@@ -117,44 +111,49 @@
                     border: none;
                     background: transparent;
                     font-family: var(--font-sans);
-                    font-size: 0.95rem;
-                    font-weight: var(--weight-medium, 500);
-                    color: #F7F5F2;
+                    font-size: 0.96rem;
+                    font-weight: var(--weight-regular, 400);
+                    color: var(--text-primary, #171412);
                     outline: none;
+                    box-shadow: none;
                     padding: 0;
                     margin: 0;
                     caret-color: var(--accent, #C85A32);
                 }
 
+                .rs-cmd-input:focus,
+                .rs-cmd-input:focus-visible {
+                    outline: none !important;
+                    box-shadow: none !important;
+                }
+
                 .rs-cmd-input::placeholder {
-                    color: #8C8680;
+                    color: #8A8076;
                     font-weight: 400;
                 }
 
                 .rs-cmd-esc {
                     display: inline-flex;
                     align-items: center;
-                    padding: 2px 6px;
+                    padding: 3px 6px;
                     font-family: var(--font-mono);
-                    font-size: 0.62rem;
-                    font-weight: 600;
-                    letter-spacing: 0.04em;
-                    text-transform: uppercase;
-                    border-radius: 3px;
-                    background: rgba(255, 255, 255, 0.05);
-                    color: #A8A29E;
-                    border: 1px solid rgba(255, 255, 255, 0.09);
+                    font-size: 0.68rem;
+                    font-weight: 500;
+                    letter-spacing: 0.03em;
+                    border-radius: 4px;
+                    background: transparent;
+                    color: #8A8076;
+                    border: none;
                     flex-shrink: 0;
                     user-select: none;
                     cursor: pointer;
-                    transition: background-color 120ms cubic-bezier(0.16, 1, 0.3, 1), border-color 120ms cubic-bezier(0.16, 1, 0.3, 1), color 120ms cubic-bezier(0.16, 1, 0.3, 1);
+                    transition: background-color 120ms cubic-bezier(0.16, 1, 0.3, 1), color 120ms cubic-bezier(0.16, 1, 0.3, 1), transform 90ms cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
                 .rs-cmd-esc:hover,
                 .rs-cmd-esc:focus-visible {
-                    background: rgba(255, 255, 255, 0.10);
-                    border-color: rgba(255, 255, 255, 0.18);
-                    color: #F7F5F2;
+                    background: rgba(28, 25, 23, 0.06);
+                    color: var(--text-primary, #171412);
                 }
 
                 .rs-cmd-esc:focus-visible {
@@ -170,11 +169,11 @@
                 .rs-cmd-results {
                     flex: 1;
                     overflow-y: auto;
-                    padding: 6px 8px 10px;
-                    max-height: 380px;
+                    padding: 8px 10px 12px;
+                    max-height: 400px;
                     overscroll-behavior: contain;
                     scrollbar-width: thin;
-                    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+                    scrollbar-color: rgba(28, 25, 23, 0.16) transparent;
                 }
 
                 .rs-cmd-group-title {
@@ -182,10 +181,14 @@
                     font-size: 0.68rem;
                     font-weight: 600;
                     text-transform: uppercase;
-                    letter-spacing: 0.07em;
-                    color: #A8A29E;
-                    padding: 9px 10px 4px;
+                    letter-spacing: 0.08em;
+                    color: #8A8076;
+                    padding: 12px 12px 5px;
                     user-select: none;
+                }
+
+                .rs-cmd-group-title:first-child {
+                    padding-top: 4px;
                 }
 
                 .rs-cmd-item {
@@ -193,19 +196,18 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    gap: 12px;
-                    padding: 8px 10px;
-                    border-radius: 4px;
+                    gap: 16px;
+                    padding: 9px 12px;
+                    border-radius: 5px;
                     cursor: pointer;
                     text-decoration: none;
                     color: inherit;
                     transition:
                         background-color 110ms cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 110ms cubic-bezier(0.16, 1, 0.3, 1),
                         transform 90ms cubic-bezier(0.16, 1, 0.3, 1);
                     user-select: none;
                     margin-bottom: 1px;
-                    border: 1px solid transparent;
+                    border: none;
                     background: transparent;
                 }
 
@@ -213,8 +215,8 @@
                     content: "";
                     position: absolute;
                     left: 0;
-                    top: 6px;
-                    bottom: 6px;
+                    top: 8px;
+                    bottom: 8px;
                     width: 2px;
                     border-radius: 1px;
                     background: var(--accent, #C85A32);
@@ -225,9 +227,7 @@
 
                 .rs-cmd-item:hover,
                 .rs-cmd-item.is-selected {
-                    background: rgba(255, 255, 255, 0.07);
-                    border-color: rgba(255, 255, 255, 0.12);
-                    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+                    background: rgba(200, 90, 50, 0.07);
                 }
 
                 .rs-cmd-item.is-selected::before {
@@ -238,50 +238,19 @@
                     transform: scale(0.992);
                 }
 
-                .rs-cmd-item__left {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    min-width: 0;
-                    flex: 1;
-                }
-
-                .rs-cmd-item__icon {
-                    width: 22px;
-                    height: 22px;
-                    border-radius: 3px;
-                    background: rgba(255, 255, 255, 0.04);
-                    border: 1px solid rgba(255, 255, 255, 0.07);
-                    color: #A8A29E;
-                    font-family: var(--font-mono);
-                    font-size: 0.65rem;
-                    font-weight: 600;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-shrink: 0;
-                    transition: background-color 100ms cubic-bezier(0.16, 1, 0.3, 1), border-color 100ms cubic-bezier(0.16, 1, 0.3, 1), color 100ms cubic-bezier(0.16, 1, 0.3, 1);
-                }
-
-                .rs-cmd-item.is-selected .rs-cmd-item__icon,
-                .rs-cmd-item:hover .rs-cmd-item__icon {
-                    background: rgba(255, 255, 255, 0.09);
-                    border-color: rgba(255, 255, 255, 0.14);
-                    color: #F7F5F2;
-                }
-
                 .rs-cmd-item__content {
                     display: flex;
                     flex-direction: column;
                     min-width: 0;
-                    gap: 1px;
+                    flex: 1;
+                    gap: 2px;
                 }
 
                 .rs-cmd-item__title {
-                    font-size: 0.88rem;
+                    font-size: 0.9rem;
                     font-weight: 500;
-                    color: #F7F5F2;
-                    line-height: 1.25;
+                    color: var(--text-primary, #171412);
+                    line-height: 1.3;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -289,17 +258,17 @@
                 }
 
                 .rs-cmd-item__sub {
-                    font-size: 0.73rem;
-                    color: #A8A29E;
-                    line-height: 1.3;
+                    font-size: 0.76rem;
+                    color: var(--text-secondary, #5C554E);
+                    line-height: 1.35;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
 
                 .rs-cmd-mark {
-                    background: rgba(200, 90, 50, 0.25);
-                    color: #F7F5F2;
+                    background: rgba(200, 90, 50, 0.14);
+                    color: var(--accent-text, #8C3B1E);
                     border-radius: 2px;
                     padding: 0 2px;
                     font-weight: 600;
@@ -308,65 +277,38 @@
                 .rs-cmd-item__right {
                     display: inline-flex;
                     align-items: center;
-                    gap: 6px;
+                    gap: 10px;
                     flex-shrink: 0;
                 }
 
-                .rs-cmd-item__kpi {
-                    font-family: var(--font-mono);
-                    font-size: 0.64rem;
-                    font-weight: 500;
-                    padding: 2px 6px;
-                    border-radius: 2px;
-                    letter-spacing: 0.02em;
+                .rs-cmd-item__meta {
+                    font-family: var(--font-sans);
+                    font-size: 0.74rem;
+                    font-weight: 400;
+                    color: #8A8076;
                     white-space: nowrap;
+                    transition: color 110ms cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
-                .rs-cmd-kpi--terracotta {
-                    background: rgba(200, 90, 50, 0.15);
-                    color: #E07844;
-                    border: 1px solid rgba(200, 90, 50, 0.30);
-                }
-
-                .rs-cmd-kpi--emerald {
-                    background: rgba(22, 101, 52, 0.18);
-                    color: #4ADE80;
-                    border: 1px solid rgba(22, 101, 52, 0.36);
-                }
-
-                .rs-cmd-kpi--slate {
-                    background: rgba(255, 255, 255, 0.05);
-                    color: #A8A29E;
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                }
-
-                .rs-cmd-item__badge {
-                    font-family: var(--font-mono);
-                    font-size: 0.63rem;
-                    font-weight: 500;
-                    padding: 2px 6px;
-                    border-radius: 2px;
-                    background: rgba(255, 255, 255, 0.04);
-                    color: #A8A29E;
-                    border: 1px solid rgba(255, 255, 255, 0.07);
-                    white-space: nowrap;
+                .rs-cmd-item.is-selected .rs-cmd-item__meta,
+                .rs-cmd-item:hover .rs-cmd-item__meta {
+                    color: var(--text-secondary, #5C554E);
                 }
 
                 .rs-cmd-item__return {
                     font-family: var(--font-mono);
-                    font-size: 0.72rem;
-                    font-weight: 600;
-                    color: #A8A29E;
+                    font-size: 0.74rem;
+                    font-weight: 500;
+                    color: var(--accent, #C85A32);
                     opacity: 0;
                     transform: translateX(-3px);
-                    transition: opacity 100ms cubic-bezier(0.16, 1, 0.3, 1), transform 100ms cubic-bezier(0.16, 1, 0.3, 1), color 100ms cubic-bezier(0.16, 1, 0.3, 1);
+                    transition: opacity 110ms cubic-bezier(0.16, 1, 0.3, 1), transform 110ms cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
                 .rs-cmd-item.is-selected .rs-cmd-item__return,
                 .rs-cmd-item:hover .rs-cmd-item__return {
                     opacity: 1;
                     transform: translateX(0);
-                    color: var(--accent, #C85A32);
                 }
 
                 /* Footer */
@@ -374,36 +316,14 @@
                     display: flex;
                     align-items: center;
                     justify-content: flex-end;
-                    padding: 8px 14px;
-                    border-top: 1px solid rgba(255, 255, 255, 0.06);
+                    padding: 10px 18px;
+                    border-top: 1px solid rgba(28, 25, 23, 0.08);
                     background: transparent;
-                    font-size: 0.68rem;
-                    color: #A8A29E;
+                    font-size: 0.71rem;
+                    color: #8A8076;
                     font-family: var(--font-sans);
+                    letter-spacing: 0.01em;
                     user-select: none;
-                }
-
-                .rs-cmd-footer__shortcuts {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 12px;
-                    flex-shrink: 0;
-                }
-
-                .rs-cmd-key {
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    min-width: 17px;
-                    padding: 1px 4px;
-                    border-radius: 2px;
-                    background: rgba(255, 255, 255, 0.05);
-                    color: #A8A29E;
-                    border: 1px solid rgba(255, 255, 255, 0.10);
-                    font-size: 0.60rem;
-                    font-family: var(--font-mono);
-                    font-weight: 600;
-                    margin-right: 3px;
                 }
 
                 @media (max-width: 640px) {
@@ -420,11 +340,7 @@
                     }
                     .rs-cmd-footer {
                         justify-content: center;
-                        padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-                    }
-                    .rs-cmd-esc {
-                        padding: 3px 6px;
-                        font-size: 0.68rem;
+                        padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
                     }
                 }
 
@@ -432,9 +348,11 @@
                     .rs-cmd-overlay,
                     .rs-cmd-overlay.is-open,
                     .rs-cmd-modal,
+                    .rs-cmd-search,
+                    .rs-cmd-search-icon,
                     .rs-cmd-item,
                     .rs-cmd-item::before,
-                    .rs-cmd-item__icon,
+                    .rs-cmd-item__meta,
                     .rs-cmd-item__return,
                     .rs-cmd-esc {
                         transition-duration: 0.01ms !important;
@@ -472,17 +390,13 @@
                             autocomplete="off"
                             spellcheck="false"
                         />
-                        <button type="button" class="rs-cmd-esc" id="rsCmdEscBtn" aria-label="Close command palette" title="Close (Esc)">esc</button>
+                        <button type="button" class="rs-cmd-esc" id="rsCmdEscBtn" aria-label="Close command palette" title="Close (Esc)">Esc</button>
                     </div>
 
                     <div class="rs-cmd-results" id="rsCmdResults" role="listbox"></div>
 
                     <div class="rs-cmd-footer">
-                        <div class="rs-cmd-footer__shortcuts">
-                            <span><kbd class="rs-cmd-key">↑↓</kbd>navigate</span>
-                            <span><kbd class="rs-cmd-key">↵</kbd>select</span>
-                            <span><kbd class="rs-cmd-key">esc</kbd>close</span>
-                        </div>
+                        <span>↑↓ Navigate · ↵ Open · Esc Close</span>
                     </div>
                 </div>
             `;
@@ -506,49 +420,37 @@
                 {
                     id: 'nav-dashboard',
                     group: 'Case Studies',
-                    icon: '01',
                     title: 'Custom Dashboards & AI Summaries',
-                    sub: 'D-Tools Cloud · 71% multi-dashboard adoption',
-                    badge: 'Case Study',
-                    kpi: '+64% Views',
-                    kpiType: 'terracotta',
-                    keywords: 'dashboard bi analytics d-tools cloud opportunity signals custom dashboards ai summaries kpi pipeline b2b data visualization metrics revenue 71% sustained views',
+                    sub: 'Role-based executive analytics and deterministic AI reporting',
+                    meta: 'D-Tools · 71% adoption',
+                    keywords: 'dashboard bi analytics d-tools cloud opportunity signals custom dashboards ai summaries kpi pipeline b2b data visualization metrics revenue 71% sustained views 64%',
                     action: () => { window.location.href = `${prefix}dashboard.html`; }
                 },
                 {
                     id: 'nav-member-portal',
                     group: 'Case Studies',
-                    icon: '02',
                     title: 'i4cp Member Portal & Research Discovery',
-                    sub: 'i4cp Enterprise · Research IA and conversational AI',
-                    badge: 'Case Study',
-                    kpi: '+500% AI',
-                    kpiType: 'terracotta',
+                    sub: 'Enterprise research IA and conversational AI search',
+                    meta: 'i4cp · +500% sessions',
                     keywords: 'i4cp member portal ai search synthesis rag overhaul enterprise research membership 500% sessions daily activity',
                     action: () => { window.location.href = `${prefix}member-portal-overhaul.html`; }
                 },
                 {
                     id: 'nav-inventory',
                     group: 'Case Studies',
-                    icon: '03',
                     title: 'Inventory, Purchasing & Receiving',
-                    sub: 'D-Tools Cloud · Desktop supply chain ledger',
-                    badge: 'Case Study',
-                    kpi: '+8% ARR',
-                    kpiType: 'emerald',
+                    sub: 'Desktop-first supply chain ledger and warehouse receiving',
+                    meta: 'D-Tools · +8% ARR',
                     keywords: 'inventory purchasing po receiving ledger stepper d-tools supply chain warehouse enterprise 8% mrr recurring revenue',
                     action: () => { window.location.href = `${prefix}inventory.html`; }
                 },
                 {
                     id: 'nav-ai-portfolio',
                     group: 'Case Studies',
-                    icon: '04',
                     title: 'Building My Portfolio in Code',
-                    sub: 'Zero-build stack · Vector search · Design tokens',
-                    badge: 'Architecture',
-                    kpi: 'Zero-Build',
-                    kpiType: 'slate',
-                    keywords: 'portfolio architecture zero-build vector search grounding coding tokens design systems vanilla web components cursor',
+                    sub: 'Zero-build HTML/CSS/JS · In-memory RAG · Design tokens',
+                    meta: 'This site',
+                    keywords: 'portfolio architecture zero-build rag grounding coding tokens design systems vanilla web components cursor',
                     action: () => { window.location.href = `${prefix}ai-coding-portfolio.html`; }
                 },
 
@@ -556,10 +458,9 @@
                 {
                     id: 'nav-work-overview',
                     group: 'Navigation',
-                    icon: '★',
                     title: 'Selected Work',
                     sub: 'Four enterprise case studies',
-                    badge: 'Work',
+                    meta: 'Section',
                     keywords: 'work selected projects case studies shipped outcomes portfolio overview index',
                     action: () => {
                         this.close();
@@ -574,20 +475,18 @@
                 {
                     id: 'nav-about',
                     group: 'Navigation',
-                    icon: 'RS',
                     title: 'About Ryan Schmidt',
                     sub: 'Background, seniority, and personal craft',
-                    badge: 'About',
+                    meta: 'Page',
                     keywords: 'about bio leadership experience career history philosophy background ryan schmidt mentor designlab 6+ years',
                     action: () => { window.location.href = `${prefix}about.html`; }
                 },
                 {
                     id: 'nav-home',
                     group: 'Navigation',
-                    icon: '⌂',
                     title: 'Homepage',
                     sub: 'Senior B2B SaaS Product Designer',
-                    badge: 'Home',
+                    meta: 'Home',
                     keywords: 'home index start main portfolio top hero',
                     action: () => {
                         this.close();
@@ -604,10 +503,9 @@
                 {
                     id: 'act-resume',
                     group: 'Connect',
-                    icon: '↓',
                     title: 'Resume (PDF)',
-                    sub: 'Download or view dossier in new tab',
-                    badge: 'PDF ↗',
+                    sub: 'Download or view resume in a new tab',
+                    meta: 'PDF ↗',
                     keywords: 'resume cv pdf download hire background experience skills ryan schmidt',
                     action: () => {
                         window.open(resumePath, '_blank', 'noopener');
@@ -617,10 +515,9 @@
                 {
                     id: 'act-email',
                     group: 'Connect',
-                    icon: '@',
                     title: 'Email',
                     sub: 'ryanschmidt1989@gmail.com',
-                    badge: 'Email ↗',
+                    meta: 'Mail ↗',
                     keywords: 'email contact hire reach out message ryanschmidt1989 gmail write direct inbox mailto',
                     action: () => {
                         window.location.href = 'mailto:ryanschmidt1989@gmail.com';
@@ -630,10 +527,9 @@
                 {
                     id: 'act-linkedin',
                     group: 'Connect',
-                    icon: '↗',
                     title: 'LinkedIn',
                     sub: 'linkedin.com/in/ryanschmidt1989',
-                    badge: 'LinkedIn ↗',
+                    meta: 'External ↗',
                     keywords: 'linkedin contact hire reach out message connect social network',
                     action: () => {
                         window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
@@ -769,10 +665,9 @@
                 matches.push({
                     id: 'act-ai-query',
                     group: 'Ask AI Assistant',
-                    icon: '✦',
                     title: `Ask AI: "${raw}"`,
                     sub: 'Search Ryan’s case studies, shipped outcomes, and role fit',
-                    badge: 'Ask AI ↵',
+                    meta: 'Ask AI',
                     action: () => {
                         this.triggerAIChat(raw);
                     }
@@ -806,15 +701,12 @@
                 const highlightedSub = this.highlightText(item.sub, tokens);
 
                 row.innerHTML = `
-                    <div class="rs-cmd-item__left">
-                        <span class="rs-cmd-item__icon">${this.escapeHtml(item.icon)}</span>
-                        <div class="rs-cmd-item__content">
-                            <span class="rs-cmd-item__title">${highlightedTitle}</span>
-                            <span class="rs-cmd-item__sub">${highlightedSub}</span>
-                        </div>
+                    <div class="rs-cmd-item__content">
+                        <span class="rs-cmd-item__title">${highlightedTitle}</span>
+                        <span class="rs-cmd-item__sub">${highlightedSub}</span>
                     </div>
                     <div class="rs-cmd-item__right">
-                        ${item.kpi ? `<span class="rs-cmd-item__kpi rs-cmd-kpi--${this.escapeHtml(item.kpiType)}">${this.escapeHtml(item.kpi)}</span>` : `<span class="rs-cmd-item__badge">${this.escapeHtml(item.badge)}</span>`}
+                        ${item.meta ? `<span class="rs-cmd-item__meta">${this.escapeHtml(item.meta)}</span>` : ''}
                         <span class="rs-cmd-item__return" aria-hidden="true">↵</span>
                     </div>
                 `;

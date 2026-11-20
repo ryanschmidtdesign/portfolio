@@ -440,6 +440,9 @@
       if (monitorScreenEl) {
         monitorScreenEl.removeAttribute('data-active-card');
       }
+      if (scene3DController && typeof scene3DController.setAmbientGaze === 'function') {
+        scene3DController.setAmbientGaze(0);
+      }
       if (scene3DController && typeof scene3DController.setCardTarget === 'function') {
         scene3DController.setCardTarget('rest');
       }
@@ -453,6 +456,9 @@
         if (headResetTimeout) {
           clearTimeout(headResetTimeout);
           headResetTimeout = null;
+        }
+        if (scene3DController && typeof scene3DController.setAmbientGaze === 'function') {
+          scene3DController.setAmbientGaze(0);
         }
         if (scene3DController && typeof scene3DController.setCardTarget === 'function') {
           scene3DController.setCardTarget('rest');
@@ -503,12 +509,21 @@
     (e) => {
       if (isScenePaused() || window.innerWidth < 1024 || !finePointerQuery.matches) return;
       targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      if (activeCardIndex === null && scene3DController && typeof scene3DController.setAmbientGaze === 'function') {
+        scene3DController.setAmbientGaze(targetMouseX);
+      }
       if (!parallaxRafId) {
         parallaxRafId = requestAnimationFrame(updateParallaxFrame);
       }
     },
     { passive: true }
   );
+
+  document.addEventListener('pointerleave', () => {
+    if (scene3DController && typeof scene3DController.setAmbientGaze === 'function') {
+      scene3DController.setAmbientGaze(0);
+    }
+  });
 
   // =========================================================================
   // 9. Reduced Motion, Tab Visibility & Viewport Pause Management
@@ -575,7 +590,7 @@
     const headerNavLinks = document.querySelectorAll('.site-header__link');
     headerNavLinks.forEach((link) => {
       const href = link.getAttribute('href');
-      if (href === '#work') {
+      if (href === '#work' || href === '#top') {
         link.classList.add('is-current');
         link.setAttribute('aria-current', 'page');
       } else if (href && href.startsWith('#')) {
