@@ -1,63 +1,51 @@
 /**
- * Ryan Schmidt Portfolio: "Desk Scene" 3D Runtime (Three.js)
- * Lazily loaded after hero text and case study cards render.
+ * Ryan Schmidt Portfolio: "Desk Scene" 2.5D Vanilla WebGL Runtime
+ * Zero-dependency WebGL renderer (no Three.js) with two-stage progressive loading,
+ * tight-cropped 2x Retina sprites, mobile 2D fast path, and idle GPU gating.
  *
  * Architecture:
- * - Master Studio Coordinate Space (1480 x 1180, rendered from 2x 2960x2360 WebP studio plates):
+ * - Master Studio Coordinate Space (1480 x 1180):
  *   - Monitor screen, coffee mug rim, and cat overlays synced via CSS custom properties.
  * - Static background pass (#desk-bg-canvas, z-index: 1):
- *   Renders `assets/desk-scene/scene-bg.webp?v=155`.
+ *   Renders `assets/desk-scene/scene-bg.webp?v=156` (2220x1770 1.5x master).
+ *   On mobile (<1024px), composites Stage 1 character layers directly in 2D (no WebGL/Stage 2).
  * - Live HTML monitor layer (#desk-monitor-screen, z-index: 2):
  *   Dynamically synced via `--mon-left`, `--mon-top`, `--mon-width`, `--mon-height`.
- * - Dynamic 3D foreground pass (#desk-char-canvas, z-index: 3):
- *   - `upperBodyGroup` (locked stationary shoulders/torso/chair)
- *     - `neckBedGroup` (`ryan-neck-bed.webp?v=155`, renderOrder 1, 38% cervical hinge)
- *     - `headPivotGroup` (5-pose optical-flow morphed head `ryan-head*.webp?v=155` + `flow-atlas.bin?v=155`,
- *       renderOrder 1.5, residual 62% cranial turn driven by critically-damped springs)
- *     - `chinShadowMesh` (renderOrder 2.4, soft hand-jaw contact occlusion)
- *     - `bodyMesh` (`ryan-body.webp?v=155`, renderOrder 3): sweater collar rim, left arm & hand, and chair.
+ * - Dynamic WebGL foreground pass (#desk-char-canvas, z-index: 3, desktop >=1024px):
+ *   1. `neckBed` (`ryan-neck-bed.webp?v=156`, 320x168, 38% cervical hinge, premultiplied alpha)
+ *   2. `head` (Stage 1 `ryan-head.webp?v=156` -> Stage 2 5-pose optical-flow morph + soft Sandstone rolloff)
+ *   3. `chinShadow` (elliptical contact AO with right-turn jaw-lift scaling & opacity rolloff)
+ *   4. `body` (`ryan-body.webp?v=156`, 766x848, locked stationary collar/arm/chair, premultiplied alpha)
  */
 
-import * as THREE from './vendor/three.module.min.js';
-
-// Master studio asset dimensions & exact feature coordinates (v123: high-res 1480x1180)
+const ASSET_V = '156';
 const SCENE_W = 1480;
 const SCENE_H = 1180;
 
-// Exact inner monitor screen rectangle in 1480x1180 master space (extended ~2px under all 4 bezels so zero gap shows)
-const MON_RECT = {
-  x: 517, // 34.93%
-  y: 507, // 42.97%
-  w: 445, // 30.07%
-  h: 177  // 15.00%
-};
+// Exact inner monitor screen rectangle in 1480x1180 master space
+const MON_RECT = { x: 517, y: 507, w: 445, h: 177 };
 
-// Exact coffee mug opening center in 1480x1180 master space (strictly left of lamp shade)
-const MUG_POS = {
-  x: 1003.5, // 67.80%
-  y: 708     // 60.00%
-};
+// Exact coffee mug opening center in 1480x1180 master space
+const MUG_POS = { x: 1003.5, y: 708 };
 
-// Exact napping tuxedo cat position on left desk surface (between left edge and monitor)
-const CAT_POS = {
-  x: 375, // 25.34%
-  y: 742  // 62.88%
-};
+// Exact napping tuxedo cat position on left desk surface
+const CAT_POS = { x: 375, y: 742 };
 
-// True spine/cervical center pivots aligned cleanly to Ryan's head center (crownCX = 754)
-const NECK_BASE_PIVOT = {
-  x: 754,
-  y: 626
-};
-const HEAD_ATLAS_PIVOT = {
-  x: 754,
-  y: 584
-};
+// Tight-cropped master bounds (1480x1180 space, matching 2x cropped WebPs)
+const NECK_BOUNDS = { x0: 696, y0: 562, x1: 856, y1: 646 };
+const BODY_BOUNDS = { x0: 585, y0: 594, x1: 968, y1: 1018 };
+const HEAD_BOUNDS = { x0: 656, y0: 428, x1: 884, y1: 660 };
+const CHIN_BOUNDS = { x0: 704, y0: 604, x1: 742, y1: 626 };
 
-const HEAD_CENTER = {
-  x: 754,
-  y: 533
-};
+// Cervical & cranial pivots in master space
+const NECK_BASE_PIVOT = { x: 754, y: 626 };
+const HEAD_ATLAS_PIVOT = { x: 754, y: 584 };
+const HEAD_CENTER = { x: 754, y: 533 };
+const BODY_PIVOT = { x: 760, y: 840 };
+const CHIN_PIVOT = { x: 722, y: 615 };
+
+const FOV_DEG = 24;
+const CAM_Z = 4.2;
 
 function clamp(v, lo, hi) {
   return v < lo ? lo : v > hi ? hi : v;
@@ -68,47 +56,37 @@ function smoothstep(edge0, edge1, x) {
   return t * t * (3 - 2 * t);
 }
 
+function isPow2(v) {
+  return (v & (v - 1)) === 0 && v > 0;
+}
+
 function loadImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.decoding = 'async';
-    img.onload = () => resolve(img);
+    img.onload = () => {
+      if (typeof img.decode === 'function') {
+        img.decode().then(() => resolve(img), () => resolve(img));
+      } else {
+        resolve(img);
+      }
+    };
     img.onerror = reject;
     img.src = src;
   });
 }
 
-function makeTexture(img, maxAnisotropy = 4) {
-  const tex = new THREE.Texture(img);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  tex.minFilter = THREE.LinearMipmapLinearFilter;
-  tex.magFilter = THREE.LinearFilter;
-  tex.generateMipmaps = true;
-  tex.anisotropy = maxAnisotropy;
-  tex.needsUpdate = true;
-  return tex;
-}
-
-async function loadFlowAtlasTexture(url) {
+async function loadFlowAtlasBytes(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed loading flow atlas: ${res.status}`);
-  const bytes = new Uint8Array(await res.arrayBuffer());
-  const tex = new THREE.DataTexture(bytes, 256, 256, THREE.RGBAFormat);
-  tex.colorSpace = THREE.NoColorSpace;
-  tex.flipY = false;
-  tex.minFilter = THREE.LinearFilter;
-  tex.magFilter = THREE.LinearFilter;
-  tex.generateMipmaps = false;
-  tex.needsUpdate = true;
-  return tex;
+  return new Uint8Array(await res.arrayBuffer());
 }
 
-function makeChinShadowTexture() {
+function makeChinShadowCanvas() {
   const c = document.createElement('canvas');
   c.width = 96;
   c.height = 64;
   const ctx = c.getContext('2d');
-  // True elliptical contact shadow reaching strict 0 alpha well inside canvas borders (no visible quad rectangle)
   ctx.save();
   ctx.translate(48, 32);
   ctx.scale(1.45, 0.72);
@@ -121,61 +99,331 @@ function makeChinShadowTexture() {
   ctx.arc(0, 0, 26, 0, Math.PI * 2);
   ctx.fill();
   ctx.restore();
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  tex.needsUpdate = true;
-  return tex;
+  return c;
+}
+
+// =========================================================================
+// Minimal 4x4 Column-Major Matrix Math (Matches THREE.PerspectiveCamera & Euler 'XYZ')
+// =========================================================================
+function mat4Mul(a, b, out = new Float32Array(16)) {
+  for (let col = 0; col < 4; col++) {
+    const b0 = b[col * 4];
+    const b1 = b[col * 4 + 1];
+    const b2 = b[col * 4 + 2];
+    const b3 = b[col * 4 + 3];
+    out[col * 4]     = a[0] * b0 + a[4] * b1 + a[8]  * b2 + a[12] * b3;
+    out[col * 4 + 1] = a[1] * b0 + a[5] * b1 + a[9]  * b2 + a[13] * b3;
+    out[col * 4 + 2] = a[2] * b0 + a[6] * b1 + a[10] * b2 + a[14] * b3;
+    out[col * 4 + 3] = a[3] * b0 + a[7] * b1 + a[11] * b2 + a[15] * b3;
+  }
+  return out;
+}
+
+function mat4PerspectiveView(fovDeg, aspect, near, far, camZ) {
+  const f = 1.0 / Math.tan((fovDeg * Math.PI) / 360);
+  const nf = 1.0 / (near - far);
+  const proj = new Float32Array([
+    f / aspect, 0, 0, 0,
+    0, f, 0, 0,
+    0, 0, (far + near) * nf, -1,
+    0, 0, 2 * far * near * nf, 0
+  ]);
+  const view = new Float32Array([
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    0, 0, -camZ, 1
+  ]);
+  return mat4Mul(proj, view);
+}
+
+// T(tx, ty, tz) * Rx(rx) * Ry(ry) * Rz(rz) * S(sx, sy, 1) — exact Three.js Euler('XYZ')
+function mat4TRS(tx, ty, tz, rx = 0, ry = 0, rz = 0, sx = 1, sy = 1) {
+  const cx = Math.cos(rx), sxr = Math.sin(rx);
+  const cy = Math.cos(ry), syr = Math.sin(ry);
+  const cz = Math.cos(rz), szr = Math.sin(rz);
+
+  const ae = cy * cz;
+  const af = -cy * szr;
+  const ag = syr;
+
+  const be = sxr * syr * cz + cx * szr;
+  const bf = -sxr * syr * szr + cx * cz;
+  const bg = -sxr * cy;
+
+  const ce = -cx * syr * cz + sxr * szr;
+  const cf = cx * syr * szr + sxr * cz;
+  const cg = cx * cy;
+
+  return new Float32Array([
+    ae * sx, be * sx, ce * sx, 0,
+    af * sy, bf * sy, cf * sy, 0,
+    ag,      bg,      cg,      0,
+    tx,      ty,      tz,      1
+  ]);
+}
+
+// =========================================================================
+// Shaders (Basic Premultiplied Plane + Bidirectional Optical-Flow Head)
+// =========================================================================
+const BASIC_VS = `
+  attribute vec3 aPos;
+  attribute vec2 aUv;
+  uniform mat4 uMvp;
+  varying vec2 vUv;
+  void main() {
+    vUv = aUv;
+    gl_Position = uMvp * vec4(aPos, 1.0);
+  }
+`;
+
+const BASIC_FS = `
+  precision highp float;
+  uniform sampler2D uMap;
+  uniform float uOpacity;
+  varying vec2 vUv;
+  void main() {
+    vec4 col = texture2D(uMap, vUv) * uOpacity;
+    if (col.a < 0.002) discard;
+    gl_FragColor = col;
+  }
+`;
+
+const HEAD_VS = `
+  attribute vec3 aPos;
+  attribute vec2 aUv;
+  attribute float aCrownMask;
+  uniform mat4 uMvp;
+  uniform float uCrownLag;
+  varying vec2 vUv;
+  varying vec2 vFlowLocal;
+  void main() {
+    vUv = aUv;
+    vFlowLocal = aUv;
+    vec3 p = aPos;
+    p.x += aCrownMask * uCrownLag * 0.0025;
+    gl_Position = uMvp * vec4(p, 1.0);
+  }
+`;
+
+const HEAD_FS = `
+  precision highp float;
+  uniform sampler2D uMapC0;
+  uniform sampler2D uMapC1;
+  uniform sampler2D uMapRest;
+  uniform sampler2D uMapC2;
+  uniform sampler2D uMapC3;
+  uniform sampler2D uFlowAtlas;
+  uniform float uAngle;
+  uniform float uHoverReady;
+  varying vec2 vUv;
+  varying vec2 vFlowLocal;
+
+  vec4 sampleMorph(sampler2D texA, sampler2D texB, vec2 qOrigin, float t) {
+    float wt = clamp(t, 0.0, 1.0);
+    vec2 qCoord = vec2(vFlowLocal.x, 1.0 - vFlowLocal.y);
+    vec2 atlasUv = qOrigin + clamp(qCoord, 0.004, 0.996) * 0.5;
+    vec4 fl = texture2D(uFlowAtlas, atlasUv);
+    vec2 fAB = (fl.rg - 128.0 / 255.0) * (255.0 / 127.0) * 0.16;
+    vec2 fBA = (fl.ba - 128.0 / 255.0) * (255.0 / 127.0) * 0.16;
+
+    vec4 a = texture2D(texA, clamp(vUv + fBA * wt, 0.0, 1.0));
+    vec4 b = texture2D(texB, clamp(vUv + fAB * (1.0 - wt), 0.0, 1.0));
+    float wA = a.a * (1.0 - wt);
+    float wB = b.a * wt;
+    float outA = mix(a.a, b.a, wt);
+    vec3 straightRgb = (a.rgb * wA + b.rgb * wB) / max(wA + wB, 1e-4);
+    return vec4(straightRgb, outA);
+  }
+
+  void main() {
+    vec4 outCol;
+    if (uHoverReady < 0.5) {
+      outCol = texture2D(uMapRest, vUv);
+    } else if (uAngle <= -0.48) {
+      outCol = sampleMorph(uMapC0, uMapC1, vec2(0.0, 0.0), (uAngle + 1.0) / 0.52);
+    } else if (uAngle <= 0.0) {
+      outCol = sampleMorph(uMapC1, uMapRest, vec2(0.5, 0.0), (uAngle + 0.48) / 0.48);
+    } else if (uAngle <= 0.48) {
+      outCol = sampleMorph(uMapRest, uMapC2, vec2(0.0, 0.5), uAngle / 0.48);
+    } else {
+      outCol = sampleMorph(uMapC2, uMapC3, vec2(0.5, 0.5), (uAngle - 0.48) / 0.52);
+    }
+
+    if (outCol.a < 0.004) discard;
+
+    // Soft Sandstone daylight highlight rolloff as temple/ear rotates toward/away from left window
+    float sideGrad = clamp((0.5 - vFlowLocal.x) * 1.6, -1.0, 1.0);
+    float lightShift = clamp(-uAngle, -1.0, 1.0) * sideGrad * 0.022;
+    vec3 warmShift = vec3(1.04, 0.98, 0.92) * lightShift;
+    outCol.rgb = clamp(outCol.rgb + warmShift * (1.0 - outCol.rgb), 0.0, 1.0);
+
+    gl_FragColor = vec4(outCol.rgb * outCol.a, outCol.a);
+  }
+`;
+
+function compileShader(gl, type, source) {
+  const sh = gl.createShader(type);
+  gl.shaderSource(sh, source);
+  gl.compileShader(sh);
+  if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+    const err = gl.getShaderInfoLog(sh) || 'Shader compile failed';
+    gl.deleteShader(sh);
+    throw new Error(err);
+  }
+  return sh;
+}
+
+function createProgram(gl, vsSrc, fsSrc) {
+  const vs = compileShader(gl, gl.VERTEX_SHADER, vsSrc);
+  const fs = compileShader(gl, gl.FRAGMENT_SHADER, fsSrc);
+  const prog = gl.createProgram();
+  gl.attachShader(prog, vs);
+  gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+  gl.deleteShader(vs);
+  gl.deleteShader(fs);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+    const err = gl.getProgramInfoLog(prog) || 'Program link failed';
+    gl.deleteProgram(prog);
+    throw new Error(err);
+  }
+  return prog;
+}
+
+function buildGridData(bounds, cols, rows, pivot, optionsGrid = {}) {
+  const { x0, y0, x1, y1 } = bounds;
+  const vertCount = (cols + 1) * (rows + 1);
+  const baseSX = new Float32Array(vertCount);
+  const baseSY = new Float32Array(vertCount);
+  const reliefZ = new Float32Array(vertCount);
+  const crownMask = new Float32Array(vertCount);
+  const uvs = new Float32Array(vertCount * 2);
+  const positions = new Float32Array(vertCount * 3);
+
+  let vi = 0;
+  for (let r = 0; r <= rows; r++) {
+    const v = 1 - r / rows;
+    const sy = y0 + (1 - v) * (y1 - y0);
+    for (let c = 0; c <= cols; c++) {
+      const u = c / cols;
+      const sx = x0 + u * (x1 - x0);
+      baseSX[vi] = sx;
+      baseSY[vi] = sy;
+      uvs[vi * 2] = u;
+      uvs[vi * 2 + 1] = v;
+
+      if (optionsGrid.isCranial) {
+        const dx = (sx - HEAD_CENTER.x) / 86;
+        const dy = (sy - HEAD_CENTER.y) / 86;
+        const r2 = Math.min(1, dx * dx + dy * dy);
+        reliefZ[vi] = Math.sqrt(Math.max(0, 1 - r2)) * 0.052;
+        crownMask[vi] = smoothstep(545, 442, sy);
+      }
+      vi++;
+    }
+  }
+
+  const indices = new Uint16Array(cols * rows * 6);
+  let ii = 0;
+  const stride = cols + 1;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const a = r * stride + c;
+      const b = a + 1;
+      const d = (r + 1) * stride + c;
+      const e = d + 1;
+      indices[ii++] = a;
+      indices[ii++] = d;
+      indices[ii++] = b;
+      indices[ii++] = b;
+      indices[ii++] = d;
+      indices[ii++] = e;
+    }
+  }
+
+  return {
+    bounds,
+    pivot,
+    vertCount,
+    baseSX,
+    baseSY,
+    reliefZ,
+    crownMask,
+    uvs,
+    positions,
+    indices,
+    posBuf: null,
+    uvBuf: null,
+    crownBuf: null,
+    idxBuf: null
+  };
 }
 
 export function initDeskScene3D(options = {}) {
   const container = document.getElementById('desk-scene');
   const bgCanvas = document.getElementById('desk-bg-canvas');
-  const charCanvas = document.getElementById('desk-char-canvas');
+  let charCanvas = document.getElementById('desk-char-canvas');
   if (!container || !bgCanvas || !charCanvas) return null;
 
-  let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({
-      canvas: charCanvas,
-      alpha: true,
-      antialias: true,
-      powerPreference: 'high-performance'
-    });
-  } catch (_) {
-    if (typeof options.onFallback === 'function') options.onFallback();
-    return null;
-  }
-
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.setClearColor(0x000000, 0);
-
-  charCanvas.addEventListener('webglcontextlost', (e) => {
-    e.preventDefault();
-    if (rafId) {
-      cancelAnimationFrame(rafId);
-      rafId = null;
-    }
-    if (typeof options.onFallback === 'function') options.onFallback();
-  });
-
   const bgCtx = bgCanvas.getContext('2d');
-  const fgScene = new THREE.Scene();
+  let charCtx2D = null;
+  const catCanvas = document.getElementById('desk-cat-layer');
+  const catCtx = catCanvas ? catCanvas.getContext('2d') : null;
 
-  const FOV_DEG = 24;
-  const CAM_Z = 4.2;
-  const camera = new THREE.PerspectiveCamera(FOV_DEG, 1, 0.1, 30);
-  camera.position.set(0, 0, CAM_Z);
-  camera.lookAt(0, 0, 0);
-
+  let destroyed = false;
   let viewW = 974;
   let viewH = 900;
   let drawX = 0;
   let drawY = 0;
   let drawW = 974;
   let drawH = 900;
+
   let bgImage = null;
-  let assetsReady = false;
+  let catImage = null;
+  let neckBedImg = null;
+  let bodyImg = null;
+  let headRestImg = null;
+
+  let stage1Ready = false;
+  let stage2Started = false;
+  let hoverReady = false;
+
+  // WebGL state (lazily created on desktop >= 1024px)
+  let gl = null;
+  let isWebGL2 = false;
+  let anisoExt = null;
+  let maxAniso = 1;
+  let basicProg = null;
+  let headProg = null;
+  let basicLoc = null;
+  let headLoc = null;
+  let webglFailed = false;
+  let webglDirty = true;
+
+  const textures = {
+    neckBed: null,
+    body: null,
+    chinShadow: null,
+    rest: null,
+    c0: null,
+    c1: null,
+    c2: null,
+    c3: null,
+    flowAtlas: null
+  };
+
+  const neckBedGrid = buildGridData(NECK_BOUNDS, 12, 10, NECK_BASE_PIVOT);
+  const bodyGrid = buildGridData(BODY_BOUNDS, 28, 28, BODY_PIVOT);
+  const headGrid = buildGridData(HEAD_BOUNDS, 28, 28, HEAD_ATLAS_PIVOT, { isCranial: true });
+  const chinShadowGrid = buildGridData(CHIN_BOUNDS, 2, 2, CHIN_PIVOT);
+  const allGrids = [neckBedGrid, bodyGrid, headGrid, chinShadowGrid];
+
+  let projView = mat4PerspectiveView(FOV_DEG, 1, 0.1, 30, CAM_Z);
+  let neckPosW = { wx: 0, wy: 0 };
+  let atlasPosW = { wx: 0, wy: 0 };
+  let bodyPosW = { wx: 0, wy: 0 };
+  let chinRestPos = { wx: 0, wy: 0 };
 
   function sceneToWorld(sx, sy) {
     const px = drawX + (sx / SCENE_W) * drawW;
@@ -188,325 +436,247 @@ export function initDeskScene3D(options = {}) {
     };
   }
 
-  // Build sub-region geometry anchored relative to a pivot point in 1480x1180 space
-  function buildAnchoredSubGrid(bounds, cols, rows, pivot, optionsGrid = {}) {
-    const { x0, y0, x1, y1 } = bounds;
-    const geo = new THREE.PlaneGeometry(1, 1, cols, rows);
-    const uvAttr = geo.attributes.uv;
-    const count = uvAttr.count;
-    const baseSX = new Float32Array(count);
-    const baseSY = new Float32Array(count);
-    const reliefZ = new Float32Array(count);
-    const crownMask = new Float32Array(count);
+  function uploadImageTexture(source, { premultiply, mipmap, aniso }) {
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, Boolean(premultiply));
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source);
 
-    for (let i = 0; i < count; i++) {
-      const u = uvAttr.getX(i);
-      const v = uvAttr.getY(i);
-      const sx = x0 + u * (x1 - x0);
-      const sy = y0 + (1 - v) * (y1 - y0);
-      baseSX[i] = sx;
-      baseSY[i] = sy;
+    const w = source.naturalWidth || source.width || 0;
+    const h = source.naturalHeight || source.height || 0;
+    const canMipmap = mipmap && (isWebGL2 || (isPow2(w) && isPow2(h)));
 
-      // Map UVs to exact crop inside the 1480x1180 master texture
-      uvAttr.setXY(i, sx / SCENE_W, 1 - sy / SCENE_H);
-
-      if (optionsGrid.isCranial) {
-        // Gentle 3D cranial dome centered on HEAD_CENTER + crown follow-through mask
-        const dx = (sx - HEAD_CENTER.x) / 86;
-        const dy = (sy - HEAD_CENTER.y) / 86;
-        const r2 = Math.min(1, dx * dx + dy * dy);
-        reliefZ[i] = Math.sqrt(Math.max(0, 1 - r2)) * 0.052;
-        crownMask[i] = smoothstep(545, 442, sy);
-      }
+    if (canMipmap) {
+      gl.generateMipmap(gl.TEXTURE_2D);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    } else {
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     }
-    uvAttr.needsUpdate = true;
-    geo.setAttribute('aCrownMask', new THREE.BufferAttribute(crownMask, 1));
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
-    return { geo, baseSX, baseSY, reliefZ, pivot };
+    if (aniso && anisoExt && maxAniso > 1) {
+      gl.texParameterf(gl.TEXTURE_2D, anisoExt.TEXTURE_MAX_ANISOTROPY_EXT, maxAniso);
+    }
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    return tex;
   }
 
-  // =========================================================================
-  // LAYERED MULTI-SPRING ANATOMICAL RIG:
-  // Layer 1: neckBedGroup -> neckBedMesh (renderOrder 1.0, cervical hinge 38%)
-  // Layer 2: neckBedGroup -> headPivotGroup -> headMesh (renderOrder 1.5,
-  //          3D cranial dome + cervical torsion + crown lag + bidirectional optical flow)
-  // Layer 3: chinShadowMesh (renderOrder 2.4, soft hand-jaw contact occlusion)
-  // Layer 4: bodyMesh (renderOrder 3.0, stationary sweater collar & chin-supporting hand)
-  // Note: Sleeping cat is rendered in its own DOM `.desk-cat-layer` above `.desk-cat-shadow`
-  // =========================================================================
-
-  const upperBodyGroup = new THREE.Group();
-  fgScene.add(upperBodyGroup);
-
-  const neckBedGroup = new THREE.Group();
-  upperBodyGroup.add(neckBedGroup);
-
-  const headPivotGroup = new THREE.Group();
-  neckBedGroup.add(headPivotGroup);
-
-  const neckBedGrid = buildAnchoredSubGrid(
-    { x0: 696, y0: 562, x1: 856, y1: 646 },
-    12,
-    10,
-    NECK_BASE_PIVOT
-  );
-  const neckBedMat = new THREE.MeshBasicMaterial({
-    transparent: true,
-    premultipliedAlpha: true,
-    depthTest: false,
-    depthWrite: false,
-    toneMapped: false
-  });
-  const neckBedMesh = new THREE.Mesh(neckBedGrid.geo, neckBedMat);
-  neckBedMesh.renderOrder = 1;
-  neckBedMesh.visible = false;
-  neckBedGroup.add(neckBedMesh);
-
-  const bodyGrid = buildAnchoredSubGrid(
-    { x0: 585, y0: 594, x1: 968, y1: 1018 },
-    28,
-    28,
-    { x: 760, y: 840 }
-  );
-  const bodyMat = new THREE.MeshBasicMaterial({
-    transparent: true,
-    premultipliedAlpha: true,
-    depthTest: false,
-    depthWrite: false,
-    toneMapped: false
-  });
-  const bodyMesh = new THREE.Mesh(bodyGrid.geo, bodyMat);
-  bodyMesh.renderOrder = 3;
-  bodyMesh.visible = false;
-  upperBodyGroup.add(bodyMesh);
-
-  const chinShadowGrid = buildAnchoredSubGrid(
-    { x0: 704, y0: 604, x1: 742, y1: 626 },
-    2,
-    2,
-    { x: 722, y: 615 }
-  );
-  // Remap full quad [0..1] UVs for the standalone radial chin occlusion texture
-  {
-    const chinUv = chinShadowGrid.geo.attributes.uv;
-    for (let i = 0; i < chinUv.count; i++) {
-      const u = (chinShadowGrid.baseSX[i] - 704) / 38;
-      const v = 1 - (chinShadowGrid.baseSY[i] - 604) / 22;
-      chinUv.setXY(i, u, v);
-    }
-    chinUv.needsUpdate = true;
+  function uploadFlowAtlasTexture(bytes) {
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 256, 256, 0, gl.RGBA, gl.UNSIGNED_BYTE, bytes);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    return tex;
   }
-  const chinShadowMat = new THREE.MeshBasicMaterial({
-    map: makeChinShadowTexture(),
-    transparent: true,
-    premultipliedAlpha: true,
-    depthTest: false,
-    depthWrite: false,
-    toneMapped: false,
-    opacity: 0.45
-  });
-  const chinShadowMesh = new THREE.Mesh(chinShadowGrid.geo, chinShadowMat);
-  chinShadowMesh.renderOrder = 2.4;
-  chinShadowMesh.visible = false;
-  upperBodyGroup.add(chinShadowMesh);
 
-  const headGrid = buildAnchoredSubGrid(
-    { x0: 656, y0: 428, x1: 884, y1: 660 },
-    28,
-    28,
-    HEAD_ATLAS_PIVOT,
-    { isCranial: true }
-  );
+  function initGridBuffers(grid) {
+    grid.posBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, grid.posBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, grid.positions, gl.DYNAMIC_DRAW);
 
-  // Bidirectional Optical-Flow 5-Pose Morph + Hair Crown Follow-Through Shader (6 samplers <= 8 limit)
-  const headShaderMat = new THREE.ShaderMaterial({
-    transparent: true,
-    premultipliedAlpha: true,
-    depthTest: false,
-    depthWrite: false,
-    uniforms: {
-      uMapC0: { value: null },
-      uMapC1: { value: null },
-      uMapRest: { value: null },
-      uMapC2: { value: null },
-      uMapC3: { value: null },
-      uFlowAtlas: { value: null },
-      uAngle: { value: 0.0 },
-      uCrownLag: { value: 0.0 }
-    },
-    vertexShader: `
-      attribute float aCrownMask;
-      uniform float uCrownLag;
-      varying vec2 vUv;
-      varying vec2 vFlowLocal;
+    grid.uvBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, grid.uvBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, grid.uvs, gl.STATIC_DRAW);
 
-      void main() {
-        vUv = uv;
-        vec2 cropMin = vec2(656.0 / 1480.0, 1.0 - 660.0 / 1180.0);
-        vec2 cropSize = vec2(228.0 / 1480.0, 232.0 / 1180.0);
-        vFlowLocal = (uv - cropMin) / cropSize;
+    if (grid === headGrid) {
+      grid.crownBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, grid.crownBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, grid.crownMask, gl.STATIC_DRAW);
+    }
 
-        vec3 p = position;
-        // Very subtle secondary follow-through on crown (zero cervical shear tear)
-        p.x += aCrownMask * uCrownLag * 0.0025;
+    grid.idxBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, grid.idxBuf);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, grid.indices, gl.STATIC_DRAW);
+  }
 
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
-      }
-    `,
-    fragmentShader: `
-      uniform sampler2D uMapC0;
-      uniform sampler2D uMapC1;
-      uniform sampler2D uMapRest;
-      uniform sampler2D uMapC2;
-      uniform sampler2D uMapC3;
-      uniform sampler2D uFlowAtlas;
-      uniform float uAngle;
-      varying vec2 vUv;
-      varying vec2 vFlowLocal;
+  function ensureWebGL() {
+    if (gl) return true;
+    if (webglFailed || destroyed) return false;
 
-      vec4 sampleMorph(sampler2D texA, sampler2D texB, vec2 qOrigin, float t) {
-        float wt = clamp(t, 0.0, 1.0);
-        // flipY=false DataTexture row-major layout: top of crop -> y=0 inside quadrant
-        vec2 qCoord = vec2(vFlowLocal.x, 1.0 - vFlowLocal.y);
-        vec2 atlasUv = qOrigin + clamp(qCoord, 0.004, 0.996) * 0.5;
-        vec4 fl = texture2D(uFlowAtlas, atlasUv);
-        vec2 uvScale = vec2(228.0 / 1480.0, 232.0 / 1180.0);
-        vec2 fAB = ((fl.rg - 128.0 / 255.0) * (255.0 / 127.0) * 0.16) * uvScale;
-        vec2 fBA = ((fl.ba - 128.0 / 255.0) * (255.0 / 127.0) * 0.16) * uvScale;
+    // A canvas bound to '2d' cannot switch to 'webgl'; clone a fresh node on resize <1024 -> >=1024
+    if (charCtx2D) {
+      charCanvas.removeEventListener('webglcontextlost', onContextLost);
+      const freshCanvas = charCanvas.cloneNode(false);
+      charCanvas.replaceWith(freshCanvas);
+      charCanvas = freshCanvas;
+      charCanvas.addEventListener('webglcontextlost', onContextLost);
+      charCtx2D = null;
+    }
 
-        // Backward optical-flow alignment with coverage-weighted alpha compositing (zero dark fringes or threshold snaps)
-        vec4 a = texture2D(texA, vUv + fBA * wt);
-        vec4 b = texture2D(texB, vUv + fAB * (1.0 - wt));
-        float wA = a.a * (1.0 - wt);
-        float wB = b.a * wt;
-        float outA = mix(a.a, b.a, wt);
-        vec3 straightRgb = (a.rgb * wA + b.rgb * wB) / max(wA + wB, 1e-4);
-        return vec4(straightRgb, outA);
-      }
-
-      void main() {
-        vec4 outCol;
-        if (uAngle <= -0.48) {
-          outCol = sampleMorph(uMapC0, uMapC1, vec2(0.0, 0.0), (uAngle + 1.0) / 0.52);
-        } else if (uAngle <= 0.0) {
-          outCol = sampleMorph(uMapC1, uMapRest, vec2(0.5, 0.0), (uAngle + 0.48) / 0.48);
-        } else if (uAngle <= 0.48) {
-          outCol = sampleMorph(uMapRest, uMapC2, vec2(0.0, 0.5), uAngle / 0.48);
-        } else {
-          outCol = sampleMorph(uMapC2, uMapC3, vec2(0.5, 0.5), (uAngle - 0.48) / 0.52);
-        }
-
-        if (outCol.a < 0.004) discard;
-        // Subtle directional left-window key-light wrap as temple/ear rotates toward or away from left
-        float sideGrad = clamp((0.5 - vFlowLocal.x) * 1.6, -1.0, 1.0);
-        float lightShift = clamp(-uAngle, -1.0, 1.0) * sideGrad * 0.022;
-        outCol.rgb = clamp(outCol.rgb + vec3(lightShift * 1.08, lightShift * 0.96, lightShift * 0.78), 0.0, 1.0);
-
-        gl_FragColor = outCol;
-        #include <colorspace_fragment>
-        gl_FragColor.rgb *= outCol.a;
-      }
-    `
-  });
-
-  const headMesh = new THREE.Mesh(headGrid.geo, headShaderMat);
-  headMesh.renderOrder = 1.5;
-  headMesh.visible = false;
-  headPivotGroup.add(headMesh);
-
-  const catCanvas = document.getElementById('desk-cat-layer');
-  const catCtx = catCanvas ? catCanvas.getContext('2d') : null;
-  let catImage = null;
-  const maxAniso = Math.min(8, renderer.capabilities.getMaxAnisotropy ? renderer.capabilities.getMaxAnisotropy() : 4);
-
-  let headTextures = null;
-
-  // Load 2x (2960x2360) sharp studio WebP layers + cat + neck bed + 5 poses + lossless flow atlas
-  Promise.all([
-    loadImage('assets/desk-scene/scene-bg.webp?v=155'),
-    loadImage('assets/desk-scene/tuxedo-cat.webp?v=155'),
-    loadImage('assets/desk-scene/ryan-neck-bed.webp?v=155'),
-    loadImage('assets/desk-scene/ryan-body.webp?v=155'),
-    loadImage('assets/desk-scene/ryan-head.webp?v=155'),
-    loadImage('assets/desk-scene/ryan-head-card0.webp?v=155'),
-    loadImage('assets/desk-scene/ryan-head-card1.webp?v=155'),
-    loadImage('assets/desk-scene/ryan-head-card2.webp?v=155'),
-    loadImage('assets/desk-scene/ryan-head-card3.webp?v=155'),
-    loadFlowAtlasTexture('assets/desk-scene/flow-atlas.bin?v=155')
-  ])
-    .then(([bgImg, catImg, neckBedImg, bodyImg, headRestImg, headC0Img, headC1Img, headC2Img, headC3Img, flowAtlasTex]) => {
-      bgImage = bgImg;
-      catImage = catImg;
-
-      neckBedMat.map = makeTexture(neckBedImg, maxAniso);
-      neckBedMat.needsUpdate = true;
-      neckBedMesh.visible = true;
-
-      bodyMat.map = makeTexture(bodyImg, maxAniso);
-      bodyMat.needsUpdate = true;
-      bodyMesh.visible = true;
-      chinShadowMesh.visible = true;
-
-      headTextures = {
-        rest: makeTexture(headRestImg, maxAniso),
-        0: makeTexture(headC0Img, maxAniso),
-        1: makeTexture(headC1Img, maxAniso),
-        2: makeTexture(headC2Img, maxAniso),
-        3: makeTexture(headC3Img, maxAniso)
-      };
-
-      headShaderMat.uniforms.uMapC0.value = headTextures[0];
-      headShaderMat.uniforms.uMapC1.value = headTextures[1];
-      headShaderMat.uniforms.uMapRest.value = headTextures.rest;
-      headShaderMat.uniforms.uMapC2.value = headTextures[2];
-      headShaderMat.uniforms.uMapC3.value = headTextures[3];
-      headShaderMat.uniforms.uFlowAtlas.value = flowAtlasTex;
-      headMesh.visible = true;
-
-      assetsReady = true;
-      syncOverlaysAndResize();
-      ensureRunning();
-    })
-    .catch(() => {
-      if (typeof options.onFallback === 'function') options.onFallback();
-    });
-
-  // =========================================================================
-  // 2. GEOMETRY POSITIONING & OVERLAY SYNC
-  // =========================================================================
-  const chinRestPos = { wx: 0, wy: 0 };
-
-  function syncRigGeometry() {
-    const neckP = sceneToWorld(NECK_BASE_PIVOT.x, NECK_BASE_PIVOT.y);
-    const atlasP = sceneToWorld(HEAD_ATLAS_PIVOT.x, HEAD_ATLAS_PIVOT.y);
-    const bodyP = sceneToWorld(bodyGrid.pivot.x, bodyGrid.pivot.y);
-    const chinP = sceneToWorld(chinShadowGrid.pivot.x, chinShadowGrid.pivot.y);
-    chinRestPos.wx = chinP.wx;
-    chinRestPos.wy = chinP.wy;
-
-    // Keep shoulders, torso, chair, and resting left hand 100% locked stationary
-    upperBodyGroup.position.set(0, 0, 0);
-
-    neckBedGroup.position.set(neckP.wx, neckP.wy, 0.0);
-    headPivotGroup.position.set(atlasP.wx - neckP.wx, atlasP.wy - neckP.wy, 0.002);
-    chinShadowMesh.position.set(chinP.wx, chinP.wy, 0.004);
-    bodyMesh.position.set(bodyP.wx, bodyP.wy, 0.005);
-
-    const updateGridVerts = (grid, pivW) => {
-      const pos = grid.geo.attributes.position;
-      for (let i = 0; i < pos.count; i++) {
-        const w = sceneToWorld(grid.baseSX[i], grid.baseSY[i]);
-        const lx = w.wx - pivW.wx;
-        const ly = w.wy - pivW.wy;
-        pos.setXYZ(i, lx, ly, grid.reliefZ[i]);
-      }
-      pos.needsUpdate = true;
+    const ctxAttrs = {
+      alpha: true,
+      antialias: true,
+      premultipliedAlpha: true,
+      depth: false,
+      stencil: false,
+      powerPreference: 'high-performance'
     };
 
-    updateGridVerts(neckBedGrid, neckP);
-    updateGridVerts(headGrid, atlasP);
-    updateGridVerts(chinShadowGrid, chinP);
-    updateGridVerts(bodyGrid, bodyP);
+    try {
+      gl = charCanvas.getContext('webgl2', ctxAttrs);
+      if (gl) {
+        isWebGL2 = true;
+      } else {
+        gl = charCanvas.getContext('webgl', ctxAttrs) || charCanvas.getContext('experimental-webgl', ctxAttrs);
+        isWebGL2 = false;
+      }
+      if (!gl) throw new Error('WebGL unavailable');
+
+      anisoExt =
+        gl.getExtension('EXT_texture_filter_anisotropic') ||
+        gl.getExtension('MOZ_EXT_texture_filter_anisotropic') ||
+        gl.getExtension('WEBKIT_EXT_texture_filter_anisotropic');
+      if (anisoExt) {
+        const hwMax = gl.getParameter(anisoExt.MAX_TEXTURE_MAX_ANISOTROPY_EXT) || 4;
+        maxAniso = Math.min(16, hwMax);
+      }
+
+      basicProg = createProgram(gl, BASIC_VS, BASIC_FS);
+      basicLoc = {
+        aPos: gl.getAttribLocation(basicProg, 'aPos'),
+        aUv: gl.getAttribLocation(basicProg, 'aUv'),
+        uMvp: gl.getUniformLocation(basicProg, 'uMvp'),
+        uMap: gl.getUniformLocation(basicProg, 'uMap'),
+        uOpacity: gl.getUniformLocation(basicProg, 'uOpacity')
+      };
+
+      headProg = createProgram(gl, HEAD_VS, HEAD_FS);
+      headLoc = {
+        aPos: gl.getAttribLocation(headProg, 'aPos'),
+        aUv: gl.getAttribLocation(headProg, 'aUv'),
+        aCrownMask: gl.getAttribLocation(headProg, 'aCrownMask'),
+        uMvp: gl.getUniformLocation(headProg, 'uMvp'),
+        uCrownLag: gl.getUniformLocation(headProg, 'uCrownLag'),
+        uAngle: gl.getUniformLocation(headProg, 'uAngle'),
+        uHoverReady: gl.getUniformLocation(headProg, 'uHoverReady'),
+        uMapC0: gl.getUniformLocation(headProg, 'uMapC0'),
+        uMapC1: gl.getUniformLocation(headProg, 'uMapC1'),
+        uMapRest: gl.getUniformLocation(headProg, 'uMapRest'),
+        uMapC2: gl.getUniformLocation(headProg, 'uMapC2'),
+        uMapC3: gl.getUniformLocation(headProg, 'uMapC3'),
+        uFlowAtlas: gl.getUniformLocation(headProg, 'uFlowAtlas')
+      };
+
+      allGrids.forEach(initGridBuffers);
+      textures.chinShadow = uploadImageTexture(makeChinShadowCanvas(), {
+        premultiply: true,
+        mipmap: false,
+        aniso: false
+      });
+
+      gl.disable(gl.DEPTH_TEST);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+      gl.clearColor(0, 0, 0, 0);
+
+      if (stage1Ready) {
+        uploadStage1Textures();
+      }
+      return true;
+    } catch (_) {
+      gl = null;
+      webglFailed = true;
+      if (typeof options.onFallback === 'function') options.onFallback();
+      return false;
+    }
+  }
+
+  function uploadStage1Textures() {
+    if (!gl || !stage1Ready) return;
+    if (!textures.neckBed && neckBedImg) {
+      textures.neckBed = uploadImageTexture(neckBedImg, { premultiply: true, mipmap: true, aniso: true });
+    }
+    if (!textures.body && bodyImg) {
+      textures.body = uploadImageTexture(bodyImg, { premultiply: true, mipmap: true, aniso: true });
+    }
+    if (!textures.rest && headRestImg) {
+      textures.rest = uploadImageTexture(headRestImg, { premultiply: false, mipmap: true, aniso: true });
+    }
+    webglDirty = true;
+  }
+
+  function startStage2IfDesktop() {
+    if (stage2Started || destroyed || window.innerWidth < 1024 || !gl) return;
+    stage2Started = true;
+
+    Promise.all([
+      loadImage(`assets/desk-scene/ryan-head-card0.webp?v=${ASSET_V}`),
+      loadImage(`assets/desk-scene/ryan-head-card1.webp?v=${ASSET_V}`),
+      loadImage(`assets/desk-scene/ryan-head-card2.webp?v=${ASSET_V}`),
+      loadImage(`assets/desk-scene/ryan-head-card3.webp?v=${ASSET_V}`),
+      loadFlowAtlasBytes(`assets/desk-scene/flow-atlas.bin?v=${ASSET_V}`)
+    ])
+      .then(([c0, c1, c2, c3, flowBytes]) => {
+        if (destroyed || !gl) return;
+        textures.c0 = uploadImageTexture(c0, { premultiply: false, mipmap: true, aniso: true });
+        textures.c1 = uploadImageTexture(c1, { premultiply: false, mipmap: true, aniso: true });
+        textures.c2 = uploadImageTexture(c2, { premultiply: false, mipmap: true, aniso: true });
+        textures.c3 = uploadImageTexture(c3, { premultiply: false, mipmap: true, aniso: true });
+        textures.flowAtlas = uploadFlowAtlasTexture(flowBytes);
+        hoverReady = true;
+        webglDirty = true;
+        ensureRunning();
+      })
+      .catch(() => {
+        // Stage 1 rest pose remains crisp and intact even if Stage 2 fails
+      });
+  }
+
+  const onContextLost = (e) => {
+    e.preventDefault();
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    if (typeof options.onFallback === 'function') options.onFallback();
+  };
+  charCanvas.addEventListener('webglcontextlost', onContextLost);
+
+  // =========================================================================
+  // 2. GEOMETRY POSITIONING, 2D BACKGROUND / MOBILE COMPOSITE & OVERLAY SYNC
+  // =========================================================================
+  function syncRigGeometry() {
+    if (!gl) return;
+    neckPosW = sceneToWorld(NECK_BASE_PIVOT.x, NECK_BASE_PIVOT.y);
+    atlasPosW = sceneToWorld(HEAD_ATLAS_PIVOT.x, HEAD_ATLAS_PIVOT.y);
+    bodyPosW = sceneToWorld(BODY_PIVOT.x, BODY_PIVOT.y);
+    chinRestPos = sceneToWorld(CHIN_PIVOT.x, CHIN_PIVOT.y);
+
+    const updateGridVerts = (grid, pivW) => {
+      const pos = grid.positions;
+      for (let i = 0; i < grid.vertCount; i++) {
+        const w = sceneToWorld(grid.baseSX[i], grid.baseSY[i]);
+        pos[i * 3] = w.wx - pivW.wx;
+        pos[i * 3 + 1] = w.wy - pivW.wy;
+        pos[i * 3 + 2] = grid.reliefZ[i];
+      }
+      gl.bindBuffer(gl.ARRAY_BUFFER, grid.posBuf);
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, pos);
+    };
+
+    updateGridVerts(neckBedGrid, neckPosW);
+    updateGridVerts(headGrid, atlasPosW);
+    updateGridVerts(chinShadowGrid, chinRestPos);
+    updateGridVerts(bodyGrid, bodyPosW);
+    webglDirty = true;
+  }
+
+  function drawCroppedLayer2D(ctx, img, bounds, dpr) {
+    if (!ctx || !img) return;
+    const dx = (drawX + (bounds.x0 / SCENE_W) * drawW) * dpr;
+    const dy = (drawY + (bounds.y0 / SCENE_H) * drawH) * dpr;
+    const dw = ((bounds.x1 - bounds.x0) / SCENE_W) * drawW * dpr;
+    const dh = ((bounds.y1 - bounds.y0) / SCENE_H) * drawH * dpr;
+    ctx.drawImage(img, dx, dy, dw, dh);
   }
 
   function renderBackgroundPlate() {
@@ -515,16 +685,141 @@ export function initDeskScene3D(options = {}) {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     bgCtx.imageSmoothingEnabled = true;
     bgCtx.imageSmoothingQuality = 'high';
-    bgCtx.drawImage(
-      bgImage,
-      drawX * dpr,
-      drawY * dpr,
-      drawW * dpr,
-      drawH * dpr
+    bgCtx.drawImage(bgImage, drawX * dpr, drawY * dpr, drawW * dpr, drawH * dpr);
+  }
+
+  function renderMobileCharacter2D() {
+    if (gl || !stage1Ready) return;
+    if (!charCtx2D) {
+      charCtx2D = charCanvas.getContext('2d');
+    }
+    if (!charCtx2D) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    charCtx2D.clearRect(0, 0, charCanvas.width, charCanvas.height);
+    charCtx2D.imageSmoothingEnabled = true;
+    charCtx2D.imageSmoothingQuality = 'high';
+    drawCroppedLayer2D(charCtx2D, neckBedImg, NECK_BOUNDS, dpr);
+    drawCroppedLayer2D(charCtx2D, headRestImg, HEAD_BOUNDS, dpr);
+    drawCroppedLayer2D(charCtx2D, bodyImg, BODY_BOUNDS, dpr);
+  }
+
+  function drawBasicMesh(grid, tex, mvp, opacity) {
+    if (!tex) return;
+    gl.useProgram(basicProg);
+    gl.uniformMatrix4fv(basicLoc.uMvp, false, mvp);
+    gl.uniform1f(basicLoc.uOpacity, opacity);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.uniform1i(basicLoc.uMap, 0);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, grid.posBuf);
+    gl.enableVertexAttribArray(basicLoc.aPos);
+    gl.vertexAttribPointer(basicLoc.aPos, 3, gl.FLOAT, false, 0, 0);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, grid.uvBuf);
+    gl.enableVertexAttribArray(basicLoc.aUv);
+    gl.vertexAttribPointer(basicLoc.aUv, 2, gl.FLOAT, false, 0, 0);
+
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, grid.idxBuf);
+    gl.drawElements(gl.TRIANGLES, grid.indices.length, gl.UNSIGNED_SHORT, 0);
+  }
+
+  function drawHeadMesh(mvp, angle, crownLag) {
+    if (!textures.rest) return;
+    gl.useProgram(headProg);
+    gl.uniformMatrix4fv(headLoc.uMvp, false, mvp);
+    gl.uniform1f(headLoc.uAngle, angle);
+    gl.uniform1f(headLoc.uCrownLag, crownLag);
+    gl.uniform1f(headLoc.uHoverReady, hoverReady ? 1.0 : 0.0);
+
+    const restTex = textures.rest;
+    const slots = [
+      [headLoc.uMapC0, textures.c0 || restTex],
+      [headLoc.uMapC1, textures.c1 || restTex],
+      [headLoc.uMapRest, restTex],
+      [headLoc.uMapC2, textures.c2 || restTex],
+      [headLoc.uMapC3, textures.c3 || restTex],
+      [headLoc.uFlowAtlas, textures.flowAtlas || restTex]
+    ];
+    for (let i = 0; i < slots.length; i++) {
+      gl.activeTexture(gl.TEXTURE0 + i);
+      gl.bindTexture(gl.TEXTURE_2D, slots[i][1]);
+      gl.uniform1i(slots[i][0], i);
+    }
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, headGrid.posBuf);
+    gl.enableVertexAttribArray(headLoc.aPos);
+    gl.vertexAttribPointer(headLoc.aPos, 3, gl.FLOAT, false, 0, 0);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, headGrid.uvBuf);
+    gl.enableVertexAttribArray(headLoc.aUv);
+    gl.vertexAttribPointer(headLoc.aUv, 2, gl.FLOAT, false, 0, 0);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, headGrid.crownBuf);
+    gl.enableVertexAttribArray(headLoc.aCrownMask);
+    gl.vertexAttribPointer(headLoc.aCrownMask, 1, gl.FLOAT, false, 0, 0);
+
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, headGrid.idxBuf);
+    gl.drawElements(gl.TRIANGLES, headGrid.indices.length, gl.UNSIGNED_SHORT, 0);
+  }
+
+  function renderWebGL() {
+    if (!gl || !stage1Ready) return;
+    gl.viewport(0, 0, charCanvas.width, charCanvas.height);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    const neckEuler = angleToEuler(neckSpring.pos);
+    const headEuler = angleToEuler(headSpring.pos);
+
+    // Layer 1 (lower neck hinge: 38% turn led by neckSpring)
+    const neckModel = mat4TRS(
+      neckPosW.wx,
+      neckPosW.wy,
+      0.0,
+      neckEuler.pitch * 0.38,
+      neckEuler.yaw * 0.38,
+      neckEuler.roll * 0.38
     );
+    drawBasicMesh(neckBedGrid, textures.neckBed, mat4Mul(projView, neckModel), 1.0);
+
+    // Layer 2 (cranial dome atop C1 atlas: residual 62% so cumulative skull reaches target angle)
+    const headLocal = mat4TRS(
+      atlasPosW.wx - neckPosW.wx,
+      atlasPosW.wy - neckPosW.wy,
+      0.002,
+      headEuler.pitch - neckEuler.pitch * 0.38,
+      headEuler.yaw - neckEuler.yaw * 0.38,
+      headEuler.roll - neckEuler.roll * 0.38
+    );
+    const headModel = mat4Mul(neckModel, headLocal);
+    drawHeadMesh(mat4Mul(projView, headModel), headSpring.pos, crownSpring.pos - headSpring.pos);
+
+    // Layer 3 (soft dynamic chin contact AO shadow with right-turn jaw-lift occlusion)
+    const rightTurn = Math.max(0, headSpring.pos);
+    const chinScaleX = 1.0 + rightTurn * 0.15;
+    const chinScaleY = 1.0 + rightTurn * 0.2;
+    const chinOpacity = Math.max(0, 0.45 - Math.abs(headSpring.pos) * 0.08 - rightTurn * 0.08);
+    const chinModel = mat4TRS(
+      chinRestPos.wx + crownSpring.pos * 0.0045,
+      chinRestPos.wy - Math.abs(crownSpring.pos) * 0.0012,
+      0.004,
+      0,
+      0,
+      0,
+      chinScaleX,
+      chinScaleY
+    );
+    drawBasicMesh(chinShadowGrid, textures.chinShadow, mat4Mul(projView, chinModel), chinOpacity);
+
+    // Layer 4 (stationary sweater collar, resting hand & chair)
+    const bodyModel = mat4TRS(bodyPosW.wx, bodyPosW.wy, 0.005);
+    drawBasicMesh(bodyGrid, textures.body, mat4Mul(projView, bodyModel), 1.0);
+
+    webglDirty = false;
   }
 
   function syncOverlaysAndResize() {
+    if (destroyed) return;
     const rect = container.getBoundingClientRect();
     viewW = Math.max(320, Math.round(rect.width));
     viewH = Math.max(260, Math.round(rect.height));
@@ -532,28 +827,36 @@ export function initDeskScene3D(options = {}) {
 
     bgCanvas.width = viewW * dpr;
     bgCanvas.height = viewH * dpr;
-    renderer.setSize(viewW, viewH, false);
 
-    camera.aspect = viewW / viewH;
-    camera.updateProjectionMatrix();
+    const isDesktop = window.innerWidth >= 1024;
+    if (isDesktop) {
+      if (ensureWebGL()) {
+        charCanvas.width = viewW * dpr;
+        charCanvas.height = viewH * dpr;
+        projView = mat4PerspectiveView(FOV_DEG, viewW / viewH, 0.1, 30, CAM_Z);
+        if (stage1Ready) startStage2IfDesktop();
+      }
+    } else {
+      charCanvas.width = viewW * dpr;
+      charCanvas.height = viewH * dpr;
+      if (gl) {
+        projView = mat4PerspectiveView(FOV_DEG, viewW / viewH, 0.1, 30, CAM_Z);
+      }
+    }
 
-    // Scale the entire studio scene so outer oak desk width matches the 720px CLI bar
     const DESK_WIDTH_IN_SCENE = 936;
     const targetDeskW = Math.min(720, Math.max(280, viewW - 24));
     const scale = targetDeskW / DESK_WIDTH_IN_SCENE;
     drawW = SCENE_W * scale;
     drawH = SCENE_H * scale;
     drawX = (viewW - drawW) * 0.5;
-    // Restore original baseline desk & model position (+130px desktop offset below viewport bottom)
-    drawY = window.innerWidth >= 1024 ? viewH - drawH + 130 : Math.max(0, viewH - drawH);
+    drawY = isDesktop ? viewH - drawH + 130 : Math.max(0, viewH - drawH);
 
-    // Position .desk-scene__stage to exact rendered scene image bounds so all children scale strictly as scene %
     container.style.setProperty('--stage-left', `${((drawX / viewW) * 100).toFixed(4)}%`);
     container.style.setProperty('--stage-top', `${((drawY / viewH) * 100).toFixed(4)}%`);
     container.style.setProperty('--stage-width', `${((drawW / viewW) * 100).toFixed(4)}%`);
     container.style.setProperty('--stage-height', `${((drawH / viewH) * 100).toFixed(4)}%`);
 
-    // Position #desk-monitor-screen & #desk-steam purely as percentages of the 1480x1180 scene image
     container.style.setProperty('--mon-left', `${((MON_RECT.x / SCENE_W) * 100).toFixed(4)}%`);
     container.style.setProperty('--mon-top', `${((MON_RECT.y / SCENE_H) * 100).toFixed(4)}%`);
     container.style.setProperty('--mon-width', `${((MON_RECT.w / SCENE_W) * 100).toFixed(4)}%`);
@@ -565,7 +868,6 @@ export function initDeskScene3D(options = {}) {
     container.style.setProperty('--cat-left', `${((CAT_POS.x / SCENE_W) * 100).toFixed(4)}%`);
     container.style.setProperty('--cat-top', `${((CAT_POS.y / SCENE_H) * 100).toFixed(4)}%`);
 
-    // Align wall-to-floor boundary and floor shadows to the exact vertical center of the AI search bar
     const omnibarEl = document.querySelector('.home-omnibar-section');
     if (omnibarEl) {
       const obRect = omnibarEl.getBoundingClientRect();
@@ -576,9 +878,14 @@ export function initDeskScene3D(options = {}) {
     }
 
     renderBackgroundPlate();
-    syncRigGeometry();
-    applyPoseAtTime(performance.now());
-    renderer.render(fgScene, camera);
+    if (gl) {
+      syncRigGeometry();
+      applyPoseAtTime(performance.now());
+      renderWebGL();
+    } else {
+      renderMobileCharacter2D();
+      renderCatFrame(performance.now());
+    }
 
     if (typeof options.onMonitorSync === 'function') {
       options.onMonitorSync();
@@ -586,12 +893,7 @@ export function initDeskScene3D(options = {}) {
   }
 
   // =========================================================================
-  // 3. LAYERED CRITICAL-SPRING ANATOMY + BIDIRECTIONAL OPTICAL FLOW SWEEP
-  //    3 coupled sub-stepped 2nd-order springs (zero velocity discontinuity across sweeps):
-  //    - neckSpring  (w=15.2, z=0.96): initiates turn at base cervical joint (38% rotation)
-  //    - headSpring  (w=12.6, z=0.94): drives optical-flow uAngle + cranial atlas turn (62%)
-  //    - crownSpring (w=10.2, z=0.90): secondary hair-crown & chin-shadow follow-through
-  //    Targets: Card 0 (-1.0, -8deg) <-> Card 1 (-0.48, -4.3deg) <-> Rest (0) <-> Card 2 (+0.48) <-> Card 3 (+1.0)
+  // 3. LAYERED CRITICAL-SPRING ANATOMY + IDLE GPU GATING
   // =========================================================================
   const CARD_ANGLE_TARGETS = {
     rest: 0.0,
@@ -601,7 +903,6 @@ export function initDeskScene3D(options = {}) {
     3: 1.0
   };
 
-  // Natural micro-tilt complements the 5 real optical-flow-morphed poses without swinging a flat cutout sideways
   function angleToEuler(a) {
     const absA = Math.min(1.0, Math.abs(a));
     const sign = a < 0 ? -1 : a > 0 ? 1 : 0;
@@ -616,6 +917,10 @@ export function initDeskScene3D(options = {}) {
     return { pos: 0.0, vel: 0.0, target: 0.0, omega, zeta };
   }
 
+  function isSpringActive(s) {
+    return s.vel !== 0.0 || s.pos !== s.target;
+  }
+
   function stepSpring(s, dt) {
     const k = s.omega * s.omega;
     const c = 2.0 * s.zeta * s.omega;
@@ -628,7 +933,6 @@ export function initDeskScene3D(options = {}) {
     }
   }
 
-  // Smooth critically-damped springs for fluid, organic head & neck turn without bounce or snap
   const neckSpring = makeSpring(10.5, 1.0);
   const headSpring = makeSpring(9.2, 1.0);
   const crownSpring = makeSpring(8.4, 1.0);
@@ -644,10 +948,13 @@ export function initDeskScene3D(options = {}) {
     lastPhysicsTime = now;
 
     if (prefersReducedMotion || window.innerWidth < 1024) {
+      if (neckSpring.pos !== 0 || headSpring.pos !== 0 || crownSpring.pos !== 0) {
+        webglDirty = true;
+      }
       neckSpring.pos = neckSpring.vel = neckSpring.target = 0;
       headSpring.pos = headSpring.vel = headSpring.target = 0;
       crownSpring.pos = crownSpring.vel = crownSpring.target = 0;
-    } else if (rawDt > 0) {
+    } else if (rawDt > 0 && (isSpringActive(neckSpring) || isSpringActive(headSpring) || isSpringActive(crownSpring))) {
       const steps = Math.max(1, Math.ceil(rawDt / 0.004));
       const dt = rawDt / steps;
       for (let s = 0; s < steps; s++) {
@@ -656,54 +963,25 @@ export function initDeskScene3D(options = {}) {
         crownSpring.target = headSpring.pos;
         stepSpring(crownSpring, dt);
       }
-    }
-
-    const neckEuler = angleToEuler(neckSpring.pos);
-    const headEuler = angleToEuler(headSpring.pos);
-
-    headShaderMat.uniforms.uAngle.value = headSpring.pos;
-    headShaderMat.uniforms.uCrownLag.value = crownSpring.pos - headSpring.pos;
-
-    if (assetsReady) {
-      // Layer 1 (lower neck hinge): 38% turn led by neckSpring
-      neckBedGroup.rotation.set(
-        neckEuler.pitch * 0.38,
-        neckEuler.yaw * 0.38,
-        neckEuler.roll * 0.38
-      );
-      // Layer 2 (cranial dome atop C1 atlas): residual 62% so cumulative skull reaches full target angle
-      headPivotGroup.rotation.set(
-        headEuler.pitch - neckEuler.pitch * 0.38,
-        headEuler.yaw - neckEuler.yaw * 0.38,
-        headEuler.roll - neckEuler.roll * 0.38
-      );
-      // Layer 3 (soft dynamic chin contact AO shadow over resting knuckles)
-      chinShadowMesh.position.set(
-        chinRestPos.wx + crownSpring.pos * 0.0045,
-        chinRestPos.wy - Math.abs(crownSpring.pos) * 0.0012,
-        0.004
-      );
-      chinShadowMat.opacity = 0.45 - Math.abs(headSpring.pos) * 0.08;
+      webglDirty = true;
     }
 
     renderCatFrame(now);
   }
 
-  // Natural snoozing ribcage breathing (~4.3s cycle) + subtle pointed-ear twitch (~9.6s) on dedicated CSS-filtered canvas
+  // Natural snoozing ribcage breathing (~4.3s) + ear twitch (~9.6s) on 1:1 cropped 436x200 cat sprite
   function renderCatFrame(now) {
     if (!catCanvas || !catCtx || !catImage) return;
     const CW = catCanvas.width;
     const CH = catCanvas.height;
-    const CROP_X = 668; // 334 * 2
-    const CROP_Y = 1380; // 690 * 2
-    const BASE_PAW_Y = 152; // keeps paws/belly anchored flat on desktop shadow (y >= 766)
+    const BASE_PAW_Y = 152;
 
     catCtx.clearRect(0, 0, CW, CH);
     catCtx.imageSmoothingEnabled = true;
     catCtx.imageSmoothingQuality = 'high';
 
     if (prefersReducedMotion || isPaused) {
-      catCtx.drawImage(catImage, CROP_X, CROP_Y, CW, CH, 0, 0, CW, CH);
+      catCtx.drawImage(catImage, 0, 0, CW, CH, 0, 0, CW, CH);
       return;
     }
 
@@ -716,9 +994,9 @@ export function initDeskScene3D(options = {}) {
     const earFlick = earCycle < 1.0 ? Math.sin(earCycle * Math.PI * 2) * (1.0 - earCycle) * 6.5 : 0;
 
     // 1. Pinned resting lower body & paws (zero lift off shadow)
-    catCtx.drawImage(catImage, CROP_X, CROP_Y + BASE_PAW_Y, CW, CH - BASE_PAW_Y, 0, BASE_PAW_Y, CW, CH - BASE_PAW_Y);
+    catCtx.drawImage(catImage, 0, BASE_PAW_Y, CW, CH - BASE_PAW_Y, 0, BASE_PAW_Y, CW, CH - BASE_PAW_Y);
 
-    // 2. Smooth 4px vertical strips for ribcage rise/fall + ear twitch (halves draw calls, prevents 2px seam shimmer)
+    // 2. Smooth 4px vertical strips for ribcage rise/fall + ear twitch
     for (let dx = 0; dx < CW; dx += 4) {
       const sw = Math.min(4, CW - dx);
       const sx = 334 + (dx + sw * 0.5) * 0.5;
@@ -727,27 +1005,19 @@ export function initDeskScene3D(options = {}) {
       const earDist = (sx - 533) / 11;
       const earW = Math.exp(-(earDist * earDist));
       const lift = breathe * 8.5 * ribW + earFlick * earW;
-      catCtx.drawImage(
-        catImage,
-        CROP_X + dx,
-        CROP_Y,
-        sw,
-        BASE_PAW_Y,
-        dx,
-        -lift,
-        sw,
-        BASE_PAW_Y + lift
-      );
+      catCtx.drawImage(catImage, dx, 0, sw, BASE_PAW_Y, dx, -lift, sw, BASE_PAW_Y + lift);
     }
   }
 
   function tick(now) {
-    if (isPaused) {
+    if (isPaused || destroyed) {
       rafId = null;
       return;
     }
     applyPoseAtTime(now);
-    renderer.render(fgScene, camera);
+    if (webglDirty) {
+      renderWebGL();
+    }
     if (!prefersReducedMotion) {
       rafId = requestAnimationFrame(tick);
     } else {
@@ -756,10 +1026,10 @@ export function initDeskScene3D(options = {}) {
   }
 
   function ensureRunning() {
-    if (isPaused) return;
+    if (isPaused || destroyed) return;
     if (prefersReducedMotion) {
       applyPoseAtTime(performance.now());
-      renderer.render(fgScene, camera);
+      if (webglDirty) renderWebGL();
       return;
     }
     if (!rafId) {
@@ -776,6 +1046,7 @@ export function initDeskScene3D(options = {}) {
     const nextAngle = CARD_ANGLE_TARGETS[normKey];
     neckSpring.target = nextAngle;
     headSpring.target = nextAngle;
+    webglDirty = true;
     ensureRunning();
   }
 
@@ -796,24 +1067,93 @@ export function initDeskScene3D(options = {}) {
       cancelAnimationFrame(rafId);
       rafId = null;
     }
+    webglDirty = true;
     applyPoseAtTime(performance.now());
-    renderer.render(fgScene, camera);
+    renderWebGL();
     if (!prefersReducedMotion) ensureRunning();
   }
 
+  // =========================================================================
+  // 4. TWO-STAGE PROGRESSIVE LOAD
+  // =========================================================================
   syncOverlaysAndResize();
-  ensureRunning();
+
+  Promise.all([
+    loadImage(`assets/desk-scene/scene-bg.webp?v=${ASSET_V}`),
+    loadImage(`assets/desk-scene/tuxedo-cat.webp?v=${ASSET_V}`),
+    loadImage(`assets/desk-scene/ryan-neck-bed.webp?v=${ASSET_V}`),
+    loadImage(`assets/desk-scene/ryan-body.webp?v=${ASSET_V}`),
+    loadImage(`assets/desk-scene/ryan-head.webp?v=${ASSET_V}`)
+  ])
+    .then(([bg, cat, neck, body, headRest]) => {
+      if (destroyed) return;
+      bgImage = bg;
+      catImage = cat;
+      neckBedImg = neck;
+      bodyImg = body;
+      headRestImg = headRest;
+      stage1Ready = true;
+
+      if (window.innerWidth >= 1024 && ensureWebGL()) {
+        uploadStage1Textures();
+      }
+
+      syncOverlaysAndResize();
+      container.classList.add('is-ready');
+      ensureRunning();
+
+      // Stage 2: background hover poses + optical-flow atlas (desktop only)
+      if (window.innerWidth >= 1024 && gl) {
+        startStage2IfDesktop();
+      }
+    })
+    .catch(() => {
+      if (!destroyed && typeof options.onFallback === 'function') {
+        options.onFallback();
+      }
+    });
 
   let resizeTimer = null;
-  window.addEventListener('resize', () => {
+  const onResize = () => {
     if (resizeTimer) cancelAnimationFrame(resizeTimer);
     resizeTimer = requestAnimationFrame(syncOverlaysAndResize);
-  });
+  };
+  window.addEventListener('resize', onResize);
+
+  function destroy() {
+    destroyed = true;
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    if (resizeTimer) {
+      cancelAnimationFrame(resizeTimer);
+      resizeTimer = null;
+    }
+    window.removeEventListener('resize', onResize);
+    charCanvas.removeEventListener('webglcontextlost', onContextLost);
+
+    if (gl) {
+      Object.values(textures).forEach((tex) => {
+        if (tex) gl.deleteTexture(tex);
+      });
+      allGrids.forEach((g) => {
+        if (g.posBuf) gl.deleteBuffer(g.posBuf);
+        if (g.uvBuf) gl.deleteBuffer(g.uvBuf);
+        if (g.crownBuf) gl.deleteBuffer(g.crownBuf);
+        if (g.idxBuf) gl.deleteBuffer(g.idxBuf);
+      });
+      if (basicProg) gl.deleteProgram(basicProg);
+      if (headProg) gl.deleteProgram(headProg);
+      gl = null;
+    }
+  }
 
   return {
     setCardTarget,
     setPaused,
     setReducedMotion,
-    syncOverlaysAndResize
+    syncOverlaysAndResize,
+    destroy
   };
 }

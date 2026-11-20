@@ -44,7 +44,7 @@ Accessibility
 - CSS
 - JavaScript
 - JSON
-- Three.js (lightweight procedural desk canvas)
+- Custom vanilla WebGL 2.5D desk scene (zero 3D framework overhead)
 
 Favor existing architecture when possible.
 

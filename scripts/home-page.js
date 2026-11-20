@@ -270,6 +270,7 @@
   // 3. Fallback 5-Pose Crossfade Mode (if rigged 3D is disabled or WebGL fails)
   // =========================================================================
   function activatePoseFallback() {
+    if (deskSceneEl) deskSceneEl.classList.add('is-fallback');
     if (!poseFallbackEl) return;
     poseFallbackEl.hidden = false;
     poseFallbackEl.querySelectorAll('img[data-src]').forEach((img) => {
@@ -600,7 +601,7 @@
       return;
     }
 
-    import('./desk-scene.js?v=155')
+    import('./desk-scene.js?v=156')
       .then((mod) => {
         if (mod && typeof mod.initDeskScene3D === 'function') {
           scene3DController = mod.initDeskScene3D({
@@ -651,14 +652,9 @@
       });
   }
 
-  // Initialize immediately for HTML layout, then defer 3D runtime until idle/after paint
+  // Initialize immediately for HTML layout and start desk scene in parallel (preloaded in <head>)
   runSessionLoadSequence();
   updateActiveNav();
   syncPauseState();
-
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(lazyLoad3DScene, { timeout: 400 });
-  } else {
-    setTimeout(lazyLoad3DScene, 60);
-  }
+  lazyLoad3DScene();
 })();

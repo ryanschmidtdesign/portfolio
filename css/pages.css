@@ -864,6 +864,49 @@ body.is-home {
   z-index: 4;
 }
 
+/* Smooth Stage 1 reveal so monitor, steam & contact shadows never float in mid-air before background/character paint */
+#desk-bg-canvas,
+#desk-char-canvas,
+#desk-cat-layer,
+#desk-monitor-screen,
+#desk-steam,
+.desk-cat-shadow,
+.desk-mug-shadow {
+  transition: opacity 220ms var(--ease-out);
+}
+
+#desk-scene:not(.is-ready):not(.is-fallback) #desk-bg-canvas,
+#desk-scene:not(.is-ready):not(.is-fallback) #desk-char-canvas,
+#desk-scene:not(.is-ready):not(.is-fallback) #desk-cat-layer,
+#desk-scene:not(.is-ready):not(.is-fallback) #desk-monitor-screen,
+#desk-scene:not(.is-ready):not(.is-fallback) #desk-steam,
+#desk-scene:not(.is-ready):not(.is-fallback) .desk-cat-shadow,
+#desk-scene:not(.is-ready):not(.is-fallback) .desk-mug-shadow {
+  opacity: 0;
+}
+
+#desk-scene.is-fallback #desk-bg-canvas,
+#desk-scene.is-fallback #desk-char-canvas,
+#desk-scene.is-fallback #desk-cat-layer,
+#desk-scene.is-fallback #desk-monitor-screen,
+#desk-scene.is-fallback #desk-steam,
+#desk-scene.is-fallback .desk-cat-shadow,
+#desk-scene.is-fallback .desk-mug-shadow {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #desk-bg-canvas,
+  #desk-char-canvas,
+  #desk-cat-layer,
+  #desk-monitor-screen,
+  #desk-steam,
+  .desk-cat-shadow,
+  .desk-mug-shadow {
+    transition: none;
+  }
+}
+
 /* Hover/focus-only terracotta connector curves from visible monitor screen points up to card bottom centers */
 .desk-connectors-svg {
   position: absolute;
