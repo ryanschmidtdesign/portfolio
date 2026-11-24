@@ -1,4 +1,103 @@
 // ============================================================================
+// Privacy-Safe Interaction Analytics (Vercel Blob)
+// ============================================================================
+(function () {
+  const SESSION_KEY = "rs_sid";
+
+  function getSessionId() {
+    try {
+      let sid = sessionStorage.getItem(SESSION_KEY);
+      if (!sid) {
+        sid = (window.crypto && typeof window.crypto.randomUUID === "function")
+          ? window.crypto.randomUUID()
+          : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+        sessionStorage.setItem(SESSION_KEY, sid);
+      }
+      return sid;
+    } catch (_) {
+      return "";
+    }
+  }
+
+  window.rsTrack = function rsTrack(event, details = {}) {
+    if (!event || typeof event !== "string") return;
+    try {
+      const payload = JSON.stringify({
+        event,
+        source: details.source || "ui",
+        label: details.label || "",
+        page: window.location.pathname || "/",
+        referrer: document.referrer || "",
+        sessionId: getSessionId()
+      });
+
+      if (navigator.sendBeacon && typeof Blob === "function") {
+        const sent = navigator.sendBeacon("/api/track", new Blob([payload], { type: "application/json" }));
+        if (sent) return;
+      }
+
+      if (typeof fetch === "function") {
+        fetch("/api/track", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload,
+          keepalive: true
+        }).catch(() => {});
+      }
+    } catch (_) {}
+  };
+
+  document.addEventListener("click", (e) => {
+    const resumeLink = e.target.closest('a[href*="ryan-schmidt-resume.pdf"], a[href="/resume"], a[href="/resume.pdf"]');
+    if (resumeLink) {
+      window.rsTrack("resume_click", {
+        source: resumeLink.closest(".site-header") ? "header_nav" : "page_link",
+        label: resumeLink.getAttribute("href") || ""
+      });
+    }
+
+    const linkedinLink = e.target.closest('a[href*="linkedin.com/in/ryanschmidt1989"]');
+    if (linkedinLink) {
+      window.rsTrack("linkedin_click", {
+        source: linkedinLink.closest(".site-header") ? "header_nav" : "page_link",
+        label: linkedinLink.getAttribute("href") || ""
+      });
+    }
+
+    const card = e.target.closest(".home-project-card");
+    if (card) {
+      window.rsTrack("case_study_click", {
+        source: "home_grid",
+        label: card.getAttribute("href") || ""
+      });
+    }
+  });
+})();
+
+// ============================================================================
+// Header Scroll State (activates borderless progressive blur scrim when scrolled)
+// ============================================================================
+(function () {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  let rafPending = false;
+  function syncHeaderScrollState() {
+    rafPending = false;
+    const isScrolled = (window.scrollY || window.pageYOffset || 0) > 8;
+    header.classList.toggle("is-scrolled", isScrolled);
+  }
+
+  syncHeaderScrollState();
+  window.addEventListener("scroll", () => {
+    if (!rafPending) {
+      rafPending = true;
+      requestAnimationFrame(syncHeaderScrollState);
+    }
+  }, { passive: true });
+})();
+
+// ============================================================================
 // Native Fast Scrolling & Hash Link Handling (Zero Scroll Hijacking)
 // ============================================================================
 (function () {
@@ -327,6 +426,8 @@
     const email = copyBtn.getAttribute("data-copy-email");
     if (!email) return;
 
+    window.rsTrack?.("copy_email", { source: "header_nav", label: email });
+
     const showCopied = () => {
       copyBtn.classList.add("is-copied");
       clearTimeout(copyBtn._copyTimer);
@@ -610,11 +711,36 @@
       motionQuery.addEventListener('change', handleMotion);
     }
 
+    const PAUSE_ICON = '<svg viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="1" width="2.5" height="8" rx="0.6"/><rect x="6" y="1" width="2.5" height="8" rx="0.6"/></svg>';
+    const PLAY_ICON = '<svg viewBox="0 0 10 10" aria-hidden="true"><polygon points="2,1 9,5 2,9"/></svg>';
+
     loopingVideos.forEach((video) => {
       video.style.cursor = 'pointer';
       video.setAttribute('title', 'Click to play or pause video');
       video.setAttribute('tabindex', '0');
-      video.setAttribute('aria-label', video.paused ? 'Video demonstration (paused): click to play' : 'Video demonstration (playing): click to pause');
+
+      // Wrap video so the low-profile pill stays anchored to the video corner (never over figcaption)
+      let wrap = video.parentElement;
+      if (!wrap || !wrap.classList.contains('case-study-video-wrap')) {
+        wrap = document.createElement('div');
+        wrap.className = 'case-study-video-wrap';
+        video.parentNode.insertBefore(wrap, video);
+        wrap.appendChild(video);
+      }
+
+      const pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'video-loop-pill';
+      wrap.appendChild(pill);
+
+      const syncState = () => {
+        const paused = video.paused;
+        video.setAttribute('aria-label', paused ? 'Video demonstration (paused): click to play' : 'Video demonstration (playing): click to pause');
+        pill.setAttribute('aria-label', paused ? 'Play looping video demonstration' : 'Pause looping video demonstration');
+        pill.setAttribute('aria-pressed', paused ? 'true' : 'false');
+        pill.classList.toggle('is-paused', paused);
+        pill.innerHTML = paused ? `${PLAY_ICON}<span>Paused</span>` : `${PAUSE_ICON}<span>Pause</span>`;
+      };
 
       const togglePlay = () => {
         if (video.paused) {
@@ -622,14 +748,20 @@
           if (playPromise !== undefined) {
             playPromise.catch(() => {});
           }
-          video.setAttribute('aria-label', 'Video demonstration (playing): click to pause');
         } else {
           video.pause();
-          video.setAttribute('aria-label', 'Video demonstration (paused): click to play');
         }
+        syncState();
       };
 
+      syncState();
+      video.addEventListener('play', syncState);
+      video.addEventListener('pause', syncState);
       video.addEventListener('click', togglePlay);
+      pill.addEventListener('click', (e) => {
+        e.stopPropagation();
+        togglePlay();
+      });
       video.addEventListener('keydown', (e) => {
         if (e.key === ' ' || e.key === 'Enter') {
           e.preventDefault();

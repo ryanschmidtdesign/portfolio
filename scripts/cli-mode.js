@@ -46,14 +46,18 @@
                     opacity: 0;
                     visibility: hidden;
                     pointer-events: none;
-                    transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 200ms;
+                    transition:
+                        opacity 150ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1)),
+                        visibility 0s linear 150ms;
                 }
 
                 .rs-cmd-overlay.is-open {
                     opacity: 1;
                     visibility: visible;
                     pointer-events: auto;
-                    transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0s;
+                    transition:
+                        opacity 220ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+                        visibility 0s linear 0s;
                 }
 
                 .rs-cmd-modal {
@@ -70,13 +74,15 @@
                     display: flex;
                     flex-direction: column;
                     overflow: hidden;
-                    transform: translateY(-6px) scale(0.988);
-                    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+                    transform: translateY(-6px) scale(0.985);
+                    transform-origin: top center;
+                    transition: transform 150ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1));
                     color: var(--text-primary, #171412);
                 }
 
                 .rs-cmd-overlay.is-open .rs-cmd-modal {
                     transform: translateY(0) scale(1);
+                    transition: transform 240ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
                 }
 
                 /* Search bar */
@@ -203,8 +209,8 @@
                     text-decoration: none;
                     color: inherit;
                     transition:
-                        background-color 110ms cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 90ms cubic-bezier(0.16, 1, 0.3, 1);
+                        background-color 140ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1)),
+                        transform var(--dur-press, 100ms) var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1));
                     user-select: none;
                     margin-bottom: 1px;
                     border: none;
@@ -222,10 +228,9 @@
                     background: var(--accent, #C85A32);
                     transform: scaleY(0);
                     transform-origin: center;
-                    transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
+                    transition: transform 160ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
                 }
 
-                .rs-cmd-item:hover,
                 .rs-cmd-item.is-selected {
                     background: rgba(200, 90, 50, 0.07);
                 }
@@ -287,11 +292,10 @@
                     font-weight: 400;
                     color: #8A8076;
                     white-space: nowrap;
-                    transition: color 110ms cubic-bezier(0.16, 1, 0.3, 1);
+                    transition: color 140ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1));
                 }
 
-                .rs-cmd-item.is-selected .rs-cmd-item__meta,
-                .rs-cmd-item:hover .rs-cmd-item__meta {
+                .rs-cmd-item.is-selected .rs-cmd-item__meta {
                     color: var(--text-secondary, #5C554E);
                 }
 
@@ -302,11 +306,12 @@
                     color: var(--accent, #C85A32);
                     opacity: 0;
                     transform: translateX(-3px);
-                    transition: opacity 110ms cubic-bezier(0.16, 1, 0.3, 1), transform 110ms cubic-bezier(0.16, 1, 0.3, 1);
+                    transition:
+                        opacity 140ms var(--ease-out-strong, cubic-bezier(0.23, 1, 0.32, 1)),
+                        transform 160ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
                 }
 
-                .rs-cmd-item.is-selected .rs-cmd-item__return,
-                .rs-cmd-item:hover .rs-cmd-item__return {
+                .rs-cmd-item.is-selected .rs-cmd-item__return {
                     opacity: 1;
                     transform: translateX(0);
                 }
@@ -569,7 +574,7 @@
                 const key = (e.key || '').toLowerCase();
                 if ((e.metaKey || e.ctrlKey) && key === 'k') {
                     e.preventDefault();
-                    this.toggle();
+                    this.toggle('keyboard');
                 } else if (e.key === 'Escape' && this.isOpen) {
                     e.preventDefault();
                     this.close();
@@ -628,7 +633,7 @@
             document.addEventListener('click', (e) => {
                 if (e.target.closest('[data-cmdk-trigger], .ai-mini-cmdk')) {
                     e.preventDefault();
-                    this.open();
+                    this.open('', 'button');
                 }
             });
         }
@@ -712,7 +717,7 @@
                 `;
 
                 row.addEventListener('click', () => {
-                    item.action();
+                    this.runCommandItem(item, 'click');
                 });
 
                 row.addEventListener('mouseenter', () => {
@@ -752,10 +757,28 @@
             this.setActiveIndex(nextIndex);
         }
 
+        runCommandItem(item) {
+            if (!item) return;
+            window.rsTrack?.('cmdk_select', {
+                source: item.id || 'unknown',
+                label: item.title || ''
+            });
+            if (item.id === 'act-resume') {
+                window.rsTrack?.('resume_click', { source: 'cmdk', label: 'Resume (PDF)' });
+            } else if (item.id === 'act-email') {
+                window.rsTrack?.('copy_email', { source: 'cmdk_mailto', label: 'ryanschmidt1989@gmail.com' });
+            } else if (item.id === 'act-linkedin') {
+                window.rsTrack?.('linkedin_click', { source: 'cmdk', label: 'LinkedIn' });
+            }
+            if (typeof item.action === 'function') {
+                item.action();
+            }
+        }
+
         executeActive() {
             const activeItem = this.filteredItems[this.activeIndex];
             if (activeItem && typeof activeItem.action === 'function') {
-                activeItem.action();
+                this.runCommandItem(activeItem);
             }
         }
 
@@ -787,7 +810,8 @@
             this.open();
         }
 
-        open(initialQuery = '') {
+        open(initialQuery = '', source = 'programmatic') {
+            const wasOpen = this.isOpen;
             this.lastFocusedEl = document.activeElement;
             this.isOpen = true;
             this.overlay.classList.add('is-open');
@@ -795,6 +819,9 @@
             const q = String(initialQuery || '');
             this.inputEl.value = q;
             this.renderList(q);
+            if (!wasOpen) {
+                window.rsTrack?.('cmdk_open', { source });
+            }
             requestAnimationFrame(() => {
                 this.inputEl.focus({ preventScroll: true });
                 if (q) {
@@ -814,11 +841,11 @@
             }
         }
 
-        toggle() {
+        toggle(source = 'programmatic') {
             if (this.isOpen) {
                 this.close();
             } else {
-                this.open();
+                this.open('', source);
             }
         }
     }

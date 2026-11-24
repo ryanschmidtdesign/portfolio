@@ -156,6 +156,7 @@ a {
   text-decoration-thickness: max(1px, 0.06em);
   text-underline-offset: 0.20em;
   touch-action: manipulation;
+  transition: color var(--dur-1, 150ms) var(--ease-out-strong), text-decoration-color var(--dur-1, 150ms) var(--ease-out-strong);
 }
 
 a:hover {
@@ -186,6 +187,11 @@ a:hover {
 a,
 button {
   touch-action: manipulation;
+}
+
+button,
+[role="button"] {
+  transition: transform var(--dur-press, 100ms) var(--ease-out-strong);
 }
 
 button:not(:disabled):active,

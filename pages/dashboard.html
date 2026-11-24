@@ -57,7 +57,7 @@
     </noscript>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../styles.css?v=157">
+    <link rel="stylesheet" href="../styles.css?v=159">
 
     <!-- Icons & manifest -->
     <link rel="icon" href="../favicon.ico" sizes="32x32">
@@ -329,7 +329,7 @@
             <h2 data-reveal>The Problem: Trapped in Pre-Canned Dashboards</h2>
           </div>
           <p>
-            For a 10-person residential AV company, high-level sales gauges were useless clutter. For a commercial contractor tracking $2M bids, daily service ticket counts got in the way. Meanwhile, leadership wanted to jump straight to a conversational AI chatbot. My job was to solve the immediate reporting pain first and channel the AI push into something integrators would actually trust with their job margins.
+            For a 10-person residential AV company, high-level sales gauges were useless clutter. For a commercial contractor tracking $2M bids, daily service ticket counts got in the way. Because one static screen tried to serve everyone, managers defaulted to exporting raw tables into spreadsheets every week.
           </p>
 
           <h3>Goals</h3>
@@ -367,7 +367,7 @@
                 <li class="bridge-item" data-bridge="sales" tabindex="0">
                   <span class="bridge-tag">Finding 3</span>
                   <div class="bridge-content">
-                    <strong>Sales constraint:</strong> Sales reps needed immediate visual punch for live demos.
+                    <strong>Stakeholder constraint:</strong> Sales reps needed immediate visual punch for live demos.
                   </div>
                 </li>
               </ul>
@@ -385,7 +385,7 @@
                 <li class="bridge-item" data-bridge="speed" tabindex="0">
                   <span class="bridge-tag">Decision 2</span>
                   <div class="bridge-content">
-                    <strong>Fast &amp; easy card manipulation:</strong> Drag-and-drop rearrangement and simple AI reporting from active widgets.
+                    <strong>Direct card customization:</strong> Drag-and-drop rearrangement and simple AI reporting from active widgets.
                   </div>
                 </li>
                 <li class="bridge-item" data-bridge="sales" tabindex="0">
@@ -456,11 +456,15 @@
           <ul data-progress-story>
             <li data-story-step>
               <span class="step-label">1. Responsive 12-Column Widget Grid</span>
-              <p class="step-copy">Rather than building isolated reporting pages, I designed a modular 12-column grid supporting three card footprints (Small counters, Medium trend charts, and Large data tables). Users could start from a role-specific template or a blank canvas, dragging and configuring cards to match their morning routine.</p>
+              <p class="step-copy">
+                Rather than building isolated reporting pages, I designed a modular 12-column grid supporting three card footprints (Small counters, Medium trend charts, and Large data tables). Users could start from a role-specific template or a blank canvas, dragging and configuring cards to match their morning routine.
+              </p>
             </li>
             <li data-story-step>
               <span class="step-label">2. Grounded AI Reporting</span>
-              <p class="step-copy">Project managers and executives don't trust AI guesses when job margins and billable hours are on the line. I worked with backend engineering so the summary only reads the data returned by the active widgets on the user's screen, never running open-ended database queries.</p>
+              <p class="step-copy">
+                Because every integrator combined a different set of widgets and filters, a static report template couldn't connect trends across cards—like pairing a dip in closed sales with a bottleneck in unshared quotes. To earn trust when margins and billable hours are on the line, I worked with backend engineering to scope the model strictly to the structured JSON returned by active on-screen widgets rather than open-ended database queries, keeping every claim verifiable next to the source chart.
+              </p>
             </li>
           </ul>
 
@@ -513,7 +517,7 @@
 
           <h3>Iteration: higher data density, tighter control</h3>
           <p>
-            I tested the interactive Figma prototype with five power users. Integrators immediately rejected our early wireframes. They wanted compact counters (unassigned service calls, overdue milestones, low-stock flags) docked at the top of the screen above trend charts. Adding a compact 1x1 stat card and drag-and-drop reordering took one extra sprint, but turned the dashboard into a daily second-monitor workspace.
+            I tested the interactive Figma prototype with five power users. Integrators immediately rejected our early wireframes. They wanted compact counters (unassigned service calls, overdue milestones, low-stock flags) docked at the top of the screen above trend charts. Adding a compact Small stat card and drag-and-drop reordering took one extra sprint, but turned the dashboard into a daily second-monitor workspace.
           </p>
 
           <figure class="case-study-media" data-reveal>
@@ -534,7 +538,7 @@
             <h2>Impact: From Ignored Charts to a Daily Morning Habit</h2>
           </div>
           <p class="impact-lede">
-            Measured at 30 days post-launch, 71% of active accounts maintained multiple custom dashboards, and weekly dashboard views rose 64% across consecutive quarters.
+            Measured at 30 days post-launch, 71% had created and maintained multiple custom dashboards, and weekly dashboard views rose 64% across consecutive quarters.
           </p>
           <div class="impact-callout" role="region" aria-label="Key business outcomes">
             <div class="impact-metric">
@@ -556,7 +560,7 @@
             <h2>Lesson</h2>
           </div>
           <p>
-            Executive excitement for conversational AI rarely matches how field integrators actually work. Integrators managing tight schedules and thin margins don't want to chat with their software; they want fast, reliable numbers they can scan at 7:00 AM and a one-click summary when it's time to brief the owner.
+            Executive excitement for conversational AI rarely matches how field integrators actually work. When operators are under morning time pressure, deterministic visual scanning beats open-ended prompting every time; AI earns trust when it steps in later to summarize verified numbers for stakeholder reviews.
           </p>
         </section>
 
@@ -608,10 +612,10 @@
     </div>
 
     <!-- Consolidated JavaScript -->
-    <script src="../scripts/cli-mode.js?v=93" defer></script>
-    <script src="../scripts/scripts.js?v=157" defer></script>
-    <script src="../scripts/magnetic.js?v=90" defer></script>
-    <script src="../scripts/rs-chat-widget.js?v=90" defer></script>
+    <script src="../scripts/cli-mode.js?v=95" defer></script>
+    <script src="../scripts/scripts.js?v=159" defer></script>
+    <script src="../scripts/magnetic.js?v=91" defer></script>
+    <script src="../scripts/rs-chat-widget.js?v=92" defer></script>
     <!-- SEO Landmark Footer (visually hidden) -->
     <footer class="site-footer">
       <div class="site-footer-inner">

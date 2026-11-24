@@ -23,6 +23,10 @@
         --text-primary: #F7F5F2;
         --text-secondary: #A8A29E;
         --text-on-accent: #FFFFFF;
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+        --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+        --dur-press: 100ms;
       }
 
       .visually-hidden {
@@ -78,7 +82,11 @@
         opacity: 0;
         pointer-events: none;
         transform: translateX(100%);
-        transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease, visibility 0s linear 280ms;
+        transform-origin: right center;
+        transition:
+          transform 280ms var(--ease-drawer),
+          opacity 240ms var(--ease-out-strong),
+          visibility 0s linear 280ms;
         z-index: 2147482999;
         overflow: hidden;
       }
@@ -98,7 +106,10 @@
         opacity: 1;
         pointer-events: auto;
         transform: translateX(0);
-        transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease, visibility 0s linear 0s;
+        transition:
+          transform 380ms var(--ease-drawer),
+          opacity 260ms var(--ease-out),
+          visibility 0s linear 0s;
       }
       @media (max-width: 768px) {
         .panel {
@@ -113,6 +124,7 @@
           border-top: 1px solid rgba(255, 255, 255, 0.16);
           border-radius: 2px 2px 0 0;
           transform: translateY(100%);
+          transform-origin: bottom center;
         }
         .panel.open {
           transform: translateY(0);
@@ -122,10 +134,25 @@
         }
       }
       @media (prefers-reduced-motion: reduce) {
-        .panel, .panel.open, * {
-          transition-duration: 0.01ms !important;
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
+        .panel,
+        .panel.open {
+          transform: none !important;
+          transition: opacity 160ms var(--ease-out-strong), visibility 0s linear 0s !important;
+        }
+        .panel-backdrop,
+        .panel-backdrop.open {
+          transition: opacity 160ms var(--ease-out-strong), visibility 0s linear 0s !important;
+        }
+        .pill,
+        .pills.show .pill {
+          transform: none !important;
+          transition-delay: 0ms !important;
+        }
+        .msg,
+        .loading-dots span,
+        .cursor,
+        .text.shake {
+          animation: none !important;
         }
       }
       .chat-body {
@@ -202,12 +229,20 @@
         gap: 4px;
         flex-shrink: 0;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        transition: background-color 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s cubic-bezier(0.16, 1, 0.3, 1), color 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        transition:
+          background-color 160ms var(--ease-out-strong),
+          border-color 160ms var(--ease-out-strong),
+          color 160ms var(--ease-out-strong),
+          box-shadow 160ms var(--ease-out-strong),
+          transform var(--dur-press, 100ms) var(--ease-out-strong);
       }
       .hdr-close:hover {
         background: rgba(200, 90, 50, 0.2);
         border-color: rgba(200, 90, 50, 0.5);
         color: #F7F5F2;
+      }
+      .hdr-close:active {
+        transform: scale(0.95);
       }
       .hdr-close:focus-visible {
         outline: 2px solid var(--accent);
@@ -347,12 +382,19 @@
         font-weight: 600;
         color: #A8A29E;
         cursor: pointer;
-        transition: background-color 140ms cubic-bezier(0.16, 1, 0.3, 1), border-color 140ms cubic-bezier(0.16, 1, 0.3, 1), color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+        transition:
+          background-color 140ms var(--ease-out-strong),
+          border-color 140ms var(--ease-out-strong),
+          color 140ms var(--ease-out-strong),
+          transform var(--dur-press, 100ms) var(--ease-out-strong);
       }
       .chat-copy-btn:hover {
         background: var(--accent);
         color: #FFFFFF;
         border-color: var(--accent);
+      }
+      .chat-copy-btn:active {
+        transform: scale(0.96);
       }
       .chat-copy-btn.is-copied {
         background: var(--green, #166534);
@@ -445,7 +487,12 @@
         opacity: 0;
         transform: translateY(8px) scale(0.98);
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        transition: opacity 200ms ease, transform 200ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+        transition:
+          opacity 220ms var(--ease-out),
+          transform 220ms var(--ease-out),
+          background-color 140ms var(--ease-out-strong),
+          color 140ms var(--ease-out-strong),
+          border-color 140ms var(--ease-out-strong);
       }
       .pill::before {
         content: "❯ ";
@@ -458,19 +505,25 @@
         opacity: 1;
         transform: translateY(0) scale(1);
       }
-      .pills.show .pill:nth-child(1) { transition-delay: 0ms; }
-      .pills.show .pill:nth-child(2) { transition-delay: 50ms; }
-      .pills.show .pill:nth-child(3) { transition-delay: 100ms; }
-      .pills.show .pill:nth-child(4) { transition-delay: 150ms; }
+      .pills.show .pill:nth-child(1) { transition-delay: 40ms; }
+      .pills.show .pill:nth-child(2) { transition-delay: 85ms; }
+      .pills.show .pill:nth-child(3) { transition-delay: 130ms; }
+      .pills.show .pill:nth-child(4) { transition-delay: 175ms; }
       .pill:hover,
       .pill:focus-visible {
         background: rgba(200, 90, 50, 0.18);
         border-color: rgba(200, 90, 50, 0.45);
         color: #F7F5F2;
         transform: translateY(-1px);
+        transition-duration: 140ms;
+        transition-timing-function: var(--ease-out-strong);
+        transition-delay: 0ms !important;
       }
       .pill:active {
         transform: scale(0.97);
+        transition-duration: var(--dur-press, 100ms);
+        transition-timing-function: var(--ease-out-strong);
+        transition-delay: 0ms !important;
       }
 
       /* Input & Send */
@@ -558,7 +611,11 @@
         flex-shrink: 0;
         box-sizing: border-box;
         box-shadow: 0 2px 6px rgba(200, 90, 50, 0.3);
-        transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background 160ms ease, box-shadow 160ms ease;
+        transition:
+          transform 140ms var(--ease-out-strong),
+          background-color 150ms var(--ease-out-strong),
+          box-shadow 150ms var(--ease-out-strong),
+          opacity 150ms var(--ease-out-strong);
       }
       .send:hover {
         transform: translateY(-1px);
@@ -567,6 +624,7 @@
       }
       .send:active {
         transform: scale(0.96);
+        transition-duration: var(--dur-press, 100ms);
       }
       .send:disabled {
         opacity: 0.35;
@@ -584,7 +642,7 @@
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transition: opacity 260ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 260ms;
+        transition: opacity 260ms var(--ease-drawer), visibility 0s linear 260ms;
       }
       @media (min-width: 1100px) {
         .panel-backdrop {
@@ -596,7 +654,7 @@
           opacity: 1;
           visibility: visible;
           pointer-events: auto;
-          transition: opacity 260ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0s;
+          transition: opacity 360ms var(--ease-drawer), visibility 0s linear 0s;
         }
       }
 
@@ -633,7 +691,11 @@
         font-size: 12.5px;
         font-weight: 600;
         text-decoration: none;
-        transition: transform 0.15s ease, opacity 0.15s ease;
+        transition:
+          background-color 160ms var(--ease-out-strong),
+          border-color 160ms var(--ease-out-strong),
+          transform 140ms var(--ease-out-strong),
+          opacity 140ms var(--ease-out-strong);
       }
       .hire-card-actions a:first-child {
         background: var(--accent);
@@ -647,6 +709,15 @@
         background: rgba(255, 255, 255, 0.06);
         color: #F7F5F2;
         border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+      .hire-card-actions a:last-child:hover {
+        background: rgba(255, 255, 255, 0.11);
+        border-color: rgba(255, 255, 255, 0.24);
+        transform: translateY(-1px);
+      }
+      .hire-card-actions a:active {
+        transform: scale(0.97);
+        transition-duration: var(--dur-press, 100ms);
       }
 
       /* Sources footnote */
@@ -686,10 +757,21 @@
         color: #E07844;
         border: 1px solid rgba(200, 90, 50, 0.3);
         text-decoration: none;
+        transition:
+          background-color 150ms var(--ease-out-strong),
+          border-color 150ms var(--ease-out-strong),
+          color 150ms var(--ease-out-strong),
+          transform 120ms var(--ease-out-strong);
       }
       .chat-sources-list a:hover {
         background: var(--accent);
+        border-color: var(--accent);
         color: #FFFFFF;
+        transform: translateY(-1px);
+      }
+      .chat-sources-list a:active {
+        transform: scale(0.97);
+        transition-duration: var(--dur-press, 100ms);
       }
 
       /* Dynamic loading state (loading-text + loading-dots + stop-btn) */
@@ -738,12 +820,19 @@
         border: 1px solid rgba(255, 255, 255, 0.12);
         color: #A8A29E;
         cursor: pointer;
-        transition: background-color 0.15s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.15s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+        transition:
+          background-color 150ms var(--ease-out-strong),
+          border-color 150ms var(--ease-out-strong),
+          color 150ms var(--ease-out-strong),
+          transform var(--dur-press, 100ms) var(--ease-out-strong);
       }
       .stop-btn:hover {
         background: rgba(200, 60, 40, 0.15);
         border-color: rgba(200, 60, 40, 0.35);
         color: #E05238;
+      }
+      .stop-btn:active {
+        transform: scale(0.96);
       }
 
       /* Blinking cursor */
@@ -937,7 +1026,7 @@ if (savedHist.length > 0) {
     return document.getElementById('ai-mini-input') || document.getElementById('home-omnibar-input');
   }
 
-  function openPanel(){
+  function openPanel(source = 'omnibar'){
     if (panel.classList.contains('open')) {
       requestAnimationFrame(() => (inputEl || panel)?.focus?.({ preventScroll: true }));
       return;
@@ -955,6 +1044,14 @@ if (savedHist.length > 0) {
 
     panel.classList.add('open');
     backdrop.classList.add('open');
+    window.rsTrack?.('cli_open', { source });
+
+    const pillsContainer = $('#pills');
+    if (pillsContainer && pillsContainer.classList.contains('show')) {
+      pillsContainer.classList.remove('show');
+      void pillsContainer.offsetWidth;
+      requestAnimationFrame(() => pillsContainer.classList.add('show'));
+    }
 
     requestAnimationFrame(() => (inputEl || panel)?.focus?.({ preventScroll: true }));
   }
@@ -979,48 +1076,61 @@ if (savedHist.length > 0) {
     function handleOmnibarCommand(val) {
       if (!val) return false;
       const lower = val.trim().toLowerCase();
+      const cmdSlug = lower.replace(/^\//, '');
       if (lower === '/tokens' || lower === 'tokens') {
+        window.rsTrack?.('cli_command', { source: cmdSlug, label: val });
         window.rsCommandPalette?.cycleTheme();
         return true;
       }
       if (lower === '/xray' || lower === 'xray') {
+        window.rsTrack?.('cli_command', { source: cmdSlug, label: val });
         window.rsCommandPalette?.toggleInspector();
         return true;
       }
       if (lower === '/perf' || lower === 'perf' || lower === '/skills' || lower === 'skills') {
-        window.rsCommandPalette?.open(lower.replace('/', ''));
+        window.rsTrack?.('cli_command', { source: cmdSlug, label: val });
+        window.rsCommandPalette?.open(cmdSlug, 'cli_command');
         return true;
       }
       if (lower === '/work' || lower === 'work') {
+        window.rsTrack?.('cli_command', { source: cmdSlug, label: val });
         const workEl = document.getElementById('work');
         if (workEl && document.body.classList.contains('is-home')) {
           workEl.scrollIntoView({ behavior: 'smooth' });
         } else {
-          window.rsCommandPalette?.open();
+          window.rsCommandPalette?.open('', 'cli_command');
         }
         return true;
       }
       if (lower === '/about' || lower === 'about') {
+        window.rsTrack?.('cli_command', { source: cmdSlug, label: val });
         const path = window.location.pathname || '/';
         window.location.href = path.includes('/pages/') ? 'about.html' : 'pages/about.html';
         return true;
       }
       if (lower === '/linkedin' || lower === 'linkedin') {
+        window.rsTrack?.('cli_command', { source: cmdSlug, label: val });
+        window.rsTrack?.('linkedin_click', { source: 'cli_command', label: val });
         window.open('https://www.linkedin.com/in/ryanschmidt1989/', '_blank', 'noopener');
         return true;
       }
       if (lower === '/resume' || lower === 'resume') {
+        window.rsTrack?.('cli_command', { source: cmdSlug, label: val });
+        window.rsTrack?.('resume_click', { source: 'cli_command', label: val });
         const path = window.location.pathname || '/';
         const resumePath = path.includes('/pages/') ? '../assets/ryan-schmidt-resume.pdf' : 'assets/ryan-schmidt-resume.pdf';
         window.open(resumePath, '_blank', 'noopener');
         return true;
       }
       if (lower === '/email' || lower === 'email' || lower === '/contact' || lower === 'contact') {
+        window.rsTrack?.('cli_command', { source: cmdSlug, label: val });
+        window.rsTrack?.('copy_email', { source: 'cli_command', label: val });
         window.location.href = 'mailto:ryanschmidt1989@gmail.com';
         return true;
       }
       if (lower === '/cmdk' || lower === 'cmdk' || lower === '/help' || lower === 'help') {
-        window.rsCommandPalette?.open();
+        window.rsTrack?.('cli_command', { source: cmdSlug, label: val });
+        window.rsCommandPalette?.open('', 'cli_command');
         return true;
       }
       return false;
@@ -1039,10 +1149,10 @@ if (savedHist.length > 0) {
           if (val) {
             input.value = '';
             if (handleOmnibarCommand(val)) return;
-            openPanel();
-            send(val);
+            openPanel('omnibar');
+            send(val, 'omnibar');
           } else {
-            openPanel();
+            openPanel('omnibar');
           }
         }
       });
@@ -1061,10 +1171,10 @@ if (savedHist.length > 0) {
         if (val) {
           if (activeInput) activeInput.value = '';
           if (handleOmnibarCommand(val)) return;
-          openPanel();
-          send(val);
+          openPanel('omnibar');
+          send(val, 'omnibar');
         } else {
-          openPanel();
+          openPanel('omnibar');
         }
       });
     });
@@ -1082,10 +1192,10 @@ if (savedHist.length > 0) {
         if (val) {
           if (activeInput) activeInput.value = '';
           if (handleOmnibarCommand(val)) return;
-          openPanel();
-          send(val);
+          openPanel('omnibar');
+          send(val, 'omnibar');
         } else {
-          openPanel();
+          openPanel('omnibar');
         }
       });
     });
@@ -1433,6 +1543,9 @@ if (savedHist.length > 0) {
     linkedin.target = '_blank';
     linkedin.rel = 'noopener noreferrer';
     linkedin.textContent = 'Connect on LinkedIn ↗';
+    linkedin.addEventListener('click', () => {
+      window.rsTrack?.('linkedin_click', { source: 'chat_hire_card', label: 'Connect on LinkedIn' });
+    });
   
     actions.appendChild(linkedin);
   
@@ -1442,6 +1555,9 @@ if (savedHist.length > 0) {
     resume.target = '_blank';
     resume.rel = 'noopener noreferrer';
     resume.textContent = 'View resume';
+    resume.addEventListener('click', () => {
+      window.rsTrack?.('resume_click', { source: 'chat_hire_card', label: 'View resume' });
+    });
     actions.appendChild(resume);
   
     card.appendChild(title);
@@ -1605,7 +1721,7 @@ if (savedHist.length > 0) {
     }
   }
 
-  async function send(optionalText) {
+  async function send(optionalText, trackSource) {
 
     const text = (typeof optionalText === 'string' ? optionalText : inputEl.value).trim();
     if (!text) {
@@ -1614,6 +1730,11 @@ if (savedHist.length > 0) {
       return;
     }
     if (inFlight) return;
+
+    window.rsTrack?.('cli_submit', {
+      source: trackSource || (typeof optionalText === 'string' ? 'pill_or_trigger' : 'typed_input'),
+      label: text.slice(0, 120)
+    });
 
     // URLs are handled server-side - send them through to the API
 
@@ -2005,6 +2126,10 @@ if (savedHist.length > 0) {
     const chip = e.target.closest('.pill');
     if (chip) {
       const prompt = chip.getAttribute('data-prompt') || chip.textContent;
+      window.rsTrack?.('cli_pill_click', {
+        source: 'chat_pill',
+        label: String(prompt || '').slice(0, 120)
+      });
       
       // If it contains a bracketed placeholder, populate input and highlight it
       if (prompt.includes('[') && prompt.includes(']')) {
@@ -2016,7 +2141,7 @@ if (savedHist.length > 0) {
         const end = prompt.indexOf(']') + 1;
         inputEl.setSelectionRange(start, end);
       } else {
-        send(prompt);
+        send(prompt, 'pill_or_trigger');
       }
     }
   });
@@ -2029,8 +2154,8 @@ if (savedHist.length > 0) {
       if (sectionContext && typeof sectionContext === 'object') {
         state.sectionContext = sectionContext;
       }
-      openPanel();
-      send(prompt);
+      openPanel('ask_section');
+      send(prompt, 'ask_section');
     }
   });
 
@@ -2038,12 +2163,12 @@ if (savedHist.length > 0) {
     open: openPanel,
     close: closePanel,
     send: (msg) => {
-      openPanel();
-      send(msg);
+      openPanel('cmdk_ai');
+      send(msg, 'cmdk_ai');
     }
   };
 
   if (new URLSearchParams(window.location.search).has('chat')) {
-    setTimeout(() => openPanel(), 350);
+    setTimeout(() => openPanel('url_param'), 350);
   }
 })();

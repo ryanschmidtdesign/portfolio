@@ -399,7 +399,7 @@
   inset: 0 0 auto;
   height: 2px;
   background: rgb(var(--rgb-cool) / 0.32);
-  transition: height 200ms ease, background 200ms ease;
+  transition: height 220ms var(--ease-out), background-color 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
 }
 
 .case-study--ai-coding-portfolio .sa-step:nth-child(2)::before {
@@ -416,7 +416,12 @@
 
 /* System interactive tracing */
 .case-study--ai-coding-portfolio .sa-step {
-  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    transform 240ms var(--ease-out-strong),
+    box-shadow 240ms var(--ease-out-strong),
+    background-color 240ms var(--ease-out-strong),
+    border-color 240ms var(--ease-out-strong),
+    opacity 220ms var(--ease-out-strong);
   cursor: default;
 }
 
@@ -431,7 +436,12 @@
   box-shadow: var(--glow-accent);
   background: var(--surface-elevated-strong);
   z-index: 10;
-  transition: transform 80ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 80ms cubic-bezier(0.19, 1, 0.22, 1), background 80ms cubic-bezier(0.19, 1, 0.22, 1), opacity 80ms ease;
+  transition:
+    transform 280ms var(--ease-out),
+    box-shadow 280ms var(--ease-out),
+    background-color 220ms var(--ease-out-strong),
+    border-color 220ms var(--ease-out-strong),
+    opacity 180ms var(--ease-out-strong);
 }
 
 .case-study--ai-coding-portfolio .sa-funnel .sa-step:hover::before {
@@ -659,6 +669,7 @@ body.is-home {
     mix-blend-mode: multiply;
     z-index: 1;
     pointer-events: none;
+    transition: left 360ms var(--ease-drawer);
   }
 
   /* Floor contact shadows under left and right desk feet beside the search bar (60px x 10px, blur 6px, 30% warm brown) */
@@ -675,6 +686,7 @@ body.is-home {
     mix-blend-mode: multiply;
     z-index: 2;
     pointer-events: none;
+    transition: left 360ms var(--ease-drawer);
   }
 
   .desk-foot-shadow--left {
@@ -683,6 +695,20 @@ body.is-home {
 
   .desk-foot-shadow--right {
     left: calc(50% + 346.5px);
+  }
+}
+
+@media (min-width: 1100px) {
+  body.rs-chat-drawer-open .desk-floor-shadow {
+    left: calc((100vw - var(--chat-panel-width, 440px)) / 2);
+  }
+
+  body.rs-chat-drawer-open .desk-foot-shadow--left {
+    left: calc((100vw - var(--chat-panel-width, 440px)) / 2 - 346.5px);
+  }
+
+  body.rs-chat-drawer-open .desk-foot-shadow--right {
+    left: calc((100vw - var(--chat-panel-width, 440px)) / 2 + 346.5px);
   }
 }
 
@@ -1482,19 +1508,20 @@ body.is-omnibar-focused .desk-monitor__thinking {
   --lift-y: 0px;
   --card-px: 0px;
   --card-py: 0px;
+  translate: var(--card-px, 0px) var(--card-py, 0px);
   transform:
     translate3d(
-      var(--card-px, 0px),
-      calc(var(--card-arc-y, 0px) + var(--lift-y, 0px) + var(--card-py, 0px)),
+      0,
+      calc(var(--card-arc-y, 0px) + var(--lift-y, 0px)),
       0
     )
     rotate(var(--card-rot, 0deg))
     scale(var(--card-scale, 1));
   transition:
-    transform 200ms var(--ease-desk),
-    margin-bottom 200ms var(--ease-desk),
-    opacity 200ms var(--ease-desk),
-    box-shadow 200ms var(--ease-desk);
+    transform 180ms var(--ease-out-strong),
+    margin-bottom 180ms var(--ease-out-strong),
+    opacity 180ms var(--ease-out-strong),
+    box-shadow 180ms var(--ease-out-strong);
 }
 
 /* Desktop straight card row: equal rest height & aligned bottoms, no arc offset, no rotation.
@@ -1554,7 +1581,18 @@ body.is-omnibar-focused .desk-monitor__thinking {
     16px 28px 52px -6px rgba(72, 42, 22, 0.175),
     28px 46px 76px -10px rgba(82, 48, 26, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  transition:
+    transform 260ms var(--ease-out),
+    margin-bottom 260ms var(--ease-out),
+    opacity 200ms var(--ease-out),
+    box-shadow 260ms var(--ease-out);
   z-index: 30 !important;
+}
+
+.home-project-card[data-card-index]:active {
+  --card-scale: 0.992;
+  transition-duration: var(--dur-press, 100ms);
+  transition-timing-function: var(--ease-out-strong);
 }
 
 .home-work-grid:has(.home-project-card:hover, .home-project-card:focus-within)
@@ -1620,13 +1658,16 @@ body.is-omnibar-focused .desk-monitor__thinking {
   object-position: center;
   filter: saturate(0.86) contrast(0.96) sepia(0.06) brightness(1.0);
   transition:
-    transform 200ms var(--ease-desk),
-    filter 200ms var(--ease-desk);
+    transform 220ms var(--ease-out-strong),
+    filter 220ms var(--ease-out-strong);
 }
 
 .home-project-card:hover .home-project-card__media img,
 .home-project-card:focus-within .home-project-card__media img {
   filter: saturate(1) contrast(1) sepia(0) brightness(1);
+  transition:
+    transform 360ms var(--ease-out),
+    filter 240ms var(--ease-out-strong);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -1799,13 +1840,14 @@ body.is-omnibar-focused .desk-monitor__thinking {
     max-width: calc(100% - 22px);
     max-height: 36px;
     overflow: hidden;
-    transition: opacity 140ms var(--ease-desk);
+    transition: opacity 150ms var(--ease-out-strong) 40ms;
   }
 
   .home-project-card:hover .home-project-card__tags,
   .home-project-card:focus-within .home-project-card__tags {
     opacity: 0;
     pointer-events: none;
+    transition: opacity 110ms var(--ease-out-strong) 0ms;
   }
 
   .home-project-card__cta {
@@ -1818,13 +1860,14 @@ body.is-omnibar-focused .desk-monitor__thinking {
     max-width: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-width 200ms var(--ease-desk), opacity 200ms var(--ease-desk);
+    transition: max-width 180ms var(--ease-out-strong), opacity 130ms var(--ease-out-strong);
   }
 
   .home-project-card:hover .home-project-card__cta > span,
   .home-project-card:focus-within .home-project-card__cta > span {
     max-width: 150px;
     opacity: 1;
+    transition: max-width 240ms var(--ease-out), opacity 180ms var(--ease-out) 45ms;
   }
 }
 
@@ -1865,12 +1908,12 @@ body.is-omnibar-focused .desk-monitor__thinking {
 }
 
 .home-project-card__cta svg {
-  transition: transform 200ms var(--ease-desk);
+  transition: transform 260ms var(--spring-subtle, var(--ease-out));
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .home-project-card:hover .home-project-card__cta svg {
-    transform: translateX(3px);
+    transform: translateX(3.5px);
   }
 }
 
@@ -1976,8 +2019,8 @@ body.is-omnibar-focused .desk-monitor__thinking {
   margin: 0;
   padding: 0;
   transition:
-    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 200ms ease,
+    transform 320ms var(--ease-drawer),
+    opacity 240ms var(--ease-out-strong),
     visibility 0s linear 0s;
 }
 
@@ -1988,9 +2031,9 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   pointer-events: none;
   transform: translateX(-50%) translateY(12px) scale(0.98);
   transition:
-    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 200ms ease,
-    visibility 0s linear 240ms;
+    transform 220ms var(--ease-out-strong),
+    opacity 160ms var(--ease-out-strong),
+    visibility 0s linear 220ms;
 }
 
 .home-omnibar-shell,
@@ -2007,8 +2050,9 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   overflow: hidden;
   display: block;
   transition:
-    border-color 200ms ease,
-    background 200ms ease;
+    border-color 220ms var(--ease-out-strong),
+    background-color 220ms var(--ease-out-strong),
+    box-shadow 220ms var(--ease-out-strong);
 }
 
 .home-omnibar-shell::before,
@@ -2272,6 +2316,11 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  transition: transform var(--dur-press, 100ms) var(--ease-out-strong);
+}
+
+.home-omnibar-cmdk:active {
+  transform: scale(0.96);
 }
 
 /* NOTE: ⌘K is intentionally plain text with NO container, border, background, or box padding — do not add a container back */
@@ -2317,7 +2366,26 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
   justify-content: center;
   cursor: pointer;
   box-shadow: none;
-  transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out), box-shadow 160ms var(--ease-out), transform 160ms var(--ease-out);
+  transition:
+    --mag-x 280ms var(--ease-out),
+    --mag-y 280ms var(--ease-out),
+    background-color 160ms var(--ease-out-strong),
+    border-color 160ms var(--ease-out-strong),
+    color 160ms var(--ease-out-strong),
+    box-shadow 160ms var(--ease-out-strong),
+    transform 120ms var(--ease-out-strong);
+}
+
+.home-omnibar-send.is-magnetic-active,
+.subpage-omnibar-send.is-magnetic-active {
+  transition:
+    --mag-x 55ms linear,
+    --mag-y 55ms linear,
+    background-color 160ms var(--ease-out-strong),
+    border-color 160ms var(--ease-out-strong),
+    color 160ms var(--ease-out-strong),
+    box-shadow 160ms var(--ease-out-strong),
+    transform 100ms var(--ease-out-strong);
 }
 
 .home-omnibar-send:hover,

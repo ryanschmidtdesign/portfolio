@@ -12,11 +12,14 @@
     "vitest": "^3.0.0"
   },
   "scripts": {
+    "analytics": "node scripts/analytics.js",
     "generate-logo": "node scripts/generate-logo.js",
     "test:chat-api": "node scripts/test-chat-api.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "validate:kb": "vitest run -t 'KB integrity'"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.9.0"
   }
 }
-
