@@ -304,7 +304,11 @@
                   <strong class="metric" data-animate>71%</strong>
                   <span class="metric-label">multi-dashboard adoption</span>
                 </li>
-                              </ul>
+                <li>
+                  <strong class="metric" data-animate>+64%</strong>
+                  <span class="metric-label">sustained weekly views</span>
+                </li>
+              </ul>
               <p class="metric-footnote">71% of active integrator accounts maintain two or more separate dashboards.</p>
             </div>
           </div>
@@ -332,7 +336,7 @@
           <ul>
             <li>Give each role (Field Dispatch, Sales, Accounting) a starter template that answers daily questions in under 30 seconds</li>
             <li>Let users resize, filter, and save multiple dashboard views without feeling like they are configuring a complex BI tool</li>
-            <li>Keep AI reporting strictly tied to the numbers visible on screen so financial data never hallucinates</li>
+            <li>Scope AI summaries strictly to the active widgets on screen so every takeaway can be verified against visible numbers</li>
           </ul>
         </section>
 
@@ -351,13 +355,13 @@
                 <li class="bridge-item" data-bridge="templates" tabindex="0">
                   <span class="bridge-tag">Finding 1</span>
                   <div class="bridge-content">
-                    <strong>Core insight:</strong> Many users simply ignored dashboards entirely.
+                    <strong>Role &amp; scale mismatch:</strong> A 12-person residential shop and a 60-person commercial contractor track completely different daily metrics.
                   </div>
                 </li>
                 <li class="bridge-item" data-bridge="speed" tabindex="0">
                   <span class="bridge-tag">Finding 2</span>
                   <div class="bridge-content">
-                    <strong>Workflow friction:</strong> integrators needed fast routines: customizing a daily view couldn't feel like building a report from scratch.
+                    <strong>Workflow friction:</strong> Integrators needed fast routines; customizing a daily view couldn't feel like building a report from scratch.
                   </div>
                 </li>
                 <li class="bridge-item" data-bridge="sales" tabindex="0">
@@ -375,13 +379,13 @@
                 <li class="bridge-item" data-bridge="templates" tabindex="0">
                   <span class="bridge-tag">Decision 1</span>
                   <div class="bridge-content">
-                    <strong>Role-based templates:</strong> Replaced existing static layouts with starter templates matching specific company role.
+                    <strong>Role-based templates:</strong> Replaced existing static layouts with starter templates matching specific company roles.
                   </div>
                 </li>
                 <li class="bridge-item" data-bridge="speed" tabindex="0">
                   <span class="bridge-tag">Decision 2</span>
                   <div class="bridge-content">
-                    <strong>Fast & easy card manipulation:</strong> Drag-and-drop rearrangement and simple AI reporting from active widgets.
+                    <strong>Fast &amp; easy card manipulation:</strong> Drag-and-drop rearrangement and simple AI reporting from active widgets.
                   </div>
                 </li>
                 <li class="bridge-item" data-bridge="sales" tabindex="0">
@@ -396,7 +400,7 @@
         
           <h3>What I got wrong first</h3>
           <p>
-            Early in wireframing, I pitched three static department layouts: Sales, Service, and Operations. But during user walkthroughs, the approach broke down immediately. A 12-person residential integrator runs completely differently than a 60-person commercial shop; their daily priorities had almost zero overlap. Hardcoded department views would have recreated the exact problem we were trying to fix. That pushed us toward modular templates that managers could reorganize, customize, and rename quickly, easily, and whenever they wanted.
+            Early in wireframing, I pitched three static department layouts: Sales, Service, and Operations. But during user walkthroughs, the approach broke down immediately. A 12-person residential integrator runs completely differently than a 60-person commercial shop; their daily priorities had almost zero overlap. Hardcoded department views would have recreated the exact problem we were trying to fix. That pushed us toward modular role templates that managers could reorganize, filter, and save around their own routines.
           </p>
 
           <div class="synthesis-matrix">
@@ -446,11 +450,13 @@
         </section>
 
         <section id="design-approach" aria-label="Design approach & decisions">
-          <h2>Design Approach & Decisions</h2>
+          <div class="section-divider">
+            <h2>Design Approach &amp; Decisions</h2>
+          </div>
           <ul data-progress-story>
             <li data-story-step>
               <span class="step-label">1. Responsive 12-Column Widget Grid</span>
-              <p class="step-copy">Rather than building isolated reporting pages, I designed a modular 12-column grid supporting three widget sizes: a 1x1 counter, 2x2 trend chart, and 3x2 data table. Users could start from a role-specific template or a blank canvas, dragging and configuring cards to match their morning routine.</p>
+              <p class="step-copy">Rather than building isolated reporting pages, I designed a modular 12-column grid supporting three card footprints (Small counters, Medium trend charts, and Large data tables). Users could start from a role-specific template or a blank canvas, dragging and configuring cards to match their morning routine.</p>
             </li>
             <li data-story-step>
               <span class="step-label">2. Grounded AI Reporting</span>
@@ -459,7 +465,7 @@
           </ul>
 
           <figure class="case-study-media" data-reveal>
-            <video autoplay muted playsinline loop preload="auto" width="1440" height="754" poster="../assets/case-studies/dashboards/new-dashboard-poster.webp" aria-label="Widget Center modal allowing integrators to select and add change orders metrics to the dashboard">
+            <video autoplay muted playsinline loop preload="metadata" width="1440" height="754" poster="../assets/case-studies/dashboards/new-dashboard-poster.webp" aria-label="Widget Center modal allowing integrators to select and add change orders metrics to the dashboard">
               <source src="../assets/case-studies/dashboards/new-dashboard.mp4" type="video/mp4">
             </video>
             <figcaption>
@@ -468,7 +474,7 @@
           </figure>
 
           <figure class="case-study-media" data-reveal>
-            <video autoplay muted playsinline loop preload="auto" width="1440" height="754" poster="../assets/case-studies/dashboards/generate-report-poster.webp" aria-label="Demonstration of generating an executive sales summary report from active dashboard widgets">
+            <video autoplay muted playsinline loop preload="metadata" width="1440" height="754" poster="../assets/case-studies/dashboards/generate-report-poster.webp" aria-label="Demonstration of generating an executive sales summary report from active dashboard widgets">
               <source src="../assets/case-studies/dashboards/generate-report.mp4" type="video/mp4">
             </video>
             <figcaption>Executive report: compiling active dashboard widgets into a consolidated summary brief with sections for strengths and weaknesses.</figcaption>
@@ -484,7 +490,7 @@
             Leadership originally wanted to skip visual dashboards and build a chat prompt interface. In usability tests, however, integrators froze when faced with a blank chat box. AV integrators don't log in at 7:00 AM to write prompts. They need an immediate visual scan of how they can improve their business <em>that day</em>.
           </p>
           <p>
-            That testing convinced leadership to keep visual cards as the primary morning workspace and (for now) use AI strictly as a quick report writer for weekly/monthly/quarterly leadership meetings.
+            That testing convinced leadership to keep visual cards as the primary morning workspace and position AI as an on-demand report writer for monthly and quarterly owner reviews.
           </p>
         </section>
 
@@ -502,7 +508,7 @@
         </section>
         <section id="prototyping" aria-label="Prototyping & validation">
           <div class="section-divider">
-          <h2>Prototyping & Validation</h2>
+            <h2>Prototyping &amp; Validation</h2>
           </div>
 
           <h3>Iteration: higher data density, tighter control</h3>
@@ -511,7 +517,7 @@
           </p>
 
           <figure class="case-study-media" data-reveal>
-            <video autoplay muted playsinline loop preload="auto" width="1440" height="754" poster="../assets/case-studies/dashboards/edit-dashboard-poster.webp" aria-label="Screen recording of customizing card dimensions and managing active widgets in the dashboard">
+            <video autoplay muted playsinline loop preload="metadata" width="1440" height="754" poster="../assets/case-studies/dashboards/edit-dashboard-poster.webp" aria-label="Screen recording of customizing card dimensions and managing active widgets in the dashboard">
               <source src="../assets/case-studies/dashboards/edit-dashboard.mp4" type="video/mp4">
             </video>
             <figcaption>Customizing dashboard cards: adjusting dimensions and managing active widgets to fit daily scanning workflows.</figcaption>
@@ -523,31 +529,26 @@
           </ul>
         </section>
 
-        <section id="impact" aria-label="Lessons & next" class="section--alt">
+        <section id="impact" aria-label="Impact" class="section--alt">
           <div class="section-divider">
-            <h2>Impact: Replacing Weekly Exports with Daily Habit</h2>
+            <h2>Impact: From Ignored Charts to a Daily Morning Habit</h2>
           </div>
           <p class="impact-lede">
             Measured at 30 days post-launch, 71% of active accounts maintained multiple custom dashboards, and weekly dashboard views rose 64% across consecutive quarters.
           </p>
           <div class="impact-callout" role="region" aria-label="Key business outcomes">
             <div class="impact-metric">
-              <strong class="metric">71%</strong>
+              <strong class="metric" data-animate>71%</strong>
               <span class="metric-label">multi-dashboard adoption</span>
             </div>
             <div class="impact-metric">
-              <strong class="metric">+64%</strong>
+              <strong class="metric" data-animate>+64%</strong>
               <span class="metric-label">sustained dashboard views</span>
             </div>
           </div>
           <p style="margin-top: 16px;">
             Users applied an average of 2.4 custom filter rules per card. Usage data also showed a clear split in daily habits: visual charts peaked between 6:45 AM and 8:15 AM as managers routed field crews, while AI reporting clicks surged at month-end and quarter-close when leads compiled owner reports.
           </p>
-
-          <figure class="case-study-media" data-reveal>
-            <img src="../assets/case-studies/dashboards/rename-dashboard.webp" alt="Rename and manage dashboards for different workflows" width="1440" height="900" loading="lazy" class="no-reveal">
-            <figcaption>Customized views: integrators store custom dashboard presets for weekly pipeline reviews, inventory checks, service ticketing, or whatever they want.</figcaption>
-          </figure>
         </section>
 
         <section id="lessons" aria-label="Lessons">
@@ -563,7 +564,7 @@
           <div class="section-divider">
             <h2>What's Next</h2>
           </div>
-          <p>Next on the roadmap: I left D-Tools before some of our future dashboard dreams were put into production. The next big thing we had lined up was user-scheduled email digests.</p>
+          <p>Because usage data showed AI reporting spiking at month-end and quarter-close, the next phase I scoped before leaving D-Tools was automated scheduled email digests and margin-threshold alerts so owners could receive their summary briefs without logging in.</p>
         </section>
 
         <nav class="case-study-pagination" aria-label="Project navigation">
