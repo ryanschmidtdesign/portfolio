@@ -57,7 +57,7 @@
     </noscript>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../styles.css?v=159">
+    <link rel="stylesheet" href="../styles.css?v=160">
 
     <!-- Icons & manifest -->
     <link rel="icon" href="../favicon.ico" sizes="32x32">
@@ -463,7 +463,7 @@
             <li data-story-step>
               <span class="step-label">2. Grounded AI Reporting</span>
               <p class="step-copy">
-                Because every integrator combined a different set of widgets and filters, a static report template couldn't connect trends across cards—like pairing a dip in closed sales with a bottleneck in unshared quotes. To earn trust when margins and billable hours are on the line, I worked with backend engineering to scope the model strictly to the structured JSON returned by active on-screen widgets rather than open-ended database queries, keeping every claim verifiable next to the source chart.
+                Because every integrator combined a different set of widgets and filters, a static report template couldn't connect trends across cards, like pairing a dip in closed sales with a bottleneck in unshared quotes. To earn trust when margins and billable hours are on the line, I worked with backend engineering to scope the model strictly to the structured JSON returned by active on-screen widgets rather than open-ended database queries, keeping every claim verifiable next to the source chart.
               </p>
             </li>
           </ul>
@@ -500,15 +500,167 @@
 
         <section id="execution" aria-label="Execution Constraints" class="section--alt">
           <div class="section-divider">
-            <h2>Execution Constraints: Balancing Different User Needs</h2>
+            <h2>Execution Constraints: Role Permissions &amp; Progressive Disclosure</h2>
           </div>
           <p>
-            The dashboard had to serve people with very different priorities. Executives needed a quick read on business performance, while operations teams needed to know what required attention right now. With limited space and a lot of potentially useful information, the challenge was deciding what deserved prominence without turning the dashboard into a wall of metrics.
+            One layout system had to work for company owners, operations leads, and sales reps without exposing sensitive financial data or leaving awkward blank gaps in shared templates.
           </p>
-          <h3>From Reporting to Action</h3>
+          <h3>Gating Restricted Data Without Breaking the Grid</h3>
           <p>
-            The existing dashboard leaned heavily toward high-level reporting, which could push more immediate operational needs further down the page. I redesigned the hierarchy around the questions users needed answered throughout the day, surfacing actionable information while keeping the broader business picture accessible.
+            Instead of showing locked placeholder cards, we omitted restricted widgets and secondary customization details, such as historical trend data, for roles without permission. The 12-column grid automatically reflowed remaining cards cleanly, and because the AI summary read only from the user's active on-screen widgets, restricted financial figures stayed out of generated reports as well.
           </p>
+
+          <div class="grid-rbac-spec" data-grid-rbac>
+            <div class="grid-rbac-header">
+              <span class="grid-rbac-title">12-Column Grid &amp; Role Permissions</span>
+              <div class="dual-track-tabs" role="tablist" aria-label="Dashboard role permission views">
+                <button type="button" class="dual-tab-btn is-active" id="tab-rbac-owner" data-rbac-role="owner" role="tab" aria-selected="true" aria-controls="panel-rbac-owner" tabindex="0">Owner</button>
+                <button type="button" class="dual-tab-btn" id="tab-rbac-ops" data-rbac-role="ops" role="tab" aria-selected="false" aria-controls="panel-rbac-ops" tabindex="-1">Operations</button>
+                <button type="button" class="dual-tab-btn" id="tab-rbac-sales" data-rbac-role="sales" role="tab" aria-selected="false" aria-controls="panel-rbac-sales" tabindex="-1">Sales Rep</button>
+              </div>
+            </div>
+
+            <div class="grid-rbac-ruler" aria-hidden="true">
+              <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+            </div>
+
+            <div class="grid-rbac-canvas">
+              <!-- Owner Panel -->
+              <div class="grid-rbac-panel is-active" id="panel-rbac-owner" data-rbac-panel="owner" role="tabpanel" aria-labelledby="tab-rbac-owner">
+                <div class="grid-rbac-layout">
+                  <div class="rbac-card rbac-card--sm rbac-card--restricted">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span><span class="rbac-tag rbac-tag--accent">Financial</span></div>
+                    <strong class="rbac-card__title">Gross Margin</strong>
+                    <span class="rbac-card__meta">38.4% · +2.1% trend</span>
+                  </div>
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span><span class="rbac-tag">Trend</span></div>
+                    <strong class="rbac-card__title">Closed Sales</strong>
+                    <span class="rbac-card__meta">$412k · +14% trend</span>
+                  </div>
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span></div>
+                    <strong class="rbac-card__title">Active Projects</strong>
+                    <span class="rbac-card__meta">24 in progress</span>
+                  </div>
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span></div>
+                    <strong class="rbac-card__title">Unshared Quotes</strong>
+                    <span class="rbac-card__meta">11 awaiting send</span>
+                  </div>
+                  <div class="rbac-card rbac-card--md rbac-card--restricted">
+                    <div class="rbac-card__top"><span class="rbac-size">Medium · 6 col</span><span class="rbac-tag rbac-tag--accent">Financial + Trend</span></div>
+                    <strong class="rbac-card__title">Revenue vs. Margin Trend</strong>
+                    <span class="rbac-card__meta">Quarter-over-quarter comparison enabled</span>
+                  </div>
+                  <div class="rbac-card rbac-card--md">
+                    <div class="rbac-card__top"><span class="rbac-size">Medium · 6 col</span><span class="rbac-tag">Trend</span></div>
+                    <strong class="rbac-card__title">Sales Pipeline by Stage</strong>
+                    <span class="rbac-card__meta">Filterable by rep, region, and period</span>
+                  </div>
+                  <div class="rbac-card rbac-card--lg rbac-card--restricted">
+                    <div class="rbac-card__top"><span class="rbac-size">Large · 12 col</span><span class="rbac-tag rbac-tag--accent">Financial</span></div>
+                    <strong class="rbac-card__title">Project Profitability &amp; Billing Table</strong>
+                    <span class="rbac-card__meta">Full cost, labor margin, and invoice breakdown across active accounts</span>
+                  </div>
+                </div>
+                <div class="grid-rbac-status">
+                  <span class="rbac-dot rbac-dot--full" aria-hidden="true"></span>
+                  <span><strong>Full access:</strong> All 12 columns filled. Financial widgets and trend comparisons are active and included in AI report JSON.</span>
+                </div>
+              </div>
+
+              <!-- Operations Panel -->
+              <div class="grid-rbac-panel" id="panel-rbac-ops" data-rbac-panel="ops" role="tabpanel" aria-labelledby="tab-rbac-ops" hidden>
+                <div class="grid-rbac-layout">
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span></div>
+                    <strong class="rbac-card__title">Active Projects</strong>
+                    <span class="rbac-card__meta">24 in progress</span>
+                  </div>
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span></div>
+                    <strong class="rbac-card__title">Overdue Milestones</strong>
+                    <span class="rbac-card__meta">4 need triage</span>
+                  </div>
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span></div>
+                    <strong class="rbac-card__title">Unassigned Service</strong>
+                    <span class="rbac-card__meta">7 open tickets</span>
+                  </div>
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span></div>
+                    <strong class="rbac-card__title">Low-Stock Flags</strong>
+                    <span class="rbac-card__meta">9 SKUs below min</span>
+                  </div>
+                  <div class="rbac-card rbac-card--md">
+                    <div class="rbac-card__top"><span class="rbac-size">Medium · 6 col</span></div>
+                    <strong class="rbac-card__title">Install Schedule Capacity</strong>
+                    <span class="rbac-card__meta">Crew allocation for the next 14 days</span>
+                  </div>
+                  <div class="rbac-card rbac-card--md">
+                    <div class="rbac-card__top"><span class="rbac-size">Medium · 6 col</span></div>
+                    <strong class="rbac-card__title">Open Change Orders</strong>
+                    <span class="rbac-card__meta">Pending client sign-off</span>
+                  </div>
+                  <div class="rbac-card rbac-card--lg">
+                    <div class="rbac-card__top"><span class="rbac-size">Large · 12 col</span></div>
+                    <strong class="rbac-card__title">Field Dispatch &amp; Project Milestones Table</strong>
+                    <span class="rbac-card__meta">Scheduled jobs, assigned techs, and blockers without margin columns</span>
+                  </div>
+                </div>
+                <div class="grid-rbac-status">
+                  <span class="rbac-dot rbac-dot--scoped" aria-hidden="true"></span>
+                  <span><strong>Reflowed to 12 cols:</strong> Margin and profitability widgets omitted cleanly with zero blank gaps; excluded from AI summary payload.</span>
+                </div>
+              </div>
+
+              <!-- Sales Rep Panel -->
+              <div class="grid-rbac-panel" id="panel-rbac-sales" data-rbac-panel="sales" role="tabpanel" aria-labelledby="tab-rbac-sales" hidden>
+                <div class="grid-rbac-layout">
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span></div>
+                    <strong class="rbac-card__title">My Open Quotes</strong>
+                    <span class="rbac-card__meta">14 active</span>
+                  </div>
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span></div>
+                    <strong class="rbac-card__title">Unshared Proposals</strong>
+                    <span class="rbac-card__meta">5 drafts ready</span>
+                  </div>
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span></div>
+                    <strong class="rbac-card__title">Pending Approvals</strong>
+                    <span class="rbac-card__meta">3 awaiting client</span>
+                  </div>
+                  <div class="rbac-card rbac-card--sm">
+                    <div class="rbac-card__top"><span class="rbac-size">Small · 3 col</span></div>
+                    <strong class="rbac-card__title">Follow-Ups Today</strong>
+                    <span class="rbac-card__meta">6 scheduled</span>
+                  </div>
+                  <div class="rbac-card rbac-card--md">
+                    <div class="rbac-card__top"><span class="rbac-size">Medium · 6 col</span></div>
+                    <strong class="rbac-card__title">Personal Pipeline by Stage</strong>
+                    <span class="rbac-card__meta">Current snapshot (trend controls hidden)</span>
+                  </div>
+                  <div class="rbac-card rbac-card--md">
+                    <div class="rbac-card__top"><span class="rbac-size">Medium · 6 col</span></div>
+                    <strong class="rbac-card__title">Quotes Awaiting Signature</strong>
+                    <span class="rbac-card__meta">Sorted by days since last viewed</span>
+                  </div>
+                  <div class="rbac-card rbac-card--lg">
+                    <div class="rbac-card__top"><span class="rbac-size">Large · 12 col</span></div>
+                    <strong class="rbac-card__title">Active Proposals &amp; Client Follow-Up Table</strong>
+                    <span class="rbac-card__meta">Personal accounts only; company financials and margin columns omitted</span>
+                  </div>
+                </div>
+                <div class="grid-rbac-status">
+                  <span class="rbac-dot rbac-dot--scoped" aria-hidden="true"></span>
+                  <span><strong>Reflowed to 12 cols:</strong> Restricted financial widgets and historical trend customization omitted; scoped strictly to personal pipeline.</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
         <section id="prototyping" aria-label="Prototyping & validation">
           <div class="section-divider">
@@ -517,7 +669,7 @@
 
           <h3>Iteration: higher data density, tighter control</h3>
           <p>
-            I tested the interactive Figma prototype with five power users. Integrators immediately rejected our early wireframes. They wanted compact counters (unassigned service calls, overdue milestones, low-stock flags) docked at the top of the screen above trend charts. Adding a compact Small stat card and drag-and-drop reordering took one extra sprint, but turned the dashboard into a daily second-monitor workspace.
+            I tested the interactive Figma prototype with five power users. Integrators immediately rejected our early wireframes. They wanted compact counters (unassigned service calls, overdue milestones, low-stock flags) docked at the top of the screen above trend charts. Adding a Small stat card and drag-and-drop reordering took one extra sprint, but turned the dashboard into a daily second-monitor workspace.
           </p>
 
           <figure class="case-study-media" data-reveal>
@@ -527,6 +679,7 @@
             <figcaption>Customizing dashboard cards: adjusting dimensions and managing active widgets to fit daily scanning workflows.</figcaption>
           </figure>
 
+          <p>In follow-up validation with the revised prototype:</p>
           <ul>
             <li><strong>4/5 users</strong> said the role templates matched how they already organized their week</li>
             <li><strong>All 5 participants</strong> customized and saved a new dashboard without prompting</li>
@@ -538,7 +691,7 @@
             <h2>Impact: From Ignored Charts to a Daily Morning Habit</h2>
           </div>
           <p class="impact-lede">
-            Measured at 30 days post-launch, 71% had created and maintained multiple custom dashboards, and weekly dashboard views rose 64% across consecutive quarters.
+            Measured at 30 days post-launch, 71% of active integrator accounts had created and maintained multiple custom dashboards, and weekly dashboard views rose 64% across consecutive quarters.
           </p>
           <div class="impact-callout" role="region" aria-label="Key business outcomes">
             <div class="impact-metric">
@@ -551,7 +704,7 @@
             </div>
           </div>
           <p style="margin-top: 16px;">
-            Users applied an average of 2.4 custom filter rules per card. Usage data also showed a clear split in daily habits: visual charts peaked between 6:45 AM and 8:15 AM as managers routed field crews, while AI reporting clicks surged at month-end and quarter-close when leads compiled owner reports.
+            Users applied an average of 2.4 custom filter rules per card. Usage data also showed a clear split in daily habits: visual charts peaked between 6:45 AM and 8:15 AM as managers routed field crews, while AI reporting clicks surged at month-end and quarter-close when leads compiled owner reports. Commercially, the AI report also gave the sales team a concrete story to lead enterprise demos with, satisfying the original stakeholder goal without compromising the daily workspace.
           </p>
         </section>
 
@@ -613,7 +766,7 @@
 
     <!-- Consolidated JavaScript -->
     <script src="../scripts/cli-mode.js?v=95" defer></script>
-    <script src="../scripts/scripts.js?v=159" defer></script>
+    <script src="../scripts/scripts.js?v=160" defer></script>
     <script src="../scripts/magnetic.js?v=91" defer></script>
     <script src="../scripts/rs-chat-widget.js?v=92" defer></script>
     <!-- SEO Landmark Footer (visually hidden) -->

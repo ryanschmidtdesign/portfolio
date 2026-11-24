@@ -770,6 +770,46 @@
       });
     });
   }
+
+  // Interactive 12-Column Grid & Role-Permission Spec (dashboard.html)
+  const rbacSpecs = document.querySelectorAll('[data-grid-rbac]');
+  rbacSpecs.forEach((spec) => {
+    const tabs = Array.from(spec.querySelectorAll('[data-rbac-role]'));
+    const panels = Array.from(spec.querySelectorAll('[data-rbac-panel]'));
+    if (!tabs.length || !panels.length) return;
+
+    const activate = (role, focusTab = false) => {
+      tabs.forEach((tab) => {
+        const active = tab.getAttribute('data-rbac-role') === role;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        tab.tabIndex = active ? 0 : -1;
+        if (active && focusTab) tab.focus();
+      });
+      panels.forEach((panel) => {
+        const active = panel.getAttribute('data-rbac-panel') === role;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+    };
+
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener('click', () => {
+        activate(tab.getAttribute('data-rbac-role'));
+      });
+      tab.addEventListener('keydown', (e) => {
+        let nextIdx = null;
+        if (e.key === 'ArrowRight') nextIdx = (idx + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') nextIdx = 0;
+        else if (e.key === 'End') nextIdx = tabs.length - 1;
+        if (nextIdx !== null) {
+          e.preventDefault();
+          activate(tabs[nextIdx].getAttribute('data-rbac-role'), true);
+        }
+      });
+    });
+  });
 })();
 
 // ============================================================================
