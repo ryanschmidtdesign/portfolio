@@ -2243,14 +2243,26 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 .omnibar-typewriter__caret {
   position: absolute;
   top: 50%;
-  left: 0%;
-  width: 2px;
+  left: 0;
+  width: 100%;
   height: 1.14em;
-  transform: translateY(-50%);
-  background-color: #8C8680;
-  border-radius: 1px;
+  color: #8C8680;
+  pointer-events: none;
+  transform: translate3d(0, -50%, 0);
+  will-change: transform;
   animation: omnibar-typewriter-caret 6s ease-in-out infinite;
-  transition: background-color 160ms ease;
+  transition: color 160ms ease;
+}
+
+.omnibar-typewriter__caret::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background-color: currentColor;
+  border-radius: 1px;
 }
 
 .home-omnibar-shell:hover .omnibar-typewriter__copy,
@@ -2260,7 +2272,7 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 .home-omnibar-shell:hover .omnibar-typewriter__caret,
 .subpage-omnibar-shell:hover .omnibar-typewriter__caret {
-  background-color: #D4CFCA;
+  color: #D4CFCA;
 }
 
 @keyframes omnibar-typewriter-wipe {
@@ -2277,13 +2289,13 @@ body.rs-chat-drawer-open .subpage-omnibar-dock {
 
 @keyframes omnibar-typewriter-caret {
   0%, 15% {
-    left: 0%;
+    transform: translate3d(0, -50%, 0);
   }
   40%, 75% {
-    left: calc(100% - 2px);
+    transform: translate3d(calc(100% - 2px), -50%, 0);
   }
   100% {
-    left: 0%;
+    transform: translate3d(0, -50%, 0);
   }
 }
 
@@ -2484,4 +2496,123 @@ body.is-home main {
 
 body:not(.is-home) main {
   padding-bottom: 0;
+}
+
+/* About page metric & timeline spacing utilities (replaces inline styles) */
+.metric-label--about {
+  margin-top: 4px;
+}
+
+.metric-label--about strong {
+  color: var(--text);
+}
+
+.metric-body--about {
+  margin-top: -2px;
+}
+
+.leadership-timeline--spaced {
+  margin-top: clamp(var(--space-6), 5vw, var(--space-8));
+}
+
+/* Inline case-study links inside Work History */
+.timeline-link {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent, #B8522E) 55%, transparent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+
+.timeline-link:hover,
+.timeline-link:focus-visible {
+  color: var(--accent-text, var(--accent, #B8522E));
+  text-decoration-color: currentColor;
+}
+
+/* Closing CTA Band on About page */
+.about-cta-section {
+  max-width: var(--max-width-container, 1140px);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(4.5rem, 8vw, 6.5rem);
+}
+
+.about-cta-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4, 20px);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border-radius: var(--radius-lg, 14px);
+  border: 1px solid var(--border);
+  background: var(--surface-elevated-strong, #FCFBF9);
+  box-shadow: var(--shadow-card);
+}
+
+.about-cta-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.about-cta-title {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.about-cta-sub {
+  margin: 0;
+  font-size: var(--fs-sm, 0.95rem);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.about-cta-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.about-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: var(--radius-md, 10px);
+  border: 1px solid var(--border);
+  background: var(--surface-elevated, #FAF7F2);
+  color: var(--text);
+  font-size: var(--fs-sm, 0.9rem);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 100ms ease;
+}
+
+.about-cta-btn:hover,
+.about-cta-btn:focus-visible {
+  border-color: var(--accent, #B8522E);
+  color: var(--accent-text, var(--accent, #B8522E));
+}
+
+.about-cta-btn:active {
+  transform: scale(0.98);
+}
+
+.about-cta-btn--primary {
+  background: var(--text, #1C1612);
+  border-color: var(--text, #1C1612);
+  color: var(--surface-elevated-strong, #FCFBF9);
+}
+
+.about-cta-btn--primary:hover,
+.about-cta-btn--primary:focus-visible {
+  background: var(--accent, #B8522E);
+  border-color: var(--accent, #B8522E);
+  color: #FCFBF9;
 }

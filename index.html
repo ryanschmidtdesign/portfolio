@@ -75,6 +75,8 @@
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preload" as="image" href="assets/desk-scene/scene-bg.webp?v=156" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/desk-scene/tuxedo-cat.webp?v=156">
+  <link rel="preload" as="image" href="assets/desk-scene/ryan-neck-bed.webp?v=156">
   <link rel="preload" as="image" href="assets/desk-scene/ryan-body.webp?v=156">
   <link rel="preload" as="image" href="assets/desk-scene/ryan-head.webp?v=156">
   <link rel="modulepreload" href="./scripts/desk-scene.js?v=156">
@@ -90,7 +92,7 @@
   </noscript>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./styles.css?v=159">
+  <link rel="stylesheet" href="./styles.css?v=160">
 
   <!-- Icons & manifest -->
   <link rel="icon" href="./favicon.ico" sizes="32x32">
@@ -158,9 +160,9 @@
             "about": {
               "@id": "https://ryanschmidt.design/#person"
             },
-            "description": "Portfolio of Ryan Schmidt, Senior Product Designer and UX Engineer. Three shipped B2B projects: Custom Dashboards & AI Summaries, i4cp Member Portal & Research Discovery, Inventory, Purchasing & Receiving, plus Building My Portfolio in Code.",
+            "description": "Portfolio of Ryan Schmidt, Senior Product Designer and UX Engineer. Three shipped B2B projects: Custom Dashboards & AI Reporting, i4cp Member Portal & Research Discovery, Inventory, Purchasing & Receiving, plus Building My Portfolio in Code.",
             "primaryImageOfPage": "https://ryanschmidt.design/assets/images/family-pic.jpg",
-            "dateModified": "2026-11-01",
+            "dateModified": "2026-11-24",
             "inLanguage": "en-US"
           }
         ]
@@ -378,7 +380,7 @@
         <!-- Project 1: D-Tools Dashboards -->
         <article class="home-project-card home-project-card--dashboards" data-card-index="0">
           <figure class="home-project-card__media">
-            <img src="assets/case-studies/dashboards/dashboard-gauge-thumb.webp?v=147" alt="Sales Cycle 14-day average gauge from the D-Tools Cloud executive BI dashboard" width="1078" height="440">
+            <img src="assets/case-studies/dashboards/dashboard-gauge-thumb.webp?v=147" alt="Sales Cycle 14-day average gauge from the D-Tools Cloud executive BI dashboard" width="1078" height="440" decoding="async">
           </figure>
           <div class="home-project-card__body">
             <div class="home-project-card__eyebrow-row">
@@ -390,7 +392,7 @@
               <a href="pages/dashboard.html" class="home-project-card__link">Custom Dashboards & AI Reporting</a>
             </h3>
             <p class="home-project-card__summary">
-              71% multi-dashboard adoption across active integrator accounts.
+              Role-based widget workspace and grounded AI briefs that lifted weekly views 64%.
             </p>
             <div class="home-project-card__footer">
               <ul class="home-project-card__tags" role="list" aria-label="Topics">
@@ -407,7 +409,7 @@
         <!-- Project 2: i4cp Member Portal -->
         <article class="home-project-card home-project-card--member-portal" data-card-index="1">
           <figure class="home-project-card__media">
-            <img src="assets/case-studies/member-portal/design-highlights/ahri-prompt-thumb.webp?v=147" alt="Ahri conversational AI search prompt and Key Takeaways response from the redesigned i4cp member portal" width="1078" height="440">
+            <img src="assets/case-studies/member-portal/design-highlights/ahri-prompt-thumb.webp?v=147" alt="Ahri conversational AI search prompt and Key Takeaways response from the redesigned i4cp member portal" width="1078" height="440" decoding="async">
           </figure>
           <div class="home-project-card__body">
             <div class="home-project-card__eyebrow-row">
@@ -419,7 +421,7 @@
               <a href="pages/member-portal-overhaul.html" class="home-project-card__link">Member Portal & Conversational AI</a>
             </h3>
             <p class="home-project-card__summary">
-              +500% lift in Ahri conversational AI search sessions and 2× daily active usage.
+              Rebuilt member portal navigation and conversational research discovery, driving 2× daily active usage.
             </p>
             <div class="home-project-card__footer">
               <ul class="home-project-card__tags" role="list" aria-label="Topics">
@@ -436,7 +438,7 @@
         <!-- Project 3: Real-Time Inventory -->
         <article class="home-project-card home-project-card--inventory" data-card-index="2">
           <figure class="home-project-card__media">
-            <img src="assets/case-studies/inventory/inventory-header-thumb.webp?v=147" alt="Product photo and On Hand, Available, Allocated, Ordered, and Needed stock count row in D-Tools Cloud Inventory" width="1078" height="440">
+            <img src="assets/case-studies/inventory/inventory-header-thumb.webp?v=147" alt="Product photo and On Hand, Available, Allocated, Ordered, and Needed stock count row in D-Tools Cloud Inventory" width="1078" height="440" decoding="async">
           </figure>
           <div class="home-project-card__body">
             <div class="home-project-card__eyebrow-row">
@@ -448,7 +450,7 @@
               <a href="pages/inventory.html" class="home-project-card__link">Inventory & Purchase Orders</a>
             </h3>
             <p class="home-project-card__summary">
-              +8% recurring revenue and 8% YoY adoption unblocking enterprise deals.
+              0-to-1 purchasing, receiving, and stock ledger that unblocked enterprise integrator deals.
             </p>
             <div class="home-project-card__footer">
               <ul class="home-project-card__tags" role="list" aria-label="Topics">
@@ -465,19 +467,19 @@
         <!-- Project 4: AI Coding Portfolio -->
         <article class="home-project-card home-project-card--portfolio" data-card-index="3">
           <figure class="home-project-card__media">
-            <img src="assets/case-studies/ai-coding-portfolio/portfolio-detail-thumb.webp?v=147" alt="CSS design tokens code paired with the live porcelain preview for Ryan Schmidt portfolio" width="1078" height="440">
+            <img src="assets/case-studies/ai-coding-portfolio/portfolio-detail-thumb.webp?v=147" alt="CSS design tokens code paired with the live porcelain preview for Ryan Schmidt portfolio" width="1078" height="440" decoding="async">
           </figure>
           <div class="home-project-card__body">
             <div class="home-project-card__eyebrow-row">
               <span class="home-project-eyebrow">THIS SITE</span>
               <span class="home-project-card__dot" aria-hidden="true">·</span>
-              <span class="home-project-metric">0 frameworks</span>
+              <span class="home-project-metric">Custom AI + Code</span>
             </div>
             <h3 class="home-project-card__title">
               <a href="pages/ai-coding-portfolio.html" class="home-project-card__link">Building My Portfolio in Code</a>
             </h3>
             <p class="home-project-card__summary">
-              Semantic HTML architecture and token-driven design built with Cursor.
+              Hand-built design token system and a live Gemini AI portfolio assistant backed by 74 automated tests.
             </p>
             <div class="home-project-card__footer">
               <ul class="home-project-card__tags" role="list" aria-label="Topics">
