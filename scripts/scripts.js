@@ -673,14 +673,23 @@
       crumb.addEventListener('click', () => activateCrumb(crumb));
     });
 
-    // Also allow clicking an ia-card inside an active panel to advance to the next crumb
+    // Also allow clicking or activating an ia-card inside an active panel to advance to the next crumb
     panels.forEach((panel, pIdx) => {
       const cards = panel.querySelectorAll('.ia-card');
       cards.forEach((card) => {
         card.style.cursor = 'pointer';
-        card.addEventListener('click', () => {
+        card.setAttribute('role', 'button');
+        card.tabIndex = 0;
+        const advance = () => {
           const nextCrumb = crumbs[pIdx + 1] || crumbs[0];
           activateCrumb(nextCrumb);
+        };
+        card.addEventListener('click', advance);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            advance();
+          }
         });
       });
     });

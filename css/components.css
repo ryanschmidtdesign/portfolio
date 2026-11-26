@@ -3078,3 +3078,11 @@ main[data-reveal] {
     grid-column: span 12;
   }
 }
+
+.impact-methodology-note {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-block: var(--space-4);
+  max-width: var(--prose);
+}

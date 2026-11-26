@@ -49,6 +49,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preload" as="image" href="../assets/case-studies/inventory/inventory-assets-poster.webp" fetchpriority="high">
 
     <!-- Fonts (IBM Plex Sans + Newsreader editorial serif + IBM Plex Mono) -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -57,7 +58,7 @@
     </noscript>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../styles.css?v=159">
+    <link rel="stylesheet" href="../styles.css?v=161">
 
     <!-- Icons & manifest -->
     <link rel="icon" href="../favicon.ico" sizes="32x32">
@@ -133,7 +134,7 @@
       "mainEntity": {
         "@id": "https://ryanschmidt.design/pages/inventory#work"
       },
-      "dateModified": "2026-11-01",
+      "dateModified": "2026-11-26",
       "inLanguage": "en-US"
     },
     {
@@ -146,7 +147,7 @@
         "@id": "https://ryanschmidt.design/#person"
       },
       "keywords": "Enterprise, Real-time, Inventory, MVP, UX Design, B2B SaaS",
-      "dateModified": "2026-11-01",
+      "dateModified": "2026-11-26",
       "headline": "Inventory, Purchasing & Receiving",
       "datePublished": "2024-12-01",
       "articleSection": "Case Study",
@@ -281,7 +282,7 @@
 
       <article class="case-study case-study--inventory" aria-labelledby="title">
         <header class="tldr" aria-label="Executive summary">
-          <h1 id="title" data-parallax="0.06">Inventory & <em class="serif-accent">Purchase Orders</em></h1>
+          <h1 id="title" data-parallax="0.06">Inventory &amp; <em class="serif-accent">Purchase Orders</em></h1>
           <p class="lead">
             Commercial AV integrators were tracking millions of dollars in staged equipment across spreadsheets. I designed our 0→1 Inventory, Purchasing &amp; Receiving suite to connect vendor POs directly to warehouse bins, service vans, and active job schedules, unblocking enterprise pilot deals and driving an 8% lift in platform ARR and 8% year-over-year adoption growth.
           </p>
@@ -299,11 +300,11 @@
               <p class="tldr-label label">Impact</p>
               <ul class="kpis kpis--hero" data-cascade>
                 <li>
-                  <strong class="metric status-label--done">+8%</strong>
+                  <strong class="metric status-label--done" data-animate>+8%</strong>
                   <span class="metric-label">platform ARR</span>
                 </li>
                 <li>
-                  <strong class="metric status-label--done">+8%</strong>
+                  <strong class="metric status-label--done" data-animate>+8%</strong>
                   <span class="metric-label">YoY adoption</span>
                 </li>
               </ul>
@@ -313,7 +314,7 @@
         </header>
 
         <figure class="case-study-media">
-          <video autoplay muted playsinline loop preload="auto" width="2880" height="1496" poster="../assets/case-studies/inventory/inventory-assets-poster.webp" aria-label="Screen recording of real-time inventory ledger tracking warehouse stock and project allocations">
+          <video autoplay muted playsinline loop preload="metadata" width="2880" height="1496" poster="../assets/case-studies/inventory/inventory-assets-poster.webp" aria-label="Screen recording of real-time inventory ledger tracking warehouse stock and project allocations">
             <source src="../assets/case-studies/inventory/inventory-assets.mp4" type="video/mp4">
           </video>
           <figcaption>Real-time inventory ledger connecting warehouse stock directly to project allocations and job schedules.</figcaption>
@@ -377,7 +378,7 @@
           </div>
         </section>
 
-        <section id="system-model" aria-label="System model and tradeoffs" class="section--alt">
+        <section id="system-model" aria-label="System model and tradeoffs">
           <div class="section-divider">
             <h2>System Model &amp; Tradeoffs</h2>
           </div>
@@ -498,7 +499,7 @@
                       <span class="stepper-val" id="simStepperVal" aria-live="polite" aria-atomic="true">8 / 8</span>
                       <button type="button" class="stepper-btn" data-step-delta="1" aria-label="Increase quantity">+</button>
                     </div>
-                    <span class="mock-done-pill" id="simStepperDone">✓ All 8 Received</span>
+                    <span class="mock-done-pill" id="simStepperDone" aria-live="polite">✓ All 8 Received</span>
                   </div>
                 </div>
                 <p class="dual-track-caption">
@@ -539,7 +540,7 @@
           </p>
 
           <figure class="case-study-media">
-            <video autoplay muted playsinline loop preload="auto" width="2880" height="1496" poster="../assets/case-studies/inventory/inventory-modal-poster.webp" aria-label="Screen recording of Advanced Inventory setup converting items to assets and printing QR labels">
+            <video autoplay muted playsinline loop preload="metadata" width="2880" height="1496" poster="../assets/case-studies/inventory/inventory-modal-poster.webp" aria-label="Screen recording of Advanced Inventory setup converting items to assets and printing QR labels">
               <source src="../assets/case-studies/inventory/inventory-modal.mp4" type="video/mp4">
             </video>
             <figcaption>Advanced Inventory setup modal: converting stock to serialized assets, logging serial numbers, and printing QR labels.</figcaption>
@@ -548,7 +549,7 @@
           <figure class="case-study-media">
             <picture>
               <source srcset="../assets/case-studies/inventory/inventory-controls.webp" type="image/webp">
-              <img src="../assets/case-studies/inventory/inventory-controls.png" alt="Inventory automation rules for automatic check-in, conversion, and project reservations" width="1440" height="754" loading="lazy" class="no-reveal">
+              <img src="../assets/case-studies/inventory/inventory-controls.png" alt="Inventory automation rules for automatic check-in, conversion, and project reservations" width="1440" height="754" loading="lazy" decoding="async" class="no-reveal">
             </picture>
             <figcaption>Automation rules letting managers configure automated check-ins upon PO receipt and auto-reserve stock for scheduled installations.</figcaption>
           </figure>
@@ -556,7 +557,7 @@
 
         <section id="validation" aria-label="Validation">
           <div class="section-divider">
-            <h2>Validation: Cutting Receiving from 4mins to 28s</h2>
+            <h2>Validation: Cutting Receiving from 4 Minutes to 28s</h2>
           </div>
           <p>
             In Round 1, our first receiving prototype forced warehouse staff to scan serial numbers for every single line item. Residential testers took over four minutes to check in an eight-item delivery, immediately rejecting anything that slowed down morning dock receiving.
@@ -570,7 +571,7 @@
           <div class="section-divider">
             <h2>Impact: Enterprise Deals and Recovered Warehouse Hours</h2>
           </div>
-          <p class="impact-lede">The release drove an 8% lift in platform ARR and 8% year-over-year adoption growth, while operations leads recovered an estimated 10–15 hours a week previously spent on manual stock counts. During pilot rollout, one commercial contractor found over $42,000 in 'missing' equipment sitting untracked on overflow racks, avoiding a duplicate purchase order.</p>
+          <p class="impact-lede">The release drove an 8% lift in platform ARR and 8% year-over-year adoption growth, while operations leads recovered an estimated 10–15 hours a week previously spent on manual stock counts. During pilot rollout, one commercial contractor found over $42,000 in "missing" equipment sitting untracked on overflow racks, avoiding a duplicate purchase order.</p>
           <div class="impact-callout">
             <div class="impact-metric">
               <strong class="metric" data-animate>+8%</strong>
@@ -593,12 +594,12 @@
 
         <section id="lessons" aria-label="Lessons & next steps">
           <div class="section-divider">
-            <h2>Lessons & Next Steps</h2>
+            <h2>Lessons &amp; Next Steps</h2>
           </div>
           <p>
             In warehouse software, trust is binary. If a technician drives to a job site and the four switches the app said were in stock aren't in the van, they stop using the app and go back to pen and paper. This feature succeeded because every number explained its history: where the item came from, which project had it claimed, and when the replacement was arriving.
           </p>
-            <h3>What comes next:</h3>
+            <h3>What comes next</h3>
             <p>Once teams trusted the baseline counts, the next logical steps were mobile barcode scanning in the warehouse and auto-generating reorder POs when stock hits minimums. We held those back from the MVP on purpose to make sure the foundation was rock-solid first.</p>
         </section>
 
