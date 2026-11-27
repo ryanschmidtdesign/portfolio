@@ -123,6 +123,83 @@
     });
   }
 
+  // H4: Practical Monitor Color Bleed per Project Card
+  const BLEED_COLORS = [
+    'rgba(216, 108, 62, 0.22)', // Dashboard: warm terracotta-amber
+    'rgba(74, 148, 132, 0.20)', // i4cp: muted sage-teal
+    'rgba(196, 142, 68, 0.22)', // Inventory: warm bronze-gold
+    'rgba(232, 168, 118, 0.20)' // Portfolio: soft ivory-peach
+  ];
+  let monitorBleedEl = null;
+  if (deskSceneEl) {
+    monitorBleedEl = deskSceneEl.querySelector('.desk-monitor-bleed');
+    if (!monitorBleedEl) {
+      monitorBleedEl = document.createElement('div');
+      monitorBleedEl.className = 'desk-monitor-bleed';
+      monitorBleedEl.setAttribute('aria-hidden', 'true');
+      deskSceneEl.appendChild(monitorBleedEl);
+    }
+  }
+
+  function syncMonitorBleed(index) {
+    if (!monitorBleedEl) return;
+    if (index === null || index === undefined) {
+      monitorBleedEl.classList.remove('is-active');
+    } else {
+      monitorBleedEl.style.setProperty('--bleed-color', BLEED_COLORS[index % BLEED_COLORS.length]);
+      monitorBleedEl.classList.add('is-active');
+    }
+  }
+
+  // H6: Subtle Window-Beam Ambient Dust Motes (12 particles, paused off-screen & hidden tab)
+  let dustRafId = null;
+  let dustCanvas = null;
+  let dustCtx = null;
+  const dustParticles = Array.from({ length: 12 }, (_, i) => ({
+    x: 0.06 + (i * 0.037) % 0.42,
+    y: 0.12 + ((i * 0.19) % 0.68),
+    r: 1.1 + (i % 3) * 0.55,
+    vx: 0.000018 + (i % 4) * 0.000006,
+    vy: 0.000012 + (i % 3) * 0.000005,
+    phase: i * 1.1
+  }));
+
+  if (deskSceneEl) {
+    dustCanvas = document.createElement('canvas');
+    dustCanvas.className = 'desk-dust-canvas';
+    dustCanvas.setAttribute('aria-hidden', 'true');
+    deskSceneEl.appendChild(dustCanvas);
+    dustCtx = dustCanvas.getContext('2d');
+  }
+
+  function renderDustFrame(now) {
+    if (!dustCanvas || !dustCtx || isScenePaused() || window.innerWidth < 1024) {
+      dustRafId = null;
+      return;
+    }
+    const w = dustCanvas.clientWidth;
+    const h = dustCanvas.clientHeight;
+    if (w > 0 && h > 0) {
+      if (dustCanvas.width !== w || dustCanvas.height !== h) {
+        dustCanvas.width = w;
+        dustCanvas.height = h;
+      }
+      dustCtx.clearRect(0, 0, w, h);
+      dustParticles.forEach((p) => {
+        p.x = (p.x + p.vx * 16) % 0.48;
+        p.y = (p.y + p.vy * 16);
+        if (p.y > 0.82) p.y = 0.08;
+        const driftX = p.x + Math.sin(now * 0.00045 + p.phase) * 0.012;
+        const alpha = 0.08 + 0.09 * (0.5 + 0.5 * Math.sin(now * 0.0008 + p.phase));
+        dustCtx.beginPath();
+        dustCtx.fillStyle = `rgba(255, 246, 230, ${alpha.toFixed(3)})`;
+        dustCtx.arc(driftX * w, p.y * h, p.r, 0, Math.PI * 2);
+        dustCtx.fill();
+      });
+    }
+    dustRafId = requestAnimationFrame(renderDustFrame);
+  }
+
   function syncConnectorHighlight() {
     connectorItems.forEach(({ line, pulse, dot }, idx) => {
       const active = activeCardIndex === idx;
@@ -138,6 +215,7 @@
         }
       }
     });
+    syncMonitorBleed(activeCardIndex);
   }
 
   function updateCardOrigins() {
@@ -554,8 +632,15 @@
         cancelAnimationFrame(parallaxRafId);
         parallaxRafId = null;
       }
+      if (dustRafId) {
+        cancelAnimationFrame(dustRafId);
+        dustRafId = null;
+      }
     } else {
       startMonitorLoop();
+      if (!dustRafId && dustCanvas && window.innerWidth >= 1024) {
+        dustRafId = requestAnimationFrame(renderDustFrame);
+      }
     }
 
     if (scene3DController) {
@@ -629,7 +714,7 @@
       return;
     }
 
-    import('./desk-scene.js?v=156')
+    import('./desk-scene.js?v=164')
       .then((mod) => {
         if (mod && typeof mod.initDeskScene3D === 'function') {
           scene3DController = mod.initDeskScene3D({

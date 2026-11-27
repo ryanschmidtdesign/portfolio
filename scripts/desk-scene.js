@@ -1038,7 +1038,25 @@ export function initDeskScene3D(options = {}) {
     renderCatFrame(now);
   }
 
-  // Natural snoozing ribcage breathing (~4.3s) + ear twitch (~9.6s) on 1:1 cropped 436x200 cat sprite
+  // H7: Interactive Cat Hover (ear flick) & Click (2s gentle half-wake head lift)
+  let catHoverFlickAt = -10000;
+  let catWakeStartAt = -10000;
+
+  if (catCanvas) {
+    catCanvas.addEventListener('pointerenter', () => {
+      if (prefersReducedMotion || isPaused) return;
+      catHoverFlickAt = performance.now();
+      ensureRunning();
+    });
+    catCanvas.addEventListener('click', () => {
+      if (prefersReducedMotion || isPaused) return;
+      catWakeStartAt = performance.now();
+      catHoverFlickAt = performance.now();
+      ensureRunning();
+    });
+  }
+
+  // Natural snoozing ribcage breathing (~4.3s) + ear twitch (~9.6s) + H7 interactive wake on 1:1 cropped 436x200 cat sprite
   function renderCatFrame(now) {
     if (!catCanvas || !catCtx || !catImage) return;
     const CW = catCanvas.width;
@@ -1060,12 +1078,25 @@ export function initDeskScene3D(options = {}) {
       : 0.5 + 0.5 * Math.cos((Math.PI * (cycle - 0.38)) / 0.62);
 
     const earCycle = (now % 9600) / 320;
-    const earFlick = earCycle < 1.0 ? Math.sin(earCycle * Math.PI * 2) * (1.0 - earCycle) * 6.5 : 0;
+    let earFlick = earCycle < 1.0 ? Math.sin(earCycle * Math.PI * 2) * (1.0 - earCycle) * 6.5 : 0;
+
+    // Interactive hover ear twitch (340ms)
+    const hoverElapsed = (now - catHoverFlickAt) / 340;
+    if (hoverElapsed >= 0 && hoverElapsed < 1.0) {
+      earFlick += Math.sin(hoverElapsed * Math.PI * 2) * (1.0 - hoverElapsed) * 9.0;
+    }
+
+    // Interactive click gentle 2s half-wake head lift before settling back
+    let wakeLift = 0;
+    const wakeElapsed = (now - catWakeStartAt) / 2000;
+    if (wakeElapsed >= 0 && wakeElapsed < 1.0) {
+      wakeLift = Math.sin(wakeElapsed * Math.PI) * 11.5;
+    }
 
     // 1. Pinned resting lower body & paws (zero lift off shadow)
     catCtx.drawImage(catImage, 0, BASE_PAW_Y, CW, CH - BASE_PAW_Y, 0, BASE_PAW_Y, CW, CH - BASE_PAW_Y);
 
-    // 2. Smooth 4px vertical strips for ribcage rise/fall + ear twitch
+    // 2. Smooth 4px vertical strips for ribcage rise/fall + ear twitch + wake lift
     for (let dx = 0; dx < CW; dx += 4) {
       const sw = Math.min(4, CW - dx);
       const sx = 334 + (dx + sw * 0.5) * 0.5;
@@ -1073,7 +1104,9 @@ export function initDeskScene3D(options = {}) {
       const ribW = Math.exp(-(ribDist * ribDist));
       const earDist = (sx - 533) / 11;
       const earW = Math.exp(-(earDist * earDist));
-      const lift = breathe * 8.5 * ribW + earFlick * earW;
+      const headDist = (sx - 522) / 36;
+      const headW = Math.exp(-(headDist * headDist));
+      const lift = breathe * 8.5 * ribW + earFlick * earW + wakeLift * headW;
       catCtx.drawImage(catImage, dx, 0, sw, BASE_PAW_Y, dx, -lift, sw, BASE_PAW_Y + lift);
     }
   }

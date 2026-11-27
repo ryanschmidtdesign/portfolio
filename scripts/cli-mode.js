@@ -232,11 +232,58 @@
                 }
 
                 .rs-cmd-item.is-selected {
-                    background: rgba(200, 90, 50, 0.07);
+                    background: transparent;
                 }
 
                 .rs-cmd-item.is-selected::before {
                     transform: scaleY(1);
+                }
+
+                /* G3: Shared sliding highlight bar + staggered row entrance */
+                .rs-cmd-results {
+                    position: relative;
+                }
+
+                .rs-cmd-slider {
+                    position: absolute;
+                    left: 8px;
+                    right: 8px;
+                    top: 0;
+                    height: 0;
+                    border-radius: 5px;
+                    background: rgba(200, 90, 50, 0.075);
+                    pointer-events: none;
+                    z-index: 0;
+                    opacity: 0;
+                    transform: translate3d(0, 0, 0);
+                    transition:
+                        transform 180ms var(--ease-luxe, cubic-bezier(0.22, 1, 0.36, 1)),
+                        height 180ms var(--ease-luxe, cubic-bezier(0.22, 1, 0.36, 1)),
+                        opacity 140ms ease;
+                }
+
+                .rs-cmd-slider.is-visible {
+                    opacity: 1;
+                }
+
+                .rs-cmd-item {
+                    z-index: 1;
+                }
+
+                @keyframes rs-cmd-row-in {
+                    from {
+                        opacity: 0;
+                        transform: translate3d(0, 4px, 0);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translate3d(0, 0, 0);
+                    }
+                }
+
+                .rs-cmd-overlay.is-open .rs-cmd-item {
+                    animation: rs-cmd-row-in 220ms var(--ease-luxe, cubic-bezier(0.22, 1, 0.36, 1)) both;
+                    animation-delay: calc(var(--row-idx, 0) * 18ms);
                 }
 
                 .rs-cmd-item:active {
@@ -716,6 +763,7 @@
                     </div>
                 `;
 
+                row.style.setProperty('--row-idx', String(Math.min(idx, 10)));
                 row.addEventListener('click', () => {
                     this.runCommandItem(item, 'click');
                 });
@@ -729,6 +777,13 @@
                 this.resultsEl.appendChild(row);
             });
 
+            if (!this.sliderEl || !this.resultsEl.contains(this.sliderEl)) {
+                this.sliderEl = document.createElement('div');
+                this.sliderEl.className = 'rs-cmd-slider';
+                this.sliderEl.setAttribute('aria-hidden', 'true');
+                this.resultsEl.prepend(this.sliderEl);
+            }
+
             this.setActiveIndex(0);
         }
 
@@ -736,19 +791,27 @@
             if (this.filteredItems.length === 0) {
                 this.activeIndex = 0;
                 this.inputEl.removeAttribute('aria-activedescendant');
+                if (this.sliderEl) this.sliderEl.classList.remove('is-visible');
                 return;
             }
             this.activeIndex = Math.max(0, Math.min(index, this.filteredItems.length - 1));
             this.inputEl.setAttribute('aria-activedescendant', `rs-cmd-item-${this.activeIndex}`);
             const rows = this.resultsEl.querySelectorAll('.rs-cmd-item');
+            let activeRow = null;
             rows.forEach((row, idx) => {
                 const isSelected = idx === this.activeIndex;
                 row.classList.toggle('is-selected', isSelected);
                 row.setAttribute('aria-selected', isSelected ? 'true' : 'false');
                 if (isSelected) {
+                    activeRow = row;
                     row.scrollIntoView({ block: 'nearest' });
                 }
             });
+            if (this.sliderEl && activeRow) {
+                this.sliderEl.style.transform = `translate3d(0, ${activeRow.offsetTop}px, 0)`;
+                this.sliderEl.style.height = `${activeRow.offsetHeight}px`;
+                this.sliderEl.classList.add('is-visible');
+            }
         }
 
         moveSelection(direction) {

@@ -905,7 +905,7 @@
   }
 
   function measureWordBox(linkEl) {
-    const wordSpan = linkEl && (linkEl.querySelector(".site-header__link-roll") || linkEl.querySelector("span"));
+    const wordSpan = linkEl && (linkEl.querySelector(".site-header__link-roll-inner") || linkEl.querySelector("span"));
     if (!wordSpan) return null;
 
     const navRect = nav.getBoundingClientRect();
@@ -1042,6 +1042,12 @@
 
   window.addEventListener("pagereveal", syncInitialPosition);
   window.addEventListener("hashchange", reposition);
+  nav.addEventListener("transitionend", (e) => {
+    if (e.target === nav && e.propertyName === "gap") {
+      nav.classList.remove("is-moving-right", "is-moving-left");
+      reposition();
+    }
+  });
 
   // N2 (Track-Matte Text Roll), N3 (Loop-Through External Arrows), N4 (Trim-Paths Checkmark)
   const navLinks = nav.querySelectorAll(".site-header__link");
@@ -1235,14 +1241,17 @@ setTimeout(() => {
     });
   }
 
-  // C1: Track-Matte Masked Headline Reveal on direct subpage visits
+  // C1: Track-Matte Masked Headline Reveal on direct subpage visits (deferred 1 frame so pagereveal sets __rsHeroMorphed first)
   if (!prefersReduced && !document.body.classList.contains('is-home')) {
     const heroHeading = document.querySelector('article.case-study h1#title, main h1#about-title');
-    if (heroHeading && !window.__rsHeroMorphed) {
-      heroHeading.classList.add('is-headline-reveal');
-      heroHeading.addEventListener('animationend', () => {
-        heroHeading.classList.remove('is-headline-reveal');
-      }, { once: true });
+    if (heroHeading) {
+      requestAnimationFrame(() => {
+        if (window.__rsHeroMorphed) return;
+        heroHeading.classList.add('is-headline-reveal');
+        heroHeading.addEventListener('animationend', () => {
+          heroHeading.classList.remove('is-headline-reveal');
+        }, { once: true });
+      });
     }
   }
 

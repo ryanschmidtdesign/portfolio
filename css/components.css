@@ -1336,9 +1336,9 @@ p[data-reveal] {
   }
 }
 
-/* C2: Clip-Path Image Unmasking + Inner Ken Burns Settle */
+/* C2: Clip-Path Image Unmasking + Inner Ken Burns Settle (expanded final inset preserves 44px drop shadow) */
 figure.case-study-media[data-reveal] {
-  clip-path: inset(5% round var(--radius-lg));
+  clip-path: inset(4% 4% 4% 4% round var(--radius-lg));
   transform: translateY(14px) scale(0.99);
   transition:
     opacity 540ms var(--ease-luxe, var(--ease-out)),
@@ -1353,7 +1353,7 @@ figure.case-study-media[data-reveal] video {
 }
 
 figure.case-study-media[data-reveal].is-revealed {
-  clip-path: inset(0% round var(--radius-lg));
+  clip-path: inset(-48px -28px -56px -28px round var(--radius-lg));
 }
 
 figure.case-study-media[data-reveal].is-revealed img,
@@ -1616,6 +1616,27 @@ figure.case-study-media[data-reveal].is-revealed {
       var(--surface-2) 100%);
   opacity: 0.6;
   z-index: 0;
+  transform-origin: left center;
+}
+
+/* A1: Scroll-driven timeline rule draw on About page */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline-list::before {
+      animation: timeline-draw-x linear both;
+      animation-timeline: view();
+      animation-range: entry 15% cover 48%;
+    }
+
+    @keyframes timeline-draw-x {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+  }
 }
 
 .timeline-item {
@@ -1742,23 +1763,31 @@ figure.case-study-media[data-reveal].is-revealed {
   border-radius: 2px;
 }
 
+/* A2: Polaroids land like physical paper with subtle spring tilt */
 .polaroid-popup {
   position: absolute;
   bottom: calc(100% + 14px);
   left: 50%;
-  transform: translate(-50%, 8px) scale(0.92);
+  transform: translate(-50%, 10px) scale(0.92) rotate(-4.5deg);
   opacity: 0;
   pointer-events: none;
   z-index: 100;
-  transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1), transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 220ms var(--ease-luxe, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform 380ms var(--spring-subtle, cubic-bezier(0.22, 1, 0.36, 1));
   will-change: transform, opacity;
 }
 
 .polaroid-trigger:hover .polaroid-popup,
 .polaroid-trigger:focus-visible .polaroid-popup {
   opacity: 1;
-  transform: translate(-50%, -3px) scale(1.02);
+  transform: translate(-50%, -3px) scale(1.02) rotate(-1.5deg);
   pointer-events: none;
+}
+
+.polaroid-trigger:hover .polaroid-popup--cooking,
+.polaroid-trigger:focus-visible .polaroid-popup--cooking {
+  transform: translate(-50%, -3px) scale(1.02) rotate(1.5deg);
 }
 
 .polaroid-trigger:hover .polaroid-frame,

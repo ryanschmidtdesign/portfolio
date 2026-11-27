@@ -2684,9 +2684,32 @@ body:not(.is-home) main {
 }
 
 .about-cta-btn--primary {
+  position: relative;
+  overflow: hidden;
   background: var(--text, #1C1612);
   border-color: var(--text, #1C1612);
   color: var(--surface-elevated-strong, #FCFBF9);
+}
+
+/* A3: Quiet 600ms diagonal highlight shimmer across primary CTA on hover */
+.about-cta-btn--primary::after {
+  content: "";
+  position: absolute;
+  inset: -40% -60%;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 250, 242, 0.24) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.about-cta-btn--primary:hover::after,
+.about-cta-btn--primary:focus-visible::after {
+  transform: translateX(120%);
+  transition: transform 620ms var(--ease-luxe, cubic-bezier(0.22, 1, 0.36, 1));
 }
 
 .about-cta-btn--primary:hover,
@@ -2694,4 +2717,53 @@ body:not(.is-home) main {
   background: var(--accent, #B8522E);
   border-color: var(--accent, #B8522E);
   color: #FCFBF9;
+}
+
+/* H4: Practical Monitor Color Bleed on Desk Scene during Card Hover */
+.desk-monitor-bleed {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    42% 38% at 50% 42%,
+    var(--bleed-color, rgba(200, 90, 50, 0.14)) 0%,
+    transparent 72%
+  );
+  mix-blend-mode: soft-light;
+  transition: opacity 420ms var(--ease-luxe), background 320ms var(--ease-luxe);
+}
+
+.desk-monitor-bleed.is-active {
+  opacity: 1;
+}
+
+/* H6: Subtle Window-Beam Ambient Dust Motes Canvas */
+.desk-dust-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* H7: Interactive Cat Micro-Delight Hit Target */
+@media (min-width: 1024px) and (pointer: fine) {
+  #desk-cat-layer {
+    pointer-events: auto;
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-cta-btn--primary::after,
+  .desk-dust-canvas {
+    display: none !important;
+  }
+  .desk-monitor-bleed {
+    transition: none !important;
+  }
 }
