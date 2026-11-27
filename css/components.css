@@ -1298,9 +1298,90 @@ p[data-reveal] {
   transition: opacity 400ms var(--ease-luxe, var(--ease-out)), transform 420ms var(--ease-luxe, var(--ease-out));
 }
 
+/* C1: Track-Matte Masked Headline Reveal (Case Studies & About, plays once on direct arrival) */
+@media (prefers-reduced-motion: no-preference) {
+  .is-headline-reveal {
+    animation: headline-track-matte 560ms var(--ease-luxe, var(--ease-out)) both;
+  }
+
+  .is-headline-reveal .serif-accent {
+    display: inline-block;
+    animation: headline-serif-settle 620ms var(--ease-luxe, var(--ease-out)) 70ms both;
+  }
+
+  @keyframes headline-track-matte {
+    from {
+      opacity: 0;
+      clip-path: inset(0 0 100% 0);
+      transform: translate3d(0, 14px, 0);
+    }
+    to {
+      opacity: 1;
+      clip-path: inset(0 0 0% 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes headline-serif-settle {
+    from {
+      opacity: 0;
+      letter-spacing: 0.018em;
+      transform: translate3d(0, 6px, 0);
+    }
+    to {
+      opacity: 1;
+      letter-spacing: -0.015em;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+/* C2: Clip-Path Image Unmasking + Inner Ken Burns Settle */
 figure.case-study-media[data-reveal] {
-  transform: translateY(14px) scale(0.988);
-  transition: opacity 520ms var(--ease-luxe, var(--ease-out)), transform var(--dur-5, 560ms) var(--ease-luxe, var(--ease-out));
+  clip-path: inset(5% round var(--radius-lg));
+  transform: translateY(14px) scale(0.99);
+  transition:
+    opacity 540ms var(--ease-luxe, var(--ease-out)),
+    transform var(--dur-5, 560ms) var(--ease-luxe, var(--ease-out)),
+    clip-path 620ms var(--ease-luxe, var(--ease-out));
+}
+
+figure.case-study-media[data-reveal] img,
+figure.case-study-media[data-reveal] video {
+  transform: scale(1.045);
+  transition: transform 760ms var(--ease-luxe, var(--ease-out));
+}
+
+figure.case-study-media[data-reveal].is-revealed {
+  clip-path: inset(0% round var(--radius-lg));
+}
+
+figure.case-study-media[data-reveal].is-revealed img,
+figure.case-study-media[data-reveal].is-revealed video {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  figure.case-study-media[data-reveal],
+  figure.case-study-media[data-reveal] img,
+  figure.case-study-media[data-reveal] video {
+    clip-path: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* C5: Animated RBAC Grid Reflow View Transitions */
+::view-transition-group(rbac-sm-0),
+::view-transition-group(rbac-sm-1),
+::view-transition-group(rbac-sm-2),
+::view-transition-group(rbac-sm-3),
+::view-transition-group(rbac-md-0),
+::view-transition-group(rbac-md-1),
+::view-transition-group(rbac-lg-0),
+::view-transition-group(rbac-status) {
+  animation-duration: 360ms;
+  animation-timing-function: var(--ease-luxe, cubic-bezier(0.22, 1, 0.36, 1));
 }
 
 section[data-reveal],

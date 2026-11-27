@@ -1627,9 +1627,15 @@ body.is-omnibar-focused .desk-monitor__thinking {
   z-index: 30 !important;
 }
 
+/* H8: Anticipation press-compress before Match-Cut launch */
 .home-project-card[data-card-index]:active {
-  --card-scale: 0.992;
-  transition-duration: var(--dur-press, 100ms);
+  --card-scale: 0.986;
+  --lift-y: 1.5px;
+  box-shadow:
+    2px 4px 8px rgba(58, 36, 22, 0.08),
+    8px 14px 26px -6px rgba(72, 42, 22, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition-duration: 90ms;
   transition-timing-function: var(--ease-out-strong);
 }
 

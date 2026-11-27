@@ -2,15 +2,93 @@
   navigation: auto;
 }
 
-::view-transition-old(root),
+/* T2: Layered editorial root transition (old fades/recedes, new rises cleanly) */
+::view-transition-old(root) {
+  animation: vt-root-out 340ms var(--ease-luxe) both;
+}
+
 ::view-transition-new(root) {
-  animation-duration: var(--dur-2, 180ms);
-  animation-timing-function: var(--ease-out);
+  animation: vt-root-in 380ms var(--ease-luxe) 40ms both;
+}
+
+@keyframes vt-root-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.992);
+  }
+}
+
+@keyframes vt-root-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* T1: Card -> Case Study Hero Match-Cut Shared-Element Morph */
+::view-transition-group(hero-media) {
+  animation-duration: 440ms;
+  animation-timing-function: var(--ease-luxe);
+  overflow: clip;
+  border-radius: var(--radius-lg);
+}
+
+::view-transition-old(hero-media),
+::view-transition-new(hero-media) {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  animation-duration: 340ms;
+  animation-timing-function: var(--ease-luxe);
+}
+
+::view-transition-group(hero-title) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--ease-luxe);
 }
 
 ::view-transition-group(nav-underline) {
-  animation-duration: 220ms;
-  animation-timing-function: var(--ease-desk);
+  animation-duration: 240ms;
+  animation-timing-function: var(--ease-luxe);
+}
+
+/* N7: 1.5px Terracotta Reading-Progress Hairline (subpages only) */
+.reading-progress-hairline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: calc(var(--z-header, 9990) + 1);
+  background: linear-gradient(90deg, var(--accent, #C85A32), #D8754F);
+  transform-origin: left center;
+  transform: scaleX(var(--read-progress, 0));
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+@supports (animation-timeline: scroll()) {
+  .reading-progress-hairline {
+    animation: reading-progress-fill linear both;
+    animation-timeline: scroll(root block);
+  }
+
+  @keyframes reading-progress-fill {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
 }
 
 /* Site main landmark */
@@ -162,6 +240,9 @@
   font-weight: 300;
   margin: 0 1px;
   user-select: none;
+  max-width: 12px;
+  overflow: hidden;
+  transition: opacity 240ms var(--ease-luxe), max-width 280ms var(--ease-luxe), margin 280ms var(--ease-luxe);
 }
 
 .site-header__role {
@@ -171,11 +252,31 @@
   font-weight: 400;
   color: #38332E;
   letter-spacing: -0.005em;
-  transition: color var(--dur-1) var(--ease-desk);
+  max-width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    color var(--dur-1) var(--ease-desk),
+    opacity 240ms var(--ease-luxe),
+    max-width 320ms var(--ease-luxe),
+    filter 240ms var(--ease-luxe);
 }
 
 .site-header__brand:hover .site-header__role {
   color: var(--text-secondary, #5C554E);
+}
+
+/* N5: Condense role subtitle & tighten nav gap when reading subpages */
+body:not(.is-home) .site-header.is-scrolled .site-header__sep {
+  opacity: 0;
+  max-width: 0;
+  margin: 0;
+}
+
+body:not(.is-home) .site-header.is-scrolled .site-header__role {
+  opacity: 0;
+  max-width: 0;
+  filter: blur(2px);
 }
 
 .site-header__nav {
@@ -184,6 +285,11 @@
   align-items: center;
   gap: 16px;
   flex-shrink: 0;
+  transition: gap 280ms var(--ease-luxe);
+}
+
+body:not(.is-home) .site-header.is-scrolled .site-header__nav {
+  gap: 12px;
 }
 
 .site-header__link {

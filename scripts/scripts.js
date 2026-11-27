@@ -780,14 +780,26 @@
     });
   }
 
-  // Interactive 12-Column Grid & Role-Permission Spec (dashboard.html)
+  // C5: Interactive 12-Column Grid & Role-Permission Spec with Animated View-Transition Reflow
   const rbacSpecs = document.querySelectorAll('[data-grid-rbac]');
   rbacSpecs.forEach((spec) => {
     const tabs = Array.from(spec.querySelectorAll('[data-rbac-role]'));
     const panels = Array.from(spec.querySelectorAll('[data-rbac-panel]'));
     if (!tabs.length || !panels.length) return;
 
-    const activate = (role, focusTab = false) => {
+    const tagPanelNames = (panel, assign) => {
+      if (!panel) return;
+      const sm = panel.querySelectorAll('.rbac-card--sm');
+      const md = panel.querySelectorAll('.rbac-card--md');
+      const lg = panel.querySelectorAll('.rbac-card--lg');
+      const status = panel.querySelector('.grid-rbac-status');
+      sm.forEach((el, i) => { el.style.viewTransitionName = assign ? `rbac-sm-${i}` : ''; });
+      md.forEach((el, i) => { el.style.viewTransitionName = assign ? `rbac-md-${i}` : ''; });
+      lg.forEach((el, i) => { el.style.viewTransitionName = assign ? `rbac-lg-${i}` : ''; });
+      if (status) status.style.viewTransitionName = assign ? 'rbac-status' : '';
+    };
+
+    const applyRole = (role, focusTab) => {
       tabs.forEach((tab) => {
         const active = tab.getAttribute('data-rbac-role') === role;
         tab.classList.toggle('is-active', active);
@@ -800,6 +812,30 @@
         panel.classList.toggle('is-active', active);
         panel.hidden = !active;
       });
+    };
+
+    const activate = (role, focusTab = false) => {
+      const currentPanel = panels.find((p) => p.classList.contains('is-active'));
+      const nextPanel = panels.find((p) => p.getAttribute('data-rbac-panel') === role);
+      if (!nextPanel || currentPanel === nextPanel) {
+        if (focusTab) applyRole(role, true);
+        return;
+      }
+
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (typeof document.startViewTransition === 'function' && !prefersReduced) {
+        tagPanelNames(currentPanel, true);
+        const vt = document.startViewTransition(() => {
+          tagPanelNames(currentPanel, false);
+          applyRole(role, focusTab);
+          tagPanelNames(nextPanel, true);
+        });
+        vt.finished.finally(() => {
+          tagPanelNames(nextPanel, false);
+        });
+      } else {
+        applyRole(role, focusTab);
+      }
     };
 
     tabs.forEach((tab, idx) => {
@@ -1107,5 +1143,133 @@ setTimeout(() => {
         }
       });
     });
+  }
+})();
+
+// ============================================================================
+// Phase 2 Signature Motion: T1 Match-Cut View Transitions, C1 Headline Reveal, N7 Reading Progress
+// ============================================================================
+(function () {
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const CASE_STUDIES = [
+    'dashboard.html',
+    'member-portal-overhaul.html',
+    'inventory.html',
+    'ai-coding-portfolio.html'
+  ];
+
+  function extractCaseSlug(urlStr) {
+    if (!urlStr) return null;
+    try {
+      const path = new URL(urlStr, window.location.href).pathname;
+      return CASE_STUDIES.find((slug) => path.endsWith('/' + slug) || path.endsWith('/' + slug.replace('.html', ''))) || null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function isHomeUrl(urlStr) {
+    if (!urlStr) return false;
+    try {
+      const path = new URL(urlStr, window.location.href).pathname;
+      return path === '/' || path.endsWith('/index.html') || path === '';
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function findHomeCardBySlug(slug) {
+    if (!slug) return null;
+    const base = slug.replace('.html', '');
+    return Array.from(document.querySelectorAll('.home-project-card')).find((card) => {
+      const link = card.querySelector('a.home-project-card__link');
+      const href = link ? link.getAttribute('href') || '' : '';
+      return href.includes(slug) || href.includes(base);
+    }) || null;
+  }
+
+  function setHeroNames(mediaEl, titleEl, active) {
+    if (mediaEl) mediaEl.style.viewTransitionName = active ? 'hero-media' : '';
+    if (titleEl) titleEl.style.viewTransitionName = active ? 'hero-title' : '';
+  }
+
+  // T1: Cross-document Card <-> Case Study Hero Match Cut
+  if (!prefersReduced) {
+    window.addEventListener('pageswap', (e) => {
+      if (!e.viewTransition || !e.activation) return;
+      const toUrl = e.activation.entry && e.activation.entry.url;
+      if (document.body.classList.contains('is-home')) {
+        const slug = extractCaseSlug(toUrl);
+        const card = findHomeCardBySlug(slug);
+        if (card) {
+          setHeroNames(card.querySelector('.home-project-card__media'), card.querySelector('.home-project-card__title'), true);
+        }
+      } else if (document.querySelector('article.case-study') && isHomeUrl(toUrl)) {
+        const media = document.querySelector('article.case-study .case-study-media');
+        const title = document.querySelector('article.case-study h1#title');
+        setHeroNames(media, title, true);
+      }
+    });
+
+    window.addEventListener('pagereveal', (e) => {
+      if (!e.viewTransition) return;
+      const fromUrl = window.navigation && window.navigation.activation && window.navigation.activation.from && window.navigation.activation.from.url;
+      if (!fromUrl) return;
+
+      if (document.querySelector('article.case-study') && isHomeUrl(fromUrl)) {
+        const media = document.querySelector('article.case-study .case-study-media');
+        const title = document.querySelector('article.case-study h1#title');
+        window.__rsHeroMorphed = true;
+        setHeroNames(media, title, true);
+        e.viewTransition.finished.finally(() => setHeroNames(media, title, false));
+      } else if (document.body.classList.contains('is-home')) {
+        const slug = extractCaseSlug(fromUrl);
+        const card = findHomeCardBySlug(slug);
+        if (card) {
+          const media = card.querySelector('.home-project-card__media');
+          const title = card.querySelector('.home-project-card__title');
+          setHeroNames(media, title, true);
+          e.viewTransition.finished.finally(() => setHeroNames(media, title, false));
+        }
+      }
+    });
+  }
+
+  // C1: Track-Matte Masked Headline Reveal on direct subpage visits
+  if (!prefersReduced && !document.body.classList.contains('is-home')) {
+    const heroHeading = document.querySelector('article.case-study h1#title, main h1#about-title');
+    if (heroHeading && !window.__rsHeroMorphed) {
+      heroHeading.classList.add('is-headline-reveal');
+      heroHeading.addEventListener('animationend', () => {
+        heroHeading.classList.remove('is-headline-reveal');
+      }, { once: true });
+    }
+  }
+
+  // N7: 1.5px Terracotta Reading-Progress Hairline on subpages
+  if (!document.body.classList.contains('is-home') && !document.querySelector('.reading-progress-hairline')) {
+    const bar = document.createElement('div');
+    bar.className = 'reading-progress-hairline';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+
+    const supportsScrollTimeline = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('animation-timeline: scroll()');
+    if (!supportsScrollTimeline) {
+      let raf = false;
+      const updateBar = () => {
+        raf = false;
+        const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const pct = Math.min(1, Math.max(0, (window.scrollY || 0) / max));
+        bar.style.setProperty('--read-progress', pct.toFixed(4));
+      };
+      updateBar();
+      window.addEventListener('scroll', () => {
+        if (!raf) {
+          raf = true;
+          requestAnimationFrame(updateBar);
+        }
+      }, { passive: true });
+      window.addEventListener('resize', () => requestAnimationFrame(updateBar), { passive: true });
+    }
   }
 })();
