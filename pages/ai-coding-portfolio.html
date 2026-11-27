@@ -327,7 +327,7 @@
           </div>
 
           <p>
-            I hate handing off Figma files over a wall and hoping for the best. When I understand DOM structure, CSS specificity, and API latency firsthand, I design components that engineers can implement without painful compromises. Rather than using Webflow or a template, I used this portfolio to stress-test Cursor and Claude Code on a real multi-page build.
+            Handing off static Figma files always leaves too much to chance once real browser behavior enters the picture. When I understand DOM structure, CSS specificity, and API latency firsthand, I design components that engineers can implement without painful compromises. Rather than using Webflow or a template, I used this portfolio to stress-test Cursor and Claude Code on a real multi-page build.
           </p>
         </section>
 
@@ -418,7 +418,7 @@
 
           <h3>Keeping the CSS modular</h3>
           <p>
-            Without modular stylesheets, AI coding models quickly create massive, 2,000-line CSS files with conflicting selector weights. I split the styles into five explicit layers: tokens.css, base.css, layout.css, components.css, and pages.css. When prompting Cursor, I strictly directed it to use existing token variables instead of defining ad-hoc pixel values or nested overrides.
+            Without clear stylesheet boundaries, AI coding models quickly scatter duplicate overrides and conflicting selector weights across a project. I split the styles into six explicit layers (tokens, base, layout, components, pages, and utilities) and directed Cursor to consume existing tokens instead of inventing ad-hoc pixel values.
           </p>
 
           <figure class="case-study-media" data-reveal>
@@ -506,7 +506,7 @@
             Early on, I went down a rabbit hole building multiple visual skins, including a dark mode and a retro Windows 95 theme alongside the terminal mode. Maintaining three separate color palettes tripled token upkeep and distracted from the case studies, so I stripped the site back to a single high-contrast light theme. Just because AI makes generating code fast does not mean you should keep every feature you prototype.
           </p>
           <p>
-            AI coding tools do not replace software architecture. Without clear rules upfront, an LLM will happily hand you messy CSS and duplicate utility classes. The real work is defining the constraints and knowing what to cut.
+            Moving fast makes scope discipline even more important. When you can spin up a new feature in twenty minutes, the harder part is deciding what actually belongs and being willing to cut the rest.
           </p>
         </section>
 
