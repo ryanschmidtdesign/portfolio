@@ -869,7 +869,7 @@
   }
 
   function measureWordBox(linkEl) {
-    const wordSpan = linkEl && linkEl.querySelector("span");
+    const wordSpan = linkEl && (linkEl.querySelector(".site-header__link-roll") || linkEl.querySelector("span"));
     if (!wordSpan) return null;
 
     const navRect = nav.getBoundingClientRect();
@@ -877,20 +877,35 @@
     if (!navRect.width || !wordRect.width) return null;
 
     const baselineY = (wordRect.top - navRect.top) + getBaselineOffset(wordSpan, wordRect);
+    const left = wordRect.left - navRect.left;
+    const right = navRect.width - (left + wordRect.width);
 
     return {
-      x: wordRect.left - navRect.left,
+      x: left,
+      left,
+      right,
       scaleX: wordRect.width / BASE_WIDTH,
       y: baselineY + 8
     };
   }
 
+  let lastUnderlineLeft = null;
+
   function applyUnderline(targetLink, { preview = false } = {}) {
     const box = measureWordBox(targetLink);
     if (!box) return false;
 
-    nav.style.setProperty("--nav-ul-x", `${box.x.toFixed(2)}px`);
-    nav.style.setProperty("--nav-ul-scale", box.scaleX.toFixed(4));
+    if (lastUnderlineLeft !== null && Math.abs(box.left - lastUnderlineLeft) > 1) {
+      const movingRight = box.left > lastUnderlineLeft;
+      nav.classList.toggle("is-moving-right", movingRight);
+      nav.classList.toggle("is-moving-left", !movingRight);
+    } else {
+      nav.classList.remove("is-moving-right", "is-moving-left");
+    }
+    lastUnderlineLeft = box.left;
+
+    nav.style.setProperty("--nav-ul-left", `${box.left.toFixed(2)}px`);
+    nav.style.setProperty("--nav-ul-right", `${Math.max(0, box.right).toFixed(2)}px`);
     nav.style.setProperty("--nav-ul-y", `${box.y.toFixed(2)}px`);
     nav.classList.add("has-underline");
     nav.classList.toggle("is-previewing", Boolean(preview));
@@ -991,6 +1006,64 @@
 
   window.addEventListener("pagereveal", syncInitialPosition);
   window.addEventListener("hashchange", reposition);
+
+  // N2 (Track-Matte Text Roll), N3 (Loop-Through External Arrows), N4 (Trim-Paths Checkmark)
+  const navLinks = nav.querySelectorAll(".site-header__link");
+  navLinks.forEach((link) => {
+    // N2: Wrap plain label spans (Work, About, Resume, LinkedIn) into a clipped roll slot
+    if (!link.classList.contains("site-header__copy-email")) {
+      const labelSpan = link.querySelector(":scope > span:not(.site-header__arrow)");
+      if (labelSpan && !labelSpan.classList.contains("site-header__link-roll")) {
+        const text = labelSpan.textContent.trim();
+        if (text) {
+          labelSpan.classList.add("site-header__link-roll");
+          labelSpan.innerHTML = "";
+          const inner = document.createElement("span");
+          inner.className = "site-header__link-roll-inner";
+          inner.setAttribute("data-text", text);
+          inner.textContent = text;
+          labelSpan.appendChild(inner);
+        }
+      }
+    }
+
+    // N3: Loop-through external arrow glyph (exit top-right, re-enter bottom-left)
+    if (link.classList.contains("site-header__link--ext")) {
+      const arrowEl = link.querySelector(".site-header__arrow");
+      if (arrowEl && !arrowEl.querySelector(".site-header__arrow-glyph")) {
+        const glyph = arrowEl.textContent.trim() || "↗";
+        arrowEl.innerHTML =
+          `<span class="site-header__arrow-glyph site-header__arrow-glyph--primary">${glyph}</span>` +
+          `<span class="site-header__arrow-glyph site-header__arrow-glyph--clone">${glyph}</span>`;
+      }
+    }
+
+    // N4: Trim-Paths checkmark overlay inside Email copy icon
+    if (link.classList.contains("site-header__copy-email")) {
+      const iconWrap = link.querySelector(".site-header__copy-icon");
+      if (iconWrap && !iconWrap.querySelector(".copy-icon-check")) {
+        const existingSvg = iconWrap.querySelector("svg");
+        if (existingSvg) existingSvg.classList.add("copy-icon-doc");
+        const checkSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        checkSvg.setAttribute("class", "copy-icon-check");
+        checkSvg.setAttribute("viewBox", "0 0 24 24");
+        checkSvg.setAttribute("fill", "none");
+        checkSvg.setAttribute("stroke", "currentColor");
+        checkSvg.setAttribute("stroke-width", "2.6");
+        checkSvg.setAttribute("stroke-linecap", "round");
+        checkSvg.setAttribute("stroke-linejoin", "round");
+        checkSvg.setAttribute("aria-hidden", "true");
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M5 13l4 4L19 7");
+        checkSvg.appendChild(path);
+        iconWrap.appendChild(checkSvg);
+      }
+    }
+  });
+
+  // Re-sync underline geometry after wrapping roll spans
+  invalidateBaselineCache();
+  syncInitialPosition();
 })();
 
 // --- EASTER EGG: Console Message for Tech Recruiters / EMs ---

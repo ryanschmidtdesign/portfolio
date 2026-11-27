@@ -239,18 +239,16 @@
   color: var(--text-muted, #70665D);
 }
 
-/* Shared sliding underline measured strictly to the label span (8px below baseline) */
+/* Shared elastic follow-through underline measured strictly to the label span (8px below baseline) */
 .site-header__underline {
   position: absolute;
   top: var(--nav-ul-y, 32px);
-  left: 0;
-  width: 100px;
+  left: var(--nav-ul-left, 0px);
+  right: var(--nav-ul-right, 100%);
   height: 2px;
-  border-radius: 0;
+  border-radius: 1px;
   background-color: var(--accent, #C85A32);
   pointer-events: none;
-  transform-origin: left center;
-  transform: translateX(var(--nav-ul-x, 0px)) scaleX(var(--nav-ul-scale, 0));
   opacity: 0;
   view-transition-name: nav-underline;
 }
@@ -260,16 +258,63 @@
 }
 
 .site-header__nav.has-underline.is-previewing .site-header__underline {
-  opacity: 0.4;
+  opacity: 0.42;
 }
 
 .site-header__nav.is-ready .site-header__underline {
   transition:
-    transform 220ms var(--ease-desk),
+    left 220ms var(--ease-luxe),
+    right 220ms var(--ease-luxe),
     opacity 220ms var(--ease-desk);
 }
 
+/* AE Follow-Through: leading edge departs first, trailing edge catches up */
+.site-header__nav.is-ready.is-moving-right .site-header__underline {
+  transition:
+    right 170ms var(--ease-luxe),
+    left 290ms var(--ease-luxe) 38ms,
+    opacity 220ms var(--ease-desk);
+}
+
+.site-header__nav.is-ready.is-moving-left .site-header__underline {
+  transition:
+    left 170ms var(--ease-luxe),
+    right 290ms var(--ease-luxe) 38ms,
+    opacity 220ms var(--ease-desk);
+}
+
+/* N2: Track-Matte Text-Roll Hover on Nav Links */
+.site-header__link-roll {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1.25;
+  vertical-align: bottom;
+}
+
+.site-header__link-roll-inner {
+  position: relative;
+  display: inline-block;
+  transform: translate3d(0, 0, 0);
+  transition: transform 320ms var(--ease-luxe);
+}
+
+.site-header__link-roll-inner::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  color: var(--text-primary, #171412);
+}
+
+.site-header__link:hover .site-header__link-roll-inner,
+.site-header__link:focus-visible .site-header__link-roll-inner {
+  transform: translate3d(0, -100%, 0);
+}
+
 .site-header__arrow {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -281,16 +326,93 @@
     color 180ms var(--ease-desk);
 }
 
+/* N3: Loop-Through External Arrows (exit top-right, re-enter bottom-left) */
+.site-header__link--ext .site-header__arrow {
+  overflow: hidden;
+  width: 1.05em;
+  height: 1.05em;
+}
+
+.site-header__arrow-glyph {
+  display: inline-block;
+  line-height: 1;
+  transform: translate3d(0, 0, 0);
+  transition: transform 320ms var(--ease-luxe);
+}
+
+.site-header__arrow-glyph--clone {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate3d(-115%, 115%, 0);
+}
+
+.site-header__link--ext:hover .site-header__arrow,
+.site-header__link--ext:focus-visible .site-header__arrow {
+  color: var(--text-primary, #171412);
+  transform: none;
+}
+
+.site-header__link--ext:hover .site-header__arrow-glyph--primary,
+.site-header__link--ext:focus-visible .site-header__arrow-glyph--primary {
+  transform: translate3d(115%, -115%, 0);
+}
+
+.site-header__link--ext:hover .site-header__arrow-glyph--clone,
+.site-header__link--ext:focus-visible .site-header__arrow-glyph--clone {
+  transform: translate3d(0, 0, 0);
+}
+
+.site-header__copy-icon {
+  position: relative;
+  width: 0.92em;
+  height: 0.92em;
+}
+
 .site-header__copy-icon svg {
   display: block;
   width: 0.88em;
   height: 0.88em;
 }
 
-.site-header__link:hover .site-header__arrow,
-.site-header__link:focus-visible .site-header__arrow {
+/* N4: Trim-Paths Checkmark Confirmation on Email Copy */
+.site-header__copy-icon .copy-icon-doc {
+  transition: opacity 150ms var(--ease-desk), transform 180ms var(--ease-luxe);
+}
+
+.site-header__copy-icon .copy-icon-check {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  opacity: 0;
+  color: var(--accent, #C85A32);
+  transition: opacity 120ms var(--ease-desk);
+}
+
+.site-header__copy-icon .copy-icon-check path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  transition: stroke-dashoffset 280ms var(--ease-luxe) 60ms;
+}
+
+.site-header__copy-email.is-copied .copy-icon-doc {
+  opacity: 0;
+  transform: scale(0.75);
+}
+
+.site-header__copy-email.is-copied .copy-icon-check {
+  opacity: 1;
+}
+
+.site-header__copy-email.is-copied .copy-icon-check path {
+  stroke-dashoffset: 0;
+}
+
+.site-header__link:not(.site-header__link--ext):hover .site-header__arrow,
+.site-header__link:not(.site-header__link--ext):focus-visible .site-header__arrow {
   color: var(--text-primary, #171412);
-  transform: translate(2px, -2px);
 }
 
 .site-header__copy-email {
@@ -360,11 +482,30 @@
   .site-header__name,
   .site-header__role,
   .site-header__nav.is-ready .site-header__underline,
+  .site-header__nav.is-ready.is-moving-right .site-header__underline,
+  .site-header__nav.is-ready.is-moving-left .site-header__underline,
   .site-header__link,
+  .site-header__link-roll-inner,
   .site-header__arrow,
+  .site-header__arrow-glyph,
   .site-header__copy-label,
+  .site-header__copy-icon .copy-icon-doc,
+  .site-header__copy-icon .copy-icon-check,
+  .site-header__copy-icon .copy-icon-check path,
   .subpage-ambient-glow {
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .site-header__link:hover .site-header__link-roll-inner,
+  .site-header__link:focus-visible .site-header__link-roll-inner,
+  .site-header__link--ext:hover .site-header__arrow-glyph--primary,
+  .site-header__link--ext:focus-visible .site-header__arrow-glyph--primary,
+  .site-header__link--ext:hover .site-header__arrow-glyph--clone,
+  .site-header__link--ext:focus-visible .site-header__arrow-glyph--clone {
+    transform: none !important;
+  }
+  .site-header__arrow-glyph--clone {
+    display: none !important;
   }
   .site-header__copy-label--default,
   .site-header__copy-label--copied,

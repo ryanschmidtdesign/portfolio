@@ -109,21 +109,34 @@
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       line.setAttribute('class', 'desk-connector__line');
       line.setAttribute('data-card', String(idx));
+      const pulse = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      pulse.setAttribute('class', 'desk-connector__pulse');
+      pulse.setAttribute('data-card', String(idx));
       const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       dot.setAttribute('class', 'desk-connector__dot');
       dot.setAttribute('data-card', String(idx));
       dot.setAttribute('r', '2.5');
       connectorsSvgEl.appendChild(line);
+      connectorsSvgEl.appendChild(pulse);
       connectorsSvgEl.appendChild(dot);
-      return { line, dot };
+      return { line, pulse, dot };
     });
   }
 
   function syncConnectorHighlight() {
-    connectorItems.forEach(({ line, dot }, idx) => {
+    connectorItems.forEach(({ line, pulse, dot }, idx) => {
       const active = activeCardIndex === idx;
       line.classList.toggle('is-active', active);
       dot.classList.toggle('is-active', active);
+      if (pulse) {
+        if (active) {
+          pulse.classList.remove('is-active');
+          void pulse.getBoundingClientRect();
+          pulse.classList.add('is-active');
+        } else {
+          pulse.classList.remove('is-active');
+        }
+      }
     });
   }
 
@@ -227,15 +240,15 @@
         const cp2X = idx === 3 ? endX - hSpan * 0.30 : endX - hSpan * 0.12;
         const cp2Y = idx === 3 ? endY + vSpan * 0.26 : endY + vSpan * 0.42;
 
-        item.line.setAttribute(
-          'd',
-          `M ${startX.toFixed(1)} ${startY.toFixed(1)} C ${cp1X.toFixed(1)} ${cp1Y.toFixed(1)}, ${cp2X.toFixed(1)} ${cp2Y.toFixed(1)}, ${endX.toFixed(1)} ${endY.toFixed(1)}`
-        );
+        const dAttr = `M ${startX.toFixed(1)} ${startY.toFixed(1)} C ${cp1X.toFixed(1)} ${cp1Y.toFixed(1)}, ${cp2X.toFixed(1)} ${cp2Y.toFixed(1)}, ${endX.toFixed(1)} ${endY.toFixed(1)}`;
+        item.line.setAttribute('d', dAttr);
+        if (item.pulse) item.pulse.setAttribute('d', dAttr);
         item.dot.setAttribute('cx', startX.toFixed(1));
         item.dot.setAttribute('cy', startY.toFixed(1));
 
         const pathLen = Math.ceil(item.line.getTotalLength() || 360);
         item.line.style.setProperty('--path-len', `${pathLen}px`);
+        if (item.pulse) item.pulse.style.setProperty('--path-len', `${pathLen}px`);
       }
     });
   }

@@ -9,6 +9,8 @@
     if (!this.viewport || !this.after || !this.handle) return;
 
     this.isDragging = false;
+    this.hasInteracted = false;
+    this.teaserRafId = null;
     this.position = parseFloat(container.getAttribute('data-splitter-initial')) || 50;
     this.viewportRect = null;
     this.pendingClientX = null;
@@ -68,7 +70,16 @@
     }
 
     // Allow dragging from the handle AND clicking anywhere in the viewport
+    function cancelTeaser() {
+      self.hasInteracted = true;
+      if (self.teaserRafId !== null) {
+        cancelAnimationFrame(self.teaserRafId);
+        self.teaserRafId = null;
+      }
+    }
+
     function startDrag(clientX, ev, fromHandle) {
+      cancelTeaser();
       if (ev && ev.preventDefault) ev.preventDefault();
       isPointerDown = true;
       pointerDownX = clientX;
@@ -152,6 +163,7 @@
     document.addEventListener('touchcancel', stopDrag);
 
     this.handle.addEventListener('keydown', function (e) {
+      cancelTeaser();
       if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
         e.preventDefault();
         applyKeyboardStep(Math.max(0, Math.min(100, self.position - 2)));
@@ -172,6 +184,36 @@
         applyKeyboardStep(100);
       }
     });
+
+    // C6: One-time subtle teaser sweep (50 -> 58 -> 45 -> 50%) on first scroll into view
+    var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced && 'IntersectionObserver' in window) {
+      var initialPos = self.position;
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting || self.hasInteracted) return;
+          observer.disconnect();
+          var duration = 900;
+          var startTime = null;
+          function stepTeaser(ts) {
+            if (self.hasInteracted) return;
+            if (!startTime) startTime = ts;
+            var t = Math.min(1, (ts - startTime) / duration);
+            // Smooth sinusoidal damped nudge: 0 -> +8 -> -5 -> 0
+            var wave = Math.sin(t * Math.PI * 2) * (1 - t) * 9.5;
+            self.update(Math.max(0, Math.min(100, initialPos + wave)));
+            if (t < 1) {
+              self.teaserRafId = requestAnimationFrame(stepTeaser);
+            } else {
+              self.teaserRafId = null;
+              self.update(initialPos);
+            }
+          }
+          self.teaserRafId = requestAnimationFrame(stepTeaser);
+        });
+      }, { threshold: 0.45 });
+      observer.observe(this.container);
+    }
   };
 
   ImageSplitter.prototype.onPointerMove = function (clientX) {

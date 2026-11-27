@@ -962,6 +962,39 @@ body.is-home {
   opacity: 0.92;
 }
 
+/* H5: One-shot luminous data pulse traveling monitor -> card after line draw */
+.desk-connector__pulse {
+  fill: none;
+  stroke: #FFF7EE;
+  stroke-width: 2.25px;
+  stroke-linecap: round;
+  stroke-dasharray: 26 var(--path-len, 360px);
+  stroke-dashoffset: 26;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.desk-connector__pulse.is-active {
+  animation: desk-connector-pulse 520ms var(--ease-luxe) 180ms 1 forwards;
+}
+
+@keyframes desk-connector-pulse {
+  0% {
+    stroke-dashoffset: 26;
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.95;
+  }
+  82% {
+    opacity: 0.85;
+  }
+  100% {
+    stroke-dashoffset: calc(-1 * var(--path-len, 360px));
+    opacity: 0;
+  }
+}
+
 .desk-connector__dot {
   fill: var(--accent, #C85A32);
   opacity: 0;
@@ -976,6 +1009,11 @@ body.is-home {
   .desk-connector__line,
   .desk-connector__dot {
     transition: none !important;
+  }
+  .desk-connector__pulse,
+  .desk-connector__pulse.is-active {
+    animation: none !important;
+    opacity: 0 !important;
   }
 }
 
@@ -1595,9 +1633,21 @@ body.is-omnibar-focused .desk-monitor__thinking {
   transition-timing-function: var(--ease-out-strong);
 }
 
+/* H3: Rack-Focus Depth-of-Field Pull on Neighboring Cards */
 .home-work-grid:has(.home-project-card:hover, .home-project-card:focus-within)
   .home-project-card:not(:hover):not(:focus-within) {
-  opacity: 0.75;
+  opacity: 0.72;
+  filter: saturate(0.78);
+  --card-scale: 0.985;
+  --lift-y: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-work-grid:has(.home-project-card:hover, .home-project-card:focus-within)
+    .home-project-card:not(:hover):not(:focus-within) {
+    --card-scale: 1;
+    --lift-y: 0px;
+  }
 }
 
 /* Visible focus ring on keyboard focus (uses existing focus style tokens) */
@@ -1642,6 +1692,29 @@ body.is-omnibar-focused .desk-monitor__thinking {
 .home-project-card:focus-within .home-project-card__media::before {
   background: rgba(246, 232, 214, 0);
   box-shadow: inset 0 0 0 1px rgba(146, 118, 92, 0.20);
+}
+
+/* H1: Cursor-Following Warm Paper Specular Sheen (consumes --mouse-x / --mouse-y from magnetic.js) */
+.home-project-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 250, 242, 0.28),
+    rgba(255, 238, 220, 0.08) 38%,
+    transparent 68%
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity 240ms var(--ease-luxe);
+}
+
+.home-project-card:hover .home-project-card__media::after,
+.home-project-card:focus-within .home-project-card__media::after {
+  opacity: 1;
 }
 
 @media (max-width: 1023px) {
